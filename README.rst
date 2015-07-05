@@ -24,5 +24,18 @@ SteamID
     >>> SteamID('http://steamcommunity.com/profiles/76561197968459473')  # no request is made
     SteamID(id=8193745, type='Individual', universe='Public', instance=1)
 
+    >>> group = SteamID('[g:1:4]')
+    >>> group.id  # accountid
+    4
+    >>> group.as_steam3
+    '[g:1:4]'
+    >>> group.as_32
+    'STEAM_0:0:2'
+    >>> group.as_64
+    103582791429521412
+    >>> group.community_url
+    'http://steamcommunity.com/gid/103582791429521412'
+
+
 
 .. _Steam: http://steampowered.com/
