@@ -27,9 +27,11 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
     ],
-    keywords='valve steam api',
+    keywords='valve steam steamid api webapi',
     packages=['steam'],
     install_requires=[
+        'enum34',
+        'requests',
     ],
     zip_safe=True,
 )
