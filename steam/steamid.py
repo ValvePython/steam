@@ -6,8 +6,6 @@ import requests
 class SteamID(object):
     """
     Object for converting steamID to its' various representations
-
-    https://developer.valvesoftware.com/wiki/SteamID
     """
     # Enums
 

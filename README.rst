@@ -1,7 +1,51 @@
 Module for interacting with various Steam_ features
 
+WebAPI
+------
+
+Wrapper around `Steam Web API`_. Requires `API Key`_. Upon initialization the
+instance will fetch all available interfaces from the API and populate the namespace.
+What interfaces are availability depends on the ``key``.
+
+.. code:: python
+
+    >>> from steam import WebAPI
+    >>> api = WebAPI(key="<your api key>")
+
+    >>> api.ISteamWebAPIUtil.GetServerInfo()
+    >>> api.call('ISteamWebAPIUtil.GetServerInfo')
+    {u'servertimestring': u'Sun Jul 05 22:37:25 2015', u'servertime': 1436161045}
+
+    >>> api.ISteamUser.ResolveVanityURL(vanityurl="valve", url_type=2)
+    >>> api.call('ISteamUser.ResolveVanityURL', vanityurl="valve", url_type=2)
+    {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
+
+It's not necessary to provide the key when calling any interface method.
+However, you can incase you want to fire one off call with a different ``key``.
+Some methods have parameters which need to be a ``list``.
+
+
+.. code:: python
+
+    >>> print api.ISteamUser.ResolveVanityURL.doc()  # method doc
+    ResolveVanityURL (version: 1)
+
+      Parameters:
+        key                       string   required
+          - access key
+        url_type                  int32    optional
+          - The type of vanity URL. 1 (default): Individual profile, 2: Group, 3: Official game group
+        vanityurl                 string   required
+          - The vanity URL to get a SteamID for
+
+    >>> print api.ISteamUser.doc()  # interface and all methods
+    >>> print api.doc()  # all available interfaces
+
+Checkout the wiki has a `list of the currently available API interfaces`_.
+
+
 SteamID
--------------
+-------
 
 .. code:: python
 
@@ -38,4 +82,7 @@ SteamID
 
 
 
-.. _Steam: http://steampowered.com/
+.. _Steam: https://store.steampowered.com/
+.. _Steam Web API: https://developer.valvesoftware.com/wiki/Steam_Web_API
+.. _API Key: http://steamcommunity.com/dev/apikey
+.. _list of the currently available API interfaces: https://github.com/ValvePython/steam/wiki/web-api

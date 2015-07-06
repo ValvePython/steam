@@ -1,4 +1,5 @@
-__version__ = "0.1"
+__version__ = "0.2"
 __author__ = "Rossen Georgiev"
 
-from .SteamID import SteamID
+from .steamid import SteamID
+from .webapi import WebAPI
