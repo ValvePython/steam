@@ -155,6 +155,13 @@ class SteamID(object):
         return self.as_64
 
     @property
+    def as_steam2(self):
+        return "STEAM_0:%s:%s" % (
+            self.id % 2,
+            self.id >> 1,
+            )
+
+    @property
     def as_steam3(self):
         return "[%s:%s:%s]" % (
             self.ETypeChar[self.type.value],
@@ -172,10 +179,7 @@ class SteamID(object):
 
     @property
     def as_32(self):
-        return "STEAM_0:%s:%s" % (
-            self.id % 2,
-            self.id >> 1,
-            )
+        return self.id
 
     @property
     def community_url(self):
