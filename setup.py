@@ -32,6 +32,7 @@ setup(
     install_requires=[
         'enum34',
         'requests',
+        'vdf',
     ],
     zip_safe=True,
 )

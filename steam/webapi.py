@@ -11,13 +11,21 @@ class WebAPI(object):
     More: https://developer.valvesoftware.com/wiki/Steam_Web_API
     """
 
-    def __init__(self, key, https=True):
+    def __init__(self, key, format='json', raw=False, https=True):
         """
         Optain apikey at https://steamcommunity.com/dev/apikey
+
+        key     - apikey
+        format  - output format (json, vdf, xml)
+        raw     - whenver to deserialize the response
+
+        These can be specified per method call for one off calls
         """
 
-        self.https = https
         self.key = key
+        self.format = format
+        self.raw = raw
+        self.https = https
         self.interfaces = []
         self.load_interfaces()
 
@@ -33,10 +41,10 @@ class WebAPI(object):
         Fetches the available interfaces from the API itself and then
         populates the name space under the instance
         """
-
         result = self._api_request(
             "GET",
             "ISteamWebAPIUtil/GetSupportedAPIList/v1/",
+            params={'format': 'json'},
             )
 
         if result.get('apilist', {}).get('interfaces', None) is None:
@@ -73,13 +81,19 @@ class WebAPI(object):
 
     def _api_request(self, method, path, **kwargs):
         if method not in ('GET', 'POST'):
-            raise NotImplemented("Unsupported method: %s" % self.method)
+            raise NotImplemented("HTTP method: %s" % repr(self.method))
+        if 'params' not in kwargs:
+            kwargs['params'] = {}
 
-        # set the key for every request, unless it's already specified by the method
-        if kwargs.get('params', {}).get('key', None) is None:
-            if 'params' not in kwargs:
-                kwargs['params'] = {}
-            kwargs['params']['key'] = self.key
+        onetime = {}
+        for param in ('key', 'format', 'raw'):
+            kwargs['params'][param] = onetime[param] = kwargs['params'].get(param,
+                                                                            getattr(self, param)
+                                                                            )
+        del kwargs['params']['raw']
+
+        if onetime['format'] not in ('json', 'vdf', 'xml'):
+            raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
 
         # move params to data, if data is not specified for POST
         # simplifies code calling this method
@@ -88,12 +102,22 @@ class WebAPI(object):
             del kwargs['params']
 
         f = getattr(requests, method.lower())
-        resp = f(self._url_base + path, **kwargs)
+        resp = f(self._url_base + path, stream=True, **kwargs)
 
         if not resp.ok:
             raise requests.exceptions.HTTPError("%s %s" % (resp.status_code, resp.reason))
 
-        return resp.json()
+        if onetime['raw']:
+            return resp.content
+
+        if onetime['format'] == 'json':
+            return resp.json()
+        elif onetime['format'] == 'xml':
+            import lxml.etree
+            return lxml.etree.parse(resp.raw)
+        elif onetime['format'] == 'vdf':
+            import vdf
+            return vdf.load(resp.raw)
 
     def doc(self):
         doc = "Steam Web API - List of all interfaces\n\n"
@@ -165,18 +189,27 @@ class WebAPIMethod(object):
             )
 
     def __call__(self, **kwargs):
-        unrecognized = set(kwargs.keys()).difference(set(self._dict['parameters'].keys() + ['key']))
+        possible_kwargs = (set(self._dict['parameters'].keys() + ['key', 'format', 'raw']))
+        call_kwargs = set(kwargs.keys())
+        unrecognized = call_kwargs.difference(possible_kwargs)
         if unrecognized:
             raise ValueError("Unrecognized parameter %s" % repr(unrecognized.pop()))
 
         params = {}
+        # process special case kwargs
+        for param in ('key', 'format', 'raw'):
+            if param in kwargs:
+                params[param] = kwargs[param]
+                del kwargs[param]
+
+        # process method parameters
         for param in self.parameters.values():
             name = param['name']
             islist = param['_array']
             optional = param['optional']
 
             # raise if we are missing a required parameter
-            if not optional and name not in kwargs and name != 'key':
+            if not optional and name not in kwargs:
                 raise ValueError("Method requires %s to be set" % repr(name))
 
             # populate params that will be passed to _api_request
@@ -185,7 +218,10 @@ class WebAPIMethod(object):
                 # the array index is append to the name (e.g. name[0], name[1] etc)
                 if islist:
                     if not isinstance(kwargs[name], list):
-                        raise ValueError("Expected %s to be a list, got %s" % (repr(name), repr(type(kwargs[name]))))
+                        raise ValueError("Expected %s to be a list, got %s" % (
+                            repr(name),
+                            repr(type(kwargs[name])))
+                            )
 
                     for idx, value in enumerate(kwargs[name]):
                         params['%s[%d]' % (name, idx)] = value
@@ -235,9 +271,13 @@ class WebAPIMethod(object):
             for param in sorted(self.parameters.values(), key=lambda x: x['name']):
                 doc += "    %s %s %s%s\n" % (
                     param['name'].ljust(25),
-                    (param['type']+"[]").ljust(8) if param['_array'] else param['type'].ljust(8),
+                    ((param['type']+"[]") if param['_array'] else
+                     param['type']
+                     ).ljust(8),
                     'optional' if param['optional'] else 'required',
-                    ("\n      - " + param['description']) if 'description' in param and param['description'] else '',
+                    (("\n      - " + param['description'])
+                     if 'description' in param and param['description'] else ''
+                     ),
                     )
 
         return doc

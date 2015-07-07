@@ -24,6 +24,7 @@ It's not necessary to provide the key when calling any interface method.
 However, you can incase you want to fire one off call with a different ``key``.
 Some methods have parameters which need to be a ``list``.
 
+Supported formats by web api are: ``json (default)``, ``vdf``, ``xml``
 
 .. code:: python
 
