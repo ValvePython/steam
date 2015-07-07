@@ -21,14 +21,18 @@ What interfaces are availability depends on the ``key``.
     {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
 
 It's not necessary to provide the key when calling any interface method.
-However, you can incase you want to fire one off call with a different ``key``.
+``key``, ``format``, ``raw`` parameters can be specified on ``WebAPI`` to affect
+all method calls, or when calling a specific method.
 Some methods have parameters which need to be a ``list``.
 
-Supported formats by web api are: ``json (default)``, ``vdf``, ``xml``
+Supported formats by web api are: ``json`` (default), ``vdf``, ``xml``
+The response will be deserialized using the appropriet module unless ``raw`` is
+``True``.
 
 .. code:: python
 
     >>> print api.ISteamUser.ResolveVanityURL.doc()  # method doc
+    """
     ResolveVanityURL (version: 1)
 
       Parameters:
@@ -39,10 +43,12 @@ Supported formats by web api are: ``json (default)``, ``vdf``, ``xml``
         vanityurl                 string   required
           - The vanity URL to get a SteamID for
 
+    """
     >>> print api.ISteamUser.doc()  # interface and all methods
     >>> print api.doc()  # all available interfaces
 
-Checkout the wiki has a `list of the currently available API interfaces`_.
+
+Checkout the wiki for a `list of the currently available API interfaces`_.
 
 
 SteamID
