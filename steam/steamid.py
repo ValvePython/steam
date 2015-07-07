@@ -1,33 +1,12 @@
-import enum
 import re
 import requests
+from .enums import EType, EUniverse
 
 
 class SteamID(object):
     """
     Object for converting steamID to its' various representations
     """
-    # Enums
-
-    class EUniverse(enum.Enum):
-        Invalid = 0
-        Public = 1
-        Beta = 2
-        Internal = 3
-        Dev = 4
-
-    class EType(enum.Enum):
-        Invalid = 0
-        Individual = 1
-        Multiseat = 2
-        GameServer = 3
-        AnonGameServer = 4
-        Pending = 5
-        ContentServer = 6
-        Clan = 7
-        Chat = 8
-        ConsoleUser = 9
-        AnonUser = 10
 
     ETypeChar = {
         0: 'I',
@@ -65,8 +44,8 @@ class SteamID(object):
 
         if largs == 0 and lkwargs == 0:
             self.id = 0
-            self.type = self.EType.Invalid
-            self.universe = self.EType.Invalid
+            self.type = EType.Invalid
+            self.universe = EType.Invalid
             self.instance = 0
         elif largs > 0:
             if largs > 1:
@@ -75,7 +54,8 @@ class SteamID(object):
             value = str(args[0])
 
             # see if input is community url
-            match = re.match(r'^https?://steamcommunity.com/(?P<type>id|profiles)/(?P<value>.*)/?$', value)
+            match = re.match(r'^https?://steamcommunity.com/'
+                             r'(?P<type>id|profiles)/(?P<value>.*)/?$', value)
             if match:
                 if match.group('type') == 'id':
                     page = requests.get(value).content
@@ -97,30 +77,38 @@ class SteamID(object):
                 # 32 bit account id
                 if value < 2**32-1:
                     self.id = value
-                    self.type = self.EType.Individual
-                    self.universe = self.EUniverse.Public
+                    self.type = EType.Individual
+                    self.universe = EUniverse.Public
                     self.instance = 1
                 # 64 bit
                 else:
                     self.id = value & 0xFFffFFff
                     self.instance = (value >> 32) & 0xFFffF
-                    self.type = self.EType((value >> 52) & 0xF)
-                    self.universe = self.EUniverse((value >> 56) & 0xFF)
+                    self.type = EType((value >> 52) & 0xF)
+                    self.universe = EUniverse((value >> 56) & 0xFF)
 
             # textual input e.g. [g:1:4]
             else:
                 typeChars = ''.join(self.ETypeChar.values())
-                match = re.match(r"^\[(?P<type>[%s]):(?P<universe>\d+):(?P<id>\d+)(:(?P<instance>\d+))?\]$" % typeChars, value)
+                match = re.match(r"^\["
+                                 r"(?P<type>[%s]):"        # type char
+                                 r"(?P<universe>\d+):"     # universe
+                                 r"(?P<id>\d+)"            # accountid
+                                 r"(:(?P<instance>\d+))?"  # instance
+                                 r"\]$" % typeChars, value
+                                 )
                 if not match:
-                    raise ValueError("Expected a number or textual SteamID (e.g. [g:1:4]), got %s" % repr(value))
+                    raise ValueError("Expected a number or textual SteamID"
+                                     " (e.g. [g:1:4]), got %s" % repr(value)
+                                     )
 
                 self.id = int(match.group('id'))
-                self.universe = self.EUniverse(int(match.group('universe')))
+                self.universe = EUniverse(int(match.group('universe')))
                 inverseETypeChar = dict((b, a) for (a, b) in self.ETypeChar.items())
-                self.type = self.EType(inverseETypeChar[match.group('type')])
+                self.type = EType(inverseETypeChar[match.group('type')])
                 self.instance = match.group('instance')
                 if self.instance is None:
-                    if self.type in (self.EType.Individual, self.EType.GameServer):
+                    if self.type in (EType.Individual, EType.GameServer):
                         self.instance = 1
                     else:
                         self.instance = 0
@@ -149,7 +137,7 @@ class SteamID(object):
                                 )
                     setattr(self, kwname, resolved)
 
-            if self.type in (self.EType.Individual, self.EType.GameServer):
+            if self.type in (EType.Individual, EType.GameServer):
                 self.instance = 1
             else:
                 self.instance = 0
@@ -192,8 +180,8 @@ class SteamID(object):
     @property
     def community_url(self):
         suffix = {
-            self.EType.Individual: "profiles/%s",
-            self.EType.Clan: "gid/%s",
+            EType.Individual: "profiles/%s",
+            EType.Clan: "gid/%s",
         }
         if self.type in suffix:
             url = "http://steamcommunity.com/%s" % suffix[self.type]
