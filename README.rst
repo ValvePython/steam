@@ -1,3 +1,5 @@
+|pypi| |license|
+
 Module for interacting with various Steam_ features
 
 WebAPI
@@ -102,3 +104,11 @@ SteamID
 .. _Steam Web API: https://developer.valvesoftware.com/wiki/Steam_Web_API
 .. _API Key: http://steamcommunity.com/dev/apikey
 .. _list of the currently available API interfaces: https://github.com/ValvePython/steam/wiki/web-api
+
+.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?style=flat&label=latest%20version
+    :target: https://pypi.python.org/pypi/steam
+    :alt: Latest version released on PyPi
+
+.. |license| image:: https://img.shields.io/pypi/l/steam.svg?style=flat&label=license
+    :target: https://pypi.python.org/pypi/steam
+    :alt: MIT License
