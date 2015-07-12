@@ -1,4 +1,4 @@
-__version__ = "0.3"
+__version__ = "0.4"
 __author__ = "Rossen Georgiev"
 
 from .steamid import SteamID

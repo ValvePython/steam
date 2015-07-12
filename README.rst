@@ -20,20 +20,25 @@ What interfaces are availability depends on the ``key``.
     >>> api.call('ISteamUser.ResolveVanityURL', vanityurl="valve", url_type=2)
     {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
 
+    # call a specific version of the method
+    >>> api.ISteamUser.ResolveVanityURL_v1(vanityurl="valve", url_type=2)
+    >>> api.call('ISteamUser.ResolveVanityURL_v1', vanityurl="valve", url_type=2)
+
 It's not necessary to provide the key when calling any interface method.
 ``key``, ``format``, ``raw`` parameters can be specified on ``WebAPI`` to affect
 all method calls, or when calling a specific method.
 Some methods have parameters which need to be a ``list``.
+Trying to call nonexistent method will raise an ``AttributeError``.
 
 Supported formats by web api are: ``json`` (default), ``vdf``, ``xml``
-The response will be deserialized using the appropriet module unless ``raw`` is
+The response will be deserialized using the appropriate module unless ``raw`` is
 ``True``.
 
 .. code:: python
 
     >>> print api.ISteamUser.ResolveVanityURL.doc()  # method doc
     """
-    ResolveVanityURL (version: 1)
+    ResolveVanityURL (v0001)
 
       Parameters:
         key                       string   required

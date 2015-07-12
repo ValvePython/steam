@@ -139,7 +139,14 @@ class WebAPIInterface(object):
         for method in interface_dict['methods']:
             obj = WebAPIMethod(method, parent=self)
             self.methods.append(obj)
-            setattr(self, obj.name, obj)
+
+            # map the method name as attribute including version
+            setattr(self, "%s_v%d" % (obj.name, obj.version), obj)
+
+            # without version, but th refernce of latest version
+            current_obj = getattr(self, obj.name, None)
+            if current_obj is None or current_obj.version < obj.version:
+                setattr(self, obj.name, obj)
 
     def __repr__(self):
         return "<%s %s with %s methods>" % (
@@ -182,10 +189,13 @@ class WebAPIMethod(object):
             self._dict['parameters'][param['name']] = param
 
     def __repr__(self):
-        return "<%s %s for %s>" % (
+        return "<%s %s>" % (
             self.__class__.__name__,
-            repr(self.name),
-            repr(self._parent.name),
+            repr("%s.%s_v%d" % (
+                self._parent.name,
+                self.name,
+                self.version,
+                )),
             )
 
     def __call__(self, **kwargs):
@@ -260,7 +270,7 @@ class WebAPIMethod(object):
         return self._parent.https
 
     def doc(self):
-        doc = "%(name)s (version: %(version)s)\n" % self._dict
+        doc = "%(name)s (v%(version)04d)\n" % self._dict
 
         if 'description' in self._dict:
             doc += "\n  %(description)s\n" % self._dict
