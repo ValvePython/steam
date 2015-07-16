@@ -270,7 +270,7 @@ class WebAPIMethod(object):
         return self._parent.https
 
     def doc(self):
-        doc = "%(name)s (v%(version)04d)\n" % self._dict
+        doc = "%(httpmethod)s %(name)s (v%(version)04d)\n" % self._dict
 
         if 'description' in self._dict:
             doc += "\n  %(description)s\n" % self._dict
