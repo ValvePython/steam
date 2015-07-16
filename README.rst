@@ -96,7 +96,7 @@ SteamID
     >>> group.as_steam3
     '[g:1:4]'
     >>> group.community_url
-    'http://steamcommunity.com/gid/103582791429521412'
+    'https://steamcommunity.com/gid/103582791429521412'
 
 
 

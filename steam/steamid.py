@@ -188,6 +188,6 @@ class SteamID(object):
             EType.Clan: "gid/%s",
         }
         if self.type in suffix:
-            url = "http://steamcommunity.com/%s" % suffix[self.type]
+            url = "https://steamcommunity.com/%s" % suffix[self.type]
             return url % self.as_64
-        return ''
+        return None
