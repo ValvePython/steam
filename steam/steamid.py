@@ -152,7 +152,7 @@ class SteamID(object):
             )
 
     def __str__(self):
-        return self.as_64
+        return str(self.as_64)
 
     @property
     def as_steam2(self):
