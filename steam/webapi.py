@@ -213,9 +213,10 @@ class WebAPIMethod(object):
         params = {}
         # process special case kwargs
         for param in ('key', 'format', 'raw'):
-            if param in kwargs:
-                params[param] = kwargs[param]
-                del kwargs[param]
+            if param not in kwargs:
+                parent_param = getattr(self._parent._parent, param, None)
+                if parent_param:
+                    kwargs[param] = parent_param
 
         # process method parameters
         for param in self.parameters.values():
