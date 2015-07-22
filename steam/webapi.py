@@ -1,3 +1,4 @@
+from __future__ import print_function
 import requests
 
 
@@ -124,6 +125,10 @@ class WebAPI(object):
             return vdf.load(resp.raw)
 
     def doc(self):
+        print(self.__doc__)
+
+    @property
+    def __doc__(self):
         doc = "Steam Web API - List of all interfaces\n\n"
         for interface in self.interfaces:
             doc += interface.doc()
@@ -167,6 +172,10 @@ class WebAPIInterface(object):
         return self._parent.https
 
     def doc(self):
+        print(self.__doc__)
+
+    @property
+    def __doc__(self):
         doc = "%s\n%s\n" % (self.name, '-'*len(self.name))
         for method in self.methods:
             doc += "  %s\n" % method.doc().replace("\n", "\n  ")
@@ -204,9 +213,8 @@ class WebAPIMethod(object):
             )
 
     def __call__(self, **kwargs):
-        possible_kwargs = (set(self._dict['parameters'].keys() + ['key', 'format', 'raw']))
-        call_kwargs = set(kwargs.keys())
-        unrecognized = call_kwargs.difference(possible_kwargs)
+        possible_kwargs = set(self._dict['parameters'].keys()) | set(['key', 'format', 'raw'])
+        unrecognized = set(kwargs.keys()).difference(possible_kwargs)
         if unrecognized:
             raise ValueError("Unrecognized parameter %s" % repr(unrecognized.pop()))
 
@@ -224,7 +232,7 @@ class WebAPIMethod(object):
             optional = param['optional']
 
             # raise if we are missing a required parameter
-            if not optional and name not in kwargs:
+            if not optional and name not in kwargs and name != 'key':
                 raise ValueError("Method requires %s to be set" % repr(name))
 
             # populate params that will be passed to _api_request
@@ -276,6 +284,10 @@ class WebAPIMethod(object):
         return self._parent.https
 
     def doc(self):
+        print(self.__doc__)
+
+    @property
+    def __doc__(self):
         doc = "%(httpmethod)s %(name)s (v%(version)04d)\n" % self._dict
 
         if 'description' in self._dict:

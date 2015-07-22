@@ -38,7 +38,7 @@ The response will be deserialized using the appropriate module unless ``raw`` is
 
 .. code:: python
 
-    >>> print api.ISteamUser.ResolveVanityURL.doc()  # method doc
+    >>> api.ISteamUser.ResolveVanityURL.__doc__  # method doc
     """
     ResolveVanityURL (v0001)
 
@@ -51,8 +51,11 @@ The response will be deserialized using the appropriate module unless ``raw`` is
           - The vanity URL to get a SteamID for
 
     """
-    >>> print api.ISteamUser.doc()  # interface and all methods
-    >>> print api.doc()  # all available interfaces
+
+    # or calling doc() will print it
+    >>> api.ISteamUser.ResolveVanityURL.doc()  # method doc
+    >>> api.ISteamUser.doc()  # interface and all methods
+    >>> api.doc()  # all available interfaces
 
 
 Checkout the wiki for a `list of the currently available API interfaces`_.
