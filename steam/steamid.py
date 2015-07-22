@@ -33,10 +33,14 @@ class SteamID(object):
         SteamID(id=12345, type='Invalid', universe='Invalid', instance=0)
         SteamID(103582791429521412)  # steam64
         SteamID('103582791429521412')
+        SteamID('STEAM_1:0:2')  # steam2
         SteamID('[g:1:4]')  # steam3
-        SteamID('https://steamcommunity.com/id/drunkenf00l')  # vanity url
         SteamID('http://steamcommunity.com/profiles/76561197968459473')
 
+        # WARNING: vainty url resolving is fragile
+        # it might break if community profile page changes
+        # you should use the WebAPI to resolve them reliably
+        SteamID('https://steamcommunity.com/id/drunkenf00l')
         """
 
         largs = len(args)
@@ -89,6 +93,20 @@ class SteamID(object):
 
             # textual input e.g. [g:1:4]
             else:
+                # try steam2
+                match = re.match(r"^STEAM_(?P<universe>\d+)"
+                                 r":(?P<reminder>[0-1])"
+                                 r":(?P<id>\d+)$", value
+                                 )
+
+                if match:
+                    self.id = (int(match.group('id')) << 1) | int(match.group('reminder'))
+                    self.universe = EUniverse(int(match.group('universe')))
+                    self.type = EType(1)
+                    self.instance = 1
+                    return
+
+                # try steam3
                 typeChars = ''.join(self.ETypeChar.values())
                 match = re.match(r"^\["
                                  r"(?P<type>[%s]):"        # type char
@@ -97,23 +115,24 @@ class SteamID(object):
                                  r"(:(?P<instance>\d+))?"  # instance
                                  r"\]$" % typeChars, value
                                  )
-                if not match:
-                    raise ValueError("Expected a number or textual SteamID"
-                                     " (e.g. [g:1:4]), got %s" % repr(value)
-                                     )
-
-                self.id = int(match.group('id'))
-                self.universe = EUniverse(int(match.group('universe')))
-                inverseETypeChar = dict((b, a) for (a, b) in self.ETypeChar.items())
-                self.type = EType(inverseETypeChar[match.group('type')])
-                self.instance = match.group('instance')
-                if self.instance is None:
-                    if self.type in (EType.Individual, EType.GameServer):
-                        self.instance = 1
+                if match:
+                    self.id = int(match.group('id'))
+                    self.universe = EUniverse(int(match.group('universe')))
+                    inverseETypeChar = dict((b, a) for (a, b) in self.ETypeChar.items())
+                    self.type = EType(inverseETypeChar[match.group('type')])
+                    self.instance = match.group('instance')
+                    if self.instance is None:
+                        if self.type in (EType.Individual, EType.GameServer):
+                            self.instance = 1
+                        else:
+                            self.instance = 0
                     else:
-                        self.instance = 0
-                else:
-                    self.instance = int(self.instance)
+                        self.instance = int(self.instance)
+                    return
+
+                raise ValueError("Expected a number or textual SteamID"
+                                 " (e.g. [g:1:4], STEAM_0:1:1234), got %s" % repr(value)
+                                 )
 
         elif lkwargs > 0:
             if 'id' not in kwargs:
@@ -156,7 +175,8 @@ class SteamID(object):
 
     @property
     def as_steam2(self):
-        return "STEAM_0:%s:%s" % (
+        return "STEAM_%s:%s:%s" % (
+            self.universe.value,
             self.id % 2,
             self.id >> 1,
             )
