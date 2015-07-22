@@ -213,9 +213,8 @@ class WebAPIMethod(object):
             )
 
     def __call__(self, **kwargs):
-        possible_kwargs = (set(self._dict['parameters'].keys() + ['key', 'format', 'raw']))
-        call_kwargs = set(kwargs.keys())
-        unrecognized = call_kwargs.difference(possible_kwargs)
+        possible_kwargs = set(self._dict['parameters'].keys()) | set(['key', 'format', 'raw'])
+        unrecognized = set(kwargs.keys()).difference(possible_kwargs)
         if unrecognized:
             raise ValueError("Unrecognized parameter %s" % repr(unrecognized.pop()))
 
