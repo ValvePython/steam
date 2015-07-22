@@ -233,7 +233,7 @@ class WebAPIMethod(object):
             optional = param['optional']
 
             # raise if we are missing a required parameter
-            if not optional and name not in kwargs:
+            if not optional and name not in kwargs and name != 'key':
                 raise ValueError("Method requires %s to be set" % repr(name))
 
             # populate params that will be passed to _api_request
