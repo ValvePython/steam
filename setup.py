@@ -4,11 +4,12 @@ from setuptools import setup
 from codecs import open
 from os import path
 
-from steam import __version__
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
+with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
+    __version__ = f.readline().split('"')[1]
 
 setup(
     name='steam',
@@ -16,7 +17,7 @@ setup(
     description='Module for interacting with various Steam features',
     long_description=long_description,
     url='https://github.com/ValvePython/steam',
-    author='Rossen Georgiev',
+    author="Rossen Georgiev",
     author_email='hello@rgp.io',
     license='MIT',
     classifiers=[
