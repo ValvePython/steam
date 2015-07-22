@@ -1,3 +1,4 @@
+from __future__ import print_function
 import requests
 
 
@@ -124,6 +125,10 @@ class WebAPI(object):
             return vdf.load(resp.raw)
 
     def doc(self):
+        print(self.__doc__)
+
+    @property
+    def __doc__(self):
         doc = "Steam Web API - List of all interfaces\n\n"
         for interface in self.interfaces:
             doc += interface.doc()
@@ -167,6 +172,10 @@ class WebAPIInterface(object):
         return self._parent.https
 
     def doc(self):
+        print(self.__doc__)
+
+    @property
+    def __doc__(self):
         doc = "%s\n%s\n" % (self.name, '-'*len(self.name))
         for method in self.methods:
             doc += "  %s\n" % method.doc().replace("\n", "\n  ")
@@ -276,6 +285,10 @@ class WebAPIMethod(object):
         return self._parent.https
 
     def doc(self):
+        print(self.__doc__)
+
+    @property
+    def __doc__(self):
         doc = "%(httpmethod)s %(name)s (v%(version)04d)\n" % self._dict
 
         if 'description' in self._dict:
