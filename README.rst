@@ -1,3 +1,5 @@
+|pypi| |license|
+
 Module for interacting with various Steam_ features
 
 WebAPI
@@ -68,6 +70,7 @@ SteamID
 
     >>> SteamID(12345)  # accountid
     >>> SteamID('12345')
+    >>> SteamID('STEAM_1:1:6172')  # steam2
     SteamID(id=12345, type='Individual', universe='Public', instance=1)
 
     >>> SteamID(103582791429521412)  # steam64
@@ -75,7 +78,8 @@ SteamID
     >>> SteamID('[g:1:4]')  # steam3
     SteamID(id=4, type='Clan', universe='Public', instance=0)
 
-    # vanity urls are resolved by making an HTTP request
+    # vanity urls are resolved by fetching the community profile page (this is unstable)
+    # use the WebAPI to reliably resolve vanity urls
     >>> SteamID('https://steamcommunity.com/id/drunkenf00l')
     >>> SteamID('http://steamcommunity.com/profiles/76561197968459473')  # no request is made
     SteamID(id=8193745, type='Individual', universe='Public', instance=1)
@@ -89,12 +93,12 @@ SteamID
     103582791429521412
     >>> str(group)
     '103582791429521412'
-    >>> group.as_steam2
-    'STEAM_0:0:2'
+    >>> group.as_steam2 # only works for 'Individual' accounts
+    'STEAM_1:0:2'
     >>> group.as_steam3
     '[g:1:4]'
     >>> group.community_url
-    'http://steamcommunity.com/gid/103582791429521412'
+    'https://steamcommunity.com/gid/103582791429521412'
 
 
 
@@ -102,3 +106,11 @@ SteamID
 .. _Steam Web API: https://developer.valvesoftware.com/wiki/Steam_Web_API
 .. _API Key: http://steamcommunity.com/dev/apikey
 .. _list of the currently available API interfaces: https://github.com/ValvePython/steam/wiki/web-api
+
+.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?style=flat&label=latest%20version
+    :target: https://pypi.python.org/pypi/steam
+    :alt: Latest version released on PyPi
+
+.. |license| image:: https://img.shields.io/pypi/l/steam.svg?style=flat&label=license
+    :target: https://pypi.python.org/pypi/steam
+    :alt: MIT License

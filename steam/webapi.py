@@ -42,6 +42,7 @@ class WebAPI(object):
         populates the name space under the instance
         """
         result = self._api_request(
+            None,
             "GET",
             "ISteamWebAPIUtil/GetSupportedAPIList/v1/",
             params={'format': 'json'},
@@ -79,7 +80,7 @@ class WebAPI(object):
     def _url_base(self):
         return "%s://api.steampowered.com/" % ('https' if self.https else 'http')
 
-    def _api_request(self, method, path, **kwargs):
+    def _api_request(self, caller, method, path, **kwargs):
         if method not in ('GET', 'POST'):
             raise NotImplemented("HTTP method: %s" % repr(self.method))
         if 'params' not in kwargs:
@@ -103,6 +104,9 @@ class WebAPI(object):
 
         f = getattr(requests, method.lower())
         resp = f(self._url_base + path, stream=True, **kwargs)
+
+        if caller is not None:
+            caller.last_response = resp
 
         if not resp.ok:
             raise requests.exceptions.HTTPError("%s %s" % (resp.status_code, resp.reason))
@@ -175,6 +179,7 @@ class WebAPIMethod(object):
     """
 
     def __init__(self, method_dict, parent=None):
+        self.last_response = None
         self._parent = parent
         self._dict = method_dict
 
@@ -240,6 +245,7 @@ class WebAPIMethod(object):
 
         # make the request
         return self._api_request(
+            self,
             self.method,
             "%s/%s/v%s/" % (self._parent.name, self.name, self.version),
             params=params,
@@ -270,7 +276,7 @@ class WebAPIMethod(object):
         return self._parent.https
 
     def doc(self):
-        doc = "%(name)s (v%(version)04d)\n" % self._dict
+        doc = "%(httpmethod)s %(name)s (v%(version)04d)\n" % self._dict
 
         if 'description' in self._dict:
             doc += "\n  %(description)s\n" % self._dict
