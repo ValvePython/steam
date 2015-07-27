@@ -1,4 +1,4 @@
-|pypi| |license|
+|pypi| |license| |coverage| |master_build|
 
 Module for interacting with various Steam_ features
 
@@ -104,7 +104,6 @@ SteamID
     'https://steamcommunity.com/gid/103582791429521412'
 
 
-
 .. _Steam: https://store.steampowered.com/
 .. _Steam Web API: https://developer.valvesoftware.com/wiki/Steam_Web_API
 .. _API Key: http://steamcommunity.com/dev/apikey
@@ -117,3 +116,11 @@ SteamID
 .. |license| image:: https://img.shields.io/pypi/l/steam.svg?style=flat&label=license
     :target: https://pypi.python.org/pypi/steam
     :alt: MIT License
+
+.. |coverage| image:: https://img.shields.io/coveralls/ValvePython/steam/master.svg?style=flat
+    :target: https://coveralls.io/r/ValvePython/steam?branch=master
+    :alt: Test coverage
+
+.. |master_build| image:: https://img.shields.io/travis/ValvePython/steam/master.svg?style=flat&label=master
+    :target: http://travis-ci.org/ValvePython/steam
+    :alt: Build status of master branch
