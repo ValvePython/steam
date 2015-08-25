@@ -1,6 +1,59 @@
 from __future__ import print_function
 import requests
 
+DEFAULT_PARAMS = {
+    'key': None,
+    'format': 'json',
+    'https': True,
+    'raw': False,
+}
+
+
+def webapi_request(path, method='GET', caller=None, params={}):
+    """
+    Low level function for calling Steam's WebAPI
+    """
+    if method not in ('GET', 'POST'):
+        raise NotImplemented("HTTP method: %s" % repr(self.method))
+
+    onetime = {}
+    for param in DEFAULT_PARAMS:
+        params[param] = onetime[param] = params.get(param,
+                                                    DEFAULT_PARAMS[param],
+                                                    )
+    path = "%s://api.steampowered.com/%s" % ('https' if params.get('https', True) else 'http',
+                                             path)
+    del params['raw']
+    del params['https']
+
+    if onetime['format'] not in ('json', 'vdf', 'xml'):
+        raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
+
+    # move params to data, if data is not specified for POST
+    # simplifies code calling this method
+    kwargs = {'params': params} if method == "GET" else {'data': params}
+
+    f = getattr(requests, method.lower())
+    resp = f(path, stream=True, **kwargs)
+
+    if caller is not None:
+        caller.last_response = resp
+
+    if not resp.ok:
+        raise requests.exceptions.HTTPError("%s %s" % (resp.status_code, resp.reason))
+
+    if onetime['raw']:
+        return resp.content
+
+    if onetime['format'] == 'json':
+        return resp.json()
+    elif onetime['format'] == 'xml':
+        import lxml.etree
+        return lxml.etree.parse(resp.raw)
+    elif onetime['format'] == 'vdf':
+        import vdf
+        return vdf.load(resp.raw)
+
 
 class WebAPI(object):
     """
@@ -12,13 +65,15 @@ class WebAPI(object):
     More: https://developer.valvesoftware.com/wiki/Steam_Web_API
     """
 
-    def __init__(self, key, format='json', raw=False, https=True):
+    def __init__(self, key, format='json', raw=False, https=True, auto_load_interfaces=True):
         """
         Optain apikey at https://steamcommunity.com/dev/apikey
 
-        key     - apikey
-        format  - output format (json, vdf, xml)
-        raw     - whenver to deserialize the response
+        key                   - apikey
+        format                - output format (json, vdf, xml)
+        raw                   - whenver to deserialize the response
+        https                 - whenever to use https or not
+        auto_load_interfaces  - should we load interfaces upon initialization
 
         These can be specified per method call for one off calls
         """
@@ -28,7 +83,9 @@ class WebAPI(object):
         self.raw = raw
         self.https = https
         self.interfaces = []
-        self.load_interfaces()
+
+        if auto_load_interfaces:
+            self.load_interfaces(self.fetch_interfaces())
 
     def __repr__(self):
         return "%s(key=%s, https=%s)" % (
@@ -37,22 +94,30 @@ class WebAPI(object):
             repr(self.https),
             )
 
-    def load_interfaces(self):
+    def fetch_interfaces(self):
         """
-        Fetches the available interfaces from the API itself and then
-        populates the name space under the instance
+        Returns a dict with the response from GetSupportedAPIList
+
+        This is then feeded into WebAPI.load_interfaces(reponse)
+        The reponse could be cached/save and used to load interfaces
         """
-        result = self._api_request(
-            None,
-            "GET",
+        return webapi_request(
             "ISteamWebAPIUtil/GetSupportedAPIList/v1/",
-            params={'format': 'json'},
+            method="GET",
+            caller=None,
+            params={'format': 'json',
+                    'key': self.key,
+                    },
             )
 
-        if result.get('apilist', {}).get('interfaces', None) is None:
+    def load_interfaces(self, interfaces_dict):
+        """
+        Populates the namespace under the instance
+        """
+        if interfaces_dict.get('apilist', {}).get('interfaces', None) is None:
             raise ValueError("Invalid response for GetSupportedAPIList")
 
-        interfaces = result['apilist']['interfaces']
+        interfaces = interfaces_dict['apilist']['interfaces']
         if len(interfaces) == 0:
             raise ValueError("API returned not interfaces; probably using invalid key")
 
@@ -77,52 +142,6 @@ class WebAPI(object):
         interface, method = method_path.split('.', 1)
         return getattr(getattr(self, interface), method)(**kwargs)
 
-    @property
-    def _url_base(self):
-        return "%s://api.steampowered.com/" % ('https' if self.https else 'http')
-
-    def _api_request(self, caller, method, path, **kwargs):
-        if method not in ('GET', 'POST'):
-            raise NotImplemented("HTTP method: %s" % repr(self.method))
-        if 'params' not in kwargs:
-            kwargs['params'] = {}
-
-        onetime = {}
-        for param in ('key', 'format', 'raw'):
-            kwargs['params'][param] = onetime[param] = kwargs['params'].get(param,
-                                                                            getattr(self, param)
-                                                                            )
-        del kwargs['params']['raw']
-
-        if onetime['format'] not in ('json', 'vdf', 'xml'):
-            raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
-
-        # move params to data, if data is not specified for POST
-        # simplifies code calling this method
-        if method == 'POST' and 'data' not in kwargs:
-            kwargs['data'] = kwargs['params']
-            del kwargs['params']
-
-        f = getattr(requests, method.lower())
-        resp = f(self._url_base + path, stream=True, **kwargs)
-
-        if caller is not None:
-            caller.last_response = resp
-
-        if not resp.ok:
-            raise requests.exceptions.HTTPError("%s %s" % (resp.status_code, resp.reason))
-
-        if onetime['raw']:
-            return resp.content
-
-        if onetime['format'] == 'json':
-            return resp.json()
-        elif onetime['format'] == 'xml':
-            import lxml.etree
-            return lxml.etree.parse(resp.raw)
-        elif onetime['format'] == 'vdf':
-            import vdf
-            return vdf.load(resp.raw)
 
     def doc(self):
         print(self.__doc__)
@@ -140,7 +159,7 @@ class WebAPIInterface(object):
     Steam Web API Interface
     """
 
-    def __init__(self, interface_dict, parent=None):
+    def __init__(self, interface_dict, parent):
         self._parent = parent
         self.name = interface_dict['name']
         self.methods = []
@@ -168,8 +187,20 @@ class WebAPIInterface(object):
         return iter(self.methods)
 
     @property
+    def key(self):
+        return self._parent.key
+
+    @property
     def https(self):
         return self._parent.https
+
+    @property
+    def format(self):
+        return self._parent.format
+
+    @property
+    def raw(self):
+        return self._parent.raw
 
     def doc(self):
         print(self.__doc__)
@@ -187,7 +218,7 @@ class WebAPIMethod(object):
     Steam Web API Interface Method
     """
 
-    def __init__(self, method_dict, parent=None):
+    def __init__(self, method_dict, parent):
         self.last_response = None
         self._parent = parent
         self._dict = method_dict
@@ -197,8 +228,8 @@ class WebAPIMethod(object):
         for param in params:
             # add property indicating param can be a list
             param['_array'] = param['name'].endswith('[0]')
-            # fix name
-            param['name'] = param['name'].rstrip('[0]')
+            # remove array suffix
+            param['name'] = param['name'][:-3]
             # turn params from a list to a dict
             self._dict['parameters'][param['name']] = param
 
@@ -213,17 +244,20 @@ class WebAPIMethod(object):
             )
 
     def __call__(self, **kwargs):
-        possible_kwargs = set(self._dict['parameters'].keys()) | set(['key', 'format', 'raw'])
+        possible_kwargs = set(self._dict['parameters'].keys()) |\
+                          set(['key', 'format', 'raw', 'https'])
         unrecognized = set(kwargs.keys()).difference(possible_kwargs)
         if unrecognized:
             raise ValueError("Unrecognized parameter %s" % repr(unrecognized.pop()))
 
         params = {}
         # process special case kwargs
-        for param in ('key', 'format', 'raw'):
+        for param in ('key', 'format', 'raw', 'https'):
             if param in kwargs:
                 params[param] = kwargs[param]
                 del kwargs[param]
+            else:
+                params[param] = getattr(self._parent, param)
 
         # process method parameters
         for param in self.parameters.values():
@@ -252,10 +286,10 @@ class WebAPIMethod(object):
                     params[name] = kwargs[name]
 
         # make the request
-        return self._api_request(
-            self,
-            self.method,
+        return webapi_request(
             "%s/%s/v%s/" % (self._parent.name, self.name, self.version),
+            method=self.method,
+            caller=self,
             params=params,
             )
 
@@ -272,16 +306,8 @@ class WebAPIMethod(object):
         return self._dict['parameters']
 
     @property
-    def _api_request(self):
-        return self._parent._parent._api_request
-
-    @property
     def name(self):
         return self._dict['name']
-
-    @property
-    def https(self):
-        return self._parent.https
 
     def doc(self):
         print(self.__doc__)

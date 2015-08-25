@@ -19,7 +19,7 @@
                     ]
                 }, 
                 "method": "GET", 
-                "uri": "https://api.steampowered.com/ISteamWebAPIUtil/GetSupportedAPIList/v1/?format=json"
+                "uri": "https://api.steampowered.com/ISteamWebAPIUtil/GetSupportedAPIList/v1/?key=test_api_key&format=json"
             }, 
             "response": {
                 "status": {
