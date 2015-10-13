@@ -52,7 +52,7 @@ def webapi_request(path, method='GET', caller=None, params={}):
         return lxml.etree.parse(resp.raw)
     elif onetime['format'] == 'vdf':
         import vdf
-        return vdf.load(resp.raw)
+        return vdf.loads(resp.text)
 
 
 class WebAPI(object):
