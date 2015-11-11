@@ -229,7 +229,8 @@ class WebAPIMethod(object):
             # add property indicating param can be a list
             param['_array'] = param['name'].endswith('[0]')
             # remove array suffix
-            param['name'] = param['name'][:-3]
+            if param['_array']:
+                param['name'] = param['name'][:-3]
             # turn params from a list to a dict
             self._dict['parameters'][param['name']] = param
 
