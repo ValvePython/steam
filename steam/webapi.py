@@ -150,7 +150,7 @@ class WebAPI(object):
     def __doc__(self):
         doc = "Steam Web API - List of all interfaces\n\n"
         for interface in self.interfaces:
-            doc += interface.doc()
+            doc += interface.__doc__
         return doc
 
 
@@ -209,7 +209,7 @@ class WebAPIInterface(object):
     def __doc__(self):
         doc = "%s\n%s\n" % (self.name, '-'*len(self.name))
         for method in self.methods:
-            doc += "  %s\n" % method.doc().replace("\n", "\n  ")
+            doc += "  %s\n" % method.__doc__.replace("\n", "\n  ")
         return doc
 
 
