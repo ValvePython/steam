@@ -2,9 +2,12 @@ from __future__ import print_function
 import requests
 
 DEFAULT_PARAMS = {
+    # api parameters
     'key': None,
     'format': 'json',
+    # internal
     'https': True,
+    'http_timeout': 30,
     'raw': False,
 }
 
@@ -25,6 +28,7 @@ def webapi_request(path, method='GET', caller=None, params={}):
                                              path)
     del params['raw']
     del params['https']
+    del params['http_timeout']
 
     if onetime['format'] not in ('json', 'vdf', 'xml'):
         raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
@@ -34,7 +38,7 @@ def webapi_request(path, method='GET', caller=None, params={}):
     kwargs = {'params': params} if method == "GET" else {'data': params}
 
     f = getattr(requests, method.lower())
-    resp = f(path, stream=True, **kwargs)
+    resp = f(path, stream=True, timeout=onetime['http_timeout'], **kwargs)
 
     if caller is not None:
         caller.last_response = resp
@@ -65,7 +69,7 @@ class WebAPI(object):
     More: https://developer.valvesoftware.com/wiki/Steam_Web_API
     """
 
-    def __init__(self, key, format='json', raw=False, https=True, auto_load_interfaces=True):
+    def __init__(self, key, format='json', raw=False, https=True, http_timeout=30, auto_load_interfaces=True):
         """
         Optain apikey at https://steamcommunity.com/dev/apikey
 
@@ -82,6 +86,7 @@ class WebAPI(object):
         self.format = format
         self.raw = raw
         self.https = https
+        self.http_timeout = http_timeout
         self.interfaces = []
 
         if auto_load_interfaces:
@@ -195,6 +200,10 @@ class WebAPIInterface(object):
         return self._parent.https
 
     @property
+    def http_timeout(self):
+        return self._parent.http_timeout
+
+    @property
     def format(self):
         return self._parent.format
 
@@ -245,15 +254,14 @@ class WebAPIMethod(object):
             )
 
     def __call__(self, **kwargs):
-        possible_kwargs = set(self._dict['parameters'].keys()) |\
-                          set(['key', 'format', 'raw', 'https'])
+        possible_kwargs = set(self._dict['parameters'].keys()) | set(DEFAULT_PARAMS.keys())
         unrecognized = set(kwargs.keys()).difference(possible_kwargs)
         if unrecognized:
             raise ValueError("Unrecognized parameter %s" % repr(unrecognized.pop()))
 
         params = {}
         # process special case kwargs
-        for param in ('key', 'format', 'raw', 'https'):
+        for param in DEFAULT_PARAMS.keys():
             if param in kwargs:
                 params[param] = kwargs[param]
                 del kwargs[param]
