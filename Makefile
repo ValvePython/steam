@@ -18,7 +18,7 @@ init:
 
 test:
 	rm -f .coverage steam/*.pyc tests/*.pyc
-	PYTHONHASHSEED=0 nosetests --verbosity 2 --with-coverage --cover-package=steam
+	PYTHONHASHSEED=0 nosetests --verbosity 1 --with-coverage --cover-package=steam
 
 pylint:
 	pylint -r n -f colorized steam || true

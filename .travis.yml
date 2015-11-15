@@ -1,0 +1,12 @@
+language: python
+python:
+    - "2.7"
+    - "3.3"
+    - "3.4"
+install:
+    - make init
+    - pip install coveralls
+script:
+    - make test
+after_success:
+    - coveralls

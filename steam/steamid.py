@@ -1,6 +1,6 @@
 import re
 import requests
-from .enums import EType, EUniverse
+from steam.enums import EType, EUniverse
 
 
 class SteamID(object):
@@ -44,12 +44,11 @@ class SteamID(object):
         """
 
         largs = len(args)
-        lkwargs = len(kwargs)
 
-        if largs == 0 and lkwargs == 0:
+        if largs == 0 and len(kwargs) == 0:
             self.id = 0
             self.type = EType.Invalid
-            self.universe = EType.Invalid
+            self.universe = EUniverse.Invalid
             self.instance = 0
         elif largs > 0:
             if largs > 1:
@@ -71,15 +70,15 @@ class SteamID(object):
                     value = match.group('value')
 
             # numeric input
-            if value.isdigit():
+            if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):
                 value = int(value)
                 if 0 > value:
                     raise ValueError("Expected positive int, got %d" % value)
-                if value > 2**64-1:
+                if value >= 2**64:
                     raise ValueError("Expected a 32/64 bit int")
 
                 # 32 bit account id
-                if value < 2**32-1:
+                if value < 2**32:
                     self.id = value
                     self.type = EType.Individual
                     self.universe = EUniverse.Public
@@ -94,14 +93,14 @@ class SteamID(object):
             # textual input e.g. [g:1:4]
             else:
                 # try steam2
-                match = re.match(r"^STEAM_(?P<universe>\d+)"
+                match = re.match(r"^STEAM_(?P<universe>[01])"
                                  r":(?P<reminder>[0-1])"
                                  r":(?P<id>\d+)$", value
                                  )
 
                 if match:
                     self.id = (int(match.group('id')) << 1) | int(match.group('reminder'))
-                    self.universe = EUniverse(int(match.group('universe')))
+                    self.universe = EUniverse(1)
                     self.type = EType(1)
                     self.instance = 1
                     return
@@ -134,35 +133,36 @@ class SteamID(object):
                                  " (e.g. [g:1:4], STEAM_0:1:1234), got %s" % repr(value)
                                  )
 
-        elif lkwargs > 0:
+        elif len(kwargs):
             if 'id' not in kwargs:
                 raise ValueError("Expected at least 'id' kwarg")
 
             self.id = int(kwargs['id'])
+            assert self.id <= 0xffffFFFF, "id larger than 32bits"
 
-            for kwname in 'type', 'universe':
-                if kwname in kwargs:
-                    value = kwargs[kwname]
-                    kwenum = getattr(self, "E%s" % kwname.capitalize())
-
-                    resolved = getattr(kwenum, value, None)
-                    if resolved is None:
-                        try:
-                            resolved = kwenum(value)
-                        except ValueError:
-                            raise ValueError(
-                                "Invalid value for kwarg '%s', see SteamID.E%s" %
-                                (kwname, kwname.capitalize())
-                                )
-                    setattr(self, kwname, resolved)
-
-            if self.type in (EType.Individual, EType.GameServer):
-                self.instance = 1
+            value = kwargs.get('type', 0)
+            if type(value) in (int, EType):
+                self.type = EType(value)
             else:
-                self.instance = 0
+                self.type = EType[value.lower().capitalize()]
+
+            value = kwargs.get('universe', 0)
+            if type(value) in (int, EUniverse):
+                self.universe = EUniverse(value)
+            else:
+                self.universe = EUniverse[value.lower().capitalize()]
+
+            if 'instance' in kwargs:
+                self.instance = kwargs['instance']
+                assert self.instance <= 0xffffF, "instance larger than 20bits"
+            else:
+                if self.type in (EType.Individual, EType.GameServer):
+                    self.instance = 1
+                else:
+                    self.instance = 0
 
     def __repr__(self):
-        return "%s(id=%s, type=%s, universe=%s, instance=%s)" % (
+        return "<%s(id=%s, type=%s, universe=%s, instance=%s)>" % (
             self.__class__.__name__,
             self.id,
             repr(self.type.name),
@@ -175,19 +175,26 @@ class SteamID(object):
 
     @property
     def as_steam2(self):
-        return "STEAM_%s:%s:%s" % (
-            self.universe.value,
+        return "STEAM_0:%s:%s" % (
             self.id % 2,
             self.id >> 1,
             )
 
     @property
     def as_steam3(self):
-        return "[%s:%s:%s]" % (
-            self.ETypeChar[self.type.value],
-            self.universe.value,
-            self.id,
-            )
+        if self.type is EType.AnonGameServer:
+            return "[%s:%s:%s:%s]" % (
+                self.ETypeChar[self.type.value],
+                self.universe.value,
+                self.id,
+                self.instance
+                )
+        else:
+            return "[%s:%s:%s]" % (
+                self.ETypeChar[self.type.value],
+                self.universe.value,
+                self.id,
+                )
 
     @property
     def as_64(self):
