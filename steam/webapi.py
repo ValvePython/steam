@@ -38,7 +38,7 @@ def webapi_request(path, method='GET', caller=None, params={}):
     kwargs = {'params': params} if method == "GET" else {'data': params}
 
     f = getattr(requests, method.lower())
-    resp = f(path, stream=True, timeout=onetime['http_timeout'], **kwargs)
+    resp = f(path, stream=False, timeout=onetime['http_timeout'], **kwargs)
 
     if caller is not None:
         caller.last_response = resp
