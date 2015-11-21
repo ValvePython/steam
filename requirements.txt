@@ -2,5 +2,4 @@ nose
 coverage
 mock
 requests
-enum34
 vcrpy
