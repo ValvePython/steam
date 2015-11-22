@@ -1,6 +1,6 @@
 |pypi| |license| |coverage| |master_build|
 
-Module for interacting with various Steam_ features
+Module for interacting with various Steam_ features. Install with `pip install steam`.
 
 WebAPI
 ------
@@ -14,6 +14,7 @@ What interfaces are availability depends on the ``key``.
     >>> from steam import WebAPI
     >>> api = WebAPI(key="<your api key>")
 
+    # instance.<interface>.<method>
     >>> api.ISteamWebAPIUtil.GetServerInfo()
     >>> api.call('ISteamWebAPIUtil.GetServerInfo')
     {u'servertimestring': u'Sun Jul 05 22:37:25 2015', u'servertime': 1436161045}
@@ -27,7 +28,7 @@ What interfaces are availability depends on the ``key``.
     >>> api.call('ISteamUser.ResolveVanityURL_v1', vanityurl="valve", url_type=2)
 
 It's not necessary to provide the key when calling any interface method.
-``key``, ``format``, ``raw`` parameters can be specified on ``WebAPI`` to affect
+``key``, ``format``, ``raw``, ``http_timeout`` parameters can be specified on ``WebAPI`` to affect
 all method calls, or when calling a specific method.
 Some methods have parameters which need to be a ``list``.
 Trying to call nonexistent method will raise an ``AttributeError``.

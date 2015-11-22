@@ -3,13 +3,21 @@
 from setuptools import setup
 from codecs import open
 from os import path
-
+import sys
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
     __version__ = f.readline().split('"')[1]
+
+install_requires = [
+    'requests',
+    'vdf',
+]
+
+if sys.version_info < (3, 4):
+    install_requires.append('enum34>=1.0.4')
 
 setup(
     name='steam',
@@ -30,10 +38,6 @@ setup(
     ],
     keywords='valve steam steamid api webapi',
     packages=['steam'],
-    install_requires=[
-        'enum34',
-        'requests',
-        'vdf',
-    ],
+    install_requires=install_requires,
     zip_safe=True,
 )
