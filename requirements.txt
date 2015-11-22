@@ -4,3 +4,4 @@ mock
 requests
 enum34
 vcrpy
+pyyaml

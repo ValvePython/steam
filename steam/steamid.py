@@ -1,5 +1,4 @@
 import re
-import requests
 from steam.enums import EType, EUniverse
 
 
@@ -55,19 +54,6 @@ class SteamID(object):
                 raise ValueError("Needed only 1 arg, got %d" % largs)
 
             value = str(args[0])
-
-            # see if input is community url
-            match = re.match(r'^https?://steamcommunity.com/'
-                             r'(?P<type>id|profiles)/(?P<value>.*)/?$', value)
-            if match:
-                if match.group('type') == 'id':
-                    page = requests.get(value).content
-                    value = re.findall('steamid":"(\d+)",', page)
-                    if not value:
-                        raise ValueError("Unable to retrieve steamID")
-                    value = value[0]
-                else:
-                    value = match.group('value')
 
             # numeric input
             if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):
@@ -129,8 +115,8 @@ class SteamID(object):
                         self.instance = int(self.instance)
                     return
 
-                raise ValueError("Expected a number or textual SteamID"
-                                 " (e.g. [g:1:4], STEAM_0:1:1234), got %s" % repr(value)
+                raise ValueError("Expected a steam32/64 or textual steam id"
+                                 ", got %s" % repr(value)
                                  )
 
         elif len(kwargs):
@@ -218,3 +204,60 @@ class SteamID(object):
             url = "https://steamcommunity.com/%s" % suffix[self.type]
             return url % self.as_64
         return None
+
+
+def steam64_from_url(url):
+    """
+    Takes a Steam Community url and returns steam64 or None
+
+    Example URLs:
+    ----
+    https://steamcommunity.com/gid/[g:1:4]
+    https://steamcommunity.com/gid/103582791429521412
+    https://steamcommunity.com/groups/Valve
+    https://steamcommunity.com/profiles/[U:1:12]
+    https://steamcommunity.com/profiles/76561197960265740
+    https://steamcommunity.com/id/johnc
+    """
+
+    match = re.match(r'^https?://steamcommunity.com/'
+                     r'(?P<type>profiles|id|gid|groups)/(?P<value>.*)/?$', url)
+
+    if not match:
+        return None
+
+    import requests
+
+    if match.group('type') in ('id', 'profiles'):
+        xml = requests.get("%s/?xml=1" % url).text
+        match = re.findall('<steamID64>(\d+)</steamID64>', xml)
+    else:
+        xml = requests.get("%s/memberslistxml/?xml=1" % url).text
+        match = re.findall('<groupID64>(\d+)</groupID64>', xml)
+
+    if not match:
+        return None
+
+    return match[0]  # return matched steam64
+
+
+def from_url(url):
+    """
+    Takes Steam community url and returns a SteamID instance or None
+
+    Example URLs:
+    ----
+    https://steamcommunity.com/gid/[g:1:4]
+    https://steamcommunity.com/gid/103582791429521412
+    https://steamcommunity.com/groups/Valve
+    https://steamcommunity.com/profiles/[U:1:12]
+    https://steamcommunity.com/profiles/76561197960265740
+    https://steamcommunity.com/id/johnc
+    """
+
+    steam64 = steam64_from_url(url)
+
+    if steam64:
+        return SteamID(steam64)
+
+    return None

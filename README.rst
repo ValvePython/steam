@@ -67,6 +67,7 @@ SteamID
 
 .. code:: python
 
+    >>> from steam
     >>> from steam import SteamID
 
     >>> SteamID()
@@ -82,11 +83,12 @@ SteamID
     >>> SteamID('[g:1:4]')  # steam3
     SteamID(id=4, type='Clan', universe='Public', instance=0)
 
-    # vanity urls are resolved by fetching the community profile page (this is unstable)
-    # use the WebAPI to reliably resolve vanity urls
-    >>> SteamID('https://steamcommunity.com/id/drunkenf00l')
-    >>> SteamID('http://steamcommunity.com/profiles/76561197968459473')  # no request is made
+    # A Steam community url can be resolved using steamid module
+    >>> steam.steamid.from_url('https://steamcommunity.com/id/drunkenf00l')
+    >>> steam.steamid.from_url('http://steamcommunity.com/profiles/76561197968459473')
     SteamID(id=8193745, type='Individual', universe='Public', instance=1)
+    >>> steam.steamid.steam64_from_url('http://steamcommunity.com/profiles/76561197968459473')
+    '76561197968459473'
 
     >>> group = SteamID('[g:1:4]')
     >>> group.id  # accountid

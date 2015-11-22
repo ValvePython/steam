@@ -1,7 +1,9 @@
 import unittest
 import mock
+import vcr
 
-from steam.steamid import SteamID, requests
+from steam import steamid
+from steam.steamid import SteamID
 from steam.enums import EType, EUniverse
 
 
@@ -23,40 +25,6 @@ class SteamID_initialization(unittest.TestCase):
     ######################################################
     # 1 ARG
     ######################################################
-    @mock.patch.object(requests, "get")
-    def test_arg_community_url_id(self, mock_requests_get):
-        ResponseMock = mock.Mock()
-        ResponseMock.content = 'var asd = {"steamid":"76580280500085312","key":5123}'
-        mock_requests_get.return_value = ResponseMock
-
-        # http
-        self.compare(SteamID("http://steamcommunity.com/id/testvanity"),
-                     [123456, EType.Individual, EUniverse.Public, 4444]
-                     )
-
-        mock_requests_get.assert_called_with("http://steamcommunity.com/id/testvanity")
-        # https
-        self.compare(SteamID("https://steamcommunity.com/id/testvanity"),
-                     [123456, EType.Individual, EUniverse.Public, 4444]
-                     )
-        mock_requests_get.assert_called_with("https://steamcommunity.com/id/testvanity")
-        # raise
-        ResponseMock.content = "no steamid json :("
-        with self.assertRaises(ValueError):
-            self.compare(SteamID("https://steamcommunity.com/id/testvanity"),
-                         [123456, EType.Individual, EUniverse.Public, 4444]
-                         )
-
-    def test_arg_community_url_profiles(self):
-        # http
-        self.compare(SteamID("http://steamcommunity.com/profiles/76580280500085312"),
-                     [123456, EType.Individual, EUniverse.Public, 4444]
-                     )
-        # https
-        self.compare(SteamID("https://steamcommunity.com/profiles/76580280500085312"),
-                     [123456, EType.Individual, EUniverse.Public, 4444]
-                     )
-
     def test_arg_number_out_of_range(self):
         self.assertRaises(ValueError, SteamID, -1)
         self.assertRaises(ValueError, SteamID, '-1')
@@ -243,3 +211,46 @@ class SteamID_properties(unittest.TestCase):
         self.assertEqual(SteamID('[A:1:4]').community_url,
                          None
                          )
+
+
+class steamid_functions(unittest.TestCase):
+    @mock.patch('steam.steamid.steam64_from_url')
+    def test_from_url(self, s64_from_url):
+
+        s64_from_url.return_value = None
+        self.assertIsNone(steamid.from_url(None))
+
+        s64_from_url.return_value = '76580280500085312'
+        test_instance = steamid.from_url('76580280500085312')
+        self.assertIsInstance(test_instance, SteamID)
+        self.assertEqual(test_instance.as_64, 76580280500085312)
+
+
+    @vcr.use_cassette('vcr/steamid_community_urls.yaml', mode='once', serializer='yaml')
+    def test_steam64_from_url(self):
+
+        # invalid urls return None
+        self.assertIsNone(steamid.steam64_from_url("asdasd"))
+        self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/gid/0"))
+
+        # try profile urls
+        sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/[U:1:12]')
+        self.assertEqual(sid, '76561197960265740')
+
+        sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/76561197960265740')
+        self.assertEqual(sid, '76561197960265740')
+
+        sid = steamid.steam64_from_url('https://steamcommunity.com/id/johnc')
+        self.assertEqual(sid, '76561197960265740')
+
+
+        # try group urls
+        sid = steamid.steam64_from_url('https://steamcommunity.com/gid/[g:1:4]')
+        self.assertEqual(sid, '103582791429521412')
+
+        sid = steamid.steam64_from_url('https://steamcommunity.com/gid/103582791429521412')
+        self.assertEqual(sid, '103582791429521412')
+
+        sid = steamid.steam64_from_url('https://steamcommunity.com/groups/Valve')
+        self.assertEqual(sid, '103582791429521412')
+
