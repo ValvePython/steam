@@ -6,7 +6,9 @@ python:
 install:
     - make init
     - pip install coveralls
+    - pip install scrutinizer-ocular
 script:
     - make test
 after_success:
     - coveralls
+    - ocular
