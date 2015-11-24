@@ -1,26 +1,26 @@
 import re
 from steam.enums import EType, EUniverse
 
+ETypeCharMap = {
+    0: 'I',
+    1: 'U',
+    2: 'M',
+    3: 'G',
+    4: 'A',
+    5: 'P',
+    6: 'C',
+    7: 'g',
+    8: 'T',
+    8: 'c',
+    8: 'L',
+    10: 'a',
+}
+
 
 class SteamID(object):
     """
     Object for converting steamID to its' various representations
     """
-
-    ETypeChar = {
-        0: 'I',
-        1: 'U',
-        2: 'M',
-        3: 'G',
-        4: 'A',
-        5: 'P',
-        6: 'C',
-        7: 'g',
-        8: 'T',
-        8: 'c',
-        8: 'L',
-        10: 'a',
-    }
 
     def __init__(self, *args, **kwargs):
         """
@@ -41,36 +41,26 @@ class SteamID(object):
         # you should use the WebAPI to resolve them reliably
         SteamID('https://steamcommunity.com/id/drunkenf00l')
         """
+        self.id = 0
+        self.type = EType.Invalid
+        self.universe = EUniverse.Invalid
+        self.instance = 0
 
-        largs = len(args)
-
-        if largs == 0 and len(kwargs) == 0:
-            self.id = 0
-            self.type = EType.Invalid
-            self.universe = EUniverse.Invalid
-            self.instance = 0
-        elif largs > 0:
-            if largs > 1:
-                raise ValueError("Needed only 1 arg, got %d" % largs)
-
+        if len(args) == 1:
             value = str(args[0])
 
             # numeric input
-            if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):
+            if value.isdigit():
                 value = int(value)
-                if 0 > value:
-                    raise ValueError("Expected positive int, got %d" % value)
-                if value >= 2**64:
-                    raise ValueError("Expected a 32/64 bit int")
 
                 # 32 bit account id
-                if value < 2**32:
+                if 0 < value < 2**32:
                     self.id = value
                     self.type = EType.Individual
                     self.universe = EUniverse.Public
                     self.instance = 1
                 # 64 bit
-                else:
+                elif value < 2**64:
                     self.id = value & 0xFFffFFff
                     self.instance = (value >> 32) & 0xFFffF
                     self.type = EType((value >> 52) & 0xF)
@@ -78,61 +68,25 @@ class SteamID(object):
 
             # textual input e.g. [g:1:4]
             else:
-                # try steam2
-                match = re.match(r"^STEAM_(?P<universe>[01])"
-                                 r":(?P<reminder>[0-1])"
-                                 r":(?P<id>\d+)$", value
-                                 )
+                result = steam2_to_tuple(value) or steam3_to_tuple(value)
 
-                if match:
-                    self.id = (int(match.group('id')) << 1) | int(match.group('reminder'))
-                    self.universe = EUniverse(1)
-                    self.type = EType(1)
-                    self.instance = 1
-                    return
-
-                # try steam3
-                typeChars = ''.join(self.ETypeChar.values())
-                match = re.match(r"^\["
-                                 r"(?P<type>[%s]):"        # type char
-                                 r"(?P<universe>\d+):"     # universe
-                                 r"(?P<id>\d+)"            # accountid
-                                 r"(:(?P<instance>\d+))?"  # instance
-                                 r"\]$" % typeChars, value
-                                 )
-                if match:
-                    self.id = int(match.group('id'))
-                    self.universe = EUniverse(int(match.group('universe')))
-                    inverseETypeChar = dict((b, a) for (a, b) in self.ETypeChar.items())
-                    self.type = EType(inverseETypeChar[match.group('type')])
-                    self.instance = match.group('instance')
-                    if self.instance is None:
-                        if self.type in (EType.Individual, EType.GameServer):
-                            self.instance = 1
-                        else:
-                            self.instance = 0
-                    else:
-                        self.instance = int(self.instance)
-                    return
-
-                raise ValueError("Expected a steam32/64 or textual steam id"
-                                 ", got %s" % repr(value)
-                                 )
+                if result:
+                    (self.id,
+                     self.type,
+                     self.universe,
+                     self.instance
+                    ) = result
 
         elif len(kwargs):
-            if 'id' not in kwargs:
-                raise ValueError("Expected at least 'id' kwarg")
+            self.id = int(kwargs.get('id', 0))
 
-            self.id = int(kwargs['id'])
-            assert self.id <= 0xffffFFFF, "id larger than 32bits"
-
-            value = kwargs.get('type', 0)
+            value = kwargs.get('type', 1)
             if type(value) in (int, EType):
                 self.type = EType(value)
             else:
                 self.type = EType[value.lower().capitalize()]
 
-            value = kwargs.get('universe', 0)
+            value = kwargs.get('universe', 1)
             if type(value) in (int, EUniverse):
                 self.universe = EUniverse(value)
             else:
@@ -160,10 +114,19 @@ class SteamID(object):
         return str(self.as_64)
 
     def __cmp__(self, other):
-        return cmp(self.as_64, other.as_64)
+        if isinstance(other, SteamID):
+            return cmp(self.as_64, other.as_64)
+        else:
+            raise RuntimeError("Can only compare SteamID instances")
 
     def __hash__(self):
         return hash(self.as_64)
+
+    def is_valid(self):
+        return (0 < self.id < 2**32
+                and self.type is not EType.Invalid
+                and self.universe is not EUniverse.Invalid
+                )
 
     @property
     def as_steam2(self):
@@ -176,14 +139,14 @@ class SteamID(object):
     def as_steam3(self):
         if self.type is EType.AnonGameServer:
             return "[%s:%s:%s:%s]" % (
-                self.ETypeChar[self.type.value],
+                ETypeCharMap[self.type.value],
                 self.universe.value,
                 self.id,
                 self.instance
                 )
         else:
             return "[%s:%s:%s]" % (
-                self.ETypeChar[self.type.value],
+                ETypeCharMap[self.type.value],
                 self.universe.value,
                 self.id,
                 )
@@ -211,6 +174,50 @@ class SteamID(object):
             return url % self.as_64
         return None
 
+
+def steam2_to_tuple(value):
+    match = re.match(r"^STEAM_(?P<universe>[01])"
+                     r":(?P<reminder>[0-1])"
+                     r":(?P<id>\d+)$", value
+                     )
+
+    if not match:
+        return None
+
+    steam32 = (int(match.group('id')) << 1) | int(match.group('reminder'))
+
+    return (steam32, EType(1), EUniverse(1), 1)
+
+def steam3_to_tuple(value):
+    typeChars = ''.join(ETypeCharMap.values())
+    match = re.match(r"^\["
+                     r"(?P<type>[%s]):"        # type char
+                     r"(?P<universe>\d+):"     # universe
+                     r"(?P<id>\d+)"            # accountid
+                     r"(:(?P<instance>\d+))?"  # instance
+                     r"\]$" % typeChars, value
+                     )
+    if not match:
+        return None
+
+    steam32 = int(match.group('id'))
+
+    universe = EUniverse(int(match.group('universe')))
+
+    inverseETypeCharMap = dict((b, a) for (a, b) in ETypeCharMap.items())
+    etype = EType(inverseETypeCharMap[match.group('type')])
+
+    instance = match.group('instance')
+
+    if instance is None:
+        if etype in (EType.Individual, EType.GameServer):
+            instance = 1
+        else:
+            instance = 0
+    else:
+        instance = int(instance)
+
+    return (steam32, etype, universe, instance)
 
 def steam64_from_url(url):
     """

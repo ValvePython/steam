@@ -3,7 +3,7 @@ import mock
 import vcr
 
 from steam import steamid
-from steam.steamid import SteamID
+from steam.steamid import SteamID, ETypeCharMap
 from steam.enums import EType, EUniverse
 
 
@@ -14,27 +14,40 @@ class SteamID_initialization(unittest.TestCase):
         self.assertEqual(obj.universe, test_list[2])
         self.assertEqual(obj.instance, test_list[3])
 
-    def test_arg_toomany(self):
-        with self.assertRaises(ValueError):
-            SteamID(1, 2)
-        with self.assertRaises(ValueError):
-            SteamID(1, 2, 3)
-        with self.assertRaises(ValueError):
-            SteamID(1, 2, 3, 4)
+    def test_hash(self):
+        self.assertEqual(hash(SteamID(1)), hash(SteamID(1)))
+        self.assertNotEqual(hash(SteamID(12345)), hash(SteamID(8888)))
+
+    def test_cmp(self):
+        self.assertEqual(SteamID(1), SteamID(1))
+        self.assertTrue(SteamID(2) > SteamID(1))
+        self.assertTrue(SteamID(2) < SteamID(4))
+
+        with self.assertRaises(RuntimeError):
+            a = SteamID(5) == 5
+            b = SteamID(5) == '5'
+
+    def test_is_valid(self):
+        self.assertTrue(SteamID(1).is_valid())
+        self.assertTrue(SteamID(id=5).is_valid())
+
+        self.assertFalse(SteamID(0).is_valid())
+        self.assertFalse(SteamID(-50).is_valid())
+
+        self.assertFalse(SteamID(id=1, type=EType.Invalid).is_valid())
+        self.assertFalse(SteamID(id=1, universe=EUniverse.Invalid).is_valid())
+
+    def test_arg_toomany_invalid(self):
+        self.compare(SteamID(1, 2),
+                     [0, EType.Invalid, EUniverse.Invalid, 0])
+        self.compare(SteamID(1, 2, 3),
+                     [0, EType.Invalid, EUniverse.Invalid, 0])
+        self.compare(SteamID(1, 2, 3, 4),
+                     [0, EType.Invalid, EUniverse.Invalid, 0])
 
     ######################################################
     # 1 ARG
     ######################################################
-    def test_arg_number_out_of_range(self):
-        self.assertRaises(ValueError, SteamID, -1)
-        self.assertRaises(ValueError, SteamID, '-1')
-        self.assertRaises(ValueError, SteamID, -5555555)
-        self.assertRaises(ValueError, SteamID, '-5555555')
-        self.assertRaises(ValueError, SteamID, 2**64)
-        self.assertRaises(ValueError, SteamID, str(2**64))
-        self.assertRaises(ValueError, SteamID, 2**128)
-        self.assertRaises(ValueError, SteamID, str(2**128))
-
     def test_arg_steam32(self):
         self.compare(SteamID(1),
                      [1, EType.Individual, EUniverse.Public, 1])
@@ -74,50 +87,46 @@ class SteamID_initialization(unittest.TestCase):
     ######################################################
     # 1 arg - steam2/steam3 format
     ######################################################
+    @mock.patch.multiple('steam.steamid',
+                         steam2_to_tuple=mock.DEFAULT,
+                         steam3_to_tuple=mock.DEFAULT,
+                         )
+    def test_arg_steam2(self, steam2_to_tuple, steam3_to_tuple):
+        steam2_to_tuple.return_value = (1, 2, 3, 4)
+        steam3_to_tuple.return_value = (5, 6, 7, 8)
+
+        test_instance = SteamID('STEAM_1:1:1')
+
+        steam2_to_tuple.assert_called_once_with('STEAM_1:1:1')
+        self.assertFalse(steam3_to_tuple.called)
+
+        self.compare(test_instance,
+                     [1, 2, 3, 4])
+
+    @mock.patch.multiple('steam.steamid',
+                         steam2_to_tuple=mock.DEFAULT,
+                         steam3_to_tuple=mock.DEFAULT,
+                         )
+    def test_arg_steam3(self, steam2_to_tuple, steam3_to_tuple):
+        steam2_to_tuple.return_value = None
+        steam3_to_tuple.return_value = (5, 6, 7, 8)
+
+        test_instance = SteamID('[g:1:4]')
+
+        steam2_to_tuple.assert_called_once_with('[g:1:4]')
+        steam3_to_tuple.assert_called_once_with('[g:1:4]')
+
+        self.compare(test_instance,
+                     [5, 6, 7, 8])
+
     def test_arg_text_invalid(self):
-        with self.assertRaises(ValueError):
-            SteamID("randomtext")
-
-    def test_arg_steam2(self):
-        self.compare(SteamID("STEAM_0:1:1"),
-                     [3, EType.Individual, EUniverse.Public, 1]
-                     )
-        self.compare(SteamID("STEAM_1:1:1"),
-                     [3, EType.Individual, EUniverse.Public, 1]
-                     )
-        self.compare(SteamID("STEAM_0:0:4"),
-                     [8, EType.Individual, EUniverse.Public, 1]
-                     )
-        self.compare(SteamID("STEAM_1:0:4"),
-                     [8, EType.Individual, EUniverse.Public, 1]
-                     )
-
-    def test_arg_steam3(self):
-        self.compare(SteamID("[U:1:1234]"),
-                     [1234, EType.Individual, EUniverse.Public, 1]
-                     )
-        self.compare(SteamID("[G:1:1234]"),
-                     [1234, EType.GameServer, EUniverse.Public, 1]
-                     )
-        self.compare(SteamID("[g:1:4]"),
-                     [4, EType.Clan, EUniverse.Public, 0]
-                     )
-        self.compare(SteamID("[A:1:4]"),
-                     [4, EType.AnonGameServer, EUniverse.Public, 0]
-                     )
-        self.compare(SteamID("[A:1:1234:567]"),
-                     [1234, EType.AnonGameServer, EUniverse.Public, 567]
-                     )
+        self.compare(SteamID("invalid_format"),
+                     [0, EType.Invalid, EUniverse.Invalid, 0])
 
     ######################################################
     # KWARGS
     ######################################################
     def test_kwarg_id(self):
-        # id kwarg is required always
-        with self.assertRaises(ValueError):
-            SteamID(instance=0)
-            SteamID(id=None)
-
         self.assertEqual(SteamID(id=555).id, 555)
         self.assertEqual(SteamID(id='555').id, 555)
 
@@ -253,4 +262,39 @@ class steamid_functions(unittest.TestCase):
 
         sid = steamid.steam64_from_url('https://steamcommunity.com/groups/Valve')
         self.assertEqual(sid, '103582791429521412')
+
+    def test_arg_steam2(self):
+        self.assertIsNone(steamid.steam2_to_tuple('invalid_format'))
+
+        self.assertEqual(steamid.steam2_to_tuple("STEAM_0:1:1"),
+                         (3, EType.Individual, EUniverse.Public, 1)
+                         )
+        self.assertEqual(steamid.steam2_to_tuple("STEAM_1:1:1"),
+                         (3, EType.Individual, EUniverse.Public, 1)
+                         )
+        self.assertEqual(steamid.steam2_to_tuple("STEAM_0:0:4"),
+                         (8, EType.Individual, EUniverse.Public, 1)
+                         )
+        self.assertEqual(steamid.steam2_to_tuple("STEAM_1:0:4"),
+                         (8, EType.Individual, EUniverse.Public, 1)
+                         )
+
+    def test_arg_steam3(self):
+        self.assertIsNone(steamid.steam3_to_tuple('invalid_format'))
+
+        self.assertEqual(steamid.steam3_to_tuple("[U:1:1234]"),
+                         (1234, EType.Individual, EUniverse.Public, 1)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[G:1:1234]"),
+                         (1234, EType.GameServer, EUniverse.Public, 1)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[g:1:4]"),
+                         (4, EType.Clan, EUniverse.Public, 0)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[A:1:4]"),
+                         (4, EType.AnonGameServer, EUniverse.Public, 0)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[A:1:1234:567]"),
+                         (1234, EType.AnonGameServer, EUniverse.Public, 567)
+                         )
 
