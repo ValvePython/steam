@@ -17,7 +17,7 @@ init:
 	pip install -r requirements.txt
 
 test:
-	rm -f .coverage steam/*.pyc tests/*.pyc
+	coverage erase
 	PYTHONHASHSEED=0 nosetests --verbosity 1 --with-coverage --cover-package=steam
 
 pylint:

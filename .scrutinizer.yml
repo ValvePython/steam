@@ -4,5 +4,5 @@ filter:
         - 'vcr/*'
 tools:
     external_code_coverage:
-        timeout: 300
-        runs: 3
+        timeout: 600
+        runs: 1

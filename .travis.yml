@@ -1,14 +1,10 @@
 language: python
-python:
-    - "2.7"
-    - "3.3"
-    - "3.4"
 install:
-    - make init
+    - pip install tox
     - pip install coveralls
     - pip install scrutinizer-ocular
 script:
-    - make test
+    - tox
 after_success:
     - coveralls
     - ocular
