@@ -159,6 +159,12 @@ class SteamID(object):
     def __str__(self):
         return str(self.as_64)
 
+    def __cmp__(self, other):
+        return cmp(self.as_64, other.as_64)
+
+    def __hash__(self):
+        return hash(self.as_64)
+
     @property
     def as_steam2(self):
         return "STEAM_0:%s:%s" % (
