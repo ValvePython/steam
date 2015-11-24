@@ -18,14 +18,14 @@ class SteamID_initialization(unittest.TestCase):
         self.assertEqual(hash(SteamID(1)), hash(SteamID(1)))
         self.assertNotEqual(hash(SteamID(12345)), hash(SteamID(8888)))
 
-    def test_cmp(self):
-        self.assertEqual(SteamID(1), SteamID(1))
-        self.assertTrue(SteamID(2) > SteamID(1))
-        self.assertTrue(SteamID(2) < SteamID(4))
-
-        with self.assertRaises(RuntimeError):
-            a = SteamID(5) == 5
-            b = SteamID(5) == '5'
+    def test_rich_comperison(self):
+        for test_value in [SteamID(5), 5, '5']:
+            self.assertFalse(SteamID(10) == test_value)
+            self.assertTrue(SteamID(10) != test_value)
+            self.assertTrue(SteamID(10) > test_value)
+            self.assertTrue(SteamID(10) >= test_value)
+            self.assertFalse(SteamID(10) < test_value)
+            self.assertFalse(SteamID(10) <= test_value)
 
     def test_is_valid(self):
         self.assertTrue(SteamID(1).is_valid())

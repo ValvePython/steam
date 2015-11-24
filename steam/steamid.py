@@ -113,11 +113,26 @@ class SteamID(object):
     def __str__(self):
         return str(self.as_64)
 
-    def __cmp__(self, other):
-        if isinstance(other, SteamID):
-            return cmp(self.as_64, other.as_64)
-        else:
-            raise RuntimeError("Can only compare SteamID instances")
+    def __int__(self):
+        return self.as_64
+
+    def __eq__(self, other):
+        return int(self) == int(other)
+
+    def __ne__(self, other):
+        return int(self) != int(other)
+
+    def __lt__(self, other):
+        return int(self) < int(other)
+
+    def __le__(self, other):
+        return int(self) <= int(other)
+
+    def __gt__(self, other):
+        return int(self) > int(other)
+
+    def __ge__(self, other):
+        return int(self) >= int(other)
 
     def __hash__(self):
         return hash(self.as_64)
