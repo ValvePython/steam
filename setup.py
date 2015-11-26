@@ -14,6 +14,7 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
 install_requires = [
     'requests',
     'vdf',
+    'pycrypto',
 ]
 
 if sys.version_info < (3, 4):
