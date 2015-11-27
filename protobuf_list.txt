@@ -1,0 +1,4 @@
+https://github.com/SteamRE/SteamKit/raw/master/Resources/Protobufs/steamclient/encrypted_app_ticket.proto
+https://github.com/SteamRE/SteamKit/raw/master/Resources/Protobufs/steamclient/steammessages_base.proto
+https://github.com/SteamRE/SteamKit/raw/master/Resources/Protobufs/steamclient/steammessages_clientserver.proto
+https://github.com/SteamRE/SteamKit/raw/master/Resources/Protobufs/steamclient/steammessages_clientserver_2.proto
