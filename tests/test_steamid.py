@@ -135,24 +135,24 @@ class SteamID_initialization(unittest.TestCase):
             SteamID(id=5, type="doesn't exist")
         with self.assertRaises(ValueError):
             SteamID(id=5, type=99999999)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(KeyError):
             SteamID(id=5, type=None)
 
         self.assertEqual(SteamID(id=5, type=1).type, EType.Individual)
         self.assertEqual(SteamID(id=5, type='Individual').type, EType.Individual)
-        self.assertEqual(SteamID(id=5, type='iNDIVIDUAL').type, EType.Individual)
+        self.assertEqual(SteamID(id=5, type='AnonUser').type, EType.AnonUser)
 
     def test_kwarg_universe(self):
         with self.assertRaises(KeyError):
             SteamID(id=5, universe="doesn't exist")
         with self.assertRaises(ValueError):
             SteamID(id=5, universe=99999999)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(KeyError):
             SteamID(id=5, universe=None)
 
         self.assertEqual(SteamID(id=5, universe=1).universe, EUniverse.Public)
         self.assertEqual(SteamID(id=5, universe='Public').universe, EUniverse.Public)
-        self.assertEqual(SteamID(id=5, universe='pUBLIC').universe, EUniverse.Public)
+        self.assertEqual(SteamID(id=5, universe='Dev').universe, EUniverse.Dev)
 
     def test_kwarg_instance(self):
         self.assertEqual(SteamID(id=5, instance=1234).instance, 1234)
@@ -174,11 +174,6 @@ class SteamID_initialization(unittest.TestCase):
         self.compare(SteamID(id=0,
                              type='Invalid',
                              universe='Invalid',
-                             instance=0,
-                             ), invalid)
-        self.compare(SteamID(id=0,
-                             type='iNVALID',
-                             universe='iNVALID',
                              instance=0,
                              ), invalid)
 

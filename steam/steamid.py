@@ -84,13 +84,13 @@ class SteamID(object):
             if type(value) in (int, EType):
                 self.type = EType(value)
             else:
-                self.type = EType[value.lower().capitalize()]
+                self.type = EType[value]
 
             value = kwargs.get('universe', 1)
             if type(value) in (int, EUniverse):
                 self.universe = EUniverse(value)
             else:
-                self.universe = EUniverse[value.lower().capitalize()]
+                self.universe = EUniverse[value]
 
             if 'instance' in kwargs:
                 self.instance = kwargs['instance']
