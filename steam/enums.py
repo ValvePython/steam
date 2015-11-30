@@ -1,4 +1,7 @@
 from enum import Enum
+import sys
+if sys.version_info > (3,):
+    long = int
 
 
 class EasyEnum(Enum):
@@ -9,16 +12,19 @@ class EasyEnum(Enum):
         return self.name
 
     def __eq__(self, other):
-        if isinstance(other, int):
+        if isinstance(other, (int, long)):
             return self.value == other
         else:
             return NotImplemented
 
     def __ne__(self, other):
-        if isinstance(other, int):
+        if isinstance(other, (int, long)):
             return self.value != other
         else:
             return NotImplemented
+
+    def __call__(self):
+        return int(self)
 
 
 class EMsg(EasyEnum):
@@ -1823,6 +1829,7 @@ class EMsg(EasyEnum):
 
 
 class EResult(EasyEnum):
+    Invalid = 0
     OK = 1                              # success
     Fail = 2                            # generic failure
     NoConnection = 3                    # no/failed network connection
@@ -1886,6 +1893,7 @@ class EUniverse(EasyEnum):
     Beta = 2
     Internal = 3
     Dev = 4
+    Max = 5
 
 
 class EType(EasyEnum):
@@ -1900,6 +1908,7 @@ class EType(EasyEnum):
     Chat = 8
     ConsoleUser = 9
     AnonUser = 10
+    Max = 11
 
 
 class EServerType(EasyEnum):
