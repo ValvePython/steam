@@ -3,7 +3,7 @@ import mock
 import vcr
 
 from steam import steamid
-from steam.steamid import SteamID, ETypeCharMap
+from steam.steamid import SteamID, ETypeChar
 from steam.enums import EType, EUniverse
 
 
@@ -18,15 +18,6 @@ class SteamID_initialization(unittest.TestCase):
         self.assertEqual(hash(SteamID(1)), hash(SteamID(1)))
         self.assertNotEqual(hash(SteamID(12345)), hash(SteamID(8888)))
 
-    def test_rich_comperison(self):
-        for test_value in [SteamID(5), 5, '5']:
-            self.assertFalse(SteamID(10) == test_value)
-            self.assertTrue(SteamID(10) != test_value)
-            self.assertTrue(SteamID(10) > test_value)
-            self.assertTrue(SteamID(10) >= test_value)
-            self.assertFalse(SteamID(10) < test_value)
-            self.assertFalse(SteamID(10) <= test_value)
-
     def test_is_valid(self):
         self.assertTrue(SteamID(1).is_valid())
         self.assertTrue(SteamID(id=5).is_valid())
@@ -38,12 +29,18 @@ class SteamID_initialization(unittest.TestCase):
         self.assertFalse(SteamID(id=1, universe=EUniverse.Invalid).is_valid())
 
     def test_arg_toomany_invalid(self):
+        with self.assertRaises(TypeError):
+            SteamID(1,2,3,4,5)
+        with self.assertRaises(TypeError):
+            SteamID(1,2,3,4,5,6)
+
+    def test_args_only(self):
         self.compare(SteamID(1, 2),
-                     [0, EType.Invalid, EUniverse.Invalid, 0])
+                     [1, 2, 0, 0])
         self.compare(SteamID(1, 2, 3),
-                     [0, EType.Invalid, EUniverse.Invalid, 0])
+                     [1, 2, 3, 0])
         self.compare(SteamID(1, 2, 3, 4),
-                     [0, EType.Invalid, EUniverse.Invalid, 0])
+                     [1, 2, 3, 4])
 
     ######################################################
     # 1 ARG
@@ -109,7 +106,7 @@ class SteamID_initialization(unittest.TestCase):
                          )
     def test_arg_steam3(self, steam2_to_tuple, steam3_to_tuple):
         steam2_to_tuple.return_value = None
-        steam3_to_tuple.return_value = (5, 6, 7, 8)
+        steam3_to_tuple.return_value = (4, 3, 2, 1)
 
         test_instance = SteamID('[g:1:4]')
 
@@ -117,7 +114,7 @@ class SteamID_initialization(unittest.TestCase):
         steam3_to_tuple.assert_called_once_with('[g:1:4]')
 
         self.compare(test_instance,
-                     [5, 6, 7, 8])
+                     [4, 3, 2, 1])
 
     def test_arg_text_invalid(self):
         self.compare(SteamID("invalid_format"),
@@ -182,6 +179,18 @@ class SteamID_properties(unittest.TestCase):
     def test_repr(self):
         # just to cover in coverage
         repr(SteamID())
+
+    def test_rich_comperison(self):
+        for test_value in [SteamID(5), 5]:
+            self.assertFalse(SteamID(10) == test_value)
+            self.assertTrue(SteamID(10) != test_value)
+            self.assertTrue(SteamID(10) > test_value)
+            self.assertTrue(SteamID(10) >= test_value)
+            self.assertFalse(SteamID(10) < test_value)
+            self.assertFalse(SteamID(10) <= test_value)
+
+    def test_is_instance_of_int(self):
+        self.assertIsInstance(SteamID(5), int)
 
     def test_str(self):
         self.assertEqual(str(SteamID(76580280500085312)), '76580280500085312')
