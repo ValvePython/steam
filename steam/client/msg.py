@@ -1,6 +1,7 @@
 import struct
 import fnmatch
-from steam.enums import EMsg, EUniverse, EResult
+from steam.enums import EResult, EUniverse
+from steam.enums.emsg import EMsg
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2

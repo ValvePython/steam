@@ -14,7 +14,8 @@ from gevent import queue
 from Crypto.Random import random
 
 from steam.steamid import SteamID
-from steam.enums import EMsg, EResult, EUniverse
+from steam.enums import EResult, EUniverse
+from steam.enums.emsg import EMsg
 from steam.client import crypto
 from steam.client.connection import TCPConnection
 from steam.client.msg import is_proto, clear_proto_bit
