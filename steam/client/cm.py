@@ -44,6 +44,7 @@ class CMClient:
     UDP = 1
 
     def __init__(self, protocol=0):
+        self.verbose_debug = False
         self.reconnect = False
 
         self._init_attributes()
@@ -94,7 +95,9 @@ class CMClient:
         self.connection.disconnect()
 
         self._recv_loop.kill(block=False)
-        self._heartbeat_loop.kill()
+
+        if self._heartbeat_loop:
+            self._heartbeat_loop.kill()
 
         self._init_attributes()
 
@@ -120,12 +123,16 @@ class CMClient:
         if not isinstance(message, (Msg, MsgProto)):
             raise ValueError("Expected Msg or MsgProto, got %s" % message)
 
+        if self.verbose_debug:
+            logger.debug("Outgoing: %s\n%s" % (repr(message), str(message)))
+        else:
+            logger.debug("Outgoing: %s", repr(message))
+
         data = message.serialize()
 
         if self.key:
             data = crypto.encrypt(data, self.key)
 
-        logger.debug("Outgoing: %s", repr(message.msg))
         self.connection.put_message(data)
 
     def _recv_messages(self):
@@ -149,8 +156,6 @@ class CMClient:
             emsg_id, = struct.unpack_from("<I", message)
             emsg = EMsg(clear_proto_bit(emsg_id))
 
-            logger.debug("Incoming: %s", repr(emsg))
-
             if emsg in (EMsg.ChannelEncryptRequest,
                         EMsg.ChannelEncryptResponse,
                         EMsg.ChannelEncryptResult,
@@ -161,7 +166,6 @@ class CMClient:
                 try:
                     if is_proto(emsg_id):
                         msg = MsgProto(emsg, message)
-                        print str(msg)
                     else:
                         msg = Msg(emsg, message, extended=True)
                 except:
@@ -174,6 +178,12 @@ class CMClient:
             self.dispatch_message(emsg, msg)
 
     def dispatch_message(self, emsg, msg):
+        if self.verbose_debug:
+            logger.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
+        else:
+            logger.debug("Incoming: %s", repr(msg))
+
+
         if emsg in self.registered_callbacks:
             for callback in list(self.registered_callbacks[emsg]):
                 if isinstance(callback, event.AsyncResult):
@@ -186,7 +196,7 @@ class CMClient:
         if emsg not in self.registered_callbacks:
             self.registered_callbacks[emsg] = [callback]
         else:
-            callbacks = self.registered_callbacks[emsg]
+            allbacks = self.registered_callbacks[emsg]
 
             if callback not in callbacks:
                 callbacks.append(callback)
@@ -238,14 +248,19 @@ class CMClient:
         logger.debug("Event: Ready")
 
     def _handle_multi(self, emsg, msg):
-        logger.debug("Unzipping CMsgMulti")
+        logger.debug("Unpacking CMsgMulti")
 
-        data = zipfile.ZipFile(StringIO(msg.body.message_body)).read('z')
+        if msg.body.size_unzipped:
+            logger.debug("Unzipping body")
 
-        if len(data) != msg.body.size_unzipped:
-            logger.fatal("Unzipped size mismatch")
-            self.disconnect()
-            return
+            data = zipfile.ZipFile(StringIO(msg.body.message_body)).read('z')
+
+            if len(data) != msg.body.size_unzipped:
+                logger.fatal("Unzipped size mismatch")
+                self.disconnect()
+                return
+        else:
+            data = msg.body.message_body
 
         while len(data) > 0:
             size, = struct.unpack_from("<I", data)
@@ -260,19 +275,22 @@ class CMClient:
             self.send_message(message)
 
     def _handle_logon(self, emsg, msg):
-        if msg.body.eresult == EResult.OK:
-            logger.debug("Logon completed")
+        if msg.body.eresult != EResult.OK:
+            self.disconnect()
+            return
 
-            self.steam_id = SteamID(msg.header.steamid)
-            self.session_id = msg.header.client_sessionid
+        logger.debug("Logon completed")
 
-            self.cell_id = msg.body.cell_id
-            self.webapi_nonce = msg.body.webapi_authenticate_user_nonce
+        self.steam_id = SteamID(msg.header.steamid)
+        self.session_id = msg.header.client_sessionid
 
-            if self._heartbeat_loop:
-                self._heartbeat_loop.kill()
+        self.cell_id = msg.body.cell_id
+        self.webapi_nonce = msg.body.webapi_authenticate_user_nonce
 
-            logger.debug("Heartbeat started.")
+        if self._heartbeat_loop:
+            self._heartbeat_loop.kill()
 
-            interval = msg.body.out_of_game_heartbeat_seconds
-            self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)
+        logger.debug("Heartbeat started.")
+
+        interval = msg.body.out_of_game_heartbeat_seconds
+        self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)

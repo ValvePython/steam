@@ -33,6 +33,12 @@ class MsgHdr:
 
         self.msg = EMsg(msg)
 
+    def __str__(self):
+        return '\n'.join(["msg: %s" % repr(self.msg),
+                          "targetJobID: %s" % self.targetJobID,
+                          "sourceJobID: %s" % self.sourceJobID,
+                          ])
+
 
 class ExtendedMsgHdr:
     _size = struct.calcsize("<IBHqqBqi")
@@ -77,6 +83,17 @@ class ExtendedMsgHdr:
 
         if self.headerSize != 36 or self.headerVersion != 2:
             raise RuntimeError("Failed to parse header")
+
+    def __str__(self):
+        return '\n'.join(["msg: %s" % self.msg,
+                          "headerSize: %s" % self.headerSize,
+                          "headerVersion: %s" % self.headerVersion,
+                          "targetJobID: %s" % self.targetJobID,
+                          "sourceJobID: %s" % self.sourceJobID,
+                          "headerCanary: %s" % self.headerCanary,
+                          "steamID: %s" % self.steamID,
+                          "sessionID: %s" % self.sessionID,
+                          ])
 
 
 protobuf_mask = 0x80000000
@@ -142,8 +159,26 @@ class Msg:
     def serialize(self):
         return self.header.serialize() + self.body.serialize()
 
+    def __repr__(self):
+        return "<Msg %s>" % repr(self.msg)
+
     def __str__(self):
-        return ''
+        rows = ["Msg"]
+
+        header = str(self.header)
+        if header:
+            rows.append("-------------- header --")
+            rows.append(header)
+
+        body = str(self.body)
+        if body:
+            rows.append("---------------- body --")
+            rows.append(body)
+
+        if len(rows) == 1:
+            rows[0] += " (empty)"
+
+        return '\n'.join(rows)
 
 
 cmsg_lookup = None
@@ -195,13 +230,26 @@ class MsgProto:
     def serialize(self):
         return self._header.serialize() + self.body.SerializeToString()
 
+    def __repr__(self):
+        return "<MsgProto %s>" % repr(self.msg)
+
     def __str__(self):
-        return '\n'.join(['MsgProto',
-                          '-' * 20,
-                          str(self.header),
-                          '-' * 20,
-                          str(self.body),
-                          ])
+        rows = ["MsgProto"]
+
+        header = str(self.header).rstrip()
+        if header:
+            rows.append("-------------- header --")
+            rows.append(header)
+
+        body = str(self.body).rstrip()
+        if body:
+            rows.append("---------------- body --")
+            rows.append(body)
+
+        if len(rows) == 1:
+            rows[0] += " (empty)"
+
+        return '\n'.join(rows)
 
 
 class ChannelEncryptRequest:
@@ -221,6 +269,11 @@ class ChannelEncryptRequest:
          ) = struct.unpack_from("<II", data)
 
         self.universe = EUniverse(universe)
+
+    def __str__(self):
+        return '\n'.join(["protocolVersion: %s" % self.protocolVersion,
+                          "universe: %s" % repr(self.universe),
+                          ])
 
 
 class ChannelEncryptResponse:
@@ -250,6 +303,13 @@ class ChannelEncryptResponse:
          _,
          ) = struct.unpack_from("<II128sII", data)
 
+    def __str__(self):
+        return '\n'.join(["protocolVersion: %s" % self.protocolVersion,
+                          "keySize: %s" % self.keySize,
+                          "key: %s" % repr(self.key),
+                          "crc: %s" % self.crc,
+                          ])
+
 
 class ChannelEncryptResult:
     def __init__(self, data=None):
@@ -264,3 +324,6 @@ class ChannelEncryptResult:
     def load(self, data):
         (result,) = struct.unpack_from("<I", data)
         self.result = EResult(result)
+
+    def __str__(self):
+        return "result: %s" % repr(self.result)
