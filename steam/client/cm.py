@@ -113,15 +113,17 @@ class CMClient:
         self.steam_id = None
         self.session_id = None
 
-        self.cell_id = None
-        self.webapi_nonce = None
-
         self._recv_loop = None
         self._heartbeat_loop = None
 
     def send_message(self, message):
         if not isinstance(message, (Msg, MsgProto)):
             raise ValueError("Expected Msg or MsgProto, got %s" % message)
+
+        if self.steam_id:
+            message.steamID = self.steam_id
+        if self.session_id:
+            message.sessionID = self.session_id
 
         if self.verbose_debug:
             logger.debug("Outgoing: %s\n%s" % (repr(message), str(message)))
@@ -175,7 +177,7 @@ class CMClient:
                                  )
                     raise
 
-            self.dispatch_message(emsg, msg)
+            gevent.spawn(self.dispatch_message, emsg, msg)
 
     def dispatch_message(self, emsg, msg):
         if self.verbose_debug:
@@ -190,7 +192,7 @@ class CMClient:
                     self.unregister_callback(emsg, callback)
                     callback.set((emsg, msg))
                 else:
-                    gevent.spawn(callback, emsg, msg)
+                    callback(emsg, msg)
 
     def register_callback(self, emsg, callback):
         if emsg not in self.registered_callbacks:
@@ -283,9 +285,6 @@ class CMClient:
 
         self.steam_id = SteamID(msg.header.steamid)
         self.session_id = msg.header.client_sessionid
-
-        self.cell_id = msg.body.cell_id
-        self.webapi_nonce = msg.body.webapi_authenticate_user_nonce
 
         if self._heartbeat_loop:
             self._heartbeat_loop.kill()

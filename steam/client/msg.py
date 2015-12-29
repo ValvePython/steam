@@ -135,7 +135,7 @@ class MsgHdrProtoBuf:
         self.proto.ParseFromString(data[size:self._fullsize])
 
 
-class Msg:
+class Msg(object):
     def __init__(self, msg, data=None, extended=False):
         self.extended = extended
         self.header = ExtendedMsgHdr(data) if extended else MsgHdr(data)
@@ -158,6 +158,30 @@ class Msg:
 
     def serialize(self):
         return self.header.serialize() + self.body.serialize()
+
+    @property
+    def steamID(self):
+        return (self.header.steamID
+                if isinstance(self.header, ExtendedMsgHdr)
+                else None
+                )
+
+    @steamID.setter
+    def steamID(self, value):
+        if isinstance(self.header, ExtendedMsgHdr):
+            self.header.steamID = value
+
+    @property
+    def sessionID(self):
+        return (self.header.sessionID
+                if isinstance(self.header, ExtendedMsgHdr)
+                else None
+                )
+
+    @sessionID.setter
+    def sessionID(self, value):
+        if isinstance(self.header, ExtendedMsgHdr):
+            self.header.sessionID = value
 
     def __repr__(self):
         return "<Msg %s>" % repr(self.msg)
@@ -214,7 +238,7 @@ def get_cmsg(emsg):
     return None
 
 
-class MsgProto:
+class MsgProto(object):
     def __init__(self, msg, data=None):
         self._header = MsgHdrProtoBuf(data)
         self._header.msg = msg
@@ -229,6 +253,22 @@ class MsgProto:
 
     def serialize(self):
         return self._header.serialize() + self.body.SerializeToString()
+
+    @property
+    def steamID(self):
+        return self.header.steamid
+
+    @steamID.setter
+    def steamID(self, value):
+        self.header.steamid = value
+
+    @property
+    def sessionID(self):
+        return self.header.client_sessionid
+
+    @sessionID.setter
+    def sessionID(self, value):
+        self.header.client_sessionid = value
 
     def __repr__(self):
         return "<MsgProto %s>" % repr(self.msg)
