@@ -45,7 +45,6 @@ class CMClient:
 
     def __init__(self, protocol=0):
         self.verbose_debug = False
-        self.reconnect = False
 
         self._init_attributes()
 
@@ -66,11 +65,8 @@ class CMClient:
         self.register_callback(EMsg.Multi, self._handle_multi),
         self.register_callback(EMsg.ClientLogOnResponse, self._handle_logon),
 
-    def connect(self, reconnect=None):
-        if reconnect is not None:
-            self.reconnect = reconnect
-
-        logger.debug("Connect (reconnect=%s)" % self.reconnect)
+    def connect(self):
+        logger.debug("Connect initiated.")
 
         while True:
             with gevent.Timeout(15, False):
@@ -78,18 +74,14 @@ class CMClient:
                 self.connection.connect(server_addr)
 
             if not self.connection.event_connected.is_set():
-                if self.reconnect:
-                    logger.debug("Failed to connect. Retrying...")
-                    continue
+                logger.debug("Failed to connect. Retrying...")
+                continue
 
-                logger.debug("Failed to connect")
-                return False
             break
 
         logger.debug("Event: Connected")
         self.event_connected.set()
         self._recv_loop = gevent.spawn(self._recv_messages)
-        return True
 
     def disconnect(self):
         self.connection.disconnect()
@@ -144,8 +136,7 @@ class CMClient:
             except queue.Empty:
                 if not self.connection.event_connected.is_set():
                     self.disconnect()
-                    if self.reconnect:
-                        gevent.spawn(self.connect)
+                    gevent.spawn(self.connect)
                     return
                 continue
 
@@ -277,8 +268,13 @@ class CMClient:
             self.send_message(message)
 
     def _handle_logon(self, emsg, msg):
-        if msg.body.eresult != EResult.OK:
+        result = msg.body.eresult
+        if result != EResult.OK:
             self.disconnect()
+
+            if result in (EResult.TryAnotherCM, EResult.ServiceUnavailable):
+                gevent.spawn(self.connect)
+
             return
 
         logger.debug("Logon completed")
