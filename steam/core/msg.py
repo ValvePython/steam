@@ -215,7 +215,7 @@ def get_cmsg(emsg):
     if emsg == EMsg.Multi:
         return steammessages_base_pb2.CMsgMulti
 
-    emsg = "cmsg" + str(emsg).lower()
+    emsg = "cmsg" + str(emsg).split('.', 1)[1].lower()
 
     if not cmsg_lookup:
         cmsg_list = steammessages_clientserver_pb2.__dict__
