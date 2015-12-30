@@ -27,6 +27,10 @@ class EventEmitter(object):
             else:
                 gevent.spawn(callback, *args)
 
+        # every event is also emitted as None
+        if event is not None:
+            self.emit(None, event, *args)
+
     def remove_listener(self, event, callback):
         """
         Removes a callback for the specified event
