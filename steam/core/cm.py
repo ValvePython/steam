@@ -16,10 +16,10 @@ from Crypto.Random import random
 from steam.steamid import SteamID
 from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
-from steam.client import crypto
-from steam.client.connection import TCPConnection
-from steam.client.msg import is_proto, clear_proto_bit
-from steam.client.msg import Msg, MsgProto
+from steam.core import crypto
+from steam.core.connection import TCPConnection
+from steam.core.msg import is_proto, clear_proto_bit
+from steam.core.msg import Msg, MsgProto
 
 server_list = [
     ('162.254.196.41', '27020'), ('162.254.196.40', '27021'),
