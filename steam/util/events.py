@@ -20,10 +20,11 @@ class EventEmitter(object):
             if isinstance(callback, AsyncResult):
                 self.remove_listener(event, callback)
 
+                result = args
                 if len(args) == 1:
-                    args = args[0]
+                    result = args[0]
 
-                callback.set(args)
+                callback.set(result)
             else:
                 gevent.spawn(callback, *args)
 
