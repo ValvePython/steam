@@ -61,7 +61,8 @@ class CMClient(EventEmitter):
         self.on(EMsg.ClientLogOnResponse, self._handle_logon),
 
     def emit(self, event, *args):
-        logger.debug("Emit event: %s" % str(event))
+        if event is not None:
+            logger.debug("Emit event: %s" % repr(event))
         super(CMClient, self).emit(event, *args)
 
     def connect(self):
@@ -78,21 +79,26 @@ class CMClient(EventEmitter):
 
             break
 
+        self.connected = True
         self.emit("connected")
         self._recv_loop = gevent.spawn(self._recv_messages)
 
-    def disconnect(self):
-        self.connection.disconnect()
+    def disconnect(self, reconnect=False):
+        if reconnect:
+            gevent.spawn(self.connect)
 
-        self._recv_loop.kill(block=False)
+        self.connection.disconnect()
 
         if self._heartbeat_loop:
             self._heartbeat_loop.kill()
+        self._recv_loop.kill()
 
         self._init_attributes()
         self.emit('disconnected')
 
     def _init_attributes(self):
+        self.connected = False
+
         self.key = None
 
         self.steam_id = None
@@ -128,8 +134,7 @@ class CMClient(EventEmitter):
                 message = self.connection.get_message(timeout=1)
             except queue.Empty:
                 if not self.connection.event_connected.is_set():
-                    self.disconnect()
-                    gevent.spawn(self.connect)
+                    gevent.spawn(self.disconnect)
                     return
                 continue
 
@@ -154,12 +159,12 @@ class CMClient(EventEmitter):
                         msg = MsgProto(emsg, message)
                     else:
                         msg = Msg(emsg, message, extended=True)
-                except:
-                    logger.fatal("Failed to deserialize message: %s %s",
+                except Exception as e:
+                    logger.fatal("Failed to deserialize message: %s (is_proto: %s)",
                                  str(emsg),
                                  is_proto(emsg_id)
                                  )
-                    raise
+                    logger.exception(e)
 
             if self.verbose_debug:
                 logger.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
@@ -185,15 +190,15 @@ class CMClient(EventEmitter):
 
         msg = self.wait_event(EMsg.ChannelEncryptResult)
 
-        if msg.body.result != EResult.OK:
-            logger.debug("Failed to secure channel: %s" % msg.body.result)
+        if msg.body.eresult != EResult.OK:
+            logger.debug("Failed to secure channel: %s" % msg.body.eresult)
             self.disconnect()
             return
 
         logger.debug("Channel secured")
 
         self.key = key
-        self.emit('ready')
+        self.emit('channel_secured')
 
     def _handle_multi(self, msg):
         logger.debug("Unpacking CMsgMulti")
@@ -224,23 +229,23 @@ class CMClient(EventEmitter):
 
     def _handle_logon(self, msg):
         result = msg.body.eresult
-        if result != EResult.OK:
-            self.disconnect()
 
-            if result in (EResult.TryAnotherCM, EResult.ServiceUnavailable):
-                gevent.spawn(self.connect)
-
+        if result in (EResult.TryAnotherCM,
+                      EResult.ServiceUnavailable
+                      ):
+            self.disconnect(True)
             return
 
-        logger.debug("Logon completed")
+        elif result == EResult.OK:
+            logger.debug("Logon completed")
 
-        self.steam_id = SteamID(msg.header.steamid)
-        self.session_id = msg.header.client_sessionid
+            self.steam_id = SteamID(msg.header.steamid)
+            self.session_id = msg.header.client_sessionid
 
-        if self._heartbeat_loop:
-            self._heartbeat_loop.kill()
+            if self._heartbeat_loop:
+                self._heartbeat_loop.kill()
 
-        logger.debug("Heartbeat started.")
+            logger.debug("Heartbeat started.")
 
-        interval = msg.body.out_of_game_heartbeat_seconds
-        self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)
+            interval = msg.body.out_of_game_heartbeat_seconds
+            self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)

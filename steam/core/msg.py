@@ -139,20 +139,20 @@ class Msg(object):
     def __init__(self, msg, data=None, extended=False):
         self.extended = extended
         self.header = ExtendedMsgHdr(data) if extended else MsgHdr(data)
+        self.header.msg = msg
         self.msg = msg
 
         if data:
             data = data[self.header._size:]
 
         if msg == EMsg.ChannelEncryptRequest:
-            self.header.msg = EMsg.ChannelEncryptRequest
             self.body = ChannelEncryptRequest(data)
         elif msg == EMsg.ChannelEncryptResponse:
-            self.header.msg = EMsg.ChannelEncryptResponse
             self.body = ChannelEncryptResponse(data)
         elif msg == EMsg.ChannelEncryptResult:
-            self.header.msg = EMsg.ChannelEncryptResult
             self.body = ChannelEncryptResult(data)
+        elif msg == EMsg.ClientLogOnResponse:
+            self.body = ClientLogOnResponse(data)
         else:
             self.body = None
 
@@ -214,15 +214,17 @@ def get_cmsg(emsg):
 
     if emsg == EMsg.Multi:
         return steammessages_base_pb2.CMsgMulti
-
-    emsg = "cmsg" + str(emsg).split('.', 1)[1].lower()
+    elif emsg in (EMsg.ClientToGC, EMsg.ClientFromGC):
+        return steammessages_clientserver_2_pb2.CMsgGCClient
+    else:
+        cmsg_name = "cmsg" + str(emsg).split('.', 1)[1].lower()
 
     if not cmsg_lookup:
         cmsg_list = steammessages_clientserver_pb2.__dict__
         cmsg_list = fnmatch.filter(cmsg_list, 'CMsg*')
         cmsg_lookup = dict(zip(map(lambda x: x.lower(), cmsg_list), cmsg_list))
 
-    name = cmsg_lookup.get(emsg, None)
+    name = cmsg_lookup.get(cmsg_name, None)
     if name:
         return getattr(steammessages_clientserver_pb2, name)
 
@@ -231,7 +233,7 @@ def get_cmsg(emsg):
         cmsg_list = fnmatch.filter(cmsg_list, 'CMsg*')
         cmsg_lookup2 = dict(zip(map(lambda x: x.lower(), cmsg_list), cmsg_list))
 
-    name = cmsg_lookup2.get(emsg, None)
+    name = cmsg_lookup2.get(cmsg_name, None)
     if name:
         return getattr(steammessages_clientserver_2_pb2, name)
 
@@ -356,14 +358,31 @@ class ChannelEncryptResult:
         if data:
             self.load(data)
         else:
-            self.result
+            self.eresult = EResult.Invalid
 
     def serialize(self):
-        return struct.pack("<I", self.result)
+        return struct.pack("<I", self.eresult)
 
     def load(self, data):
         (result,) = struct.unpack_from("<I", data)
-        self.result = EResult(result)
+        self.eresult = EResult(result)
 
     def __str__(self):
-        return "result: %s" % repr(self.result)
+        return "result: %s" % repr(self.eresult)
+
+class ClientLogOnResponse:
+    def __init__(self, data=None):
+        if data:
+            self.load(data)
+        else:
+            self.eresult = EResult.Invalid
+
+    def serialize(self):
+        return struct.pack("<I", self.eresult)
+
+    def load(self, data):
+        (result,) = struct.unpack_from("<I", data)
+        self.eresult = EResult(result)
+
+    def __str__(self):
+        return "eresult: %s" % repr(self.eresult)

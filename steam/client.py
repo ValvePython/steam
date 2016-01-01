@@ -1,0 +1,117 @@
+import logging
+import gevent
+from steam.util.events import EventEmitter
+from steam.enums.emsg import EMsg
+from steam.enums import EResult
+from steam.core.msg import MsgProto
+from steam.core.cm import CMClient
+from steam import SteamID
+
+logger = logging.getLogger("SteamClient")
+
+class SteamClient(EventEmitter):
+    def __init__(self):
+        self.cm = CMClient()
+
+        # re-emit all events from CMClient
+        self.cm.on(None, self.emit)
+
+        # register listners
+        self.on(EMsg.ClientLogOnResponse, self._handle_logon)
+        self.on("disconnected", self._handle_disconnect)
+
+        self.logged_on = False
+
+    def emit(self, event, *args):
+        if event is not None:
+            logger.debug("Emit event: %s" % repr(event))
+        super(SteamClient, self).emit(event, *args)
+
+    @property
+    def steam_id(self):
+        return self.cm.steam_id
+    @property
+
+    def connected(self):
+        return self.cm.connected
+
+    def connect(self):
+        self.cm.connect()
+
+    def disconnect(self):
+        self.cm.disconnect()
+
+    def _handle_disconnect(self):
+        self.logged_on = False
+
+    def _handle_logon(self, msg):
+        result = EResult(msg.body.eresult)
+
+        if result == EResult.OK:
+            self.emit("logged_on")
+            self.logged_on = True
+            return
+
+        # CM kills the connection on error anyway
+        self.disconnect()
+
+        if result in (EResult.AccountLogonDenied,
+                        EResult.AccountLoginDeniedNeedTwoFactor,
+                        EResult.TwoFactorCodeMismatch,
+                        ):
+            self.emit("need_code", result)
+        else:
+            self.emit("error", result)
+
+    def send(self, message):
+        self.cm.send_message(message)
+
+    def anonymous_login(self):
+        logger.debug("Attempting Anonymous login")
+
+        if self.logged_on:
+            logger.debug("Aready logged on")
+            return
+        if not self.connected:
+            self.connect()
+
+
+        self.wait_event("channel_secured")
+
+        message = MsgProto(EMsg.ClientLogon)
+        message.header.steamid = SteamID(type='AnonUser', universe='Public')
+        message.body.protocol_version = 65575
+        self.send(message)
+
+    def login(self, username, password, auth_code=None, two_factor_code=None, remember=False):
+        logger.debug("Attempting login")
+
+        if self.logged_on:
+            logger.debug("Aready logged on")
+            return
+        if not self.connected:
+            self.connect()
+
+        self.wait_event("channel_secured")
+
+        message = MsgProto(EMsg.ClientLogon)
+        message.header.steamid = SteamID(type='Individual', universe='Public')
+        message.body.protocol_version = 65575
+        message.body.client_package_version = 1771
+        message.body.client_os_type = 13
+        message.body.client_language = "english"
+
+        message.body.account_name = username
+        message.body.password = password
+
+        if auth_code:
+            message.body.auth_code = auth_code
+        if two_factor_code:
+            message.body.two_factor_code = two_factor_code
+
+        self.send(message)
+
+    def logout(self):
+        if self.logged_on:
+            self.send(MsgProto(EMsg.ClientLogOff))
+            self.logged_on = False
