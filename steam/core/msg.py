@@ -301,6 +301,7 @@ class ChannelEncryptRequest:
         else:
             self.protocolVersion = 1
             self.universe = EUniverse.Invalid
+            self.challenge = ''
 
     def serialize(self):
         return struct.pack("<II", self.protocolVersion, self.universe)
@@ -312,9 +313,13 @@ class ChannelEncryptRequest:
 
         self.universe = EUniverse(universe)
 
+        if len(data) >= 16:
+            self.challenge = data[8:]
+
     def __str__(self):
         return '\n'.join(["protocolVersion: %s" % self.protocolVersion,
                           "universe: %s" % repr(self.universe),
+                          "challenge: %s" % repr(self.challenge),
                           ])
 
 

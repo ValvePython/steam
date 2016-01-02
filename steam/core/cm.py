@@ -100,6 +100,7 @@ class CMClient(EventEmitter):
         self.connected = False
 
         self.key = None
+        self.hmac_secret = None
 
         self.steam_id = None
         self.session_id = None
@@ -124,7 +125,10 @@ class CMClient(EventEmitter):
         data = message.serialize()
 
         if self.key:
-            data = crypto.encrypt(data, self.key)
+            if self.hmac_secret:
+                data = crypto.symmetric_encrypt_HMAC(data, self.key, self.hmac_secret)
+            else:
+                data = crypto.symmetric_encrypt(data, self.key)
 
         self.connection.put_message(data)
 
@@ -139,7 +143,15 @@ class CMClient(EventEmitter):
                 continue
 
             if self.key:
-                message = crypto.decrypt(message, self.key)
+                if self.hmac_secret:
+                    try:
+                        message = crypto.symmetric_decrypt_HMAC(message, self.key, self.hmac_secret)
+                    except RuntimeError as e:
+                        logger.exception(e)
+                        gevent.spawn(self.disconnect)
+                        return
+                else:
+                    message = crypto.symmetric_decrypt(message, self.key)
 
             self._parse_message(message)
 
@@ -176,14 +188,20 @@ class CMClient(EventEmitter):
     def _handle_encrypt_request(self, msg):
         logger.debug("Securing channel")
 
-        if msg.body.protocolVersion != 1:
-            raise RuntimeError("Unsupported protocol version")
-        if msg.body.universe != EUniverse.Public:
-            raise RuntimeError("Unsupported universe")
+        try:
+            if msg.body.protocolVersion != 1:
+                raise RuntimeError("Unsupported protocol version")
+            if msg.body.universe != EUniverse.Public:
+                raise RuntimeError("Unsupported universe")
+        except RuntimeError as e:
+            logger.exception(e)
+            gevent.spawn(self.disconnect)
+            return
 
         resp = Msg(EMsg.ChannelEncryptResponse)
 
-        key, resp.body.key = crypto.generate_session_key()
+        challenge = msg.body.challenge
+        key, resp.body.key = crypto.generate_session_key(challenge)
         resp.body.crc = binascii.crc32(resp.body.key) & 0xffffffff
 
         self.send_message(resp)
@@ -192,12 +210,15 @@ class CMClient(EventEmitter):
 
         if msg.body.eresult != EResult.OK:
             logger.debug("Failed to secure channel: %s" % msg.body.eresult)
-            self.disconnect()
+            gevent.spawn(self.disconnect)
             return
 
         logger.debug("Channel secured")
 
         self.key = key
+        if challenge:
+            self.hmac_secret = key[:16]
+
         self.emit('channel_secured')
 
     def _handle_multi(self, msg):
@@ -210,7 +231,7 @@ class CMClient(EventEmitter):
 
             if len(data) != msg.body.size_unzipped:
                 logger.fatal("Unzipped size mismatch")
-                self.disconnect()
+                gevent.spawn(self.disconnect)
                 return
         else:
             data = msg.body.message_body

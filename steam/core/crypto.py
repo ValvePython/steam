@@ -2,6 +2,7 @@ from base64 import b64decode
 from Crypto import Random
 from Crypto.Cipher import PKCS1_OAEP, AES
 from Crypto.PublicKey import RSA
+from Crypto.Hash import HMAC, SHA
 
 public_key = """
 MIGdMA0GCSqGSIb3DQEBAQUAA4GLADCBhwKBgQDf7BrWLBBmLBc1OhSwfFkRf53T
@@ -15,21 +16,52 @@ pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
 unpad = lambda s: s[0:-ord(s[-1])]
 
 
-def generate_session_key():
+def generate_session_key(hmac_secret=''):
     session_key = Random.new().read(32)
     cipher = PKCS1_OAEP.new(RSA.importKey(b64decode(public_key)))
-    encrypted_session_key = cipher.encrypt(session_key)
+    encrypted_session_key = cipher.encrypt(session_key + hmac_secret)
     return (session_key, encrypted_session_key)
 
-
-def encrypt(message, key):
+def symmetric_encrypt(message, key):
     iv = Random.new().read(BS)
+    return symmetric_encrypt_with_iv(message, key, iv)
+
+def symmetric_encrypt_HMAC(message, key, hmac_secret):
+    random_bytes = Random.new().read(3)
+
+    hmac = HMAC.new(hmac_secret, digestmod=SHA)
+    hmac.update(random_bytes)
+    hmac.update(message)
+
+    iv = hmac.digest()[:13] + random_bytes
+
+    return symmetric_encrypt_with_iv(message, key, iv)
+
+def symmetric_encrypt_with_iv(message, key, iv):
     encrypted_iv = AES.new(key, AES.MODE_ECB).encrypt(iv)
     cyphertext = AES.new(key, AES.MODE_CBC, iv).encrypt(pad(message))
     return encrypted_iv + cyphertext
 
+def symmetric_decrypt(cyphertext, key):
+    iv = symmetric_decrypt_iv(cyphertext, key)
+    return symmetric_decrypt_with_iv(cyphertext, key, iv)
 
-def decrypt(cyphertext, key):
-    iv = AES.new(key, AES.MODE_ECB).decrypt(cyphertext[:BS])
+def symmetric_decrypt_HMAC(cyphertext, key, hmac_secret):
+    iv = symmetric_decrypt_iv(cyphertext, key)
+    message = symmetric_decrypt_with_iv(cyphertext, key, iv)
+
+    hmac = HMAC.new(hmac_secret, digestmod=SHA)
+    hmac.update(iv[-3:])
+    hmac.update(message)
+
+    if iv[:13] != hmac.digest()[:13]:
+        raise RuntimeError("Unable to decrypt message. HMAC does not match.")
+
+    return message
+
+def symmetric_decrypt_iv(cyphertext, key):
+    return AES.new(key, AES.MODE_ECB).decrypt(cyphertext[:BS])
+
+def symmetric_decrypt_with_iv(cyphertext, key, iv):
     message = AES.new(key, AES.MODE_CBC, iv).decrypt(cyphertext[BS:])
     return unpad(message)
