@@ -115,3 +115,16 @@ class SteamClient(EventEmitter):
         if self.logged_on:
             self.send(MsgProto(EMsg.ClientLogOff))
             self.logged_on = False
+
+    def games_played(self, app_ids):
+        if not isinstance(app_ids, list):
+            raise ValueError("Expected app_ids to be of type list")
+
+        app_ids = map(int, app_ids)
+
+        message = MsgProto(EMsg.ClientGamesPlayed)
+        GamePlayed = message.body.GamePlayed
+
+        message.body.games_played.extend(map(lambda x: GamePlayed(game_id=x), app_ids))
+
+        self.send(message)
