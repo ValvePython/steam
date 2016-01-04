@@ -12,9 +12,11 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
     __version__ = f.readline().split('"')[1]
 
 install_requires = [
-    'requests',
-    'vdf',
-    'pycrypto',
+    'requests>=2.9.1',
+    'vdf>=1.10',
+    'pycrypto>=2.6.1',
+    'gevent>=1.1rc2',
+    'protobuf>=2.6.1',
 ]
 
 if sys.version_info < (3, 4):
