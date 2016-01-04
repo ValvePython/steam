@@ -3,18 +3,21 @@ from steam.enums.base import SteamIntEnum
 from steam.enums import EType, EUniverse
 
 class ETypeChar(SteamIntEnum):
-   I = EType.Invalid
-   U = EType.Individual
-   M = EType.Multiseat
-   G = EType.GameServer
-   A = EType.AnonGameServer
-   P = EType.Pending
-   C = EType.ContentServer
-   g = EType.Clan
-   T = EType.Chat
-   c = EType.Chat
-   L = EType.Chat
-   a = EType.AnonUser
+    I = EType.Invalid
+    U = EType.Individual
+    M = EType.Multiseat
+    G = EType.GameServer
+    A = EType.AnonGameServer
+    P = EType.Pending
+    C = EType.ContentServer
+    g = EType.Clan
+    T = EType.Chat
+    c = EType.Chat
+    L = EType.Chat
+    a = EType.AnonUser
+
+    def __str__(self):
+        return self.name
 
 ETypeChars = ''.join(map(str, list(ETypeChar)))
 
