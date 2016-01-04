@@ -156,6 +156,9 @@ class CMClient(EventEmitter):
             self._parse_message(message)
 
     def _parse_message(self, message):
+            if not self.connected:
+                return
+
             emsg_id, = struct.unpack_from("<I", message)
             emsg = EMsg(clear_proto_bit(emsg_id))
 

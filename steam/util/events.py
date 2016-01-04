@@ -16,6 +16,8 @@ class EventEmitter(object):
         if not hasattr(self, '_event_callbacks'):
             return
 
+        gevent.idle()
+
         for callback in list(self._event_callbacks[event]):
             if isinstance(callback, AsyncResult):
                 self.remove_listener(event, callback)
@@ -27,6 +29,8 @@ class EventEmitter(object):
                 callback.set(result)
             else:
                 gevent.spawn(callback, *args)
+
+            gevent.idle()
 
         # every event is also emitted as None
         if event is not None:

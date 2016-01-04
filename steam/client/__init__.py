@@ -48,8 +48,8 @@ class SteamClient(EventEmitter):
         result = EResult(msg.body.eresult)
 
         if result == EResult.OK:
-            self.emit("logged_on")
             self.logged_on = True
+            self.emit("logged_on")
             return
 
         # CM kills the connection on error anyway
@@ -64,6 +64,9 @@ class SteamClient(EventEmitter):
             self.emit("error", result)
 
     def send(self, message):
+        if not self.connected:
+            raise RuntimeError("Cannot send message while not connected")
+
         self.cm.send_message(message)
 
     def anonymous_login(self):
@@ -74,7 +77,6 @@ class SteamClient(EventEmitter):
             return
         if not self.connected:
             self.connect()
-
 
         self.wait_event("channel_secured")
 
@@ -113,8 +115,9 @@ class SteamClient(EventEmitter):
 
     def logout(self):
         if self.logged_on:
-            self.send(MsgProto(EMsg.ClientLogOff))
             self.logged_on = False
+            self.send(MsgProto(EMsg.ClientLogOff))
+            self.wait_event('disconnected')
 
     def games_played(self, app_ids):
         if not isinstance(app_ids, list):
