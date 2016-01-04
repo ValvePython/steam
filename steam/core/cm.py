@@ -56,6 +56,8 @@ class CMClient(EventEmitter):
         else:
             raise ValueError("Only TCP is supported")
 
+        self.connection.event_connected.rawlink(self._handle_disconnect)
+
         self.on(EMsg.ChannelEncryptRequest, self._handle_encrypt_request),
         self.on(EMsg.Multi, self._handle_multi),
         self.on(EMsg.ClientLogOnResponse, self._handle_logon),
@@ -69,23 +71,25 @@ class CMClient(EventEmitter):
         logger.debug("Connect initiated.")
 
         while True:
-            with gevent.Timeout(15, False):
-                server_addr = random.choice(server_list)
-                self.connection.connect(server_addr)
+            server_addr = random.choice(server_list)
 
-            if not self.connection.event_connected.is_set():
-                logger.debug("Failed to connect. Retrying...")
-                continue
+            if self.connection.connect(server_addr):
+                break
 
-            break
+            logger.debug("Failed to connect. Retrying...")
 
         self.connected = True
         self.emit("connected")
         self._recv_loop = gevent.spawn(self._recv_messages)
 
+    def _handle_disconnect(self, event):
+        if not event.is_set():
+            gevent.spawn(self.disconnect)
+
     def disconnect(self, reconnect=False):
-        if reconnect:
-            gevent.spawn(self.connect)
+        if not self.connected:
+            return
+        self.connected = False
 
         self.connection.disconnect()
 
@@ -95,6 +99,9 @@ class CMClient(EventEmitter):
 
         self._init_attributes()
         self.emit('disconnected')
+
+        if reconnect:
+            gevent.spawn(self.connect)
 
     def _init_attributes(self):
         self.connected = False
@@ -133,14 +140,9 @@ class CMClient(EventEmitter):
         self.connection.put_message(data)
 
     def _recv_messages(self):
-        while True:
-            try:
-                message = self.connection.get_message(timeout=1)
-            except queue.Empty:
-                if not self.connection.event_connected.is_set():
-                    gevent.spawn(self.disconnect)
-                    return
-                continue
+        for message in self.connection:
+            if not self.connected:
+                break
 
             if self.key:
                 if self.hmac_secret:

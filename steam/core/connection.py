@@ -32,7 +32,11 @@ class Connection:
         self._new_socket()
 
         logger.debug("Attempting connection to %s", str(server_addr))
-        self._connect(server_addr)
+
+        try:
+            self._connect(server_addr)
+        except socket.error:
+            return False
 
         self.server_addr = server_addr
 
@@ -41,6 +45,7 @@ class Connection:
 
         logger.debug("Connected.")
         self.event_connected.set()
+        return True
 
     def disconnect(self):
         if not self.event_connected.is_set():
@@ -62,7 +67,14 @@ class Connection:
         self.socket.close()
 
         logger.debug("Disconnected.")
+
+        # hack
+        # rawlink will only call the callback on set
+        self.event_connected.set()
         self.event_connected.clear()
+
+    def __iter__(self):
+        return self.recv_queue
 
     def get_message(self, block=True, timeout=None):
         return self.recv_queue.get(block, timeout)
