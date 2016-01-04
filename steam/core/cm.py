@@ -216,11 +216,13 @@ class CMClient(EventEmitter):
             gevent.spawn(self.disconnect)
             return
 
-        logger.debug("Channel secured")
 
         self.key = key
         if challenge:
+            logger.debug("Channel secured")
             self.hmac_secret = key[:16]
+        else:
+            logger.debug("Channel secured (legacy mode)")
 
         self.emit('channel_secured')
 
