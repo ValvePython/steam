@@ -2,6 +2,8 @@ import struct
 import binascii
 import logging
 import zipfile
+from time import time
+from collections import defaultdict
 
 try:
     from cStringIO import StringIO
@@ -9,9 +11,8 @@ except ImportError:
     from StringIO import StringIO
 
 import gevent
-from gevent import event
-from gevent import queue
-from Crypto.Random import random
+from gevent import event, queue
+from random import shuffle
 
 from steam.steamid import SteamID
 from steam.enums import EResult, EUniverse
@@ -21,21 +22,8 @@ from steam.core.connection import TCPConnection
 from steam.core.msg import is_proto, clear_proto_bit
 from steam.core.msg import Msg, MsgProto
 from steam.util.events import EventEmitter
+from steam.util import ip_from_int
 
-server_list = [
-    ('162.254.196.41', '27020'), ('162.254.196.40', '27021'),
-    ('162.254.196.43', '27019'), ('162.254.196.40', '27018'),
-    ('162.254.196.43', '27020'), ('162.254.196.41', '27019'),
-    ('162.254.196.41', '27018'), ('162.254.196.42', '27020'),
-    ('162.254.196.41', '27017'), ('162.254.196.41', '27021'),
-    ('146.66.152.10', '27017'), ('146.66.152.10', '27018'),
-    ('146.66.152.11', '27019'), ('146.66.152.11', '27020'),
-    ('146.66.152.10', '27019'), ('162.254.197.42', '27018'),
-    ('162.254.197.41', '27019'), ('162.254.197.41', '27017'),
-    ('208.78.164.14', '27017'), ('208.78.164.14', '27019'),
-    ('208.78.164.9', '27019'), ('208.78.164.14', '27018'),
-    ('208.78.164.9', '27018'), ('208.78.164.13', '27017'),
-]
 
 logger = logging.getLogger("CMClient")
 
@@ -49,7 +37,7 @@ class CMClient(EventEmitter):
 
         self._init_attributes()
 
-        self.registered_callbacks = {}
+        self.servers = CMServerList()
 
         if protocol == CMClient.TCP:
             self.connection = TCPConnection()
@@ -61,6 +49,7 @@ class CMClient(EventEmitter):
         self.on(EMsg.ChannelEncryptRequest, self._handle_encrypt_request),
         self.on(EMsg.Multi, self._handle_multi),
         self.on(EMsg.ClientLogOnResponse, self._handle_logon),
+        self.on(EMsg.ClientCMList, self._handle_cm_list),
 
     def emit(self, event, *args):
         if event is not None:
@@ -70,14 +59,13 @@ class CMClient(EventEmitter):
     def connect(self):
         logger.debug("Connect initiated.")
 
-        while True:
-            server_addr = random.choice(server_list)
-
+        for server_addr in self.servers:
             if self.connection.connect(server_addr):
                 break
 
             logger.debug("Failed to connect. Retrying...")
 
+        self.current_server_addr = server_addr
         self.connected = True
         self.emit("connected")
         self._recv_loop = gevent.spawn(self._recv_messages)
@@ -104,6 +92,7 @@ class CMClient(EventEmitter):
             gevent.spawn(self.connect)
 
     def _init_attributes(self):
+        self.current_server_addr = None
         self.connected = False
 
         self.key = None
@@ -261,6 +250,7 @@ class CMClient(EventEmitter):
         if result in (EResult.TryAnotherCM,
                       EResult.ServiceUnavailable
                       ):
+            self.servers.mark_bad(self.current_server_addr)
             self.disconnect(True)
             return
 
@@ -277,3 +267,78 @@ class CMClient(EventEmitter):
 
             interval = msg.body.out_of_game_heartbeat_seconds
             self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)
+
+    def _handle_cm_list(self, msg):
+        logger.debug("Updating CM list")
+
+        new_servers = zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)
+        self.servers.merge_list(new_servers)
+
+
+class CMServerList(object):
+    Good = 1
+    Bad = 2
+
+    def __init__(self, bad_timespan=300):
+        self._log = logging.getLogger("CMServerList")
+
+        self.bad_timespan = bad_timespan
+        self.list = defaultdict(dict)
+
+        # build-in list
+        self.merge_list([("208.64.200.201", 27017), ("208.64.200.201", 27018),
+                         ("208.64.200.201", 27019), ("208.64.200.201", 27020),
+                         ("208.64.200.202", 27017), ("208.64.200.202", 27018),
+                         ("208.64.200.202", 27019), ("208.64.200.203", 27017),
+                         ("208.64.200.203", 27018), ("208.64.200.203", 27019),
+                         ("208.64.200.204", 27017), ("208.64.200.204", 27018),
+                         ("208.64.200.204", 27019), ("208.64.200.205", 27017),
+                         ("208.64.200.205", 27018), ("208.64.200.205", 27019),
+                         ("208.78.164.9", 27017), ("208.78.164.9", 27018),
+                         ("208.78.164.9", 27019), ("208.78.164.10", 27017),
+                         ("208.78.164.10", 27018), ("208.78.164.10", 27019),
+                         ("208.78.164.11", 27017), ("208.78.164.11", 27018),
+                         ("208.78.164.11", 27019), ("208.78.164.12", 27017),
+                         ("208.78.164.12", 27018), ("208.78.164.12", 27019),
+                         ("208.78.164.13", 27017), ("208.78.164.13", 27018),
+                         ("208.78.164.13", 27019), ("208.78.164.14", 27017),
+                         ("208.78.164.14", 27018), ("208.78.164.14", 27019),
+                         ])
+
+    def __iter__(self):
+        def genfunc():
+            while True:
+                good_servers = filter(lambda x: x[1]['quality'] == CMServerList.Good, self.list.items())
+
+                if len(good_servers) == 0:
+                    self.reset_all()
+                    continue
+
+                shuffle(good_servers)
+
+                for server_addr, meta in good_servers:
+                    yield server_addr
+
+        return genfunc()
+
+    def reset_all(self):
+        self._log.debug("Marking all CMs as Good.")
+
+        for key in self.list:
+            self.mark_good(key)
+
+    def mark_good(self, server_addr):
+        self.list[server_addr].update({'quality': CMServerList.Good, 'timestamp': time()})
+
+    def mark_bad(self, server_addr):
+        self._log.debug("Marking %s as Bad." % repr(server_addr))
+        self.list[server_addr].update({'quality': CMServerList.Bad, 'timestamp': time()})
+
+    def merge_list(self, new_list):
+        total = len(self.list)
+
+        for ip, port in new_list:
+            self.mark_good((ip, port))
+
+        if total:
+            self._log.debug("Added %d new CM addresses." % (len(self.list) - total))
