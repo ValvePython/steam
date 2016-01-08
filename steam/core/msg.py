@@ -247,9 +247,14 @@ class MsgProto(object):
 
         self.msg = msg
         self.header = self._header.proto
-        self.body = get_cmsg(msg)()
+        proto = get_cmsg(msg)
 
-        if data:
+        if msg == EMsg.ServiceMethod:
+            self.body = "!!NOT IMPLEMENTED!!"
+        else:
+            self.body = proto()
+
+        if data and proto is not None:
             data = data[self._header._fullsize:]
             self.body.ParseFromString(data)
 
