@@ -19,10 +19,9 @@ from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
 from steam.core import crypto
 from steam.core.connection import TCPConnection
-from steam.core.msg import is_proto, clear_proto_bit
 from steam.core.msg import Msg, MsgProto
 from steam.util.events import EventEmitter
-from steam.util import ip_from_int
+from steam.util import ip_from_int, is_proto, clear_proto_bit
 
 
 logger = logging.getLogger("CMClient")

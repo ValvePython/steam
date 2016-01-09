@@ -5,6 +5,7 @@ from steam.enums.emsg import EMsg
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2
+from steam.util import set_proto_bit, clear_proto_bit
 
 
 class MsgHdr:
@@ -94,21 +95,6 @@ class ExtendedMsgHdr:
                           "steamID: %s" % self.steamID,
                           "sessionID: %s" % self.sessionID,
                           ])
-
-
-protobuf_mask = 0x80000000
-
-
-def is_proto(emsg):
-    return (int(emsg) & protobuf_mask) > 0
-
-
-def set_proto_bit(emsg):
-    return int(emsg) | protobuf_mask
-
-
-def clear_proto_bit(emsg):
-    return int(emsg) & ~protobuf_mask
 
 
 class MsgHdrProtoBuf:
