@@ -5,6 +5,7 @@ from steam.enums.emsg import EMsg
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2
+from steam.protobufs import gc_pb2
 from steam.util import set_proto_bit, clear_proto_bit
 
 
@@ -382,3 +383,83 @@ class ClientLogOnResponse:
 
     def __str__(self):
         return "eresult: %s" % repr(self.eresult)
+
+
+class GCMsgHdr:
+    _size = struct.calcsize("<Hqq")
+
+    def __init__(self, msg, data=None):
+        self.proto = None
+        self.msg = clear_proto_bit(msg)
+
+        if data:
+            self.load(data)
+        else:
+            self.headerVersion = 1
+            self.targetJobID = -1
+            self.sourceJobID = -1
+
+    def serialize(self):
+        return struct.pack("<Hqq",
+                           self.headerVersion,
+                           self.targetJobID,
+                           self.sourceJobID,
+                           )
+
+    def load(self, data):
+        (self.headerVersion,
+         self.targetJobID,
+         self.sourceJobID,
+         ) = struct.unpack_from("<Hqq", data)
+
+    def __str__(self):
+        return '\n'.join(["headerVersion: %s" % self.headerVersion,
+                          "targetJobID: %s" % self.targetJobID,
+                          "sourceJobID: %s" % self.sourceJobID,
+                          ])
+
+class GCMsgHdrProto:
+    _size = struct.calcsize("<Ii")
+
+    def __init__(self, msg, data=None):
+        self.proto = gc_pb2.CMsgProtoBufHeader()
+
+        if data:
+            self.load(data)
+        else:
+            self.msg = clear_proto_bit(msg)
+            self.headerLength = 0
+
+
+    def serialize(self):
+        proto_data = self.proto.SerializeToString()
+        self.headerLength = len(proto_data)
+
+        return struct.pack("<Ii",
+                           set_proto_bit(self.msg),
+                           self.headerLength,
+                           ) + proto_data
+
+    def load(self, data):
+        (msg,
+         self.headerLength,
+         ) = struct.unpack_from("<Ii", data)
+
+        self.msg = clear_proto_bit(msg)
+
+        if self.headerLength:
+            x = GCMsgHdrProto._size
+            self.proto.ParseFromString(data[x:x+self.headerLength])
+
+    def __str__(self):
+        resp = ["msg: %s" % self.msg,
+                "headerLength: %s" % self.headerLength,
+                ]
+
+        proto = str(self.proto)
+
+        if proto:
+            resp.append('-- proto --')
+            resp.append(proto)
+
+        return '\n'.join(resp)

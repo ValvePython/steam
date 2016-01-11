@@ -41,6 +41,11 @@ pb_fetch:
 	wget -nv --show-progress -N -P ./steam/protobufs/ -i protobuf_list.txt
 
 pb_compile:
-	protoc --python_out ./steam/protobufs/ --proto_path=/usr/include --proto_path=./steam/protobufs ./steam/protobufs/*.proto
+	for filepath in `ls ./steam/protobufs/*.proto`; do \
+		protoc --python_out ./steam/protobufs/ --proto_path=/usr/include --proto_path=./steam/protobufs "$$filepath"; \
+	done;
 
-pb_update: pb_fetch pb_compile
+pb_clear:
+	rm -f ./stema/protobufs/*.proto
+
+pb_update: pb_fetch pb_compile pb_clear
