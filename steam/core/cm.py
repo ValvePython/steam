@@ -93,6 +93,7 @@ class CMClient(EventEmitter):
     def _init_attributes(self):
         self.current_server_addr = None
         self.connected = False
+        self.channel_secured = False
 
         self.key = None
         self.hmac_secret = None
@@ -143,14 +144,15 @@ class CMClient(EventEmitter):
                 else:
                     message = crypto.symmetric_decrypt(message, self.key)
 
-            self._parse_message(message)
+            gevent.spawn(self._parse_message, message)
+            gevent.idle()
 
     def _parse_message(self, message):
-            if not self.connected:
-                return
-
             emsg_id, = struct.unpack_from("<I", message)
             emsg = EMsg(clear_proto_bit(emsg_id))
+
+            if not self.connected and emsg != EMsg.ClientLogOnResponse:
+                return
 
             if emsg in (EMsg.ChannelEncryptRequest,
                         EMsg.ChannelEncryptResponse,
@@ -214,6 +216,7 @@ class CMClient(EventEmitter):
         else:
             logger.debug("Channel secured (legacy mode)")
 
+        self.channel_secured = True
         self.emit('channel_secured')
 
     def _handle_multi(self, msg):

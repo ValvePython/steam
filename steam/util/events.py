@@ -13,24 +13,22 @@ class EventEmitter(object):
         Emit event with some arguments
         """
 
-        if not hasattr(self, '_event_callbacks'):
-            return
-
         gevent.idle()
 
-        for callback in list(self._event_callbacks[event]):
-            if isinstance(callback, AsyncResult):
-                self.remove_listener(event, callback)
+        if hasattr(self, '_event_callbacks'):
+            for callback in list(self._event_callbacks[event]):
+                if isinstance(callback, AsyncResult):
+                    self.remove_listener(event, callback)
 
-                result = args
-                if len(args) == 1:
-                    result = args[0]
+                    result = args
+                    if len(args) == 1:
+                        result = args[0]
 
-                callback.set(result)
-            else:
-                gevent.spawn(callback, *args)
+                    callback.set(result)
+                else:
+                    gevent.spawn(callback, *args)
 
-            gevent.idle()
+                gevent.idle()
 
         # every event is also emitted as None
         if event is not None:
