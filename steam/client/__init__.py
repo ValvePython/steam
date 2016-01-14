@@ -59,7 +59,7 @@ class SteamClient(EventEmitter):
                         EResult.AccountLoginDeniedNeedTwoFactor,
                         EResult.TwoFactorCodeMismatch,
                         ):
-            self.emit("need_code", result)
+            self.emit("auth_code_required", result)
         else:
             self.emit("error", result)
 
@@ -69,16 +69,21 @@ class SteamClient(EventEmitter):
 
         self.cm.send_message(message)
 
-    def anonymous_login(self):
-        logger.debug("Attempting Anonymous login")
-
+    def _pre_login(self):
         if self.logged_on:
-            logger.debug("Aready logged on")
-            return
+            logger.debug("Trying to login while logged on???")
+            raise RuntimeError("Already logged on")
+
         if not self.connected:
             self.connect()
 
-        self.wait_event("channel_secured")
+        if not self.cm.channel_secured:
+            self.wait_event("channel_secured")
+
+    def anonymous_login(self):
+        logger.debug("Attempting Anonymous login")
+
+        self._pre_login()
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='AnonUser', universe='Public')
@@ -88,13 +93,7 @@ class SteamClient(EventEmitter):
     def login(self, username, password, auth_code=None, two_factor_code=None, remember=False):
         logger.debug("Attempting login")
 
-        if self.logged_on:
-            logger.debug("Aready logged on")
-            return
-        if not self.connected:
-            self.connect()
-
-        self.wait_event("channel_secured")
+        self._pre_login()
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='Individual', universe='Public')
