@@ -119,6 +119,10 @@ class SteamClient(EventEmitter):
             self.send(MsgProto(EMsg.ClientLogOff))
             self.wait_event('disconnected')
 
+    def run_forever(self):
+        while True:
+            gevent.sleep(300)
+
     def games_played(self, app_ids):
         if not isinstance(app_ids, list):
             raise ValueError("Expected app_ids to be of type list")
