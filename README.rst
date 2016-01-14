@@ -2,6 +2,92 @@
 
 Module for interacting with various Steam_ features. Install with ``pip install steam``.
 
+SteamClient
+-----------
+
+``gevent`` based implementation for interacting with the Steam network.
+This is currently a WIP, and is barebone.
+It should be possible to implement various functions with ease.
+
+Here is a CLI login example.
+It will prompt for user and password.
+If authentication code is required, it will additionally prompt for that.
+Configuring logging will lets us see the internal interactions.
+
+.. code:: python
+
+    import logging
+    from getpass import getpass
+    logging.basicConfig(format='[%(asctime)s] %(levelname)s %(name)s: %(message)s', level=logging.DEBUG)
+
+    from steam import SteamClient
+    from steam.enums import EResult
+    from steam.enums.emsg import EMsg
+
+    client = SteamClient()
+    #client.cm.verbose_debug = True
+
+    @client.on('error')
+    def print_error(result):
+        print "Error:", EResult(result)
+
+    @client.on('auth_code_required')
+    def auth_code_prompt(eresult):
+        if eresult == EResult.AccountLogonDenied:
+            code = raw_input("Enter Email Code: ")
+            logOnDetails.update({'auth_code': code})
+        else:
+            code = raw_input("Enter 2FA Code: ")
+            logOnDetails.update({'two_factor_code': code})
+
+        client.login(**logOnDetails)
+
+    logOnDetails = {
+        'username': raw_input("Steam user: "),
+        'password': getpass("Password: "),
+    }
+
+    client.login(**logOnDetails)
+    # OR
+    # client.anonymous_login()
+
+    msg = client.wait_event(EMsg.ClientAccountInfo)
+    print "Logged on as: %s" % msg.body.persona_name
+    print "SteamID: %s" % repr(client.steamid)
+
+    client.wait_event('disconnect')
+
+
+Example of sending a protobuf message and handling the response.
+`wait_event` will block until specified event.
+
+.. code:: python
+
+    from steam.core.emsg import MsgProto
+
+    message = MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce)
+    client.send(message)
+
+    resp = client.wait_event(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
+
+    if resp.body.eresult == EResult.OK:
+        print "WebAPI Nonce: %s" % repr(resp.body.webapi_authenticate_user_nonce)
+    else:
+        print "Error: %s" % EResult(resp.body.eresult)
+
+
+Alternatively, a callback can be registered to handle the response event every time.
+
+.. code:: python
+
+    @client.on(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
+    def handle_webapi_nonce(msg):
+        print "WebAPI Nonce: %s" % repr(resp.body.webapi_authenticate_user_nonce)
+
+    # OR
+    client.on(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, handle_webapi_nonce)
+
+
 WebAPI
 ------
 
@@ -65,6 +151,8 @@ Checkout the wiki for a `list of the currently available API interfaces`_.
 SteamID
 -------
 
+``SteamID`` is immutable as it inherits from ``int``.
+
 .. code:: python
 
     >>> from steam
@@ -96,6 +184,8 @@ SteamID
     >>> group.as_32  # accountid
     4
     >>> group.as_64
+    103582791429521412
+    >>> int(group)
     103582791429521412
     >>> str(group)
     '103582791429521412'
