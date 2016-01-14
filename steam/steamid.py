@@ -56,37 +56,10 @@ class SteamID(int):
         return "<%s(id=%s, type=%s, universe=%s, instance=%s)>" % (
             self.__class__.__name__,
             self.id,
-            repr(str(self.type)),
-            repr(str(self.universe)),
+            repr(self.type.name),
+            repr(self.universe.name),
             self.instance,
             )
-
-#     def __str__(self):
-#         return str(self.as_64)
-#
-#     def __int__(self):
-#         return self.as_64
-#
-#     def __eq__(self, other):
-#         return int(self) == int(other)
-#
-#     def __ne__(self, other):
-#         return int(self) != int(other)
-#
-#     def __lt__(self, other):
-#         return int(self) < int(other)
-#
-#     def __le__(self, other):
-#         return int(self) <= int(other)
-#
-#     def __gt__(self, other):
-#         return int(self) > int(other)
-#
-#     def __ge__(self, other):
-#         return int(self) >= int(other)
-#
-#     def __hash__(self):
-#         return hash(self.as_64)
 
     @property
     def id(self):
