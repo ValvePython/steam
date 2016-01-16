@@ -6,12 +6,15 @@ from steam.enums import EResult
 from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
+from steam.client.jobs import JobManager
 
 logger = logging.getLogger("SteamClient")
+
 
 class SteamClient(EventEmitter):
     def __init__(self):
         self.cm = CMClient()
+        self.job = JobManager(self)
 
         # re-emit all events from CMClient
         self.cm.on(None, self.emit)

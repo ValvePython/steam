@@ -124,6 +124,7 @@ class MsgHdrProtoBuf:
 
 class Msg(object):
     def __init__(self, msg, data=None, extended=False):
+        self.proto = False
         self.extended = extended
         self.header = ExtendedMsgHdr(data) if extended else MsgHdr(data)
         self.header.msg = msg
@@ -229,6 +230,7 @@ def get_cmsg(emsg):
 
 class MsgProto(object):
     def __init__(self, msg, data=None):
+        self.proto = True
         self._header = MsgHdrProtoBuf(data)
         self._header.msg = msg
 
