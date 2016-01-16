@@ -201,7 +201,11 @@ class CMClient(EventEmitter):
 
         self.send_message(resp)
 
-        msg = self.wait_event(EMsg.ChannelEncryptResult)
+        try:
+            msg = self.wait_event(EMsg.ChannelEncryptResult, timeout=15)
+        except gevent.Timeout:
+            gevent.spawn(self.disconnect, True)
+            return
 
         if msg.body.eresult != EResult.OK:
             logger.debug("Failed to secure channel: %s" % msg.body.eresult)
