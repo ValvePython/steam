@@ -85,10 +85,12 @@ class CMClient(EventEmitter):
         self._recv_loop.kill()
 
         self._init_attributes()
-        self.emit('disconnected')
 
         if reconnect:
+            self.emit('reconnect')
             gevent.spawn(self.connect)
+        else:
+            self.emit('disconnected')
 
     def _init_attributes(self):
         self.current_server_addr = None
