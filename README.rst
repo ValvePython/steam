@@ -1,6 +1,38 @@
 |pypi| |license| |coverage| |scru| |master_build|
 
-Module for interacting with various Steam_ features. Install with ``pip install steam``.
+Module for interacting with various Steam_ features.
+
+Installation
+------------
+
+Install latest version from PYPI::
+
+    pip install -U steam
+
+Install the current dev version from ``github``::
+
+    pip install git+https://github.com/ValvePython/steam
+
+Testing
+-------
+
+To run the test suite with the current ``python``, use::
+
+    make test
+
+To run for specific version, setup a ``virtual environment``::
+
+    virtualenv -p python3 py3
+    source py3/bin/active
+    make test
+
+To run for ``python 2.7``, ``3.3``, ``3.4`` and ``pypy``, assuming you have them installed::
+
+    tox
+
+-------------------
+Basic documentation
+-------------------
 
 SteamClient
 -----------
