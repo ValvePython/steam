@@ -1,3 +1,7 @@
+"""The EMsg enum contains many members and takes a bit to load.
+For this reason it is seperate, and imported only when needed.
+"""
+
 from steam.enums.base import SteamIntEnum
 
 

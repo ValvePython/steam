@@ -61,27 +61,35 @@ def webapi_request(path, method='GET', caller=None, params={}):
 
 class WebAPI(object):
     """
-    Steam Web API wrapper
+    Steam WebAPI wrapper. See https://developer.valvesoftware.com/wiki/Steam_Web_API
 
-    Interfaces and methods are populated upon init based on
-    response of available such from the API.
+    .. note::
+        Interfaces and methods are populated automatically from WebAPI.
 
-    More: https://developer.valvesoftware.com/wiki/Steam_Web_API
+    :param key: api key from https://steamcommunity.com/dev/apikey
+    :type key: str
+    :param format: response format, either (``json``, ``vdf``, or ``xml``)
+    :type format: str
+    :param raw: return raw response
+    :type raw: bool
+    :param https: use ``https``
+    :type https: bool
+    :param auto_load_interfaces: load interfaces from the WebAPI
+    :type auto_load_interfaces: bool
+
+    These can be specified per method call for one off calls
+
+    Example usage:
+
+    .. code:: python
+
+        >>> api = WebAPI(key)
+        >>> api.ISteamUser.ResolveVanityURL(vanityurl="valve", url_type=2)
+        >>> api.call('ISteamUser.ResolveVanityURL', vanityurl="valve", url_type=2)
+        {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
     """
 
     def __init__(self, key, format='json', raw=False, https=True, http_timeout=30, auto_load_interfaces=True):
-        """
-        Optain apikey at https://steamcommunity.com/dev/apikey
-
-        key                   - apikey
-        format                - output format (json, vdf, xml)
-        raw                   - whenver to deserialize the response
-        https                 - whenever to use https or not
-        auto_load_interfaces  - should we load interfaces upon initialization
-
-        These can be specified per method call for one off calls
-        """
-
         self.key = key
         self.format = format
         self.raw = raw
@@ -101,10 +109,11 @@ class WebAPI(object):
 
     def fetch_interfaces(self):
         """
-        Returns a dict with the response from GetSupportedAPIList
+        Returns a dict with the response from ``GetSupportedAPIList``
 
-        This is then feeded into WebAPI.load_interfaces(reponse)
-        The reponse could be cached/save and used to load interfaces
+        :return: ``dict`` of all interfaces and methods
+
+        The returned value can passed to :py:func:`WebAPI.load_interfaces`
         """
         return webapi_request(
             "ISteamWebAPIUtil/GetSupportedAPIList/v1/",
@@ -141,7 +150,11 @@ class WebAPI(object):
         """
         Make an API call for specific method
 
-        method_path is a str in the format of "INTERFACE.METHOD"
+        :param method_path: format ``Interface.Method`` (e.g. ``ISteamWebAPIUtil.GetServerInfo``)
+        :type method_path: str
+        :param kwargs: keyword arguments for the specific method
+        :return: response
+        :rtype: ``dict``, ``lxml.etree.ElementTree`` or ``str``
         """
 
         interface, method = method_path.split('.', 1)
@@ -149,14 +162,14 @@ class WebAPI(object):
 
 
     def doc(self):
-        print(self.__doc__)
+        """
+        Print documentation for all interfaces and their methods
+        """
 
-    @property
-    def __doc__(self):
         doc = "Steam Web API - List of all interfaces\n\n"
         for interface in self.interfaces:
             doc += interface.__doc__
-        return doc
+        print(doc)
 
 
 class WebAPIInterface(object):

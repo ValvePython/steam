@@ -26,16 +26,7 @@ class SteamID(int):
     """
     Object for converting steamID to its' various representations
 
-    (immutable)
-    """
-
-    def __new__(cls, *args, **kwargs):
-        steam64 = make_steam64(*args, **kwargs)
-        return super(SteamID, cls).__new__(cls, steam64)
-
-    def __init__(self, *args, **kwargs):
-        """
-        The instance can be initialized with various parameters
+    .. code:: python
 
         SteamID()  # invalid steamid
         SteamID(12345)  # accountid
@@ -45,11 +36,13 @@ class SteamID(int):
         SteamID('103582791429521412')
         SteamID('STEAM_1:0:2')  # steam2
         SteamID('[g:1:4]')  # steam3
+    """
 
-        To create a SteamID from a community url use:
+    def __new__(cls, *args, **kwargs):
+        steam64 = make_steam64(*args, **kwargs)
+        return super(SteamID, cls).__new__(cls, steam64)
 
-        steam.steamid.from_url()
-        """
+    def __init__(self, *args, **kwargs):
         pass
 
     def __repr__(self):
@@ -63,30 +56,55 @@ class SteamID(int):
 
     @property
     def id(self):
+        """
+        :return: account id
+        :rtype: int
+        """
         return int(self) & 0xFFffFFff
 
     @property
     def instance(self):
+        """
+        :rtype: int
+        """
         return (int(self) >> 32) & 0xFFffF
 
     @property
     def type(self):
+        """
+        :rtype: :py:class:`steam.enum.EType`
+        """
         return EType((int(self) >> 52) & 0xF)
 
     @property
     def universe(self):
+        """
+        :rtype: :py:class:`steam.enum.EUniverse`
+        """
         return EUniverse((int(self) >> 56) & 0xFF)
 
     @property
     def as_32(self):
+        """
+        :return: account id
+        :rtype: int
+        """
         return self.id
 
     @property
     def as_64(self):
+        """
+        :return: steam64 format
+        :rtype: int
+        """
         return int(self)
 
     @property
     def as_steam2(self):
+        """
+        :return: steam2 format (e.g ``STEAM_0:0:1234``)
+        :rtype: str
+        """
         return "STEAM_0:%s:%s" % (
             self.id % 2,
             self.id >> 1,
@@ -94,6 +112,10 @@ class SteamID(int):
 
     @property
     def as_steam3(self):
+        """
+        :return: steam3 format (e.g ``[U:1:1234]``)
+        :rtype: str
+        """
         if self.type is EType.AnonGameServer:
             return "[%s:%s:%s:%s]" % (
                 str(ETypeChar(self.type)),
@@ -110,6 +132,10 @@ class SteamID(int):
 
     @property
     def community_url(self):
+        """
+        :return: e.g https://steamcommunity.com/profiles/123456789
+        :rtype: str
+        """
         suffix = {
             EType.Individual: "profiles/%s",
             EType.Clan: "gid/%s",
@@ -121,6 +147,9 @@ class SteamID(int):
         return None
 
     def is_valid(self):
+        """
+        :rtype: :py:class:`bool`
+        """
         return (self.id > 0
                 and self.type is not EType.Invalid
                 and self.universe is not EUniverse.Invalid
@@ -131,14 +160,16 @@ def make_steam64(id=0, *args, **kwargs):
         """
         Returns steam64 from various other representations.
 
-        make_steam64()  # invalid steamid
-        make_steam64(12345)  # accountid
-        make_steam64('12345')
-        make_steam64(id=12345, type='Invalid', universe='Invalid', instance=0)
-        make_steam64(103582791429521412)  # steam64
-        make_steam64('103582791429521412')
-        make_steam64('STEAM_1:0:2')  # steam2
-        make_steam64('[g:1:4]')  # steam3
+        .. code:: python
+
+            make_steam64()  # invalid steamid
+            make_steam64(12345)  # accountid
+            make_steam64('12345')
+            make_steam64(id=12345, type='Invalid', universe='Invalid', instance=0)
+            make_steam64(103582791429521412)  # steam64
+            make_steam64('103582791429521412')
+            make_steam64('STEAM_1:0:2')  # steam2
+            make_steam64('[g:1:4]')  # steam3
         """
 
         accountid = id
@@ -210,6 +241,12 @@ def make_steam64(id=0, *args, **kwargs):
 
 
 def steam2_to_tuple(value):
+    """
+    :param value: steam2 (e.g. ``STEAM_0:0:1234``)
+    :type value: str
+    :return: (accountid, type, universe, instance)
+    :rtype: ``tuple`` or ``None``
+    """
     match = re.match(r"^STEAM_(?P<universe>[01])"
                      r":(?P<reminder>[0-1])"
                      r":(?P<id>\d+)$", value
@@ -224,6 +261,12 @@ def steam2_to_tuple(value):
 
 
 def steam3_to_tuple(value):
+    """
+    :param value: steam3 (e.g. ``[U:1:1234]``)
+    :type value: str
+    :return: (accountid, type, universe, instance)
+    :rtype: ``tuple`` or ``None``
+    """
     match = re.match(r"^\["
                      r"(?P<type>[%s]):"        # type char
                      r"(?P<universe>\d+):"     # universe
@@ -254,14 +297,19 @@ def steam64_from_url(url):
     """
     Takes a Steam Community url and returns steam64 or None
 
-    Example URLs:
-    ----
-    https://steamcommunity.com/gid/[g:1:4]
-    https://steamcommunity.com/gid/103582791429521412
-    https://steamcommunity.com/groups/Valve
-    https://steamcommunity.com/profiles/[U:1:12]
-    https://steamcommunity.com/profiles/76561197960265740
-    https://steamcommunity.com/id/johnc
+    :param url: steam community url
+    :type url: str
+    :return: steam64
+    :rtype: ``int`` or ``None``
+
+    Example URLs::
+
+        https://steamcommunity.com/gid/[g:1:4]
+        https://steamcommunity.com/gid/103582791429521412
+        https://steamcommunity.com/groups/Valve
+        https://steamcommunity.com/profiles/[U:1:12]
+        https://steamcommunity.com/profiles/76561197960265740
+        https://steamcommunity.com/id/johnc
     """
 
     match = re.match(r'^https?://steamcommunity.com/'
@@ -289,14 +337,12 @@ def from_url(url):
     """
     Takes Steam community url and returns a SteamID instance or None
 
-    Example URLs:
-    ----
-    https://steamcommunity.com/gid/[g:1:4]
-    https://steamcommunity.com/gid/103582791429521412
-    https://steamcommunity.com/groups/Valve
-    https://steamcommunity.com/profiles/[U:1:12]
-    https://steamcommunity.com/profiles/76561197960265740
-    https://steamcommunity.com/id/johnc
+    :param url: steam community url
+    :type url: str
+    :return: `SteamID` instance
+    :rtype: :py:class:`steam.SteamID` or ``None``
+
+    See :py:func:`steam64_from_url`
     """
 
     steam64 = steam64_from_url(url)

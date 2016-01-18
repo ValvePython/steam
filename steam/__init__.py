@@ -1,4 +1,5 @@
-__version__ = "0.5.4"
+version_info = (0, 6, 0, 'alpha')
+__version__ = "0.6.0a"
 __author__ = "Rossen Georgiev"
 
 from steam.steamid import SteamID
