@@ -1,11 +1,17 @@
 language: python
+env:
+    - TOXENV=py27
+    - TOXENV=py33
+    - TOXENV=py34
+    - TOXENV=pypy
+    - TOXENV=pypy3
 install:
     - pip install tox
     - pip install coveralls
     - pip install scrutinizer-ocular
+    - pip install gevent
 script:
-    - rm .coverage
-    - tox
+    - tox -e $TOXENV
 after_script:
     - coveralls
     - ocular
