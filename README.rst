@@ -2,6 +2,8 @@
 
 Module for interacting with various Steam_ features.
 
+**Documentation**: http://valvepython.github.io/steam/
+
 Installation
 ------------
 
@@ -30,11 +32,8 @@ To run for ``python 2.7``, ``3.3``, ``3.4`` and ``pypy``, assuming you have them
 
     tox
 
-Documentation
--------------
 
-Full documentation of the module can be found at http://valvepython.github.io/steam/
-
+.. _Steam: https://store.steampowered.com/
 
 .. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?style=flat&label=latest%20version
     :target: https://pypi.python.org/pypi/steam
