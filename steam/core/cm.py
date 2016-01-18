@@ -150,37 +150,37 @@ class CMClient(EventEmitter):
             gevent.idle()
 
     def _parse_message(self, message):
-            emsg_id, = struct.unpack_from("<I", message)
-            emsg = EMsg(clear_proto_bit(emsg_id))
+        emsg_id, = struct.unpack_from("<I", message)
+        emsg = EMsg(clear_proto_bit(emsg_id))
 
-            if not self.connected and emsg != EMsg.ClientLogOnResponse:
-                return
+        if not self.connected and emsg != EMsg.ClientLogOnResponse:
+            return
 
-            if emsg in (EMsg.ChannelEncryptRequest,
-                        EMsg.ChannelEncryptResponse,
-                        EMsg.ChannelEncryptResult,
-                        ):
+        if emsg in (EMsg.ChannelEncryptRequest,
+                    EMsg.ChannelEncryptResponse,
+                    EMsg.ChannelEncryptResult,
+                    ):
 
-                msg = Msg(emsg, message)
-            else:
-                try:
-                    if is_proto(emsg_id):
-                        msg = MsgProto(emsg, message)
-                    else:
-                        msg = Msg(emsg, message, extended=True)
-                except Exception as e:
-                    logger.fatal("Failed to deserialize message: %s (is_proto: %s)",
-                                 str(emsg),
-                                 is_proto(emsg_id)
-                                 )
-                    logger.exception(e)
+            msg = Msg(emsg, message)
+        else:
+            try:
+                if is_proto(emsg_id):
+                    msg = MsgProto(emsg, message)
+                else:
+                    esg = Msg(emsg, message, extended=True)
+            except Exception as e:
+                logger.fatal("Failed to deserialize message: %s (is_proto: %s)",
+                             str(emsg),
+                             is_proto(emsg_id)
+                             )
+                logger.exception(e)
 
-            if self.verbose_debug:
-                logger.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
-            else:
-                logger.debug("Incoming: %s", repr(msg))
+        if self.verbose_debug:
+            logger.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
+        else:
+            logger.debug("Incoming: %s", repr(msg))
 
-            self.emit(emsg, msg)
+        self.emit(emsg, msg)
 
     def _handle_encrypt_request(self, msg):
         logger.debug("Securing channel")
