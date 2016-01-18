@@ -4,7 +4,7 @@ install:
     - pip install coveralls
     - pip install scrutinizer-ocular
 script:
-    - coverage erase
+    - rm .coverage
     - tox
 after_script:
     - coveralls
