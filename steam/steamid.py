@@ -157,87 +157,87 @@ class SteamID(int):
 
 
 def make_steam64(id=0, *args, **kwargs):
-        """
-        Returns steam64 from various other representations.
+    """
+    Returns steam64 from various other representations.
 
-        .. code:: python
+    .. code:: python
 
-            make_steam64()  # invalid steamid
-            make_steam64(12345)  # accountid
-            make_steam64('12345')
-            make_steam64(id=12345, type='Invalid', universe='Invalid', instance=0)
-            make_steam64(103582791429521412)  # steam64
-            make_steam64('103582791429521412')
-            make_steam64('STEAM_1:0:2')  # steam2
-            make_steam64('[g:1:4]')  # steam3
-        """
+        make_steam64()  # invalid steamid
+        make_steam64(12345)  # accountid
+        make_steam64('12345')
+        make_steam64(id=12345, type='Invalid', universe='Invalid', instance=0)
+        make_steam64(103582791429521412)  # steam64
+        make_steam64('103582791429521412')
+        make_steam64('STEAM_1:0:2')  # steam2
+        make_steam64('[g:1:4]')  # steam3
+    """
 
-        accountid = id
-        etype = EType.Invalid
-        universe = EUniverse.Invalid
-        instance = None
+    accountid = id
+    etype = EType.Invalid
+    universe = EUniverse.Invalid
+    instance = None
 
-        if len(args) == 0 and len(kwargs) == 0:
-            value = str(accountid)
+    if len(args) == 0 and len(kwargs) == 0:
+        value = str(accountid)
 
-            # numeric input
-            if value.isdigit():
-                value = int(value)
+        # numeric input
+        if value.isdigit():
+            value = int(value)
 
-                # 32 bit account id
-                if 0 < value < 2**32:
-                    accountid = value
-                    etype = EType.Individual
-                    universe = EUniverse.Public
-                # 64 bit
-                elif value < 2**64:
-                    return value
+            # 32 bit account id
+            if 0 < value < 2**32:
+                accountid = value
+                etype = EType.Individual
+                universe = EUniverse.Public
+            # 64 bit
+            elif value < 2**64:
+                return value
 
-            # textual input e.g. [g:1:4]
+        # textual input e.g. [g:1:4]
+        else:
+            result = steam2_to_tuple(value) or steam3_to_tuple(value)
+
+            if result:
+                (accountid,
+                 etype,
+                 universe,
+                 instance,
+                 ) = result
             else:
-                result = steam2_to_tuple(value) or steam3_to_tuple(value)
+                accountid = 0
 
-                if result:
-                    (accountid,
-                     etype,
-                     universe,
-                     instance,
-                     ) = result
-                else:
-                    accountid = 0
+    elif len(args) > 0:
+        length = len(args)
+        if length == 1:
+            etype, = args
+        elif length == 2:
+            etype, universe = args
+        elif length == 3:
+            etype, universe, instance = args
+        else:
+            raise TypeError("Takes at most 4 arguments (%d given)" % length)
 
-        elif len(args) > 0:
-            length = len(args)
-            if length == 1:
-                etype, = args
-            elif length == 2:
-                etype, universe = args
-            elif length == 3:
-                etype, universe, instance = args
-            else:
-                raise TypeError("Takes at most 4 arguments (%d given)" % length)
+    if len(kwargs) > 0:
+        etype = kwargs.get('type', etype)
+        universe = kwargs.get('universe', universe)
+        instance = kwargs.get('instance', instance)
 
-        if len(kwargs) > 0:
-            etype = kwargs.get('type', etype)
-            universe = kwargs.get('universe', universe)
-            instance = kwargs.get('instance', instance)
+    etype = (EType(etype)
+             if isinstance(etype, (int, EType))
+             else EType[etype]
+             )
 
-        etype = (EType(etype)
-                 if isinstance(etype, (int, EType))
-                 else EType[etype]
-                 )
+    universe = (EUniverse(universe)
+                if isinstance(universe, (int, EUniverse))
+                else EUniverse[universe]
+                )
 
-        universe = (EUniverse(universe)
-                    if isinstance(universe, (int, EUniverse))
-                    else EUniverse[universe]
-                    )
+    if instance is None:
+        instance = 1 if etype in (EType.Individual, EType.GameServer) else 0
 
-        if instance is None:
-            instance = 1 if etype in (EType.Individual, EType.GameServer) else 0
+    assert instance <= 0xffffF, "instance larger than 20bits"
 
-        assert instance <= 0xffffF, "instance larger than 20bits"
-
-        return (universe << 56) | (etype << 52) | (instance << 32) | accountid
+    return (universe << 56) | (etype << 52) | (instance << 32) | accountid
 
 
 def steam2_to_tuple(value):
