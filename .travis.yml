@@ -1,17 +1,16 @@
 language: python
-env:
-    - TOXENV=py27
-    - TOXENV=py33
-    - TOXENV=py34
-    - TOXENV=pypy
-    - TOXENV=pypy3
+sudo: false
+python:
+    - "2.7"
+    - "3.3"
+    - "3.4"
+    - "3.5"
 install:
-    - pip install tox
+    - make init
     - pip install coveralls
     - pip install scrutinizer-ocular
-    - pip install gevent
 script:
-    - tox -e $TOXENV
+    - make test
 after_script:
     - coveralls
     - ocular

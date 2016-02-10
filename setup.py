@@ -15,7 +15,7 @@ install_requires = [
     'requests>=2.9.1',
     'vdf>=1.10',
     'pycrypto>=2.6.1',
-    'gevent>=1.1rc2',
+    'gevent>=1.1rc3',
     'protobuf>=2.6.1',
 ]
 
