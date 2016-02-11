@@ -167,7 +167,7 @@ class CMClient(EventEmitter):
                 if is_proto(emsg_id):
                     msg = MsgProto(emsg, message)
                 else:
-                    esg = Msg(emsg, message, extended=True)
+                    msg = Msg(emsg, message, extended=True)
             except Exception as e:
                 logger.fatal("Failed to deserialize message: %s (is_proto: %s)",
                              str(emsg),
