@@ -30,10 +30,9 @@ logger = logging.getLogger("CMClient")
 class CMClient(EventEmitter):
     TCP = 0
     UDP = 1
+    verbose_debug = False
 
     def __init__(self, protocol=0):
-        self.verbose_debug = False
-
         self._init_attributes()
 
         self.servers = CMServerList()
