@@ -25,6 +25,11 @@ class SteamClient(EventEmitter):
 
         self.logged_on = False
 
+    def __repr__(self):
+        return "<%s() %s>" % (self.__class__.__name__,
+                              'online' if self.connected else 'offline',
+                              )
+
     def emit(self, event, *args):
         if event is not None:
             logger.debug("Emit event: %s" % repr(event))
