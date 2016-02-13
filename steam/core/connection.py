@@ -10,7 +10,7 @@ from gevent.select import select as gselect
 logger = logging.getLogger("Connection")
 
 
-class Connection:
+class Connection(object):
     MAGIC = 'VT01'
     FMT = '<I4s'
     FMT_SIZE = struct.calcsize(FMT)
@@ -39,6 +39,7 @@ class Connection:
             return False
 
         self.server_addr = server_addr
+        self.recv_queue.queue.clear()
 
         self._reader = gevent.spawn(self._reader_loop)
         self._writer = gevent.spawn(self._writer_loop)
@@ -63,6 +64,7 @@ class Connection:
         self._readbuf = ''
         self.send_queue.queue.clear()
         self.recv_queue.queue.clear()
+        self.recv_queue.put(StopIteration)
 
         self.socket.close()
 
@@ -75,9 +77,6 @@ class Connection:
 
     def __iter__(self):
         return self.recv_queue
-
-    def get_message(self, block=True, timeout=None):
-        return self.recv_queue.get(block, timeout)
 
     def put_message(self, message):
         self.send_queue.put(message)
@@ -116,7 +115,9 @@ class Connection:
             message_length, magic = struct.unpack_from(Connection.FMT, buf)
 
             if magic != Connection.MAGIC:
-                raise RuntimeError("invalid magic, got %s" % repr(magic))
+                logger.debug("invalid magic, got %s" % repr(magic))
+                self.disconnect()
+                return
 
             packet_length = header_size + message_length
 
@@ -139,7 +140,10 @@ class TCPConnection(Connection):
         self.socket.connect(server_addr)
 
     def _read_data(self):
-        return self.socket.recv(2048)
+        try:
+            return self.socket.recv(2048)
+        except socket.error:
+            return ''
 
     def _write_data(self, data):
         self.socket.sendall(data)
