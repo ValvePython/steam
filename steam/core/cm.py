@@ -99,7 +99,7 @@ class CMClient(EventEmitter):
         self.key = None
         self.hmac_secret = None
 
-        self.steam_id = None
+        self.steam_id = SteamID()
         self.session_id = None
 
         self._recv_loop = None
