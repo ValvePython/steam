@@ -1,6 +1,6 @@
 import logging
 import gevent
-from steam.util.events import EventEmitter
+from eventemitter import EventEmitter
 from steam.util import set_proto_bit, clear_proto_bit, is_proto
 from steam.enums.emsg import EMsg
 from steam.enums import EResult

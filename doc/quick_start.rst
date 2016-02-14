@@ -194,7 +194,7 @@ Configuring logging will lets us see the internal interactions.
     # OR
     # client.anonymous_login()
 
-    msg = client.wait_event(EMsg.ClientAccountInfo)
+    msg, = client.wait_event(EMsg.ClientAccountInfo)
     print "Logged on as: %s" % msg.body.persona_name
     print "SteamID: %s" % repr(client.steamid)
 
@@ -214,7 +214,7 @@ Example of sending a protobuf message and handling the response.
     message = MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce)
     client.send(message)
 
-    resp = client.wait_event(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
+    resp, = client.wait_event(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
 
     if resp.body.eresult == EResult.OK:
         print "WebAPI Nonce: %s" % repr(resp.body.webapi_authenticate_user_nonce)

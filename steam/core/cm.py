@@ -20,7 +20,7 @@ from steam.enums.emsg import EMsg
 from steam.core import crypto
 from steam.core.connection import TCPConnection
 from steam.core.msg import Msg, MsgProto
-from steam.util.events import EventEmitter
+from eventemitter import EventEmitter
 from steam.util import ip_from_int, is_proto, clear_proto_bit
 
 
@@ -202,9 +202,8 @@ class CMClient(EventEmitter):
 
         self.send_message(resp)
 
-        try:
-            msg = self.wait_event(EMsg.ChannelEncryptResult, timeout=15)
-        except gevent.Timeout:
+        msg, = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
+        if msg is None:
             gevent.spawn(self.disconnect, True)
             return
 

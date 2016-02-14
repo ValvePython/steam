@@ -1,4 +1,5 @@
 coverage==4.0.3
+gevent-eventemitter==1.1
 enum34==1.1.2
 gevent==1.1rc3
 mock==1.3.0

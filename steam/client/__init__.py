@@ -1,6 +1,6 @@
 import logging
 import gevent
-from steam.util.events import EventEmitter
+from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
 from steam.enums import EResult
 from steam.core.msg import MsgProto

@@ -1,6 +1,6 @@
 import logging
 from gevent import event
-from steam.util.events import EventEmitter
+from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
 
 logger = logging.getLogger("JobManager")

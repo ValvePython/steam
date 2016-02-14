@@ -16,6 +16,7 @@ install_requires = [
     'vdf>=1.10',
     'pycrypto>=2.6.1',
     'gevent>=1.1rc3',
+    'gevent-eventemitter>=1.1',
     'protobuf>=2.6.1',
 ]
 
