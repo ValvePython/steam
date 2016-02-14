@@ -29,7 +29,7 @@ setup(
     long_description=long_description,
     url='https://github.com/ValvePython/steam',
     author="Rossen Georgiev",
-    author_email='hello@rgp.io',
+    author_email='rossen@rgp.io',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
