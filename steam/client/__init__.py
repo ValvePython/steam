@@ -2,7 +2,7 @@ import logging
 import gevent
 from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
-from steam.enums import EResult
+from steam.enums import EResult, EOSType
 from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
@@ -135,7 +135,7 @@ class SteamClient(EventEmitter, FeatureBase):
         message.header.steamid = SteamID(type='Individual', universe='Public')
         message.body.protocol_version = 65575
         message.body.client_package_version = 1771
-        message.body.client_os_type = 13
+        message.body.client_os_type = EOSType.Win10
         message.body.client_language = "english"
 
         message.body.account_name = username
