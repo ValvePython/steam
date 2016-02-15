@@ -6,24 +6,25 @@ from steam.enums import EResult
 from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
-from steam.client.jobs import JobManager
+from steam.client.features import FeatureBase
 
 logger = logging.getLogger("SteamClient")
 
 
-class SteamClient(EventEmitter):
+class SteamClient(EventEmitter, FeatureBase):
+    current_jobid = 0
+
     def __init__(self):
         self.cm = CMClient()
-        self.job = JobManager(self)
-
-        # re-emit all events from CMClient
-        self.cm.on(None, self.emit)
 
         # register listners
+        self.cm.on(None, self._handle_cm_events)
         self.on(EMsg.ClientLogOnResponse, self._handle_logon)
         self.on("disconnected", self._handle_disconnect)
 
         self.logged_on = False
+
+        super(SteamClient, self).__init__()
 
     def __repr__(self):
         return "<%s() %s>" % (self.__class__.__name__,
@@ -49,8 +50,23 @@ class SteamClient(EventEmitter):
     def disconnect(self):
         self.cm.disconnect()
 
+    def _handle_cm_events(self, event, *args):
+        self.emit(event, *args)
+
+        if isinstance(event, EMsg):
+            message = args[0]
+
+            if message.proto:
+                jobid = message.header.jobid_target
+            else:
+                jobid = message.header.targetJobID
+
+            if jobid not in (-1, 18446744073709551615):
+                self.emit("job_%d" % jobid, *args)
+
     def _handle_disconnect(self):
         self.logged_on = False
+        self.current_jobid = 0
 
     def _handle_logon(self, msg):
         result = EResult(msg.body.eresult)
@@ -76,6 +92,18 @@ class SteamClient(EventEmitter):
             raise RuntimeError("Cannot send message while not connected")
 
         self.cm.send_message(message)
+
+    def send_job(self, message):
+        jobid = self.current_jobid = (self.current_jobid + 1) % 4294967295
+
+        if message.proto:
+            message.header.jobid_source = jobid
+        else:
+            message.header.sourceJobID = jobid
+
+        self.send(message)
+
+        return "job_%d" % jobid
 
     def _pre_login(self):
         if self.logged_on:
