@@ -1,5 +1,7 @@
+import os
 import logging
 import gevent
+from Crypto.Hash import SHA
 from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
 from steam.enums import EResult, EOSType
@@ -13,6 +15,8 @@ logger = logging.getLogger("SteamClient")
 
 class SteamClient(EventEmitter, FeatureBase):
     current_jobid = 0
+    credential_location = None
+    username = None
 
     def __init__(self):
         self.cm = CMClient()
@@ -20,6 +24,7 @@ class SteamClient(EventEmitter, FeatureBase):
         # register listners
         self.cm.on(None, self._handle_cm_events)
         self.on(EMsg.ClientLogOnResponse, self._handle_logon)
+        self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
         self.on("disconnected", self._handle_disconnect)
 
         self.logged_on = False
@@ -36,11 +41,14 @@ class SteamClient(EventEmitter, FeatureBase):
             logger.debug("Emit event: %s" % repr(event))
         super(SteamClient, self).emit(event, *args)
 
+    def set_credential_location(self, path):
+        self.credential_location = path
+
     @property
     def steam_id(self):
         return self.cm.steam_id
-    @property
 
+    @property
     def connected(self):
         return self.cm.connected
 
@@ -65,6 +73,7 @@ class SteamClient(EventEmitter, FeatureBase):
                 self.emit("job_%d" % jobid, *args)
 
     def _handle_disconnect(self):
+        self.username = None
         self.logged_on = False
         self.current_jobid = 0
 
@@ -80,12 +89,29 @@ class SteamClient(EventEmitter, FeatureBase):
         self.disconnect()
 
         if result in (EResult.AccountLogonDenied,
-                        EResult.AccountLoginDeniedNeedTwoFactor,
-                        EResult.TwoFactorCodeMismatch,
-                        ):
+                      EResult.AccountLoginDeniedNeedTwoFactor,
+                      EResult.TwoFactorCodeMismatch,
+                      ):
             self.emit("auth_code_required", result)
         else:
             self.emit("error", result)
+
+    def _handle_update_machine_auth(self, message):
+        ok = self.store_sentry(self.username, message.body.bytes)
+
+        if ok:
+            resp = MsgProto(EMsg.ClientUpdateMachineAuthResponse)
+
+            resp.header.jobid_target = message.header.jobid_source
+
+            resp.body.filename = message.body.filename
+            resp.body.eresult = EResult.OK
+            resp.body.sha_file = SHA.new(message.body.bytes).digest()
+            resp.body.getlasterror = 0
+            resp.body.offset = message.body.offset
+            resp.body.cubwrote = message.body.cubtowrite
+
+            self.send(resp)
 
     def send(self, message):
         if not self.connected:
@@ -116,20 +142,43 @@ class SteamClient(EventEmitter, FeatureBase):
         if not self.cm.channel_secured:
             self.wait_event("channel_secured")
 
-    def anonymous_login(self):
-        logger.debug("Attempting Anonymous login")
+    def _get_sentry_path(self, username):
+        if self.credential_location is not None:
+            return os.path.join(self.credential_location,
+                                "%s_sentry.bin" % username
+                                 )
+        return None
 
-        self._pre_login()
+    def get_sentry(self, username):
+        filepath = self._get_sentry_path(username)
 
-        message = MsgProto(EMsg.ClientLogon)
-        message.header.steamid = SteamID(type='AnonUser', universe='Public')
-        message.body.protocol_version = 65575
-        self.send(message)
+        if filepath and os.path.isfile(filepath):
+            try:
+                with open(filepath, 'r') as f:
+                    return f.read()
+            except IOError as e:
+                logger.error("get_sentry: %s" % str(e))
+
+        return None
+
+    def store_sentry(self, username, sentry_bytes):
+        filepath = self._get_sentry_path(username)
+        if filepath:
+            try:
+                with open(filepath, 'w') as f:
+                    f.write(sentry_bytes)
+                return True
+            except IOError as e:
+                logger.error("store_sentry: %s" % str(e))
+
+        return False
 
     def login(self, username, password, auth_code=None, two_factor_code=None, remember=False):
         logger.debug("Attempting login")
 
         self._pre_login()
+
+        self.username = username
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='Individual', universe='Public')
@@ -141,11 +190,28 @@ class SteamClient(EventEmitter, FeatureBase):
         message.body.account_name = username
         message.body.password = password
 
+        sentry = self.get_sentry(username)
+        if sentry is None:
+            message.body.eresult_sentryfile = EResult.FileNotFound
+        else:
+            message.body.eresult_sentryfile = EResult.OK
+            message.body.sha_sentryfile = SHA.new(sentry).digest()
+
         if auth_code:
             message.body.auth_code = auth_code
         if two_factor_code:
             message.body.two_factor_code = two_factor_code
 
+        self.send(message)
+
+    def anonymous_login(self):
+        logger.debug("Attempting Anonymous login")
+
+        self._pre_login()
+
+        message = MsgProto(EMsg.ClientLogon)
+        message.header.steamid = SteamID(type='AnonUser', universe='Public')
+        message.body.protocol_version = 65575
         self.send(message)
 
     def logout(self):
