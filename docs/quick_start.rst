@@ -175,13 +175,13 @@ Configuring logging will lets us see the internal interactions.
         print "Error:", EResult(result)
 
     @client.on('auth_code_required')
-    def auth_code_prompt(eresult):
-        if eresult == EResult.AccountLogonDenied:
-            code = raw_input("Enter Email Code: ")
-            logOnDetails.update({'auth_code': code})
-        else:
+    def auth_code_prompt(is_2fa, code_mismatch):
+        if is_2fa:
             code = raw_input("Enter 2FA Code: ")
             logOnDetails.update({'two_factor_code': code})
+        else:
+            code = raw_input("Enter Email Code: ")
+            logOnDetails.update({'auth_code': code})
 
         client.login(**logOnDetails)
 

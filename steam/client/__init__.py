@@ -14,9 +14,15 @@ logger = logging.getLogger("SteamClient")
 
 
 class SteamClient(EventEmitter, FeatureBase):
+    """
+    Implementation of Steam client based on ``gevent``
+
+    See `gevent-eventmitter <https://github.com/rossengeorgiev/gevent-eventemitter>`_
+    for details on how to work with events.
+    """
     current_jobid = 0
-    credential_location = None
-    username = None
+    credential_location = None  #: location for sentry
+    username = None  #: username when logged on
 
     def __init__(self):
         self.cm = CMClient()
@@ -27,6 +33,7 @@ class SteamClient(EventEmitter, FeatureBase):
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
         self.on("disconnected", self._handle_disconnect)
 
+        #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
         self.logged_on = False
 
         super(SteamClient, self).__init__()
@@ -42,20 +49,38 @@ class SteamClient(EventEmitter, FeatureBase):
         super(SteamClient, self).emit(event, *args)
 
     def set_credential_location(self, path):
+        """
+        Sets folder location for sentry files
+
+        Needs to be set explicitly for sentries to be created.
+        """
         self.credential_location = path
 
     @property
     def steam_id(self):
+        """
+        ``steam.steamid.SteamID`` of the current logged on user.
+        Points to invalid user, if not logged on.
+        """
         return self.cm.steam_id
 
     @property
     def connected(self):
+        """
+        Monitor ``connected`` and ``disconnected`` events for when this changes.
+        """
         return self.cm.connected
 
     def connect(self):
+        """
+        Initiate connection
+        """
         self.cm.connect()
 
     def disconnect(self):
+        """
+        Close connection
+        """
         self.cm.disconnect()
 
     def _handle_cm_events(self, event, *args):
@@ -125,12 +150,44 @@ class SteamClient(EventEmitter, FeatureBase):
             self.send(resp)
 
     def send(self, message):
+        """
+        Send a message to CM
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        """
         if not self.connected:
             raise RuntimeError("Cannot send message while not connected")
 
         self.cm.send_message(message)
 
     def send_job(self, message):
+        """
+        Send a message as a job
+
+        .. note::
+            Not all messages are jobs, you'll have to find out which are which
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :return: ``jobid`` event identifier
+        :rtype: :class:`str`
+
+        To catch the response just listen for the ``jobid`` event.
+
+        .. code:: python
+
+            jobid = steamclient.send_job(my_message)
+
+            resp = steamclient.wait_event(jobid, timeout=15)
+            if resp:
+                (message,) = resp
+
+            @steamclient.once(jobid)
+            def handle_response(message):
+                pass
+
+        """
         jobid = self.current_jobid = (self.current_jobid + 1) % 4294967295
 
         if message.proto:
@@ -161,6 +218,17 @@ class SteamClient(EventEmitter, FeatureBase):
         return None
 
     def get_sentry(self, username):
+        """
+        Returns contents of sentry file for the given username
+
+        .. note::
+            returns ``None`` if :attr:`credential_location` is not set, or file is not found/inaccessible
+
+        :param username: username
+        :type username: :class:`str`
+        :return: sentry file contents, or ``None``
+        :rtype: :class:`bytes`, :class:`None`
+        """
         filepath = self._get_sentry_path(username)
 
         if filepath and os.path.isfile(filepath):
@@ -173,6 +241,14 @@ class SteamClient(EventEmitter, FeatureBase):
         return None
 
     def store_sentry(self, username, sentry_bytes):
+        """
+        Store sentry bytes under a username
+
+        :param username: username
+        :type username: :class:`str`
+        :return: Whenver the operation succeed
+        :rtype: :class:`bool`
+        """
         filepath = self._get_sentry_path(username)
         if filepath:
             try:
@@ -184,7 +260,39 @@ class SteamClient(EventEmitter, FeatureBase):
 
         return False
 
-    def login(self, username, password, auth_code=None, two_factor_code=None, remember=False):
+    def login(self, username, password, auth_code=None, two_factor_code=None):
+        """
+        Login as a specific user
+
+        :param username: username
+        :type username: :class:`str`
+        :param password: password
+        :type password: :class:`str`
+        :param auth_code: email authentication code
+        :type auth_code: :class:`str`
+        :param two_factor_code: 2FA authentication code
+        :type two_factor_code: :class:`str`
+
+        .. note::
+            Failure to login will result in the server dropping the connection, ``error`` event is fired
+
+        ``auth_code_required`` event is fired when 2FA or Email code is needed.
+        Here is example code of how to handle the situation.
+
+        .. code:: python
+
+            @steamclient.on('auth_code_required')
+            def auth_code_prompt(is_2fa, code_mismatch):
+                if is_2fa:
+                    code = raw_input("Enter 2FA Code: ")
+                    steamclient.login(username, password, two_factor_code=code)
+                else:
+                    code = raw_input("Enter Email Code: ")
+                    steamclient.login(username, password, auth_code=code)
+
+        Codes are required every time a user logins if sentry is not setup.
+        See :meth:`set_credential_location`
+        """
         logger.debug("Attempting login")
 
         self._pre_login()
@@ -216,6 +324,9 @@ class SteamClient(EventEmitter, FeatureBase):
         self.send(message)
 
     def anonymous_login(self):
+        """
+        Login as anonymous user
+        """
         logger.debug("Attempting Anonymous login")
 
         self._pre_login()
@@ -226,16 +337,33 @@ class SteamClient(EventEmitter, FeatureBase):
         self.send(message)
 
     def logout(self):
+        """
+        Logout from steam. Doesn't nothing if not logged on upon calling :meth:`logout`
+
+        .. note::
+            The server will drop the connection immediatelly upon logout.
+        """
         if self.logged_on:
             self.logged_on = False
             self.send(MsgProto(EMsg.ClientLogOff))
             self.wait_event('disconnected')
 
     def run_forever(self):
+        """
+        Transfer control the gevent event loop
+
+        This is useful when the application is setup and ment to run for a long time
+        """
         while True:
             gevent.sleep(300)
 
     def games_played(self, app_ids):
+        """
+        Set the application being played by the user
+
+        :param app_ids: a list of application ids
+        :type app_ids: :class:`list`
+        """
         if not isinstance(app_ids, list):
             raise ValueError("Expected app_ids to be of type list")
 
