@@ -89,10 +89,21 @@ class SteamClient(EventEmitter, FeatureBase):
         self.disconnect()
 
         if result in (EResult.AccountLogonDenied,
+                      EResult.InvalidLoginAuthCode,
                       EResult.AccountLoginDeniedNeedTwoFactor,
                       EResult.TwoFactorCodeMismatch,
                       ):
-            self.emit("auth_code_required", result)
+
+            is_2fa = (result in (EResult.AccountLoginDeniedNeedTwoFactor,
+                                 EResult.TwoFactorCodeMismatch,
+                                 ))
+
+            if is_2fa:
+                code_mismatch = (result == EResult.TwoFactorCodeMismatch)
+            else:
+                code_mismatch = (result == EResult.InvalidLoginAuthCode)
+
+            self.emit("auth_code_required", is_2fa, code_mismatch)
         else:
             self.emit("error", result)
 
