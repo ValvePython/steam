@@ -1,3 +1,23 @@
+"""
+Example usage for messeages to the Dota 2 GC.
+
+.. code:: python
+
+    from steam import SteamClient
+    from steam.client.gc import GameCoordinator
+
+    client = SteamClient()
+    gc = GameCoordinator(client, 570)
+
+    @gc.on(None)
+    def handle_any_gc_message(header, body):
+        pass
+
+    @gc.on(4004)  # EMsgGCClientWelcome
+    def handle_client_welcome(header, body):
+        passs
+
+"""
 import logging
 import gevent
 from eventemitter import EventEmitter
@@ -8,13 +28,22 @@ from steam.core.msg import GCMsgHdr, GCMsgHdrProto, MsgProto
 
 
 class GameCoordinator(EventEmitter):
-    def __init__(self, client, app_id):
-        self.client = client
+    """
+    GameCoordinator is used to proxy messages from/to GC
+
+    :param steam_client: steam client instance
+    :type steam_client: :class:`steam.client.SteamClient`
+    :param app_id: app id of the application
+    :type app_id: :class:`int`
+    """
+
+    def __init__(self, steam_client, app_id):
+        self.steam = steam_client
         self.app_id = app_id
         self._log = logging.getLogger("GC(appid:%d)" % app_id)
 
         # listen for GC messages
-        self.client.on(EMsg.ClientFromGC, self._handle_from_gc)
+        self.steam.on(EMsg.ClientFromGC, self._handle_from_gc)
 
     def emit(self, event, *args):
         if event is not None:
@@ -22,6 +51,14 @@ class GameCoordinator(EventEmitter):
         super(GameCoordinator, self).emit(event, *args)
 
     def send(self, header, body):
+        """
+        Send a message to GC
+
+        :param header: message header
+        :type header: :class:`steam.core.msg.GCMsgHdr`
+        :param body: serialized body of the message
+        :type body: :class:`bytes`
+        """
         message = MsgProto(EMsg.ClientToGC)
         message.header.routing_appid = self.app_id
         message.body.appid = self.app_id
@@ -31,7 +68,7 @@ class GameCoordinator(EventEmitter):
                                 )
         message.body.payload = header.serialize() + body
 
-        self.client.send(message)
+        self.steam.send(message)
 
     def _handle_from_gc(self, msg):
         if msg.body.appid != self.app_id:
