@@ -4,7 +4,7 @@ import gevent
 from Crypto.Hash import SHA
 from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
-from steam.enums import EResult, EOSType
+from steam.enums import EResult, EOSType, EPersonaState
 from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
@@ -107,6 +107,7 @@ class SteamClient(EventEmitter, FeatureBase):
 
         if result == EResult.OK:
             self.logged_on = True
+            self.set_persona(EPersonaState.Online)
             self.emit("logged_on")
             return
 
