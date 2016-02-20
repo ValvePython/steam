@@ -1,3 +1,5 @@
+:tocdepth: 10
+
 .. include:: global.rst
 
 ``steam`` module documentation
@@ -7,6 +9,8 @@
 
 
 A python module for intracting with various parts of Steam_.
+
+Visit the `Github repository <https://github.com/ValvePython/steam>`_.
 
 .. note::
     The module is still very much an alpha.
@@ -27,21 +31,14 @@ To install the current dev version from `Github repository <https://github.com/V
 
     pip install git+https://github.com/ValvePython/steam
 
-Contributing
-============
-
-Issues, suggestions, and code contributions are welcome.
-Just head on to the `Github repostory <https://github.com/ValvePython/steam>`_.
-
-Table of contents
-=================
+Contents
+========
 
 .. toctree::
     :maxdepth: 3
 
-    quick_start
+    user_guide
     api/index
-
 
 Indices and tables
 ==================

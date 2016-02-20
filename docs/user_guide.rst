@@ -1,7 +1,7 @@
 .. include:: global.rst
 
-Quick start
-***********
+User guide
+**********
 
 Welcome to the quick start section.
 The aim here is to give you a very quick

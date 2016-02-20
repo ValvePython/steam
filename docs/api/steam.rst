@@ -1,17 +1,16 @@
 steam
 =====
 
-.. automodule:: steam
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 .. toctree::
-
     steam.client
     steam.core
     steam.enums
     steam.util
+
+.. automodule:: steam
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 steam.steamid
 -------------

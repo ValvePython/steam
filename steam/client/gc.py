@@ -1,5 +1,5 @@
 """
-Example usage for messeages to the Dota 2 GC.
+Example usage for messages to the Dota 2 GC.
 
 .. code:: python
 
