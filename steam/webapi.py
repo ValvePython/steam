@@ -1,5 +1,34 @@
+"""
+WebAPI provides a thin gevent cooperative wrapper over Steam's WebAPI
+
+Calling an endpoint
+
+.. code:: python
+
+    >>> api = WebAPI(key)
+    >>> api.ISteamUser.ResolveVanityURL(vanityurl="valve", url_type=2)
+    >>> api.call('ISteamUser.ResolveVanityURL', vanityurl="valve", url_type=2)
+    {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
+
+All globals params (``key``, ``https``, ``format``, ``raw``) can be specified on per call basis.
+
+.. code:: python
+
+    >>> print a.ISteamUser.ResolveVanityURL(format='vdf', raw=True, vanityurl="valve", url_type=2)
+    "response"
+    {
+            "steamid"       "103582791429521412"
+            "success"       "1"
+    }
+"""
 from __future__ import print_function
 import requests
+import gevent.monkey
+gevent.monkey.patch_socket()
+gevent.monkey.patch_ssl()
+
+session = requests.Session()
+session.mount('any', requests.adapters.HTTPAdapter())
 
 DEFAULT_PARAMS = {
     # api parameters
@@ -15,6 +44,16 @@ DEFAULT_PARAMS = {
 def webapi_request(path, method='GET', caller=None, params={}):
     """
     Low level function for calling Steam's WebAPI
+
+    :param path: request url
+    :type path: :class:`str`
+    :param method: HTTP method (GET or POST)
+    :type method: :class:`str`
+    :param caller: caller reference, caller.last_response is set to the last response
+    :param params: dict of WebAPI and endpoint specific params
+    :type params: :class:`dict`
+    :return: response based on paramers
+    :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
     """
     if method not in ('GET', 'POST'):
         raise NotImplemented("HTTP method: %s" % repr(self.method))
@@ -37,23 +76,25 @@ def webapi_request(path, method='GET', caller=None, params={}):
     # simplifies code calling this method
     kwargs = {'params': params} if method == "GET" else {'data': params}
 
-    f = getattr(requests, method.lower())
+    f = getattr(session, method.lower())
     resp = f(path, stream=False, timeout=onetime['http_timeout'], **kwargs)
 
+    # we keep a reference of the last response instance on the caller
     if caller is not None:
         caller.last_response = resp
 
-    if not resp.ok:
-        raise requests.exceptions.HTTPError("%s %s" % (resp.status_code, resp.reason))
+    # 4XX and 5XX will cause this to raise
+    resp.raise_for_status()
 
+    # response
     if onetime['raw']:
-        return resp.content
+        return resp.text
 
     if onetime['format'] == 'json':
         return resp.json()
     elif onetime['format'] == 'xml':
         import lxml.etree
-        return lxml.etree.parse(resp.raw)
+        return lxml.etree.fromstring(resp.content)
     elif onetime['format'] == 'vdf':
         import vdf
         return vdf.loads(resp.text)
@@ -78,15 +119,6 @@ class WebAPI(object):
     :type auto_load_interfaces: bool
 
     These can be specified per method call for one off calls
-
-    Example usage:
-
-    .. code:: python
-
-        >>> api = WebAPI(key)
-        >>> api.ISteamUser.ResolveVanityURL(vanityurl="valve", url_type=2)
-        >>> api.call('ISteamUser.ResolveVanityURL', vanityurl="valve", url_type=2)
-        {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
     """
 
     def __init__(self, key, format='json', raw=False, https=True, http_timeout=30, auto_load_interfaces=True):
