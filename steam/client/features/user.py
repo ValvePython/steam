@@ -6,21 +6,26 @@ class User(object):
     def __init__(self):
         super(User, self).__init__()
 
-    def set_persona(self, state, name=None):
+    def set_persona(self, state=None, name=None):
         """
-        Set persona state and name
+        Set persona state and/or name
 
         :param state: persona state flag
         :type state: :class:`steam.enums.common.EPersonaState`
         :param name: profile name
         :type name: :class:`str`
         """
-        if not isinstance(state, EPersonaState):
-            raise ValueError("Expected state to be instance of EPersonaState")
+        if state is None and name is None:
+            return
 
         message = MsgProto(EMsg.ClientChangeStatus)
 
-        message.body.persona_state = state
+        if state:
+            if not isinstance(state, EPersonaState):
+                raise ValueError("Expected state to be instance of EPersonaState")
+
+            message.body.persona_state = state
+
         if name:
             message.body.player_name = name
 
