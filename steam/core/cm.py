@@ -342,25 +342,69 @@ class CMServerList(object):
         self.bad_timespan = bad_timespan
         self.list = defaultdict(dict)
 
+        self.bootstrap_from_builtin_list()
+
+    def bootstrap_from_builtin_list(self):
+        """
+        Resets the server list to the built in one.
+        This method is called during initialization.
+        """
+        self.list.clear()
+
         # build-in list
-        self.merge_list([("208.64.200.201", 27017), ("208.64.200.201", 27018),
-                         ("208.64.200.201", 27019), ("208.64.200.201", 27020),
-                         ("208.64.200.202", 27017), ("208.64.200.202", 27018),
-                         ("208.64.200.202", 27019), ("208.64.200.203", 27017),
-                         ("208.64.200.203", 27018), ("208.64.200.203", 27019),
-                         ("208.64.200.204", 27017), ("208.64.200.204", 27018),
-                         ("208.64.200.204", 27019), ("208.64.200.205", 27017),
-                         ("208.64.200.205", 27018), ("208.64.200.205", 27019),
-                         ("208.78.164.9", 27017), ("208.78.164.9", 27018),
-                         ("208.78.164.9", 27019), ("208.78.164.10", 27017),
-                         ("208.78.164.10", 27018), ("208.78.164.10", 27019),
-                         ("208.78.164.11", 27017), ("208.78.164.11", 27018),
-                         ("208.78.164.11", 27019), ("208.78.164.12", 27017),
-                         ("208.78.164.12", 27018), ("208.78.164.12", 27019),
-                         ("208.78.164.13", 27017), ("208.78.164.13", 27018),
-                         ("208.78.164.13", 27019), ("208.78.164.14", 27017),
-                         ("208.78.164.14", 27018), ("208.78.164.14", 27019),
+        self.merge_list([('162.254.195.44', 27019), ('146.66.152.11', 27017),
+                         ('162.254.196.40', 27017), ('146.66.152.11', 27018),
+                         ('162.254.197.41', 27017), ('162.254.197.42', 27018),
+                         ('146.66.152.10', 27018),  ('162.254.196.41', 27020),
+                         ('185.25.180.14', 27018),  ('162.254.196.43', 27021),
+                         ('146.66.155.8', 27018),   ('162.254.196.40', 27018),
+                         ('162.254.197.41', 27021), ('162.254.197.42', 27017),
+                         ('185.25.180.14', 27017),  ('185.25.182.10', 27018),
+                         ('162.254.196.40', 27021), ('208.78.164.9', 27019),
+                         ('208.78.164.12', 27018),  ('162.254.196.40', 27019),
+                         ('162.254.197.41', 27020), ('208.78.164.14', 27018),
+                         ('162.254.195.46', 27019), ('162.254.197.40', 27018),
+                         ('155.133.242.8', 27020),  ('162.254.196.41', 27018),
+                         ('208.78.164.14', 27019),  ('208.78.164.12', 27017),
+                         ('162.254.196.40', 27020), ('162.254.196.42', 27021)
                          ])
+
+    def bootstrap_from_webapi(self, cellid=0):
+        """
+        Fetches CM server list from WebAPI and replaces the current one
+
+        :param cellid: cell id (0 = global)
+        :type cellid: :class:`int`
+        :return: booststrap success
+        :rtype: :class:`bool`
+        """
+        from steam import WebAPI
+
+        try:
+            api = WebAPI(None)
+            resp = api.ISteamDirectory.GetCMList_v1(cellid=cellid)
+        except Exception as exp:
+            self._log.error("WebAPI boostrap failed: %s" % str(exp))
+            return False
+
+        result = EResult(resp['response']['result'])
+
+        if result != EResult.OK:
+            self._log.error("GetCMList failed with %s" % repr(result))
+            return False
+
+        serverlist = resp['response']['serverlist']
+        self._log.debug("Recieved %d servers from WebAPI" % len(serverlist))
+
+        def str_to_tuple(serveraddr):
+            ip, port = serveraddr.split(':')
+            return str(ip), int(port)
+
+        self.list.clear()
+        self.merge_list(map(str_to_tuple, serverlist))
+
+        return True
+
 
     def __iter__(self):
         def genfunc():
