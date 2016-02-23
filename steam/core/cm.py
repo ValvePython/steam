@@ -28,13 +28,33 @@ logger = logging.getLogger("CMClient")
 
 
 class CMClient(EventEmitter):
-    TCP = 0
-    UDP = 1
-    verbose_debug = False
+    """
+    CMClient provides a secure message channel to Steam CM servers
+
+    Incoming messages are parsed and emitted as events using
+    their :class:`steam.enums.emsg.EMsg` as event identifier
+    """
+
+    TCP = 0                                 #: TCP protocol enum
+    UDP = 1                                 #: UDP protocol enum
+    verbose_debug = False                   #: print message connects in debug
+
+    servers = None                          #: a instance of :class:`steam.core.cm.CMServerList`
+    current_server_addr = None              #: (ip, port) tuple
+    connected = False                       #: :class:`True` if connected to CM
+    channel_secured = False                 #: :class:`True` once secure channel handshake is complete
+
+    key = None                              #: channel encryption key
+    hmac_secret = None                      #: HMAC secret
+
+    steam_id = SteamID()                    #: :class:`steam.steamid.SteamID` of the current user
+    session_id = None                       #: session id when logged in
+    webapi_authenticate_user_nonce = None   #: nonce for the getting a web session
+
+    _recv_loop = None
+    _heartbeat_loop = None
 
     def __init__(self, protocol=0):
-        self._init_attributes()
-
         self.servers = CMServerList()
 
         if protocol == CMClient.TCP:
@@ -55,6 +75,8 @@ class CMClient(EventEmitter):
         super(CMClient, self).emit(event, *args)
 
     def connect(self):
+        """Initiate connection to CM. Blocks until we connect."""
+
         logger.debug("Connect initiated.")
 
         for server_addr in self.servers:
@@ -73,6 +95,8 @@ class CMClient(EventEmitter):
             gevent.spawn(self.disconnect)
 
     def disconnect(self, reconnect=False):
+        """Close connection"""
+
         if not self.connected:
             return
         self.connected = False
@@ -83,7 +107,7 @@ class CMClient(EventEmitter):
             self._heartbeat_loop.kill()
         self._recv_loop.kill()
 
-        self._init_attributes()
+        self._reset_attributes()
 
         if reconnect:
             self.emit('reconnect')
@@ -91,21 +115,28 @@ class CMClient(EventEmitter):
         else:
             self.emit('disconnected')
 
-    def _init_attributes(self):
-        self.current_server_addr = None
-        self.connected = False
-        self.channel_secured = False
+    def _reset_attributes(self):
+        del self.current_server_addr
+        del self.connected
+        del self.channel_secured
 
-        self.key = None
-        self.hmac_secret = None
+        del self.key
+        del self.hmac_secret
 
-        self.steam_id = SteamID()
-        self.session_id = None
+        del self.steam_id
+        del self.session_id
+        del self.webapi_authenticate_user_nonce
 
-        self._recv_loop = None
-        self._heartbeat_loop = None
+        del self._recv_loop
+        del self._heartbeat_loop
 
     def send_message(self, message):
+        """
+        Sends a message
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        """
         if not isinstance(message, (Msg, MsgProto)):
             raise ValueError("Expected Msg or MsgProto, got %s" % message)
 
@@ -266,6 +297,8 @@ class CMClient(EventEmitter):
             self.steam_id = SteamID(msg.header.steamid)
             self.session_id = msg.header.client_sessionid
 
+            self.webapi_authenticate_user_nonce = msg.body.webapi_authenticate_user_nonce
+
             if self._heartbeat_loop:
                 self._heartbeat_loop.kill()
 
@@ -282,6 +315,24 @@ class CMClient(EventEmitter):
 
 
 class CMServerList(object):
+    """
+    Managing object for CM servers
+
+    Comes with built in list of CM server to bootstrap a connection
+
+    To get a server address from the list simply iterate over it
+
+    .. code:: python
+
+        servers = CMServerList()
+        for server_addr in servers:
+            pass
+
+    The good servers are returned first, then bad ones. After failing to connect
+    call :meth:`mark_bad` with the server addr. When connection succeeds break
+    out of the loop.
+    """
+
     Good = 1
     Bad = 2
 
@@ -328,19 +379,36 @@ class CMServerList(object):
         return genfunc()
 
     def reset_all(self):
+        """Reset status for all servers in the list"""
+
         self._log.debug("Marking all CMs as Good.")
 
         for key in self.list:
             self.mark_good(key)
 
     def mark_good(self, server_addr):
+        """Mark server address as good
+
+        :param server_addr: (ip, port) tuple
+        :type server_addr: :class:`tuple`
+        """
         self.list[server_addr].update({'quality': CMServerList.Good, 'timestamp': time()})
 
     def mark_bad(self, server_addr):
+        """Mark server address as bad, when unable to connect for example
+
+        :param server_addr: (ip, port) tuple
+        :type server_addr: :class:`tuple`
+        """
         self._log.debug("Marking %s as Bad." % repr(server_addr))
         self.list[server_addr].update({'quality': CMServerList.Bad, 'timestamp': time()})
 
     def merge_list(self, new_list):
+        """Add new CM servers to the list
+
+        :param new_list: a list of (ip, port) tuples
+        :type new_list: :class:`list`
+        """
         total = len(self.list)
 
         for ip, port in new_list:

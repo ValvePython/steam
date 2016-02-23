@@ -11,7 +11,6 @@ steam.core.cm
 
 .. automodule:: steam.core.cm
     :members:
-    :undoc-members:
     :show-inheritance:
 
 steam.core.connection

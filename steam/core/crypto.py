@@ -23,6 +23,12 @@ else:
 
 
 def generate_session_key(hmac_secret=b''):
+    """
+    :param hmac_secret: optional HMAC
+    :type hmac_secret: :class:`bytes`
+    :return: (session_key, encrypted_session_key) tuple
+    :rtype: :class:`tuple`
+    """
     session_key = Random.new().read(32)
     cipher = PKCS1_OAEP.new(RSA.importKey(b64decode(public_key)))
     encrypted_session_key = cipher.encrypt(session_key + hmac_secret)
@@ -53,6 +59,7 @@ def symmetric_decrypt(cyphertext, key):
     return symmetric_decrypt_with_iv(cyphertext, key, iv)
 
 def symmetric_decrypt_HMAC(cyphertext, key, hmac_secret):
+    """:raises: :class:`RuntimeError` when HMAC verification fails"""
     iv = symmetric_decrypt_iv(cyphertext, key)
     message = symmetric_decrypt_with_iv(cyphertext, key, iv)
 
