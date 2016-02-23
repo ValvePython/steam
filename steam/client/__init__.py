@@ -30,9 +30,9 @@ class SteamClient(EventEmitter, FeatureBase):
 
         # register listners
         self.cm.on(None, self._handle_cm_events)
+        self.cm.on("disconnected", self._handle_disconnect)
         self.on(EMsg.ClientLogOnResponse, self._handle_logon)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
-        self.on("disconnected", self._handle_disconnect)
 
         #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
         self.logged_on = False
