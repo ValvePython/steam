@@ -6,10 +6,10 @@ steam.util
     :undoc-members:
     :show-inheritance:
 
-steam.util.events
+steam.util.web
 -----------------
 
-.. automodule:: steam.util.events
+.. automodule:: steam.util.web
     :members:
     :undoc-members:
     :show-inheritance:

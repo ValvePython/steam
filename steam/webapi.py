@@ -21,14 +21,7 @@ All globals params (``key``, ``https``, ``format``, ``raw``) can be specified on
             "success"       "1"
     }
 """
-from __future__ import print_function
-import requests
-import gevent.monkey
-gevent.monkey.patch_socket()
-gevent.monkey.patch_ssl()
-
-session = requests.Session()
-session.mount('any', requests.adapters.HTTPAdapter())
+from steam.util.web import make_requests_session
 
 DEFAULT_PARAMS = {
     # api parameters
@@ -41,7 +34,7 @@ DEFAULT_PARAMS = {
 }
 
 
-def webapi_request(path, method='GET', caller=None, params={}):
+def webapi_request(path, method='GET', caller=None, params={}, session=None):
     """
     Low level function for calling Steam's WebAPI
 
@@ -52,6 +45,8 @@ def webapi_request(path, method='GET', caller=None, params={}):
     :param caller: caller reference, caller.last_response is set to the last response
     :param params: dict of WebAPI and endpoint specific params
     :type params: :class:`dict`
+    :param session: an instance requests session, or one is created per call
+    :type session: :class:`requests.Session`
     :return: response based on paramers
     :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
     """
@@ -108,26 +103,39 @@ class WebAPI(object):
         Interfaces and methods are populated automatically from WebAPI.
 
     :param key: api key from https://steamcommunity.com/dev/apikey
-    :type key: str
-    :param format: response format, either (``json``, ``vdf``, or ``xml``)
-    :type format: str
+    :type key: :class:`str`
+    :param format: response format, either (``json``, ``vdf``, or ``xml``) only when ``raw=False``
+    :type format: :class:`str`
     :param raw: return raw response
-    :type raw: bool
+    :type raw: class:`bool`
     :param https: use ``https``
-    :type https: bool
+    :type https: :class:`bool`
+    :param http_timeout: HTTP timeout in seconds
+    :type http_timeout: :class:`int`
     :param auto_load_interfaces: load interfaces from the WebAPI
-    :type auto_load_interfaces: bool
+    :type auto_load_interfaces: :class:`bool`
 
     These can be specified per method call for one off calls
     """
+    key = DEFAULT_PARAMS['key']
+    format = DEFAULT_PARAMS['format']
+    raw = DEFAULT_PARAMS['raw']
+    https = DEFAULT_PARAMS['https']
+    http_timeout = DEFAULT_PARAMS['http_timeout']
+    interfaces = []
 
-    def __init__(self, key, format='json', raw=False, https=True, http_timeout=30, auto_load_interfaces=True):
-        self.key = key
-        self.format = format
-        self.raw = raw
-        self.https = https
-        self.http_timeout = http_timeout
-        self.interfaces = []
+    def __init__(self, key, format = DEFAULT_PARAMS['format'],
+                            raw = DEFAULT_PARAMS['raw'],
+                            https = DEFAULT_PARAMS['https'],
+                            http_timeout = DEFAULT_PARAMS['http_timeout'],
+                            auto_load_interfaces = True):
+        self.key = key                              #: api key
+        self.format = format                        #: format (``json``, ``vdf``, or ``xml``)
+        self.raw = raw                              #: return raw reponse or parse
+        self.https = https                          #: use https or not
+        self.http_timeout = http_timeout            #: HTTP timeout in seconds
+        self.interfaces = []                        #: list of all interfaces
+        self.session = make_requests_session()      #: :class:`requests.Session` from :func:`steam.util.web.make_requests_session`
 
         if auto_load_interfaces:
             self.load_interfaces(self.fetch_interfaces())
@@ -143,7 +151,7 @@ class WebAPI(object):
         """
         Returns a dict with the response from ``GetSupportedAPIList``
 
-        :return: ``dict`` of all interfaces and methods
+        :return: :class:`dict` of all interfaces and methods
 
         The returned value can passed to :py:func:`WebAPI.load_interfaces`
         """
@@ -154,6 +162,7 @@ class WebAPI(object):
             params={'format': 'json',
                     'key': self.key,
                     },
+            session=self.session,
             )
 
     def load_interfaces(self, interfaces_dict):
@@ -183,10 +192,10 @@ class WebAPI(object):
         Make an API call for specific method
 
         :param method_path: format ``Interface.Method`` (e.g. ``ISteamWebAPIUtil.GetServerInfo``)
-        :type method_path: str
+        :type method_path: :class:`str`
         :param kwargs: keyword arguments for the specific method
         :return: response
-        :rtype: ``dict``, ``lxml.etree.ElementTree`` or ``str``
+        :rtype: :class:`dict`, :class:`lxml.etree.Element` or :class:`str`
         """
 
         interface, method = method_path.split('.', 1)
@@ -255,6 +264,10 @@ class WebAPIInterface(object):
     @property
     def raw(self):
         return self._parent.raw
+
+    @property
+    def session(self):
+        return self._parent.session
 
     def doc(self):
         print(self.__doc__)
@@ -345,6 +358,7 @@ class WebAPIMethod(object):
             method=self.method,
             caller=self,
             params=params,
+            session=self._parent.session,
             )
 
     @property
