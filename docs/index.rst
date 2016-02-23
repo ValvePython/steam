@@ -38,6 +38,10 @@ Contents
     :maxdepth: 3
 
     user_guide
+
+.. toctree::
+    :maxdepth: 5
+
     api/index
 
 Indices and tables
