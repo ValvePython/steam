@@ -11,6 +11,14 @@ User
     :undoc-members:
     :show-inheritance:
 
+Web
+---
+
+.. automodule:: steam.client.features.web
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Misc
 ----
 

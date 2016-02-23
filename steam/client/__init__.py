@@ -23,6 +23,7 @@ class SteamClient(EventEmitter, FeatureBase):
     current_jobid = 0
     credential_location = None  #: location for sentry
     username = None  #: username when logged on
+    _logger = logger
 
     def __init__(self):
         self.cm = CMClient()
