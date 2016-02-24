@@ -46,12 +46,14 @@ class Web(object):
             'steamLoginSecure': resp['authenticateuser']['tokensecure'],
         }
 
-
-
-
     def get_web_session(self):
         """
         See :meth:`get_web_session_cookies`
+
+        .. warning::
+            Exercise caution when using the session.
+            Auth cookies will be send with every request,
+            regardless of the domain or https/http.
 
         :return: authenticated session ready for use
         :rtype: :class:`requests.Session`, :class:`None`
