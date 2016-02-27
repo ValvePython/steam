@@ -1,12 +1,8 @@
 import requests
-import gevent.monkey
-gevent.monkey.patch_socket()
-gevent.monkey.patch_ssl()
-
 
 def make_requests_session():
     """
-    :returns: gevent cooperative requests session
+    :returns: requests session
     :rtype: :class:`requests.Session`
     """
     session = requests.Session()

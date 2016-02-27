@@ -1,6 +1,10 @@
 import os
 import logging
 import gevent
+import gevent.monkey
+gevent.monkey.patch_socket()
+gevent.monkey.patch_ssl()
+
 from Crypto.Hash import SHA
 from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
