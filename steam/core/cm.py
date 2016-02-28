@@ -80,10 +80,17 @@ class CMClient(EventEmitter):
         logger.debug("Connect initiated.")
 
         for server_addr in self.servers:
+            start = time()
+
             if self.connection.connect(server_addr):
                 break
 
+            diff = time() - start
+
             logger.debug("Failed to connect. Retrying...")
+
+            if diff < 5:
+                gevent.sleep(5 - diff)
 
         self.current_server_addr = server_addr
         self.connected = True
