@@ -116,19 +116,18 @@ class CMClient(EventEmitter):
             self.emit('disconnected')
 
     def _reset_attributes(self):
-        del self.current_server_addr
-        del self.connected
-        del self.channel_secured
-
-        del self.key
-        del self.hmac_secret
-
-        del self.steam_id
-        del self.session_id
-        del self.webapi_authenticate_user_nonce
-
-        del self._recv_loop
-        del self._heartbeat_loop
+        for name in ['current_server_addr',
+                     'connected',
+                     'channel_secured',
+                     'key',
+                     'hmac_secret',
+                     'steam_id',
+                     'session_id',
+                     'webapi_authenticate_user_nonce',
+                     '_recv_loop',
+                     '_heartbeat_loop',
+                     ]:
+            self.__dict__.pop(name, None)
 
     def send_message(self, message):
         """
