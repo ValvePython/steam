@@ -1,6 +1,8 @@
 """
 Various features that don't have a category
 """
+from steam.core.msg import MsgProto
+from steam.enums.emsg import EMsg
 
 class Misc(object):
     def __init__(self):
