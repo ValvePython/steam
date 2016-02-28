@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from codecs import open
 from os import path
 import sys
@@ -41,7 +41,7 @@ setup(
         'Operating System :: OS Independent',
     ],
     keywords='valve steam steamid api webapi',
-    packages=['steam'],
+    packages=['steam'] + ['steam.'+x for x in find_packages(where='steam')],
     install_requires=install_requires,
     zip_safe=True,
 )
