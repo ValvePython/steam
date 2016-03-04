@@ -2,7 +2,7 @@ import unittest
 import mock
 import vcr
 
-from steam.webapi import WebAPI, requests
+from steam.webapi import WebAPI
 from steam.enums import EType, EUniverse
 
 test_api_key = 'test_api_key'
