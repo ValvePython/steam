@@ -5,10 +5,7 @@ import zipfile
 from time import time
 from collections import defaultdict
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+from io import BytesIO
 
 import gevent
 from gevent import event, queue
@@ -266,7 +263,7 @@ class CMClient(EventEmitter):
         if msg.body.size_unzipped:
             logger.debug("Unzipping body")
 
-            data = zipfile.ZipFile(StringIO(msg.body.message_body)).read('z')
+            data = zipfile.ZipFile(BytesIO(msg.body.message_body)).read('z')
 
             if len(data) != msg.body.size_unzipped:
                 logger.fatal("Unzipped size mismatch")
@@ -415,7 +412,7 @@ class CMServerList(object):
     def __iter__(self):
         def genfunc():
             while True:
-                good_servers = filter(lambda x: x[1]['quality'] == CMServerList.Good, self.list.items())
+                good_servers = list(filter(lambda x: x[1]['quality'] == CMServerList.Good, self.list.items()))
 
                 if len(good_servers) == 0:
                     self.reset_all()

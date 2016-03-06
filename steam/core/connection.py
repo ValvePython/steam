@@ -11,7 +11,7 @@ logger = logging.getLogger("Connection")
 
 
 class Connection(object):
-    MAGIC = 'VT01'
+    MAGIC = b'VT01'
     FMT = '<I4s'
     FMT_SIZE = struct.calcsize(FMT)
 
@@ -22,7 +22,7 @@ class Connection(object):
 
         self._reader = None
         self._writer = None
-        self._readbuf = ''
+        self._readbuf = b''
         self.send_queue = queue.Queue()
         self.recv_queue = queue.Queue()
 
@@ -61,7 +61,7 @@ class Connection(object):
             self._writer.kill(block=False)
             self._writer = None
 
-        self._readbuf = ''
+        self._readbuf = b''
         self.send_queue.queue.clear()
         self.recv_queue.queue.clear()
         self.recv_queue.put(StopIteration)

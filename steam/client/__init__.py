@@ -239,7 +239,7 @@ class SteamClient(EventEmitter, FeatureBase):
 
         if filepath and os.path.isfile(filepath):
             try:
-                with open(filepath, 'r') as f:
+                with open(filepath, 'rb') as f:
                     return f.read()
             except IOError as e:
                 logger.error("get_sentry: %s" % str(e))
@@ -258,7 +258,7 @@ class SteamClient(EventEmitter, FeatureBase):
         filepath = self._get_sentry_path(username)
         if filepath:
             try:
-                with open(filepath, 'w') as f:
+                with open(filepath, 'wb') as f:
                     f.write(sentry_bytes)
                 return True
             except IOError as e:
