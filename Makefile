@@ -53,14 +53,14 @@ upload: dist register
 	twine upload -r pypi dist/*
 
 pb_fetch:
-	wget -nv --show-progress -N -P ./steam/protobufs/ -i protobuf_list.txt
+	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt
 
 pb_compile:
-	for filepath in `ls ./steam/protobufs/*.proto`; do \
-		protoc --python_out ./steam/protobufs/ --proto_path=/usr/include --proto_path=./steam/protobufs "$$filepath"; \
+	for filepath in `ls ./protobufs/*.proto`; do \
+		protoc --python_out ./steam/protobufs/ --proto_path=/usr/include --proto_path=./protobufs "$$filepath"; \
 	done;
 
 pb_clear:
-	rm -f ./stema/protobufs/*.proto
+	rm -f ./protobufs/*.proto
 
 pb_update: pb_fetch pb_compile
