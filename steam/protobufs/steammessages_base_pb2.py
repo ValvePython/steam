@@ -4,17 +4,24 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
 from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
+_sym_db = _symbol_database.Default()
 
-import google.protobuf.descriptor_pb2
+
+from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_base.proto',
   package='',
-  serialized_pb='\n\x18steammessages_base.proto\x1a google/protobuf/descriptor.proto\"\xf8\x03\n\x12\x43MsgProtoBufHeader\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10\x63lient_sessionid\x18\x02 \x01(\x05\x12\x15\n\rrouting_appid\x18\x03 \x01(\r\x12*\n\x0cjobid_source\x18\n \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12*\n\x0cjobid_target\x18\x0b \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x17\n\x0ftarget_job_name\x18\x0c \x01(\t\x12\x0f\n\x07seq_num\x18\x18 \x01(\x05\x12\x12\n\x07\x65result\x18\r \x01(\x05:\x01\x32\x12\x15\n\rerror_message\x18\x0e \x01(\t\x12\n\n\x02ip\x18\x0f \x01(\r\x12\x1a\n\x12\x61uth_account_flags\x18\x10 \x01(\r\x12\x14\n\x0ctoken_source\x18\x16 \x01(\r\x12\x1b\n\x13\x61\x64min_spoofing_user\x18\x17 \x01(\x08\x12\x1a\n\x0ftransport_error\x18\x11 \x01(\x05:\x01\x31\x12\'\n\tmessageid\x18\x12 \x01(\x04:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x1a\n\x12publisher_group_id\x18\x13 \x01(\r\x12\r\n\x05sysid\x18\x14 \x01(\r\x12\x11\n\ttrace_tag\x18\x15 \x01(\x04\x12\x15\n\rwebapi_key_id\x18\x19 \x01(\r\"8\n\tCMsgMulti\x12\x15\n\rsize_unzipped\x18\x01 \x01(\r\x12\x14\n\x0cmessage_body\x18\x02 \x01(\x0c\"+\n\x13\x43MsgProtobufWrapped\x12\x14\n\x0cmessage_body\x18\x01 \x01(\x0c\"\x8f\x01\n\x0e\x43MsgAuthTicket\x12\x0e\n\x06\x65state\x18\x01 \x01(\r\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x0e\n\x06gameid\x18\x04 \x01(\x06\x12\x14\n\x0ch_steam_pipe\x18\x05 \x01(\r\x12\x12\n\nticket_crc\x18\x06 \x01(\r\x12\x0e\n\x06ticket\x18\x07 \x01(\x0c\"\xf6\x01\n\x14\x43\x43\x44\x44\x42\x41ppDetailCommon\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x0c\n\x04logo\x18\x04 \x01(\t\x12\x12\n\nlogo_small\x18\x05 \x01(\t\x12\x0c\n\x04tool\x18\x06 \x01(\x08\x12\x0c\n\x04\x64\x65mo\x18\x07 \x01(\x08\x12\r\n\x05media\x18\x08 \x01(\x08\x12\x1f\n\x17\x63ommunity_visible_stats\x18\t \x01(\x08\x12\x15\n\rfriendly_name\x18\n \x01(\t\x12\x13\n\x0bpropagation\x18\x0b \x01(\t\x12\x19\n\x11has_adult_content\x18\x0c \x01(\x08\"\xef\x02\n\rCMsgAppRights\x12\x11\n\tedit_info\x18\x01 \x01(\x08\x12\x0f\n\x07publish\x18\x02 \x01(\x08\x12\x17\n\x0fview_error_data\x18\x03 \x01(\x08\x12\x10\n\x08\x64ownload\x18\x04 \x01(\x08\x12\x15\n\rupload_cdkeys\x18\x05 \x01(\x08\x12\x17\n\x0fgenerate_cdkeys\x18\x06 \x01(\x08\x12\x17\n\x0fview_financials\x18\x07 \x01(\x08\x12\x12\n\nmanage_ceg\x18\x08 \x01(\x08\x12\x16\n\x0emanage_signing\x18\t \x01(\x08\x12\x15\n\rmanage_cdkeys\x18\n \x01(\x08\x12\x16\n\x0e\x65\x64it_marketing\x18\x0b \x01(\x08\x12\x17\n\x0f\x65\x63onomy_support\x18\x0c \x01(\x08\x12\"\n\x1a\x65\x63onomy_support_supervisor\x18\r \x01(\x08\x12\x16\n\x0emanage_pricing\x18\x0e \x01(\x08\x12\x16\n\x0e\x62roadcast_live\x18\x0f \x01(\x08:A\n\x12msgpool_soft_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd0\x86\x03 \x01(\x05:\x02\x33\x32:B\n\x12msgpool_hard_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd1\x86\x03 \x01(\x05:\x03\x33\x38\x34\x42\x05H\x01\x90\x01\x00')
+  syntax='proto2',
+  serialized_pb=b'\n\x18steammessages_base.proto\x1a google/protobuf/descriptor.proto\"\xf8\x03\n\x12\x43MsgProtoBufHeader\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10\x63lient_sessionid\x18\x02 \x01(\x05\x12\x15\n\rrouting_appid\x18\x03 \x01(\r\x12*\n\x0cjobid_source\x18\n \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12*\n\x0cjobid_target\x18\x0b \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x17\n\x0ftarget_job_name\x18\x0c \x01(\t\x12\x0f\n\x07seq_num\x18\x18 \x01(\x05\x12\x12\n\x07\x65result\x18\r \x01(\x05:\x01\x32\x12\x15\n\rerror_message\x18\x0e \x01(\t\x12\n\n\x02ip\x18\x0f \x01(\r\x12\x1a\n\x12\x61uth_account_flags\x18\x10 \x01(\r\x12\x14\n\x0ctoken_source\x18\x16 \x01(\r\x12\x1b\n\x13\x61\x64min_spoofing_user\x18\x17 \x01(\x08\x12\x1a\n\x0ftransport_error\x18\x11 \x01(\x05:\x01\x31\x12\'\n\tmessageid\x18\x12 \x01(\x04:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x1a\n\x12publisher_group_id\x18\x13 \x01(\r\x12\r\n\x05sysid\x18\x14 \x01(\r\x12\x11\n\ttrace_tag\x18\x15 \x01(\x04\x12\x15\n\rwebapi_key_id\x18\x19 \x01(\r\"8\n\tCMsgMulti\x12\x15\n\rsize_unzipped\x18\x01 \x01(\r\x12\x14\n\x0cmessage_body\x18\x02 \x01(\x0c\"+\n\x13\x43MsgProtobufWrapped\x12\x14\n\x0cmessage_body\x18\x01 \x01(\x0c\"\x8f\x01\n\x0e\x43MsgAuthTicket\x12\x0e\n\x06\x65state\x18\x01 \x01(\r\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x0e\n\x06gameid\x18\x04 \x01(\x06\x12\x14\n\x0ch_steam_pipe\x18\x05 \x01(\r\x12\x12\n\nticket_crc\x18\x06 \x01(\r\x12\x0e\n\x06ticket\x18\x07 \x01(\x0c\"\xf6\x01\n\x14\x43\x43\x44\x44\x42\x41ppDetailCommon\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x0c\n\x04logo\x18\x04 \x01(\t\x12\x12\n\nlogo_small\x18\x05 \x01(\t\x12\x0c\n\x04tool\x18\x06 \x01(\x08\x12\x0c\n\x04\x64\x65mo\x18\x07 \x01(\x08\x12\r\n\x05media\x18\x08 \x01(\x08\x12\x1f\n\x17\x63ommunity_visible_stats\x18\t \x01(\x08\x12\x15\n\rfriendly_name\x18\n \x01(\t\x12\x13\n\x0bpropagation\x18\x0b \x01(\t\x12\x19\n\x11has_adult_content\x18\x0c \x01(\x08\"\xef\x02\n\rCMsgAppRights\x12\x11\n\tedit_info\x18\x01 \x01(\x08\x12\x0f\n\x07publish\x18\x02 \x01(\x08\x12\x17\n\x0fview_error_data\x18\x03 \x01(\x08\x12\x10\n\x08\x64ownload\x18\x04 \x01(\x08\x12\x15\n\rupload_cdkeys\x18\x05 \x01(\x08\x12\x17\n\x0fgenerate_cdkeys\x18\x06 \x01(\x08\x12\x17\n\x0fview_financials\x18\x07 \x01(\x08\x12\x12\n\nmanage_ceg\x18\x08 \x01(\x08\x12\x16\n\x0emanage_signing\x18\t \x01(\x08\x12\x15\n\rmanage_cdkeys\x18\n \x01(\x08\x12\x16\n\x0e\x65\x64it_marketing\x18\x0b \x01(\x08\x12\x17\n\x0f\x65\x63onomy_support\x18\x0c \x01(\x08\x12\"\n\x1a\x65\x63onomy_support_supervisor\x18\r \x01(\x08\x12\x16\n\x0emanage_pricing\x18\x0e \x01(\x08\x12\x16\n\x0e\x62roadcast_live\x18\x0f \x01(\x08:A\n\x12msgpool_soft_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd0\x86\x03 \x01(\x05:\x02\x33\x32:B\n\x12msgpool_hard_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd1\x86\x03 \x01(\x05:\x03\x33\x38\x34\x42\x05H\x01\x90\x01\x00'
+  ,
+  dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 MSGPOOL_SOFT_LIMIT_FIELD_NUMBER = 50000
@@ -80,7 +87,7 @@ _CMSGPROTOBUFHEADER = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='target_job_name', full_name='CMsgProtoBufHeader.target_job_name', index=5,
       number=12, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -101,7 +108,7 @@ _CMSGPROTOBUFHEADER = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='error_message', full_name='CMsgProtoBufHeader.error_message', index=8,
       number=14, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -183,7 +190,10 @@ _CMSGPROTOBUFHEADER = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=63,
   serialized_end=567,
 )
@@ -206,7 +216,7 @@ _CMSGMULTI = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='message_body', full_name='CMsgMulti.message_body', index=1,
       number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -218,7 +228,10 @@ _CMSGMULTI = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=569,
   serialized_end=625,
 )
@@ -234,7 +247,7 @@ _CMSGPROTOBUFWRAPPED = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='message_body', full_name='CMsgProtobufWrapped.message_body', index=0,
       number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -246,7 +259,10 @@ _CMSGPROTOBUFWRAPPED = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=627,
   serialized_end=670,
 )
@@ -304,7 +320,7 @@ _CMSGAUTHTICKET = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='ticket', full_name='CMsgAuthTicket.ticket', index=6,
       number=7, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -316,7 +332,10 @@ _CMSGAUTHTICKET = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=673,
   serialized_end=816,
 )
@@ -339,28 +358,28 @@ _CCDDBAPPDETAILCOMMON = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='name', full_name='CCDDBAppDetailCommon.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='icon', full_name='CCDDBAppDetailCommon.icon', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='logo', full_name='CCDDBAppDetailCommon.logo', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='logo_small', full_name='CCDDBAppDetailCommon.logo_small', index=4,
       number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -395,14 +414,14 @@ _CCDDBAPPDETAILCOMMON = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='friendly_name', full_name='CCDDBAppDetailCommon.friendly_name', index=9,
       number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='propagation', full_name='CCDDBAppDetailCommon.propagation', index=10,
       number=11, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -421,7 +440,10 @@ _CCDDBAPPDETAILCOMMON = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=819,
   serialized_end=1065,
 )
@@ -547,7 +569,10 @@ _CMSGAPPRIGHTS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1068,
   serialized_end=1435,
 )
@@ -558,46 +583,54 @@ DESCRIPTOR.message_types_by_name['CMsgProtobufWrapped'] = _CMSGPROTOBUFWRAPPED
 DESCRIPTOR.message_types_by_name['CMsgAuthTicket'] = _CMSGAUTHTICKET
 DESCRIPTOR.message_types_by_name['CCDDBAppDetailCommon'] = _CCDDBAPPDETAILCOMMON
 DESCRIPTOR.message_types_by_name['CMsgAppRights'] = _CMSGAPPRIGHTS
+DESCRIPTOR.extensions_by_name['msgpool_soft_limit'] = msgpool_soft_limit
+DESCRIPTOR.extensions_by_name['msgpool_hard_limit'] = msgpool_hard_limit
 
-class CMsgProtoBufHeader(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CMSGPROTOBUFHEADER
-
+CMsgProtoBufHeader = _reflection.GeneratedProtocolMessageType('CMsgProtoBufHeader', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGPROTOBUFHEADER,
+  __module__ = 'steammessages_base_pb2'
   # @@protoc_insertion_point(class_scope:CMsgProtoBufHeader)
+  ))
+_sym_db.RegisterMessage(CMsgProtoBufHeader)
 
-class CMsgMulti(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CMSGMULTI
-
+CMsgMulti = _reflection.GeneratedProtocolMessageType('CMsgMulti', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGMULTI,
+  __module__ = 'steammessages_base_pb2'
   # @@protoc_insertion_point(class_scope:CMsgMulti)
+  ))
+_sym_db.RegisterMessage(CMsgMulti)
 
-class CMsgProtobufWrapped(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CMSGPROTOBUFWRAPPED
-
+CMsgProtobufWrapped = _reflection.GeneratedProtocolMessageType('CMsgProtobufWrapped', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGPROTOBUFWRAPPED,
+  __module__ = 'steammessages_base_pb2'
   # @@protoc_insertion_point(class_scope:CMsgProtobufWrapped)
+  ))
+_sym_db.RegisterMessage(CMsgProtobufWrapped)
 
-class CMsgAuthTicket(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CMSGAUTHTICKET
-
+CMsgAuthTicket = _reflection.GeneratedProtocolMessageType('CMsgAuthTicket', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGAUTHTICKET,
+  __module__ = 'steammessages_base_pb2'
   # @@protoc_insertion_point(class_scope:CMsgAuthTicket)
+  ))
+_sym_db.RegisterMessage(CMsgAuthTicket)
 
-class CCDDBAppDetailCommon(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCDDBAPPDETAILCOMMON
-
+CCDDBAppDetailCommon = _reflection.GeneratedProtocolMessageType('CCDDBAppDetailCommon', (_message.Message,), dict(
+  DESCRIPTOR = _CCDDBAPPDETAILCOMMON,
+  __module__ = 'steammessages_base_pb2'
   # @@protoc_insertion_point(class_scope:CCDDBAppDetailCommon)
+  ))
+_sym_db.RegisterMessage(CCDDBAppDetailCommon)
 
-class CMsgAppRights(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CMSGAPPRIGHTS
-
+CMsgAppRights = _reflection.GeneratedProtocolMessageType('CMsgAppRights', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGAPPRIGHTS,
+  __module__ = 'steammessages_base_pb2'
   # @@protoc_insertion_point(class_scope:CMsgAppRights)
+  ))
+_sym_db.RegisterMessage(CMsgAppRights)
 
-google.protobuf.descriptor_pb2.MessageOptions.RegisterExtension(msgpool_soft_limit)
-google.protobuf.descriptor_pb2.MessageOptions.RegisterExtension(msgpool_hard_limit)
+google_dot_protobuf_dot_descriptor__pb2.MessageOptions.RegisterExtension(msgpool_soft_limit)
+google_dot_protobuf_dot_descriptor__pb2.MessageOptions.RegisterExtension(msgpool_hard_limit)
 
 DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), 'H\001\220\001\000')
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), b'H\001\220\001\000')
 # @@protoc_insertion_point(module_scope)

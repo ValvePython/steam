@@ -4,19 +4,26 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
 from google.protobuf import service as _service
 from google.protobuf import service_reflection
 from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
+_sym_db = _symbol_database.Default()
 
-import steammessages_unified_base_pb2
+
+import steam.protobufs.steammessages_unified_base_pb2 as steammessages__unified__base__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_partnerapps.proto',
   package='',
-  serialized_pb='\n\x1fsteammessages_partnerapps.proto\x1a steammessages_unified_base.proto\"J\n\'CPartnerApps_RequestUploadToken_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\"f\n(CPartnerApps_RequestUploadToken_Response\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x10\n\x08location\x18\x02 \x01(\t\x12\x12\n\nrouting_id\x18\x03 \x01(\x04\"]\n!CPartnerApps_FinishUpload_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\"H\n(CPartnerApps_FinishUploadKVSign_Response\x12\x1c\n\x14signed_installscript\x18\x01 \x01(\t\"\x88\x01\n*CPartnerApps_FinishUploadLegacyDRM_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\x12\r\n\x05\x66lags\x18\x04 \x01(\r\x12\x11\n\ttool_name\x18\x05 \x01(\t\">\n+CPartnerApps_FinishUploadLegacyDRM_Response\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\"$\n\"CPartnerApps_FinishUpload_Response\"5\n#CPartnerApps_FindDRMUploads_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\x05\"\xb4\x01\n\x1e\x43PartnerApps_ExistingDRMUpload\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x10\n\x08\x61\x63tor_id\x18\x03 \x01(\x05\x12\x15\n\rsupplied_name\x18\x05 \x01(\t\x12\r\n\x05\x66lags\x18\x06 \x01(\r\x12\x10\n\x08mod_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x07\x12\x14\n\x0corig_file_id\x18\t \x01(\t\"X\n$CPartnerApps_FindDRMUploads_Response\x12\x30\n\x07uploads\x18\x01 \x03(\x0b\x32\x1f.CPartnerApps_ExistingDRMUpload\"@\n\x1d\x43PartnerApps_Download_Request\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\"F\n\x1e\x43PartnerApps_Download_Response\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\x32\xac\n\n\x0bPartnerApps\x12\xb1\x01\n\x18RequestKVSignUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for installscript file upload / signing\x12\xae\x01\n\x15RequestDRMUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for executable file upload / processing\x12\xb5\x01\n\x15RequestCEGUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"G\x82\xb5\x18\x43Request upload token for custom executable file upload / processing\x12\xab\x01\n\x12\x46inishUploadKVSign\x12\".CPartnerApps_FinishUpload_Request\x1a).CPartnerApps_FinishUploadKVSign_Response\"F\x82\xb5\x18\x42\x43ommit method to sign an installscript after an upload is complete\x12\xa4\x01\n\x15\x46inishUploadDRMUpload\x12+.CPartnerApps_FinishUploadLegacyDRM_Request\x1a,.CPartnerApps_FinishUploadLegacyDRM_Response\"0\x82\xb5\x18,Commit method for executable file processing\x12\x99\x01\n\x15\x46inishUploadCEGUpload\x12\".CPartnerApps_FinishUpload_Request\x1a#.CPartnerApps_FinishUpload_Response\"7\x82\xb5\x18\x33\x43ommit method for custom executable file processing\x12\x8d\x01\n\x0e\x46indDRMUploads\x12$.CPartnerApps_FindDRMUploads_Request\x1a%.CPartnerApps_FindDRMUploads_Response\".\x82\xb5\x18*Finds N most recent prior uploads by appid\x12K\n\x08\x44ownload\x12\x1e.CPartnerApps_Download_Request\x1a\x1f.CPartnerApps_Download_Response\x1a\x32\x82\xb5\x18.Service methods for app management by partnersB\x03\x90\x01\x01')
+  syntax='proto2',
+  serialized_pb=b'\n\x1fsteammessages_partnerapps.proto\x1a steammessages_unified_base.proto\"J\n\'CPartnerApps_RequestUploadToken_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\"f\n(CPartnerApps_RequestUploadToken_Response\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x10\n\x08location\x18\x02 \x01(\t\x12\x12\n\nrouting_id\x18\x03 \x01(\x04\"]\n!CPartnerApps_FinishUpload_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\"H\n(CPartnerApps_FinishUploadKVSign_Response\x12\x1c\n\x14signed_installscript\x18\x01 \x01(\t\"\x88\x01\n*CPartnerApps_FinishUploadLegacyDRM_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\x12\r\n\x05\x66lags\x18\x04 \x01(\r\x12\x11\n\ttool_name\x18\x05 \x01(\t\">\n+CPartnerApps_FinishUploadLegacyDRM_Response\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\"$\n\"CPartnerApps_FinishUpload_Response\"5\n#CPartnerApps_FindDRMUploads_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\x05\"\xb4\x01\n\x1e\x43PartnerApps_ExistingDRMUpload\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x10\n\x08\x61\x63tor_id\x18\x03 \x01(\x05\x12\x15\n\rsupplied_name\x18\x05 \x01(\t\x12\r\n\x05\x66lags\x18\x06 \x01(\r\x12\x10\n\x08mod_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x07\x12\x14\n\x0corig_file_id\x18\t \x01(\t\"X\n$CPartnerApps_FindDRMUploads_Response\x12\x30\n\x07uploads\x18\x01 \x03(\x0b\x32\x1f.CPartnerApps_ExistingDRMUpload\"@\n\x1d\x43PartnerApps_Download_Request\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\"F\n\x1e\x43PartnerApps_Download_Response\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\x32\xac\n\n\x0bPartnerApps\x12\xb1\x01\n\x18RequestKVSignUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for installscript file upload / signing\x12\xae\x01\n\x15RequestDRMUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for executable file upload / processing\x12\xb5\x01\n\x15RequestCEGUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"G\x82\xb5\x18\x43Request upload token for custom executable file upload / processing\x12\xab\x01\n\x12\x46inishUploadKVSign\x12\".CPartnerApps_FinishUpload_Request\x1a).CPartnerApps_FinishUploadKVSign_Response\"F\x82\xb5\x18\x42\x43ommit method to sign an installscript after an upload is complete\x12\xa4\x01\n\x15\x46inishUploadDRMUpload\x12+.CPartnerApps_FinishUploadLegacyDRM_Request\x1a,.CPartnerApps_FinishUploadLegacyDRM_Response\"0\x82\xb5\x18,Commit method for executable file processing\x12\x99\x01\n\x15\x46inishUploadCEGUpload\x12\".CPartnerApps_FinishUpload_Request\x1a#.CPartnerApps_FinishUpload_Response\"7\x82\xb5\x18\x33\x43ommit method for custom executable file processing\x12\x8d\x01\n\x0e\x46indDRMUploads\x12$.CPartnerApps_FindDRMUploads_Request\x1a%.CPartnerApps_FindDRMUploads_Response\".\x82\xb5\x18*Finds N most recent prior uploads by appid\x12K\n\x08\x44ownload\x12\x1e.CPartnerApps_Download_Request\x1a\x1f.CPartnerApps_Download_Response\x1a\x32\x82\xb5\x18.Service methods for app management by partnersB\x03\x90\x01\x01'
+  ,
+  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -31,7 +38,7 @@ _CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='filename', full_name='CPartnerApps_RequestUploadToken_Request.filename', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -50,7 +57,10 @@ _CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=69,
   serialized_end=143,
 )
@@ -73,7 +83,7 @@ _CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='location', full_name='CPartnerApps_RequestUploadToken_Response.location', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -92,7 +102,10 @@ _CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=145,
   serialized_end=247,
 )
@@ -134,7 +147,10 @@ _CPARTNERAPPS_FINISHUPLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=249,
   serialized_end=342,
 )
@@ -150,7 +166,7 @@ _CPARTNERAPPS_FINISHUPLOADKVSIGN_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='signed_installscript', full_name='CPartnerApps_FinishUploadKVSign_Response.signed_installscript', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -162,7 +178,10 @@ _CPARTNERAPPS_FINISHUPLOADKVSIGN_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=344,
   serialized_end=416,
 )
@@ -206,7 +225,7 @@ _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='tool_name', full_name='CPartnerApps_FinishUploadLegacyDRM_Request.tool_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -218,7 +237,10 @@ _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=419,
   serialized_end=555,
 )
@@ -234,7 +256,7 @@ _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='file_id', full_name='CPartnerApps_FinishUploadLegacyDRM_Response.file_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -246,7 +268,10 @@ _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=557,
   serialized_end=619,
 )
@@ -267,7 +292,10 @@ _CPARTNERAPPS_FINISHUPLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=621,
   serialized_end=657,
 )
@@ -295,7 +323,10 @@ _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=659,
   serialized_end=712,
 )
@@ -311,7 +342,7 @@ _CPARTNERAPPS_EXISTINGDRMUPLOAD = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='file_id', full_name='CPartnerApps_ExistingDRMUpload.file_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -332,7 +363,7 @@ _CPARTNERAPPS_EXISTINGDRMUPLOAD = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='supplied_name', full_name='CPartnerApps_ExistingDRMUpload.supplied_name', index=3,
       number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -346,7 +377,7 @@ _CPARTNERAPPS_EXISTINGDRMUPLOAD = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='mod_type', full_name='CPartnerApps_ExistingDRMUpload.mod_type', index=5,
       number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -360,7 +391,7 @@ _CPARTNERAPPS_EXISTINGDRMUPLOAD = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='orig_file_id', full_name='CPartnerApps_ExistingDRMUpload.orig_file_id', index=7,
       number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -372,7 +403,10 @@ _CPARTNERAPPS_EXISTINGDRMUPLOAD = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=715,
   serialized_end=895,
 )
@@ -400,7 +434,10 @@ _CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=897,
   serialized_end=985,
 )
@@ -416,7 +453,7 @@ _CPARTNERAPPS_DOWNLOAD_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='file_id', full_name='CPartnerApps_Download_Request.file_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -435,7 +472,10 @@ _CPARTNERAPPS_DOWNLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=987,
   serialized_end=1051,
 )
@@ -451,7 +491,7 @@ _CPARTNERAPPS_DOWNLOAD_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='download_url', full_name='CPartnerApps_Download_Response.download_url', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -470,7 +510,10 @@ _CPARTNERAPPS_DOWNLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1053,
   serialized_end=1123,
 )
@@ -489,88 +532,100 @@ DESCRIPTOR.message_types_by_name['CPartnerApps_FindDRMUploads_Response'] = _CPAR
 DESCRIPTOR.message_types_by_name['CPartnerApps_Download_Request'] = _CPARTNERAPPS_DOWNLOAD_REQUEST
 DESCRIPTOR.message_types_by_name['CPartnerApps_Download_Response'] = _CPARTNERAPPS_DOWNLOAD_RESPONSE
 
-class CPartnerApps_RequestUploadToken_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST
-
+CPartnerApps_RequestUploadToken_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_RequestUploadToken_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_RequestUploadToken_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_RequestUploadToken_Request)
 
-class CPartnerApps_RequestUploadToken_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE
-
+CPartnerApps_RequestUploadToken_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_RequestUploadToken_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_RequestUploadToken_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_RequestUploadToken_Response)
 
-class CPartnerApps_FinishUpload_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOAD_REQUEST
-
+CPartnerApps_FinishUpload_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOAD_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUpload_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUpload_Request)
 
-class CPartnerApps_FinishUploadKVSign_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADKVSIGN_RESPONSE
-
+CPartnerApps_FinishUploadKVSign_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUploadKVSign_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADKVSIGN_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUploadKVSign_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUploadKVSign_Response)
 
-class CPartnerApps_FinishUploadLegacyDRM_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST
-
+CPartnerApps_FinishUploadLegacyDRM_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUploadLegacyDRM_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUploadLegacyDRM_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUploadLegacyDRM_Request)
 
-class CPartnerApps_FinishUploadLegacyDRM_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE
-
+CPartnerApps_FinishUploadLegacyDRM_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUploadLegacyDRM_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUploadLegacyDRM_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUploadLegacyDRM_Response)
 
-class CPartnerApps_FinishUpload_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOAD_RESPONSE
-
+CPartnerApps_FinishUpload_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUpload_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOAD_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUpload_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUpload_Response)
 
-class CPartnerApps_FindDRMUploads_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST
-
+CPartnerApps_FindDRMUploads_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_FindDRMUploads_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FindDRMUploads_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FindDRMUploads_Request)
 
-class CPartnerApps_ExistingDRMUpload(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_EXISTINGDRMUPLOAD
-
+CPartnerApps_ExistingDRMUpload = _reflection.GeneratedProtocolMessageType('CPartnerApps_ExistingDRMUpload', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_EXISTINGDRMUPLOAD,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_ExistingDRMUpload)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_ExistingDRMUpload)
 
-class CPartnerApps_FindDRMUploads_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE
-
+CPartnerApps_FindDRMUploads_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_FindDRMUploads_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_FindDRMUploads_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FindDRMUploads_Response)
 
-class CPartnerApps_Download_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_DOWNLOAD_REQUEST
-
+CPartnerApps_Download_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_Download_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_DOWNLOAD_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_Download_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_Download_Request)
 
-class CPartnerApps_Download_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARTNERAPPS_DOWNLOAD_RESPONSE
-
+CPartnerApps_Download_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_Download_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_DOWNLOAD_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
   # @@protoc_insertion_point(class_scope:CPartnerApps_Download_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_Download_Response)
 
 
 DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), '\220\001\001')
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), b'\220\001\001')
 
 _PARTNERAPPS = _descriptor.ServiceDescriptor(
   name='PartnerApps',
   full_name='PartnerApps',
   file=DESCRIPTOR,
   index=0,
-  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), '\202\265\030.Service methods for app management by partners'),
+  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), b'\202\265\030.Service methods for app management by partners'),
   serialized_start=1126,
   serialized_end=2450,
   methods=[
@@ -581,7 +636,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST,
     output_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030<Request upload token for installscript file upload / signing'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030<Request upload token for installscript file upload / signing'),
   ),
   _descriptor.MethodDescriptor(
     name='RequestDRMUploadToken',
@@ -590,7 +645,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST,
     output_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030<Request upload token for executable file upload / processing'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030<Request upload token for executable file upload / processing'),
   ),
   _descriptor.MethodDescriptor(
     name='RequestCEGUploadToken',
@@ -599,7 +654,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST,
     output_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030CRequest upload token for custom executable file upload / processing'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030CRequest upload token for custom executable file upload / processing'),
   ),
   _descriptor.MethodDescriptor(
     name='FinishUploadKVSign',
@@ -608,7 +663,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_FINISHUPLOAD_REQUEST,
     output_type=_CPARTNERAPPS_FINISHUPLOADKVSIGN_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030BCommit method to sign an installscript after an upload is complete'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030BCommit method to sign an installscript after an upload is complete'),
   ),
   _descriptor.MethodDescriptor(
     name='FinishUploadDRMUpload',
@@ -617,7 +672,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST,
     output_type=_CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030,Commit method for executable file processing'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030,Commit method for executable file processing'),
   ),
   _descriptor.MethodDescriptor(
     name='FinishUploadCEGUpload',
@@ -626,7 +681,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_FINISHUPLOAD_REQUEST,
     output_type=_CPARTNERAPPS_FINISHUPLOAD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\0303Commit method for custom executable file processing'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\0303Commit method for custom executable file processing'),
   ),
   _descriptor.MethodDescriptor(
     name='FindDRMUploads',
@@ -635,7 +690,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARTNERAPPS_FINDDRMUPLOADS_REQUEST,
     output_type=_CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030*Finds N most recent prior uploads by appid'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030*Finds N most recent prior uploads by appid'),
   ),
   _descriptor.MethodDescriptor(
     name='Download',
@@ -648,11 +703,15 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
   ),
 ])
 
-class PartnerApps(_service.Service):
-  __metaclass__ = service_reflection.GeneratedServiceType
-  DESCRIPTOR = _PARTNERAPPS
-class PartnerApps_Stub(PartnerApps):
-  __metaclass__ = service_reflection.GeneratedServiceStubType
-  DESCRIPTOR = _PARTNERAPPS
+PartnerApps = service_reflection.GeneratedServiceType('PartnerApps', (_service.Service,), dict(
+  DESCRIPTOR = _PARTNERAPPS,
+  __module__ = 'steammessages_partnerapps_pb2'
+  ))
+
+PartnerApps_Stub = service_reflection.GeneratedServiceStubType('PartnerApps_Stub', (PartnerApps,), dict(
+  DESCRIPTOR = _PARTNERAPPS,
+  __module__ = 'steammessages_partnerapps_pb2'
+  ))
+
 
 # @@protoc_insertion_point(module_scope)

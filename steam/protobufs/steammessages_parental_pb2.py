@@ -4,19 +4,26 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
 from google.protobuf import service as _service
 from google.protobuf import service_reflection
 from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
+_sym_db = _symbol_database.Default()
 
-import steammessages_unified_base_pb2
+
+import steam.protobufs.steammessages_unified_base_pb2 as steammessages__unified__base__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_parental.proto',
   package='',
-  serialized_pb='\n\x1csteammessages_parental.proto\x1a steammessages_unified_base.proto\"0\n\x0bParentalApp\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\nis_allowed\x18\x02 \x01(\x08\"\xac\x02\n\x10ParentalSettings\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x61pplist_base_id\x18\x02 \x01(\r\x12 \n\x18\x61pplist_base_description\x18\x03 \x01(\t\x12\"\n\x0c\x61pplist_base\x18\x04 \x03(\x0b\x32\x0c.ParentalApp\x12$\n\x0e\x61pplist_custom\x18\x05 \x03(\x0b\x32\x0c.ParentalApp\x12\x18\n\x10passwordhashtype\x18\x06 \x01(\r\x12\x0c\n\x04salt\x18\x07 \x01(\x0c\x12\x14\n\x0cpasswordhash\x18\x08 \x01(\x0c\x12\x12\n\nis_enabled\x18\t \x01(\x08\x12\x18\n\x10\x65nabled_features\x18\n \x01(\r\x12\x16\n\x0erecovery_email\x18\x0b \x01(\t\"\x99\x01\n(CParental_EnableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x11\n\tsessionid\x18\x03 \x01(\t\x12\x12\n\nenablecode\x18\x04 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\"+\n)CParental_EnableParentalSettings_Response\"N\n)CParental_DisableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableParentalSettings_Response\"8\n%CParental_GetParentalSettings_Request\x12\x0f\n\x07steamid\x18\n \x01(\x06\"M\n&CParental_GetParentalSettings_Response\x12#\n\x08settings\x18\x01 \x01(\x0b\x32\x11.ParentalSettings\"?\n+CParental_GetSignedParentalSettings_Request\x12\x10\n\x08priority\x18\x01 \x01(\r\"^\n,CParental_GetSignedParentalSettings_Response\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\"\x98\x01\n%CParental_SetParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x14\n\x0cnew_password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\"(\n&CParental_SetParentalSettings_Response\"7\n\x1f\x43Parental_ValidateToken_Request\x12\x14\n\x0cunlock_token\x18\x01 \x01(\t\"\"\n CParental_ValidateToken_Response\"g\n\"CParental_ValidatePassword_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07session\x18\x02 \x01(\t\x12\x1e\n\x16send_unlock_on_success\x18\x03 \x01(\x08\"4\n#CParental_ValidatePassword_Response\x12\r\n\x05token\x18\x01 \x01(\t\"/\n\x1c\x43Parental_LockClient_Request\x12\x0f\n\x07session\x18\x01 \x01(\t\"\x1f\n\x1d\x43Parental_LockClient_Response\"\'\n%CParental_RequestRecoveryCode_Request\"(\n&CParental_RequestRecoveryCode_Response\"S\n)CParental_DisableWithRecoveryCode_Request\x12\x15\n\rrecovery_code\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableWithRecoveryCode_Response\"\x84\x01\n-CParental_ParentalSettingsChange_Notification\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\x12\x10\n\x08password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\"L\n%CParental_ParentalUnlock_Notification\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x11\n\tsessionid\x18\x02 \x01(\t\"8\n#CParental_ParentalLock_Notification\x12\x11\n\tsessionid\x18\x01 \x01(\t2\xd2\x0e\n\x08Parental\x12\xd0\x01\n\x16\x45nableParentalSettings\x12).CParental_EnableParentalSettings_Request\x1a*.CParental_EnableParentalSettings_Response\"_\x82\xb5\x18[Enable parental settings for the logged in account, optionally setting the current settings\x12\xab\x01\n\x17\x44isableParentalSettings\x12*.CParental_DisableParentalSettings_Request\x1a+.CParental_DisableParentalSettings_Response\"7\x82\xb5\x18\x33\x44isable parental settings for the logged in account\x12\xa7\x01\n\x13GetParentalSettings\x12&.CParental_GetParentalSettings_Request\x1a\'.CParental_GetParentalSettings_Response\"?\x82\xb5\x18;Get the current parental settings for the logged in account\x12\xe8\x01\n\x19GetSignedParentalSettings\x12,.CParental_GetSignedParentalSettings_Request\x1a-.CParental_GetSignedParentalSettings_Response\"n\x82\xb5\x18jGet the current parental settings for the logged in account in a form that can by verified by the receiver\x12\xa7\x01\n\x13SetParentalSettings\x12&.CParental_SetParentalSettings_Request\x1a\'.CParental_SetParentalSettings_Response\"?\x82\xb5\x18;Set the current parental settings for the logged in account\x12\xa7\x01\n\rValidateToken\x12 .CParental_ValidateToken_Request\x1a!.CParental_ValidateToken_Response\"Q\x82\xb5\x18MCheck if the given parental unlock token is correct for the logged in account\x12\xb7\x01\n\x10ValidatePassword\x12#.CParental_ValidatePassword_Request\x1a$.CParental_ValidatePassword_Response\"X\x82\xb5\x18TValidate the plaintext password for the logged in account and return an unlock token\x12\x8f\x01\n\nLockClient\x12\x1d.CParental_LockClient_Request\x1a\x1e.CParental_LockClient_Response\"B\x82\xb5\x18>Notify connected clients that a lock has occurred in a browser\x12\xc3\x01\n\x13RequestRecoveryCode\x12&.CParental_RequestRecoveryCode_Request\x1a\'.CParental_RequestRecoveryCode_Response\"[\x82\xb5\x18WRequest a recovery code be sent to the recovery email address for the specified account\x12\xaa\x01\n\x17\x44isableWithRecoveryCode\x12*.CParental_DisableWithRecoveryCode_Request\x1a+.CParental_DisableWithRecoveryCode_Response\"6\x82\xb5\x18\x32\x41ttempt a recovery unlock on the specified account\x1a\x1d\x82\xb5\x18\x19Parental settings service2\x86\x04\n\x0eParentalClient\x12\x9c\x01\n\x14NotifySettingsChange\x12..CParental_ParentalSettingsChange_Notification\x1a\x0b.NoResponse\"G\x82\xb5\x18\x43Notification from server to client of a change in parental settings\x12\x94\x01\n\x0cNotifyUnlock\x12&.CParental_ParentalUnlock_Notification\x1a\x0b.NoResponse\"O\x82\xb5\x18KNotification from server to client that an unlock has occurred in a browser\x12\x8d\x01\n\nNotifyLock\x12$.CParental_ParentalLock_Notification\x1a\x0b.NoResponse\"L\x82\xb5\x18HNotification from server to client that a lock has occurred in a browser\x1a.\x82\xb5\x18&Parental settings client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  syntax='proto2',
+  serialized_pb=b'\n\x1csteammessages_parental.proto\x1a steammessages_unified_base.proto\"0\n\x0bParentalApp\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\nis_allowed\x18\x02 \x01(\x08\"\xac\x02\n\x10ParentalSettings\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x61pplist_base_id\x18\x02 \x01(\r\x12 \n\x18\x61pplist_base_description\x18\x03 \x01(\t\x12\"\n\x0c\x61pplist_base\x18\x04 \x03(\x0b\x32\x0c.ParentalApp\x12$\n\x0e\x61pplist_custom\x18\x05 \x03(\x0b\x32\x0c.ParentalApp\x12\x18\n\x10passwordhashtype\x18\x06 \x01(\r\x12\x0c\n\x04salt\x18\x07 \x01(\x0c\x12\x14\n\x0cpasswordhash\x18\x08 \x01(\x0c\x12\x12\n\nis_enabled\x18\t \x01(\x08\x12\x18\n\x10\x65nabled_features\x18\n \x01(\r\x12\x16\n\x0erecovery_email\x18\x0b \x01(\t\"\x99\x01\n(CParental_EnableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x11\n\tsessionid\x18\x03 \x01(\t\x12\x12\n\nenablecode\x18\x04 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\"+\n)CParental_EnableParentalSettings_Response\"N\n)CParental_DisableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableParentalSettings_Response\"8\n%CParental_GetParentalSettings_Request\x12\x0f\n\x07steamid\x18\n \x01(\x06\"M\n&CParental_GetParentalSettings_Response\x12#\n\x08settings\x18\x01 \x01(\x0b\x32\x11.ParentalSettings\"?\n+CParental_GetSignedParentalSettings_Request\x12\x10\n\x08priority\x18\x01 \x01(\r\"^\n,CParental_GetSignedParentalSettings_Response\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\"\x98\x01\n%CParental_SetParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x14\n\x0cnew_password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\"(\n&CParental_SetParentalSettings_Response\"7\n\x1f\x43Parental_ValidateToken_Request\x12\x14\n\x0cunlock_token\x18\x01 \x01(\t\"\"\n CParental_ValidateToken_Response\"g\n\"CParental_ValidatePassword_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07session\x18\x02 \x01(\t\x12\x1e\n\x16send_unlock_on_success\x18\x03 \x01(\x08\"4\n#CParental_ValidatePassword_Response\x12\r\n\x05token\x18\x01 \x01(\t\"/\n\x1c\x43Parental_LockClient_Request\x12\x0f\n\x07session\x18\x01 \x01(\t\"\x1f\n\x1d\x43Parental_LockClient_Response\"\'\n%CParental_RequestRecoveryCode_Request\"(\n&CParental_RequestRecoveryCode_Response\"S\n)CParental_DisableWithRecoveryCode_Request\x12\x15\n\rrecovery_code\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableWithRecoveryCode_Response\"\x84\x01\n-CParental_ParentalSettingsChange_Notification\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\x12\x10\n\x08password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\"L\n%CParental_ParentalUnlock_Notification\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x11\n\tsessionid\x18\x02 \x01(\t\"8\n#CParental_ParentalLock_Notification\x12\x11\n\tsessionid\x18\x01 \x01(\t2\xd2\x0e\n\x08Parental\x12\xd0\x01\n\x16\x45nableParentalSettings\x12).CParental_EnableParentalSettings_Request\x1a*.CParental_EnableParentalSettings_Response\"_\x82\xb5\x18[Enable parental settings for the logged in account, optionally setting the current settings\x12\xab\x01\n\x17\x44isableParentalSettings\x12*.CParental_DisableParentalSettings_Request\x1a+.CParental_DisableParentalSettings_Response\"7\x82\xb5\x18\x33\x44isable parental settings for the logged in account\x12\xa7\x01\n\x13GetParentalSettings\x12&.CParental_GetParentalSettings_Request\x1a\'.CParental_GetParentalSettings_Response\"?\x82\xb5\x18;Get the current parental settings for the logged in account\x12\xe8\x01\n\x19GetSignedParentalSettings\x12,.CParental_GetSignedParentalSettings_Request\x1a-.CParental_GetSignedParentalSettings_Response\"n\x82\xb5\x18jGet the current parental settings for the logged in account in a form that can by verified by the receiver\x12\xa7\x01\n\x13SetParentalSettings\x12&.CParental_SetParentalSettings_Request\x1a\'.CParental_SetParentalSettings_Response\"?\x82\xb5\x18;Set the current parental settings for the logged in account\x12\xa7\x01\n\rValidateToken\x12 .CParental_ValidateToken_Request\x1a!.CParental_ValidateToken_Response\"Q\x82\xb5\x18MCheck if the given parental unlock token is correct for the logged in account\x12\xb7\x01\n\x10ValidatePassword\x12#.CParental_ValidatePassword_Request\x1a$.CParental_ValidatePassword_Response\"X\x82\xb5\x18TValidate the plaintext password for the logged in account and return an unlock token\x12\x8f\x01\n\nLockClient\x12\x1d.CParental_LockClient_Request\x1a\x1e.CParental_LockClient_Response\"B\x82\xb5\x18>Notify connected clients that a lock has occurred in a browser\x12\xc3\x01\n\x13RequestRecoveryCode\x12&.CParental_RequestRecoveryCode_Request\x1a\'.CParental_RequestRecoveryCode_Response\"[\x82\xb5\x18WRequest a recovery code be sent to the recovery email address for the specified account\x12\xaa\x01\n\x17\x44isableWithRecoveryCode\x12*.CParental_DisableWithRecoveryCode_Request\x1a+.CParental_DisableWithRecoveryCode_Response\"6\x82\xb5\x18\x32\x41ttempt a recovery unlock on the specified account\x1a\x1d\x82\xb5\x18\x19Parental settings service2\x86\x04\n\x0eParentalClient\x12\x9c\x01\n\x14NotifySettingsChange\x12..CParental_ParentalSettingsChange_Notification\x1a\x0b.NoResponse\"G\x82\xb5\x18\x43Notification from server to client of a change in parental settings\x12\x94\x01\n\x0cNotifyUnlock\x12&.CParental_ParentalUnlock_Notification\x1a\x0b.NoResponse\"O\x82\xb5\x18KNotification from server to client that an unlock has occurred in a browser\x12\x8d\x01\n\nNotifyLock\x12$.CParental_ParentalLock_Notification\x1a\x0b.NoResponse\"L\x82\xb5\x18HNotification from server to client that a lock has occurred in a browser\x1a.\x82\xb5\x18&Parental settings client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01'
+  ,
+  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -50,7 +57,10 @@ _PARENTALAPP = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=66,
   serialized_end=114,
 )
@@ -80,7 +90,7 @@ _PARENTALSETTINGS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='applist_base_description', full_name='ParentalSettings.applist_base_description', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -108,14 +118,14 @@ _PARENTALSETTINGS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='salt', full_name='ParentalSettings.salt', index=6,
       number=7, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='passwordhash', full_name='ParentalSettings.passwordhash', index=7,
       number=8, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -136,7 +146,7 @@ _PARENTALSETTINGS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='recovery_email', full_name='ParentalSettings.recovery_email', index=10,
       number=11, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -148,7 +158,10 @@ _PARENTALSETTINGS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=117,
   serialized_end=417,
 )
@@ -164,7 +177,7 @@ _CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='password', full_name='CParental_EnableParentalSettings_Request.password', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -178,7 +191,7 @@ _CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='sessionid', full_name='CParental_EnableParentalSettings_Request.sessionid', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -204,7 +217,10 @@ _CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=420,
   serialized_end=573,
 )
@@ -225,7 +241,10 @@ _CPARENTAL_ENABLEPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=575,
   serialized_end=618,
 )
@@ -241,7 +260,7 @@ _CPARENTAL_DISABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='password', full_name='CParental_DisableParentalSettings_Request.password', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -260,7 +279,10 @@ _CPARENTAL_DISABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=620,
   serialized_end=698,
 )
@@ -281,7 +303,10 @@ _CPARENTAL_DISABLEPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=700,
   serialized_end=744,
 )
@@ -309,7 +334,10 @@ _CPARENTAL_GETPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=746,
   serialized_end=802,
 )
@@ -337,7 +365,10 @@ _CPARENTAL_GETPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=804,
   serialized_end=881,
 )
@@ -365,7 +396,10 @@ _CPARENTAL_GETSIGNEDPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=883,
   serialized_end=946,
 )
@@ -381,14 +415,14 @@ _CPARENTAL_GETSIGNEDPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='serialized_settings', full_name='CParental_GetSignedParentalSettings_Response.serialized_settings', index=0,
       number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='signature', full_name='CParental_GetSignedParentalSettings_Response.signature', index=1,
       number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -400,7 +434,10 @@ _CPARENTAL_GETSIGNEDPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=948,
   serialized_end=1042,
 )
@@ -416,7 +453,7 @@ _CPARENTAL_SETPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='password', full_name='CParental_SetParentalSettings_Request.password', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -430,14 +467,14 @@ _CPARENTAL_SETPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='new_password', full_name='CParental_SetParentalSettings_Request.new_password', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='sessionid', full_name='CParental_SetParentalSettings_Request.sessionid', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -456,7 +493,10 @@ _CPARENTAL_SETPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1045,
   serialized_end=1197,
 )
@@ -477,7 +517,10 @@ _CPARENTAL_SETPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1199,
   serialized_end=1239,
 )
@@ -493,7 +536,7 @@ _CPARENTAL_VALIDATETOKEN_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='unlock_token', full_name='CParental_ValidateToken_Request.unlock_token', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -505,7 +548,10 @@ _CPARENTAL_VALIDATETOKEN_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1241,
   serialized_end=1296,
 )
@@ -526,7 +572,10 @@ _CPARENTAL_VALIDATETOKEN_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1298,
   serialized_end=1332,
 )
@@ -542,14 +591,14 @@ _CPARENTAL_VALIDATEPASSWORD_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='password', full_name='CParental_ValidatePassword_Request.password', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='session', full_name='CParental_ValidatePassword_Request.session', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -568,7 +617,10 @@ _CPARENTAL_VALIDATEPASSWORD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1334,
   serialized_end=1437,
 )
@@ -584,7 +636,7 @@ _CPARENTAL_VALIDATEPASSWORD_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='token', full_name='CParental_ValidatePassword_Response.token', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -596,7 +648,10 @@ _CPARENTAL_VALIDATEPASSWORD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1439,
   serialized_end=1491,
 )
@@ -612,7 +667,7 @@ _CPARENTAL_LOCKCLIENT_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='session', full_name='CParental_LockClient_Request.session', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -624,7 +679,10 @@ _CPARENTAL_LOCKCLIENT_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1493,
   serialized_end=1540,
 )
@@ -645,7 +703,10 @@ _CPARENTAL_LOCKCLIENT_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1542,
   serialized_end=1573,
 )
@@ -666,7 +727,10 @@ _CPARENTAL_REQUESTRECOVERYCODE_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1575,
   serialized_end=1614,
 )
@@ -687,7 +751,10 @@ _CPARENTAL_REQUESTRECOVERYCODE_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1616,
   serialized_end=1656,
 )
@@ -722,7 +789,10 @@ _CPARENTAL_DISABLEWITHRECOVERYCODE_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1658,
   serialized_end=1741,
 )
@@ -743,7 +813,10 @@ _CPARENTAL_DISABLEWITHRECOVERYCODE_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1743,
   serialized_end=1787,
 )
@@ -759,28 +832,28 @@ _CPARENTAL_PARENTALSETTINGSCHANGE_NOTIFICATION = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='serialized_settings', full_name='CParental_ParentalSettingsChange_Notification.serialized_settings', index=0,
       number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='signature', full_name='CParental_ParentalSettingsChange_Notification.signature', index=1,
       number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='password', full_name='CParental_ParentalSettingsChange_Notification.password', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='sessionid', full_name='CParental_ParentalSettingsChange_Notification.sessionid', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -792,7 +865,10 @@ _CPARENTAL_PARENTALSETTINGSCHANGE_NOTIFICATION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1790,
   serialized_end=1922,
 )
@@ -808,14 +884,14 @@ _CPARENTAL_PARENTALUNLOCK_NOTIFICATION = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='password', full_name='CParental_ParentalUnlock_Notification.password', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='sessionid', full_name='CParental_ParentalUnlock_Notification.sessionid', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -827,7 +903,10 @@ _CPARENTAL_PARENTALUNLOCK_NOTIFICATION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1924,
   serialized_end=2000,
 )
@@ -843,7 +922,7 @@ _CPARENTAL_PARENTALLOCK_NOTIFICATION = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='sessionid', full_name='CParental_ParentalLock_Notification.sessionid', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -855,7 +934,10 @@ _CPARENTAL_PARENTALLOCK_NOTIFICATION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=2002,
   serialized_end=2058,
 )
@@ -891,166 +973,191 @@ DESCRIPTOR.message_types_by_name['CParental_ParentalSettingsChange_Notification'
 DESCRIPTOR.message_types_by_name['CParental_ParentalUnlock_Notification'] = _CPARENTAL_PARENTALUNLOCK_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CParental_ParentalLock_Notification'] = _CPARENTAL_PARENTALLOCK_NOTIFICATION
 
-class ParentalApp(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _PARENTALAPP
-
+ParentalApp = _reflection.GeneratedProtocolMessageType('ParentalApp', (_message.Message,), dict(
+  DESCRIPTOR = _PARENTALAPP,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:ParentalApp)
+  ))
+_sym_db.RegisterMessage(ParentalApp)
 
-class ParentalSettings(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _PARENTALSETTINGS
-
+ParentalSettings = _reflection.GeneratedProtocolMessageType('ParentalSettings', (_message.Message,), dict(
+  DESCRIPTOR = _PARENTALSETTINGS,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:ParentalSettings)
+  ))
+_sym_db.RegisterMessage(ParentalSettings)
 
-class CParental_EnableParentalSettings_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST
-
+CParental_EnableParentalSettings_Request = _reflection.GeneratedProtocolMessageType('CParental_EnableParentalSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_EnableParentalSettings_Request)
+  ))
+_sym_db.RegisterMessage(CParental_EnableParentalSettings_Request)
 
-class CParental_EnableParentalSettings_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_ENABLEPARENTALSETTINGS_RESPONSE
-
+CParental_EnableParentalSettings_Response = _reflection.GeneratedProtocolMessageType('CParental_EnableParentalSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_ENABLEPARENTALSETTINGS_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_EnableParentalSettings_Response)
+  ))
+_sym_db.RegisterMessage(CParental_EnableParentalSettings_Response)
 
-class CParental_DisableParentalSettings_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_DISABLEPARENTALSETTINGS_REQUEST
-
+CParental_DisableParentalSettings_Request = _reflection.GeneratedProtocolMessageType('CParental_DisableParentalSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_DISABLEPARENTALSETTINGS_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_DisableParentalSettings_Request)
+  ))
+_sym_db.RegisterMessage(CParental_DisableParentalSettings_Request)
 
-class CParental_DisableParentalSettings_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_DISABLEPARENTALSETTINGS_RESPONSE
-
+CParental_DisableParentalSettings_Response = _reflection.GeneratedProtocolMessageType('CParental_DisableParentalSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_DISABLEPARENTALSETTINGS_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_DisableParentalSettings_Response)
+  ))
+_sym_db.RegisterMessage(CParental_DisableParentalSettings_Response)
 
-class CParental_GetParentalSettings_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_GETPARENTALSETTINGS_REQUEST
-
+CParental_GetParentalSettings_Request = _reflection.GeneratedProtocolMessageType('CParental_GetParentalSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_GETPARENTALSETTINGS_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_GetParentalSettings_Request)
+  ))
+_sym_db.RegisterMessage(CParental_GetParentalSettings_Request)
 
-class CParental_GetParentalSettings_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_GETPARENTALSETTINGS_RESPONSE
-
+CParental_GetParentalSettings_Response = _reflection.GeneratedProtocolMessageType('CParental_GetParentalSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_GETPARENTALSETTINGS_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_GetParentalSettings_Response)
+  ))
+_sym_db.RegisterMessage(CParental_GetParentalSettings_Response)
 
-class CParental_GetSignedParentalSettings_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_GETSIGNEDPARENTALSETTINGS_REQUEST
-
+CParental_GetSignedParentalSettings_Request = _reflection.GeneratedProtocolMessageType('CParental_GetSignedParentalSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_GETSIGNEDPARENTALSETTINGS_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_GetSignedParentalSettings_Request)
+  ))
+_sym_db.RegisterMessage(CParental_GetSignedParentalSettings_Request)
 
-class CParental_GetSignedParentalSettings_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_GETSIGNEDPARENTALSETTINGS_RESPONSE
-
+CParental_GetSignedParentalSettings_Response = _reflection.GeneratedProtocolMessageType('CParental_GetSignedParentalSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_GETSIGNEDPARENTALSETTINGS_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_GetSignedParentalSettings_Response)
+  ))
+_sym_db.RegisterMessage(CParental_GetSignedParentalSettings_Response)
 
-class CParental_SetParentalSettings_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_SETPARENTALSETTINGS_REQUEST
-
+CParental_SetParentalSettings_Request = _reflection.GeneratedProtocolMessageType('CParental_SetParentalSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_SETPARENTALSETTINGS_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_SetParentalSettings_Request)
+  ))
+_sym_db.RegisterMessage(CParental_SetParentalSettings_Request)
 
-class CParental_SetParentalSettings_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_SETPARENTALSETTINGS_RESPONSE
-
+CParental_SetParentalSettings_Response = _reflection.GeneratedProtocolMessageType('CParental_SetParentalSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_SETPARENTALSETTINGS_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_SetParentalSettings_Response)
+  ))
+_sym_db.RegisterMessage(CParental_SetParentalSettings_Response)
 
-class CParental_ValidateToken_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_VALIDATETOKEN_REQUEST
-
+CParental_ValidateToken_Request = _reflection.GeneratedProtocolMessageType('CParental_ValidateToken_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_VALIDATETOKEN_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ValidateToken_Request)
+  ))
+_sym_db.RegisterMessage(CParental_ValidateToken_Request)
 
-class CParental_ValidateToken_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_VALIDATETOKEN_RESPONSE
-
+CParental_ValidateToken_Response = _reflection.GeneratedProtocolMessageType('CParental_ValidateToken_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_VALIDATETOKEN_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ValidateToken_Response)
+  ))
+_sym_db.RegisterMessage(CParental_ValidateToken_Response)
 
-class CParental_ValidatePassword_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_VALIDATEPASSWORD_REQUEST
-
+CParental_ValidatePassword_Request = _reflection.GeneratedProtocolMessageType('CParental_ValidatePassword_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_VALIDATEPASSWORD_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ValidatePassword_Request)
+  ))
+_sym_db.RegisterMessage(CParental_ValidatePassword_Request)
 
-class CParental_ValidatePassword_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_VALIDATEPASSWORD_RESPONSE
-
+CParental_ValidatePassword_Response = _reflection.GeneratedProtocolMessageType('CParental_ValidatePassword_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_VALIDATEPASSWORD_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ValidatePassword_Response)
+  ))
+_sym_db.RegisterMessage(CParental_ValidatePassword_Response)
 
-class CParental_LockClient_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_LOCKCLIENT_REQUEST
-
+CParental_LockClient_Request = _reflection.GeneratedProtocolMessageType('CParental_LockClient_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_LOCKCLIENT_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_LockClient_Request)
+  ))
+_sym_db.RegisterMessage(CParental_LockClient_Request)
 
-class CParental_LockClient_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_LOCKCLIENT_RESPONSE
-
+CParental_LockClient_Response = _reflection.GeneratedProtocolMessageType('CParental_LockClient_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_LOCKCLIENT_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_LockClient_Response)
+  ))
+_sym_db.RegisterMessage(CParental_LockClient_Response)
 
-class CParental_RequestRecoveryCode_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_REQUESTRECOVERYCODE_REQUEST
-
+CParental_RequestRecoveryCode_Request = _reflection.GeneratedProtocolMessageType('CParental_RequestRecoveryCode_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_REQUESTRECOVERYCODE_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_RequestRecoveryCode_Request)
+  ))
+_sym_db.RegisterMessage(CParental_RequestRecoveryCode_Request)
 
-class CParental_RequestRecoveryCode_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_REQUESTRECOVERYCODE_RESPONSE
-
+CParental_RequestRecoveryCode_Response = _reflection.GeneratedProtocolMessageType('CParental_RequestRecoveryCode_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_REQUESTRECOVERYCODE_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_RequestRecoveryCode_Response)
+  ))
+_sym_db.RegisterMessage(CParental_RequestRecoveryCode_Response)
 
-class CParental_DisableWithRecoveryCode_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_DISABLEWITHRECOVERYCODE_REQUEST
-
+CParental_DisableWithRecoveryCode_Request = _reflection.GeneratedProtocolMessageType('CParental_DisableWithRecoveryCode_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_DISABLEWITHRECOVERYCODE_REQUEST,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_DisableWithRecoveryCode_Request)
+  ))
+_sym_db.RegisterMessage(CParental_DisableWithRecoveryCode_Request)
 
-class CParental_DisableWithRecoveryCode_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_DISABLEWITHRECOVERYCODE_RESPONSE
-
+CParental_DisableWithRecoveryCode_Response = _reflection.GeneratedProtocolMessageType('CParental_DisableWithRecoveryCode_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_DISABLEWITHRECOVERYCODE_RESPONSE,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_DisableWithRecoveryCode_Response)
+  ))
+_sym_db.RegisterMessage(CParental_DisableWithRecoveryCode_Response)
 
-class CParental_ParentalSettingsChange_Notification(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_PARENTALSETTINGSCHANGE_NOTIFICATION
-
+CParental_ParentalSettingsChange_Notification = _reflection.GeneratedProtocolMessageType('CParental_ParentalSettingsChange_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_PARENTALSETTINGSCHANGE_NOTIFICATION,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ParentalSettingsChange_Notification)
+  ))
+_sym_db.RegisterMessage(CParental_ParentalSettingsChange_Notification)
 
-class CParental_ParentalUnlock_Notification(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_PARENTALUNLOCK_NOTIFICATION
-
+CParental_ParentalUnlock_Notification = _reflection.GeneratedProtocolMessageType('CParental_ParentalUnlock_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_PARENTALUNLOCK_NOTIFICATION,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ParentalUnlock_Notification)
+  ))
+_sym_db.RegisterMessage(CParental_ParentalUnlock_Notification)
 
-class CParental_ParentalLock_Notification(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CPARENTAL_PARENTALLOCK_NOTIFICATION
-
+CParental_ParentalLock_Notification = _reflection.GeneratedProtocolMessageType('CParental_ParentalLock_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CPARENTAL_PARENTALLOCK_NOTIFICATION,
+  __module__ = 'steammessages_parental_pb2'
   # @@protoc_insertion_point(class_scope:CParental_ParentalLock_Notification)
+  ))
+_sym_db.RegisterMessage(CParental_ParentalLock_Notification)
 
 
 DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), '\220\001\001')
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), b'\220\001\001')
 
 _PARENTAL = _descriptor.ServiceDescriptor(
   name='Parental',
   full_name='Parental',
   file=DESCRIPTOR,
   index=0,
-  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), '\202\265\030\031Parental settings service'),
+  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), b'\202\265\030\031Parental settings service'),
   serialized_start=2061,
   serialized_end=3935,
   methods=[
@@ -1061,7 +1168,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST,
     output_type=_CPARENTAL_ENABLEPARENTALSETTINGS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030[Enable parental settings for the logged in account, optionally setting the current settings'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030[Enable parental settings for the logged in account, optionally setting the current settings'),
   ),
   _descriptor.MethodDescriptor(
     name='DisableParentalSettings',
@@ -1070,7 +1177,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_DISABLEPARENTALSETTINGS_REQUEST,
     output_type=_CPARENTAL_DISABLEPARENTALSETTINGS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\0303Disable parental settings for the logged in account'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\0303Disable parental settings for the logged in account'),
   ),
   _descriptor.MethodDescriptor(
     name='GetParentalSettings',
@@ -1079,7 +1186,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_GETPARENTALSETTINGS_REQUEST,
     output_type=_CPARENTAL_GETPARENTALSETTINGS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030;Get the current parental settings for the logged in account'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030;Get the current parental settings for the logged in account'),
   ),
   _descriptor.MethodDescriptor(
     name='GetSignedParentalSettings',
@@ -1088,7 +1195,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_GETSIGNEDPARENTALSETTINGS_REQUEST,
     output_type=_CPARENTAL_GETSIGNEDPARENTALSETTINGS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030jGet the current parental settings for the logged in account in a form that can by verified by the receiver'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030jGet the current parental settings for the logged in account in a form that can by verified by the receiver'),
   ),
   _descriptor.MethodDescriptor(
     name='SetParentalSettings',
@@ -1097,7 +1204,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_SETPARENTALSETTINGS_REQUEST,
     output_type=_CPARENTAL_SETPARENTALSETTINGS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030;Set the current parental settings for the logged in account'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030;Set the current parental settings for the logged in account'),
   ),
   _descriptor.MethodDescriptor(
     name='ValidateToken',
@@ -1106,7 +1213,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_VALIDATETOKEN_REQUEST,
     output_type=_CPARENTAL_VALIDATETOKEN_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030MCheck if the given parental unlock token is correct for the logged in account'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030MCheck if the given parental unlock token is correct for the logged in account'),
   ),
   _descriptor.MethodDescriptor(
     name='ValidatePassword',
@@ -1115,7 +1222,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_VALIDATEPASSWORD_REQUEST,
     output_type=_CPARENTAL_VALIDATEPASSWORD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030TValidate the plaintext password for the logged in account and return an unlock token'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030TValidate the plaintext password for the logged in account and return an unlock token'),
   ),
   _descriptor.MethodDescriptor(
     name='LockClient',
@@ -1124,7 +1231,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_LOCKCLIENT_REQUEST,
     output_type=_CPARENTAL_LOCKCLIENT_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030>Notify connected clients that a lock has occurred in a browser'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030>Notify connected clients that a lock has occurred in a browser'),
   ),
   _descriptor.MethodDescriptor(
     name='RequestRecoveryCode',
@@ -1133,7 +1240,7 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_REQUESTRECOVERYCODE_REQUEST,
     output_type=_CPARENTAL_REQUESTRECOVERYCODE_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030WRequest a recovery code be sent to the recovery email address for the specified account'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030WRequest a recovery code be sent to the recovery email address for the specified account'),
   ),
   _descriptor.MethodDescriptor(
     name='DisableWithRecoveryCode',
@@ -1142,16 +1249,20 @@ _PARENTAL = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CPARENTAL_DISABLEWITHRECOVERYCODE_REQUEST,
     output_type=_CPARENTAL_DISABLEWITHRECOVERYCODE_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\0302Attempt a recovery unlock on the specified account'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\0302Attempt a recovery unlock on the specified account'),
   ),
 ])
 
-class Parental(_service.Service):
-  __metaclass__ = service_reflection.GeneratedServiceType
-  DESCRIPTOR = _PARENTAL
-class Parental_Stub(Parental):
-  __metaclass__ = service_reflection.GeneratedServiceStubType
-  DESCRIPTOR = _PARENTAL
+Parental = service_reflection.GeneratedServiceType('Parental', (_service.Service,), dict(
+  DESCRIPTOR = _PARENTAL,
+  __module__ = 'steammessages_parental_pb2'
+  ))
+
+Parental_Stub = service_reflection.GeneratedServiceStubType('Parental_Stub', (Parental,), dict(
+  DESCRIPTOR = _PARENTAL,
+  __module__ = 'steammessages_parental_pb2'
+  ))
+
 
 
 _PARENTALCLIENT = _descriptor.ServiceDescriptor(
@@ -1159,7 +1270,7 @@ _PARENTALCLIENT = _descriptor.ServiceDescriptor(
   full_name='ParentalClient',
   file=DESCRIPTOR,
   index=1,
-  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), '\202\265\030&Parental settings client notifications\300\265\030\002'),
+  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), b'\202\265\030&Parental settings client notifications\300\265\030\002'),
   serialized_start=3938,
   serialized_end=4456,
   methods=[
@@ -1169,8 +1280,8 @@ _PARENTALCLIENT = _descriptor.ServiceDescriptor(
     index=0,
     containing_service=None,
     input_type=_CPARENTAL_PARENTALSETTINGSCHANGE_NOTIFICATION,
-    output_type=steammessages_unified_base_pb2._NORESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030CNotification from server to client of a change in parental settings'),
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030CNotification from server to client of a change in parental settings'),
   ),
   _descriptor.MethodDescriptor(
     name='NotifyUnlock',
@@ -1178,8 +1289,8 @@ _PARENTALCLIENT = _descriptor.ServiceDescriptor(
     index=1,
     containing_service=None,
     input_type=_CPARENTAL_PARENTALUNLOCK_NOTIFICATION,
-    output_type=steammessages_unified_base_pb2._NORESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030KNotification from server to client that an unlock has occurred in a browser'),
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030KNotification from server to client that an unlock has occurred in a browser'),
   ),
   _descriptor.MethodDescriptor(
     name='NotifyLock',
@@ -1187,16 +1298,20 @@ _PARENTALCLIENT = _descriptor.ServiceDescriptor(
     index=2,
     containing_service=None,
     input_type=_CPARENTAL_PARENTALLOCK_NOTIFICATION,
-    output_type=steammessages_unified_base_pb2._NORESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030HNotification from server to client that a lock has occurred in a browser'),
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030HNotification from server to client that a lock has occurred in a browser'),
   ),
 ])
 
-class ParentalClient(_service.Service):
-  __metaclass__ = service_reflection.GeneratedServiceType
-  DESCRIPTOR = _PARENTALCLIENT
-class ParentalClient_Stub(ParentalClient):
-  __metaclass__ = service_reflection.GeneratedServiceStubType
-  DESCRIPTOR = _PARENTALCLIENT
+ParentalClient = service_reflection.GeneratedServiceType('ParentalClient', (_service.Service,), dict(
+  DESCRIPTOR = _PARENTALCLIENT,
+  __module__ = 'steammessages_parental_pb2'
+  ))
+
+ParentalClient_Stub = service_reflection.GeneratedServiceStubType('ParentalClient_Stub', (ParentalClient,), dict(
+  DESCRIPTOR = _PARENTALCLIENT,
+  __module__ = 'steammessages_parental_pb2'
+  ))
+
 
 # @@protoc_insertion_point(module_scope)

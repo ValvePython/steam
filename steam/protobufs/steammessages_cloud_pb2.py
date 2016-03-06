@@ -4,19 +4,26 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
 from google.protobuf import service as _service
 from google.protobuf import service_reflection
 from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
+_sym_db = _symbol_database.Default()
 
-import steammessages_unified_base_pb2
+
+import steam.protobufs.steammessages_unified_base_pb2 as steammessages__unified__base__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_cloud.proto',
   package='',
-  serialized_pb='\n\x19steammessages_cloud.proto\x1a steammessages_unified_base.proto\"d\n\"CCloud_GetUploadServerInfo_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID to which a file will be uploaded to.\"9\n#CCloud_GetUploadServerInfo_Response\x12\x12\n\nserver_url\x18\x01 \x01(\t\"\x94\x06\n\x1e\x43\x43loud_BeginHTTPUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x33\n\tfile_size\x18\x02 \x01(\rB \x82\xb5\x18\x1cOriginal file size in bytes.\x12=\n\x08\x66ilename\x18\x03 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12V\n\x08\x66ile_sha\x18\x04 \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\x12\\\n\tis_public\x18\x05 \x01(\x08\x42I\x82\xb5\x18\x45True if the file should be marked public on the UFS, false otherwise.\x12z\n\x11platforms_to_sync\x18\x06 \x03(\tB_\x82\xb5\x18[Array of string specifying which platforms to sync; value values: all, windows, osx, linux.\x12r\n\x15request_headers_names\x18\x07 \x03(\tBS\x82\xb5\x18ONames for headers you\'ll want to set on your upload request. May be left blank.\x12\x96\x01\n\x16request_headers_values\x18\x08 \x03(\tBv\x82\xb5\x18rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.\"\x98\x04\n\x1f\x43\x43loud_BeginHTTPUpload_Response\x12/\n\x05ugcid\x18\x01 \x01(\x06\x42 \x82\xb5\x18\x1cUGC ID of the uploaded file.\x12\x30\n\ttimestamp\x18\x02 \x01(\x07\x42\x1d\x82\xb5\x18\x19Server timestamp of file.\x12X\n\x08url_host\x18\x03 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x04 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x05 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12{\n\x0frequest_headers\x18\x06 \x03(\x0b\x32,.CCloud_BeginHTTPUpload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xad\x04\n\x1f\x43\x43loud_CommitHTTPUpload_Request\x12\xa4\x01\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x87\x01\x82\xb5\x18\x82\x01True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.\x12\x95\x01\n\x08\x66ile_sha\x18\x03 \x01(\tB\x82\x01\x82\xb5\x18~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginHTTPUpload request.\"}\n CCloud_CommitHTTPUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\x8c\x01\n\x1d\x43\x43loud_GetFileDetails_Request\x12;\n\x05ugcid\x18\x01 \x01(\x04\x42,\x82\xb5\x18(ID of the Cloud file to get details for.\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x8d\x01\n\x0f\x43\x43loud_UserFile\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\r\n\x05ugcid\x18\x02 \x01(\x04\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x04\x12\x11\n\tfile_size\x18\x05 \x01(\r\x12\x0b\n\x03url\x18\x06 \x01(\t\x12\x17\n\x0fsteamid_creator\x18\x07 \x01(\x06\"C\n\x1e\x43\x43loud_GetFileDetails_Response\x12!\n\x07\x64\x65tails\x18\x01 \x01(\x0b\x32\x10.CCloud_UserFile\"\xe9\x03\n!CCloud_EnumerateUserFiles_Request\x12\x34\n\x05\x61ppid\x18\x01 \x01(\rB%\x82\xb5\x18!App ID to enumerate the files of.\x12\x9b\x01\n\x10\x65xtended_details\x18\x02 \x01(\x08\x42\x80\x01\x82\xb5\x18|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.\x12|\n\x05\x63ount\x18\x03 \x01(\rBm\x82\xb5\x18i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.\x12r\n\x0bstart_index\x18\x04 \x01(\rB]\x82\xb5\x18Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.\"Z\n\"CCloud_EnumerateUserFiles_Response\x12\x1f\n\x05\x66iles\x18\x01 \x03(\x0b\x32\x10.CCloud_UserFile\x12\x13\n\x0btotal_files\x18\x02 \x01(\r\"Y\n\x15\x43\x43loud_Delete_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x18\n\x16\x43\x43loud_Delete_Response\"\'\n%CCloud_GetClientEncryptionKey_Request\"n\n&CCloud_GetClientEncryptionKey_Response\x12\'\n\x03key\x18\x01 \x01(\x0c\x42\x1a\x82\xb5\x18\x16\x41\x45S-256 encryption key\x12\x1b\n\x03\x63rc\x18\x02 \x01(\x05\x42\x0e\x82\xb5\x18\nCRC of key\"\xaa\x01\n\x1d\x43\x43loud_CDNReport_Notification\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0f\n\x07success\x18\x03 \x01(\x08\x12\x18\n\x10http_status_code\x18\x04 \x01(\r\x12\x16\n\x0e\x65xpected_bytes\x18\x05 \x01(\x04\x12\x16\n\x0ereceived_bytes\x18\x06 \x01(\x04\x12\x10\n\x08\x64uration\x18\x07 \x01(\r\"\xe0\x01\n1CCloud_ExternalStorageTransferReport_Notification\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x11\n\tis_upload\x18\x03 \x01(\x08\x12\x0f\n\x07success\x18\x04 \x01(\x08\x12\x18\n\x10http_status_code\x18\x05 \x01(\r\x12\x16\n\x0e\x62ytes_expected\x18\x06 \x01(\x04\x12\x14\n\x0c\x62ytes_actual\x18\x07 \x01(\x04\x12\x13\n\x0b\x64uration_ms\x18\x08 \x01(\r\x12\x0e\n\x06\x63\x65llid\x18\t \x01(\r\"\xbc\x05\n$CCloud_ClientBeginFileUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x44\n\tfile_size\x18\x02 \x01(\rB1\x82\xb5\x18-file size as transmitted and stored in Cloud.\x12N\n\rraw_file_size\x18\x03 \x01(\rB7\x82\xb5\x18\x33\x66ile size before any compression and/or encryption.\x12(\n\x08\x66ile_sha\x18\x04 \x01(\x0c\x42\x16\x82\xb5\x18\x12SHA-1 of raw file.\x12*\n\ntime_stamp\x18\x05 \x01(\x04\x42\x16\x82\xb5\x18\x12Timestamp of file.\x12=\n\x08\x66ilename\x18\x06 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12%\n\x11platforms_to_sync\x18\x07 \x01(\r:\n4294967295\x12\x46\n\x07\x63\x65ll_id\x18\t \x01(\rB5\x82\xb5\x18\x31\x43lient\'s cell ID so we can pick storage location.\x12Q\n\x0b\x63\x61n_encrypt\x18\n \x01(\x08\x42<\x82\xb5\x18\x38if true, client can encrypt the file before uploading it\x12\x66\n\x0eis_shared_file\x18\x0b \x01(\x08\x42N\x82\xb5\x18Jif true, this is going to be UGC or a screenshot or some other shared file\"\xf1\x06\n!ClientCloudFileUploadBlockDetails\x12X\n\x08url_host\x18\x01 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x02 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x03 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12;\n\x0bhttp_method\x18\x04 \x01(\x05\x42&\x82\xb5\x18\"EHTTPMethod to use for this block.\x12}\n\x0frequest_headers\x18\x05 \x03(\x0b\x32..ClientCloudFileUploadBlockDetails.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x12\x38\n\x0c\x62lock_offset\x18\x06 \x01(\x04\x42\"\x82\xb5\x18\x1eoffset of file block to upload\x12m\n\x0c\x62lock_length\x18\x07 \x01(\rBW\x82\xb5\x18Slength of file block to upload - if zero, no part of the file is part of this block\x12_\n\x12\x65xplicit_body_data\x18\x08 \x01(\x0c\x42\x43\x82\xb5\x18?explicit body data to use, instead of file data, for this block\x12o\n\x0fmay_parallelize\x18\t \x01(\x08\x42V\x82\xb5\x18Rif true, this request may be done in parallel with other similarly-marked requests\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xed\x01\n%CCloud_ClientBeginFileUpload_Response\x12[\n\x0c\x65ncrypt_file\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41If true, the file should be encrypted by the client before upload\x12g\n\x0e\x62lock_requests\x18\x02 \x03(\x0b\x32\".ClientCloudFileUploadBlockDetailsB+\x82\xb5\x18\'HTTP requests to make to perform upload\"\xc9\x03\n%CCloud_ClientCommitFileUpload_Request\x12\x61\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41True if all block uploads succeeded, false if any of them failed.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.\x12p\n\x08\x66ile_sha\x18\x03 \x01(\x0c\x42^\x82\xb5\x18ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginFileUpload request.\"\x83\x01\n&CCloud_ClientCommitFileUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\x80\x01\n!CCloud_ClientFileDownload_Request\x12.\n\x05\x61ppid\x18\x01 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file is part of.\x12+\n\x08\x66ilename\x18\x02 \x01(\tB\x19\x82\xb5\x18\x15\x46ilename of the file.\"\xfe\x05\n\"CCloud_ClientFileDownload_Response\x12\x32\n\x05\x61ppid\x18\x01 \x01(\rB#\x82\xb5\x18\x1f\x41pplication the file belongs to\x12G\n\tfile_size\x18\x02 \x01(\rB4\x82\xb5\x18\x30\x66ile size as transmitted and stored in the Cloud\x12G\n\rraw_file_size\x18\x03 \x01(\rB0\x82\xb5\x18,file size when decompressed and/or decrypted\x12!\n\x08sha_file\x18\x04 \x01(\x0c\x42\x0f\x82\xb5\x18\x0bSHA of file\x12)\n\ntime_stamp\x18\x05 \x01(\x04\x42\x15\x82\xb5\x18\x11Timestamp of file\x12J\n\x12is_explicit_delete\x18\x06 \x01(\x08\x42.\x82\xb5\x18*True if this is an explicitly deleted file\x12/\n\x08url_host\x18\x07 \x01(\tB\x1d\x82\xb5\x18\x19Host to GET the file from\x12O\n\x08url_path\x18\x08 \x01(\tB=\x82\xb5\x18\x39Path on that host to use, including URL parameters if any\x12\x37\n\tuse_https\x18\t \x01(\x08\x42$\x82\xb5\x18 If set, use HTTPS, else use HTTP\x12~\n\x0frequest_headers\x18\n \x03(\x0b\x32/.CCloud_ClientFileDownload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP GET request.\x12\x11\n\tencrypted\x18\x0b \x01(\x08\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xe3\x01\n\x1f\x43\x43loud_ClientDeleteFile_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID for which the file is being deleted.\x12\'\n\x08\x66ilename\x18\x02 \x01(\tB\x15\x82\xb5\x18\x11\x46ilename of file.\x12W\n\x12is_explicit_delete\x18\x03 \x01(\x08\x42;\x82\xb5\x18\x37If true, this is a \'delete\'; if false, it is a \'forget\'\"\"\n CCloud_ClientDeleteFile_Response2\x88\x10\n\x05\x43loud\x12\x9c\x01\n\x13GetUploadServerInfo\x12#.CCloud_GetUploadServerInfo_Request\x1a$.CCloud_GetUploadServerInfo_Response\":\x82\xb5\x18\x36Returns the URL of the proper cloud server for a user.\x12\xa8\x02\n\x0f\x42\x65ginHTTPUpload\x12\x1f.CCloud_BeginHTTPUpload_Request\x1a .CCloud_BeginHTTPUpload_Response\"\xd1\x01\x82\xb5\x18\xcc\x01\x42\x65gins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.\x12\xad\x01\n\x10\x43ommitHTTPUpload\x12 .CCloud_CommitHTTPUpload_Request\x1a!.CCloud_CommitHTTPUpload_Response\"T\x82\xb5\x18PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.\x12w\n\x0eGetFileDetails\x12\x1e.CCloud_GetFileDetails_Request\x1a\x1f.CCloud_GetFileDetails_Response\"$\x82\xb5\x18 Returns details on a Cloud file.\x12\xba\x01\n\x12\x45numerateUserFiles\x12\".CCloud_EnumerateUserFiles_Request\x1a#.CCloud_EnumerateUserFiles_Response\"[\x82\xb5\x18WEnumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.\x12\x64\n\x06\x44\x65lete\x12\x16.CCloud_Delete_Request\x1a\x17.CCloud_Delete_Response\")\x82\xb5\x18%Deletes a file from the user\'s cloud.\x12\x99\x01\n\x16GetClientEncryptionKey\x12&.CCloud_GetClientEncryptionKey_Request\x1a\'.CCloud_GetClientEncryptionKey_Response\".\x82\xb5\x18*Gets the user\'s Cloud file encryption key.\x12\x63\n\tCDNReport\x12\x1e.CCloud_CDNReport_Notification\x1a\x0b.NoResponse\")\x82\xb5\x18%Reports the result of a CDN transfer.\x12\x9f\x01\n\x1d\x45xternalStorageTransferReport\x12\x32.CCloud_ExternalStorageTransferReport_Notification\x1a\x0b.NoResponse\"=\x82\xb5\x18\x39Reports the result of an external Cloud storage transfer.\x12\x88\x01\n\x15\x43lientBeginFileUpload\x12%.CCloud_ClientBeginFileUpload_Request\x1a&.CCloud_ClientBeginFileUpload_Response\" \x82\xb5\x18\x1cInitiate an upload to Cloud.\x12\x9a\x01\n\x16\x43lientCommitFileUpload\x12&.CCloud_ClientCommitFileUpload_Request\x1a\'.CCloud_ClientCommitFileUpload_Response\"/\x82\xb5\x18+Commit the file upload or indicate failure.\x12|\n\x12\x43lientFileDownload\x12\".CCloud_ClientFileDownload_Request\x1a#.CCloud_ClientFileDownload_Response\"\x1d\x82\xb5\x18\x19Initiate a file download.\x12u\n\x10\x43lientDeleteFile\x12 .CCloud_ClientDeleteFile_Request\x1a!.CCloud_ClientDeleteFile_Response\"\x1c\x82\xb5\x18\x18\x44\x65lete or forget a file.\x1a)\x82\xb5\x18%A service for Steam Cloud operations.B\x03\x90\x01\x01')
+  syntax='proto2',
+  serialized_pb=b'\n\x19steammessages_cloud.proto\x1a steammessages_unified_base.proto\"d\n\"CCloud_GetUploadServerInfo_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID to which a file will be uploaded to.\"9\n#CCloud_GetUploadServerInfo_Response\x12\x12\n\nserver_url\x18\x01 \x01(\t\"\x94\x06\n\x1e\x43\x43loud_BeginHTTPUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x33\n\tfile_size\x18\x02 \x01(\rB \x82\xb5\x18\x1cOriginal file size in bytes.\x12=\n\x08\x66ilename\x18\x03 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12V\n\x08\x66ile_sha\x18\x04 \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\x12\\\n\tis_public\x18\x05 \x01(\x08\x42I\x82\xb5\x18\x45True if the file should be marked public on the UFS, false otherwise.\x12z\n\x11platforms_to_sync\x18\x06 \x03(\tB_\x82\xb5\x18[Array of string specifying which platforms to sync; value values: all, windows, osx, linux.\x12r\n\x15request_headers_names\x18\x07 \x03(\tBS\x82\xb5\x18ONames for headers you\'ll want to set on your upload request. May be left blank.\x12\x96\x01\n\x16request_headers_values\x18\x08 \x03(\tBv\x82\xb5\x18rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.\"\x98\x04\n\x1f\x43\x43loud_BeginHTTPUpload_Response\x12/\n\x05ugcid\x18\x01 \x01(\x06\x42 \x82\xb5\x18\x1cUGC ID of the uploaded file.\x12\x30\n\ttimestamp\x18\x02 \x01(\x07\x42\x1d\x82\xb5\x18\x19Server timestamp of file.\x12X\n\x08url_host\x18\x03 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x04 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x05 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12{\n\x0frequest_headers\x18\x06 \x03(\x0b\x32,.CCloud_BeginHTTPUpload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xad\x04\n\x1f\x43\x43loud_CommitHTTPUpload_Request\x12\xa4\x01\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x87\x01\x82\xb5\x18\x82\x01True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.\x12\x95\x01\n\x08\x66ile_sha\x18\x03 \x01(\tB\x82\x01\x82\xb5\x18~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginHTTPUpload request.\"}\n CCloud_CommitHTTPUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\x8c\x01\n\x1d\x43\x43loud_GetFileDetails_Request\x12;\n\x05ugcid\x18\x01 \x01(\x04\x42,\x82\xb5\x18(ID of the Cloud file to get details for.\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x8d\x01\n\x0f\x43\x43loud_UserFile\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\r\n\x05ugcid\x18\x02 \x01(\x04\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x04\x12\x11\n\tfile_size\x18\x05 \x01(\r\x12\x0b\n\x03url\x18\x06 \x01(\t\x12\x17\n\x0fsteamid_creator\x18\x07 \x01(\x06\"C\n\x1e\x43\x43loud_GetFileDetails_Response\x12!\n\x07\x64\x65tails\x18\x01 \x01(\x0b\x32\x10.CCloud_UserFile\"\xe9\x03\n!CCloud_EnumerateUserFiles_Request\x12\x34\n\x05\x61ppid\x18\x01 \x01(\rB%\x82\xb5\x18!App ID to enumerate the files of.\x12\x9b\x01\n\x10\x65xtended_details\x18\x02 \x01(\x08\x42\x80\x01\x82\xb5\x18|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.\x12|\n\x05\x63ount\x18\x03 \x01(\rBm\x82\xb5\x18i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.\x12r\n\x0bstart_index\x18\x04 \x01(\rB]\x82\xb5\x18Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.\"Z\n\"CCloud_EnumerateUserFiles_Response\x12\x1f\n\x05\x66iles\x18\x01 \x03(\x0b\x32\x10.CCloud_UserFile\x12\x13\n\x0btotal_files\x18\x02 \x01(\r\"Y\n\x15\x43\x43loud_Delete_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x18\n\x16\x43\x43loud_Delete_Response\"\'\n%CCloud_GetClientEncryptionKey_Request\"n\n&CCloud_GetClientEncryptionKey_Response\x12\'\n\x03key\x18\x01 \x01(\x0c\x42\x1a\x82\xb5\x18\x16\x41\x45S-256 encryption key\x12\x1b\n\x03\x63rc\x18\x02 \x01(\x05\x42\x0e\x82\xb5\x18\nCRC of key\"\xaa\x01\n\x1d\x43\x43loud_CDNReport_Notification\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0f\n\x07success\x18\x03 \x01(\x08\x12\x18\n\x10http_status_code\x18\x04 \x01(\r\x12\x16\n\x0e\x65xpected_bytes\x18\x05 \x01(\x04\x12\x16\n\x0ereceived_bytes\x18\x06 \x01(\x04\x12\x10\n\x08\x64uration\x18\x07 \x01(\r\"\xe0\x01\n1CCloud_ExternalStorageTransferReport_Notification\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x11\n\tis_upload\x18\x03 \x01(\x08\x12\x0f\n\x07success\x18\x04 \x01(\x08\x12\x18\n\x10http_status_code\x18\x05 \x01(\r\x12\x16\n\x0e\x62ytes_expected\x18\x06 \x01(\x04\x12\x14\n\x0c\x62ytes_actual\x18\x07 \x01(\x04\x12\x13\n\x0b\x64uration_ms\x18\x08 \x01(\r\x12\x0e\n\x06\x63\x65llid\x18\t \x01(\r\"\xbc\x05\n$CCloud_ClientBeginFileUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x44\n\tfile_size\x18\x02 \x01(\rB1\x82\xb5\x18-file size as transmitted and stored in Cloud.\x12N\n\rraw_file_size\x18\x03 \x01(\rB7\x82\xb5\x18\x33\x66ile size before any compression and/or encryption.\x12(\n\x08\x66ile_sha\x18\x04 \x01(\x0c\x42\x16\x82\xb5\x18\x12SHA-1 of raw file.\x12*\n\ntime_stamp\x18\x05 \x01(\x04\x42\x16\x82\xb5\x18\x12Timestamp of file.\x12=\n\x08\x66ilename\x18\x06 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12%\n\x11platforms_to_sync\x18\x07 \x01(\r:\n4294967295\x12\x46\n\x07\x63\x65ll_id\x18\t \x01(\rB5\x82\xb5\x18\x31\x43lient\'s cell ID so we can pick storage location.\x12Q\n\x0b\x63\x61n_encrypt\x18\n \x01(\x08\x42<\x82\xb5\x18\x38if true, client can encrypt the file before uploading it\x12\x66\n\x0eis_shared_file\x18\x0b \x01(\x08\x42N\x82\xb5\x18Jif true, this is going to be UGC or a screenshot or some other shared file\"\xf1\x06\n!ClientCloudFileUploadBlockDetails\x12X\n\x08url_host\x18\x01 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x02 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x03 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12;\n\x0bhttp_method\x18\x04 \x01(\x05\x42&\x82\xb5\x18\"EHTTPMethod to use for this block.\x12}\n\x0frequest_headers\x18\x05 \x03(\x0b\x32..ClientCloudFileUploadBlockDetails.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x12\x38\n\x0c\x62lock_offset\x18\x06 \x01(\x04\x42\"\x82\xb5\x18\x1eoffset of file block to upload\x12m\n\x0c\x62lock_length\x18\x07 \x01(\rBW\x82\xb5\x18Slength of file block to upload - if zero, no part of the file is part of this block\x12_\n\x12\x65xplicit_body_data\x18\x08 \x01(\x0c\x42\x43\x82\xb5\x18?explicit body data to use, instead of file data, for this block\x12o\n\x0fmay_parallelize\x18\t \x01(\x08\x42V\x82\xb5\x18Rif true, this request may be done in parallel with other similarly-marked requests\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xed\x01\n%CCloud_ClientBeginFileUpload_Response\x12[\n\x0c\x65ncrypt_file\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41If true, the file should be encrypted by the client before upload\x12g\n\x0e\x62lock_requests\x18\x02 \x03(\x0b\x32\".ClientCloudFileUploadBlockDetailsB+\x82\xb5\x18\'HTTP requests to make to perform upload\"\xc9\x03\n%CCloud_ClientCommitFileUpload_Request\x12\x61\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41True if all block uploads succeeded, false if any of them failed.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.\x12p\n\x08\x66ile_sha\x18\x03 \x01(\x0c\x42^\x82\xb5\x18ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginFileUpload request.\"\x83\x01\n&CCloud_ClientCommitFileUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\x80\x01\n!CCloud_ClientFileDownload_Request\x12.\n\x05\x61ppid\x18\x01 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file is part of.\x12+\n\x08\x66ilename\x18\x02 \x01(\tB\x19\x82\xb5\x18\x15\x46ilename of the file.\"\xfe\x05\n\"CCloud_ClientFileDownload_Response\x12\x32\n\x05\x61ppid\x18\x01 \x01(\rB#\x82\xb5\x18\x1f\x41pplication the file belongs to\x12G\n\tfile_size\x18\x02 \x01(\rB4\x82\xb5\x18\x30\x66ile size as transmitted and stored in the Cloud\x12G\n\rraw_file_size\x18\x03 \x01(\rB0\x82\xb5\x18,file size when decompressed and/or decrypted\x12!\n\x08sha_file\x18\x04 \x01(\x0c\x42\x0f\x82\xb5\x18\x0bSHA of file\x12)\n\ntime_stamp\x18\x05 \x01(\x04\x42\x15\x82\xb5\x18\x11Timestamp of file\x12J\n\x12is_explicit_delete\x18\x06 \x01(\x08\x42.\x82\xb5\x18*True if this is an explicitly deleted file\x12/\n\x08url_host\x18\x07 \x01(\tB\x1d\x82\xb5\x18\x19Host to GET the file from\x12O\n\x08url_path\x18\x08 \x01(\tB=\x82\xb5\x18\x39Path on that host to use, including URL parameters if any\x12\x37\n\tuse_https\x18\t \x01(\x08\x42$\x82\xb5\x18 If set, use HTTPS, else use HTTP\x12~\n\x0frequest_headers\x18\n \x03(\x0b\x32/.CCloud_ClientFileDownload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP GET request.\x12\x11\n\tencrypted\x18\x0b \x01(\x08\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xe3\x01\n\x1f\x43\x43loud_ClientDeleteFile_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID for which the file is being deleted.\x12\'\n\x08\x66ilename\x18\x02 \x01(\tB\x15\x82\xb5\x18\x11\x46ilename of file.\x12W\n\x12is_explicit_delete\x18\x03 \x01(\x08\x42;\x82\xb5\x18\x37If true, this is a \'delete\'; if false, it is a \'forget\'\"\"\n CCloud_ClientDeleteFile_Response2\x88\x10\n\x05\x43loud\x12\x9c\x01\n\x13GetUploadServerInfo\x12#.CCloud_GetUploadServerInfo_Request\x1a$.CCloud_GetUploadServerInfo_Response\":\x82\xb5\x18\x36Returns the URL of the proper cloud server for a user.\x12\xa8\x02\n\x0f\x42\x65ginHTTPUpload\x12\x1f.CCloud_BeginHTTPUpload_Request\x1a .CCloud_BeginHTTPUpload_Response\"\xd1\x01\x82\xb5\x18\xcc\x01\x42\x65gins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.\x12\xad\x01\n\x10\x43ommitHTTPUpload\x12 .CCloud_CommitHTTPUpload_Request\x1a!.CCloud_CommitHTTPUpload_Response\"T\x82\xb5\x18PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.\x12w\n\x0eGetFileDetails\x12\x1e.CCloud_GetFileDetails_Request\x1a\x1f.CCloud_GetFileDetails_Response\"$\x82\xb5\x18 Returns details on a Cloud file.\x12\xba\x01\n\x12\x45numerateUserFiles\x12\".CCloud_EnumerateUserFiles_Request\x1a#.CCloud_EnumerateUserFiles_Response\"[\x82\xb5\x18WEnumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.\x12\x64\n\x06\x44\x65lete\x12\x16.CCloud_Delete_Request\x1a\x17.CCloud_Delete_Response\")\x82\xb5\x18%Deletes a file from the user\'s cloud.\x12\x99\x01\n\x16GetClientEncryptionKey\x12&.CCloud_GetClientEncryptionKey_Request\x1a\'.CCloud_GetClientEncryptionKey_Response\".\x82\xb5\x18*Gets the user\'s Cloud file encryption key.\x12\x63\n\tCDNReport\x12\x1e.CCloud_CDNReport_Notification\x1a\x0b.NoResponse\")\x82\xb5\x18%Reports the result of a CDN transfer.\x12\x9f\x01\n\x1d\x45xternalStorageTransferReport\x12\x32.CCloud_ExternalStorageTransferReport_Notification\x1a\x0b.NoResponse\"=\x82\xb5\x18\x39Reports the result of an external Cloud storage transfer.\x12\x88\x01\n\x15\x43lientBeginFileUpload\x12%.CCloud_ClientBeginFileUpload_Request\x1a&.CCloud_ClientBeginFileUpload_Response\" \x82\xb5\x18\x1cInitiate an upload to Cloud.\x12\x9a\x01\n\x16\x43lientCommitFileUpload\x12&.CCloud_ClientCommitFileUpload_Request\x1a\'.CCloud_ClientCommitFileUpload_Response\"/\x82\xb5\x18+Commit the file upload or indicate failure.\x12|\n\x12\x43lientFileDownload\x12\".CCloud_ClientFileDownload_Request\x1a#.CCloud_ClientFileDownload_Response\"\x1d\x82\xb5\x18\x19Initiate a file download.\x12u\n\x10\x43lientDeleteFile\x12 .CCloud_ClientDeleteFile_Request\x1a!.CCloud_ClientDeleteFile_Response\"\x1c\x82\xb5\x18\x18\x44\x65lete or forget a file.\x1a)\x82\xb5\x18%A service for Steam Cloud operations.B\x03\x90\x01\x01'
+  ,
+  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -34,7 +41,7 @@ _CCLOUD_GETUPLOADSERVERINFO_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030+App ID to which a file will be uploaded to.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030+App ID to which a file will be uploaded to.')),
   ],
   extensions=[
   ],
@@ -43,7 +50,10 @@ _CCLOUD_GETUPLOADSERVERINFO_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=63,
   serialized_end=163,
 )
@@ -59,7 +69,7 @@ _CCLOUD_GETUPLOADSERVERINFO_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='server_url', full_name='CCloud_GetUploadServerInfo_Response.server_url', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -71,7 +81,10 @@ _CCLOUD_GETUPLOADSERVERINFO_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=165,
   serialized_end=222,
 )
@@ -90,56 +103,56 @@ _CCLOUD_BEGINHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030,App ID for which the file is being uploaded.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030,App ID for which the file is being uploaded.')),
     _descriptor.FieldDescriptor(
       name='file_size', full_name='CCloud_BeginHTTPUpload_Request.file_size', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\034Original file size in bytes.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\034Original file size in bytes.')),
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_BeginHTTPUpload_Request.filename', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'Name of the file to store in the cloud.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'Name of the file to store in the cloud.')),
     _descriptor.FieldDescriptor(
       name='file_sha', full_name='CCloud_BeginHTTPUpload_Request.file_sha', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030@Hex string (40 digits) representing the SHA1 digest of the file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030@Hex string (40 digits) representing the SHA1 digest of the file.')),
     _descriptor.FieldDescriptor(
       name='is_public', full_name='CCloud_BeginHTTPUpload_Request.is_public', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ETrue if the file should be marked public on the UFS, false otherwise.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ETrue if the file should be marked public on the UFS, false otherwise.')),
     _descriptor.FieldDescriptor(
       name='platforms_to_sync', full_name='CCloud_BeginHTTPUpload_Request.platforms_to_sync', index=5,
       number=6, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030[Array of string specifying which platforms to sync; value values: all, windows, osx, linux.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030[Array of string specifying which platforms to sync; value values: all, windows, osx, linux.')),
     _descriptor.FieldDescriptor(
       name='request_headers_names', full_name='CCloud_BeginHTTPUpload_Request.request_headers_names', index=6,
       number=7, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ONames for headers you\'ll want to set on your upload request. May be left blank.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ONames for headers you\'ll want to set on your upload request. May be left blank.')),
     _descriptor.FieldDescriptor(
       name='request_headers_values', full_name='CCloud_BeginHTTPUpload_Request.request_headers_values', index=7,
       number=8, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.')),
   ],
   extensions=[
   ],
@@ -148,7 +161,10 @@ _CCLOUD_BEGINHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=225,
   serialized_end=1013,
 )
@@ -164,14 +180,14 @@ _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='name', full_name='CCloud_BeginHTTPUpload_Response.HTTPHeaders.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='value', full_name='CCloud_BeginHTTPUpload_Response.HTTPHeaders.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -183,7 +199,10 @@ _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1510,
   serialized_end=1552,
 )
@@ -201,42 +220,42 @@ _CCLOUD_BEGINHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\034UGC ID of the uploaded file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\034UGC ID of the uploaded file.')),
     _descriptor.FieldDescriptor(
       name='timestamp', full_name='CCloud_BeginHTTPUpload_Response.timestamp', index=1,
       number=2, type=7, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\031Server timestamp of file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\031Server timestamp of file.')),
     _descriptor.FieldDescriptor(
       name='url_host', full_name='CCloud_BeginHTTPUpload_Response.url_host', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')),
     _descriptor.FieldDescriptor(
       name='url_path', full_name='CCloud_BeginHTTPUpload_Response.url_path', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0309Relative path on server to which file should be uploaded.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0309Relative path on server to which file should be uploaded.')),
     _descriptor.FieldDescriptor(
       name='use_https', full_name='CCloud_BeginHTTPUpload_Response.use_https', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'If true, use https, otherwise use http.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'If true, use https, otherwise use http.')),
     _descriptor.FieldDescriptor(
       name='request_headers', full_name='CCloud_BeginHTTPUpload_Response.request_headers', index=5,
       number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300Name-value pairs to be sent in HTTP PUT request.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300Name-value pairs to be sent in HTTP PUT request.')),
   ],
   extensions=[
   ],
@@ -245,7 +264,10 @@ _CCLOUD_BEGINHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1016,
   serialized_end=1552,
 )
@@ -264,28 +286,28 @@ _CCLOUD_COMMITHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\202\001True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\202\001True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.')),
     _descriptor.FieldDescriptor(
       name='appid', full_name='CCloud_CommitHTTPUpload_Request.appid', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.')),
     _descriptor.FieldDescriptor(
       name='file_sha', full_name='CCloud_CommitHTTPUpload_Request.file_sha', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.')),
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_CommitHTTPUpload_Request.filename', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030;Filename as specified in the Cloud.BeginHTTPUpload request.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030;Filename as specified in the Cloud.BeginHTTPUpload request.')),
   ],
   extensions=[
   ],
@@ -294,7 +316,10 @@ _CCLOUD_COMMITHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1555,
   serialized_end=2112,
 )
@@ -313,7 +338,7 @@ _CCLOUD_COMMITHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030=True if the file was successfully committed, false otherwise.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030=True if the file was successfully committed, false otherwise.')),
   ],
   extensions=[
   ],
@@ -322,7 +347,10 @@ _CCLOUD_COMMITHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=2114,
   serialized_end=2239,
 )
@@ -341,14 +369,14 @@ _CCLOUD_GETFILEDETAILS_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030(ID of the Cloud file to get details for.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030(ID of the Cloud file to get details for.')),
     _descriptor.FieldDescriptor(
       name='appid', full_name='CCloud_GetFileDetails_Request.appid', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\033App ID the file belongs to.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\033App ID the file belongs to.')),
   ],
   extensions=[
   ],
@@ -357,7 +385,10 @@ _CCLOUD_GETFILEDETAILS_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=2242,
   serialized_end=2382,
 )
@@ -387,7 +418,7 @@ _CCLOUD_USERFILE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_UserFile.filename', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -408,7 +439,7 @@ _CCLOUD_USERFILE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='url', full_name='CCloud_UserFile.url', index=5,
       number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -427,7 +458,10 @@ _CCLOUD_USERFILE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=2385,
   serialized_end=2526,
 )
@@ -455,7 +489,10 @@ _CCLOUD_GETFILEDETAILS_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=2528,
   serialized_end=2595,
 )
@@ -474,28 +511,28 @@ _CCLOUD_ENUMERATEUSERFILES_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030!App ID to enumerate the files of.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030!App ID to enumerate the files of.')),
     _descriptor.FieldDescriptor(
       name='extended_details', full_name='CCloud_EnumerateUserFiles_Request.extended_details', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.')),
     _descriptor.FieldDescriptor(
       name='count', full_name='CCloud_EnumerateUserFiles_Request.count', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.')),
     _descriptor.FieldDescriptor(
       name='start_index', full_name='CCloud_EnumerateUserFiles_Request.start_index', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.')),
   ],
   extensions=[
   ],
@@ -504,7 +541,10 @@ _CCLOUD_ENUMERATEUSERFILES_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=2598,
   serialized_end=3087,
 )
@@ -539,7 +579,10 @@ _CCLOUD_ENUMERATEUSERFILES_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3089,
   serialized_end=3179,
 )
@@ -555,7 +598,7 @@ _CCLOUD_DELETE_REQUEST = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_Delete_Request.filename', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -565,7 +608,7 @@ _CCLOUD_DELETE_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\033App ID the file belongs to.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\033App ID the file belongs to.')),
   ],
   extensions=[
   ],
@@ -574,7 +617,10 @@ _CCLOUD_DELETE_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3181,
   serialized_end=3270,
 )
@@ -595,7 +641,10 @@ _CCLOUD_DELETE_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3272,
   serialized_end=3296,
 )
@@ -616,7 +665,10 @@ _CCLOUD_GETCLIENTENCRYPTIONKEY_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3298,
   serialized_end=3337,
 )
@@ -632,17 +684,17 @@ _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='key', full_name='CCloud_GetClientEncryptionKey_Response.key', index=0,
       number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\026AES-256 encryption key')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\026AES-256 encryption key')),
     _descriptor.FieldDescriptor(
       name='crc', full_name='CCloud_GetClientEncryptionKey_Response.crc', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\nCRC of key')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\nCRC of key')),
   ],
   extensions=[
   ],
@@ -651,7 +703,10 @@ _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3339,
   serialized_end=3449,
 )
@@ -674,7 +729,7 @@ _CCLOUD_CDNREPORT_NOTIFICATION = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='url', full_name='CCloud_CDNReport_Notification.url', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -721,7 +776,10 @@ _CCLOUD_CDNREPORT_NOTIFICATION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3452,
   serialized_end=3622,
 )
@@ -737,14 +795,14 @@ _CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='host', full_name='CCloud_ExternalStorageTransferReport_Notification.host', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='path', full_name='CCloud_ExternalStorageTransferReport_Notification.path', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -805,7 +863,10 @@ _CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3625,
   serialized_end=3849,
 )
@@ -824,42 +885,42 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030,App ID for which the file is being uploaded.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030,App ID for which the file is being uploaded.')),
     _descriptor.FieldDescriptor(
       name='file_size', full_name='CCloud_ClientBeginFileUpload_Request.file_size', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030-file size as transmitted and stored in Cloud.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030-file size as transmitted and stored in Cloud.')),
     _descriptor.FieldDescriptor(
       name='raw_file_size', full_name='CCloud_ClientBeginFileUpload_Request.raw_file_size', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0303file size before any compression and/or encryption.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0303file size before any compression and/or encryption.')),
     _descriptor.FieldDescriptor(
       name='file_sha', full_name='CCloud_ClientBeginFileUpload_Request.file_sha', index=3,
       number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\022SHA-1 of raw file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\022SHA-1 of raw file.')),
     _descriptor.FieldDescriptor(
       name='time_stamp', full_name='CCloud_ClientBeginFileUpload_Request.time_stamp', index=4,
       number=5, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\022Timestamp of file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\022Timestamp of file.')),
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_ClientBeginFileUpload_Request.filename', index=5,
       number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'Name of the file to store in the cloud.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'Name of the file to store in the cloud.')),
     _descriptor.FieldDescriptor(
       name='platforms_to_sync', full_name='CCloud_ClientBeginFileUpload_Request.platforms_to_sync', index=6,
       number=7, type=13, cpp_type=3, label=1,
@@ -873,21 +934,21 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0301Client\'s cell ID so we can pick storage location.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0301Client\'s cell ID so we can pick storage location.')),
     _descriptor.FieldDescriptor(
       name='can_encrypt', full_name='CCloud_ClientBeginFileUpload_Request.can_encrypt', index=8,
       number=10, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0308if true, client can encrypt the file before uploading it')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0308if true, client can encrypt the file before uploading it')),
     _descriptor.FieldDescriptor(
       name='is_shared_file', full_name='CCloud_ClientBeginFileUpload_Request.is_shared_file', index=9,
       number=11, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Jif true, this is going to be UGC or a screenshot or some other shared file')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Jif true, this is going to be UGC or a screenshot or some other shared file')),
   ],
   extensions=[
   ],
@@ -896,7 +957,10 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=3852,
   serialized_end=4552,
 )
@@ -912,14 +976,14 @@ _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='name', full_name='ClientCloudFileUploadBlockDetails.HTTPHeaders.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='value', full_name='ClientCloudFileUploadBlockDetails.HTTPHeaders.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -931,7 +995,10 @@ _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1510,
   serialized_end=1552,
 )
@@ -946,66 +1013,66 @@ _CLIENTCLOUDFILEUPLOADBLOCKDETAILS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='url_host', full_name='ClientCloudFileUploadBlockDetails.url_host', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')),
     _descriptor.FieldDescriptor(
       name='url_path', full_name='ClientCloudFileUploadBlockDetails.url_path', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0309Relative path on server to which file should be uploaded.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0309Relative path on server to which file should be uploaded.')),
     _descriptor.FieldDescriptor(
       name='use_https', full_name='ClientCloudFileUploadBlockDetails.use_https', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'If true, use https, otherwise use http.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'If true, use https, otherwise use http.')),
     _descriptor.FieldDescriptor(
       name='http_method', full_name='ClientCloudFileUploadBlockDetails.http_method', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\"EHTTPMethod to use for this block.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\"EHTTPMethod to use for this block.')),
     _descriptor.FieldDescriptor(
       name='request_headers', full_name='ClientCloudFileUploadBlockDetails.request_headers', index=4,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300Name-value pairs to be sent in HTTP PUT request.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300Name-value pairs to be sent in HTTP PUT request.')),
     _descriptor.FieldDescriptor(
       name='block_offset', full_name='ClientCloudFileUploadBlockDetails.block_offset', index=5,
       number=6, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\036offset of file block to upload')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\036offset of file block to upload')),
     _descriptor.FieldDescriptor(
       name='block_length', full_name='ClientCloudFileUploadBlockDetails.block_length', index=6,
       number=7, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Slength of file block to upload - if zero, no part of the file is part of this block')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Slength of file block to upload - if zero, no part of the file is part of this block')),
     _descriptor.FieldDescriptor(
       name='explicit_body_data', full_name='ClientCloudFileUploadBlockDetails.explicit_body_data', index=7,
       number=8, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030?explicit body data to use, instead of file data, for this block')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030?explicit body data to use, instead of file data, for this block')),
     _descriptor.FieldDescriptor(
       name='may_parallelize', full_name='ClientCloudFileUploadBlockDetails.may_parallelize', index=8,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Rif true, this request may be done in parallel with other similarly-marked requests')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Rif true, this request may be done in parallel with other similarly-marked requests')),
   ],
   extensions=[
   ],
@@ -1014,7 +1081,10 @@ _CLIENTCLOUDFILEUPLOADBLOCKDETAILS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=4555,
   serialized_end=5436,
 )
@@ -1033,14 +1103,14 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030AIf true, the file should be encrypted by the client before upload')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030AIf true, the file should be encrypted by the client before upload')),
     _descriptor.FieldDescriptor(
       name='block_requests', full_name='CCloud_ClientBeginFileUpload_Response.block_requests', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'HTTP requests to make to perform upload')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'HTTP requests to make to perform upload')),
   ],
   extensions=[
   ],
@@ -1049,7 +1119,10 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=5439,
   serialized_end=5676,
 )
@@ -1068,28 +1141,28 @@ _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ATrue if all block uploads succeeded, false if any of them failed.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ATrue if all block uploads succeeded, false if any of them failed.')),
     _descriptor.FieldDescriptor(
       name='appid', full_name='CCloud_ClientCommitFileUpload_Request.appid', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.')),
     _descriptor.FieldDescriptor(
       name='file_sha', full_name='CCloud_ClientCommitFileUpload_Request.file_sha', index=2,
       number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.')),
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_ClientCommitFileUpload_Request.filename', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030;Filename as specified in the Cloud.BeginFileUpload request.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030;Filename as specified in the Cloud.BeginFileUpload request.')),
   ],
   extensions=[
   ],
@@ -1098,7 +1171,10 @@ _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=5679,
   serialized_end=6136,
 )
@@ -1117,7 +1193,7 @@ _CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030=True if the file was successfully committed, false otherwise.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030=True if the file was successfully committed, false otherwise.')),
   ],
   extensions=[
   ],
@@ -1126,7 +1202,10 @@ _CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=6139,
   serialized_end=6270,
 )
@@ -1145,14 +1224,14 @@ _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\033App ID the file is part of.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\033App ID the file is part of.')),
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_ClientFileDownload_Request.filename', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\025Filename of the file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\025Filename of the file.')),
   ],
   extensions=[
   ],
@@ -1161,7 +1240,10 @@ _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=6273,
   serialized_end=6401,
 )
@@ -1177,14 +1259,14 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='name', full_name='CCloud_ClientFileDownload_Response.HTTPHeaders.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='value', full_name='CCloud_ClientFileDownload_Response.HTTPHeaders.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1196,7 +1278,10 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=1510,
   serialized_end=1552,
 )
@@ -1214,70 +1299,70 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\037Application the file belongs to')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\037Application the file belongs to')),
     _descriptor.FieldDescriptor(
       name='file_size', full_name='CCloud_ClientFileDownload_Response.file_size', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300file size as transmitted and stored in the Cloud')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300file size as transmitted and stored in the Cloud')),
     _descriptor.FieldDescriptor(
       name='raw_file_size', full_name='CCloud_ClientFileDownload_Response.raw_file_size', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030,file size when decompressed and/or decrypted')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030,file size when decompressed and/or decrypted')),
     _descriptor.FieldDescriptor(
       name='sha_file', full_name='CCloud_ClientFileDownload_Response.sha_file', index=3,
       number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\013SHA of file')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\013SHA of file')),
     _descriptor.FieldDescriptor(
       name='time_stamp', full_name='CCloud_ClientFileDownload_Response.time_stamp', index=4,
       number=5, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\021Timestamp of file')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\021Timestamp of file')),
     _descriptor.FieldDescriptor(
       name='is_explicit_delete', full_name='CCloud_ClientFileDownload_Response.is_explicit_delete', index=5,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030*True if this is an explicitly deleted file')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030*True if this is an explicitly deleted file')),
     _descriptor.FieldDescriptor(
       name='url_host', full_name='CCloud_ClientFileDownload_Response.url_host', index=6,
       number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\031Host to GET the file from')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\031Host to GET the file from')),
     _descriptor.FieldDescriptor(
       name='url_path', full_name='CCloud_ClientFileDownload_Response.url_path', index=7,
       number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0309Path on that host to use, including URL parameters if any')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0309Path on that host to use, including URL parameters if any')),
     _descriptor.FieldDescriptor(
       name='use_https', full_name='CCloud_ClientFileDownload_Response.use_https', index=8,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030 If set, use HTTPS, else use HTTP')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030 If set, use HTTPS, else use HTTP')),
     _descriptor.FieldDescriptor(
       name='request_headers', full_name='CCloud_ClientFileDownload_Response.request_headers', index=9,
       number=10, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300Name-value pairs to be sent in HTTP GET request.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300Name-value pairs to be sent in HTTP GET request.')),
     _descriptor.FieldDescriptor(
       name='encrypted', full_name='CCloud_ClientFileDownload_Response.encrypted', index=10,
       number=11, type=8, cpp_type=7, label=1,
@@ -1293,7 +1378,10 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=6404,
   serialized_end=7170,
 )
@@ -1312,21 +1400,21 @@ _CCLOUD_CLIENTDELETEFILE_REQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030+App ID for which the file is being deleted.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030+App ID for which the file is being deleted.')),
     _descriptor.FieldDescriptor(
       name='filename', full_name='CCloud_ClientDeleteFile_Request.filename', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\021Filename of file.')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\021Filename of file.')),
     _descriptor.FieldDescriptor(
       name='is_explicit_delete', full_name='CCloud_ClientDeleteFile_Request.is_explicit_delete', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0307If true, this is a \'delete\'; if false, it is a \'forget\'')),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0307If true, this is a \'delete\'; if false, it is a \'forget\'')),
   ],
   extensions=[
   ],
@@ -1335,7 +1423,10 @@ _CCLOUD_CLIENTDELETEFILE_REQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=7173,
   serialized_end=7400,
 )
@@ -1356,19 +1447,22 @@ _CCLOUD_CLIENTDELETEFILE_RESPONSE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=7402,
   serialized_end=7436,
 )
 
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE;
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['request_headers'].message_type = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS
 _CCLOUD_GETFILEDETAILS_RESPONSE.fields_by_name['details'].message_type = _CCLOUD_USERFILE
 _CCLOUD_ENUMERATEUSERFILES_RESPONSE.fields_by_name['files'].message_type = _CCLOUD_USERFILE
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS.containing_type = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS;
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS.containing_type = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['request_headers'].message_type = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS
 _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['block_requests'].message_type = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE;
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['request_headers'].message_type = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS
 DESCRIPTOR.message_types_by_name['CCloud_GetUploadServerInfo_Request'] = _CCLOUD_GETUPLOADSERVERINFO_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_GetUploadServerInfo_Response'] = _CCLOUD_GETUPLOADSERVERINFO_RESPONSE
@@ -1397,328 +1491,360 @@ DESCRIPTOR.message_types_by_name['CCloud_ClientFileDownload_Response'] = _CCLOUD
 DESCRIPTOR.message_types_by_name['CCloud_ClientDeleteFile_Request'] = _CCLOUD_CLIENTDELETEFILE_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_ClientDeleteFile_Response'] = _CCLOUD_CLIENTDELETEFILE_RESPONSE
 
-class CCloud_GetUploadServerInfo_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_GETUPLOADSERVERINFO_REQUEST
-
+CCloud_GetUploadServerInfo_Request = _reflection.GeneratedProtocolMessageType('CCloud_GetUploadServerInfo_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETUPLOADSERVERINFO_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_GetUploadServerInfo_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_GetUploadServerInfo_Request)
 
-class CCloud_GetUploadServerInfo_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_GETUPLOADSERVERINFO_RESPONSE
-
+CCloud_GetUploadServerInfo_Response = _reflection.GeneratedProtocolMessageType('CCloud_GetUploadServerInfo_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETUPLOADSERVERINFO_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_GetUploadServerInfo_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_GetUploadServerInfo_Response)
 
-class CCloud_BeginHTTPUpload_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_BEGINHTTPUPLOAD_REQUEST
-
+CCloud_BeginHTTPUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_BeginHTTPUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_BEGINHTTPUPLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_BeginHTTPUpload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_BeginHTTPUpload_Request)
 
-class CCloud_BeginHTTPUpload_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+CCloud_BeginHTTPUpload_Response = _reflection.GeneratedProtocolMessageType('CCloud_BeginHTTPUpload_Response', (_message.Message,), dict(
 
-  class HTTPHeaders(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS
-
+  HTTPHeaders = _reflection.GeneratedProtocolMessageType('HTTPHeaders', (_message.Message,), dict(
+    DESCRIPTOR = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS,
+    __module__ = 'steammessages_cloud_pb2'
     # @@protoc_insertion_point(class_scope:CCloud_BeginHTTPUpload_Response.HTTPHeaders)
-  DESCRIPTOR = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE
-
+    ))
+  ,
+  DESCRIPTOR = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_BeginHTTPUpload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_BeginHTTPUpload_Response)
+_sym_db.RegisterMessage(CCloud_BeginHTTPUpload_Response.HTTPHeaders)
 
-class CCloud_CommitHTTPUpload_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_COMMITHTTPUPLOAD_REQUEST
-
+CCloud_CommitHTTPUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_CommitHTTPUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMMITHTTPUPLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_CommitHTTPUpload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_CommitHTTPUpload_Request)
 
-class CCloud_CommitHTTPUpload_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_COMMITHTTPUPLOAD_RESPONSE
-
+CCloud_CommitHTTPUpload_Response = _reflection.GeneratedProtocolMessageType('CCloud_CommitHTTPUpload_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMMITHTTPUPLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_CommitHTTPUpload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_CommitHTTPUpload_Response)
 
-class CCloud_GetFileDetails_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_GETFILEDETAILS_REQUEST
-
+CCloud_GetFileDetails_Request = _reflection.GeneratedProtocolMessageType('CCloud_GetFileDetails_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETFILEDETAILS_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_GetFileDetails_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_GetFileDetails_Request)
 
-class CCloud_UserFile(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_USERFILE
-
+CCloud_UserFile = _reflection.GeneratedProtocolMessageType('CCloud_UserFile', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_USERFILE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_UserFile)
+  ))
+_sym_db.RegisterMessage(CCloud_UserFile)
 
-class CCloud_GetFileDetails_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_GETFILEDETAILS_RESPONSE
-
+CCloud_GetFileDetails_Response = _reflection.GeneratedProtocolMessageType('CCloud_GetFileDetails_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETFILEDETAILS_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_GetFileDetails_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_GetFileDetails_Response)
 
-class CCloud_EnumerateUserFiles_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_ENUMERATEUSERFILES_REQUEST
-
+CCloud_EnumerateUserFiles_Request = _reflection.GeneratedProtocolMessageType('CCloud_EnumerateUserFiles_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_ENUMERATEUSERFILES_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_EnumerateUserFiles_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_EnumerateUserFiles_Request)
 
-class CCloud_EnumerateUserFiles_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_ENUMERATEUSERFILES_RESPONSE
-
+CCloud_EnumerateUserFiles_Response = _reflection.GeneratedProtocolMessageType('CCloud_EnumerateUserFiles_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_ENUMERATEUSERFILES_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_EnumerateUserFiles_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_EnumerateUserFiles_Response)
 
-class CCloud_Delete_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_DELETE_REQUEST
-
+CCloud_Delete_Request = _reflection.GeneratedProtocolMessageType('CCloud_Delete_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_DELETE_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_Delete_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_Delete_Request)
 
-class CCloud_Delete_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_DELETE_RESPONSE
-
+CCloud_Delete_Response = _reflection.GeneratedProtocolMessageType('CCloud_Delete_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_DELETE_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_Delete_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_Delete_Response)
 
-class CCloud_GetClientEncryptionKey_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_GETCLIENTENCRYPTIONKEY_REQUEST
-
+CCloud_GetClientEncryptionKey_Request = _reflection.GeneratedProtocolMessageType('CCloud_GetClientEncryptionKey_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETCLIENTENCRYPTIONKEY_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_GetClientEncryptionKey_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_GetClientEncryptionKey_Request)
 
-class CCloud_GetClientEncryptionKey_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE
-
+CCloud_GetClientEncryptionKey_Response = _reflection.GeneratedProtocolMessageType('CCloud_GetClientEncryptionKey_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_GetClientEncryptionKey_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_GetClientEncryptionKey_Response)
 
-class CCloud_CDNReport_Notification(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CDNREPORT_NOTIFICATION
-
+CCloud_CDNReport_Notification = _reflection.GeneratedProtocolMessageType('CCloud_CDNReport_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CDNREPORT_NOTIFICATION,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_CDNReport_Notification)
+  ))
+_sym_db.RegisterMessage(CCloud_CDNReport_Notification)
 
-class CCloud_ExternalStorageTransferReport_Notification(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION
-
+CCloud_ExternalStorageTransferReport_Notification = _reflection.GeneratedProtocolMessageType('CCloud_ExternalStorageTransferReport_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ExternalStorageTransferReport_Notification)
+  ))
+_sym_db.RegisterMessage(CCloud_ExternalStorageTransferReport_Notification)
 
-class CCloud_ClientBeginFileUpload_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST
-
+CCloud_ClientBeginFileUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_ClientBeginFileUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientBeginFileUpload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientBeginFileUpload_Request)
 
-class ClientCloudFileUploadBlockDetails(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+ClientCloudFileUploadBlockDetails = _reflection.GeneratedProtocolMessageType('ClientCloudFileUploadBlockDetails', (_message.Message,), dict(
 
-  class HTTPHeaders(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS
-
+  HTTPHeaders = _reflection.GeneratedProtocolMessageType('HTTPHeaders', (_message.Message,), dict(
+    DESCRIPTOR = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS,
+    __module__ = 'steammessages_cloud_pb2'
     # @@protoc_insertion_point(class_scope:ClientCloudFileUploadBlockDetails.HTTPHeaders)
-  DESCRIPTOR = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS
-
+    ))
+  ,
+  DESCRIPTOR = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:ClientCloudFileUploadBlockDetails)
+  ))
+_sym_db.RegisterMessage(ClientCloudFileUploadBlockDetails)
+_sym_db.RegisterMessage(ClientCloudFileUploadBlockDetails.HTTPHeaders)
 
-class CCloud_ClientBeginFileUpload_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE
-
+CCloud_ClientBeginFileUpload_Response = _reflection.GeneratedProtocolMessageType('CCloud_ClientBeginFileUpload_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientBeginFileUpload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientBeginFileUpload_Response)
 
-class CCloud_ClientCommitFileUpload_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST
-
+CCloud_ClientCommitFileUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_ClientCommitFileUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientCommitFileUpload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientCommitFileUpload_Request)
 
-class CCloud_ClientCommitFileUpload_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE
-
+CCloud_ClientCommitFileUpload_Response = _reflection.GeneratedProtocolMessageType('CCloud_ClientCommitFileUpload_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientCommitFileUpload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientCommitFileUpload_Response)
 
-class CCloud_ClientFileDownload_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST
-
+CCloud_ClientFileDownload_Request = _reflection.GeneratedProtocolMessageType('CCloud_ClientFileDownload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientFileDownload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientFileDownload_Request)
 
-class CCloud_ClientFileDownload_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+CCloud_ClientFileDownload_Response = _reflection.GeneratedProtocolMessageType('CCloud_ClientFileDownload_Response', (_message.Message,), dict(
 
-  class HTTPHeaders(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS
-
+  HTTPHeaders = _reflection.GeneratedProtocolMessageType('HTTPHeaders', (_message.Message,), dict(
+    DESCRIPTOR = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS,
+    __module__ = 'steammessages_cloud_pb2'
     # @@protoc_insertion_point(class_scope:CCloud_ClientFileDownload_Response.HTTPHeaders)
-  DESCRIPTOR = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE
-
+    ))
+  ,
+  DESCRIPTOR = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientFileDownload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientFileDownload_Response)
+_sym_db.RegisterMessage(CCloud_ClientFileDownload_Response.HTTPHeaders)
 
-class CCloud_ClientDeleteFile_Request(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTDELETEFILE_REQUEST
-
+CCloud_ClientDeleteFile_Request = _reflection.GeneratedProtocolMessageType('CCloud_ClientDeleteFile_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTDELETEFILE_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientDeleteFile_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientDeleteFile_Request)
 
-class CCloud_ClientDeleteFile_Response(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CCLOUD_CLIENTDELETEFILE_RESPONSE
-
+CCloud_ClientDeleteFile_Response = _reflection.GeneratedProtocolMessageType('CCloud_ClientDeleteFile_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_CLIENTDELETEFILE_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
   # @@protoc_insertion_point(class_scope:CCloud_ClientDeleteFile_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_ClientDeleteFile_Response)
 
 
 DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), '\220\001\001')
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), b'\220\001\001')
 _CCLOUD_GETUPLOADSERVERINFO_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_GETUPLOADSERVERINFO_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030+App ID to which a file will be uploaded to.')
+_CCLOUD_GETUPLOADSERVERINFO_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030+App ID to which a file will be uploaded to.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030,App ID for which the file is being uploaded.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030,App ID for which the file is being uploaded.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['file_size'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\034Original file size in bytes.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\034Original file size in bytes.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['filename'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'Name of the file to store in the cloud.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'Name of the file to store in the cloud.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['file_sha'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030@Hex string (40 digits) representing the SHA1 digest of the file.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030@Hex string (40 digits) representing the SHA1 digest of the file.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['is_public'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['is_public']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ETrue if the file should be marked public on the UFS, false otherwise.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['is_public']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ETrue if the file should be marked public on the UFS, false otherwise.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['platforms_to_sync'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['platforms_to_sync']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030[Array of string specifying which platforms to sync; value values: all, windows, osx, linux.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['platforms_to_sync']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030[Array of string specifying which platforms to sync; value values: all, windows, osx, linux.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_names'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_names']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ONames for headers you\'ll want to set on your upload request. May be left blank.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_names']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ONames for headers you\'ll want to set on your upload request. May be left blank.')
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_values'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.')
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.')
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['ugcid'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['ugcid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\034UGC ID of the uploaded file.')
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['ugcid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\034UGC ID of the uploaded file.')
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['timestamp'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['timestamp']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\031Server timestamp of file.')
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['timestamp']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\031Server timestamp of file.')
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_host'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_host']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_host']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_path'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_path']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0309Relative path on server to which file should be uploaded.')
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_path']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0309Relative path on server to which file should be uploaded.')
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['use_https'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['use_https']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'If true, use https, otherwise use http.')
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['use_https']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'If true, use https, otherwise use http.')
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['request_headers'].has_options = True
-_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['request_headers']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300Name-value pairs to be sent in HTTP PUT request.')
+_CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['request_headers']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300Name-value pairs to be sent in HTTP PUT request.')
 _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['transfer_succeeded'].has_options = True
-_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['transfer_succeeded']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\202\001True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.')
+_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['transfer_succeeded']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\202\001True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.')
 _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.')
+_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.')
 _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['file_sha'].has_options = True
-_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.')
+_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.')
 _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['filename'].has_options = True
-_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030;Filename as specified in the Cloud.BeginHTTPUpload request.')
+_CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030;Filename as specified in the Cloud.BeginHTTPUpload request.')
 _CCLOUD_COMMITHTTPUPLOAD_RESPONSE.fields_by_name['file_committed'].has_options = True
-_CCLOUD_COMMITHTTPUPLOAD_RESPONSE.fields_by_name['file_committed']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030=True if the file was successfully committed, false otherwise.')
+_CCLOUD_COMMITHTTPUPLOAD_RESPONSE.fields_by_name['file_committed']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030=True if the file was successfully committed, false otherwise.')
 _CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['ugcid'].has_options = True
-_CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['ugcid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030(ID of the Cloud file to get details for.')
+_CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['ugcid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030(ID of the Cloud file to get details for.')
 _CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\033App ID the file belongs to.')
+_CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\033App ID the file belongs to.')
 _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030!App ID to enumerate the files of.')
+_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030!App ID to enumerate the files of.')
 _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['extended_details'].has_options = True
-_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['extended_details']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.')
+_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['extended_details']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.')
 _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['count'].has_options = True
-_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['count']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.')
+_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['count']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.')
 _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['start_index'].has_options = True
-_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['start_index']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.')
+_CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['start_index']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.')
 _CCLOUD_DELETE_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_DELETE_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\033App ID the file belongs to.')
+_CCLOUD_DELETE_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\033App ID the file belongs to.')
 _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['key'].has_options = True
-_CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['key']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\026AES-256 encryption key')
+_CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['key']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\026AES-256 encryption key')
 _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['crc'].has_options = True
-_CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['crc']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\nCRC of key')
+_CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['crc']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\nCRC of key')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030,App ID for which the file is being uploaded.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030,App ID for which the file is being uploaded.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_size'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030-file size as transmitted and stored in Cloud.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030-file size as transmitted and stored in Cloud.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['raw_file_size'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['raw_file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0303file size before any compression and/or encryption.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['raw_file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0303file size before any compression and/or encryption.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_sha'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\022SHA-1 of raw file.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\022SHA-1 of raw file.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['time_stamp'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['time_stamp']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\022Timestamp of file.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['time_stamp']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\022Timestamp of file.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['filename'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'Name of the file to store in the cloud.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'Name of the file to store in the cloud.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['cell_id'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['cell_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0301Client\'s cell ID so we can pick storage location.')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['cell_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0301Client\'s cell ID so we can pick storage location.')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['can_encrypt'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['can_encrypt']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0308if true, client can encrypt the file before uploading it')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['can_encrypt']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0308if true, client can encrypt the file before uploading it')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['is_shared_file'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['is_shared_file']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Jif true, this is going to be UGC or a screenshot or some other shared file')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['is_shared_file']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Jif true, this is going to be UGC or a screenshot or some other shared file')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_host'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_host']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_host']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_path'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_path']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0309Relative path on server to which file should be uploaded.')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_path']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0309Relative path on server to which file should be uploaded.')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['use_https'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['use_https']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'If true, use https, otherwise use http.')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['use_https']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'If true, use https, otherwise use http.')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['http_method'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['http_method']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\"EHTTPMethod to use for this block.')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['http_method']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\"EHTTPMethod to use for this block.')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['request_headers'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['request_headers']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300Name-value pairs to be sent in HTTP PUT request.')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['request_headers']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300Name-value pairs to be sent in HTTP PUT request.')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['block_offset'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['block_offset']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\036offset of file block to upload')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['block_offset']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\036offset of file block to upload')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['block_length'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['block_length']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Slength of file block to upload - if zero, no part of the file is part of this block')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['block_length']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Slength of file block to upload - if zero, no part of the file is part of this block')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['explicit_body_data'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['explicit_body_data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030?explicit body data to use, instead of file data, for this block')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['explicit_body_data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030?explicit body data to use, instead of file data, for this block')
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['may_parallelize'].has_options = True
-_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['may_parallelize']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030Rif true, this request may be done in parallel with other similarly-marked requests')
+_CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['may_parallelize']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030Rif true, this request may be done in parallel with other similarly-marked requests')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['encrypt_file'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['encrypt_file']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030AIf true, the file should be encrypted by the client before upload')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['encrypt_file']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030AIf true, the file should be encrypted by the client before upload')
 _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['block_requests'].has_options = True
-_CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['block_requests']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\'HTTP requests to make to perform upload')
+_CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE.fields_by_name['block_requests']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\'HTTP requests to make to perform upload')
 _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['transfer_succeeded'].has_options = True
-_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['transfer_succeeded']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ATrue if all block uploads succeeded, false if any of them failed.')
+_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['transfer_succeeded']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ATrue if all block uploads succeeded, false if any of them failed.')
 _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.')
+_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030eApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.')
 _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['file_sha'].has_options = True
-_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.')
+_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['file_sha']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.')
 _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['filename'].has_options = True
-_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030;Filename as specified in the Cloud.BeginFileUpload request.')
+_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030;Filename as specified in the Cloud.BeginFileUpload request.')
 _CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE.fields_by_name['file_committed'].has_options = True
-_CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE.fields_by_name['file_committed']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030=True if the file was successfully committed, false otherwise.')
+_CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE.fields_by_name['file_committed']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030=True if the file was successfully committed, false otherwise.')
 _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\033App ID the file is part of.')
+_CCLOUD_CLIENTFILEDOWNLOAD_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\033App ID the file is part of.')
 _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST.fields_by_name['filename'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\025Filename of the file.')
+_CCLOUD_CLIENTFILEDOWNLOAD_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\025Filename of the file.')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['appid'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\037Application the file belongs to')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\037Application the file belongs to')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['file_size'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300file size as transmitted and stored in the Cloud')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300file size as transmitted and stored in the Cloud')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['raw_file_size'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['raw_file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030,file size when decompressed and/or decrypted')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['raw_file_size']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030,file size when decompressed and/or decrypted')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['sha_file'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['sha_file']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\013SHA of file')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['sha_file']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\013SHA of file')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['time_stamp'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['time_stamp']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\021Timestamp of file')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['time_stamp']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\021Timestamp of file')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['is_explicit_delete'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['is_explicit_delete']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030*True if this is an explicitly deleted file')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['is_explicit_delete']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030*True if this is an explicitly deleted file')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['url_host'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['url_host']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\031Host to GET the file from')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['url_host']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\031Host to GET the file from')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['url_path'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['url_path']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0309Path on that host to use, including URL parameters if any')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['url_path']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0309Path on that host to use, including URL parameters if any')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['use_https'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['use_https']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030 If set, use HTTPS, else use HTTP')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['use_https']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030 If set, use HTTPS, else use HTTP')
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['request_headers'].has_options = True
-_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['request_headers']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0300Name-value pairs to be sent in HTTP GET request.')
+_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['request_headers']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0300Name-value pairs to be sent in HTTP GET request.')
 _CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['appid'].has_options = True
-_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030+App ID for which the file is being deleted.')
+_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['appid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030+App ID for which the file is being deleted.')
 _CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['filename'].has_options = True
-_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\030\021Filename of file.')
+_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['filename']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\030\021Filename of file.')
 _CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['is_explicit_delete'].has_options = True
-_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['is_explicit_delete']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\202\265\0307If true, this is a \'delete\'; if false, it is a \'forget\'')
+_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['is_explicit_delete']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), b'\202\265\0307If true, this is a \'delete\'; if false, it is a \'forget\'')
 
 _CLOUD = _descriptor.ServiceDescriptor(
   name='Cloud',
   full_name='Cloud',
   file=DESCRIPTOR,
   index=0,
-  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), '\202\265\030%A service for Steam Cloud operations.'),
+  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), b'\202\265\030%A service for Steam Cloud operations.'),
   serialized_start=7439,
   serialized_end=9495,
   methods=[
@@ -1729,7 +1855,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_GETUPLOADSERVERINFO_REQUEST,
     output_type=_CCLOUD_GETUPLOADSERVERINFO_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\0306Returns the URL of the proper cloud server for a user.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\0306Returns the URL of the proper cloud server for a user.'),
   ),
   _descriptor.MethodDescriptor(
     name='BeginHTTPUpload',
@@ -1738,7 +1864,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_BEGINHTTPUPLOAD_REQUEST,
     output_type=_CCLOUD_BEGINHTTPUPLOAD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030\314\001Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030\314\001Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.'),
   ),
   _descriptor.MethodDescriptor(
     name='CommitHTTPUpload',
@@ -1747,7 +1873,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_COMMITHTTPUPLOAD_REQUEST,
     output_type=_CCLOUD_COMMITHTTPUPLOAD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.'),
   ),
   _descriptor.MethodDescriptor(
     name='GetFileDetails',
@@ -1756,7 +1882,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_GETFILEDETAILS_REQUEST,
     output_type=_CCLOUD_GETFILEDETAILS_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030 Returns details on a Cloud file.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030 Returns details on a Cloud file.'),
   ),
   _descriptor.MethodDescriptor(
     name='EnumerateUserFiles',
@@ -1765,7 +1891,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_ENUMERATEUSERFILES_REQUEST,
     output_type=_CCLOUD_ENUMERATEUSERFILES_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030WEnumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030WEnumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.'),
   ),
   _descriptor.MethodDescriptor(
     name='Delete',
@@ -1774,7 +1900,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_DELETE_REQUEST,
     output_type=_CCLOUD_DELETE_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030%Deletes a file from the user\'s cloud.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030%Deletes a file from the user\'s cloud.'),
   ),
   _descriptor.MethodDescriptor(
     name='GetClientEncryptionKey',
@@ -1783,7 +1909,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_GETCLIENTENCRYPTIONKEY_REQUEST,
     output_type=_CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030*Gets the user\'s Cloud file encryption key.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030*Gets the user\'s Cloud file encryption key.'),
   ),
   _descriptor.MethodDescriptor(
     name='CDNReport',
@@ -1791,8 +1917,8 @@ _CLOUD = _descriptor.ServiceDescriptor(
     index=7,
     containing_service=None,
     input_type=_CCLOUD_CDNREPORT_NOTIFICATION,
-    output_type=steammessages_unified_base_pb2._NORESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030%Reports the result of a CDN transfer.'),
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030%Reports the result of a CDN transfer.'),
   ),
   _descriptor.MethodDescriptor(
     name='ExternalStorageTransferReport',
@@ -1800,8 +1926,8 @@ _CLOUD = _descriptor.ServiceDescriptor(
     index=8,
     containing_service=None,
     input_type=_CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION,
-    output_type=steammessages_unified_base_pb2._NORESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\0309Reports the result of an external Cloud storage transfer.'),
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\0309Reports the result of an external Cloud storage transfer.'),
   ),
   _descriptor.MethodDescriptor(
     name='ClientBeginFileUpload',
@@ -1810,7 +1936,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST,
     output_type=_CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030\034Initiate an upload to Cloud.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030\034Initiate an upload to Cloud.'),
   ),
   _descriptor.MethodDescriptor(
     name='ClientCommitFileUpload',
@@ -1819,7 +1945,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST,
     output_type=_CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030+Commit the file upload or indicate failure.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030+Commit the file upload or indicate failure.'),
   ),
   _descriptor.MethodDescriptor(
     name='ClientFileDownload',
@@ -1828,7 +1954,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_CLIENTFILEDOWNLOAD_REQUEST,
     output_type=_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030\031Initiate a file download.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030\031Initiate a file download.'),
   ),
   _descriptor.MethodDescriptor(
     name='ClientDeleteFile',
@@ -1837,15 +1963,19 @@ _CLOUD = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCLOUD_CLIENTDELETEFILE_REQUEST,
     output_type=_CCLOUD_CLIENTDELETEFILE_RESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), '\202\265\030\030Delete or forget a file.'),
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), b'\202\265\030\030Delete or forget a file.'),
   ),
 ])
 
-class Cloud(_service.Service):
-  __metaclass__ = service_reflection.GeneratedServiceType
-  DESCRIPTOR = _CLOUD
-class Cloud_Stub(Cloud):
-  __metaclass__ = service_reflection.GeneratedServiceStubType
-  DESCRIPTOR = _CLOUD
+Cloud = service_reflection.GeneratedServiceType('Cloud', (_service.Service,), dict(
+  DESCRIPTOR = _CLOUD,
+  __module__ = 'steammessages_cloud_pb2'
+  ))
+
+Cloud_Stub = service_reflection.GeneratedServiceStubType('Cloud_Stub', (Cloud,), dict(
+  DESCRIPTOR = _CLOUD,
+  __module__ = 'steammessages_cloud_pb2'
+  ))
+
 
 # @@protoc_insertion_point(module_scope)

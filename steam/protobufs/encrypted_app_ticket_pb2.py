@@ -4,8 +4,11 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
 from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
 
 
 
@@ -13,7 +16,10 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='encrypted_app_ticket.proto',
   package='',
-  serialized_pb='\n\x1a\x65ncrypted_app_ticket.proto\"\xad\x01\n\x12\x45ncryptedAppTicket\x12\x19\n\x11ticket_version_no\x18\x01 \x01(\r\x12\x1b\n\x13\x63rc_encryptedticket\x18\x02 \x01(\r\x12\x1c\n\x14\x63\x62_encrypteduserdata\x18\x03 \x01(\r\x12\'\n\x1f\x63\x62_encrypted_appownershipticket\x18\x04 \x01(\r\x12\x18\n\x10\x65ncrypted_ticket\x18\x05 \x01(\x0c\x42\x05H\x01\x90\x01\x00')
+  syntax='proto2',
+  serialized_pb=b'\n\x1a\x65ncrypted_app_ticket.proto\"\xad\x01\n\x12\x45ncryptedAppTicket\x12\x19\n\x11ticket_version_no\x18\x01 \x01(\r\x12\x1b\n\x13\x63rc_encryptedticket\x18\x02 \x01(\r\x12\x1c\n\x14\x63\x62_encrypteduserdata\x18\x03 \x01(\r\x12\'\n\x1f\x63\x62_encrypted_appownershipticket\x18\x04 \x01(\r\x12\x18\n\x10\x65ncrypted_ticket\x18\x05 \x01(\x0c\x42\x05H\x01\x90\x01\x00'
+)
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -56,7 +62,7 @@ _ENCRYPTEDAPPTICKET = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='encrypted_ticket', full_name='EncryptedAppTicket.encrypted_ticket', index=4,
       number=5, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -68,20 +74,24 @@ _ENCRYPTEDAPPTICKET = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
+  oneofs=[
+  ],
   serialized_start=31,
   serialized_end=204,
 )
 
 DESCRIPTOR.message_types_by_name['EncryptedAppTicket'] = _ENCRYPTEDAPPTICKET
 
-class EncryptedAppTicket(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _ENCRYPTEDAPPTICKET
-
+EncryptedAppTicket = _reflection.GeneratedProtocolMessageType('EncryptedAppTicket', (_message.Message,), dict(
+  DESCRIPTOR = _ENCRYPTEDAPPTICKET,
+  __module__ = 'encrypted_app_ticket_pb2'
   # @@protoc_insertion_point(class_scope:EncryptedAppTicket)
+  ))
+_sym_db.RegisterMessage(EncryptedAppTicket)
 
 
 DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), 'H\001\220\001\000')
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), b'H\001\220\001\000')
 # @@protoc_insertion_point(module_scope)

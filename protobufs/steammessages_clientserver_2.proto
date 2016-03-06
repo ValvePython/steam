@@ -1,3 +1,4 @@
+syntax = "proto2";
 import "steammessages_base.proto";
 
 option optimize_for = SPEED;

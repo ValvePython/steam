@@ -1,4 +1,4 @@
-|pypi| |license| |coverage| |scru| |master_build|
+|license| |coverage| |scru| |master_build|
 
 A python module for interacting with various parts of Steam_.
 
@@ -64,14 +64,14 @@ To run for ``python 2.7`` and ``3.4`` assuming you have them installed::
     :target: https://pypi.python.org/pypi/steam
     :alt: MIT License
 
-.. |coverage| image:: https://img.shields.io/coveralls/ValvePython/steam/master.svg?style=flat
-    :target: https://coveralls.io/r/ValvePython/steam?branch=master
+.. |coverage| image:: https://img.shields.io/coveralls/ValvePython/steam/py3.svg?style=flat
+    :target: https://coveralls.io/r/ValvePython/steam?branch=py3
     :alt: Test coverage
 
-.. |scru| image:: https://scrutinizer-ci.com/g/ValvePython/steam/badges/quality-score.png?b=master
-    :target: https://scrutinizer-ci.com/g/ValvePython/steam/?branch=master
+.. |scru| image:: https://scrutinizer-ci.com/g/ValvePython/steam/badges/quality-score.png?b=py3
+    :target: https://scrutinizer-ci.com/g/ValvePython/steam/?branch=py3
     :alt: Scrutinizer score
 
-.. |master_build| image:: https://img.shields.io/travis/ValvePython/steam/master.svg?style=flat&label=master
-    :target: http://travis-ci.org/ValvePython/steam
+.. |master_build| image:: https://img.shields.io/travis/ValvePython/steam/master.svg?style=flat&label=py3
+    :target: http://travis-ci.org/ValvePython/steam/branches
     :alt: Build status of master branch

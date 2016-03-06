@@ -1,3 +1,4 @@
+syntax = "proto2";
 option optimize_for = SPEED;
 option py_generic_services = false;
 
