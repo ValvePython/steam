@@ -196,8 +196,16 @@ class SteamID_properties(unittest.TestCase):
         self.assertEqual(str(SteamID(76580280500085312)), '76580280500085312')
 
     def test_as_steam2(self):
-        self.assertEqual(SteamID('STEAM_0:1:4').as_steam2, 'STEAM_0:1:4')
-        self.assertEqual(SteamID('STEAM_1:1:4').as_steam2, 'STEAM_0:1:4')
+        self.assertEqual(SteamID('STEAM_0:1:4').as_steam2, 'STEAM_1:1:4')
+        self.assertEqual(SteamID('STEAM_1:1:4').as_steam2, 'STEAM_1:1:4')
+        self.assertEqual(SteamID('STEAM_0:0:4').as_steam2, 'STEAM_1:0:4')
+        self.assertEqual(SteamID('STEAM_1:0:4').as_steam2, 'STEAM_1:0:4')
+
+    def test_as_steam2_zero(self):
+        self.assertEqual(SteamID('STEAM_0:1:4').as_steam2_zero, 'STEAM_0:1:4')
+        self.assertEqual(SteamID('STEAM_1:1:4').as_steam2_zero, 'STEAM_0:1:4')
+        self.assertEqual(SteamID('STEAM_0:0:4').as_steam2_zero, 'STEAM_0:0:4')
+        self.assertEqual(SteamID('STEAM_1:0:4').as_steam2_zero, 'STEAM_0:0:4')
 
     def test_as_steam3(self):
         self.assertEqual(SteamID('[U:1:1234]').as_steam3, '[U:1:1234]')

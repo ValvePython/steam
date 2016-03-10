@@ -102,13 +102,31 @@ class SteamID(int):
     @property
     def as_steam2(self):
         """
-        :return: steam2 format (e.g ``STEAM_0:0:1234``)
+        :return: steam2 format (e.g ``STEAM_1:0:1234``)
         :rtype: str
+
+        .. note::
+            ``STEAM_X:Y:Z``. The value of ``X`` should represent the universe, or ``1``
+            for ``Public``. However, there was a bug in GoldSrc and Orange Box games
+            and ``X`` was ``0``. If you need that format use :attr:`SteamID.as_steam2_zero`
+
+
         """
-        return "STEAM_0:%s:%s" % (
+        return "STEAM_1:%s:%s" % (
             self.id % 2,
             self.id >> 1,
             )
+
+    @property
+    def as_steam2_zero(self):
+        """
+        For GoldSrc and Orange Box games.
+        See :attr:`SteamID.as_steam2`
+
+        :return: steam2 format (e.g ``STEAM_0:0:1234``)
+        :rtype: str
+        """
+        return self.as_steam2.replace("_1", "_0")
 
     @property
     def as_steam3(self):
@@ -242,10 +260,13 @@ def make_steam64(id=0, *args, **kwargs):
 
 def steam2_to_tuple(value):
     """
-    :param value: steam2 (e.g. ``STEAM_0:0:1234``)
+    :param value: steam2 (e.g. ``STEAM_1:0:1234`)
     :type value: str
     :return: (accountid, type, universe, instance)
     :rtype: ``tuple`` or ``None``
+
+    .. note::
+        The universe will be always set to ``1``. See :attr:`SteamID.as_steam2`
     """
     match = re.match(r"^STEAM_(?P<universe>[01])"
                      r":(?P<reminder>[0-1])"
