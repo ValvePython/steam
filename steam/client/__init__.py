@@ -205,7 +205,7 @@ class SteamClient(EventEmitter, FeatureBase):
 
         return "job_%d" % jobid
 
-    def wait_for_job(self, message, timeout=None):
+    def send_job_and_wait(self, message, timeout=None, raises=False):
         """
         Send a message as a job and waits for the response.  
         .. note::
@@ -220,9 +220,12 @@ class SteamClient(EventEmitter, FeatureBase):
         :raises: ``gevent.Timeout``
         """
         job_id = self.send_job(message)
-        return self.wait_event(job_id, timeout, raises=True)[0].body
+        response = self.wait_event(job_id, timeout, raises=raises)
+        if response is None:
+            return None
+        return response[0].body
         
-    def wait_for_message(self, message, response_emsg, timeout=None):
+    def send_message_and_wait(self, message, response_emsg, timeout=None, raises=False):
         """
         Send a message to CM and waits for a defined answer.
 
@@ -236,7 +239,10 @@ class SteamClient(EventEmitter, FeatureBase):
         :raises: ``gevent.Timeout``
         """
         self.send(message)
-        return self.wait_event(response_emsg, timeout, raises=True)[0].body
+        response = self.wait_event(response_emsg, timeout, raises=raises)
+        if response is None:
+            return None
+        return response[0].body
 
     def _pre_login(self):
         if self.logged_on:
