@@ -205,6 +205,39 @@ class SteamClient(EventEmitter, FeatureBase):
 
         return "job_%d" % jobid
 
+    def wait_for_job(self, message, timeout=None):
+        """
+        Send a message as a job and waits for the response.  
+        .. note::
+            Not all messages are jobs, you'll have to find out which are which
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :param timeout: how long to wait for a response (in seconds)
+        :type timeout: :class:`float`
+        :return: ``response``
+        :rtype :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :raises: ``gevent.Timeout``
+        """
+        job_id = self.send_job(message)
+        return self.wait_event(job_id, timeout, raises=True)[0].body
+        
+    def wait_for_message(self, message, response_emsg, timeout=None):
+        """
+        Send a message to CM and waits for a defined answer.
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :param response_emsg: the answer to wait for (one of steam.enums.emsg.EMsg)
+        :type response_emsg: :class:`int`
+        :param timeout: how long to wait for a response (in seconds)
+        :type timeout: :class:`float`
+        :param message: a message instance
+        :raises: ``gevent.Timeout``
+        """
+        self.send(message)
+        return self.wait_event(response_emsg, timeout, raises=True)[0].body
+
     def _pre_login(self):
         if self.logged_on:
             logger.debug("Trying to login while logged on???")
