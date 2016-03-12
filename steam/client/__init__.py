@@ -205,6 +205,50 @@ class SteamClient(EventEmitter, FeatureBase):
 
         return "job_%d" % jobid
 
+    def send_job_and_wait(self, message, timeout=None, raises=False):
+        """
+        Send a message as a job and wait for the response.
+        .. note::
+            Not all messages are jobs, you'll have to find out which are which
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :param timeout: (optional)(default:None) seconds to wait
+        :type timeout: :class:`int`
+        :param raises: (optional)(default:False) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
+        :type raises: :class:`bool`
+        :return: ``response``
+        :rtype :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :raises: ``gevent.Timeout``
+        """
+        job_id = self.send_job(message)
+        response = self.wait_event(job_id, timeout, raises=raises)
+        if response is None:
+            return None
+        return response[0].body
+
+    def send_message_and_wait(self, message, response_emsg, timeout=None, raises=False):
+        """
+        Send a message to CM and wait for a defined answer.
+
+        :param message: a message instance
+        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :param response_emsg: the answer to wait for (one of steam.enums.emsg.EMsg)
+        :type response_emsg: :class:`int`
+        :param timeout: (optional)(default:None) seconds to wait
+        :type timeout: :class:`int`
+        :param raises: (optional)(default:False) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
+        :type raises: :class:`bool`
+        :return: ``response``
+        :rtype :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :raises: ``gevent.Timeout``
+        """
+        self.send(message)
+        response = self.wait_event(response_emsg, timeout, raises=raises)
+        if response is None:
+            return None
+        return response[0].body
+
     def _pre_login(self):
         if self.logged_on:
             logger.debug("Trying to login while logged on???")
