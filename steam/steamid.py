@@ -1,6 +1,12 @@
+import sys
 import re
 from steam.enums.base import SteamIntEnum
 from steam.enums import EType, EUniverse
+
+if sys.version_info < (3,):
+    intBase = long
+else:
+    intBase = int
 
 class ETypeChar(SteamIntEnum):
     I = EType.Invalid
@@ -22,7 +28,7 @@ class ETypeChar(SteamIntEnum):
 ETypeChars = ''.join(map(str, list(ETypeChar)))
 
 
-class SteamID(int):
+class SteamID(intBase):
     """
     Object for converting steamID to its' various representations
 

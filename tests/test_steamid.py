@@ -189,9 +189,6 @@ class SteamID_properties(unittest.TestCase):
             self.assertFalse(SteamID(10) < test_value)
             self.assertFalse(SteamID(10) <= test_value)
 
-    def test_is_instance_of_int(self):
-        self.assertIsInstance(SteamID(5), int)
-
     def test_str(self):
         self.assertEqual(str(SteamID(76580280500085312)), '76580280500085312')
 
