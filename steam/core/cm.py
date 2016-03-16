@@ -120,8 +120,7 @@ class CMClient(EventEmitter):
             self.emit('disconnected')
 
     def _reset_attributes(self):
-        for name in ['current_server_addr',
-                     'connected',
+        for name in ['connected',
                      'channel_secured',
                      'key',
                      'hmac_secret',
