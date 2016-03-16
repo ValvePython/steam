@@ -50,6 +50,7 @@ class CMClient(EventEmitter):
 
     _recv_loop = None
     _heartbeat_loop = None
+    _reconnect_backoff_c = 0
 
     def __init__(self, protocol=0):
         self.servers = CMServerList()
@@ -98,8 +99,25 @@ class CMClient(EventEmitter):
         if not event.is_set():
             gevent.spawn(self.disconnect)
 
-    def disconnect(self, reconnect=False):
-        """Close connection"""
+    def disconnect(self, reconnect=False, nodelay=False):
+        """Close connection
+
+        .. note::
+            When ``reconnect`` is ``True``, the delay before reconnect is determined
+            by exponential backoff algorithm starting from 0 seconds and up to 31 seconds
+
+        :param reconnect: attempt to reconnect
+        :type reconnect: :class:`bool`
+        :param nodelay: set to ``True`` to ignore reconnect delay
+        :type nodelay: :class:`bool`
+
+        Event: ``disconnected``
+
+        Event: ``reconnect`` instead of ``disconnected`` when going to reconnect
+
+        :param delay_seconds: seconds delay before reconnect is attempted
+        :type delay_seconds: :class:`int`
+        """
 
         if not self.connected:
             return
@@ -114,9 +132,18 @@ class CMClient(EventEmitter):
         self._reset_attributes()
 
         if reconnect:
-            self.emit('reconnect')
-            gevent.spawn(self.connect)
+            if nodelay:
+                delay_seconds = 0
+                self._reconnect_backoff_c = 0
+            else:
+                delay_seconds = 2**self._reconnect_backoff_c - 1
+                self._reconnect_backoff_c = min(5, self._reconnect_backoff_c + 1)
+
+            self.emit('reconnect', delay_seconds)
+
+            gevent.spawn_later(delay_seconds, self.connect)
         else:
+            self._reconnect_backoff_c = 0
             self.emit('disconnected')
 
     def _reset_attributes(self):
@@ -237,6 +264,7 @@ class CMClient(EventEmitter):
 
         msg, = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
         if msg is None:
+            self.servers.mark_bad(self.current_server_addr)
             gevent.spawn(self.disconnect, True)
             return
 
@@ -291,9 +319,9 @@ class CMClient(EventEmitter):
                       ):
             self.servers.mark_bad(self.current_server_addr)
             self.disconnect(True)
-            return
-
         elif result == EResult.OK:
+            self._reconnect_backoff_c = 0
+
             logger.debug("Logon completed")
 
             self.steam_id = SteamID(msg.header.steamid)
@@ -308,6 +336,9 @@ class CMClient(EventEmitter):
 
             interval = msg.body.out_of_game_heartbeat_seconds
             self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)
+        else:
+            self.emit("error", EResult(result))
+            self.disconnect()
 
     def _handle_cm_list(self, msg):
         logger.debug("Updating CM list")
