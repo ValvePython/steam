@@ -351,7 +351,7 @@ class SteamClient(EventEmitter, FeatureBase):
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='Individual', universe='Public')
-        message.body.protocol_version = 65575
+        message.body.protocol_version = 65579
         message.body.client_package_version = 1771
         message.body.client_os_type = EOSType.Win10
         message.body.client_language = "english"

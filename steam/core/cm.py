@@ -1,7 +1,7 @@
 import struct
 import binascii
 import logging
-import zipfile
+from gzip import GzipFile
 from time import time
 from collections import defaultdict
 
@@ -290,7 +290,8 @@ class CMClient(EventEmitter):
         if msg.body.size_unzipped:
             logger.debug("Unzipping body")
 
-            data = zipfile.ZipFile(BytesIO(msg.body.message_body)).read('z')
+            with GzipFile(fileobj=BytesIO(msg.body.message_body)) as f:
+                data = f.read()
 
             if len(data) != msg.body.size_unzipped:
                 logger.fatal("Unzipped size mismatch")
