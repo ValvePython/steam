@@ -214,17 +214,18 @@ class SteamClient(EventEmitter, FeatureBase):
     def send_job_and_wait(self, message, timeout=None, raises=False):
         """
         Send a message as a job and wait for the response.
+
         .. note::
             Not all messages are jobs, you'll have to find out which are which
 
         :param message: a message instance
         :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
-        :param timeout: (optional)(default:None) seconds to wait
+        :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
-        :param raises: (optional)(default:False) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
+        :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
         :type raises: :class:`bool`
         :return: ``response``
-        :rtype :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :rtype: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
         :raises: ``gevent.Timeout``
         """
         job_id = self.send_job(message)
@@ -239,14 +240,14 @@ class SteamClient(EventEmitter, FeatureBase):
 
         :param message: a message instance
         :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
-        :param response_emsg: the answer to wait for (one of steam.enums.emsg.EMsg)
-        :type response_emsg: :class:`int`
-        :param timeout: (optional)(default:None) seconds to wait
+        :param response_emsg: emsg to wait for
+        :type response_emsg: :class:`steam.enums.emsg.EMsg`,:class:`int`
+        :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
-        :param raises: (optional)(default:False) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
+        :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
         :type raises: :class:`bool`
         :return: ``response``
-        :rtype :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :rtype: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
         :raises: ``gevent.Timeout``
         """
         self.send(message)
