@@ -167,6 +167,11 @@ Configuring logging will lets us see the internal interactions.
     from steam.enums import EResult
     from steam.enums.emsg import EMsg
 
+    logOnDetails = {
+        'username': raw_input("Steam user: "),
+        'password': getpass("Password: "),
+    }
+
     client = SteamClient()
     #client.cm.verbose_debug = True
 
@@ -183,16 +188,15 @@ Configuring logging will lets us see the internal interactions.
             code = raw_input("Enter Email Code: ")
             logOnDetails.update({'auth_code': code})
 
+        client.connect()
+
+    @client.on('connected')
+    def send_login():
         client.login(**logOnDetails)
+        # OR
+        # client.anonymous_login()
 
-    logOnDetails = {
-        'username': raw_input("Steam user: "),
-        'password': getpass("Password: "),
-    }
-
-    client.login(**logOnDetails)
-    # OR
-    # client.anonymous_login()
+    client.connect()
 
     msg, = client.wait_event(EMsg.ClientAccountInfo)
     print "Logged on as: %s" % msg.body.persona_name
@@ -212,9 +216,8 @@ Example of sending a protobuf message and handling the response.
     from steam.core.emsg import MsgProto
 
     message = MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce)
-    client.send(message)
 
-    resp, = client.wait_event(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
+    client.send_message_and_wait(message, EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
 
     if resp.body.eresult == EResult.OK:
         print "WebAPI Nonce: %s" % repr(resp.body.webapi_authenticate_user_nonce)
