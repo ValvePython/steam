@@ -255,17 +255,6 @@ class SteamClient(EventEmitter, FeatureBase):
             return None
         return response[0].body
 
-    def _pre_login(self):
-        if self.logged_on:
-            logger.debug("Trying to login while logged on???")
-            raise RuntimeError("Already logged on")
-
-        if not self.connected:
-            self.connect()
-
-        if not self.cm.channel_secured:
-            self.wait_event("channel_secured")
-
     def _get_sentry_path(self, username):
         if self.credential_location is not None:
             return os.path.join(self.credential_location,
@@ -315,6 +304,17 @@ class SteamClient(EventEmitter, FeatureBase):
                 logger.error("store_sentry: %s" % str(e))
 
         return False
+
+    def _pre_login(self):
+        if self.logged_on:
+            logger.debug("Trying to login while logged on???")
+            raise RuntimeError("Already logged on")
+
+        if not self.connected:
+            self.connect()
+
+        if not self.cm.channel_secured:
+            self.wait_event("channel_secured")
 
     def login(self, username, password, auth_code=None, two_factor_code=None):
         """
