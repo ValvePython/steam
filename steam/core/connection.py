@@ -51,6 +51,7 @@ class Connection(object):
     def disconnect(self):
         if not self.event_connected.is_set():
             return
+        self.event_connected.clear()
 
         self.server_addr = None
 
@@ -69,11 +70,6 @@ class Connection(object):
         self.socket.close()
 
         logger.debug("Disconnected.")
-
-        # hack
-        # rawlink will only call the callback on set
-        self.event_connected.set()
-        self.event_connected.clear()
 
     def __iter__(self):
         return self.recv_queue

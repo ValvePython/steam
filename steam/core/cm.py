@@ -60,8 +60,6 @@ class CMClient(EventEmitter):
         else:
             raise ValueError("Only TCP is supported")
 
-        self.connection.event_connected.rawlink(self._handle_disconnect)
-
         self.on(EMsg.ChannelEncryptRequest, self._handle_encrypt_request),
         self.on(EMsg.Multi, self._handle_multi),
         self.on(EMsg.ClientLogOnResponse, self._handle_logon),
@@ -94,10 +92,6 @@ class CMClient(EventEmitter):
         self.connected = True
         self.emit("connected")
         self._recv_loop = gevent.spawn(self._recv_messages)
-
-    def _handle_disconnect(self, event):
-        if not event.is_set():
-            gevent.spawn(self.disconnect)
 
     def disconnect(self, reconnect=False, nodelay=False):
         """Close connection
@@ -207,6 +201,8 @@ class CMClient(EventEmitter):
 
             gevent.spawn(self._parse_message, message)
             gevent.idle()
+
+        gevent.spawn(self.disconnect)
 
     def _parse_message(self, message):
         emsg_id, = struct.unpack_from("<I", message)

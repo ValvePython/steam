@@ -35,6 +35,7 @@ class SteamClient(EventEmitter, FeatureBase):
         # register listners
         self.cm.on(None, self._handle_cm_events)
         self.cm.on("disconnected", self._handle_disconnect)
+        self.cm.on("reconnect", self._handle_disconnect)
         self.on(EMsg.ClientLogOnResponse, self._handle_logon)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
 
@@ -86,6 +87,7 @@ class SteamClient(EventEmitter, FeatureBase):
         """
         Close connection
         """
+        self.logged_on = False
         self.cm.disconnect()
 
     def _handle_cm_events(self, event, *args):
@@ -102,7 +104,11 @@ class SteamClient(EventEmitter, FeatureBase):
             if jobid not in (-1, 18446744073709551615):
                 self.emit("job_%d" % jobid, *args)
 
-    def _handle_disconnect(self):
+    def _handle_disconnect(self, *args):
+        # only disconnect, reconnect has 1 arg
+        if self.logged_on and len(args) == 0:
+            gevent.spawn(self.connect)
+
         self.username = None
         self.logged_on = False
         self.current_jobid = 0
