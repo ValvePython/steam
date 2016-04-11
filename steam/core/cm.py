@@ -258,19 +258,22 @@ class CMClient(EventEmitter):
 
         self.send_message(resp)
 
-        msg, = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
-        if msg is None:
+        resp = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
+
+        if resp is None:
             self.servers.mark_bad(self.current_server_addr)
             gevent.spawn(self.disconnect, True)
             return
+
+        msg, = resp
 
         if msg.body.eresult != EResult.OK:
             logger.debug("Failed to secure channel: %s" % msg.body.eresult)
             gevent.spawn(self.disconnect)
             return
 
-
         self.key = key
+
         if challenge:
             logger.debug("Channel secured")
             self.hmac_secret = key[:16]
