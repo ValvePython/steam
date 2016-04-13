@@ -190,7 +190,7 @@ Configuring logging will lets us see the internal interactions.
 
         client.connect()
 
-    @client.on('connected')
+    @client.on('channel_secured')
     def send_login():
         client.login(**logOnDetails)
         # OR
