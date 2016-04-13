@@ -105,10 +105,6 @@ class SteamClient(EventEmitter, FeatureBase):
                 self.emit("job_%d" % jobid, *args)
 
     def _handle_disconnect(self, *args):
-        # only disconnect, reconnect has 1 arg
-        if self.logged_on and len(args) == 0:
-            gevent.spawn(self.connect)
-
         self.username = None
         self.logged_on = False
         self.current_jobid = 0

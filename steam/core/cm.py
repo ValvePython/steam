@@ -38,6 +38,7 @@ class CMClient(EventEmitter):
 
     servers = None                          #: a instance of :class:`steam.core.cm.CMServerList`
     current_server_addr = None              #: (ip, port) tuple
+    _connecting = False
     connected = False                       #: :class:`True` if connected to CM
     channel_secured = False                 #: :class:`True` once secure channel handshake is complete
 
@@ -72,6 +73,13 @@ class CMClient(EventEmitter):
 
     def connect(self):
         """Initiate connection to CM. Blocks until we connect."""
+        if self.connected:
+            logger.debug("Connect called, but we are connected?")
+            return
+        if self._connecting:
+            logger.debug("Connect called, but we are already connecting.")
+            return
+        self._connecting = True
 
         logger.debug("Connect initiated.")
 
@@ -92,6 +100,7 @@ class CMClient(EventEmitter):
         self.connected = True
         self.emit("connected")
         self._recv_loop = gevent.spawn(self._recv_messages)
+        self._connecting = False
 
     def disconnect(self, reconnect=False, nodelay=False):
         """Close connection
