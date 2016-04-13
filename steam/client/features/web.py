@@ -30,7 +30,7 @@ class Web(object):
         data = {
             'steamid': self.steam_id,
             'sessionkey': ekey,
-            'encrypted_loginkey': symmetric_encrypt(self.cm.webapi_authenticate_user_nonce, skey),
+            'encrypted_loginkey': symmetric_encrypt(self.webapi_authenticate_user_nonce, skey),
         }
 
         try:
