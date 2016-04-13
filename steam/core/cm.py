@@ -63,7 +63,7 @@ class CMClient(EventEmitter):
 
         self.on(EMsg.ChannelEncryptRequest, self.__handle_encrypt_request),
         self.on(EMsg.Multi, self.__handle_multi),
-        self.on(EMsg.ClientLogOnResponse, self.__handle_logon),
+        self.on(EMsg.ClientLogOnResponse, self._handle_logon),
         self.on(EMsg.ClientCMList, self.__handle_cm_list),
 
     def emit(self, event, *args):
@@ -323,7 +323,7 @@ class CMClient(EventEmitter):
             gevent.sleep(interval)
             self.send(message)
 
-    def __handle_logon(self, msg):
+    def _handle_logon(self, msg):
         result = msg.body.eresult
 
         if result in (EResult.TryAnotherCM,

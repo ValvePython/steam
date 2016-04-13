@@ -34,7 +34,6 @@ class SteamClient(CMClient, FeatureBase):
         self.on(None, self._handle_jobs)
         self.on("disconnected", self._handle_disconnect)
         self.on("reconnect", self._handle_disconnect)
-        self.on(EMsg.ClientLogOnResponse, self._handle_logon)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
 
         #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
@@ -81,6 +80,8 @@ class SteamClient(CMClient, FeatureBase):
         self.current_jobid = 0
 
     def _handle_logon(self, msg):
+        CMClient._handle_logon(self, msg)
+
         result = EResult(msg.body.eresult)
 
         if result == EResult.OK:
@@ -108,8 +109,6 @@ class SteamClient(CMClient, FeatureBase):
                 code_mismatch = (result == EResult.InvalidLoginAuthCode)
 
             self.emit("auth_code_required", is_2fa, code_mismatch)
-        else:
-            self.emit("error", result)
 
     def _handle_update_machine_auth(self, message):
         ok = self.store_sentry(self.username, message.body.bytes)
