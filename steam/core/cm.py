@@ -293,10 +293,13 @@ class CMClient(EventEmitter):
         self.emit('channel_secured')
 
     def __handle_multi(self, msg):
-        self._LOG.debug("Unpacking CMsgMulti")
+        self._LOG.debug("Multi: Unpacking")
 
         if msg.body.size_unzipped:
-            self._LOG.debug("Unzipping body")
+            self._LOG.debug("Multi: Decompressing payload (%d -> %s)" % (
+                len(msg.body.message_body),
+                msg.body.size_unzipped,
+                ))
 
             with GzipFile(fileobj=BytesIO(msg.body.message_body)) as f:
                 data = f.read()
