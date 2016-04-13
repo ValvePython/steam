@@ -21,12 +21,10 @@ from eventemitter import EventEmitter
 from steam.util import ip_from_int, is_proto, clear_proto_bit
 
 
-logger = logging.getLogger("CMClient")
-
-
 class CMClient(EventEmitter):
     """
     CMClient provides a secure message channel to Steam CM servers
+    Can be used as mixing or on it's own.
 
     Incoming messages are parsed and emitted as events using
     their :class:`steam.enums.emsg.EMsg` as event identifier
@@ -42,8 +40,8 @@ class CMClient(EventEmitter):
     connected = False                       #: :class:`True` if connected to CM
     channel_secured = False                 #: :class:`True` once secure channel handshake is complete
 
-    key = None                              #: channel encryption key
-    hmac_secret = None                      #: HMAC secret
+    channel_key = None                              #: channel encryption key
+    channel_hmac = None                      #: HMAC secret
 
     steam_id = SteamID()                    #: :class:`steam.steamid.SteamID` of the current user
     session_id = None                       #: session id when logged in
@@ -52,8 +50,10 @@ class CMClient(EventEmitter):
     _recv_loop = None
     _heartbeat_loop = None
     _reconnect_backoff_c = 0
+    _LOG = None
 
     def __init__(self, protocol=0):
+        self._LOG = logging.getLogger("CMClient")
         self.servers = CMServerList()
 
         if protocol == CMClient.TCP:
@@ -61,27 +61,27 @@ class CMClient(EventEmitter):
         else:
             raise ValueError("Only TCP is supported")
 
-        self.on(EMsg.ChannelEncryptRequest, self._handle_encrypt_request),
-        self.on(EMsg.Multi, self._handle_multi),
-        self.on(EMsg.ClientLogOnResponse, self._handle_logon),
-        self.on(EMsg.ClientCMList, self._handle_cm_list),
+        self.on(EMsg.ChannelEncryptRequest, self.__handle_encrypt_request),
+        self.on(EMsg.Multi, self.__handle_multi),
+        self.on(EMsg.ClientLogOnResponse, self.__handle_logon),
+        self.on(EMsg.ClientCMList, self.__handle_cm_list),
 
     def emit(self, event, *args):
         if event is not None:
-            logger.debug("Emit event: %s" % repr(event))
+            self._LOG.debug("Emit event: %s" % repr(event))
         super(CMClient, self).emit(event, *args)
 
     def connect(self):
         """Initiate connection to CM. Blocks until we connect."""
         if self.connected:
-            logger.debug("Connect called, but we are connected?")
+            self._LOG.debug("Connect called, but we are connected?")
             return
         if self._connecting:
-            logger.debug("Connect called, but we are already connecting.")
+            self._LOG.debug("Connect called, but we are already connecting.")
             return
         self._connecting = True
 
-        logger.debug("Connect initiated.")
+        self._LOG.debug("Connect initiated.")
 
         for server_addr in self.servers:
             start = time()
@@ -91,7 +91,7 @@ class CMClient(EventEmitter):
 
             diff = time() - start
 
-            logger.debug("Failed to connect. Retrying...")
+            self._LOG.debug("Failed to connect. Retrying...")
 
             if diff < 5:
                 gevent.sleep(5 - diff)
@@ -153,7 +153,7 @@ class CMClient(EventEmitter):
         for name in ['connected',
                      'channel_secured',
                      'key',
-                     'hmac_secret',
+                     'channel_hmac',
                      'steam_id',
                      'session_id',
                      'webapi_authenticate_user_nonce',
@@ -162,9 +162,9 @@ class CMClient(EventEmitter):
                      ]:
             self.__dict__.pop(name, None)
 
-    def send_message(self, message):
+    def send(self, message):
         """
-        Sends a message
+        Send a message
 
         :param message: a message instance
         :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
@@ -178,17 +178,17 @@ class CMClient(EventEmitter):
             message.sessionID = self.session_id
 
         if self.verbose_debug:
-            logger.debug("Outgoing: %s\n%s" % (repr(message), str(message)))
+            self._LOG.debug("Outgoing: %s\n%s" % (repr(message), str(message)))
         else:
-            logger.debug("Outgoing: %s", repr(message))
+            self._LOG.debug("Outgoing: %s", repr(message))
 
         data = message.serialize()
 
-        if self.key:
-            if self.hmac_secret:
-                data = crypto.symmetric_encrypt_HMAC(data, self.key, self.hmac_secret)
+        if self.channel_key:
+            if self.channel_hmac:
+                data = crypto.symmetric_encrypt_HMAC(data, self.channel_key, self.channel_hmac)
             else:
-                data = crypto.symmetric_encrypt(data, self.key)
+                data = crypto.symmetric_encrypt(data, self.channel_key)
 
         self.connection.put_message(data)
 
@@ -197,16 +197,16 @@ class CMClient(EventEmitter):
             if not self.connected:
                 break
 
-            if self.key:
-                if self.hmac_secret:
+            if self.channel_key:
+                if self.channel_hmac:
                     try:
-                        message = crypto.symmetric_decrypt_HMAC(message, self.key, self.hmac_secret)
+                        message = crypto.symmetric_decrypt_HMAC(message, self.channel_key, self.channel_hmac)
                     except RuntimeError as e:
-                        logger.exception(e)
+                        self._LOG.exception(e)
                         gevent.spawn(self.disconnect)
                         return
                 else:
-                    message = crypto.symmetric_decrypt(message, self.key)
+                    message = crypto.symmetric_decrypt(message, self.channel_key)
 
             gevent.spawn(self._parse_message, message)
             gevent.idle()
@@ -233,21 +233,21 @@ class CMClient(EventEmitter):
                 else:
                     msg = Msg(emsg, message, extended=True)
             except Exception as e:
-                logger.fatal("Failed to deserialize message: %s (is_proto: %s)",
+                self._LOG.fatal("Failed to deserialize message: %s (is_proto: %s)",
                              str(emsg),
                              is_proto(emsg_id)
                              )
-                logger.exception(e)
+                self._LOG.exception(e)
 
         if self.verbose_debug:
-            logger.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
+            self._LOG.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
         else:
-            logger.debug("Incoming: %s", repr(msg))
+            self._LOG.debug("Incoming: %s", repr(msg))
 
         self.emit(emsg, msg)
 
-    def _handle_encrypt_request(self, msg):
-        logger.debug("Securing channel")
+    def __handle_encrypt_request(self, msg):
+        self._LOG.debug("Securing channel")
 
         try:
             if msg.body.protocolVersion != 1:
@@ -255,7 +255,7 @@ class CMClient(EventEmitter):
             if msg.body.universe != EUniverse.Public:
                 raise RuntimeError("Unsupported universe")
         except RuntimeError as e:
-            logger.exception(e)
+            self._LOG.exception(e)
             gevent.spawn(self.disconnect)
             return
 
@@ -265,7 +265,7 @@ class CMClient(EventEmitter):
         key, resp.body.key = crypto.generate_session_key(challenge)
         resp.body.crc = binascii.crc32(resp.body.key) & 0xffffffff
 
-        self.send_message(resp)
+        self.send(resp)
 
         resp = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
 
@@ -277,32 +277,32 @@ class CMClient(EventEmitter):
         msg, = resp
 
         if msg.body.eresult != EResult.OK:
-            logger.debug("Failed to secure channel: %s" % msg.body.eresult)
+            self._LOG.debug("Failed to secure channel: %s" % msg.body.eresult)
             gevent.spawn(self.disconnect)
             return
 
-        self.key = key
+        self.channel_key = key
 
         if challenge:
-            logger.debug("Channel secured")
-            self.hmac_secret = key[:16]
+            self._LOG.debug("Channel secured")
+            self.channel_hmac = key[:16]
         else:
-            logger.debug("Channel secured (legacy mode)")
+            self._LOG.debug("Channel secured (legacy mode)")
 
         self.channel_secured = True
         self.emit('channel_secured')
 
-    def _handle_multi(self, msg):
-        logger.debug("Unpacking CMsgMulti")
+    def __handle_multi(self, msg):
+        self._LOG.debug("Unpacking CMsgMulti")
 
         if msg.body.size_unzipped:
-            logger.debug("Unzipping body")
+            self._LOG.debug("Unzipping body")
 
             with GzipFile(fileobj=BytesIO(msg.body.message_body)) as f:
                 data = f.read()
 
             if len(data) != msg.body.size_unzipped:
-                logger.fatal("Unzipped size mismatch")
+                self._LOG.fatal("Unzipped size mismatch")
                 gevent.spawn(self.disconnect)
                 return
         else:
@@ -313,14 +313,14 @@ class CMClient(EventEmitter):
             self._parse_message(data[4:4+size])
             data = data[4+size:]
 
-    def _heartbeat(self, interval):
+    def __heartbeat(self, interval):
         message = MsgProto(EMsg.ClientHeartBeat)
 
         while True:
             gevent.sleep(interval)
-            self.send_message(message)
+            self.send(message)
 
-    def _handle_logon(self, msg):
+    def __handle_logon(self, msg):
         result = msg.body.eresult
 
         if result in (EResult.TryAnotherCM,
@@ -331,7 +331,7 @@ class CMClient(EventEmitter):
         elif result == EResult.OK:
             self._reconnect_backoff_c = 0
 
-            logger.debug("Logon completed")
+            self._LOG.debug("Logon completed")
 
             self.steam_id = SteamID(msg.header.steamid)
             self.session_id = msg.header.client_sessionid
@@ -341,16 +341,16 @@ class CMClient(EventEmitter):
             if self._heartbeat_loop:
                 self._heartbeat_loop.kill()
 
-            logger.debug("Heartbeat started.")
+            self._LOG.debug("Heartbeat started.")
 
             interval = msg.body.out_of_game_heartbeat_seconds
-            self._heartbeat_loop = gevent.spawn(self._heartbeat, interval)
+            self._heartbeat_loop = gevent.spawn(self.__heartbeat, interval)
         else:
             self.emit("error", EResult(result))
             self.disconnect()
 
-    def _handle_cm_list(self, msg):
-        logger.debug("Updating CM list")
+    def __handle_cm_list(self, msg):
+        self._LOG.debug("Updating CM list")
 
         new_servers = zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)
         self.servers.merge_list(new_servers)

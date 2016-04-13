@@ -14,10 +14,8 @@ from steam.core.cm import CMClient
 from steam import SteamID
 from steam.client.features import FeatureBase
 
-logger = logging.getLogger("SteamClient")
 
-
-class SteamClient(EventEmitter, FeatureBase):
+class SteamClient(CMClient, FeatureBase):
     """
     Implementation of Steam client based on ``gevent``
 
@@ -27,32 +25,28 @@ class SteamClient(EventEmitter, FeatureBase):
     current_jobid = 0
     credential_location = None  #: location for sentry
     username = None  #: username when logged on
-    _logger = logger
 
     def __init__(self):
-        self.cm = CMClient()
+        CMClient.__init__(self)
 
+        self._LOG = logging.getLogger("SteamClient")
         # register listners
-        self.cm.on(None, self._handle_cm_events)
-        self.cm.on("disconnected", self._handle_disconnect)
-        self.cm.on("reconnect", self._handle_disconnect)
+        self.on(None, self._handle_jobs)
+        self.on("disconnected", self._handle_disconnect)
+        self.on("reconnect", self._handle_disconnect)
         self.on(EMsg.ClientLogOnResponse, self._handle_logon)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
 
         #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
         self.logged_on = False
 
-        super(SteamClient, self).__init__()
+        FeatureBase.__init__(self)
 
     def __repr__(self):
-        return "<%s() %s>" % (self.__class__.__name__,
+        return "<%s(%s) %s>" % (self.__class__.__name__,
+                              repr(self.current_server_addr),
                               'online' if self.connected else 'offline',
                               )
-
-    def emit(self, event, *args):
-        if event is not None:
-            logger.debug("Emit event: %s" % repr(event))
-        super(SteamClient, self).emit(event, *args)
 
     def set_credential_location(self, path):
         """
@@ -62,37 +56,14 @@ class SteamClient(EventEmitter, FeatureBase):
         """
         self.credential_location = path
 
-    @property
-    def steam_id(self):
-        """
-        ``steam.steamid.SteamID`` of the current logged on user.
-        Points to invalid user, if not logged on.
-        """
-        return self.cm.steam_id
-
-    @property
-    def connected(self):
-        """
-        Monitor ``connected`` and ``disconnected`` events for when this changes.
-        """
-        return self.cm.connected
-
-    def connect(self):
-        """
-        Initiate connection
-        """
-        self.cm.connect()
-
     def disconnect(self):
         """
         Close connection
         """
         self.logged_on = False
-        self.cm.disconnect()
+        CMClient.disconnect(self)
 
-    def _handle_cm_events(self, event, *args):
-        self.emit(event, *args)
-
+    def _handle_jobs(self, event, *args):
         if isinstance(event, EMsg):
             message = args[0]
 
@@ -166,8 +137,7 @@ class SteamClient(EventEmitter, FeatureBase):
         """
         if not self.connected:
             raise RuntimeError("Cannot send message while not connected")
-
-        self.cm.send_message(message)
+        CMClient.send(self, message)
 
     def send_job(self, message):
         """
@@ -278,7 +248,7 @@ class SteamClient(EventEmitter, FeatureBase):
                 with open(filepath, 'rb') as f:
                     return f.read()
             except IOError as e:
-                logger.error("get_sentry: %s" % str(e))
+                self._LOG.error("get_sentry: %s" % str(e))
 
         return None
 
@@ -298,19 +268,19 @@ class SteamClient(EventEmitter, FeatureBase):
                     f.write(sentry_bytes)
                 return True
             except IOError as e:
-                logger.error("store_sentry: %s" % str(e))
+                self._LOG.error("store_sentry: %s" % str(e))
 
         return False
 
     def _pre_login(self):
         if self.logged_on:
-            logger.debug("Trying to login while logged on???")
+            self._LOG.debug("Trying to login while logged on???")
             raise RuntimeError("Already logged on")
 
         if not self.connected:
             self.connect()
 
-        if not self.cm.channel_secured:
+        if not self.channel_secured:
             self.wait_event("channel_secured")
 
     def login(self, username, password, auth_code=None, two_factor_code=None):
@@ -346,7 +316,7 @@ class SteamClient(EventEmitter, FeatureBase):
         Codes are required every time a user logins if sentry is not setup.
         See :meth:`set_credential_location`
         """
-        logger.debug("Attempting login")
+        self._LOG.debug("Attempting login")
 
         self._pre_login()
 
@@ -380,7 +350,7 @@ class SteamClient(EventEmitter, FeatureBase):
         """
         Login as anonymous user
         """
-        logger.debug("Attempting Anonymous login")
+        self._LOG.debug("Attempting Anonymous login")
 
         self._pre_login()
 
