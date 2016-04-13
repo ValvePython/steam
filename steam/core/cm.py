@@ -152,7 +152,7 @@ class CMClient(EventEmitter):
     def _reset_attributes(self):
         for name in ['connected',
                      'channel_secured',
-                     'key',
+                     'channel_key',
                      'channel_hmac',
                      'steam_id',
                      'session_id',
