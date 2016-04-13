@@ -55,12 +55,12 @@ class SteamClient(CMClient, FeatureBase):
         """
         self.credential_location = path
 
-    def disconnect(self):
+    def disconnect(self, *args, **kwargs):
         """
         Close connection
         """
         self.logged_on = False
-        CMClient.disconnect(self)
+        CMClient.disconnect(self, *args, **kwargs)
 
     def _handle_jobs(self, event, *args):
         if isinstance(event, EMsg):
