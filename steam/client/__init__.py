@@ -390,7 +390,7 @@ class SteamClient(EventEmitter, FeatureBase):
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='AnonUser', universe='Public')
-        message.body.protocol_version = 65575
+        message.body.protocol_version = 65579
         self.send(message)
 
     def logout(self):
