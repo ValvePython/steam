@@ -2,6 +2,7 @@ import sys
 import re
 from steam.enums.base import SteamIntEnum
 from steam.enums import EType, EUniverse
+from steam.util.web import make_requests_session
 
 if sys.version_info < (3,):
     intBase = long
@@ -345,13 +346,13 @@ def steam64_from_url(url):
     if not match:
         return None
 
-    import requests
+    web = make_requests_session()
 
     if match.group('type') in ('id', 'profiles'):
-        xml = requests.get("%s/?xml=1" % url).text
+        xml = web.get("%s/?xml=1" % url).text
         match = re.findall('<steamID64>(\d+)</steamID64>', xml)
     else:
-        xml = requests.get("%s/memberslistxml/?xml=1" % url).text
+        xml = web.get("%s/memberslistxml/?xml=1" % url).text
         match = re.findall('<groupID64>(\d+)</groupID64>', xml)
 
     if not match:
