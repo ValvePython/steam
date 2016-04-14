@@ -203,8 +203,7 @@ class CMClient(EventEmitter):
                         message = crypto.symmetric_decrypt_HMAC(message, self.channel_key, self.channel_hmac)
                     except RuntimeError as e:
                         self._LOG.exception(e)
-                        gevent.spawn(self.disconnect)
-                        return
+                        break
                 else:
                     message = crypto.symmetric_decrypt(message, self.channel_key)
 
