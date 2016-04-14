@@ -13,10 +13,10 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
 
 install_requires = [
     'requests>=2.9.1',
-    'vdf>=1.10',
+    'vdf>=2.0',
     'pycrypto>=2.6.1',
-    'gevent>=1.1rc3',
-    'gevent-eventemitter>=1.2',
+    'gevent>=1.1.0',
+    'gevent-eventemitter>=1.4',
     'protobuf>=2.6.1',
 ]
 
