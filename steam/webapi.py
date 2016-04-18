@@ -21,6 +21,7 @@ All globals params (``key``, ``https``, ``format``, ``raw``) can be specified on
             "success"       "1"
     }
 """
+import json
 from steam.util.web import make_requests_session
 
 DEFAULT_PARAMS = {
@@ -66,6 +67,13 @@ def webapi_request(path, method='GET', caller=None, params={}, session=None):
 
     if onetime['format'] not in ('json', 'vdf', 'xml'):
         raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
+
+    # serialize some parameter types properly
+    for k, v in params.items():
+        if isinstance(v, bool):
+            params[k] = 1 if v else 0
+        elif isinstance(v, (list, dict)):
+            params[k] = json.dumps(v)
 
     # move params to data, if data is not specified for POST
     # simplifies code calling this method
