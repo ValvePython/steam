@@ -2,7 +2,7 @@ steam.client
 ============
 
 .. toctree::
-    steam.client.features
+    steam.client.builtins
     steam.client.mixins
     steam.client.gc
 

@@ -12,10 +12,10 @@ from steam.enums import EResult, EOSType, EPersonaState
 from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
-from steam.client.features import FeatureBase
+from steam.client.builtins import BuiltinBase
 
 
-class SteamClient(CMClient, FeatureBase):
+class SteamClient(CMClient, BuiltinBase):
     """
     Implementation of Steam client based on ``gevent``
 
@@ -39,7 +39,7 @@ class SteamClient(CMClient, FeatureBase):
         #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
         self.logged_on = False
 
-        FeatureBase.__init__(self)
+        BuiltinBase.__init__(self)
 
     def __repr__(self):
         return "<%s(%s) %s>" % (self.__class__.__name__,

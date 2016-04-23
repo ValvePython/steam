@@ -1,12 +1,12 @@
-steam.client.features
+steam.client.builtins
 =====================
 
-.. automodule:: steam.client.features
+.. automodule:: steam.client.builtins
 
 User
 ----
 
-.. automodule:: steam.client.features.user
+.. automodule:: steam.client.builtins.user
     :members:
     :undoc-members:
     :show-inheritance:
@@ -14,7 +14,7 @@ User
 Web
 ---
 
-.. automodule:: steam.client.features.web
+.. automodule:: steam.client.builtins.web
     :members:
     :undoc-members:
     :show-inheritance:
@@ -22,7 +22,7 @@ Web
 Misc
 ----
 
-.. automodule:: steam.client.features.misc
+.. automodule:: steam.client.builtins.misc
     :members:
     :undoc-members:
     :show-inheritance:
