@@ -5,8 +5,8 @@ from steam.core.msg import MsgProto
 from steam.enums.emsg import EMsg
 
 class Misc(object):
-    def __init__(self):
-        super(Misc, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(Misc, self).__init__(*args, **kwargs)
 
     def games_played(self, app_ids):
         """

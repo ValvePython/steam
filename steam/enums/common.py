@@ -1,14 +1,5 @@
 from steam.enums.base import SteamIntEnum
 
-__all__ = [
-    'EResult',
-    'EUniverse',
-    'EType',
-    'EServerType',
-    'EOSType',
-    'EPersonaState',
-    ]
-
 
 class EResult(SteamIntEnum):
     Invalid = 0
@@ -269,3 +260,95 @@ class EPersonaState(SteamIntEnum):
     LookingToTrade = 5
     LookingToPlay = 6
     Max = 7
+
+
+class EFriendRelationship(SteamIntEnum):
+    No = 0
+    Blocked = 1
+    RequestRecipient = 2
+    Friend = 3
+    RequestInitiator = 4
+    Ignored = 5
+    IgnoredFriend = 6
+    SuggestedFriend = 7
+    Max = 8
+
+
+class EAccountFlags(SteamIntEnum):
+    NormalUser = 0
+    PersonaNameSet = 1
+    Unbannable = 2
+    PasswordSet = 4
+    Support = 8
+    Admin = 16
+    Supervisor = 32
+    AppEditor = 64
+    HWIDSet = 128
+    PersonalQASet = 256
+    VacBeta = 512
+    Debug = 1024
+    Disabled = 2048
+    LimitedUser = 4096
+    LimitedUserForce = 8192
+    EmailValidated = 16384
+    MarketingTreatment = 32768
+    OGGInviteOptOut = 65536
+    ForcePasswordChange = 131072
+    ForceEmailVerification = 262144
+    LogonExtraSecurity = 524288
+    LogonExtraSecurityDisabled = 1048576
+    Steam2MigrationComplete = 2097152
+    NeedLogs = 4194304
+    Lockdown = 8388608
+    MasterAppEditor = 16777216
+    BannedFromWebAPI = 33554432
+    ClansOnlyFromFriends = 67108864
+    GlobalModerator = 134217728
+
+class EFriendFlags(SteamIntEnum):
+    No = 0
+    Blocked = 1
+    FriendshipRequested = 2
+    Immediate = 4
+    ClanMember = 8
+    OnGameServer = 16
+    RequestingFriendship = 128
+    RequestingInfo = 256
+    Ignored = 512
+    IgnoredFriend = 1024
+    Suggested = 2048
+    FlagAll = 65535
+
+
+class EPersonaStateFlag(SteamIntEnum):
+    HasRichPresence = 1
+    InJoinableGame = 2
+    OnlineUsingWeb = 256
+    OnlineUsingMobile = 512
+    OnlineUsingBigPicture = 1024
+
+
+class EClientPersonaStateFlag(SteamIntEnum):
+    Status = 1
+    PlayerName = 2
+    QueryPort = 4
+    SourceID = 8
+    Presence = 16
+    Metadata = 32
+    LastSeen = 64
+    ClanInfo = 128
+    GameExtraInfo = 256
+    GameDataBlob = 512
+    ClanTag = 1024
+    Facebook = 2048
+
+
+# Do not remove
+from sys import modules
+from enum import EnumMeta
+
+__all__ = map(lambda y: y.__name__,
+              filter(lambda x: x.__class__ is EnumMeta, modules[__name__].__dict__.values()),
+              )
+
+del modules, EnumMeta

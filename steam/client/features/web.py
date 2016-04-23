@@ -9,8 +9,8 @@ from steam.util.web import make_requests_session
 
 
 class Web(object):
-    def __init__(self):
-        super(Web, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(Web, self).__init__(*args, **kwargs)
 
     def get_web_session_cookies(self):
         """

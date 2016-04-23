@@ -3,8 +3,8 @@ from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
 
 class User(object):
-    def __init__(self):
-        super(User, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(User, self).__init__(*args, **kwargs)
 
     def set_persona(self, state=None, name=None):
         """
