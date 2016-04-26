@@ -1,7 +1,7 @@
-__version__ = "0.7.2"
+__version__ = "0.7.3"
 __author__ = "Rossen Georgiev"
 
-version_info = (0, 7, 2)
+version_info = (0, 7, 3)
 
 from steam.steamid import SteamID
 from steam.webapi import WebAPI
