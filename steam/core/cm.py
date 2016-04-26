@@ -41,8 +41,8 @@ class CMClient(EventEmitter):
     connected = False                       #: :class:`True` if connected to CM
     channel_secured = False                 #: :class:`True` once secure channel handshake is complete
 
-    channel_key = None                              #: channel encryption key
-    channel_hmac = None                      #: HMAC secret
+    channel_key = None                      #: channel encryption key
+    channel_hmac = None                     #: HMAC secret
 
     steam_id = SteamID()                    #: :class:`steam.steamid.SteamID` of the current user
     session_id = None                       #: session id when logged in

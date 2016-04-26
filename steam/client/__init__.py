@@ -189,7 +189,7 @@ class SteamClient(CMClient, BuiltinBase):
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
         :type raises: :class:`bool`
-        :return: ``response``
+        :return: response proto message
         :rtype: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
         :raises: ``gevent.Timeout``
         """
@@ -211,7 +211,7 @@ class SteamClient(CMClient, BuiltinBase):
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
         :type raises: :class:`bool`
-        :return: ``response``
+        :return: response proto message
         :rtype: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
         :raises: ``gevent.Timeout``
         """
