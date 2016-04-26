@@ -36,6 +36,7 @@ class CMClient(EventEmitter):
 
     servers = None                          #: a instance of :class:`steam.core.cm.CMServerList`
     current_server_addr = None              #: (ip, port) tuple
+    _seen_logon = False
     _connecting = False
     connected = False                       #: :class:`True` if connected to CM
     channel_secured = False                 #: :class:`True` once secure channel handshake is complete
@@ -157,6 +158,7 @@ class CMClient(EventEmitter):
                      'steam_id',
                      'session_id',
                      'webapi_authenticate_user_nonce',
+                     '_seen_logon',
                      '_recv_loop',
                      '_heartbeat_loop',
                      ]:
@@ -209,6 +211,10 @@ class CMClient(EventEmitter):
 
             gevent.spawn(self._parse_message, message)
             gevent.idle()
+
+        if not self._seen_logon and self.channel_secured:
+            if self.wait_event('disconnected', timeout=5) is not None:
+                return
 
         gevent.spawn(self.disconnect)
 
@@ -331,6 +337,7 @@ class CMClient(EventEmitter):
             self.servers.mark_bad(self.current_server_addr)
             self.disconnect(True)
         elif result == EResult.OK:
+            self._seen_logon = True
             self._reconnect_backoff_c = 0
 
             self._LOG.debug("Logon completed")
