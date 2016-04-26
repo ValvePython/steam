@@ -251,13 +251,13 @@ class CMClient(EventEmitter):
 
         self.emit(emsg, msg)
 
-    def __handle_encrypt_request(self, msg):
+    def __handle_encrypt_request(self, req):
         self._LOG.debug("Securing channel")
 
         try:
-            if msg.body.protocolVersion != 1:
+            if req.body.protocolVersion != 1:
                 raise RuntimeError("Unsupported protocol version")
-            if msg.body.universe != EUniverse.Public:
+            if req.body.universe != EUniverse.Public:
                 raise RuntimeError("Unsupported universe")
         except RuntimeError as e:
             self._LOG.exception(e)
@@ -266,24 +266,24 @@ class CMClient(EventEmitter):
 
         resp = Msg(EMsg.ChannelEncryptResponse)
 
-        challenge = msg.body.challenge
+        challenge = req.body.challenge
         key, resp.body.key = crypto.generate_session_key(challenge)
         resp.body.crc = binascii.crc32(resp.body.key) & 0xffffffff
 
         self.send(resp)
 
-        resp = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
+        result = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
 
-        if resp is None:
+        if result is None:
             self.servers.mark_bad(self.current_server_addr)
             gevent.spawn(self.disconnect, True)
             return
 
-        msg, = resp
+        eresult = result[0].body.eresult
 
-        if msg.body.eresult != EResult.OK:
-            self._LOG.debug("Failed to secure channel: %s" % msg.body.eresult)
-            gevent.spawn(self.disconnect)
+        if eresult != EResult.OK:
+            self._LOG.error("Failed to secure channel: %s" % eresult)
+            gevent.spawn(self.disconnect, True)
             return
 
         self.channel_key = key
