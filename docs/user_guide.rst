@@ -144,14 +144,13 @@ SteamClient
 ===========
 
 ``gevent`` based implementation for interacting with the Steam network.
-This is currently a WIP, and is barebone.
-It should be possible to implement various functions with ease.
+The library comes with some Steam client features implemented, see :doc:`api/steam.client` for more details.
 
 CLI example
 -----------
 
 This program will prompt for user and password.
-If authentication code is required, it will additionally prompt for that.
+If an authentication code is required, it will additionally prompt for that.
 Configuring logging will lets us see the internal interactions.
 
 .. code:: python
@@ -209,18 +208,22 @@ Sending a message
 -----------------
 
 Example of sending a protobuf message and handling the response.
-`wait_event` will block until specified event.
+`send_message_and_wait` will send a message and block until the specified event.
 
 .. code:: python
 
-    from steam.core.emsg import MsgProto
+    from steam.enums import EResult
+    from steam.core.msg import MsgProto
 
-    message = MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce)
+    message = MsgProto(EMsg.ClientAddFriend)
+    message.body.steamid_to_add = 77777777777
 
-    resp = client.send_message_and_wait(message, EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
+    resp = client.send_message_and_wait(message, EMsg.ClientAddFriendResponse)
 
     if resp.eresult == EResult.OK:
-        print "WebAPI Nonce: %s" % repr(resp.webapi_authenticate_user_nonce)
+        print "Send a friend request to %s (%d)" % (repr(body.persona_name_added),
+                                                   body.steam_id_added,
+                                                   )
     else:
         print "Error: %s" % EResult(resp.eresult)
 
@@ -229,9 +232,8 @@ Alternatively, a callback can be registered to handle the response event every t
 
 .. code:: python
 
-    @client.on(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
-    def handle_webapi_nonce(msg):
-        print "WebAPI Nonce: %s" % repr(resp.body.webapi_authenticate_user_nonce)
-
+    @client.on(EMsg.ClientAddFriendResponse)
+    def handle_add_response(msg):
+        pass
     # OR
-    client.on(EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, handle_webapi_nonce)
+    client.on(EMsg.ClientAddFriendResponse, handle_add_response)
