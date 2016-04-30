@@ -13,8 +13,7 @@ class Web(object):
         super(Web, self).__init__(*args, **kwargs)
 
     def get_web_session_cookies(self):
-        """
-        Get web authentication cookies via WebAPI's ``AuthenticateUser``
+        """Get web authentication cookies via WebAPI's ``AuthenticateUser``
 
         .. note::
             only valid during the current steam session
@@ -46,16 +45,17 @@ class Web(object):
             'steamLoginSecure': resp['authenticateuser']['tokensecure'],
         }
 
-    def get_web_session(self):
-        """
+    def get_web_session(self, language='english'):
+        """Get a :class:`requests.Session` that is ready for use
+
         See :meth:`get_web_session_cookies`
 
-        .. warning::
-            Exercise caution when using the session.
-            Auth cookies will be send with every request,
-            regardless of the domain or https/http.
+        .. note::
+            Auth cookies will only be send to ``.steampowered.com`` and ``.steamcommunity.com`` domains
 
-        :return: authenticated session ready for use
+        :param language: localization language for steam pages
+        :type language: :class:`str`
+        :return: authenticated Session ready for use
         :rtype: :class:`requests.Session`, :class:`None`
         """
         cookies = self.get_web_session_cookies()
@@ -64,7 +64,12 @@ class Web(object):
 
         session = make_requests_session()
 
-        for name, val in cookies.items():
-            session.cookies.set(name, val)
+        for domain in ['.steampowered.com', '.steamcommunity.com']:
+            for name, val in cookies.items():
+                secure = (name == 'steamLoginSecure')
+                session.cookies.set(name, val, domain=domain, secure=secure)
+
+            session.cookies.set('Steam_Language', language, domain=domain)
+            session.cookies.set('birthtime', '-3333', domain=domain)
 
         return session
