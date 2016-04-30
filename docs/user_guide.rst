@@ -147,9 +147,6 @@ SteamClient
 This is currently a WIP, and is barebone.
 It should be possible to implement various functions with ease.
 
-.. warning::
-    API for this part could change without notice
-
 CLI example
 -----------
 
@@ -202,7 +199,10 @@ Configuring logging will lets us see the internal interactions.
     print "Logged on as: %s" % msg.body.persona_name
     print "SteamID: %s" % repr(client.steamid)
 
-    client.wait_event('disconnect')
+    try:
+        client.run_forever()
+    except KeyboardInterrupt:
+        client.logout()
 
 
 Sending a message
@@ -217,12 +217,12 @@ Example of sending a protobuf message and handling the response.
 
     message = MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce)
 
-    client.send_message_and_wait(message, EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
+    resp = client.send_message_and_wait(message, EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse)
 
-    if resp.body.eresult == EResult.OK:
-        print "WebAPI Nonce: %s" % repr(resp.body.webapi_authenticate_user_nonce)
+    if resp.eresult == EResult.OK:
+        print "WebAPI Nonce: %s" % repr(resp.webapi_authenticate_user_nonce)
     else:
-        print "Error: %s" % EResult(resp.body.eresult)
+        print "Error: %s" % EResult(resp.eresult)
 
 
 Alternatively, a callback can be registered to handle the response event every time.
