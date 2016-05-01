@@ -11,23 +11,56 @@ class Friends(object):
         super(Friends, self).__init__(*args, **kwargs)
 
         #: SteamFriendlist instance
-        self.friends = SteamFriendlist(self)
+        self.friends = SteamFriendlist(self, logger_name="%s.friends" % self.__class__.__name__)
 
 class SteamFriendlist(EventEmitter):
-    _LOG = logging.getLogger('SteamClient.friends')
+    """SteamFriendlist is an object that keeps state of user's friend list.
+    Think of it as a list of :class:`SteamUser`.
+    You can iterate over it, check if it contains a particular steam id, or get :class:`SteamUser` for a steamid.
 
-    def __init__(self, client):
+    .. note::
+        persona state is not update immediatelly for new user entries
+
+
+    Event: ``ready`` - friendlist is ready to use
+
+    Event: ``friend_invite`` - new or existing friend invite
+
+    :param user: steam user instance
+    :type user: :class:`SteamUser`
+
+    Event: ``friend_new`` - emitted upon accepting a new friend (or being accepted)
+
+    :param user: steam user instance
+    :type user: :class:`SteamUser`
+
+
+    Event: ``friend_removed`` - no longer a friend (removed by either side)
+
+    :param user: steam user instance
+    :type user: :class:`SteamUser`
+
+    """
+    ready = False  #: indicates whether friend list is available
+
+    def __init__(self, client, logger_name='SteamFriendList'):
+        self._LOG = logging.getLogger(logger_name)
         self._fr = {}
         self._steam = client
 
         self._steam.on(EMsg.ClientAddFriendResponse, self._handle_add_friend_result)
         self._steam.on(EMsg.ClientFriendsList, self._handle_friends_list)
         self._steam.on(EMsg.ClientPersonaState, self._handle_persona_state)
+        self._steam.on('disconnected', self._handle_disconnect)
 
     def emit(self, event, *args):
         if event is not None:
             self._LOG.debug("Emit event: %s" % repr(event))
         EventEmitter.emit(self, event, *args)
+
+    def _handle_disconnect(self):
+        self.ready = False
+        self._fr.clear()
 
     def _handle_add_friend_result(self, message):
         eresult = EResult(message.body.eresult)
@@ -72,6 +105,10 @@ class SteamFriendlist(EventEmitter):
             m.body.friends.extend(pstate_check)
             self._steam.send(m)
 
+        if not self.ready:
+            self.ready = True
+            self.emit('ready')
+
     def _handle_persona_state(self, message):
         for friend in message.body.friends:
             steamid = friend.friendid
@@ -81,6 +118,7 @@ class SteamFriendlist(EventEmitter):
 
             if steamid in self._fr:
                 self._fr[steamid]._data['pstate'] = friend
+                self.emit('persona_state_updated', self._fr[steamid])
 
     def __repr__(self):
         return "<%s %d users>" % (
@@ -143,6 +181,14 @@ class SteamUser(intBase):
             'relationship': EFriendRelationship(rel)
         }
 
+    def __repr__(self):
+        return "<%s (%s) %s %s>" % (
+            self.__class__.__name__,
+            int(self) if self.name is None else repr(self.name),
+            self.relationship.name,
+            self.state.name,
+            )
+
     @property
     def steamid(self):
         """SteamID instance
@@ -159,7 +205,7 @@ class SteamUser(intBase):
         """
         return self._data['relationship']
 
-    def get_persona_state_value(self, field_name):
+    def get_ps(self, field_name):
         """Get a value for field in ``CMsgClientPersonaState.Friend``
 
         :param field_name: see example list below
@@ -188,7 +234,7 @@ class SteamUser(intBase):
 
         :rtype: :class:`str`, :class:`None`
         """
-        return self.get_persona_state_value('player_name')
+        return self.get_ps('player_name')
 
     @property
     def state(self):
@@ -196,7 +242,7 @@ class SteamUser(intBase):
 
         :rtype: :class:`steam.enums.common.EPersonaState`
         """
-        state = self.get_persona_state_value('persona_state')
+        state = self.get_ps('persona_state')
         if state:
             return EPersonaState(state)
         return EPersonaState.Offline
@@ -209,7 +255,7 @@ class SteamUser(intBase):
         :return: url to avatar
         :rtype: :class:`str`
         """
-        ahash = self.get_persona_state_value('avatar_hash')
+        ahash = self.get_ps('avatar_hash')
         if ahash is None:
             return None
 
@@ -222,11 +268,3 @@ class SteamUser(intBase):
         ahash = binascii.hexlify(persona_state_value.avatar_hash).decode('ascii')
 
         return url % (ahash[:2], ahash, sizes[size])
-
-    def __repr__(self):
-        return "<%s (%s) %s %s>" % (
-            self.__class__.__name__,
-            int(self) if self.name is None else repr(self.name),
-            self.relationship.name,
-            self.state.name,
-            )
