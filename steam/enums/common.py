@@ -350,8 +350,8 @@ class EClientPersonaStateFlag(SteamIntEnum):
 from sys import modules
 from enum import EnumMeta
 
-__all__ = map(lambda y: y.__name__,
+__all__ = list(map(lambda y: y.__name__,
               filter(lambda x: x.__class__ is EnumMeta, modules[__name__].__dict__.values()),
-              )
+              ))
 
 del modules, EnumMeta
