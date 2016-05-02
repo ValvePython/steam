@@ -296,7 +296,7 @@ class ChannelEncryptRequest:
             self.load(data)
 
     def serialize(self):
-        return struct.pack("<II", self.protocolVersion, self.universe)
+        return struct.pack("<II", self.protocolVersion, self.universe) + self.challenge
 
     def load(self, data):
         (self.protocolVersion,
@@ -305,7 +305,7 @@ class ChannelEncryptRequest:
 
         self.universe = EUniverse(universe)
 
-        if len(data) >= 16:
+        if len(data) > 8:
             self.challenge = data[8:]
 
     def __str__(self):
