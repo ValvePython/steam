@@ -11,14 +11,13 @@ from steam.util import set_proto_bit, clear_proto_bit
 
 class MsgHdr:
     _size = struct.calcsize("<Iqq")
+    msg = EMsg.Invalid
+    targetJobID = -1
+    sourceJobID = -1
 
     def __init__(self, data=None):
         if data:
             self.load(data)
-        else:
-            self.msg = EMsg.Invalid
-            self.targetJobID = -1
-            self.sourceJobID = -1
 
     def serialize(self):
         return struct.pack("<Iqq",
@@ -44,19 +43,18 @@ class MsgHdr:
 
 class ExtendedMsgHdr:
     _size = struct.calcsize("<IBHqqBqi")
+    msg = EMsg.Invalid
+    headerSize = 36
+    headerVersion = 2
+    targetJobID = -1
+    sourceJobID = -1
+    headerCanary = 239
+    steamID = -1
+    sessionID = -1
 
     def __init__(self, data=None):
         if data:
             self.load(data)
-        else:
-            self.msg = EMsg.Invalid
-            self.headerSize = 36
-            self.headerVersion = 2
-            self.targetJobID = -1
-            self.sourceJobID = -1
-            self.headerCanary = 239
-            self.steamID = -1
-            self.sessionID = -1
 
     def serialize(self):
         return struct.pack("<IBHqqBqi",
@@ -100,14 +98,13 @@ class ExtendedMsgHdr:
 
 class MsgHdrProtoBuf:
     _size = struct.calcsize("<II")
+    msg = EMsg.Invalid
 
     def __init__(self, data=None):
         self.proto = steammessages_base_pb2.CMsgProtoBufHeader()
 
         if data:
             self.load(data)
-        else:
-            self.msg = EMsg.Invalid
 
     def serialize(self):
         proto_data = self.proto.SerializeToString()
@@ -123,8 +120,9 @@ class MsgHdrProtoBuf:
 
 
 class Msg(object):
+    proto = False
+
     def __init__(self, msg, data=None, extended=False):
-        self.proto = False
         self.extended = extended
         self.header = ExtendedMsgHdr(data) if extended else MsgHdr(data)
         self.header.msg = msg
@@ -229,13 +227,13 @@ def get_cmsg(emsg):
 
 
 class MsgProto(object):
-    def __init__(self, msg, data=None):
-        self.proto = True
-        self._header = MsgHdrProtoBuf(data)
-        self._header.msg = msg
+    proto = True
 
-        self.msg = msg
+    def __init__(self, msg, data=None):
+        self._header = MsgHdrProtoBuf(data)
+        self.msg = self._header.msg = msg
         self.header = self._header.proto
+
         proto = get_cmsg(msg)
 
         if msg == EMsg.ServiceMethod:
@@ -289,13 +287,13 @@ class MsgProto(object):
 
 
 class ChannelEncryptRequest:
+    protocolVersion = 1
+    universe = EUniverse.Invalid
+    challenge = b''
+
     def __init__(self, data=None):
         if data:
             self.load(data)
-        else:
-            self.protocolVersion = 1
-            self.universe = EUniverse.Invalid
-            self.challenge = ''
 
     def serialize(self):
         return struct.pack("<II", self.protocolVersion, self.universe)
@@ -318,14 +316,14 @@ class ChannelEncryptRequest:
 
 
 class ChannelEncryptResponse:
+    protocolVersion = 1
+    keySize = 128
+    key = ''
+    crc = 0
+
     def __init__(self, data=None):
         if data:
             self.load(data)
-        else:
-            self.protocolVersion = 1
-            self.keySize = 128
-            self.key = ''
-            self.crc = 0
 
     def serialize(self):
         return struct.pack("<II128sII",
@@ -353,11 +351,11 @@ class ChannelEncryptResponse:
 
 
 class ChannelEncryptResult:
+    eresult = EResult.Invalid
+
     def __init__(self, data=None):
         if data:
             self.load(data)
-        else:
-            self.eresult = EResult.Invalid
 
     def serialize(self):
         return struct.pack("<I", self.eresult)
@@ -370,11 +368,11 @@ class ChannelEncryptResult:
         return "result: %s" % repr(self.eresult)
 
 class ClientLogOnResponse:
+    eresult = EResult.Invalid
+
     def __init__(self, data=None):
         if data:
             self.load(data)
-        else:
-            self.eresult = EResult.Invalid
 
     def serialize(self):
         return struct.pack("<I", self.eresult)
@@ -389,17 +387,16 @@ class ClientLogOnResponse:
 
 class GCMsgHdr:
     _size = struct.calcsize("<Hqq")
+    proto = None
+    headerVersion = 1
+    targetJobID = -1
+    sourceJobID = -1
 
     def __init__(self, msg, data=None):
-        self.proto = None
         self.msg = clear_proto_bit(msg)
 
         if data:
             self.load(data)
-        else:
-            self.headerVersion = 1
-            self.targetJobID = -1
-            self.sourceJobID = -1
 
     def serialize(self):
         return struct.pack("<Hqq",
@@ -422,16 +419,14 @@ class GCMsgHdr:
 
 class GCMsgHdrProto:
     _size = struct.calcsize("<Ii")
+    headerLength = 0
 
     def __init__(self, msg, data=None):
         self.proto = gc_pb2.CMsgProtoBufHeader()
+        self.msg = clear_proto_bit(msg)
 
         if data:
             self.load(data)
-        else:
-            self.msg = clear_proto_bit(msg)
-            self.headerLength = 0
-
 
     def serialize(self):
         proto_data = self.proto.SerializeToString()
