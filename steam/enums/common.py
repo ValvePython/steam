@@ -103,6 +103,9 @@ class EResult(SteamIntEnum):
     EmailSendFailure = 99
     NotSettled = 100
     NeedCaptcha = 101
+    GSLTDenied = 102
+    GSOwnerDenied = 103
+    InvalidItemType = 104
 
 
 class EUniverse(SteamIntEnum):
