@@ -12,13 +12,18 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
     __version__ = f.readline().split('"')[1]
 
 install_requires = [
+    'pycrypto>=2.6.1',
     'requests>=2.9.1',
     'vdf>=2.0',
-    'pycrypto>=2.6.1',
-    'gevent>=1.1.0',
-    'gevent-eventemitter>=1.4',
-    'protobuf>=2.6.1',
 ]
+
+install_extras = {
+    'client': [
+        'gevent>=1.1.0',
+        'protobuf>=2.6.1',
+        'gevent-eventemitter>=1.4',
+    ],
+}
 
 if sys.version_info < (3, 4):
     install_requires.append('enum34>=1.0.4')
@@ -43,5 +48,6 @@ setup(
     keywords='valve steam steamid api webapi steamcommunity',
     packages=['steam'] + ['steam.'+x for x in find_packages(where='steam')],
     install_requires=install_requires,
+    extras_require=install_extras,
     zip_safe=True,
 )
