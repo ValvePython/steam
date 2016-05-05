@@ -10,26 +10,29 @@
 
 A python module for intracting with various parts of Steam_.
 
-Visit the `Github repository <https://github.com/ValvePython/steam>`_.
-
-.. note::
-    The module is still very much an alpha.
-    API can change without warning
+Visit the `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
 .. note::
     Python 3 is currently not supported,
-    see `milestone <https://github.com/ValvePython/steam/milestones/Python%203%20support>`_.
+    see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
 
 Installing
 ==========
 
-The latest relase version can be installed from ``PYPI``::
+By default the ``steam`` package doesn't install all dependecies.
+Add ``[client]`` extra if you are going to use ``SteamClient``.
+
+Install latest version from PYPI::
 
     pip install -U steam
+    pip install -U steam[client]
 
-To install the current dev version from `Github repository <https://github.com/ValvePython/steam>`_::
+Install the current dev version from ``github``::
 
     pip install git+https://github.com/ValvePython/steam
+    pip install git+https://github.com/ValvePython/steam#egg=steam[client]
+
+For extras syntax in ``requirements.txt`` see `pip docs <https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers>`_::
 
 Contents
 ========
