@@ -6,5 +6,6 @@ steam
     steam.core
     steam.enums
     steam.steamid
-    steam.util
     steam.webapi
+    steam.webauth
+    steam.util

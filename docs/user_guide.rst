@@ -237,3 +237,17 @@ Alternatively, a callback can be registered to handle the response event every t
         pass
     # OR
     client.on(EMsg.ClientAddFriendResponse, handle_add_response)
+
+
+Web Authentication
+==================
+
+There are currently two paths for gaining accessing to steam websites.
+Either using :class:`steam.webauth.WebAuth`, or via a :class:`steam.client.SteamClient` instance.
+
+.. code:: python
+
+    session = client.get_web_session()  # returns request.Session
+    session.get('https://store.steampowered.com')
+
+For more details about :class:`steam.webauth.WebAuth`, see :doc:`api/steam.webauth`

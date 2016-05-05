@@ -5,6 +5,7 @@ version_info = (0, 7, 4)
 
 from steam.steamid import SteamID
 from steam.webapi import WebAPI
+from steam.webauth import WebAuth
 
 
 # proxy object
