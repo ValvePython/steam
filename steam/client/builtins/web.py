@@ -1,10 +1,9 @@
 """
 Web related features
 """
-from Crypto.Hash import SHA
-from Crypto.Random import new as randombytes
+from binascii import hexlify
 from steam import WebAPI
-from steam.core.crypto import generate_session_key, symmetric_encrypt
+from steam.core.crypto import generate_session_key, symmetric_encrypt, sha1_hash, random_bytes
 from steam.util.web import make_requests_session
 
 
@@ -40,7 +39,7 @@ class Web(object):
             return None
 
         return {
-            'sessionid': SHA.new(randombytes().read(32)).hexdigest(),
+            'sessionid': hexlify(sha1_hash(random_bytes(32))),
             'steamLogin': resp['authenticateuser']['token'],
             'steamLoginSecure': resp['authenticateuser']['tokensecure'],
         }

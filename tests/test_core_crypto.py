@@ -7,18 +7,15 @@ from steam.core import crypto
 
 class crypto_testcase(unittest.TestCase):
     def setUp(self):
-        class NotRandom:
-            def read(self, n):
-                return b'1' * n
+        patcher = mock.patch('os.urandom')
+        self.addCleanup(patcher.stop)
+        self.urandom = patcher.start()
+        self.urandom.side_effect = lambda n: b'1' * n
 
-        def fakeNew():
-            return NotRandom()
-
-        self._oldnew = crypto.Random.new
-        crypto.Random.new = fakeNew
-
-    def tearDown(self):
-        crypto.Random.new = self._oldnew
+        patcher = mock.patch('steam.core.crypto.random_bytes')
+        self.addCleanup(patcher.stop)
+        self.random_bytes = patcher.start()
+        self.random_bytes.side_effect = lambda n: b'1' * n
 
     def test_keygen(self):
         expected_key = b'1' * 32
@@ -70,4 +67,6 @@ class crypto_testcase(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             crypto.symmetric_decrypt_HMAC(cyphertext, key, b'4'*16)
 
-
+    def test_sha1_hash(self):
+        self.assertEqual(crypto.sha1_hash(b'123'),    b'@\xbd\x00\x15c\x08_\xc3Qe2\x9e\xa1\xff\\^\xcb\xdb\xbe\xef')
+        self.assertEqual(crypto.sha1_hash(b'999999'), b'\x1fU#\xa8\xf55(\x9b4\x01\xb2\x99X\xd0\x1b)f\xeda\xd2')

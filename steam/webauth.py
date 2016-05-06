@@ -41,8 +41,11 @@ Alternatively, if Steam Guard is not enabled on the account:
 import time
 import sys
 from base64 import b64encode
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_v1_5
+
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicNumbers
+from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
+from steam.core.crypto import backend
+
 from steam.util.web import make_requests_session
 from steam import SteamID
 
@@ -53,7 +56,7 @@ else:
 
 
 class WebAuth(object):
-    cipher = None
+    key = None
     complete = False  #: whether authentication has been completed successfully
     session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
@@ -93,15 +96,15 @@ class WebAuth(object):
 
         return resp
 
-    def _make_cipher(self):
-        if not self.cipher:
+    def _load_key(self):
+        if not self.key:
             resp = self.get_rsa_key(self.username)
 
-            rsa = RSA.construct((intBase(resp['publickey_mod'], 16),
-                                 intBase(resp['publickey_exp'], 16),
-                                 ))
+            nums = RSAPublicNumbers(intBase(resp['publickey_exp'], 16),
+                                    intBase(resp['publickey_mod'], 16),
+                                    )
 
-            self.cipher = PKCS1_v1_5.new(rsa)
+            self.key = backend.load_rsa_public_numbers(nums)
             self.timestamp = resp['timestamp']
 
     def login(self, captcha='', email_code='', twofactor_code='', language='english'):
@@ -126,11 +129,11 @@ class WebAuth(object):
         if self.complete:
             return self.session
 
-        self._make_cipher()
+        self._load_key()
 
         params = {
             'username' : self.username,
-            "password": b64encode(self.cipher.encrypt(self.password)),
+            "password": b64encode(self.key.encrypt(self.password, PKCS1v15())),
             "emailauth": email_code,
             "emailsteamid": str(self.steamid) if email_code else '',
             "twofactorcode": twofactor_code,

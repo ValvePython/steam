@@ -12,7 +12,7 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
     __version__ = f.readline().split('"')[1]
 
 install_requires = [
-    'pycrypto>=2.6.1',
+    'cryptography>=1.3',
     'requests>=2.9.1',
     'vdf>=2.0',
 ]

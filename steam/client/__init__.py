@@ -5,7 +5,7 @@ import gevent.monkey
 gevent.monkey.patch_socket()
 gevent.monkey.patch_ssl()
 
-from Crypto.Hash import SHA
+from steam.core.crypto import sha1_hash
 from eventemitter import EventEmitter
 from steam.enums.emsg import EMsg
 from steam.enums import EResult, EOSType, EPersonaState
@@ -120,7 +120,7 @@ class SteamClient(CMClient, BuiltinBase):
 
             resp.body.filename = message.body.filename
             resp.body.eresult = EResult.OK
-            resp.body.sha_file = SHA.new(message.body.bytes).digest()
+            resp.body.sha_file = sha1_hash(message.body.bytes)
             resp.body.getlasterror = 0
             resp.body.offset = message.body.offset
             resp.body.cubwrote = message.body.cubtowrite
@@ -336,7 +336,7 @@ class SteamClient(CMClient, BuiltinBase):
             message.body.eresult_sentryfile = EResult.FileNotFound
         else:
             message.body.eresult_sentryfile = EResult.OK
-            message.body.sha_sentryfile = SHA.new(sentry).digest()
+            message.body.sha_sentryfile = sha1_hash(sentry)
 
         if auth_code:
             message.body.auth_code = auth_code
