@@ -54,6 +54,11 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt
+	rename -v '.steamclient' '' protobufs/*.proto
+	for filepath in `ls ./protobufs/*.proto`; do \
+		sed -i 's/cc_generic_services/py_generic_services/' "$$filepath"; \
+		sed -i 's/\.steamclient\.proto/.proto/' "$$filepath"; \
+	done;
 
 pb_compile:
 	for filepath in `ls ./protobufs/*.proto`; do \

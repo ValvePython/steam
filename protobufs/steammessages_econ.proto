@@ -1,0 +1,18 @@
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+message CEcon_ClientGetItemShopOverlayAuthURL_Request {
+	optional string return_url = 1;
+}
+
+message CEcon_ClientGetItemShopOverlayAuthURL_Response {
+	optional string url = 1;
+}
+
+service Econ {
+	option (service_description) = "A service that provides communication with the econ servers";
+	rpc ClientGetItemShopOverlayAuthURL (.CEcon_ClientGetItemShopOverlayAuthURL_Request) returns (.CEcon_ClientGetItemShopOverlayAuthURL_Response) {
+		option (method_description) = "Generates a URL which sets a secure cookie for in-game-browser itemshop purchases";
+	}
+}
