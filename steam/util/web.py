@@ -7,9 +7,6 @@ def make_requests_session():
     """
     session = requests.Session()
 
-    # use urllib3 to make requests gevent cooperative
-    session.mount('any', requests.adapters.HTTPAdapter())
-
     version = __import__('steam').__version__
     ua = "python-steam/{0} {1}".format(version,
                                 session.headers['User-Agent'])
