@@ -1,6 +1,6 @@
 """Utility package with various useful functions
 """
-
+import weakref
 import struct
 import socket
 
@@ -54,3 +54,34 @@ def clear_proto_bit(emsg):
     return int(emsg) & ~protobuf_mask
 
 
+class WeakRefKeyDict(object):
+    """Pretends to be a dictionary.
+    Use any object (even unhashable) as key and store a value.
+    Once the object is garbage collected, the entry is destroyed automatically.
+    """
+    def __init__(self):
+        self.refs = {}
+
+    def __setitem__(self, obj, value):
+        key = id(obj)
+
+        if key not in self.refs:
+            wr = weakref.ref(obj, WeakRefCallback(self.refs, key))
+            self.refs[key] = [wr, None]
+        self.refs[key][1] = value
+
+    def __getitem__(self, obj):
+        key = id(obj)
+        return self.refs[key][1]
+
+    def __contains__(self, obj):
+        return id(obj) in self.refs
+
+    def __len__(self):
+        return len(self.refs)
+
+class WeakRefCallback(object):
+    def __init__(self, refs, key):
+        self.__dict__.update(locals())
+    def __call__(self, wr):
+        del self.refs[self.key]
