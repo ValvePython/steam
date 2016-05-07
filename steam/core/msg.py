@@ -248,12 +248,12 @@ class MsgProto(object):
         self.msg = self._header.msg = msg
         self.header = self._header.proto
 
-        if msg in (EMsg.ServiceMethod, EMsg.ServiceMethod):
+        if msg == EMsg.ServiceMethod:
             proto = get_um(self.header.target_job_name)
             if proto:
                 self.body = proto()
             else:
-                self.body = '!! Unable to resolve: %s !!' % repr(self.header.target_job_name)
+                self.body = '!! Can\'t resolve ServiceMethod: %s !!' % repr(self.header.target_job_name)
         else:
             proto = get_cmsg(msg)
 
