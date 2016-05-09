@@ -169,7 +169,7 @@ Configuring logging will lets us see the internal interactions.
     }
 
     client = SteamClient()
-    #client.cm.verbose_debug = True
+    #client.verbose_debug = True
 
     @client.on('error')
     def print_error(result):
@@ -179,20 +179,12 @@ Configuring logging will lets us see the internal interactions.
     def auth_code_prompt(is_2fa, code_mismatch):
         if is_2fa:
             code = raw_input("Enter 2FA Code: ")
-            logOnDetails.update({'two_factor_code': code})
+            client.login(two_factor_code=code, **logOnDetails)
         else:
             code = raw_input("Enter Email Code: ")
-            logOnDetails.update({'auth_code': code})
+            client.login(auth_code=code, **logOnDetails)
 
-        client.connect()
-
-    @client.on('channel_secured')
-    def send_login():
-        client.login(**logOnDetails)
-        # OR
-        # client.anonymous_login()
-
-    client.connect()
+    client.login(**logOnDetails)
 
     msg, = client.wait_event(EMsg.ClientAccountInfo)
     print "Logged on as: %s" % msg.body.persona_name
