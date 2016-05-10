@@ -25,6 +25,7 @@ class SteamClient(CMClient, BuiltinBase):
     current_jobid = 0
     credential_location = None  #: location for sentry
     username = None  #: username when logged on
+    login_key = None  #: can be used for subsequent logins (no 2FA code will be required)
 
     def __init__(self):
         CMClient.__init__(self)
@@ -34,6 +35,7 @@ class SteamClient(CMClient, BuiltinBase):
         self.on(None, self._handle_jobs)
         self.on("disconnected", self._handle_disconnect)
         self.on("reconnect", self._handle_disconnect)
+        self.on(EMsg.ClientNewLoginKey, self._handle_login_key)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
 
         #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
@@ -75,7 +77,6 @@ class SteamClient(CMClient, BuiltinBase):
                 self.emit("job_%d" % jobid, *args)
 
     def _handle_disconnect(self, *args):
-        self.username = None
         self.logged_on = False
         self.current_jobid = 0
 
@@ -109,6 +110,12 @@ class SteamClient(CMClient, BuiltinBase):
                 code_mismatch = (result == EResult.InvalidLoginAuthCode)
 
             self.emit("auth_code_required", is_2fa, code_mismatch)
+
+    def _handle_login_key(self, message):
+        self.login_key = message.body.login_key
+        resp = MsgProto(EMsg.ClientNewLoginKeyAccepted)
+        resp.body.unique_id = message.body.unique_id
+        self.send(resp)
 
     def _handle_update_machine_auth(self, message):
         ok = self.store_sentry(self.username, message.body.bytes)
@@ -282,7 +289,7 @@ class SteamClient(CMClient, BuiltinBase):
         if not self.channel_secured:
             self.wait_event("channel_secured")
 
-    def login(self, username, password, auth_code=None, two_factor_code=None):
+    def login(self, username, password='', login_key=None, auth_code=None, two_factor_code=None):
         """
         Login as a specific user
 
@@ -290,6 +297,8 @@ class SteamClient(CMClient, BuiltinBase):
         :type username: :class:`str`
         :param password: password
         :type password: :class:`str`
+        :param login_key: login key, instead of password
+        :type login_key: :class:`str`
         :param auth_code: email authentication code
         :type auth_code: :class:`str`
         :param two_factor_code: 2FA authentication code
@@ -327,9 +336,14 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.client_package_version = 1771
         message.body.client_os_type = EOSType.Win10
         message.body.client_language = "english"
+        message.body.should_remember_password = True
 
         message.body.account_name = username
-        message.body.password = password
+
+        if login_key:
+            message.body.login_key = login_key
+        else:
+            message.body.password = password
 
         sentry = self.get_sentry(username)
         if sentry is None:
@@ -353,6 +367,9 @@ class SteamClient(CMClient, BuiltinBase):
 
         self._pre_login()
 
+        self.username = None
+        self.login_key = None
+
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='AnonUser', universe='Public')
         message.body.protocol_version = 65579
@@ -360,7 +377,7 @@ class SteamClient(CMClient, BuiltinBase):
 
     def logout(self):
         """
-        Logout from steam. Doesn't nothing if not logged on upon calling :meth:`logout`
+        Logout from steam. Doesn't nothing if not logged on.
 
         .. note::
             The server will drop the connection immediatelly upon logout.
