@@ -50,7 +50,6 @@ class CMClient(EventEmitter):
 
     _recv_loop = None
     _heartbeat_loop = None
-    _reconnect_backoff_c = 0
     _LOG = None
 
     def __init__(self, protocol=0):
@@ -72,11 +71,13 @@ class CMClient(EventEmitter):
             self._LOG.debug("Emit event: %s" % repr(event))
         super(CMClient, self).emit(event, *args)
 
-    def connect(self, retry=None):
+    def connect(self, retry=None, delay=0):
         """Initiate connection to CM. Blocks until connected unless ``retry`` is specified.
 
         :param retry: number of retries before returning. Unlimited when set to ``None``
         :type retry: :class:`int`
+        :param delay: delay in secnds before connection attempt
+        :type delay: :class:`int`
         :return: successful connection
         :rtype: :class:`bool`
         """
@@ -87,6 +88,10 @@ class CMClient(EventEmitter):
             self._LOG.debug("Connect called, but we are already connecting.")
             return
         self._connecting = True
+
+        if delay:
+            self._LOG.debug("Delayed connect: %d seconds" % delay)
+            gevent.sleep(delay)
 
         self._LOG.debug("Connect initiated.")
 
@@ -113,7 +118,7 @@ class CMClient(EventEmitter):
         self._connecting = False
         return True
 
-    def disconnect(self, reconnect=False, nodelay=False):
+    def disconnect(self):
         """Close connection
 
         .. note::
@@ -145,20 +150,7 @@ class CMClient(EventEmitter):
 
         self._reset_attributes()
 
-        if reconnect:
-            if nodelay:
-                delay_seconds = 0
-                self._reconnect_backoff_c = 0
-            else:
-                delay_seconds = 2**self._reconnect_backoff_c - 1
-                self._reconnect_backoff_c = min(5, self._reconnect_backoff_c + 1)
-
-            self.emit('reconnect', delay_seconds)
-
-            gevent.spawn_later(delay_seconds, self.connect)
-        else:
-            self._reconnect_backoff_c = 0
-            self.emit('disconnected')
+        self.emit('disconnected')
 
     def _reset_attributes(self):
         for name in ['connected',
@@ -286,14 +278,14 @@ class CMClient(EventEmitter):
 
         if result is None:
             self.servers.mark_bad(self.current_server_addr)
-            gevent.spawn(self.disconnect, True)
+            gevent.spawn(self.disconnect)
             return
 
         eresult = result[0].body.eresult
 
         if eresult != EResult.OK:
             self._LOG.error("Failed to secure channel: %s" % eresult)
-            gevent.spawn(self.disconnect, True)
+            gevent.spawn(self.disconnect)
             return
 
         self.channel_key = key
@@ -345,10 +337,9 @@ class CMClient(EventEmitter):
                       EResult.ServiceUnavailable
                       ):
             self.servers.mark_bad(self.current_server_addr)
-            self.disconnect(True)
+            self.disconnect()
         elif result == EResult.OK:
             self._seen_logon = True
-            self._reconnect_backoff_c = 0
 
             self._LOG.debug("Logon completed")
 

@@ -22,6 +22,7 @@ class SteamClient(CMClient, BuiltinBase):
     See `gevent-eventmitter <https://github.com/rossengeorgiev/gevent-eventemitter>`_
     for details on how to work with events.
     """
+    _reconnect_backoff_c = 0
     current_jobid = 0
     credential_location = None  #: location for sentry
     username = None  #: username when logged on
@@ -86,6 +87,7 @@ class SteamClient(CMClient, BuiltinBase):
         result = EResult(msg.body.eresult)
 
         if result == EResult.OK:
+            self._reconnect_backoff_c = 0
             self.logged_on = True
             self.set_persona(EPersonaState.Online)
             self.emit("logged_on")
@@ -133,6 +135,25 @@ class SteamClient(CMClient, BuiltinBase):
             resp.body.cubwrote = message.body.cubtowrite
 
             self.send(resp)
+
+    def reconnect(self, maxdelay=30, retry=0):
+        """Implements explonential backoff delay before attempting to connect.
+        It is otherwise identical to calling :meth:`steam.core.cm.CMClient.connect`.
+        The delay is reset upon a successful login.
+
+        :param maxdelay: maximum delay in seconds before connect (0-120s)
+        :type maxdelay: :class:`int`
+        :param retry: see :meth:`steam.core.cm.CMClient.connect`
+        :type retry: :class:`int`
+        :return: successful connection
+        :rtype: :class:`bool`
+        """
+        delay_seconds = 2**self._reconnect_backoff_c - 1
+
+        if delay_seconds < maxdelay:
+            self._reconnect_backoff_c = min(7, self._reconnect_backoff_c + 1)
+
+        return self.connect(delay=delay_seconds, retry=retry)
 
     def send(self, message):
         """
