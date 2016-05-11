@@ -72,8 +72,14 @@ class CMClient(EventEmitter):
             self._LOG.debug("Emit event: %s" % repr(event))
         super(CMClient, self).emit(event, *args)
 
-    def connect(self):
-        """Initiate connection to CM. Blocks until we connect."""
+    def connect(self, retry=None):
+        """Initiate connection to CM. Blocks until connected unless ``retry`` is specified.
+
+        :param retry: number of retries before returning. Unlimited when set to ``None``
+        :type retry: :class:`int`
+        :return: successful connection
+        :rtype: :class:`bool`
+        """
         if self.connected:
             self._LOG.debug("Connect called, but we are connected?")
             return
@@ -84,7 +90,10 @@ class CMClient(EventEmitter):
 
         self._LOG.debug("Connect initiated.")
 
-        for server_addr in self.servers:
+        for i, server_addr in enumerate(self.servers):
+            if retry is not None and i > retry:
+                return False
+
             start = time()
 
             if self.connection.connect(server_addr):
@@ -102,6 +111,7 @@ class CMClient(EventEmitter):
         self.emit("connected")
         self._recv_loop = gevent.spawn(self._recv_messages)
         self._connecting = False
+        return True
 
     def disconnect(self, reconnect=False, nodelay=False):
         """Close connection
