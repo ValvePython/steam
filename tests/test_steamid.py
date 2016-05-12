@@ -244,13 +244,15 @@ class steamid_functions(unittest.TestCase):
         self.assertIsInstance(test_instance, SteamID)
         self.assertEqual(test_instance.as_64, 76580280500085312)
 
-    @mock.patch('requests.get')
-    def test_steam64_from_url_timeout(self, get_mock):
-        get_mock.return_value = requests.exceptions.ConnectTimeout('test')
+    @mock.patch('steam.steamid.make_requests_session')
+    def test_steam64_from_url_timeout(self, mrs_mock):
+        mm = mrs_mock.return_value = mock.MagicMock()
+
+        mm.get.side_effect = requests.exceptions.ConnectTimeout('test')
         self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/id/timeout_me"))
 
-        get_mock.reset_mock()
-        get_mock.return_value = requests.exceptions.ReadTimeout('test')
+        mm.get.reset_mock()
+        mm.get.side_effect = requests.exceptions.ReadTimeout('test')
         self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/id/timeout_me"))
 
     @vcr.use_cassette('vcr/steamid_community_urls.yaml', mode='once', serializer='yaml', filter_query_parameters=['nocache'])

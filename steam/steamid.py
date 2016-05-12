@@ -362,12 +362,12 @@ def steam64_from_url(url, http_timeout=30):
 
     try:
         if match.group('type') in ('id', 'profiles'):
-            xml = web.get("%s/?xml=1&nocache=%d" % (url, nocache)).text
+            xml = web.get("%s/?xml=1&nocache=%d" % (url, nocache), timeout=http_timeout).text
             match = re.findall('<steamID64>(\d+)</steamID64>', xml)
         else:
-            xml = web.get("%s/memberslistxml/?xml=1&nocache=%d" % (url, nocache)).text
+            xml = web.get("%s/memberslistxml/?xml=1&nocache=%d" % (url, nocache), timeout=http_timeout).text
             match = re.findall('<groupID64>(\d+)</groupID64>', xml)
-    except requests.exceptions.BaseHTTPError:
+    except requests.exceptions.RequestException:
         return None
 
     if not match:
