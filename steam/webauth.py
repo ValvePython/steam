@@ -81,7 +81,7 @@ class WebAuth(object):
         :type username: :class:`str`
         :return: json response
         :rtype: :class:`dict`
-        :raises HTTPError: when there is any problem with the rsa key request
+        :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
         """
         try:
             resp = self.session.get('https://store.steampowered.com/login/getrsakey/',
@@ -120,7 +120,7 @@ class WebAuth(object):
         :type language: :class:`str`
         :return: a session on success and :class:`None` otherwise
         :rtype: :class:`requests.Session`, :class:`None`
-        :raises HTTPError: when there is any problem with the rsa key request
+        :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
         :raises CaptchaRequired: when captcha is needed
         :raises EmailCodeRequired: when email is needed
         :raises TwoFactorCodeRequired: when 2FA is needed
@@ -142,7 +142,7 @@ class WebAuth(object):
             "loginfriendlyname": "python-steam webauth",
             "rsatimestamp": self.timestamp,
             "remember_login": False,
-            "donotcache": int(time.time() * 1000),
+            "donotcache": int(time.time() * 100000),
         }
 
         try:
@@ -156,7 +156,6 @@ class WebAuth(object):
             self.complete = True
             self.password = None
 
-            # dologin will actually set the cookies, but only for steamcommunity.com  ¯\_(ツ)_/¯
             self.session.cookies.clear()
             data = resp['transfer_parameters']
 
