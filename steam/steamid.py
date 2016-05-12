@@ -1,5 +1,7 @@
+from time import time
 import sys
 import re
+import requests
 from steam.enums.base import SteamIntEnum
 from steam.enums import EType, EUniverse
 from steam.util.web import make_requests_session
@@ -321,13 +323,21 @@ def steam3_to_tuple(value):
 
     return (steam32, etype, universe, instance)
 
-def steam64_from_url(url):
+def steam64_from_url(url, http_timeout=30):
     """
     Takes a Steam Community url and returns steam64 or None
 
+    .. note::
+        Each call makes a http request to ``steamcommunity.com``
+
+    .. note::
+        For a reliable resolving of vanity urls use ``ISteamUser.ResolveVanityURL`` web api
+
     :param url: steam community url
     :type url: str
-    :return: steam64
+    :param http_timeout: how long to wait on http request before turning ``None``
+    :type http_timeout: :class:`int`
+    :return: steam64, or ``None`` if ``steamcommunity.com`` is down
     :rtype: ``int`` or ``None``
 
     Example URLs::
@@ -346,14 +356,19 @@ def steam64_from_url(url):
     if not match:
         return None
 
+    url = re.sub(r'^https', 'http', url)  # avoid 1 extra req, https is redirected to http anyway
     web = make_requests_session()
+    nocache = time() * 100000
 
-    if match.group('type') in ('id', 'profiles'):
-        xml = web.get("%s/?xml=1" % url).text
-        match = re.findall('<steamID64>(\d+)</steamID64>', xml)
-    else:
-        xml = web.get("%s/memberslistxml/?xml=1" % url).text
-        match = re.findall('<groupID64>(\d+)</groupID64>', xml)
+    try:
+        if match.group('type') in ('id', 'profiles'):
+            xml = web.get("%s/?xml=1&nocache=%d" % (url, nocache)).text
+            match = re.findall('<steamID64>(\d+)</steamID64>', xml)
+        else:
+            xml = web.get("%s/memberslistxml/?xml=1&nocache=%d" % (url, nocache)).text
+            match = re.findall('<groupID64>(\d+)</groupID64>', xml)
+    except requests.exceptions.BaseHTTPError:
+        return None
 
     if not match:
         return None
@@ -361,16 +376,19 @@ def steam64_from_url(url):
     return match[0]  # return matched steam64
 
 
-def from_url(url):
+def from_url(url, http_timeout=30):
     """
-    Takes Steam community url and returns a SteamID instance or None
+    Takes Steam community url and returns a SteamID instance or ``None``
+
+    See :py:func:`steam64_from_url` for details
 
     :param url: steam community url
     :type url: str
+    :param http_timeout: how long to wait on http request before turning ``None``
+    :type http_timeout: :class:`int`
     :return: `SteamID` instance
     :rtype: :py:class:`steam.SteamID` or ``None``
 
-    See :py:func:`steam64_from_url`
     """
 
     steam64 = steam64_from_url(url)
@@ -379,3 +397,5 @@ def from_url(url):
         return SteamID(steam64)
 
     return None
+
+SteamID.from_url = staticmethod(from_url)

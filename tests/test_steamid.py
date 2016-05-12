@@ -2,6 +2,7 @@ import unittest
 import mock
 import vcr
 
+import requests
 from steam import steamid
 from steam.steamid import SteamID, ETypeChar
 from steam.enums import EType, EUniverse
@@ -243,10 +244,17 @@ class steamid_functions(unittest.TestCase):
         self.assertIsInstance(test_instance, SteamID)
         self.assertEqual(test_instance.as_64, 76580280500085312)
 
+    @mock.patch('requests.get')
+    def test_steam64_from_url_timeout(self, get_mock):
+        get_mock.return_value = requests.exceptions.ConnectTimeout('test')
+        self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/id/timeout_me"))
 
-    @vcr.use_cassette('vcr/steamid_community_urls.yaml', mode='once', serializer='yaml')
+        get_mock.reset_mock()
+        get_mock.return_value = requests.exceptions.ReadTimeout('test')
+        self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/id/timeout_me"))
+
+    @vcr.use_cassette('vcr/steamid_community_urls.yaml', mode='once', serializer='yaml', filter_query_parameters=['nocache'])
     def test_steam64_from_url(self):
-
         # invalid urls return None
         self.assertIsNone(steamid.steam64_from_url("asdasd"))
         self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/gid/0"))
