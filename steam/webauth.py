@@ -38,9 +38,10 @@ Alternatively, if Steam Guard is not enabled on the account:
     If you are using :class:`steam.client.SteamClient`, see :meth:`steam.client.builtins.web.Web.get_web_session()`
 
 """
-import time
+from time import time
 import sys
 from base64 import b64encode
+import requests
 
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicNumbers
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
@@ -84,11 +85,11 @@ class WebAuth(object):
         :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
         """
         try:
-            resp = self.session.get('https://store.steampowered.com/login/getrsakey/',
+            resp = self.session.post('https://store.steampowered.com/login/getrsakey/',
                                     timeout=15,
-                                    params={
+                                    data={
                                         'username': username,
-                                        'donotchache': int(time.time() * 1000),
+                                        'donotchache': int(time() * 1000),
                                         },
                                     ).json()
         except requests.exceptions.RequestException as e:
@@ -131,7 +132,7 @@ class WebAuth(object):
 
         self._load_key()
 
-        params = {
+        data = {
             'username' : self.username,
             "password": b64encode(self.key.encrypt(self.password, PKCS1v15())),
             "emailauth": email_code,
@@ -142,11 +143,11 @@ class WebAuth(object):
             "loginfriendlyname": "python-steam webauth",
             "rsatimestamp": self.timestamp,
             "remember_login": False,
-            "donotcache": int(time.time() * 100000),
+            "donotcache": int(time() * 100000),
         }
 
         try:
-            resp = self.session.get('https://store.steampowered.com/login/dologin/', params=params, timeout=15).json()
+            resp = self.session.post('https://store.steampowered.com/login/dologin/', data=data, timeout=15).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
