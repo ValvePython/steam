@@ -1,0 +1,236 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: GET
+    uri: https://api.steampowered.com/ISteamWebAPIUtil/GetSupportedAPIList/v1/?format=json
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-length: ['7182']
+      content-type: [application/json; charset=UTF-8]
+      date: ['Fri, 13 May 2016 12:46:46 GMT']
+      expires: ['Fri, 13 May 2016 12:46:46 GMT']
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: publishedfileids%5B2%5D=1&publishedfileids%5B3%5D=1&itemcount=5&format=json&publishedfileids%5B1%5D=1&publishedfileids%5B4%5D=1&publishedfileids%5B0%5D=1
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: [q=0]
+      Connection: [keep-alive]
+      Content-Length: ['190']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: POST
+    uri: https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/
+  response:
+    body: {string: !!python/unicode "{\n\t\"response\": {\n\t\t\"result\": 1,\n\t\t\
+        \"resultcount\": 5,\n\t\t\"publishedfiledetails\": [\n\t\t\t{\n\t\t\t\t\"\
+        publishedfileid\": \"1\",\n\t\t\t\t\"result\": 9\n\t\t\t},\n\t\t\t{\n\t\t\t\
+        \t\"publishedfileid\": \"1\",\n\t\t\t\t\"result\": 9\n\t\t\t},\n\t\t\t{\n\t\
+        \t\t\t\"publishedfileid\": \"1\",\n\t\t\t\t\"result\": 9\n\t\t\t},\n\t\t\t\
+        {\n\t\t\t\t\"publishedfileid\": \"1\",\n\t\t\t\t\"result\": 9\n\t\t\t},\n\t\
+        \t\t{\n\t\t\t\t\"publishedfileid\": \"1\",\n\t\t\t\t\"result\": 9\n\t\t\t\
+        }\n\t\t]\n\t\t\n\t}\n}"}
+    headers:
+      connection: [keep-alive]
+      content-length: ['365']
+      content-type: [application/json; charset=UTF-8]
+      date: ['Fri, 13 May 2016 12:46:47 GMT']
+      expires: ['Fri, 13 May 2016 13:16:20 GMT']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: [q=0]
+      Connection: [keep-alive]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: GET
+    uri: https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?format=json&url_type=2&vanityurl=valve
+  response:
+    body: {string: !!python/unicode "{\n\t\"response\": {\n\t\t\"steamid\": \"103582791429521412\"\
+        ,\n\t\t\"success\": 1\n\t}\n}"}
+    headers:
+      connection: [keep-alive]
+      content-length: ['71']
+      content-type: [application/json; charset=UTF-8]
+      date: ['Fri, 13 May 2016 12:46:47 GMT']
+      expires: ['Fri, 13 May 2016 12:46:47 GMT']
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: [q=0]
+      Connection: [keep-alive]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: GET
+    uri: https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/?format=json
+  response:
+    body: {string: !!python/unicode "{\n\t\"servertime\": 1463143608,\n\t\"servertimestring\"\
+        : \"Fri May 13 05:46:48 2016\"\n}"}
+    headers:
+      connection: [keep-alive]
+      content-length: ['78']
+      content-type: [application/json; charset=UTF-8]
+      date: ['Fri, 13 May 2016 12:46:48 GMT']
+      expires: ['Fri, 13 May 2016 12:46:48 GMT']
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: [q=0]
+      Connection: [keep-alive]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: GET
+    uri: https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/?format=vdf
+  response:
+    body: {string: !!python/unicode "\"response\"\n{\n\t\"servertime\"\t\"1463143609\"\
+        \n\t\"servertimestring\"\t\"Fri May 13 05:46:49 2016\"\n}"}
+    headers:
+      connection: [keep-alive]
+      content-length: ['88']
+      content-type: [text/vdf; charset=UTF-8]
+      date: ['Fri, 13 May 2016 12:46:49 GMT']
+      expires: ['Fri, 13 May 2016 12:46:49 GMT']
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+version: 1
