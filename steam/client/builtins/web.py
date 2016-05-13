@@ -63,7 +63,7 @@ class Web(object):
 
         session = make_requests_session()
 
-        for domain in ['.steampowered.com', '.steamcommunity.com']:
+        for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
             for name, val in cookies.items():
                 secure = (name == 'steamLoginSecure')
                 session.cookies.set(name, val, domain=domain, secure=secure)
