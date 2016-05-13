@@ -2,7 +2,7 @@
 """
 This module simplifies the process of obtaining an authenticated session for steam websites.
 After authentication is complete, a :class:`requests.Session` is created containing the auth cookies.
-The session can be used to access ``steamcommunity.com`` and ``steampowered.com``.
+The session can be used to access ``steamcommunity.com``, ``store.steampowered.com``, and ``help.steampowered.com``.
 
 Example usage:
 
@@ -162,7 +162,7 @@ class WebAuth(object):
 
             self.steamid = SteamID(data['steamid'])
 
-            for domain in ['.steampowered.com', '.steamcommunity.com']:
+            for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
                 self.session.cookies.set('steamLogin', '%s||%s' % (data['steamid'], data['token']),
                                     domain=domain, secure=False)
                 self.session.cookies.set('steamLoginSecure', '%s||%s' % (data['steamid'], data['token_secure']),
