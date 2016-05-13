@@ -31,6 +31,10 @@ test:
 	coverage erase
 	PYTHONHASHSEED=0 nosetests --nologcapture --verbosity 1 --with-coverage --cover-package=steam
 
+webauth_gen:
+	rm -f vcr/webauth*
+	python tests/generete_webauth_vcr.py
+
 pylint:
 	pylint -r n -f colorized steam || true
 

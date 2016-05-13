@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['46']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: POST
+    uri: https://store.steampowered.com/login/getrsakey/
+  response:
+    body: {string: !!python/unicode '{"timestamp": "75683600000", "token_gid": 0,
+        "publickey_mod": "C91B651503A9831EB1708001E9D77FC618D472D29467B7CA31984918BECED0E1E54687EC744B93A10E12D3107B0CC7533923593600D98CCAA921914FB16B4D9910EB7CD556663778C081A22848DCCAB178772C88F24373679441AF0D7042208FE24AB9ADCB17F8C147425ED0C88B67E3E4C997511AB1B3A42F6CE2D0EC1D16FDEFE40D92C778EF45DACAD2AC10177D03B5736C6C339EAD8F03768036E3546A070D5A1FC04BA30495BEAA4A342D842A59971A179A39B6AA532F3BEEDE50596F52F15C9DF7D1DF4EFB470ACB2C36C005FDBDB5A3AB7D9A3D665120B0E04DD782C5E3CFBDA922761ADE5B09D742ED54C198C11A60C77725E4C001AE68C9855D5ED5",
+        "publickey_exp": "010001", "success": true}'}
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-length: ['621']
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 13 May 2016 03:01:26 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      server: [Apache]
+      x-frame-options: [DENY]
+    status: {code: 200, message: OK}
+- request:
+    body: ''
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['578']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+    method: POST
+    uri: https://store.steampowered.com/login/dologin/
+  response:
+    body: {string: !!python/unicode '{"captcha_gid": -1, "success": false, "requires_twofactor":
+        false, "captcha_needed": false, "clear_password_field": true, "message": "Incorrect
+        login."}'}
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-length: ['152']
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 13 May 2016 03:01:27 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      server: [Apache]
+      x-frame-options: [DENY]
+    status: {code: 200, message: OK}
+version: 1
