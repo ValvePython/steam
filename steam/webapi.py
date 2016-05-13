@@ -212,13 +212,13 @@ class WebAPI(object):
 
     def doc(self):
         """
-        Print documentation for all interfaces and their methods
+        :return: Documentation for all interfaces and their methods
+        :rtype: :class:`str`
         """
-
         doc = "Steam Web API - List of all interfaces\n\n"
         for interface in self.interfaces:
             doc += interface.__doc__
-        print(doc)
+        return doc
 
 
 class WebAPIInterface(object):
@@ -278,7 +278,7 @@ class WebAPIInterface(object):
         return self._parent.session
 
     def doc(self):
-        print(self.__doc__)
+        return self.__doc__
 
     @property
     def __doc__(self):
@@ -386,7 +386,7 @@ class WebAPIMethod(object):
         return self._dict['name']
 
     def doc(self):
-        print(self.__doc__)
+        return self.__doc__
 
     @property
     def __doc__(self):
