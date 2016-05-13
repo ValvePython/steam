@@ -134,7 +134,7 @@ class WebAuth(object):
 
         data = {
             'username' : self.username,
-            "password": b64encode(self.key.encrypt(self.password, PKCS1v15())),
+            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
             "emailsteamid": str(self.steamid) if email_code else '',
             "twofactorcode": twofactor_code,
