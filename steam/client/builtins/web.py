@@ -50,7 +50,7 @@ class Web(object):
         See :meth:`get_web_session_cookies`
 
         .. note::
-            Auth cookies will only be send to ``.steampowered.com`` and ``.steamcommunity.com`` domains
+            Auth cookies will only be send to ``(help|store).steampowered.com`` and ``steamcommunity.com`` domains
 
         :param language: localization language for steam pages
         :type language: :class:`str`
