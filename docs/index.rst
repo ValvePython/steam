@@ -8,19 +8,30 @@
 |pypi| |license|
 
 
-A python module for intracting with various parts of Steam_.
+A python module for interacting with various parts of Steam_.
 
-Visit the `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
+Supports Python ``2.7+`` and ``3.4+``.
 
 .. note::
-    Python 3 is currently not supported,
+    Python 3 support for the SteamClient is not available in the release,
     see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
+
+Main features:
+
+* :class:`SteamID <steam.steamid.SteamID>` - convert between the various ID representations with ease
+* :class:`WebAPI <steam.webapi.WebAPI>` - simple API for Steam's Web API with automatic population of interfaces
+* :class:`WebAuth <steam.webauth.WebAuth>` - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
+* :class:`SteamClient <steam.client.SteamClient>` - communication with the steam network based on ``gevent``.
+
+Checkout the :doc:`user_guide` for examples, or the :doc:`api/index` for details.
+
+For questions, issues, or general curiosity, visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
 Installing
 ==========
 
-By default the ``steam`` package doesn't install all dependecies.
-Add ``[client]`` extra if you are going to use ``SteamClient``.
+By default the ``steam`` package doesn't install all dependencies.
+Add ``[client]`` extra if you are going to use :class:`SteamClient <steam.client.SteamClient>`.
 
 Install latest version from PYPI::
 

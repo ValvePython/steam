@@ -10,7 +10,7 @@ overview of the functionality available in the ``steam`` module.
 SteamID
 =======
 
-``SteamID`` object can be used to convert the universal steam id
+:mod:`SteamID <steam.steamid>` can be used to convert the universal steam id
 to its' various representations.
 
 .. note::
@@ -62,8 +62,8 @@ Here are some examples:
 
 .. code:: python
 
+    >>> SteamID.from_url('https://steamcommunity.com/id/drunkenf00l')
     >>> steam.steamid.from_url('https://steamcommunity.com/id/drunkenf00l')
-    >>> steam.steamid.from_url('http://steamcommunity.com/profiles/76561197968459473')
     SteamID(id=8193745, type='Individual', universe='Public', instance=1)
 
     >>> steam.steamid.steam64_from_url('http://steamcommunity.com/profiles/76561197968459473')
@@ -73,12 +73,12 @@ Here are some examples:
 WebAPI
 ======
 
-Wrapper around `Steam Web API`_. Requires `API Key`_. Upon initialization the
-instance will fetch all available interfaces from the API and populate the namespace.
+:mod:`WebAPI <steam.webapi>` is a thin Wrapper around `Steam Web API`_. Requires `API Key`_. Upon initialization the
+instance will fetch all available interfaces and populate the namespace.
 
 .. note::
    Interface availability depends on the ``key``.
-   Unless data is loaded manually.
+   Unless the schema is loaded manually.
 
 Example usage
 -------------
@@ -200,7 +200,7 @@ Sending a message
 -----------------
 
 Example of sending a protobuf message and handling the response.
-`send_message_and_wait` will send a message and block until the specified event.
+:meth:`send_message_and_wait() <steam.client.SteamClient.send_message_and_wait>` will send a message and block until the specified event.
 
 .. code:: python
 
@@ -235,11 +235,11 @@ Web Authentication
 ==================
 
 There are currently two paths for gaining accessing to steam websites.
-Either using :class:`steam.webauth.WebAuth`, or via a :class:`steam.client.SteamClient` instance.
+Either using :class:`WebAuth <steam.webauth.WebAuth>`, or via a :meth:`SteamClient.get_web_session() <steam.client.builtins.web.Web.get_web_session>` instance.
 
 .. code:: python
 
-    session = client.get_web_session()  # returns request.Session
+    session = client.get_web_session()  # returns requests.Session
     session.get('https://store.steampowered.com')
 
-For more details about :class:`steam.webauth.WebAuth`, see :doc:`api/steam.webauth`
+For more details about :class:`WebAuth <steam.webauth.WebAuth>`, see :mod:`steam.webauth`

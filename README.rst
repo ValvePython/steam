@@ -1,8 +1,24 @@
 |pypi| |license| |coverage| |scru| |master_build|
 
-Module for interacting with various Steam_ features.
+A python module for interacting with various parts of Steam_.
 
-**Documentation**: http://valvepython.github.io/steam/
+Supports Python ``2.7+`` and ``3.4+``.
+
+.. note::
+    Python 3 support for the SteamClient is not available in the release,
+    see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
+
+Main features:
+
+* `SteamID <http://valvepython.github.io/steam/api/steam.client.html>`_  - convert between the various ID representations with ease
+* `WebAPI <http://valvepython.github.io/steam/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
+* `WebAuth <http://valvepython.github.io/steam/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
+* `SteamClient <http://valvepython.github.io/steam/api/steam.client.html>_` - communication with the steam network based on ``gevent``.
+
+Checkout the `User guide <http://valvepython.github.io/steam/user_guide.html>`_ for examples,
+ or the `API Reference <http://valvepython.github.io/steam/api/index.html>`_ for details.
+
+For questions, issues or general curiosity visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
 Installation
 ------------
@@ -35,7 +51,7 @@ To run for specific version, setup a ``virtual environment``::
     source py3/bin/active
     make test
 
-To run for ``python 2.7``, ``3.3``, ``3.4`` and ``pypy``, assuming you have them installed::
+To run for ``python 2.7`` and ``3.4`` assuming you have them installed::
 
     tox
 
