@@ -4,19 +4,17 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-.. note::
-    Python 3 support for the SteamClient is not available in the release,
-    see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
+Python 3 support for the SteamClient is not available in the release, see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
 
 Main features:
 
 * `SteamID <http://valvepython.github.io/steam/api/steam.client.html>`_  - convert between the various ID representations with ease
 * `WebAPI <http://valvepython.github.io/steam/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
 * `WebAuth <http://valvepython.github.io/steam/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
-* `SteamClient <http://valvepython.github.io/steam/api/steam.client.html>_` - communication with the steam network based on ``gevent``.
+* `SteamClient <http://valvepython.github.io/steam/api/steam.client.html>`_ - communication with the steam network based on ``gevent``.
 
 Checkout the `User guide <http://valvepython.github.io/steam/user_guide.html>`_ for examples,
- or the `API Reference <http://valvepython.github.io/steam/api/index.html>`_ for details.
+or the `API Reference <http://valvepython.github.io/steam/api/index.html>`_ for details.
 
 For questions, issues or general curiosity visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
@@ -36,7 +34,7 @@ Install the current dev version from ``github``::
     pip install git+https://github.com/ValvePython/steam
     pip install git+https://github.com/ValvePython/steam#egg=steam[client]
 
-For extras syntax in ``requirements.txt`` see `pip docs <https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers>`_::
+For extras syntax in ``requirements.txt`` see `pip docs <https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers>`_
 
 Testing
 -------
