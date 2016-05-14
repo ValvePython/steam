@@ -1,5 +1,5 @@
 """
-WebAPI provides a thin gevent cooperative wrapper over Steam's WebAPI
+WebAPI provides a thin wrapper over `Steam's Web API <https://developer.valvesoftware.com/wiki/Steam_Web_API>`_
 
 Calling an endpoint
 

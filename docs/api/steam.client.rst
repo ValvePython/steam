@@ -1,11 +1,13 @@
 steam.client
 ============
 
+.. automodule:: steam.client
+    :members: SteamClient
+    :undoc-members:
+    :show-inheritance:
+
 .. toctree::
     steam.client.builtins
     steam.client.mixins
     steam.client.gc
 
-.. automodule:: steam.client
-    :members:
-    :show-inheritance:

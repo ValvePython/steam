@@ -1,7 +1,7 @@
 """
 All optional features are available as mixins for :class:`steam.client.SteamClient`.
 Using this approach the client can remain light yet flexible.
-Functionallity can be added though inheritance depending on the use case.
+Functionality can be added though inheritance depending on the use case.
 
 
 Here is quick example of how to use one of the available mixins.
@@ -25,7 +25,7 @@ Making custom mixing is just as simple.
     Take care not to override existing methods or properties, otherwise bad things will happen
 
 .. note::
-    To avoid name collisions of non-public variables and methods, see `Private Variables <https://docs.python.org/2/tutorial/classes.html#private-variables-and-class-local-references>`_
+    To avoid name collisions of non-public variables and methods, use `Private Variables <https://docs.python.org/2/tutorial/classes.html#private-variables-and-class-local-references>`_
 
 .. code:: python
 

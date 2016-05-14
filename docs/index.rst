@@ -18,10 +18,10 @@ Supports Python ``2.7+`` and ``3.4+``.
 
 Main features:
 
-* :class:`SteamID <steam.steamid.SteamID>` - convert between the various ID representations with ease
-* :class:`WebAPI <steam.webapi.WebAPI>` - simple API for Steam's Web API with automatic population of interfaces
-* :class:`WebAuth <steam.webauth.WebAuth>` - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
-* :class:`SteamClient <steam.client.SteamClient>` - communication with the steam network based on ``gevent``.
+* :doc:`SteamID <api/steam.steamid>` - convert between the various ID representations with ease
+* :doc:`WebAPI <api/steam.webapi>` - simple API for Steam's Web API with automatic population of interfaces
+* :doc:`WebAuth <api/steam.webauth>` - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
+* :doc:`SteamClient <api/steam.client>` - communication with the steam network based on ``gevent``.
 
 Checkout the :doc:`user_guide` for examples, or the :doc:`api/index` for details.
 

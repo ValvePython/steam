@@ -36,7 +36,7 @@ Example usage for sending client hello to Dota 2's GC.
     gc.send(header, body.SerializeToString())
 
 The above code assumes that we have a ``myDotaModule`` that contains the appropriate
-data structures, which can be used to (de)serialize messages. For example, protobufs.
+data structures, which can be used to (de)serialize messages such as protobufs.
 """
 import logging
 import gevent
