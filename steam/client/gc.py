@@ -1,9 +1,9 @@
 """
 :class:`GameCoordinator` is used to proxy messages from/to GC.
-It takes care of the encapsulation details, but on it's own is not
+It takes care of the encapsulation details, but on its own is not
 enough to communicate with a given GC.
 
-Example usage for sending client hello to Dota 2's GC.
+Example implementation of Dota 2 GC client with inheritance.
 
 .. code:: python
 
@@ -12,31 +12,29 @@ Example usage for sending client hello to Dota 2's GC.
     from steam.core.msg import GCMsgHdrProto
     from steam.client.gc import GameCoordinator
 
+    class ExampleDotaClient(GameCoordinator):
+        def __init__(self, steam):
+            GameCoordinator.__init__(self, steam, 570)
+
+        def _process_gc_message(self, emsg, header, body):
+            if emsg == 4004: # EMsgGCClientWelcome
+                message = myDotaModule.gcsdk_gcmessages_pb2.CMsgClientWelcome()
+                message.ParseFromString(body)
+                print message
+
+        def send_hello(self):
+            header = GCMsgHdrProto(4006)  # EMsgGCClientHello
+            body = myDotaModule.gcsdk_gcmessages_pb2.CMsgClientHello()
+            self.send(header, body.SerializeToString())
+
     client = SteamClient()
+    dota = ExampleDotaClient(client)
 
-    # login logic etc
-
-    gc = GameCoordinator(client, 570)
-
-    @gc.on(None)
-    def handle_any_gc_message(header, body):
-        pass
-
-    @gc.on(4004)  # EMsgGCClientWelcome
-    def handle_client_welcome(header, body):
-        message = myDotaModule.gcsdk_gcmessages_pb2.CMsgClientWelcome()
-        message.ParseFromString(body)
-
-    # indicate to steam that we are playing Dota 2
+    client.login()
     client.games_played([570])
 
-    # send client hello
-    header = GCMsgHdrProto(4006)  # EMsgGCClientHello
-    body = myDotaModule.gcsdk_gcmessages_pb2.CMsgClientHello()
-    gc.send(header, body.SerializeToString())
-
 The above code assumes that we have a ``myDotaModule`` that contains the appropriate
-data structures, which can be used to (de)serialize messages such as protobufs.
+protobufs needed to (de)serialize message for communication with GC.
 """
 import logging
 import gevent
@@ -45,6 +43,7 @@ from steam.util import set_proto_bit, clear_proto_bit, is_proto
 from steam.enums.emsg import EMsg
 from steam.enums import EResult
 from steam.core.msg import GCMsgHdr, GCMsgHdrProto, MsgProto
+from steam.client import SteamClient
 
 
 class GameCoordinator(EventEmitter):
@@ -65,17 +64,20 @@ class GameCoordinator(EventEmitter):
     """
 
     def __init__(self, steam_client, app_id):
+        if not isinstance(steam_client, SteamClient):
+            raise ValueError("Expected an instance of SteamClient as first argument")
+
         self.steam = steam_client
         self.app_id = app_id
-        self._log = logging.getLogger("GC(appid:%d)" % app_id)
+        self._LOG = logging.getLogger("GC(appid:%d)" % app_id)
 
         # listen for GC messages
         self.steam.on(EMsg.ClientFromGC, self._handle_from_gc)
 
     def emit(self, event, *args):
         if event is not None:
-            self._log.debug("Emit event: %s" % repr(event))
-        super(GameCoordinator, self).emit(event, *args)
+            self._LOG.debug("Emit event: %s" % repr(event))
+        EventEmitter.emit(self, event, *args)
 
     def send(self, header, body):
         """
@@ -94,7 +96,6 @@ class GameCoordinator(EventEmitter):
                                 else header.msg
                                 )
         message.body.payload = header.serialize() + body
-
         self.steam.send(message)
 
     def _handle_from_gc(self, msg):
@@ -112,4 +113,7 @@ class GameCoordinator(EventEmitter):
 
         body = msg.body.payload[header_size:]
 
-        self.emit(clear_proto_bit(emsg), header, body)
+        self._process_gc_message(clear_proto_bit(emsg), header, body)
+
+    def _process_message(self, emsg, header, body):
+        self.emit(emsg, header, body)
