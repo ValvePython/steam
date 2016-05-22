@@ -7,14 +7,9 @@
 
 |pypi| |license|
 
-
 A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
-
-.. note::
-    Python 3 support for the SteamClient is not available in the release,
-    see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
 
 Main features:
 

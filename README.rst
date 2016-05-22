@@ -4,8 +4,6 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-Python 3 support for the SteamClient is not available in the release, see `issue#10 <https://github.com/ValvePython/steam/issues/10>`_.
-
 Main features:
 
 * `SteamID <http://valvepython.github.io/steam/api/steam.client.html>`_  - convert between the various ID representations with ease
