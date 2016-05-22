@@ -102,6 +102,7 @@ message CMsgClientUCMUpdatePublishedFile {
 	repeated .CMsgClientUCMUpdatePublishedFile.KeyValueTag kvtags = 24;
 	repeated .CMsgClientUCMUpdatePublishedFile.AdditionalPreview previews = 25;
 	repeated int32 previews_to_remove = 26;
+	optional bool clear_in_progress = 27;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {

@@ -9,6 +9,10 @@ extend .google.protobuf.MessageOptions {
 	optional int32 msgpool_hard_limit = 50001 [default = 384];
 }
 
+extend .google.protobuf.FileOptions {
+	optional bool force_php_generation = 50000 [default = false];
+}
+
 message CMsgProtoBufHeader {
 	optional fixed64 steamid = 1;
 	optional int32 client_sessionid = 2;
