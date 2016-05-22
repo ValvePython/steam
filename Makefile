@@ -65,7 +65,7 @@ pb_fetch:
 
 pb_compile:
 	for filepath in `ls ./protobufs/*.proto`; do \
-		./tools/protoc3 --python_out ./steam/protobufs/ --proto_path=./tools/protobuf/src --proto_path=./protobufs "$$filepath"; \
+		protoc3 --python_out ./steam/protobufs/ --proto_path=./tools/protobuf/src --proto_path=./protobufs "$$filepath"; \
 	done;
 	sed -i 's/^import /import steam.protobufs./' steam/protobufs/*_pb2.py
 
