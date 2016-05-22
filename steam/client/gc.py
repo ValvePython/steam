@@ -115,5 +115,5 @@ class GameCoordinator(EventEmitter):
 
         self._process_gc_message(clear_proto_bit(emsg), header, body)
 
-    def _process_message(self, emsg, header, body):
+    def _process_gc_message(self, emsg, header, body):
         self.emit(emsg, header, body)
