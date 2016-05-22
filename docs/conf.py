@@ -291,3 +291,4 @@ texinfo_documents = [
 
 # AUTODOC
 autodoc_member_order = 'bysource'
+autoclass_content = 'both'
