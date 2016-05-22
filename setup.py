@@ -44,6 +44,8 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
     ],
     keywords='valve steam steamid api webapi steamcommunity',
     packages=['steam'] + ['steam.'+x for x in find_packages(where='steam')],
