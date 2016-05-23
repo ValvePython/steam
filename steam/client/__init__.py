@@ -4,34 +4,24 @@ Implementation of Steam client based on ``gevent``
 Events
 ^^^^^^
 
-See `gevent-eventmitter <https://github.com/rossengeorgiev/gevent-eventemitter>`_
-for details on how to work with events.
-
-| ``connected`` - when successful connection with a CM server is established
-| ``disconnected`` - when connection is lost
-| ``channel_secured`` - after channel encryption is complete, client can attempt to login now
-| ``error`` - after login failure
-| ``auth_code_required`` - either email code or 2FA code is needed for login
-| ``logged_on`` - after successful login, client can send messages
-| :class:`EMsg <steam.enums.emsg.EMsg>` - all messages are emitted with their ``EMsg``
-
-Mixing can emitter additional events. See their docs pages for details.
+ | ``connected`` - when successful connection with a CM server is established
+ | ``disconnected`` - when connection is lost
+ | ``channel_secured`` - after channel encryption is complete, client can attempt to login now
+ | ``error`` - after login failure
+ | ``auth_code_required`` - either email code or 2FA code is needed for login
+ | ``logged_on`` - after successful login, client can send messages
+ | :class:`EMsg <steam.enums.emsg.EMsg>` - all messages are emitted with their ``EMsg``
 
 
-Builtins
-^^^^^^^^
+.. note::
+    Mixins can emitter additional events. See their docs pages for details.
 
-Additional features are located in separate submodules.
-All functionality from :doc:`bultins <api/steam.client.builtins>` is inherited by default.
+.. note::
+    Additional features are located in separate submodules. All functionality from ``bultins`` is inherited by default.
 
-Mixins
-^^^^^^
+.. note::
+    Optional features are available as ``mixins``. This allows the client to remain light yet flexible.
 
-Optional features are available as :doc:`mixins <api/steam.client.mixins>`.
-This allows the client to remain light yet flexible.
-
-API
-^^^
 """
 import os
 import logging
