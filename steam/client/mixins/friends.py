@@ -220,7 +220,6 @@ class SteamUser(intBase):
          - game_name
          - avatar_hash
          - facebook_id
-         ...
 
         """
         pstate = self._data.get('pstate', None)

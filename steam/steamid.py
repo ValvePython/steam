@@ -67,14 +67,14 @@ class SteamID(intBase):
     def id(self):
         """
         :return: account id
-        :rtype: int
+        :rtype: :class:`int`
         """
         return int(self) & 0xFFffFFff
 
     @property
     def instance(self):
         """
-        :rtype: int
+        :rtype: :class:`int`
         """
         return (int(self) >> 32) & 0xFFffF
 
@@ -96,7 +96,7 @@ class SteamID(intBase):
     def as_32(self):
         """
         :return: account id
-        :rtype: int
+        :rtype: :class:`int`
         """
         return self.id
 
@@ -104,7 +104,7 @@ class SteamID(intBase):
     def as_64(self):
         """
         :return: steam64 format
-        :rtype: int
+        :rtype: :class:`int`
         """
         return int(self)
 
@@ -112,7 +112,7 @@ class SteamID(intBase):
     def as_steam2(self):
         """
         :return: steam2 format (e.g ``STEAM_1:0:1234``)
-        :rtype: str
+        :rtype: :class:`str`
 
         .. note::
             ``STEAM_X:Y:Z``. The value of ``X`` should represent the universe, or ``1``
@@ -133,7 +133,7 @@ class SteamID(intBase):
         See :attr:`SteamID.as_steam2`
 
         :return: steam2 format (e.g ``STEAM_0:0:1234``)
-        :rtype: str
+        :rtype: :class:`str`
         """
         return self.as_steam2.replace("_1", "_0")
 
@@ -141,7 +141,7 @@ class SteamID(intBase):
     def as_steam3(self):
         """
         :return: steam3 format (e.g ``[U:1:1234]``)
-        :rtype: str
+        :rtype: :class:`str`
         """
         if self.type is EType.AnonGameServer:
             return "[%s:%s:%s:%s]" % (
@@ -161,7 +161,7 @@ class SteamID(intBase):
     def community_url(self):
         """
         :return: e.g https://steamcommunity.com/profiles/123456789
-        :rtype: str
+        :rtype: :class:`str`
         """
         suffix = {
             EType.Individual: "profiles/%s",
@@ -269,10 +269,10 @@ def make_steam64(id=0, *args, **kwargs):
 
 def steam2_to_tuple(value):
     """
-    :param value: steam2 (e.g. ``STEAM_1:0:1234`)
-    :type value: str
+    :param value: steam2 (e.g. ``STEAM_1:0:1234``)
+    :type value: :class:`str`
     :return: (accountid, type, universe, instance)
-    :rtype: ``tuple`` or ``None``
+    :rtype: :class:`tuple` or :class:`None`
 
     .. note::
         The universe will be always set to ``1``. See :attr:`SteamID.as_steam2`
@@ -293,9 +293,9 @@ def steam2_to_tuple(value):
 def steam3_to_tuple(value):
     """
     :param value: steam3 (e.g. ``[U:1:1234]``)
-    :type value: str
+    :type value: :class:`str`
     :return: (accountid, type, universe, instance)
-    :rtype: ``tuple`` or ``None``
+    :rtype: :class:`tuple` or :class:`None`
     """
     match = re.match(r"^\["
                      r"(?P<type>[%s]):"        # type char
@@ -334,11 +334,11 @@ def steam64_from_url(url, http_timeout=30):
         For a reliable resolving of vanity urls use ``ISteamUser.ResolveVanityURL`` web api
 
     :param url: steam community url
-    :type url: str
+    :type url: :class:`str`
     :param http_timeout: how long to wait on http request before turning ``None``
     :type http_timeout: :class:`int`
     :return: steam64, or ``None`` if ``steamcommunity.com`` is down
-    :rtype: ``int`` or ``None``
+    :rtype: :class:`int` or :class:`None`
 
     Example URLs::
 
@@ -383,11 +383,11 @@ def from_url(url, http_timeout=30):
     See :py:func:`steam64_from_url` for details
 
     :param url: steam community url
-    :type url: str
+    :type url: :class:`str`
     :param http_timeout: how long to wait on http request before turning ``None``
     :type http_timeout: :class:`int`
     :return: `SteamID` instance
-    :rtype: :py:class:`steam.SteamID` or ``None``
+    :rtype: :py:class:`steam.SteamID` or :class:`None`
 
     """
 
