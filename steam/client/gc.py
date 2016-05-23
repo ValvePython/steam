@@ -32,6 +32,7 @@ Example implementation of Dota 2 GC client with inheritance.
 
     client.login()
     client.games_played([570])
+    dota.send_hello()
 
 The above code assumes that we have a ``myDotaModule`` that contains the appropriate
 protobufs needed to (de)serialize message for communication with GC.
