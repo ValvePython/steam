@@ -4,13 +4,7 @@ steam.enums
 .. automodule:: steam.enums
     :members:
     :undoc-members:
-
-steam.enums.base
-----------------
-
-.. automodule:: steam.enums.base
-    :members:
-    :undoc-members:
+    :inherited-members:
 
 steam.enums.common
 ------------------
@@ -18,6 +12,7 @@ steam.enums.common
 .. automodule:: steam.enums.common
     :members:
     :undoc-members:
+    :inherited-members:
 
 steam.enums.emsg
 ----------------
@@ -25,5 +20,6 @@ steam.enums.emsg
 .. automodule:: steam.enums.emsg
     :members:
     :undoc-members:
+    :inherited-members:
 
 
