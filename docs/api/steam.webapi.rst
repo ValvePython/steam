@@ -1,5 +1,5 @@
-steam.webapi
-============
+webapi
+======
 
 .. automodule:: steam.webapi
     :members:

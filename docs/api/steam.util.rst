@@ -1,13 +1,13 @@
-steam.util
-==========
+util
+====
 
 .. automodule:: steam.util
     :members:
     :undoc-members:
     :show-inheritance:
 
-steam.util.web
------------------
+util.web
+-----------
 
 .. automodule:: steam.util.web
     :members:

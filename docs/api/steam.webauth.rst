@@ -1,5 +1,5 @@
-steam.webauth
-=============
+webauth
+=======
 
 .. automodule:: steam.webauth
     :members:

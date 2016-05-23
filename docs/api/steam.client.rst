@@ -1,5 +1,5 @@
-steam.client
-============
+client
+======
 
 .. automodule:: steam.client
     :members: SteamClient

@@ -1,21 +1,21 @@
-steam.enums
-===========
+enums
+=====
 
 .. automodule:: steam.enums
     :members:
     :undoc-members:
     :inherited-members:
 
-steam.enums.common
-------------------
+enums.common
+------------
 
 .. automodule:: steam.enums.common
     :members:
     :undoc-members:
     :inherited-members:
 
-steam.enums.emsg
-----------------
+enums.emsg
+----------
 
 .. automodule:: steam.enums.emsg
     :members:

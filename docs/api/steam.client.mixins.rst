@@ -1,5 +1,5 @@
-steam.client.mixins
-===================
+mixins
+======
 
 List of mixins:
 

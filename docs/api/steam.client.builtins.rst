@@ -1,5 +1,5 @@
-steam.client.builtins
-=====================
+builtins
+========
 
 .. automodule:: steam.client.builtins
 

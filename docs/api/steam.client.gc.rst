@@ -1,5 +1,5 @@
-steam.client.gc
-===============
+gc
+==
 
 .. automodule:: steam.client.gc
     :members:
