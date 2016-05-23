@@ -4,7 +4,7 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-Documentation: http://valvepython.github.io/steam
+Documentation: http://steam.readthedocs.io
 
 Main features
 -------------
