@@ -1,4 +1,4 @@
-|license| |coverage| |scru| |master_build|
+|pypi| |license| |coverage| |scru| |master_build| |docs|
 
 A python module for interacting with various parts of Steam_.
 
@@ -76,3 +76,7 @@ To run for ``python 2.7`` and ``3.4`` assuming you have them installed::
 .. |master_build| image:: https://img.shields.io/travis/ValvePython/steam/master.svg?style=flat&label=master
     :target: http://travis-ci.org/ValvePython/steam/branches
     :alt: Build status of master branch
+
+.. |docs| image:: https://readthedocs.org/projects/steam/badge/?version=latest
+    :target: http://steam.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation status
