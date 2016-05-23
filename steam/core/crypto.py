@@ -1,3 +1,6 @@
+"""
+All function in this module take and return :class:`bytes`
+"""
 import sys
 from os import urandom as random_bytes
 from struct import pack
@@ -13,6 +16,8 @@ backend = cryptography.hazmat.backends.default_backend()
 
 
 class UniverseKey(object):
+    """Public keys for Universes"""
+
     Public = backend.load_der_public_key(b64decode("""
 MIGdMA0GCSqGSIb3DQEBAQUAA4GLADCBhwKBgQDf7BrWLBBmLBc1OhSwfFkRf53T
 2Ct64+AVzRkeRuh7h3SiGEYxqQMUeYKO6UWiSRKpI2hzic9pobFhRr3Bvr/WARvY
