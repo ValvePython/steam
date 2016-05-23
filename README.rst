@@ -4,7 +4,10 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-Main features:
+Documentation: http://valvepython.github.io/steam
+
+Main features
+-------------
 
 * `SteamID <http://valvepython.github.io/steam/api/steam.client.html>`_  - convert between the various ID representations with ease
 * `WebAPI <http://valvepython.github.io/steam/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
