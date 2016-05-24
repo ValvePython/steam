@@ -1,7 +1,7 @@
 """
 All optional features are available as mixins for :class:`steam.client.SteamClient`.
 Using this approach the client can remain light yet flexible.
-Functionality can be added though inheritance depending on the use case.
+Functionality can be added through inheritance depending on the use case.
 
 
 Here is quick example of how to use one of the available mixins.
@@ -11,12 +11,10 @@ Here is quick example of how to use one of the available mixins.
     from steam import SteamClient
     from stema.client.mixins.friends import Friends
 
-
     class MySteamClient(SteamClient, Friends):
         pass
 
     client = MySteamClient()
-
 
 
 Making custom mixing is just as simple.
@@ -26,6 +24,7 @@ Making custom mixing is just as simple.
 
 .. note::
     To avoid name collisions of non-public variables and methods, use `Private Variables <https://docs.python.org/2/tutorial/classes.html#private-variables-and-class-local-references>`_
+
 
 .. code:: python
 
@@ -43,6 +42,8 @@ Making custom mixing is just as simple.
         pass
 
     client = MySteamClient()
+
+.. code:: python
 
     >>> client.my_property
     42
