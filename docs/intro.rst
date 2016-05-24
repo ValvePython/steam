@@ -1,9 +1,11 @@
 .. include:: global.rst
 
-Intro
-=====
+Intro - steam |version|
+=======================
 
-|pypi| |license|
+|today|
+
+|license|
 
 A python module for interacting with various parts of Steam_.
 
