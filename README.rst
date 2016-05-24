@@ -48,6 +48,7 @@ To run for specific version, setup a ``virtual environment``::
 
     virtualenv -p python3 py3
     source py3/bin/active
+    pip install -r requirements.txt
     make test
 
 To run for ``python 2.7`` and ``3.4`` assuming you have them installed::
