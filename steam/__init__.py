@@ -4,6 +4,7 @@ __author__ = "Rossen Georgiev"
 version_info = (0, 8, 0)
 
 from steam.steamid import SteamID
+from steam.globalid import GlobalID
 from steam.webapi import WebAPI
 from steam.webauth import WebAuth
 
