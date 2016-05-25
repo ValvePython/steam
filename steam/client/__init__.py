@@ -6,6 +6,7 @@ Events
 
  | ``connected`` - when successful connection with a CM server is established
  | ``disconnected`` - when connection is lost
+ | ``reconnect`` - when connect attempt is delayed, `delay` argument gives the delay in seconds
  | ``channel_secured`` - after channel encryption is complete, client can attempt to login now
  | ``error`` - after login failure
  | ``auth_code_required`` - either email code or 2FA code is needed for login
