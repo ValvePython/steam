@@ -71,7 +71,7 @@ class CMClient(EventEmitter):
             self._LOG.debug("Emit event: %s" % repr(event))
         super(CMClient, self).emit(event, *args)
 
-    def connect(self, retry=None, delay=0):
+    def connect(self, retry=0, delay=0):
         """Initiate connection to CM. Blocks until connected unless ``retry`` is specified.
 
         :param retry: number of retries before returning. Unlimited when set to ``None``
@@ -91,12 +91,13 @@ class CMClient(EventEmitter):
 
         if delay:
             self._LOG.debug("Delayed connect: %d seconds" % delay)
+            self.emit('reconnect', delay)
             gevent.sleep(delay)
 
         self._LOG.debug("Connect initiated.")
 
         for i, server_addr in enumerate(self.servers):
-            if retry is not None and i > retry:
+            if retry and i > retry:
                 return False
 
             start = time()
