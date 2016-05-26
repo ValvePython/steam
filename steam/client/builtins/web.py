@@ -15,7 +15,7 @@ class Web(object):
         """Get web authentication cookies via WebAPI's ``AuthenticateUser``
 
         .. note::
-            only valid during the current steam session
+            A session is only valid during the current steam session.
 
         :return: dict with authentication cookies
         :rtype: :class:`dict`, :class:`None`

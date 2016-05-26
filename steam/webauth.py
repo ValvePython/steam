@@ -4,6 +4,15 @@ This module simplifies the process of obtaining an authenticated session for ste
 After authentication is complete, a :class:`requests.Session` is created containing the auth cookies.
 The session can be used to access ``steamcommunity.com``, ``store.steampowered.com``, and ``help.steampowered.com``.
 
+.. warning::
+    A web session may expire randomly, or when you login from different IP address.
+    Some pages will return status code `401` when that happens.
+    Keep in mind if you are trying to write robust code.
+
+.. note::
+    If you are using :class:`steam.client.SteamClient`, use :meth:`steam.client.builtins.web.Web.get_web_session()`
+
+
 Example usage:
 
 .. code:: python
@@ -33,9 +42,6 @@ Alternatively, if Steam Guard is not enabled on the account:
         session = wa.WebAuth('username', 'password').login()
     except wa.HTTPError:
         pass
-
-.. note::
-    If you are using :class:`steam.client.SteamClient`, see :meth:`steam.client.builtins.web.Web.get_web_session()`
 
 """
 from time import time
@@ -142,7 +148,7 @@ class WebAuth(object):
             "captcha_text": captcha,
             "loginfriendlyname": "python-steam webauth",
             "rsatimestamp": self.timestamp,
-            "remember_login": False,
+            "remember_login": 'true',
             "donotcache": int(time() * 100000),
         }
 
@@ -157,12 +163,17 @@ class WebAuth(object):
             self.complete = True
             self.password = None
 
+            rememberLogin = self.session.cookies['steamRememberLogin'] if 'steamRememberLogin' in self.session.cookies else None
+
             self.session.cookies.clear()
             data = resp['transfer_parameters']
 
             self.steamid = SteamID(data['steamid'])
 
             for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
+                if rememberLogin:
+                    self.session.cookies.set('steamRememberLogin', '%s||%s' % (data['steamid'], rememberLogin),
+                                        domain=domain, secure=False)
                 self.session.cookies.set('steamLogin', '%s||%s' % (data['steamid'], data['token']),
                                     domain=domain, secure=False)
                 self.session.cookies.set('steamLoginSecure', '%s||%s' % (data['steamid'], data['token_secure']),
