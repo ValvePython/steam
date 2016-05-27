@@ -330,6 +330,7 @@ class EPersonaStateFlag(SteamIntEnum):
     OnlineUsingWeb = 256
     OnlineUsingMobile = 512
     OnlineUsingBigPicture = 1024
+    OnlineUsingVR = 2048
 
 
 class EClientPersonaStateFlag(SteamIntEnum):
