@@ -2,18 +2,12 @@
 Various features that don't have a category
 """
 import logging
-import sys
 from eventemitter import EventEmitter
 from steam.core.msg import MsgProto, get_um
 from steam.enums import EResult, ELeaderboardDataRequest, ELeaderboardSortMethod, ELeaderboardDisplayType
 from steam.enums.emsg import EMsg
-from steam.util import WeakRefKeyDict
+from steam.util import WeakRefKeyDict, _range, chunks
 from steam.util.throttle import ConstantRateLimit
-
-if sys.version_info < (3,):
-    _range = xrange
-else:
-    _range = range
 
 
 class Misc(object):
@@ -262,14 +256,29 @@ class SteamLeaderboard(object):
 
         return [entries[i] for i in _range(0, len(entries), step)]
 
-    def __iter__(self):
+    def get_iter(self, times, seconds, chunk_size=2000):
+        """Make a iterator over the entries
+
+        See :class:`steam.util.throttle.ConstantRateLimit` for `times` and `seconds` parameters.
+
+        :param chunk_size: number of entries per request
+        :type chunk_size: :class:`int`
+        :returns: generator object
+        :rtype: :class:`generator`
+
+        The iterator essentially buffers `chuck_size` number of entries, and ensures
+        we are not sending messages too fast.
+        For example, the `__iter__` method on this class uses `get_iter(1, 1, 2000)`
+        """
         def entry_generator():
-            with ConstantRateLimit(1, 1, use_gevent=True) as r:
-                for i in _range(0, len(self), 500):
-                    entries = self[i:i+500]
+            with ConstantRateLimit(times, seconds, use_gevent=True) as r:
+                for entries in chunks(self, chunk_size):
                     if not entries:
                         raise StopIteration
                     for entry in entries:
                         yield entry
                     r.wait()
         return entry_generator()
+
+    def __iter__(self):
+        return self.get_iter(1, 1, 2000)
