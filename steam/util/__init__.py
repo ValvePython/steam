@@ -3,6 +3,12 @@
 import weakref
 import struct
 import socket
+import sys
+
+if sys.version_info < (3,):
+    _range = xrange
+else:
+    _range = range
 
 def ip_from_int(ip):
     """Convert IP to :py:class:`int`
@@ -52,6 +58,19 @@ def clear_proto_bit(emsg):
     :rtype: int
     """
     return int(emsg) & ~protobuf_mask
+
+def chunks(arr, size):
+    """Splits a list into chunks
+
+    :param arr: list to split
+    :type arr: :class:`list`
+    :param size: number of elements in each chunk
+    :type size: :class:`int`
+    :return: generator object
+    :rtype: :class:`generator`
+    """
+    for i in _range(0, len(arr), size):
+        yield arr[i:i+size]
 
 
 class WeakRefKeyDict(object):
