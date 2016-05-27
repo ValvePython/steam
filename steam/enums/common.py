@@ -346,6 +346,27 @@ class EClientPersonaStateFlag(SteamIntEnum):
     ClanTag = 1024
     Facebook = 2048
 
+class ELeaderboardDataRequest(SteamIntEnum):
+    Global = 0
+    GlobalAroundUser = 1
+    Friends = 2
+    Users = 3
+
+class ELeaderboardSortMethod(SteamIntEnum):
+    NONE = 0
+    Ascending = 1
+    Descending = 2
+
+class ELeaderboardDisplayType(SteamIntEnum):
+    NONE = 0
+    Numeric = 1
+    TimeSeconds = 2
+    TimeMilliSeconds = 3
+
+class ELeaderboardUploadScoreMethod(SteamIntEnum):
+    NONE = 0
+    KeepBest = 1
+    ForceUpdate = 2
 
 # Do not remove
 from sys import modules
