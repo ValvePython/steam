@@ -200,7 +200,7 @@ class SteamLeaderboard(object):
         return "<%s(%d, %s, %d, %s, %s)>" % (
             self.__class__.__name__,
             self.app_id,
-            self.name,
+            repr(self.name),
             len(self),
             self.sort_method,
             self.display_type,
