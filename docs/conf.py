@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.abspath('../'))
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
 #    'sphinx.ext.githubpages',
 ]
 
@@ -288,6 +289,14 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# LINK PYTHON DOCS
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3.4', None),
+    'gevent': ('http://www.gevent.org', None),
+    'requests': ('http://docs.python-requests.org/en/master', None),
+    }
 
 # AUTODOC
 autodoc_member_order = 'bysource'
