@@ -37,7 +37,9 @@ class Misc(object):
         self.send(message)
 
     def get_leaderboard(self, app_id, name):
-        """Find a leaderboard
+        """.. versionadded:: 0.8.2
+
+        Find a leaderboard
 
         :param app_id: application id
         :type app_id: :class:`int`
@@ -106,7 +108,7 @@ class SteamUnifiedMessages(EventEmitter):
 
         :param method_name: name for the method (e.g. ``Player.GetGameBadgeLevels#1``)
         :type method_name: :class:`str`
-        :return: proto message instance, or ``None`` if not found
+        :return: proto message instance, or :class:`None` if not found
         """
         proto = get_um(method_name)
         if proto is None:
@@ -118,7 +120,7 @@ class SteamUnifiedMessages(EventEmitter):
     def send(self, message):
         """Send service method request
 
-        :param message: proto message instance (use :meth:`get`)
+        :param message: proto message instance (use :meth:`SteamUnifiedMessages.get`)
         :return: ``jobid`` event identifier
         :rtype: :class:`str`
 
@@ -142,7 +144,7 @@ class SteamUnifiedMessages(EventEmitter):
         :param message: proto message instance (use :meth:`get`)
         :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
-        :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
+        :param raises: (optional) On timeout if :class:`False` return :class:`None`, else raise :class:`gevent.Timeout`
         :type raises: :class:`bool`
         :return: response proto message instance
         :rtype: proto message, :class:`None`
@@ -157,7 +159,9 @@ class SteamUnifiedMessages(EventEmitter):
 
 
 class SteamLeaderboard(object):
-    """Steam leaderboard object.
+    """.. versionadded:: 0.8.2
+
+    Steam leaderboard object.
     Generated via :meth:`Misc.get_leaderboard()`
     Works more or less like a :class:`list` to access entries.
 
@@ -259,16 +263,16 @@ class SteamLeaderboard(object):
     def get_iter(self, times, seconds, chunk_size=2000):
         """Make a iterator over the entries
 
-        See :class:`steam.util.throttle.ConstantRateLimit` for `times` and `seconds` parameters.
+        See :class:`steam.util.throttle.ConstantRateLimit` for ``times`` and ``seconds`` parameters.
 
         :param chunk_size: number of entries per request
         :type chunk_size: :class:`int`
         :returns: generator object
         :rtype: :class:`generator`
 
-        The iterator essentially buffers `chuck_size` number of entries, and ensures
+        The iterator essentially buffers ``chuck_size`` number of entries, and ensures
         we are not sending messages too fast.
-        For example, the `__iter__` method on this class uses `get_iter(1, 1, 2000)`
+        For example, the ``__iter__`` method on this class uses ``get_iter(1, 1, 2000)``
         """
         def entry_generator():
             with ConstantRateLimit(times, seconds, use_gevent=True) as r:
