@@ -81,7 +81,7 @@ Obtaining a key
 
 Any steam user can get a key by visiting http://steamcommunity.com/dev/apikey.
 The only requirement is that the user has verified their email.
-Then the key can be used on the ``public`` WebAPI. See :class:`steam.webapi.SERVICE`
+Then the key can be used on the ``public`` WebAPI. See :class:`steam.webapi.APIHost`
 
 .. note::
    Interface availability depends on the ``key``.
@@ -241,7 +241,7 @@ Alternatively, a callback can be registered to handle the response event every t
 Web Authentication
 ==================
 
-There are currently two paths for gaining accessing to steam websites.
+There are currently two paths for gaining access to steam websites.
 Either using :class:`WebAuth <steam.webauth.WebAuth>`, or via a :meth:`SteamClient.get_web_session() <steam.client.builtins.web.Web.get_web_session>` instance.
 
 .. code:: python
