@@ -2,7 +2,7 @@
 Web related features
 """
 from binascii import hexlify
-from steam import WebAPI
+from steam import webapi
 from steam.core.crypto import generate_session_key, symmetric_encrypt, sha1_hash, random_bytes
 from steam.util.web import make_requests_session
 
@@ -32,8 +32,7 @@ class Web(object):
         }
 
         try:
-            api = WebAPI(None)
-            resp = api.ISteamUserAuth.AuthenticateUser(**data)
+            resp = webapi.post('ISteamUserAuth', 'AuthenticateUser', 1, params=data)
         except Exception as exp:
             self._logger.debug("get_web_session_cookies error: %s" % str(exp))
             return None

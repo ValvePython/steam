@@ -347,7 +347,7 @@ class CMClient(EventEmitter):
             self.steam_id = SteamID(msg.header.steamid)
             self.session_id = msg.header.client_sessionid
 
-            self.webapi_authenticate_user_nonce = msg.body.webapi_authenticate_user_nonce
+            self.webapi_authenticate_user_nonce = msg.body.webapi_authenticate_user_nonce.encode('ascii')
 
             if self._heartbeat_loop:
                 self._heartbeat_loop.kill()
@@ -431,11 +431,10 @@ class CMServerList(object):
         :return: booststrap success
         :rtype: :class:`bool`
         """
-        from steam import WebAPI
+        from steam import _webapi
 
         try:
-            api = WebAPI(None)
-            resp = api.ISteamDirectory.GetCMList_v1(cellid=cellid)
+            resp = _webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid})
         except Exception as exp:
             self._log.error("WebAPI boostrap failed: %s" % str(exp))
             return False
