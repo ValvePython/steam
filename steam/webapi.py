@@ -310,10 +310,10 @@ class WebAPIMethod(object):
 
             if name in kwargs:
                 if islist and not isinstance(kwargs[name], list):
-                        raise ValueError("Expected %s to be a list, got %s" % (
-                            repr(name),
-                            repr(type(kwargs[name])))
-                            )
+                    raise ValueError("Expected %s to be a list, got %s" % (
+                        repr(name),
+                        repr(type(kwargs[name])))
+                        )
                 params[name] = kwargs[name]
 
         url = "%s://%s/%s/%s/v%s/" % (
