@@ -305,25 +305,16 @@ class WebAPIMethod(object):
             islist = param['_array']
             optional = param['optional']
 
-            # raise if we are missing a required parameter
             if not optional and name not in kwargs and name != 'key':
                 raise ValueError("Method requires %s to be set" % repr(name))
 
-            # populate params that will be passed to _api_request
             if name in kwargs:
-                # some parameters can be an array, they need to be send as seperate field
-                # the array index is append to the name (e.g. name[0], name[1] etc)
-                if islist:
-                    if not isinstance(kwargs[name], list):
+                if islist and not isinstance(kwargs[name], list):
                         raise ValueError("Expected %s to be a list, got %s" % (
                             repr(name),
                             repr(type(kwargs[name])))
                             )
-
-                    for idx, value in enumerate(kwargs[name]):
-                        params['%s[%d]' % (name, idx)] = value
-                else:
-                    params[name] = kwargs[name]
+                params[name] = kwargs[name]
 
         url = "%s://%s/%s/%s/v%s/" % (
             'https' if self._parent.https else 'http',
@@ -413,14 +404,19 @@ def webapi_request(url, method='GET', caller=None, session=None, params=None):
     onetime = {}
     for param in DEFAULT_PARAMS:
         params[param] = onetime[param] = params.get(param, DEFAULT_PARAMS[param])
-    map(params.pop, ('raw', 'apihost', 'https', 'http_timeout'))
+    for param in ('raw', 'apihost', 'https', 'http_timeout'):
+        del params[param]
 
     if onetime['format'] not in ('json', 'vdf', 'xml'):
         raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
 
-    for k, v in params.items(): # serialize some types
+    for k, v in list(params.items()): # serialize some types
         if isinstance(v, bool): params[k] = 1 if v else 0
-        elif isinstance(v, (list, dict)): params[k] = _json.dumps(v)
+        elif isinstance(v, dict): params[k] = _json.dumps(v)
+        elif isinstance(v, list):
+            del params[k]
+            for i, lvalue in enumerate(v):
+                params["%s[%d]" % (k, i)] = lvalue
 
     kwargs = {'params': params} if method == "GET" else {'data': params} # params to data for POST
 
