@@ -36,8 +36,9 @@ class WACase(unittest.TestCase):
         self.assertIsInstance(s, requests.Session)
 
         for domain in s.cookies.list_domains():
-            self.assertEqual(s.cookies.get('steamLogin', domain=domain), '0||%s' % ('A'*16))
-            self.assertEqual(s.cookies.get('steamLoginSecure', domain=domain), '0||%s' % ('B'*16))
+            self.assertEqual(s.cookies.get('steamLogin', domain=domain), '0%7C%7C{}'.format('A'*16))
+            self.assertEqual(s.cookies.get('steamLoginSecure', domain=domain), '0%7C%7C{}'.format('B'*16))
+            self.assertEqual(s.cookies.get('steamMachineAuth', domain=domain), '0%7C%7C{}'.format('C'*16))
 
         self.assertEqual(s, user.login())
 

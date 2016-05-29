@@ -163,21 +163,14 @@ class WebAuth(object):
             self.complete = True
             self.password = None
 
-            rememberLogin = self.session.cookies['steamRememberLogin'] if 'steamRememberLogin' in self.session.cookies else None
-
-            self.session.cookies.clear()
             data = resp['transfer_parameters']
-
             self.steamid = SteamID(data['steamid'])
 
+            for cookie in list(self.session.cookies):
+                for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
+                    self.session.cookies.set(cookie.name, cookie.value, domain=domain, secure=cookie.secure)
+
             for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-                if rememberLogin:
-                    self.session.cookies.set('steamRememberLogin', '%s||%s' % (data['steamid'], rememberLogin),
-                                        domain=domain, secure=False)
-                self.session.cookies.set('steamLogin', '%s||%s' % (data['steamid'], data['token']),
-                                    domain=domain, secure=False)
-                self.session.cookies.set('steamLoginSecure', '%s||%s' % (data['steamid'], data['token_secure']),
-                                    domain=domain, secure=True)
                 self.session.cookies.set('Steam_Language', language, domain=domain)
                 self.session.cookies.set('birthtime', '-3333', domain=domain)
 
