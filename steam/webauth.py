@@ -32,7 +32,10 @@ Example usage:
     except wa.TwoFactorCodeRequired:
         user.login(twofactor_code='ZXC123')
 
-    wa.session.get('https://store.steampowered.com/account/history/')
+    user.session.get('https://store.steampowered.com/account/history/')
+    # OR
+    session = user.login()
+    session.get('https://store.steampowered.com/account/history')
 
 Alternatively, if Steam Guard is not enabled on the account:
 
@@ -43,6 +46,8 @@ Alternatively, if Steam Guard is not enabled on the account:
     except wa.HTTPError:
         pass
 
+The :class:`WebAuth` instance should be discarded once a session is obtained
+as it is not reusable.
 """
 from time import time
 import sys
