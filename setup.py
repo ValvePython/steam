@@ -8,7 +8,7 @@ import sys
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()\
-                        .replace('.io/en/latest', '.io/en/stable')\
+                        .replace('.io/en/latest/', '.io/en/stable/')\
                         .replace('?badge=latest', '?badge=stable')\
                         .replace('projects/steam/badge/?version=latest', 'projects/steam/badge/?version=stable')
 with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:

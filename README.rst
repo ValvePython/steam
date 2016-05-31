@@ -4,7 +4,7 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-Documentation: http://steam.readthedocs.io/en/latest
+Documentation: http://steam.readthedocs.io/en/latest/
 
 Main features
 -------------
