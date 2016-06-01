@@ -4,6 +4,15 @@ This module simplifies the process of obtaining an authenticated session for ste
 After authentication is complete, a :class:`requests.Session` is created containing the auth cookies.
 The session can be used to access ``steamcommunity.com``, ``store.steampowered.com``, and ``help.steampowered.com``.
 
+.. warning::
+    A web session may expire randomly, or when you login from different IP address.
+    Some pages will return status code `401` when that happens.
+    Keep in mind if you are trying to write robust code.
+
+.. note::
+    If you are using :class:`steam.client.SteamClient`, use :meth:`steam.client.builtins.web.Web.get_web_session()`
+
+
 Example usage:
 
 .. code:: python
@@ -23,7 +32,10 @@ Example usage:
     except wa.TwoFactorCodeRequired:
         user.login(twofactor_code='ZXC123')
 
-    wa.session.get('https://store.steampowered.com/account/history/')
+    user.session.get('https://store.steampowered.com/account/history/')
+    # OR
+    session = user.login()
+    session.get('https://store.steampowered.com/account/history')
 
 Alternatively, if Steam Guard is not enabled on the account:
 
@@ -34,9 +46,8 @@ Alternatively, if Steam Guard is not enabled on the account:
     except wa.HTTPError:
         pass
 
-.. note::
-    If you are using :class:`steam.client.SteamClient`, see :meth:`steam.client.builtins.web.Web.get_web_session()`
-
+The :class:`WebAuth` instance should be discarded once a session is obtained
+as it is not reusable.
 """
 from time import time
 import sys
@@ -142,7 +153,7 @@ class WebAuth(object):
             "captcha_text": captcha,
             "loginfriendlyname": "python-steam webauth",
             "rsatimestamp": self.timestamp,
-            "remember_login": False,
+            "remember_login": 'true',
             "donotcache": int(time() * 100000),
         }
 
@@ -157,16 +168,14 @@ class WebAuth(object):
             self.complete = True
             self.password = None
 
-            self.session.cookies.clear()
             data = resp['transfer_parameters']
-
             self.steamid = SteamID(data['steamid'])
 
+            for cookie in list(self.session.cookies):
+                for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
+                    self.session.cookies.set(cookie.name, cookie.value, domain=domain, secure=cookie.secure)
+
             for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-                self.session.cookies.set('steamLogin', '%s||%s' % (data['steamid'], data['token']),
-                                    domain=domain, secure=False)
-                self.session.cookies.set('steamLoginSecure', '%s||%s' % (data['steamid'], data['token_secure']),
-                                    domain=domain, secure=True)
                 self.session.cookies.set('Steam_Language', language, domain=domain)
                 self.session.cookies.set('birthtime', '-3333', domain=domain)
 

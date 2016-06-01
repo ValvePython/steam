@@ -26,7 +26,11 @@ def request_scrubber(r):
 
 def response_scrubber(r):
     if 'set-cookie' in r['headers']:
-        del r['headers']['set-cookie']
+        r['headers']['set-cookie'] = [
+            'steamLogin=0%7C%7C{}; path=/; httponly'.format('A'*16),
+            'steamLoginSecure=0%7C%7C{}; path=/; httponly; secure'.format('B'*16),
+            'steamMachineAuth=0%7C%7C{}; path=/; httponly'.format('C'*16),
+            ]
 
     if r.get('body', ''):
         data = json.loads(r['body']['string'])
@@ -37,7 +41,7 @@ def response_scrubber(r):
             data['transfer_parameters']['steamid'] = '0'
             data['transfer_parameters']['token'] = 'A'*16
             data['transfer_parameters']['token_secure'] = 'B'*16
-            data['transfer_parameters']['auth'] = 'C'*16
+            data['transfer_parameters']['auth'] = 'Z'*16
 
         body = json.dumps(data)
         r['body']['string'] = body

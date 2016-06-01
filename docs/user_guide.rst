@@ -10,14 +10,14 @@ overview of the functionality available in the ``steam`` module.
 SteamID
 =======
 
-:mod:`SteamID <steam.steamid>` can be used to convert the universal steam id
+:mod:`SteamID <steam.steamid.SteamID>` can be used to convert the universal steam id
 to its' various representations.
 
 .. note::
-    ``SteamID`` is immutable as it inherits from ``int``.
+    :class:`SteamID <steam.steamid.SteamID>` is immutable as it inherits from :class:`int`.
 
-Example usage
--------------
+Converting between representations
+----------------------------------
 
 .. code:: python
 
@@ -54,10 +54,10 @@ Example usage
     'https://steamcommunity.com/gid/103582791429521412'
 
 
-Resolving community urls to ``SteamID``
------------------------------------------
+Resolving community urls to :class:`SteamID <steam.steamid.SteamID>`
+--------------------------------------------------------------------
 
-The ``steamid`` submodule provides function to resolve community urls.
+The :mod:`steam.steamid` submodule provides function to resolve community urls.
 Here are some examples:
 
 .. code:: python
@@ -76,12 +76,19 @@ WebAPI
 :mod:`WebAPI <steam.webapi>` is a thin Wrapper around `Steam Web API`_. Requires `API Key`_. Upon initialization the
 instance will fetch all available interfaces and populate the namespace.
 
+Obtaining a key
+---------------
+
+Any steam user can get a key by visiting http://steamcommunity.com/dev/apikey.
+The only requirement is that the user has verified their email.
+Then the key can be used on the ``public`` WebAPI. See :class:`steam.webapi.APIHost`
+
 .. note::
    Interface availability depends on the ``key``.
    Unless the schema is loaded manually.
 
-Example usage
--------------
+Calling an endpoint
+-------------------
 
 .. code:: python
 
@@ -234,7 +241,7 @@ Alternatively, a callback can be registered to handle the response event every t
 Web Authentication
 ==================
 
-There are currently two paths for gaining accessing to steam websites.
+There are currently two paths for gaining access to steam websites.
 Either using :class:`WebAuth <steam.webauth.WebAuth>`, or via a :meth:`SteamClient.get_web_session() <steam.client.builtins.web.Web.get_web_session>` instance.
 
 .. code:: python

@@ -4,7 +4,7 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-Documentation: http://steam.readthedocs.io
+Documentation: http://steam.readthedocs.io/en/latest/
 
 Main features
 -------------
@@ -58,7 +58,7 @@ To run for ``python 2.7`` and ``3.4`` assuming you have them installed::
 
 .. _Steam: https://store.steampowered.com/
 
-.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?style=flat&label=latest%20version
+.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?style=flat&label=stable
     :target: https://pypi.python.org/pypi/steam
     :alt: Latest version released on PyPi
 

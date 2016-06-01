@@ -6,8 +6,16 @@ util
     :undoc-members:
     :show-inheritance:
 
+util.throttle
+-------------
+
+.. automodule:: steam.util.throttle
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 util.web
------------
+--------
 
 .. automodule:: steam.util.web
     :members:

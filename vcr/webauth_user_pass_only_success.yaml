@@ -39,7 +39,7 @@ interactions:
     body: {string: !!python/unicode '{"requires_twofactor": false, "login_complete":
         true, "transfer_urls": ["https://steamcommunity.com/login/transfer", "https://help.steampowered.com/login/transfer"],
         "transfer_parameters": {"steamid": "0", "remember_login": false, "token":
-        "AAAAAAAAAAAAAAAA", "token_secure": "BBBBBBBBBBBBBBBB", "auth": "CCCCCCCCCCCCCCCC"},
+        "AAAAAAAAAAAAAAAA", "token_secure": "BBBBBBBBBBBBBBBB", "auth": "ZZZZZZZZZZZZZZZZ"},
         "success": true}'}
     headers:
       cache-control: [no-cache]
@@ -49,6 +49,9 @@ interactions:
       date: ['Fri, 13 May 2016 03:01:25 GMT']
       expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
       server: [Apache]
+      set-cookie: [steamLogin=0%7C%7CAAAAAAAAAAAAAAAA; path=/; httponly, steamLoginSecure=0%7C%7CBBBBBBBBBBBBBBBB;
+          path=/; httponly; secure, steamMachineAuth=0%7C%7CCCCCCCCCCCCCCCCC; path=/;
+          httponly]
       x-frame-options: [DENY]
     status: {code: 200, message: OK}
 version: 1

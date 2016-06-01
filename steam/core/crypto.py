@@ -53,13 +53,8 @@ def symmetric_encrypt(message, key):
 
 def symmetric_encrypt_HMAC(message, key, hmac_secret):
     prefix = random_bytes(3)
-
-    hmac = HMAC(hmac_secret, SHA1(), backend)
-    hmac.update(prefix)
-    hmac.update(message)
-
-    iv = hmac.finalize()[:13] + prefix
-
+    hmac = hmac_sha1(hmac_secret, prefix + message)
+    iv = hmac[:13] + prefix
     return symmetric_encrypt_with_iv(message, key, iv)
 
 def symmetric_encrypt_iv(iv, key):
@@ -81,11 +76,9 @@ def symmetric_decrypt_HMAC(cyphertext, key, hmac_secret):
     iv = symmetric_decrypt_iv(cyphertext, key)
     message = symmetric_decrypt_with_iv(cyphertext, key, iv)
 
-    hmac = HMAC(hmac_secret, SHA1(), backend)
-    hmac.update(iv[-3:])
-    hmac.update(message)
+    hmac = hmac_sha1(hmac_secret, iv[-3:] + message)
 
-    if iv[:13] != hmac.finalize()[:13]:
+    if iv[:13] != hmac[:13]:
         raise RuntimeError("Unable to decrypt message. HMAC does not match.")
 
     return message
@@ -97,6 +90,11 @@ def symmetric_decrypt_iv(cyphertext, key):
 def symmetric_decrypt_with_iv(cyphertext, key, iv):
     decryptor =  Cipher(AES(key), CBC(iv), backend).decryptor()
     return unpad(decryptor.update(cyphertext[BS:]) + decryptor.finalize())
+
+def hmac_sha1(secret, data):
+    hmac = HMAC(secret, SHA1(), backend)
+    hmac.update(data)
+    return hmac.finalize()
 
 def sha1_hash(data):
     sha = Hash(SHA1(), backend)

@@ -1,14 +1,23 @@
 """
 WebAPI provides a thin wrapper over `Steam's Web API <https://developer.valvesoftware.com/wiki/Steam_Web_API>`_
 
-Calling an endpoint
+It is very fiendly to exploration and prototyping when using ``ipython``, ``notebooks`` or similar.
+The ``key`` will determine what WebAPI interfaces and methods are available.
+
+.. note::
+    Some endpoints don't require a key
+
+Currently the WebAPI can be accessed via one of two API hosts. See :class:`APIHost`.
+
+Example code:
 
 .. code:: python
 
     >>> api = WebAPI(key)
-    >>> api.ISteamUser.ResolveVanityURL(vanityurl="valve", url_type=2)
     >>> api.call('ISteamUser.ResolveVanityURL', vanityurl="valve", url_type=2)
-    {u'response': {u'steamid': u'103582791429521412', u'success': 1}}
+    >>> api.ISteamUser.ResolveVanityURL(vanityurl="valve", url_type=2)
+    >>> api.ISteamUser.ResolveVanityURL_v1(vanityurl="valve", url_type=2)
+    {'response': {'steamid': '103582791429521412', 'success': 1}}
 
 All globals params (``key``, ``https``, ``format``, ``raw``) can be specified on per call basis.
 
@@ -21,11 +30,23 @@ All globals params (``key``, ``https``, ``format``, ``raw``) can be specified on
             "success"       "1"
     }
 """
-import json
-from steam.util.web import make_requests_session
+import json as _json
+from steam.util.web import make_requests_session as _make_session
+
+class APIHost(object):
+    """Enum of currently available API hosts."""
+    Public = 'api.steampowered.com'
+    """ available over HTTP (port 80) and HTTPS (port 443)"""
+    Partner = 'partner.steam-api.com'
+    """available over HTTPS (port 443) only
+
+    .. note::
+        Key is required for every request. If not supplied you will get HTTP 403.
+    """
 
 DEFAULT_PARAMS = {
     # api parameters
+    'apihost': APIHost.Public,
     'key': None,
     'format': 'json',
     # internal
@@ -35,80 +56,11 @@ DEFAULT_PARAMS = {
 }
 
 
-def webapi_request(path, method='GET', caller=None, params={}, session=None):
-    """
-    Low level function for calling Steam's WebAPI
-
-    :param path: request url
-    :type path: :class:`str`
-    :param method: HTTP method (GET or POST)
-    :type method: :class:`str`
-    :param caller: caller reference, caller.last_response is set to the last response
-    :param params: dict of WebAPI and endpoint specific params
-    :type params: :class:`dict`
-    :param session: an instance requests session, or one is created per call
-    :type session: :class:`requests.Session`
-    :return: response based on paramers
-    :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
-    """
-    if method not in ('GET', 'POST'):
-        raise NotImplemented("HTTP method: %s" % repr(self.method))
-
-    onetime = {}
-    for param in DEFAULT_PARAMS:
-        params[param] = onetime[param] = params.get(param,
-                                                    DEFAULT_PARAMS[param],
-                                                    )
-    path = "%s://api.steampowered.com/%s" % ('https' if params.get('https', True) else 'http',
-                                             path)
-    del params['raw']
-    del params['https']
-    del params['http_timeout']
-
-    if onetime['format'] not in ('json', 'vdf', 'xml'):
-        raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
-
-    # serialize some parameter types properly
-    for k, v in params.items():
-        if isinstance(v, bool):
-            params[k] = 1 if v else 0
-        elif isinstance(v, (list, dict)):
-            params[k] = json.dumps(v)
-
-    # move params to data, if data is not specified for POST
-    # simplifies code calling this method
-    kwargs = {'params': params} if method == "GET" else {'data': params}
-
-    f = getattr(session, method.lower())
-    resp = f(path, stream=False, timeout=onetime['http_timeout'], **kwargs)
-
-    # we keep a reference of the last response instance on the caller
-    if caller is not None:
-        caller.last_response = resp
-
-    # 4XX and 5XX will cause this to raise
-    resp.raise_for_status()
-
-    # response
-    if onetime['raw']:
-        return resp.text
-
-    if onetime['format'] == 'json':
-        return resp.json()
-    elif onetime['format'] == 'xml':
-        import lxml.etree
-        return lxml.etree.fromstring(resp.content)
-    elif onetime['format'] == 'vdf':
-        import vdf
-        return vdf.loads(resp.text)
-
-
 class WebAPI(object):
-    """
-    Steam WebAPI wrapper. See https://developer.valvesoftware.com/wiki/Steam_Web_API
+    """Steam WebAPI wrapper
 
     .. note::
-        Interfaces and methods are populated automatically from WebAPI.
+        Interfaces and methods are populated automatically from Steam WebAPI.
 
     :param key: api key from https://steamcommunity.com/dev/apikey
     :type key: :class:`str`
@@ -120,7 +72,9 @@ class WebAPI(object):
     :type https: :class:`bool`
     :param http_timeout: HTTP timeout in seconds
     :type http_timeout: :class:`int`
-    :param auto_load_interfaces: load interfaces from the WebAPI
+    :param apihost: api hostname, see :class:`APIHost`
+    :type apihost: :class:`str`
+    :param auto_load_interfaces: load interfaces from the Steam WebAPI
     :type auto_load_interfaces: :class:`bool`
 
     These can be specified per method call for one off calls
@@ -130,20 +84,23 @@ class WebAPI(object):
     raw = DEFAULT_PARAMS['raw']
     https = DEFAULT_PARAMS['https']
     http_timeout = DEFAULT_PARAMS['http_timeout']
+    apihost = DEFAULT_PARAMS['apihost']
     interfaces = []
 
     def __init__(self, key, format = DEFAULT_PARAMS['format'],
                             raw = DEFAULT_PARAMS['raw'],
                             https = DEFAULT_PARAMS['https'],
                             http_timeout = DEFAULT_PARAMS['http_timeout'],
+                            apihost = DEFAULT_PARAMS['apihost'],
                             auto_load_interfaces = True):
         self.key = key                              #: api key
         self.format = format                        #: format (``json``, ``vdf``, or ``xml``)
         self.raw = raw                              #: return raw reponse or parse
         self.https = https                          #: use https or not
         self.http_timeout = http_timeout            #: HTTP timeout in seconds
+        self.apihost = apihost                      #: ..versionadded:: 0.8.3 apihost hostname
         self.interfaces = []                        #: list of all interfaces
-        self.session = make_requests_session()      #: :class:`requests.Session` from :func:`steam.util.web.make_requests_session`
+        self.session = _make_session()              #: :class:`requests.Session` from :func:`steam.util.web.make_requests_session`
 
         if auto_load_interfaces:
             self.load_interfaces(self.fetch_interfaces())
@@ -163,14 +120,14 @@ class WebAPI(object):
 
         The returned value can passed to :py:func:`WebAPI.load_interfaces`
         """
-        return webapi_request(
-            "ISteamWebAPIUtil/GetSupportedAPIList/v1/",
-            method="GET",
+        return get('ISteamWebAPIUtil', 'GetSupportedAPIList', 1,
+            https=self.https,
+            apihost=self.apihost,
             caller=None,
+            session=self.session,
             params={'format': 'json',
                     'key': self.key,
                     },
-            session=self.session,
             )
 
     def load_interfaces(self, interfaces_dict):
@@ -213,7 +170,7 @@ class WebAPI(object):
     def doc(self):
         """
         :return: Documentation for all interfaces and their methods
-        :rtype: :class:`str`
+        :rtype: str
         """
         doc = "Steam Web API - List of all interfaces\n\n"
         for interface in self.interfaces:
@@ -258,6 +215,10 @@ class WebAPIInterface(object):
         return self._parent.key
 
     @property
+    def apihost(self):
+        return self._parent.apihost
+
+    @property
     def https(self):
         return self._parent.https
 
@@ -278,6 +239,10 @@ class WebAPIInterface(object):
         return self._parent.session
 
     def doc(self):
+        """
+        :return: Documentation for all methods on this interface
+        :rtype: str
+        """
         return self.__doc__
 
     @property
@@ -340,33 +305,31 @@ class WebAPIMethod(object):
             islist = param['_array']
             optional = param['optional']
 
-            # raise if we are missing a required parameter
             if not optional and name not in kwargs and name != 'key':
                 raise ValueError("Method requires %s to be set" % repr(name))
 
-            # populate params that will be passed to _api_request
             if name in kwargs:
-                # some parameters can be an array, they need to be send as seperate field
-                # the array index is append to the name (e.g. name[0], name[1] etc)
-                if islist:
-                    if not isinstance(kwargs[name], list):
-                        raise ValueError("Expected %s to be a list, got %s" % (
-                            repr(name),
-                            repr(type(kwargs[name])))
-                            )
+                if islist and not isinstance(kwargs[name], list):
+                    raise ValueError("Expected %s to be a list, got %s" % (
+                        repr(name),
+                        repr(type(kwargs[name])))
+                        )
+                params[name] = kwargs[name]
 
-                    for idx, value in enumerate(kwargs[name]):
-                        params['%s[%d]' % (name, idx)] = value
-                else:
-                    params[name] = kwargs[name]
+        url = "%s://%s/%s/%s/v%s/" % (
+            'https' if self._parent.https else 'http',
+            self._parent.apihost,
+            self._parent.name,
+            self.name,
+            self.version,
+            )
 
-        # make the request
         return webapi_request(
-            "%s/%s/v%s/" % (self._parent.name, self.name, self.version),
+            url=url,
             method=self.method,
             caller=self,
-            params=params,
             session=self._parent.session,
+            params=params,
             )
 
     @property
@@ -386,6 +349,10 @@ class WebAPIMethod(object):
         return self._dict['name']
 
     def doc(self):
+        """
+        :return: Documentation for this method
+        :rtype: str
+        """
         return self.__doc__
 
     @property
@@ -411,3 +378,117 @@ class WebAPIMethod(object):
                     )
 
         return doc
+
+def webapi_request(url, method='GET', caller=None, session=None, params=None):
+    """Low level function for calling Steam's WebAPI
+
+    .. versionchanged:: 0.8.3
+
+    :param url: request url (e.g. ``https://api.steampowered.com/A/B/v001/``)
+    :type url: :class:`str`
+    :param method: HTTP method (GET or POST)
+    :type method: :class:`str`
+    :param caller: caller reference, caller.last_response is set to the last response
+    :param params: dict of WebAPI and endpoint specific params
+    :type params: :class:`dict`
+    :param session: an instance requests session, or one is created per call
+    :type session: :class:`requests.Session`
+    :return: response based on paramers
+    :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
+    """
+    if method not in ('GET', 'POST'):
+        raise NotImplemented("HTTP method: %s" % repr(self.method))
+    if params is None:
+        params = {}
+
+    onetime = {}
+    for param in DEFAULT_PARAMS:
+        params[param] = onetime[param] = params.get(param, DEFAULT_PARAMS[param])
+    for param in ('raw', 'apihost', 'https', 'http_timeout'):
+        del params[param]
+
+    if onetime['format'] not in ('json', 'vdf', 'xml'):
+        raise ValueError("Expected format to be json,vdf or xml; got %s" % onetime['format'])
+
+    for k, v in list(params.items()): # serialize some types
+        if isinstance(v, bool): params[k] = 1 if v else 0
+        elif isinstance(v, dict): params[k] = _json.dumps(v)
+        elif isinstance(v, list):
+            del params[k]
+            for i, lvalue in enumerate(v):
+                params["%s[%d]" % (k, i)] = lvalue
+
+    kwargs = {'params': params} if method == "GET" else {'data': params} # params to data for POST
+
+    if session is None: session = _make_session()
+
+    f = getattr(session, method.lower())
+    resp = f(url, stream=False, timeout=onetime['http_timeout'], **kwargs)
+
+    # we keep a reference of the last response instance on the caller
+    if caller is not None: caller.last_response = resp
+    # 4XX and 5XX will cause this to raise
+    resp.raise_for_status()
+
+    if onetime['raw']:
+        return resp.text
+    elif onetime['format'] == 'json':
+        return resp.json()
+    elif onetime['format'] == 'xml':
+        from lxml import etree as _etree
+        return _etree.fromstring(resp.content)
+    elif onetime['format'] == 'vdf':
+        import vdf as _vdf
+        return _vdf.loads(resp.text)
+
+def get(interface, method, version=1,
+        apihost=DEFAULT_PARAMS['apihost'], https=DEFAULT_PARAMS['https'],
+        caller=None, session=None, params=None):
+    """Send GET request to an API endpoint
+
+    .. versionadded:: 0.8.3
+
+    :param interface: interface name
+    :type interface: str
+    :param method: method name
+    :type method: str
+    :param version: method version
+    :type version: int
+    :param apihost: API hostname
+    :type apihost: str
+    :param https: whether to use HTTPS
+    :type https: bool
+    :param params: parameters for endpoint
+    :type params: dict
+    :return: endpoint response
+    :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
+    """
+    url = u"%s://%s/%s/%s/v%s/" % (
+        'https' if https else 'http', apihost, interface, method, version)
+    return webapi_request(url, 'GET', caller=caller, session=session, params=params)
+
+def post(interface, method, version=1,
+         apihost=DEFAULT_PARAMS['apihost'], https=DEFAULT_PARAMS['https'],
+         caller=None, session=None, params=None):
+    """Send POST request to an API endpoint
+
+    .. versionadded:: 0.8.3
+
+    :param interface: interface name
+    :type interface: str
+    :param method: method name
+    :type method: str
+    :param version: method version
+    :type version: int
+    :param apihost: API hostname
+    :type apihost: str
+    :param https: whether to use HTTPS
+    :type https: bool
+    :param params: parameters for endpoint
+    :type params: dict
+    :return: endpoint response
+    :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
+    """
+    url = "%s://%s/%s/%s/v%s/" % (
+        'https' if https else 'http', apihost, interface, method, version)
+    return webapi_request(url, 'POST', caller=caller, session=session, params=params)

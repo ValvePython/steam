@@ -213,10 +213,16 @@ def get_cmsg(emsg):
     """
     global cmsg_lookup, cmsg_lookup2
 
+    if not isinstance(emsg, EMsg):
+        emsg = EMsg(emsg)
+
     if emsg in cmsg_lookup_predefined:
         return cmsg_lookup_predefined[emsg]
     else:
-        cmsg_name = "cmsg" + str(emsg).split('.', 1)[1].lower()
+        enum_name = emsg.name.lower()
+        if enum_name.startswith("econ"):  # special case for 'EconTrading_'
+            enum_name = enum_name[4:]
+        cmsg_name = "cmsg" + enum_name
 
     if not cmsg_lookup:
         cmsg_list = steammessages_clientserver_pb2.__dict__
