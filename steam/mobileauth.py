@@ -59,6 +59,22 @@ class MobileAuth(object):
 
             self.key = backend.load_rsa_public_numbers(nums)
             self.timestamp = resp['timestamp']
+            
+    def request(self, uri, data):
+        if not self.complete:
+            return None
+            
+        headers = {
+            'X-Requested-With': 'com.valvesoftware.android.steam.community',
+            'User-agent':  'Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; Google Nexus 4 - 4.1.1 - API 16 - 768x1280 Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
+        }
+        
+        try:
+            response = self.session.post(uri, data=data, headers=headers)
+        except requests.exceptions.RequestException as e:
+            raise HTTPError(str(e))
+        else:
+            return response
 
     def login(self, captcha='', email_code='', twofactor_code='', language='english'):
         if self.complete:
