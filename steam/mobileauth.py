@@ -23,7 +23,7 @@ class MobileAuth(object):
     session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
     steamid = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
-
+    oauth = {}
     def __init__(self, username, password):
         self.__dict__.update(locals())
         self.session = make_requests_session()
@@ -76,6 +76,19 @@ class MobileAuth(object):
         else:
             return response
 
+    def refreshSession(self, oauth_token=None):
+        oauth_token = oauth_token or self.oauth['oauth_token']
+        response = self.request('https://api.steampowered.com/IMobileAuthService/GetWGToken/v0001', {'access_token': oauth_token})
+        try:
+            data = json.loads(response)
+        except Exception, e:
+            raise RefreshSessionFailed(str(e))
+        else:
+            self.oauth['wgtoken'] = data['response']['token']
+            self.oauth['wgtoken_secure'] = data['response']['token_secure']
+            self.session.cookies.set('steamLogin', '%s||%s' % (self.steamid, sself.oauth['wgtoken']), domain=domain, secure=False)
+            self.session.cookies.set('steamLoginSecure', '%s||%s' % (self.steamid, self.oauth['wgtoken_secure']), domain=domain, secure=True)
+
     def login(self, captcha='', email_code='', twofactor_code='', language='english'):
         if self.complete:
             return self.session
@@ -116,6 +129,12 @@ class MobileAuth(object):
         if resp['success'] and resp['login_complete']:
             self.complete = True
             self.password = None
+            self.steamid = SteamID(resp['oauth']['steamid'])
+            self.oauth = resp['oauth']
+            for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
+                self.session.cookies.set('steamLogin', '%s||%s' % (self.steamid, resp['oauth']['wgtoken']), domain=domain, secure=False)
+                self.session.cookies.set('steamLoginSecure', '%s||%s' % (self.steamid, data['oauth']['wgtoken_secure']), domain=domain, secure=True)
+
             return resp
         else:
             if resp.get('captcha_needed', False):
@@ -148,4 +167,7 @@ class EmailCodeRequired(MobileWebAuthException):
     pass
 
 class TwoFactorCodeRequired(MobileWebAuthException):
+    pass
+
+class RefreshSessionFailed(MobileWebAuthException):
     pass
