@@ -70,9 +70,9 @@ else:
 class WebAuth(object):
     key = None
     complete = False  #: whether authentication has been completed successfully
-    session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
+    session = None  #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
-    steamid = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
+    steamid = None  #: :class:`steam.steamid.SteamID` (after auth is complete)
 
     def __init__(self, username, password):
         self.__dict__.update(locals())
@@ -97,12 +97,12 @@ class WebAuth(object):
         """
         try:
             resp = self.session.post('https://store.steampowered.com/login/getrsakey/',
-                                    timeout=15,
-                                    data={
-                                        'username': username,
-                                        'donotchache': int(time() * 1000),
-                                        },
-                                    ).json()
+                                     timeout=15,
+                                     data={
+                                         'username': username,
+                                         'donotchache': int(time() * 1000),
+                                     },
+                                     ).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
@@ -144,7 +144,7 @@ class WebAuth(object):
         self._load_key()
 
         data = {
-            'username' : self.username,
+            'username': self.username,
             "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
             "emailsteamid": str(self.steamid) if email_code else '',
@@ -199,17 +199,22 @@ class WebAuth(object):
 class WebAuthException(Exception):
     pass
 
+
 class HTTPError(WebAuthException):
     pass
+
 
 class LoginIncorrect(WebAuthException):
     pass
 
+
 class CaptchaRequired(WebAuthException):
     pass
 
+
 class EmailCodeRequired(WebAuthException):
     pass
+
 
 class TwoFactorCodeRequired(WebAuthException):
     pass

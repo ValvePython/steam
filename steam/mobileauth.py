@@ -1,4 +1,54 @@
 # -*- coding: utf-8 -*-
+"""
+This module simplifies the process of obtaining an authenticated session for mobile steam websites.
+After authentication is complete, a :class:`requests.Session` is created containing the auth and mobile specific cookies.
+The session can be used to access ``steamcommunity.com``, ``store.steampowered.com``, and ``help.steampowered.com``.
+The main purpose of a mobile session, is to access the mobile trade confirmations page and to easily access the
+ITwoFactorService api, but can also used to access all 'normal' steam pages.
+
+
+.. warning::
+    A web session may expire randomly, or when you login from different IP address.
+    Some pages will return status code `401` when that happens.
+    Keep in mind if you are trying to write robust code.
+
+Example usage:
+
+.. code:: python
+
+    import steam.mobileauth as ma
+
+    user = ma.WebAuth('username', 'password')
+
+    try:
+        user.login()
+    except wa.CaptchaRequired:
+        print user.captcha_url
+        # ask a human to solve captcha
+        user.login(captcha='ABC123')
+    except wa.EmailCodeRequired:
+        user.login(email_code='ZXC123')
+    except wa.TwoFactorCodeRequired:
+        user.login(twofactor_code='ZXC123')
+
+    user.session.get('https://store.steampowered.com/account/history/')
+    # OR
+    session = user.login()
+    session.get('https://store.steampowered.com/account/history')
+
+Alternatively, if Steam Guard is not enabled on the account:
+
+.. code:: python
+
+    try:
+        session = wa.WebAuth('username', 'password').login()
+    except wa.HTTPError:
+        pass
+
+The :class:`MobileAuth` instance should be discarded once a session is obtained
+as it is not reusable.
+"""
+import json
 from time import time
 import sys
 from base64 import b64encode
@@ -20,10 +70,11 @@ else:
 class MobileAuth(object):
     key = None
     complete = False  #: whether authentication has been completed successfully
-    session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
+    session = None  #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
-    steamid = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
+    steamid = None  #: :class:`steam.steamid.SteamID` (after auth is complete)
     oauth = {}
+
     def __init__(self, username, password):
         self.__dict__.update(locals())
         self.session = make_requests_session()
@@ -38,12 +89,12 @@ class MobileAuth(object):
     def get_rsa_key(self, username):
         try:
             resp = self.session.post('https://steamcommunity.com/mobilelogin/getrsakey/',
-                                    timeout=15,
-                                    data={
-                                        'username': username,
-                                        'donotchache': int(time() * 1000),
-                                        },
-                                    ).json()
+                                     timeout=15,
+                                     data={
+                                         'username': username,
+                                         'donotchache': int(time() * 1000),
+                                     },
+                                     ).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
@@ -59,40 +110,11 @@ class MobileAuth(object):
 
             self.key = backend.load_rsa_public_numbers(nums)
             self.timestamp = resp['timestamp']
-            
-    def request(self, uri, data):
-        if not self.complete:
-            return None
-            
-        headers = {
-            'X-Requested-With': 'com.valvesoftware.android.steam.community',
-            'User-agent':  'Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; Google Nexus 4 - 4.1.1 - API 16 - 768x1280 Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
-        }
-        
-        try:
-            response = self.session.post(uri, data=data, headers=headers)
-        except requests.exceptions.RequestException as e:
-            raise HTTPError(str(e))
-        else:
-            return response
-
-    def refreshSession(self, oauth_token=None):
-        oauth_token = oauth_token or self.oauth['oauth_token']
-        response = self.request('https://api.steampowered.com/IMobileAuthService/GetWGToken/v0001', {'access_token': oauth_token})
-        try:
-            data = json.loads(response)
-        except Exception, e:
-            raise RefreshSessionFailed(str(e))
-        else:
-            self.oauth['wgtoken'] = data['response']['token']
-            self.oauth['wgtoken_secure'] = data['response']['token_secure']
-            self.session.cookies.set('steamLogin', '%s||%s' % (self.steamid, sself.oauth['wgtoken']), domain=domain, secure=False)
-            self.session.cookies.set('steamLoginSecure', '%s||%s' % (self.steamid, self.oauth['wgtoken_secure']), domain=domain, secure=True)
 
     def login(self, captcha='', email_code='', twofactor_code='', language='english'):
         if self.complete:
             return self.session
-            
+
         for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
             self.session.cookies.set('forceMobile', '1', domain=domain, secure=False)
             self.session.cookies.set('mobileClientVersion', '0 (2.1.3)', domain=domain, secure=False)
@@ -103,7 +125,7 @@ class MobileAuth(object):
         self._load_key()
 
         data = {
-            'username' : self.username,
+            'username': self.username,
             "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
             "emailsteamid": str(self.steamid) if email_code else '',
@@ -129,11 +151,14 @@ class MobileAuth(object):
         if resp['success'] and resp['login_complete']:
             self.complete = True
             self.password = None
+            resp['oauth'] = json.loads(resp['oauth'])
             self.steamid = SteamID(resp['oauth']['steamid'])
             self.oauth = resp['oauth']
             for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-                self.session.cookies.set('steamLogin', '%s||%s' % (self.steamid, resp['oauth']['wgtoken']), domain=domain, secure=False)
-                self.session.cookies.set('steamLoginSecure', '%s||%s' % (self.steamid, data['oauth']['wgtoken_secure']), domain=domain, secure=True)
+                self.session.cookies.set('steamLogin', '%s||%s' % (self.steamid, resp['oauth']['wgtoken']),
+                                         domain=domain, secure=False)
+                self.session.cookies.set('steamLoginSecure', '%s||%s' % (self.steamid, resp['oauth']['wgtoken_secure']),
+                                         domain=domain, secure=True)
 
             return resp
         else:
@@ -151,23 +176,26 @@ class MobileAuth(object):
 
         return None
 
+
 class MobileWebAuthException(Exception):
     pass
+
 
 class HTTPError(MobileWebAuthException):
     pass
 
+
 class LoginIncorrect(MobileWebAuthException):
     pass
+
 
 class CaptchaRequired(MobileWebAuthException):
     pass
 
+
 class EmailCodeRequired(MobileWebAuthException):
     pass
 
-class TwoFactorCodeRequired(MobileWebAuthException):
-    pass
 
-class RefreshSessionFailed(MobileWebAuthException):
+class TwoFactorCodeRequired(MobileWebAuthException):
     pass

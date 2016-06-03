@@ -1,8 +1,10 @@
 import struct
+import hashlib
 from binascii import hexlify
 from time import time
 from steam import webapi
 from steam.core.crypto import hmac_sha1, sha1_hash
+
 
 def generate_twofactor_code(shared_secret):
     """Generate Steam 2FA code for login with current time
@@ -84,5 +86,5 @@ def generate_device_id(steamid):
     :return: android device id
     :rtype: str
     """
-    h = hexlify(sha1(str(steamid).encode('ascii'))).decode('ascii')
+    h = hexlify(str(hashlib.sha1(str(steamid).encode('ascii')))).decode('ascii')
     return "android:%s-%s-%s-%s-%s" % (h[:8], h[8:12], h[12:16], h[16:20], h[20:32])
