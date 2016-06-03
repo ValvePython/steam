@@ -12,6 +12,11 @@ The session can be used to access ``steamcommunity.com``, ``store.steampowered.c
 .. note::
     If you are using :class:`steam.client.SteamClient`, use :meth:`steam.client.builtins.web.Web.get_web_session()`
 
+.. note::
+    If you need to authenticate as a mobile device for things like trading confirmations
+    use :class:`MobileWebAuth` instead. The login process is identical, and in addition
+    you will get :attr:`.oauth_token`.
+
 
 Example usage:
 
@@ -49,8 +54,9 @@ Alternatively, if Steam Guard is not enabled on the account:
 The :class:`WebAuth` instance should be discarded once a session is obtained
 as it is not reusable.
 """
-from time import time
 import sys
+import json
+from time import time
 from base64 import b64encode
 import requests
 
@@ -58,8 +64,8 @@ from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicNumbers
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
 from steam.core.crypto import backend
 
+from steam import SteamID, webapi
 from steam.util.web import make_requests_session
-from steam import SteamID
 
 if sys.version_info < (3,):
     intBase = long
@@ -77,6 +83,10 @@ class WebAuth(object):
     def __init__(self, username, password):
         self.__dict__.update(locals())
         self.session = make_requests_session()
+        self._session_setup()
+
+    def _session_setup(self):
+        pass
 
     @property
     def captcha_url(self):
@@ -84,7 +94,7 @@ class WebAuth(object):
         if self.captcha_gid == -1:
             return None
         else:
-            return "https://store.steampowered.com/login/rendercaptcha/?gid=%s" % self.captcha_gid
+            return "https://steamcommunity.com/login/rendercaptcha/?gid=%s" % self.captcha_gid
 
     def get_rsa_key(self, username):
         """Get rsa key for a given username
@@ -119,6 +129,29 @@ class WebAuth(object):
             self.key = backend.load_rsa_public_numbers(nums)
             self.timestamp = resp['timestamp']
 
+    def _send_login(self, captcha='', email_code='', twofactor_code=''):
+        data = {
+            'username' : self.username,
+            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
+            "emailauth": email_code,
+            "emailsteamid": str(self.steamid) if email_code else '',
+            "twofactorcode": twofactor_code,
+            "captchagid": self.captcha_gid,
+            "captcha_text": captcha,
+            "loginfriendlyname": "python-steam webauth",
+            "rsatimestamp": self.timestamp,
+            "remember_login": 'true',
+            "donotcache": int(time() * 100000),
+        }
+
+        try:
+            return self.session.post('https://steamcommunity.com/login/dologin/', data=data, timeout=15).json()
+        except requests.exceptions.RequestException as e:
+            raise HTTPError(str(e))
+
+    def _finalize_login(self, login_response):
+        self.steamid = SteamID(login_response['transfer_parameters']['steamid'])
+
     def login(self, captcha='', email_code='', twofactor_code='', language='english'):
         """Attempts web login and returns on a session with cookies set
 
@@ -142,34 +175,14 @@ class WebAuth(object):
             return self.session
 
         self._load_key()
-
-        data = {
-            'username' : self.username,
-            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
-            "emailauth": email_code,
-            "emailsteamid": str(self.steamid) if email_code else '',
-            "twofactorcode": twofactor_code,
-            "captchagid": self.captcha_gid,
-            "captcha_text": captcha,
-            "loginfriendlyname": "python-steam webauth",
-            "rsatimestamp": self.timestamp,
-            "remember_login": 'true',
-            "donotcache": int(time() * 100000),
-        }
-
-        try:
-            resp = self.session.post('https://store.steampowered.com/login/dologin/', data=data, timeout=15).json()
-        except requests.exceptions.RequestException as e:
-            raise HTTPError(str(e))
+        resp = self._send_login(captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
+        print resp
 
         self.captcha_gid = -1
 
         if resp['success'] and resp['login_complete']:
             self.complete = True
             self.password = None
-
-            data = resp['transfer_parameters']
-            self.steamid = SteamID(data['steamid'])
 
             for cookie in list(self.session.cookies):
                 for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
@@ -178,6 +191,8 @@ class WebAuth(object):
             for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
                 self.session.cookies.set('Steam_Language', language, domain=domain)
                 self.session.cookies.set('birthtime', '-3333', domain=domain)
+
+            self._finalize_login(resp)
 
             return self.session
         else:
@@ -194,6 +209,44 @@ class WebAuth(object):
                 raise LoginIncorrect(resp['message'])
 
         return None
+
+
+class MobileWebAuth(WebAuth):
+    """Identical to :class:`WebAuth`, except it authenticates as a mobile device."""
+    oauth_token = None  #: holds oauth_token after successful login
+
+    def _send_login(self, captcha='', email_code='', twofactor_code=''):
+        data = {
+            'username' : self.username,
+            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
+            "emailauth": email_code,
+            "emailsteamid": str(self.steamid) if email_code else '',
+            "twofactorcode": twofactor_code,
+            "captchagid": self.captcha_gid,
+            "captcha_text": captcha,
+            "loginfriendlyname": "python-steam webauth",
+            "rsatimestamp": self.timestamp,
+            "remember_login": 'true',
+            "donotcache": int(time() * 100000),
+            "oauth_client_id": "DE45CD61",
+            "oauth_scope": "read_profile write_profile read_client write_client",
+        }
+
+        self.session.cookies.set('mobileClientVersion', '0 (2.1.3)')
+        self.session.cookies.set('mobileClient', 'android')
+
+        try:
+            return self.session.post('https://steamcommunity.com/login/dologin/', data=data, timeout=15).json()
+        except requests.exceptions.RequestException as e:
+            raise HTTPError(str(e))
+        finally:
+            self.session.cookies.pop('mobileClientVersion', None)
+            self.session.cookies.pop('mobileClient', None)
+
+    def _finalize_login(self, login_response):
+        data = json.loads(login_response['oauth'])
+        self.steamid = SteamID(data['steamid'])
+        self.oauth_token = data['oauth_token']
 
 
 class WebAuthException(Exception):
