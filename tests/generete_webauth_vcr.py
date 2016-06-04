@@ -21,15 +21,16 @@ from steam import webauth as wa
 # any personal info. MAKE SURE TO CHECK THE VCR BEFORE COMMIT TO REPO
 
 def request_scrubber(r):
+    r['headers'].pop('set-cokie', None)
     r.body = ''
     return r
 
 def response_scrubber(r):
-    if 'set-cookie' in r['headers']:
+    if 'set-cookie' in r['headers'] and 'steamLogin' in ''.join(r['headers']['set-cookie']):
         r['headers']['set-cookie'] = [
             'steamLogin=0%7C%7C{}; path=/; httponly'.format('A'*16),
             'steamLoginSecure=0%7C%7C{}; path=/; httponly; secure'.format('B'*16),
-            'steamMachineAuth=0%7C%7C{}; path=/; httponly'.format('C'*16),
+            'steamMachineAuth0={}; path=/; httponly'.format('C'*16),
             ]
 
     if r.get('body', ''):
@@ -47,6 +48,7 @@ def response_scrubber(r):
         r['body']['string'] = body
         r['headers']['content-length'] = [str(len(body))]
 
+        print("--- response ---------")
         print(r)
 
     return r

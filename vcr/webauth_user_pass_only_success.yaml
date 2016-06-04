@@ -7,19 +7,26 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['46']
       Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+      User-Agent: [python-steam/0.8.3 python-requests/2.9.1]
     method: POST
-    uri: https://store.steampowered.com/login/getrsakey/
+    uri: https://steamcommunity.com/login/getrsakey/
   response:
-    body: {string: !!python/unicode '{"timestamp": "75683600000", "token_gid": 0,
-        "publickey_mod": "C91B651503A9831EB1708001E9D77FC618D472D29467B7CA31984918BECED0E1E54687EC744B93A10E12D3107B0CC7533923593600D98CCAA921914FB16B4D9910EB7CD556663778C081A22848DCCAB178772C88F24373679441AF0D7042208FE24AB9ADCB17F8C147425ED0C88B67E3E4C997511AB1B3A42F6CE2D0EC1D16FDEFE40D92C778EF45DACAD2AC10177D03B5736C6C339EAD8F03768036E3546A070D5A1FC04BA30495BEAA4A342D842A59971A179A39B6AA532F3BEEDE50596F52F15C9DF7D1DF4EFB470ACB2C36C005FDBDB5A3AB7D9A3D665120B0E04DD782C5E3CFBDA922761ADE5B09D742ED54C198C11A60C77725E4C001AE68C9855D5ED5",
+    body: {string: !!python/unicode '{"timestamp": "263253650000", "token_gid": 0,
+        "publickey_mod": "E0E0F924CDF326B86350CB6EDB534ED68A20C11FA1BF77DE7C4AE5B83A5264D7594511F17E6A46EB33908AAAE13A37653478949885B4780EEF23094AB153414AB30AD668CEEDB923B05373E62A7A7B5DB3DFF72FC9F79B6D6159CBA292EE21037701566EADA53C6BEEFCF8075245DC9577DB9357B551B8DC1339BFA0146FFF79F21BCEAB16E9DF638AC5E172A8FA7BA37F608478C12C6DF203533E08CF04971A644CD2E17B7A33C19AE7DB14A80D34A44DB30F37A8EB480A908F4449A80E64CB065C86309AFB942DF2B2256A3E56B9E6E66362454F9AFAC0817AD4143177A44ECE79D7058179A3FA13156DCAA2614792FDCB8186D678151AB6984FFE1D47BE3B",
         "publickey_exp": "010001", "success": true}'}
     headers:
       cache-control: [no-cache]
       connection: [keep-alive]
-      content-length: ['621']
+      content-length: ['622']
+      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
+          https://www.google.com https://www.gstatic.com https://apis.google.com;
+          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
+          https://api.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
+          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
+          https://www.google.com https://sketchfab.com https://help.steampowered.com/;']
       content-type: [application/json; charset=utf-8]
-      date: ['Fri, 13 May 2016 03:01:24 GMT']
+      date: ['Sat, 04 Jun 2016 00:17:23 GMT']
       expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
       server: [Apache]
       x-frame-options: [DENY]
@@ -30,28 +37,34 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Content-Length: ['588']
+      Content-Length: ['574']
       Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+      User-Agent: [python-steam/0.8.3 python-requests/2.9.1]
     method: POST
-    uri: https://store.steampowered.com/login/dologin/
+    uri: https://steamcommunity.com/login/dologin/
   response:
     body: {string: !!python/unicode '{"requires_twofactor": false, "login_complete":
-        true, "transfer_urls": ["https://steamcommunity.com/login/transfer", "https://help.steampowered.com/login/transfer"],
+        true, "transfer_urls": ["https://store.steampowered.com/login/transfer", "https://help.steampowered.com/login/transfer"],
         "transfer_parameters": {"steamid": "0", "remember_login": false, "token":
         "AAAAAAAAAAAAAAAA", "token_secure": "BBBBBBBBBBBBBBBB", "auth": "ZZZZZZZZZZZZZZZZ"},
         "success": true}'}
     headers:
       cache-control: [no-cache]
       connection: [keep-alive]
-      content-length: ['341']
+      content-length: ['345']
+      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
+          https://www.google.com https://www.gstatic.com https://apis.google.com;
+          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
+          https://api.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
+          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
+          https://www.google.com https://sketchfab.com https://help.steampowered.com/;']
       content-type: [application/json; charset=utf-8]
-      date: ['Fri, 13 May 2016 03:01:25 GMT']
+      date: ['Sat, 04 Jun 2016 00:17:24 GMT']
       expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
       server: [Apache]
       set-cookie: [steamLogin=0%7C%7CAAAAAAAAAAAAAAAA; path=/; httponly, steamLoginSecure=0%7C%7CBBBBBBBBBBBBBBBB;
-          path=/; httponly; secure, steamMachineAuth=0%7C%7CCCCCCCCCCCCCCCCC; path=/;
-          httponly]
+          path=/; httponly; secure, steamMachineAuth0=CCCCCCCCCCCCCCCC; path=/; httponly]
       x-frame-options: [DENY]
     status: {code: 200, message: OK}
 version: 1
