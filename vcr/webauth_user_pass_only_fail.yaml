@@ -7,19 +7,26 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['46']
       Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+      User-Agent: [python-steam/0.8.3 python-requests/2.9.1]
     method: POST
-    uri: https://store.steampowered.com/login/getrsakey/
+    uri: https://steamcommunity.com/login/getrsakey/
   response:
-    body: {string: !!python/unicode '{"timestamp": "75683600000", "token_gid": 0,
-        "publickey_mod": "C91B651503A9831EB1708001E9D77FC618D472D29467B7CA31984918BECED0E1E54687EC744B93A10E12D3107B0CC7533923593600D98CCAA921914FB16B4D9910EB7CD556663778C081A22848DCCAB178772C88F24373679441AF0D7042208FE24AB9ADCB17F8C147425ED0C88B67E3E4C997511AB1B3A42F6CE2D0EC1D16FDEFE40D92C778EF45DACAD2AC10177D03B5736C6C339EAD8F03768036E3546A070D5A1FC04BA30495BEAA4A342D842A59971A179A39B6AA532F3BEEDE50596F52F15C9DF7D1DF4EFB470ACB2C36C005FDBDB5A3AB7D9A3D665120B0E04DD782C5E3CFBDA922761ADE5B09D742ED54C198C11A60C77725E4C001AE68C9855D5ED5",
+    body: {string: !!python/unicode '{"timestamp": "259640400000", "token_gid": 0,
+        "publickey_mod": "CA419D47649D81ACB6A748C80BEF0F8CBB87B4B64ED810EE1A60A47A18A511EFEB52936FBC0986714BB0D725643FE255E39FC3426E9BA8B331C3598B96E9BC18E6E2B86AE1ED7E8E96E8FF1CB7705D3C138C56FF6F07B5F62F1F3199116CB4058E23CD62C79BC840C630BD0FECF59F3D368007A7F12E5A7306DB70E5EEF3430D11FD60745495CB4E0F4167637D1DED0A02DADC28C06E4B97456FCB316163D5C97BE2ECF3A0C1E6BC53C59BF703F1C7187B5D165497AB4337D46A2B15D1811F65F5C46E58D7A85685409C6C2CBB81B397CE341CD33468ED62289C356A82C270258E361C629396012FACD282BDBC7440D6AD7AEDF9C94AF1596FDEA572EA873273",
         "publickey_exp": "010001", "success": true}'}
     headers:
       cache-control: [no-cache]
       connection: [keep-alive]
-      content-length: ['621']
+      content-length: ['622']
+      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
+          https://www.google.com https://www.gstatic.com https://apis.google.com;
+          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
+          https://api.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
+          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
+          https://www.google.com https://sketchfab.com https://help.steampowered.com/;']
       content-type: [application/json; charset=utf-8]
-      date: ['Fri, 13 May 2016 03:01:26 GMT']
+      date: ['Sat, 04 Jun 2016 00:05:21 GMT']
       expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
       server: [Apache]
       x-frame-options: [DENY]
@@ -30,11 +37,11 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Content-Length: ['578']
+      Content-Length: ['586']
       Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-steam/0.7.4 python-requests/2.9.1]
+      User-Agent: [python-steam/0.8.3 python-requests/2.9.1]
     method: POST
-    uri: https://store.steampowered.com/login/dologin/
+    uri: https://steamcommunity.com/login/dologin/
   response:
     body: {string: !!python/unicode '{"captcha_gid": -1, "success": false, "requires_twofactor":
         false, "captcha_needed": false, "clear_password_field": true, "message": "Incorrect
@@ -43,8 +50,15 @@ interactions:
       cache-control: [no-cache]
       connection: [keep-alive]
       content-length: ['152']
+      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
+          https://www.google.com https://www.gstatic.com https://apis.google.com;
+          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
+          https://api.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
+          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
+          https://www.google.com https://sketchfab.com https://help.steampowered.com/;']
       content-type: [application/json; charset=utf-8]
-      date: ['Fri, 13 May 2016 03:01:27 GMT']
+      date: ['Sat, 04 Jun 2016 00:05:22 GMT']
       expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
       server: [Apache]
       x-frame-options: [DENY]

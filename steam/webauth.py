@@ -106,7 +106,7 @@ class WebAuth(object):
         :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
         """
         try:
-            resp = self.session.post('https://store.steampowered.com/login/getrsakey/',
+            resp = self.session.post('https://steamcommunity.com/login/getrsakey/',
                                     timeout=15,
                                     data={
                                         'username': username,
@@ -176,7 +176,6 @@ class WebAuth(object):
 
         self._load_key()
         resp = self._send_login(captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
-        print resp
 
         self.captcha_gid = -1
 
