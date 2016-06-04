@@ -76,9 +76,9 @@ else:
 class WebAuth(object):
     key = None
     complete = False  #: whether authentication has been completed successfully
-    session = None  #: :class:`requests.Session` (with auth cookies after auth is complete)
+    session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
-    steamid = None  #: :class:`steam.steamid.SteamID` (after auth is complete)
+    steamid = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
 
     def __init__(self, username, password):
         self.__dict__.update(locals())
@@ -106,15 +106,6 @@ class WebAuth(object):
         :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
         """
         try:
-<<<<<<< HEAD
-            resp = self.session.post('https://store.steampowered.com/login/getrsakey/',
-                                     timeout=15,
-                                     data={
-                                         'username': username,
-                                         'donotchache': int(time() * 1000),
-                                     },
-                                     ).json()
-=======
             resp = self.session.post('https://steamcommunity.com/login/getrsakey/',
                                     timeout=15,
                                     data={
@@ -122,7 +113,6 @@ class WebAuth(object):
                                         'donotchache': int(time() * 1000),
                                         },
                                     ).json()
->>>>>>> refs/remotes/ValvePython/master
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
@@ -185,29 +175,7 @@ class WebAuth(object):
             return self.session
 
         self._load_key()
-<<<<<<< HEAD
-
-        data = {
-            'username': self.username,
-            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
-            "emailauth": email_code,
-            "emailsteamid": str(self.steamid) if email_code else '',
-            "twofactorcode": twofactor_code,
-            "captchagid": self.captcha_gid,
-            "captcha_text": captcha,
-            "loginfriendlyname": "python-steam webauth",
-            "rsatimestamp": self.timestamp,
-            "remember_login": 'true',
-            "donotcache": int(time() * 100000),
-        }
-
-        try:
-            resp = self.session.post('https://store.steampowered.com/login/dologin/', data=data, timeout=15).json()
-        except requests.exceptions.RequestException as e:
-            raise HTTPError(str(e))
-=======
         resp = self._send_login(captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
->>>>>>> refs/remotes/ValvePython/master
 
         self.captcha_gid = -1
 
@@ -283,22 +251,17 @@ class MobileWebAuth(WebAuth):
 class WebAuthException(Exception):
     pass
 
-
 class HTTPError(WebAuthException):
     pass
-
 
 class LoginIncorrect(WebAuthException):
     pass
 
-
 class CaptchaRequired(WebAuthException):
     pass
 
-
 class EmailCodeRequired(WebAuthException):
     pass
-
 
 class TwoFactorCodeRequired(WebAuthException):
     pass
