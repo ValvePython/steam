@@ -25,6 +25,9 @@ Events
 
 """
 import os
+import json
+from time import time
+from io import open
 import logging
 import gevent
 import gevent.monkey
@@ -39,14 +42,16 @@ from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
 from steam.client.builtins import BuiltinBase
+from steam.util import ip_from_int
 
 
 class SteamClient(CMClient, BuiltinBase):
+    _cm_servers_timestamp = None       # used to decide when to update CM list on disk
     _reconnect_backoff_c = 0
     current_jobid = 0
-    credential_location = None  #: location for sentry
-    username = None  #: username when logged on
-    login_key = None  #: can be used for subsequent logins (no 2FA code will be required)
+    credential_location = None         #: location for sentry
+    username = None                    #: username when logged on
+    login_key = None                   #: can be used for subsequent logins (no 2FA code will be required)
 
     def __init__(self):
         CMClient.__init__(self)
@@ -78,12 +83,55 @@ class SteamClient(CMClient, BuiltinBase):
         """
         self.credential_location = path
 
+    def connect(self, *args, **kwargs):
+        """Attempt to establish connection, see :method:`.CMClient.connect`"""
+        self._bootstrap_cm_list_from_file()
+        CMClient.connect(self, *args, **kwargs)
+
     def disconnect(self, *args, **kwargs):
-        """
-        Close connection
-        """
+        """Close connection, see :method:`.CMClient.disconnect`"""
         self.logged_on = False
         CMClient.disconnect(self, *args, **kwargs)
+
+    def _bootstrap_cm_list_from_file(self):
+        if not self.credential_location or self._cm_servers_timestamp is not None: return
+
+        filepath = os.path.join(self.credential_location, 'cm_servers.json')
+        if not os.path.isfile(filepath): return
+
+        self._LOG.debug("Reading CM servers from %s" % repr(filepath))
+        try:
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+        except IOError as e:
+            self._LOG.error("load %s: %s" % (repr(filepath), str(e)))
+            return
+
+        self.cm_servers.clear()
+        self.cm_servers.merge_list(data['servers'])
+        self._cm_servers_timestamp = int(data['timestamp'])
+
+    def _handle_cm_list(self, msg):
+        if self._cm_servers_timestamp is None:
+            self.cm_servers.clear()
+            self._cm_servers_timestamp = int(time())
+
+        CMClient._handle_cm_list(self, msg)  # just merges the list
+
+        if self.credential_location:
+            filepath = os.path.join(self.credential_location, 'cm_servers.json')
+
+            if not os.path.exists(filepath) or time() - (3600*24) > self._cm_servers_timestamp:
+                data = {
+                    'timestamp': self._cm_servers_timestamp,
+                    'servers': list(zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
+                }
+                try:
+                    with open(filepath, 'wb') as f:
+                        f.write(json.dumps(data, indent=True).encode('ascii'))
+                    self._LOG.debug("Saved CM servers to %s" % repr(filepath))
+                except IOError as e:
+                    self._LOG.error("saving %s: %s" % (filepath, str(e)))
 
     def _handle_jobs(self, event, *args):
         if isinstance(event, EMsg):
