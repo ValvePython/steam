@@ -390,7 +390,7 @@ class CMServerList(object):
     Bad = 2
 
     def __init__(self, bad_timespan=300):
-        self._log = logging.getLogger("CMServerList")
+        self._LOG = logging.getLogger("CMServerList")
 
         self.bad_timespan = bad_timespan
         self.list = defaultdict(dict)
@@ -400,7 +400,7 @@ class CMServerList(object):
     def clear(self):
         """Clears the server list"""
         if len(self.list):
-            self._log.debug("List cleared.")
+            self._LOG.debug("List cleared.")
         self.list.clear()
 
     def bootstrap_from_builtin_list(self):
@@ -408,7 +408,7 @@ class CMServerList(object):
         Resets the server list to the built in one.
         This method is called during initialization.
         """
-        self._log.debug("Bootstraping from builtin list")
+        self._LOG.debug("Bootstraping from builtin list")
         self.clear()
 
         # build-in list
@@ -438,23 +438,23 @@ class CMServerList(object):
         :return: booststrap success
         :rtype: :class:`bool`
         """
-        self._log.debug("Attempting bootstrap via WebAPI")
+        self._LOG.debug("Attempting bootstrap via WebAPI")
 
         from steam import _webapi
         try:
             resp = _webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid})
         except Exception as exp:
-            self._log.error("WebAPI boostrap failed: %s" % str(exp))
+            self._LOG.error("WebAPI boostrap failed: %s" % str(exp))
             return False
 
         result = EResult(resp['response']['result'])
 
         if result != EResult.OK:
-            self._log.error("GetCMList failed with %s" % repr(result))
+            self._LOG.error("GetCMList failed with %s" % repr(result))
             return False
 
         serverlist = resp['response']['serverlist']
-        self._log.debug("Recieved %d servers from WebAPI" % len(serverlist))
+        self._LOG.debug("Recieved %d servers from WebAPI" % len(serverlist))
 
         def str_to_tuple(serveraddr):
             ip, port = serveraddr.split(':')
@@ -484,7 +484,7 @@ class CMServerList(object):
     def reset_all(self):
         """Reset status for all servers in the list"""
 
-        self._log.debug("Marking all CMs as Good.")
+        self._LOG.debug("Marking all CMs as Good.")
 
         for key in self.list:
             self.mark_good(key)
@@ -503,7 +503,7 @@ class CMServerList(object):
         :param server_addr: (ip, port) tuple
         :type server_addr: :class:`tuple`
         """
-        self._log.debug("Marking %s as Bad." % repr(server_addr))
+        self._LOG.debug("Marking %s as Bad." % repr(server_addr))
         self.list[server_addr].update({'quality': CMServerList.Bad, 'timestamp': time()})
 
     def merge_list(self, new_list):
@@ -519,4 +519,4 @@ class CMServerList(object):
                 self.mark_good((ip, port))
 
         if len(self.list) > total:
-            self._log.debug("Added %d new CM addresses." % (len(self.list) - total))
+            self._LOG.debug("Added %d new CM addresses." % (len(self.list) - total))
