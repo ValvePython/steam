@@ -11,6 +11,7 @@ Events
  | ``error`` - after login failure
  | ``auth_code_required`` - either email code or 2FA code is needed for login
  | ``logged_on`` - after successful login, client can send messages
+ | ``new_login_key`` - after new login key has been received and acknowledged
  | :class:`EMsg <steam.enums.emsg.EMsg>` - all messages are emitted with their ``EMsg``
 
 
@@ -182,10 +183,14 @@ class SteamClient(CMClient, BuiltinBase):
             self.emit("auth_code_required", is_2fa, code_mismatch)
 
     def _handle_login_key(self, message):
-        self.login_key = message.body.login_key
         resp = MsgProto(EMsg.ClientNewLoginKeyAccepted)
         resp.body.unique_id = message.body.unique_id
-        self.send(resp)
+
+        if self.logged_on:
+            self.send(resp)
+            gevent.idle()
+            self.login_key = message.body.login_key
+            self.emit("new_login_key")
 
     def _handle_update_machine_auth(self, message):
         ok = self.store_sentry(self.username, message.body.bytes)
