@@ -78,7 +78,7 @@ class WebAuth(object):
     complete = False  #: whether authentication has been completed successfully
     session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
-    steamid = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
+    steam_id = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
 
     def __init__(self, username, password):
         self.__dict__.update(locals())
@@ -134,7 +134,7 @@ class WebAuth(object):
             'username' : self.username,
             "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
-            "emailsteamid": str(self.steamid) if email_code else '',
+            "emailsteamid": str(self.steam_id) if email_code else '',
             "twofactorcode": twofactor_code,
             "captchagid": self.captcha_gid,
             "captcha_text": captcha,
@@ -150,7 +150,7 @@ class WebAuth(object):
             raise HTTPError(str(e))
 
     def _finalize_login(self, login_response):
-        self.steamid = SteamID(login_response['transfer_parameters']['steamid'])
+        self.steam_id = SteamID(login_response['transfer_parameters']['steamid'])
 
     def login(self, captcha='', email_code='', twofactor_code='', language='english'):
         """Attempts web login and returns on a session with cookies set
@@ -200,7 +200,7 @@ class WebAuth(object):
 
                 raise CaptchaRequired(resp['message'])
             elif resp.get('emailauth_needed', False):
-                self.steamid = SteamID(resp['emailsteamid'])
+                self.steam_id = SteamID(resp['emailsteamid'])
                 raise EmailCodeRequired(resp['message'])
             elif resp.get('requires_twofactor', False):
                 raise TwoFactorCodeRequired(resp['message'])
@@ -219,7 +219,7 @@ class MobileWebAuth(WebAuth):
             'username' : self.username,
             "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
-            "emailsteamid": str(self.steamid) if email_code else '',
+            "emailsteamid": str(self.steam_id) if email_code else '',
             "twofactorcode": twofactor_code,
             "captchagid": self.captcha_gid,
             "captcha_text": captcha,
@@ -244,7 +244,7 @@ class MobileWebAuth(WebAuth):
 
     def _finalize_login(self, login_response):
         data = json.loads(login_response['oauth'])
-        self.steamid = SteamID(data['steamid'])
+        self.steam_id = SteamID(data['steamid'])
         self.oauth_token = data['oauth_token']
 
 
