@@ -6,13 +6,14 @@ Supports Python ``2.7+`` and ``3.3+``.
 
 Documentation: http://steam.readthedocs.io/en/latest/
 
-Main features
--------------
+Key features
+------------
 
+* `SteamAuthenticator <http://valvepython.github.io/steam/api/steam.guard.html>`_ - enable/disable/manage 2FA on account and generate codes
+* `SteamClient <http://valvepython.github.io/steam/api/steam.client.html>`_ - communication with the steam network based on ``gevent``.
 * `SteamID <http://valvepython.github.io/steam/api/steam.client.html>`_  - convert between the various ID representations with ease
 * `WebAPI <http://valvepython.github.io/steam/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
 * `WebAuth <http://valvepython.github.io/steam/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
-* `SteamClient <http://valvepython.github.io/steam/api/steam.client.html>`_ - communication with the steam network based on ``gevent``.
 
 Checkout the `User guide <http://valvepython.github.io/steam/user_guide.html>`_ for examples,
 or the `API Reference <http://valvepython.github.io/steam/api/index.html>`_ for details.

@@ -59,6 +59,16 @@ def clear_proto_bit(emsg):
     """
     return int(emsg) & ~protobuf_mask
 
+def proto_to_dict(message):
+    """Converts protobuf message instance to dict (shallow)
+
+    :param message: protobuf message
+    :return: parameters and their values
+    :rtype: dict
+    """
+    return {field.name: getattr(message, field.name, field.default_value)
+            for field in message.DESCRIPTOR.fields}
+
 def chunks(arr, size):
     """Splits a list into chunks
 
