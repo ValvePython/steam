@@ -12,6 +12,7 @@ install:
     - pip install scrutinizer-ocular
 script:
     - make test
+    - make docs
 after_script:
     - coveralls
     - ocular
