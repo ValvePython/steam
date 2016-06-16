@@ -11,3 +11,4 @@ PyYAML==3.11
 requests==2.9.1
 vcrpy==1.7.4
 vdf==2.0
+sphinx==1.3.5

@@ -369,6 +369,11 @@ class ELeaderboardUploadScoreMethod(SteamIntEnum):
     KeepBest = 1
     ForceUpdate = 2
 
+class ETwoFactorTokenType(SteamIntEnum):
+    NONE = 0
+    ValveMobileApp = 1
+    ThirdParty = 2
+
 # Do not remove
 from sys import modules
 from enum import EnumMeta

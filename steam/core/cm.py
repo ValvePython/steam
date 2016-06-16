@@ -34,7 +34,7 @@ class CMClient(EventEmitter):
     UDP = 1                                 #: UDP protocol enum
     verbose_debug = False                   #: print message connects in debug
 
-    servers = None                          #: a instance of :class:`steam.core.cm.CMServerList`
+    cm_servers = None                       #: a instance of :class:`steam.core.cm.CMServerList`
     current_server_addr = None              #: (ip, port) tuple
     _seen_logon = False
     _connecting = False
@@ -54,7 +54,7 @@ class CMClient(EventEmitter):
 
     def __init__(self, protocol=0):
         self._LOG = logging.getLogger("CMClient")
-        self.servers = CMServerList()
+        self.cm_servers = CMServerList()
 
         if protocol == CMClient.TCP:
             self.connection = TCPConnection()
@@ -64,7 +64,7 @@ class CMClient(EventEmitter):
         self.on(EMsg.ChannelEncryptRequest, self.__handle_encrypt_request),
         self.on(EMsg.Multi, self.__handle_multi),
         self.on(EMsg.ClientLogOnResponse, self._handle_logon),
-        self.on(EMsg.ClientCMList, self.__handle_cm_list),
+        self.on(EMsg.ClientCMList, self._handle_cm_list),
 
     def emit(self, event, *args):
         if event is not None:
@@ -96,7 +96,7 @@ class CMClient(EventEmitter):
 
         self._LOG.debug("Connect initiated.")
 
-        for i, server_addr in enumerate(self.servers):
+        for i, server_addr in enumerate(self.cm_servers):
             if retry and i > retry:
                 return False
 
@@ -278,7 +278,7 @@ class CMClient(EventEmitter):
         result = self.wait_event(EMsg.ChannelEncryptResult, timeout=5)
 
         if result is None:
-            self.servers.mark_bad(self.current_server_addr)
+            self.cm_servers.mark_bad(self.current_server_addr)
             gevent.spawn(self.disconnect)
             return
 
@@ -337,7 +337,7 @@ class CMClient(EventEmitter):
         if result in (EResult.TryAnotherCM,
                       EResult.ServiceUnavailable
                       ):
-            self.servers.mark_bad(self.current_server_addr)
+            self.cm_servers.mark_bad(self.current_server_addr)
             self.disconnect()
         elif result == EResult.OK:
             self._seen_logon = True
@@ -360,11 +360,11 @@ class CMClient(EventEmitter):
             self.emit("error", EResult(result))
             self.disconnect()
 
-    def __handle_cm_list(self, msg):
+    def _handle_cm_list(self, msg):
         self._LOG.debug("Updating CM list")
 
         new_servers = zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)
-        self.servers.merge_list(new_servers)
+        self.cm_servers.merge_list(new_servers)
 
 
 class CMServerList(object):
@@ -390,19 +390,26 @@ class CMServerList(object):
     Bad = 2
 
     def __init__(self, bad_timespan=300):
-        self._log = logging.getLogger("CMServerList")
+        self._LOG = logging.getLogger("CMServerList")
 
         self.bad_timespan = bad_timespan
         self.list = defaultdict(dict)
 
         self.bootstrap_from_builtin_list()
 
+    def clear(self):
+        """Clears the server list"""
+        if len(self.list):
+            self._LOG.debug("List cleared.")
+        self.list.clear()
+
     def bootstrap_from_builtin_list(self):
         """
         Resets the server list to the built in one.
         This method is called during initialization.
         """
-        self.list.clear()
+        self._LOG.debug("Bootstraping from builtin list")
+        self.clear()
 
         # build-in list
         self.merge_list([('162.254.195.44', 27019), ('146.66.152.11', 27017),
@@ -431,32 +438,32 @@ class CMServerList(object):
         :return: booststrap success
         :rtype: :class:`bool`
         """
-        from steam import _webapi
+        self._LOG.debug("Attempting bootstrap via WebAPI")
 
+        from steam import _webapi
         try:
             resp = _webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid})
         except Exception as exp:
-            self._log.error("WebAPI boostrap failed: %s" % str(exp))
+            self._LOG.error("WebAPI boostrap failed: %s" % str(exp))
             return False
 
         result = EResult(resp['response']['result'])
 
         if result != EResult.OK:
-            self._log.error("GetCMList failed with %s" % repr(result))
+            self._LOG.error("GetCMList failed with %s" % repr(result))
             return False
 
         serverlist = resp['response']['serverlist']
-        self._log.debug("Recieved %d servers from WebAPI" % len(serverlist))
+        self._LOG.debug("Recieved %d servers from WebAPI" % len(serverlist))
 
         def str_to_tuple(serveraddr):
             ip, port = serveraddr.split(':')
             return str(ip), int(port)
 
-        self.list.clear()
+        self.clear()
         self.merge_list(map(str_to_tuple, serverlist))
 
         return True
-
 
     def __iter__(self):
         def genfunc():
@@ -477,7 +484,7 @@ class CMServerList(object):
     def reset_all(self):
         """Reset status for all servers in the list"""
 
-        self._log.debug("Marking all CMs as Good.")
+        self._LOG.debug("Marking all CMs as Good.")
 
         for key in self.list:
             self.mark_good(key)
@@ -496,19 +503,20 @@ class CMServerList(object):
         :param server_addr: (ip, port) tuple
         :type server_addr: :class:`tuple`
         """
-        self._log.debug("Marking %s as Bad." % repr(server_addr))
+        self._LOG.debug("Marking %s as Bad." % repr(server_addr))
         self.list[server_addr].update({'quality': CMServerList.Bad, 'timestamp': time()})
 
     def merge_list(self, new_list):
         """Add new CM servers to the list
 
-        :param new_list: a list of (ip, port) tuples
+        :param new_list: a list of ``(ip, port)`` tuples
         :type new_list: :class:`list`
         """
         total = len(self.list)
 
         for ip, port in new_list:
-            self.mark_good((ip, port))
+            if (ip, port) not in self.list:
+                self.mark_good((ip, port))
 
-        if total:
-            self._log.debug("Added %d new CM addresses." % (len(self.list) - total))
+        if len(self.list) > total:
+            self._LOG.debug("Added %d new CM addresses." % (len(self.list) - total))

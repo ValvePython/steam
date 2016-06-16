@@ -69,6 +69,26 @@ class SteamUnifiedMessages(EventEmitter):
 
     Incoming messages are emitted as events once with their ``jobid``
     and once with their method name (e.g. ``Player.GetGameBadgeLevels#1``)
+
+    Example code:
+
+    .. code:: python
+
+        response = client.unified_messages.send_and_wait('Player.GetGameBadgeLevels#1', {
+            'property': 1,
+            'something': 'value',
+            })
+
+        # or alternatively
+
+        jobid = client.unified_message.send('Player.GetGameBadgeLevels#1', {'something': 1})
+        response, = client.unified_message.wait_event(jobid)
+
+        # or
+
+        message = client.unified_message.get('Player.GetGameBadgeLevels#1')
+        message.something = 1
+        response = client.unified_message.send_and_wait(message)
     """
     def __init__(self, steam, logger_name=None):
         self._LOG = logging.getLogger(logger_name if logger_name else self.__class__.__name__)
@@ -117,10 +137,15 @@ class SteamUnifiedMessages(EventEmitter):
         self._data[message] = method_name
         return message
 
-    def send(self, message):
+    def send(self, message, params=None):
         """Send service method request
 
-        :param message: proto message instance (use :meth:`SteamUnifiedMessages.get`)
+        :param message:
+            proto message instance (use :meth:`SteamUnifiedMessages.get`)
+            or method name (e.g. ``Player.GetGameBadgeLevels#1``)
+        :type message: :class:`str`, proto message instance
+        :param params: message parameters
+        :type params: :class:`dict`
         :return: ``jobid`` event identifier
         :rtype: :class:`str`
 
@@ -129,8 +154,17 @@ class SteamUnifiedMessages(EventEmitter):
         .. note::
             If you listen for ``jobid`` on the client instance you will get the encapsulated message
         """
+        if isinstance(message, str):
+            message = self.get(message)
         if message not in self._data:
             raise ValueError("Supplied message seems to be invalid. Did you use 'get' method?")
+
+        if params:
+            for k, v in params.items():
+                if isinstance(v, list):
+                    getattr(message, k).extend(v)
+                else:
+                    setattr(message, k, v)
 
         capsule = MsgProto(EMsg.ClientServiceMethod)
         capsule.body.method_name = self._data[message]
@@ -138,10 +172,15 @@ class SteamUnifiedMessages(EventEmitter):
 
         return self._steam.send_job(capsule)
 
-    def send_and_wait(self, message, timeout=None, raises=False):
+    def send_and_wait(self, message, params=None, timeout=None, raises=False):
         """Send service method request and wait for response
 
-        :param message: proto message instance (use :meth:`get`)
+        :param message:
+            proto message instance (use :meth:`SteamUnifiedMessages.get`)
+            or method name (e.g. ``Player.GetGameBadgeLevels#1``)
+        :type message: :class:`str`, proto message instance
+        :param params: message parameters
+        :type params: :class:`dict`
         :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if :class:`False` return :class:`None`, else raise :class:`gevent.Timeout`
@@ -150,7 +189,7 @@ class SteamUnifiedMessages(EventEmitter):
         :rtype: proto message, :class:`None`
         :raises: ``gevent.Timeout``
         """
-        job_id = self.send(message)
+        job_id = self.send(message, params)
         resp = self.wait_event(job_id, timeout, raises=raises)
         if resp is None and not raises:
             return None
