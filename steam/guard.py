@@ -11,17 +11,17 @@ Adding an authenticator
 .. code:: python
 
     sa = SteamAuthenticator(medium=medium)
-    sa.add()  # SMS code will be send to account's phone number
-    sa.finalize('SMS CODE')
+    sa.add()    # SMS code will be send to account's phone number
+    sa.secrets  # dict with authenticator secrets, make sure you save them
 
-    sa.secrets  # dict with authenticator secrets
+    sa.finalize('SMS CODE')  # activate the authenticator
 
-    sa.get_code()  # 2FA code for login
+    sa.get_code()  # generate 2FA code for login
 
     sa.remove()  # removes the authenticator from the account
 
 .. warning::
-    Once the authenticator is enabled, make sure you save your secrets.
+    Before you finalize the authenticator, make sure to save your secrets.
     Otherwise you will lose access to the account.
 
 Once authenticator is enabled all you need is the secrets to generate codes.
@@ -31,7 +31,12 @@ Once authenticator is enabled all you need is the secrets to generate codes.
     sa = SteamAuthenticator(secrets)
     sa.get_code()
 
+You can obtain the authenticator secrets from an Android device using
+:func:`extract_secrets_from_android_rooted`. See the function docstring for
+details on what is required for it to work.
 """
+import json
+import subprocess
 import struct
 import requests
 from base64 import b64decode, b64encode
@@ -332,3 +337,33 @@ def generate_device_id(steamid):
     """
     h = hexlify(sha1_hash(str(steamid).encode('ascii'))).decode('ascii')
     return "android:%s-%s-%s-%s-%s" % (h[:8], h[8:12], h[12:16], h[16:20], h[20:32])
+
+def extract_secrets_from_android_rooted(adb_path='adb'):
+    """Extract Steam Authenticator secrets from a rooted Android device
+
+    Prerequisite for this to work:
+
+        - rooted android device
+        - `adb binary <https://developer.android.com/studio/command-line/adb.html>`_
+        - device in debug mode, connected and paired
+
+    .. note::
+        If you know how to make this work, without requiring a the device to be rooted,
+        please open a issue on github. Thanks
+
+    :param adb_path: path to adb binary
+    :type adb_path: str
+    :raises: When there is any problem
+    :return: all secrets from the device, steamid as key
+    :rtype: dict
+    """
+    data = subprocess.check_output([
+        adb_path, 'shell', 'su', '-c',
+        "'cat /data/data/com.valvesoftware.android.steam.community/files/Steamguard*'"
+        ])
+
+    if data[0] != "{":
+        raise RuntimeError("Got invalid data: %s" % repr(data))
+
+    return {int(x['steamid']): x
+            for x in map(json.loads, data.replace("}{", '}||||{').split('|||||'))}
