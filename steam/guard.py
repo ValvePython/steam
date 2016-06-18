@@ -290,15 +290,15 @@ def generate_twofactor_code_for_time(shared_secret, timestamp):
 
     return code
 
-def generate_confirmation_key(identity_secret, timestamp, tag=''):
+def generate_confirmation_key(identity_secret, tag, timestamp):
     """Generate confirmation key for trades. Can only be used once.
 
     :param identity_secret: authenticator identity secret
     :type identity_secret: bytes
-    :param timestamp: timestamp to use for generating key
-    :type timestamp: int
     :param tag: tag identifies what the request, see list below
     :type tag: str
+    :param timestamp: timestamp to use for generating key
+    :type timestamp: int
     :return: confirmation key
     :rtype: bytes
 

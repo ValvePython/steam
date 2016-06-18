@@ -12,8 +12,8 @@ class TCguard(unittest.TestCase):
         self.assertEqual(code, '94R9D')
 
     def test_generate_confirmation_key(self):
-        key = g.generate_confirmation_key(b'itsmemario', 100000)
+        key = g.generate_confirmation_key(b'itsmemario', '', 100000)
         self.assertEqual(key, b'\xed\xb5\xe5\xad\x8f\xf1\x99\x01\xc8-w\xd6\xb5 p\xccz\xd7\xd1\x05')
 
-        key = g.generate_confirmation_key(b'itsmemario', 100000, 'allow')
+        key = g.generate_confirmation_key(b'itsmemario', 'allow', 100000)
         self.assertEqual(key, b"Q'\x06\x80\xe1g\xa8m$\xb2hV\xe6g\x8b'\x8f\xf1L\xb0")
