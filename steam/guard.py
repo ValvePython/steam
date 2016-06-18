@@ -154,10 +154,7 @@ class SteamAuthenticator(object):
         if resp['status'] != EResult.OK:
             raise SteamAuthenticatorError("Failed to add authenticator. Error: %s" % repr(EResult(resp['status'])))
 
-        for key in ['shared_secret', 'identity_secret', 'serial_number', 'secret_1', 'revocation_code', 'token_gid']:
-            if key in resp:
-                self.secrets[key] = resp[key]
-
+        self.secrets = resp
         self.steam_time_offset = int(resp['server_time']) - time()
 
     def finalize(self, activation_code):
