@@ -105,14 +105,6 @@ class SteamAuthenticator(object):
                                          self.get_time() if timestamp is None else timestamp)
 
     def _send_request(self, action, params):
-        action_map = {
-            'add':          'AddAuthenticator',
-            'finalize':     'FinalizeAddAuthenticator',
-            'remove':       'RemoveAuthenticator',
-            'status':       'QueryStatus',
-            'createcodes':  'CreateEmergencyCodes',
-            'destroycodes': 'DestroyEmergencyCodes',
-        }
         medium = self.medium
 
         if isinstance(medium, MobileWebAuth):
@@ -123,7 +115,7 @@ class SteamAuthenticator(object):
             params['http_timeout'] = 10
 
             try:
-                resp = webapi.post('ITwoFactorService', action_map[action], 1, params=params)
+                resp = webapi.post('ITwoFactorService', action, 1, params=params)
             except requests.exceptions.RequestException as exp:
                 raise SteamAuthenticatorError("Error adding via WebAPI: %s" % str(exp))
 
@@ -132,14 +124,14 @@ class SteamAuthenticator(object):
             if not medium.logged_on:
                 raise SteamAuthenticatorError("SteamClient instance not logged in")
 
-            resp = medium.unified_messages.send_and_wait("TwoFactor.%s#1" % action_map[action],
+            resp = medium.unified_messages.send_and_wait("TwoFactor.%s#1" % action,
                                                          params, timeout=10)
             if resp is None:
                 raise SteamAuthenticatorError("Failed to add authenticator. Request timeout")
 
             resp = proto_to_dict(resp)
 
-            if action == 'add':
+            if action == 'AddAuthenticator':
                 for key in ['shared_secret', 'identity_secret', 'secret_1']:
                     resp[key] = b64encode(resp[key])
 
@@ -151,15 +143,13 @@ class SteamAuthenticator(object):
 
         :raises: :class:`SteamAuthenticatorError`
         """
-        params = {
+        resp = self._send_request('AddAuthenticator', {
             'steamid': self.medium.steam_id,
             'authenticator_time': int(time()),
             'authenticator_type': int(ETwoFactorTokenType.ValveMobileApp),
             'device_identifier': generate_device_id(self.medium.steam_id),
             'sms_phone_id': '1',
-        }
-
-        resp = self._send_request('add', params)
+        })
 
         if resp['status'] != EResult.OK:
             raise SteamAuthenticatorError("Failed to add authenticator. Error: %s" % repr(EResult(resp['status'])))
@@ -177,14 +167,12 @@ class SteamAuthenticator(object):
         :type activation_code: str
         :raises: :class:`SteamAuthenticatorError`
         """
-        params = {
+        resp = self._send_request('FinalizeAddAuthenticator', {
             'steamid': self.medium.steam_id,
             'authenticator_time': int(time()),
             'authenticator_code': self.get_code(),
             'activation_code': activation_code,
-        }
-
-        resp = self._send_request('finalize', params)
+        })
 
         if resp['status'] != EResult.TwoFactorActivationCodeMismatch and resp.get('want_more', False) and self._finalize_attempts:
             self.steam_time_offset += 30
@@ -208,13 +196,11 @@ class SteamAuthenticator(object):
         if not self.secrets:
             raise SteamAuthenticatorError("No authenticator secrets available?")
 
-        params = {
+        resp = self._send_request('RemoveAuthenticator', {
             'steamid': self.medium.steam_id,
             'revocation_code': self.revocation_code,
             'steamguard_scheme': 1,
-        }
-
-        resp = self._send_request('remove', params)
+        })
 
         if not resp['success']:
             raise SteamAuthenticatorError("Failed to remove authenticator. (attempts remaining: %s)" % (
@@ -230,8 +216,7 @@ class SteamAuthenticator(object):
         :return: dict with status parameters
         :rtype: dict
         """
-        params = {'steamid': self.medium.steam_id}
-        return self._send_request('status', params)
+        return self._send_request('QueryStatus', {'steamid': self.medium.steam_id})
 
     def create_emergency_codes(self):
         """Generate emergency codes
@@ -240,15 +225,14 @@ class SteamAuthenticator(object):
         :return: list of codes
         :rtype: list
         """
-        return self._send_request('createcodes', {}).get('code', [])
+        return self._send_request('CreateEmergencyCodes', {}).get('code', [])
 
     def destroy_emergency_codes(self):
         """Destroy all emergency codes
 
         :raises: :class:`SteamAuthenticatorError`
         """
-        params = {'steamid': self.medium.steam_id}
-        self._send_request('destroycodes', params)
+        self._send_request('DestroyEmergencyCodes', {'steamid': self.medium.steam_id})
 
 
 class SteamAuthenticatorError(Exception):
