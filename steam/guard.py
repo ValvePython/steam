@@ -101,8 +101,8 @@ class SteamAuthenticator(object):
         :return: trade confirmation key
         :rtype: str
         """
-        return generate_confirmation_key(b64decode(self.identity_secret),
-                                         self.get_time() if timestamp is None else timestamp, tag)
+        return generate_confirmation_key(b64decode(self.identity_secret), tag,
+                                         self.get_time() if timestamp is None else timestamp)
 
     def _send_request(self, action, params):
         medium = self.medium
