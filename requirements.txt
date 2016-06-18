@@ -1,5 +1,4 @@
 coverage==4.0.3
-setuptools>=11.3
 gevent-eventemitter==1.4
 enum34==1.1.2; python_version < '3.4'
 gevent==1.1.0
