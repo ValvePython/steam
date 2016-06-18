@@ -12,17 +12,17 @@ Events
  | ``auth_code_required`` - either email code or 2FA code is needed for login
  | ``logged_on`` - after successful login, client can send messages
  | ``new_login_key`` - after new login key has been received and acknowledged
- | :class:`EMsg <steam.enums.emsg.EMsg>` - all messages are emitted with their ``EMsg``
+ | :class:`.EMsg` - all messages are emitted with their :class:`.EMsg` number
 
 
 .. note::
     Mixins can emitter additional events. See their docs pages for details.
 
 .. note::
-    Additional features are located in separate submodules. All functionality from ``bultins`` is inherited by default.
+    Additional features are located in separate submodules. All functionality from :mod:`.builtins` is inherited by default.
 
 .. note::
-    Optional features are available as ``mixins``. This allows the client to remain light yet flexible.
+    Optional features are available as :mod:`.mixins`. This allows the client to remain light yet flexible.
 
 """
 import os
@@ -85,12 +85,12 @@ class SteamClient(CMClient, BuiltinBase):
         self.credential_location = path
 
     def connect(self, *args, **kwargs):
-        """Attempt to establish connection, see :method:`.CMClient.connect`"""
+        """Attempt to establish connection, see :meth:`.CMClient.connect`"""
         self._bootstrap_cm_list_from_file()
         CMClient.connect(self, *args, **kwargs)
 
     def disconnect(self, *args, **kwargs):
-        """Close connection, see :method:`.CMClient.disconnect`"""
+        """Close connection, see :meth:`.CMClient.disconnect`"""
         self.logged_on = False
         CMClient.disconnect(self, *args, **kwargs)
 
@@ -211,12 +211,12 @@ class SteamClient(CMClient, BuiltinBase):
 
     def reconnect(self, maxdelay=30, retry=0):
         """Implements explonential backoff delay before attempting to connect.
-        It is otherwise identical to calling :meth:`steam.core.cm.CMClient.connect`.
+        It is otherwise identical to calling :meth:`.CMClient.connect`.
         The delay is reset upon a successful login.
 
         :param maxdelay: maximum delay in seconds before connect (0-120s)
         :type maxdelay: :class:`int`
-        :param retry: see :meth:`steam.core.cm.CMClient.connect`
+        :param retry: see :meth:`.CMClient.connect`
         :type retry: :class:`int`
         :return: successful connection
         :rtype: :class:`bool`
@@ -233,7 +233,7 @@ class SteamClient(CMClient, BuiltinBase):
         Send a message to CM
 
         :param message: a message instance
-        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :type message: :class:`.Msg`, :class:`.MsgProto`
         """
         if not self.connected:
             raise RuntimeError("Cannot send message while not connected")
@@ -247,7 +247,7 @@ class SteamClient(CMClient, BuiltinBase):
             Not all messages are jobs, you'll have to find out which are which
 
         :param message: a message instance
-        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :type message: :class:`.Msg`, :class:`.MsgProto`
         :return: ``jobid`` event identifier
         :rtype: :class:`str`
 
@@ -285,13 +285,13 @@ class SteamClient(CMClient, BuiltinBase):
             Not all messages are jobs, you'll have to find out which are which
 
         :param message: a message instance
-        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :type message: :class:`.Msg`, :class:`.MsgProto`
         :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
         :type raises: :class:`bool`
         :return: response proto message
-        :rtype: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :rtype: :class:`.Msg`, :class:`.MsgProto`
         :raises: ``gevent.Timeout``
         """
         job_id = self.send_job(message)
@@ -305,15 +305,15 @@ class SteamClient(CMClient, BuiltinBase):
         Send a message to CM and wait for a defined answer.
 
         :param message: a message instance
-        :type message: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :type message: :class:`.Msg`, :class:`.MsgProto`
         :param response_emsg: emsg to wait for
-        :type response_emsg: :class:`steam.enums.emsg.EMsg`,:class:`int`
+        :type response_emsg: :class:`.EMsg`,:class:`int`
         :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
         :type raises: :class:`bool`
         :return: response proto message
-        :rtype: :class:`steam.core.msg.Msg`, :class:`steam.core.msg.MsgProto`
+        :rtype: :class:`.Msg`, :class:`.MsgProto`
         :raises: ``gevent.Timeout``
         """
         self.send(message)
