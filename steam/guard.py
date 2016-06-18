@@ -70,7 +70,7 @@ class SteamAuthenticator(object):
 
     def __getattr__(self, key):
         if key not in self.secrets:
-            raise AttributeError("No such attribute")
+            raise AttributeError("No %s attribute" % repr(key))
         return self.secrets[key]
 
     def get_time(self):
