@@ -239,8 +239,9 @@ class SteamClient(CMClient, BuiltinBase):
         :type message: :class:`.Msg`, :class:`.MsgProto`
         """
         if not self.connected:
-            raise RuntimeError("Cannot send message while not connected")
-        CMClient.send(self, message)
+            self._LOG.debug("Trying to send message when not connected. (discarded)")
+        else:
+            CMClient.send(self, message)
 
     def send_job(self, message):
         """
