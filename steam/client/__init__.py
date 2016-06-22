@@ -165,6 +165,9 @@ class SteamClient(CMClient, BuiltinBase):
         # CM kills the connection on error anyway
         self.disconnect()
 
+        if result == EResult.InvalidPassword:
+            self.login_key = None
+
         if result in (EResult.AccountLogonDenied,
                       EResult.InvalidLoginAuthCode,
                       EResult.AccountLoginDeniedNeedTwoFactor,
@@ -382,6 +385,28 @@ class SteamClient(CMClient, BuiltinBase):
 
         if not self.channel_secured:
             self.wait_event("channel_secured")
+
+    @property
+    def can_relogin(self):
+        """``True`` when the client has the nessesary data for :meth:`relogin`"""
+        return bool(self.username) and bool(self.login_key)
+
+    def relogin(self):
+        """Login without specifiying credentials. Can be used after the client instance has
+        already been logged on once before and has obtained :attr:`login_key`.
+        Listen for the ``new_login_key`` event.
+
+        .. note::
+            Only works when :attr:`can_relogin` is ``True``.
+
+        .. code:: python
+
+            if client.can_relogin: client.relogin()
+            else:
+                client.login(user, pass)
+        """
+        if self.can_relogin:
+            self.login(self.username, '', self.login_key)
 
     def login(self, username, password='', login_key=None, auth_code=None, two_factor_code=None):
         """
