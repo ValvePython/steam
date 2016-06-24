@@ -60,14 +60,63 @@ def clear_proto_bit(emsg):
     return int(emsg) & ~protobuf_mask
 
 def proto_to_dict(message):
-    """Converts protobuf message instance to dict (shallow)
+    """Converts protobuf message instance to dict
 
-    :param message: protobuf message
+    :param message: protobuf message instance
     :return: parameters and their values
     :rtype: dict
     """
-    return {field.name: getattr(message, field.name, field.default_value)
-            for field in message.DESCRIPTOR.fields}
+    data = {}
+
+    for desc, field in message.ListFields():
+        if desc.type == desc.TYPE_MESSAGE:
+            if desc.label == desc.LABEL_REPEATED:
+                data[desc.name] = map(proto_to_dict, field)
+            else:
+                data[desc.name] = proto_to_dict(field)
+        else:
+            data[desc.name] = field
+
+    return data
+
+def proto_fill_from_dict(message, data, clear=True):
+    """Fills protobuf message parameters inplace from a :class:`dict`
+
+    :param message: protobuf message instance
+    :param data: parameters and values
+    :type data: dict
+    :param clear: whether clear exisiting values
+    :type clear: bool
+    :return: value of message paramater
+    :raises: incorrect types or values will raise
+    """
+    if clear: message.Clear()
+    field_descs = message.DESCRIPTOR.fields_by_name
+
+    for key, val in data.items():
+        desc = field_descs[key]
+
+        if desc.type == desc.TYPE_MESSAGE:
+            if desc.label == desc.LABEL_REPEATED:
+                if not isinstance(val, list):
+                    raise TypeError("Expected %s to be of type list, got %s" % (
+                        repr(key), type(val)
+                        ))
+
+                for item in val:
+                    item_message = getattr(message, key).add()
+                    proto_fill_from_dict(item_message, item)
+            else:
+                if not isinstance(val, dict):
+                    raise TypeError("Expected %s to be of type dict, got %s" % (
+                        repr(key), type(dict)
+                        ))
+
+                proto_fill_from_dict(getattr(message, key), val)
+        else:
+            setattr(message, key, val)
+
+    return message
 
 def chunks(arr, size):
     """Splits a list into chunks
