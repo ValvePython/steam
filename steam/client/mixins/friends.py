@@ -19,28 +19,45 @@ class SteamFriendlist(EventEmitter):
     You can iterate over it, check if it contains a particular steam id, or get :class:`SteamUser` for a steamid.
 
     .. note::
-        persona state is not update immediatelly for new user entries
-
-
-    Event: ``ready`` - friendlist is ready to use
-
-    Event: ``friend_invite`` - new or existing friend invite
-
-    :param user: steam user instance
-    :type user: :class:`SteamUser`
-
-    Event: ``friend_new`` - emitted upon accepting a new friend (or being accepted)
-
-    :param user: steam user instance
-    :type user: :class:`SteamUser`
-
-
-    Event: ``friend_removed`` - no longer a friend (removed by either side)
-
-    :param user: steam user instance
-    :type user: :class:`SteamUser`
+        persona state is not updated immediatelly for new user entries
 
     """
+    EVENT_READY = 'ready'
+    """Friend list is ready for use
+    """
+    EVENT_FRIEND_INVITE = 'friend_invite'
+    """New or existing friend invite
+
+    :param user: steam user instance
+    :type user: :class:`.SteamUser`
+    """
+    EVENT_FRIEND_NEW = 'friend_new'
+    """Friendship established (after being accepted, or accepting)
+
+    :param user: steam user instance
+    :type user: :class:`.SteamUser`
+    """
+    EVENT_FRIEND_REMOVED = 'friend_removed'
+    """No longer a friend (removed by either side)
+
+    :param user: steam user instance
+    :type user: :class:`.SteamUser`
+    """
+    EVENT_FRIEND_ADD_RESULT = 'friend_add_result'
+    """Result response after adding a friend
+
+    :param eresult: result
+    :param type: :class:`.EResult`
+    :param steam_id: steam id
+    :param type: :class:`.SteamID`
+    """
+    EVENT_PERSONA_STATE_UPDATED = 'persona_state_updated'
+    """Upon persona state changes for a user
+
+    :param user: steam user instance
+    :type user: :class:`.SteamUser`
+    """
+
     ready = False  #: indicates whether friend list is available
 
     def __init__(self, client, logger_name='SteamFriendList'):
@@ -51,7 +68,7 @@ class SteamFriendlist(EventEmitter):
         self._steam.on(EMsg.ClientAddFriendResponse, self._handle_add_friend_result)
         self._steam.on(EMsg.ClientFriendsList, self._handle_friends_list)
         self._steam.on(EMsg.ClientPersonaState, self._handle_persona_state)
-        self._steam.on('disconnected', self._handle_disconnect)
+        self._steam.on(self._steam.EVENT_DISCONNECTED, self._handle_disconnect)
 
     def emit(self, event, *args):
         if event is not None:
@@ -65,7 +82,7 @@ class SteamFriendlist(EventEmitter):
     def _handle_add_friend_result(self, message):
         eresult = EResult(message.body.eresult)
         steam_id = SteamID(message.body.steam_id_added)
-        self.emit("friend_add_result", eresult, steam_id)
+        self.emit(self.EVENT_FRIEND_ADD_RESULT, eresult, steam_id)
 
     def _handle_friends_list(self, message):
         incremental = message.body.bincremental
@@ -88,15 +105,15 @@ class SteamFriendlist(EventEmitter):
                         pstate_check.add(steamid)
 
                     if rel == EFriendRelationship.RequestRecipient:
-                        self.emit('friend_invite', suser)
+                        self.emit(self.EVENT_FRIEND_INVITE, suser)
             else:
                 oldrel = self._fr[steamid]._data['relationship']
                 self._fr[steamid]._data['relationship'] = rel
 
                 if rel == EFriendRelationship.No:
-                    self.emit('friend_removed', self._fr.pop(steamid))
+                    self.emit(self.EVENT_FRIEND_REMOVED, self._fr.pop(steamid))
                 elif oldrel in (2,4) and rel == EFriendRelationship.Friend:
-                    self.emit('friend_new', self._fr[steamid])
+                    self.emit(self.EVENT_FRIEND_NEW, self._fr[steamid])
 
         # request persona state for any new entries
         if pstate_check:
@@ -107,7 +124,7 @@ class SteamFriendlist(EventEmitter):
 
         if not self.ready:
             self.ready = True
-            self.emit('ready')
+            self.emit(self.EVENT_READY)
 
     def _handle_persona_state(self, message):
         for friend in message.body.friends:
@@ -147,7 +164,7 @@ class SteamFriendlist(EventEmitter):
         When someone sends you an invite, use this method to accept it.
 
         :param steamid_or_accountname_or_email: steamid, account name, or email
-        :type steamid_or_accountname_or_email: :class:`int`, :class:`steam.steamid.SteamID`, :class:`SteamUser`, :class:`str`
+        :type steamid_or_accountname_or_email: :class:`int`, :class:`.SteamID`, :class:`SteamUser`, :class:`str`
 
         .. note::
             Adding by email doesn't not work. It's only mentioned for the sake of completeness.
@@ -166,7 +183,7 @@ class SteamFriendlist(EventEmitter):
         Remove a friend
 
         :param steamid: their steamid
-        :type steamid: :class:`int`, :class:`steam.steamid.SteamID`, :class:`SteamUser`
+        :type steamid: :class:`int`, :class:`.SteamID`, :class:`SteamUser`
         """
         m = MsgProto(EMsg.ClientRemoveFriend)
         m.body.friendid = steamid
@@ -193,7 +210,7 @@ class SteamUser(intBase):
     def steamid(self):
         """SteamID instance
 
-        :rtype: :class:`steam.steamid.SteamID`
+        :rtype: :class:`.SteamID`
         """
         return SteamID(int(self))
 
@@ -201,7 +218,7 @@ class SteamUser(intBase):
     def relationship(self):
         """Current relationship with the steam user
 
-        :rtype: :class:`steam.enums.common.EFriendRelationship`
+        :rtype: :class:`.EFriendRelationship`
         """
         return self._data['relationship']
 
@@ -239,7 +256,7 @@ class SteamUser(intBase):
     def state(self):
         """State of the steam user
 
-        :rtype: :class:`steam.enums.common.EPersonaState`
+        :rtype: :class:`.EPersonaState`
         """
         state = self.get_ps('persona_state')
         if state:

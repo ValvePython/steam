@@ -30,11 +30,36 @@ class CMClient(EventEmitter):
     their :class:`steam.enums.emsg.EMsg` as event identifier
     """
 
-    TCP = 0                                 #: TCP protocol enum
-    UDP = 1                                 #: UDP protocol enum
+    EVENT_CONNECTED = 'connected'
+    """Connection establed to CM server
+    """
+    EVENT_DISCONNECTED = 'disconnected'
+    """Connection closed
+    """
+    EVENT_RECONNECT = 'reconnect'
+    """Delayed connect
+
+    :param delay: delay in seconds
+    :type delay: int
+    """
+    EVENT_CHANNEL_SECURED = 'channel_secured'
+    """After successful completion of encryption handshake
+    """
+    EVENT_ERROR = 'error'
+    """When login is denied
+
+    :param eresult: reason
+    :type eresult: :class:`.EResult`
+    """
+    EVENT_EMSG = 0
+    """All incoming messages are emitted with their :class:`.EMsg` number.
+    """
+
+    PROTOCOL_TCP = 0                        #: TCP protocol enum
+    PROTOCOL_UDP = 1                        #: UDP protocol enum
     verbose_debug = False                   #: print message connects in debug
 
-    cm_servers = None                       #: a instance of :class:`steam.core.cm.CMServerList`
+    cm_servers = None                       #: a instance of :class:`.CMServerList`
     current_server_addr = None              #: (ip, port) tuple
     _seen_logon = False
     _connecting = False
@@ -44,7 +69,7 @@ class CMClient(EventEmitter):
     channel_key = None                      #: channel encryption key
     channel_hmac = None                     #: HMAC secret
 
-    steam_id = SteamID()                    #: :class:`steam.steamid.SteamID` of the current user
+    steam_id = SteamID()                    #: :class:`.SteamID` of the current user
     session_id = None                       #: session id when logged in
     webapi_authenticate_user_nonce = None   #: nonce for the getting a web session
 
@@ -52,11 +77,11 @@ class CMClient(EventEmitter):
     _heartbeat_loop = None
     _LOG = None
 
-    def __init__(self, protocol=0):
+    def __init__(self, protocol=PROTOCOL_TCP):
         self._LOG = logging.getLogger("CMClient")
         self.cm_servers = CMServerList()
 
-        if protocol == CMClient.TCP:
+        if protocol == CMClient.PROTOCOL_TCP:
             self.connection = TCPConnection()
         else:
             raise ValueError("Only TCP is supported")
@@ -91,7 +116,7 @@ class CMClient(EventEmitter):
 
         if delay:
             self._LOG.debug("Delayed connect: %d seconds" % delay)
-            self.emit('reconnect', delay)
+            self.emit(self.EVENT_RECONNECT, delay)
             gevent.sleep(delay)
 
         self._LOG.debug("Connect initiated.")
@@ -114,7 +139,7 @@ class CMClient(EventEmitter):
 
         self.current_server_addr = server_addr
         self.connected = True
-        self.emit("connected")
+        self.emit(self.EVENT_CONNECTED)
         self._recv_loop = gevent.spawn(self._recv_messages)
         self._connecting = False
         return True
@@ -151,7 +176,7 @@ class CMClient(EventEmitter):
 
         self._reset_attributes()
 
-        self.emit('disconnected')
+        self.emit(self.EVENT_DISCONNECTED)
 
     def _reset_attributes(self):
         for name in ['connected',
@@ -298,7 +323,7 @@ class CMClient(EventEmitter):
             self._LOG.debug("Channel secured (legacy mode)")
 
         self.channel_secured = True
-        self.emit('channel_secured')
+        self.emit(self.EVENT_CHANNEL_SECURED)
 
     def __handle_multi(self, msg):
         self._LOG.debug("Multi: Unpacking")
@@ -357,7 +382,7 @@ class CMClient(EventEmitter):
             interval = msg.body.out_of_game_heartbeat_seconds
             self._heartbeat_loop = gevent.spawn(self.__heartbeat, interval)
         else:
-            self.emit("error", EResult(result))
+            self.emit(self.EVENT_ERROR, EResult(result))
             self.disconnect()
 
     def _handle_cm_list(self, msg):

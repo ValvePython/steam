@@ -3,6 +3,7 @@ client
 
 .. automodule:: steam.client
     :members: SteamClient
+    :member-order: alphabetical
     :undoc-members:
     :inherited-members:
     :show-inheritance:

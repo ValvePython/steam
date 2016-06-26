@@ -1,23 +1,6 @@
 """
 Implementation of Steam client based on ``gevent``
 
-Events
-^^^^^^
-
- | ``connected`` - when successful connection with a CM server is established
- | ``disconnected`` - when connection is lost
- | ``reconnect`` - when connect attempt is delayed, `delay` argument gives the delay in seconds
- | ``channel_secured`` - after channel encryption is complete, client can attempt to login now
- | ``error`` - after login failure
- | ``auth_code_required`` - either email code or 2FA code is needed for login
- | ``logged_on`` - after successful login, client can send messages
- | ``new_login_key`` - after new login key has been received and acknowledged
- | :class:`.EMsg` - all messages are emitted with their :class:`.EMsg` number
-
-
-.. note::
-    Mixins can emitter additional events. See their docs pages for details.
-
 .. note::
     Additional features are located in separate submodules. All functionality from :mod:`.builtins` is inherited by default.
 
@@ -47,6 +30,16 @@ from steam.util import ip_from_int
 
 
 class SteamClient(CMClient, BuiltinBase):
+    EVENT_LOGGED_ON = 'logged_on'
+    """After successful login
+    """
+    EVENT_AUTH_CODE_REQUIRED = 'auth_code_required'
+    """When either email or 2FA code is needed for login
+    """
+    EVENT_NEW_LOGIN_KEY = 'new_login_key'
+    """After a new login key is accepted
+    """
+
     _cm_servers_timestamp = None       # used to decide when to update CM list on disk
     _reconnect_backoff_c = 0
     current_jobid = 0
@@ -60,8 +53,8 @@ class SteamClient(CMClient, BuiltinBase):
         self._LOG = logging.getLogger("SteamClient")
         # register listners
         self.on(None, self._handle_jobs)
-        self.on("disconnected", self._handle_disconnect)
-        self.on("reconnect", self._handle_disconnect)
+        self.on(self.EVENT_DISCONNECTED, self._handle_disconnect)
+        self.on(self.EVENT_RECONNECT, self._handle_disconnect)
         self.on(EMsg.ClientNewLoginKey, self._handle_login_key)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
 
@@ -159,7 +152,7 @@ class SteamClient(CMClient, BuiltinBase):
             self._reconnect_backoff_c = 0
             self.logged_on = True
             self.set_persona(EPersonaState.Online)
-            self.emit("logged_on")
+            self.emit(self.EVENT_LOGGED_ON)
             return
 
         # CM kills the connection on error anyway
@@ -183,7 +176,7 @@ class SteamClient(CMClient, BuiltinBase):
             else:
                 code_mismatch = (result == EResult.InvalidLoginAuthCode)
 
-            self.emit("auth_code_required", is_2fa, code_mismatch)
+            self.emit(self.EVENT_AUTH_CODE_REQUIRED, is_2fa, code_mismatch)
 
     def _handle_login_key(self, message):
         resp = MsgProto(EMsg.ClientNewLoginKeyAccepted)
@@ -193,7 +186,7 @@ class SteamClient(CMClient, BuiltinBase):
             self.send(resp)
             gevent.idle()
             self.login_key = message.body.login_key
-            self.emit("new_login_key")
+            self.emit(self.EVENT_NEW_LOGIN_KEY)
 
     def _handle_update_machine_auth(self, message):
         ok = self.store_sentry(self.username, message.body.bytes)
@@ -432,7 +425,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         .. code:: python
 
-            @steamclient.on('auth_code_required')
+            @steamclient.on(steamclient.EVENT_AUTH_CODE_REQUIRED)
             def auth_code_prompt(is_2fa, code_mismatch):
                 if is_2fa:
                     code = raw_input("Enter 2FA Code: ")
