@@ -10,7 +10,7 @@ The session can be used to access ``steamcommunity.com``, ``store.steampowered.c
     Keep in mind if you are trying to write robust code.
 
 .. note::
-    If you are using :class:`steam.client.SteamClient`, use :meth:`steam.client.builtins.web.Web.get_web_session()`
+    If you are using :class:`.SteamClient` take a look at :meth:`.get_web_session()`
 
 .. note::
     If you need to authenticate as a mobile device for things like trading confirmations
@@ -78,7 +78,7 @@ class WebAuth(object):
     complete = False  #: whether authentication has been completed successfully
     session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
-    steam_id = None    #: :class:`steam.steamid.SteamID` (after auth is complete)
+    steam_id = None    #: :class:`.SteamID` (after auth is complete)
 
     def __init__(self, username, password):
         self.__dict__.update(locals())

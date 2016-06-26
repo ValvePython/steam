@@ -100,7 +100,7 @@ class WebAPI(object):
         self.http_timeout = http_timeout            #: HTTP timeout in seconds
         self.apihost = apihost                      #: ..versionadded:: 0.8.3 apihost hostname
         self.interfaces = []                        #: list of all interfaces
-        self.session = _make_session()              #: :class:`requests.Session` from :func:`steam.util.web.make_requests_session`
+        self.session = _make_session()              #: :class:`requests.Session` from :func:`.make_requests_session`
 
         if auto_load_interfaces:
             self.load_interfaces(self.fetch_interfaces())
@@ -118,7 +118,7 @@ class WebAPI(object):
 
         :return: :class:`dict` of all interfaces and methods
 
-        The returned value can passed to :py:func:`WebAPI.load_interfaces`
+        The returned value can passed to :meth:`load_interfaces`
         """
         return get('ISteamWebAPIUtil', 'GetSupportedAPIList', 1,
             https=self.https,
