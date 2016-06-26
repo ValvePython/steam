@@ -12,7 +12,7 @@ class User(object):
         self.on(self.EVENT_LOGGED_ON, self.__handle_set_persona)
 
     def __handle_set_persona(self):
-        self.set_persona(persona_state=self.persona_state)
+        self.change_status(persona_state=self.persona_state)
 
     def change_status(self, **kwargs):
         """
