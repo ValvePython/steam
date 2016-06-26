@@ -71,7 +71,6 @@ class CMClient(EventEmitter):
 
     steam_id = SteamID()                    #: :class:`.SteamID` of the current user
     session_id = None                       #: session id when logged in
-    webapi_authenticate_user_nonce = None   #: nonce for the getting a web session
 
     _recv_loop = None
     _heartbeat_loop = None
@@ -185,7 +184,6 @@ class CMClient(EventEmitter):
                      'channel_hmac',
                      'steam_id',
                      'session_id',
-                     'webapi_authenticate_user_nonce',
                      '_seen_logon',
                      '_recv_loop',
                      '_heartbeat_loop',
@@ -371,8 +369,6 @@ class CMClient(EventEmitter):
 
             self.steam_id = SteamID(msg.header.steamid)
             self.session_id = msg.header.client_sessionid
-
-            self.webapi_authenticate_user_nonce = msg.body.webapi_authenticate_user_nonce.encode('ascii')
 
             if self._heartbeat_loop:
                 self._heartbeat_loop.kill()

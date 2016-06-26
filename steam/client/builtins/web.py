@@ -1,9 +1,10 @@
 """
 Web related features
 """
-from binascii import hexlify
 from steam import webapi
-from steam.core.crypto import generate_session_key, symmetric_encrypt, sha1_hash, random_bytes
+from steam.core.msg import MsgProto
+from steam.enums.emsg import EMsg
+from steam.core.crypto import generate_session_key, symmetric_encrypt
 from steam.util.web import make_requests_session
 
 
@@ -20,15 +21,18 @@ class Web(object):
         :return: dict with authentication cookies
         :rtype: :class:`dict`, :class:`None`
         """
-        if not self.logged_on:
-            return None
+        if not self.logged_on: return None
+
+        resp = self.send_job_and_wait(MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce), timeout=5)
+
+        if resp is None: return None
 
         skey, ekey = generate_session_key()
 
         data = {
             'steamid': self.steam_id,
             'sessionkey': ekey,
-            'encrypted_loginkey': symmetric_encrypt(self.webapi_authenticate_user_nonce, skey),
+            'encrypted_loginkey': symmetric_encrypt(resp.webapi_authenticate_user_nonce.encode('ascii'), skey),
         }
 
         try:
@@ -38,7 +42,6 @@ class Web(object):
             return None
 
         return {
-            'sessionid': hexlify(sha1_hash(random_bytes(32))),
             'steamLogin': resp['authenticateuser']['token'],
             'steamLoginSecure': resp['authenticateuser']['tokensecure'],
         }
