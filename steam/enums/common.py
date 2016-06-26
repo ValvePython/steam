@@ -255,17 +255,6 @@ class EOSType(SteamIntEnum):
     Max = 26
 
 
-class EPersonaState(SteamIntEnum):
-    Offline = 0
-    Online = 1
-    Busy = 2
-    Away = 3
-    Snooze = 4
-    LookingToTrade = 5
-    LookingToPlay = 6
-    Max = 7
-
-
 class EFriendRelationship(SteamIntEnum):
     No = 0
     Blocked = 1
@@ -322,6 +311,17 @@ class EFriendFlags(SteamIntEnum):
     IgnoredFriend = 1024
     Suggested = 2048
     FlagAll = 65535
+
+
+class EPersonaState(SteamIntEnum):
+    Offline = 0
+    Online = 1
+    Busy = 2
+    Away = 3
+    Snooze = 4
+    LookingToTrade = 5
+    LookingToPlay = 6
+    Max = 7
 
 
 class EPersonaStateFlag(SteamIntEnum):

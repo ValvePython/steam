@@ -1,32 +1,37 @@
 from steam.enums import EPersonaState
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
+from steam.util import proto_fill_from_dict
 
 class User(object):
+    persona_state = EPersonaState.Online    #: current persona state
+
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
 
-    def set_persona(self, state=None, name=None):
-        """
-        Set persona state and/or name
+        self.on(self.EVENT_LOGGED_ON, self.__handle_set_persona)
 
-        :param state: persona state flag
-        :type state: :class:`steam.enums.common.EPersonaState`
-        :param name: profile name
-        :type name: :class:`str`
+    def __handle_set_persona(self):
+        self.set_persona(persona_state=self.persona_state)
+
+    def change_status(self, **kwargs):
         """
-        if state is None and name is None:
-            return
+        Set name, persona state, flags
+
+        .. note::
+            Changing persona state will also change :attr:`persona_state`
+
+        :param persona_state: persona state (Online/Offlane/Away/etc)
+        :type persona_state: :class:`.EPersonaState`
+        :param player_name: profile name
+        :type player_name: :class:`str`
+        :param persona_state_flags: persona state flags
+        :type persona_state_flags: :class:`.EPersonaStateFlag`
+        """
+        if not kwargs: return
+
+        self.persona_state = kwargs.get('persona_state', self.persona_state)
 
         message = MsgProto(EMsg.ClientChangeStatus)
-
-        if state:
-            if not isinstance(state, EPersonaState):
-                raise ValueError("Expected state to be instance of EPersonaState")
-
-            message.body.persona_state = state
-
-        if name:
-            message.body.player_name = name
-
+        proto_fill_from_dict(message.body, kwargs)
         self.send(message)

@@ -151,7 +151,6 @@ class SteamClient(CMClient, BuiltinBase):
         if result == EResult.OK:
             self._reconnect_backoff_c = 0
             self.logged_on = True
-            self.set_persona(EPersonaState.Online)
             self.emit(self.EVENT_LOGGED_ON)
             return
 
