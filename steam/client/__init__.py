@@ -26,7 +26,7 @@ from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
 from steam.client.builtins import BuiltinBase
-from steam.util import ip_from_int
+from steam.util import ip_from_int, proto_fill_from_dict
 
 
 class SteamClient(CMClient, BuiltinBase):
@@ -223,20 +223,25 @@ class SteamClient(CMClient, BuiltinBase):
 
         return self.connect(delay=delay_seconds, retry=retry)
 
-    def send(self, message):
-        """
+    def send(self, message, body_params=None):
+        """.. versionchanged:: 0.8.4
         Send a message to CM
 
         :param message: a message instance
         :type message: :class:`.Msg`, :class:`.MsgProto`
+        :param body_params: a dict with params to the body (only :class:`.MsgProto`)
+        :type body_params: dict
         """
         if not self.connected:
             self._LOG.debug("Trying to send message when not connected. (discarded)")
         else:
+            if body_params and isinstance(message, MsgProto):
+                proto_fill_from_dict(message.body, body_params)
+
             CMClient.send(self, message)
 
-    def send_job(self, message):
-        """
+    def send_job(self, message, body_params=None):
+        """.. versionchanged:: 0.8.4
         Send a message as a job
 
         .. note::
@@ -244,6 +249,8 @@ class SteamClient(CMClient, BuiltinBase):
 
         :param message: a message instance
         :type message: :class:`.Msg`, :class:`.MsgProto`
+        :param body_params: a dict with params to the body (only :class:`.MsgProto`)
+        :type body_params: dict
         :return: ``jobid`` event identifier
         :rtype: :class:`str`
 
@@ -257,10 +264,6 @@ class SteamClient(CMClient, BuiltinBase):
             if resp:
                 (message,) = resp
 
-            @steamclient.once(jobid)
-            def handle_response(message):
-                pass
-
         """
         jobid = self.current_jobid = (self.current_jobid + 1) % 4294967295
 
@@ -269,12 +272,12 @@ class SteamClient(CMClient, BuiltinBase):
         else:
             message.header.sourceJobID = jobid
 
-        self.send(message)
+        self.send(message, body_params)
 
         return "job_%d" % jobid
 
-    def send_job_and_wait(self, message, timeout=None, raises=False):
-        """
+    def send_job_and_wait(self, message, body_params=None, timeout=None, raises=False):
+        """.. versionchanged:: 0.8.4
         Send a message as a job and wait for the response.
 
         .. note::
@@ -282,6 +285,8 @@ class SteamClient(CMClient, BuiltinBase):
 
         :param message: a message instance
         :type message: :class:`.Msg`, :class:`.MsgProto`
+        :param body_params: a dict with params to the body (only :class:`.MsgProto`)
+        :type body_params: dict
         :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
@@ -290,20 +295,22 @@ class SteamClient(CMClient, BuiltinBase):
         :rtype: :class:`.Msg`, :class:`.MsgProto`
         :raises: ``gevent.Timeout``
         """
-        job_id = self.send_job(message)
+        job_id = self.send_job(message, body_params)
         response = self.wait_event(job_id, timeout, raises=raises)
         if response is None:
             return None
         return response[0].body
 
-    def send_message_and_wait(self, message, response_emsg, timeout=None, raises=False):
-        """
+    def send_message_and_wait(self, message, response_emsg, body_params=None, timeout=None, raises=False):
+        """.. versionchanged:: 0.8.4
         Send a message to CM and wait for a defined answer.
 
         :param message: a message instance
         :type message: :class:`.Msg`, :class:`.MsgProto`
         :param response_emsg: emsg to wait for
         :type response_emsg: :class:`.EMsg`,:class:`int`
+        :param body_params: a dict with params to the body (only :class:`.MsgProto`)
+        :type body_params: dict
         :param timeout: (optional) seconds to wait
         :type timeout: :class:`int`
         :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
@@ -312,7 +319,7 @@ class SteamClient(CMClient, BuiltinBase):
         :rtype: :class:`.Msg`, :class:`.MsgProto`
         :raises: ``gevent.Timeout``
         """
-        self.send(message)
+        self.send(message, body_params)
         response = self.wait_event(response_emsg, timeout, raises=raises)
         if response is None:
             return None
