@@ -6,7 +6,7 @@ from eventemitter import EventEmitter
 from steam.core.msg import MsgProto, get_um
 from steam.enums import EResult, ELeaderboardDataRequest, ELeaderboardSortMethod, ELeaderboardDisplayType
 from steam.enums.emsg import EMsg
-from steam.util import WeakRefKeyDict, _range, chunks
+from steam.util import WeakRefKeyDict, _range, chunks, proto_fill_from_dict
 from steam.util.throttle import ConstantRateLimit
 
 
@@ -160,11 +160,7 @@ class SteamUnifiedMessages(EventEmitter):
             raise ValueError("Supplied message seems to be invalid. Did you use 'get' method?")
 
         if params:
-            for k, v in params.items():
-                if isinstance(v, list):
-                    getattr(message, k).extend(v)
-                else:
-                    setattr(message, k, v)
+            proto_fill_from_dict(message, params)
 
         capsule = MsgProto(EMsg.ClientServiceMethod)
         capsule.body.method_name = self._data[message]
