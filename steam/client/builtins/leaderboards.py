@@ -122,6 +122,9 @@ class SteamLeaderboard(object):
         if resp.eresult != EResult.OK:
             raise LookupError(EResult(resp.eresult))
 
+        if resp.HasField('leaderboard_entry_count'):
+            self.entry_count = resp.leaderboard_entry_count
+
         return resp.entries
 
     def __getitem__(self, x):
@@ -134,6 +137,7 @@ class SteamLeaderboard(object):
                 start, stop = stop, start
             step = abs(step)
         else:
+            if x < 0: x += self.entry_count
             start, stop, step = x, x + 1, 1
 
         if start >= stop: return []
