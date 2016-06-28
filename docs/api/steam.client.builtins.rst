@@ -27,3 +27,18 @@ Misc
     :undoc-members:
     :show-inheritance:
 
+Unified Messages
+----------------
+
+.. automodule:: steam.client.builtins.unified_messages
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Leaderboards
+------------
+
+.. automodule:: steam.client.builtins.leaderboards
+    :members:
+    :undoc-members:
+    :show-inheritance:
