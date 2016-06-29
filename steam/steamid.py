@@ -55,7 +55,7 @@ class SteamID(intBase):
         pass
 
     def __repr__(self):
-        return "<%s(id=%s, type=%s, universe=%s, instance=%s)>" % (
+        return "%s(id=%s, type=%s, universe=%s, instance=%s)" % (
             self.__class__.__name__,
             self.id,
             repr(self.type.name),
