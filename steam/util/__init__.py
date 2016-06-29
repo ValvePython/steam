@@ -114,7 +114,10 @@ def proto_fill_from_dict(message, data, clear=True):
 
                 proto_fill_from_dict(getattr(message, key), val)
         else:
-            setattr(message, key, val)
+            if isinstance(val, list):
+                getattr(message, key).extend(val)
+            else:
+                setattr(message, key, val)
 
     return message
 
