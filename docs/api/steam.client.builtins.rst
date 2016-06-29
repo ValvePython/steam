@@ -42,3 +42,11 @@ Leaderboards
     :members:
     :undoc-members:
     :show-inheritance:
+
+Game Servers
+------------
+
+.. automodule:: steam.client.builtins.gameservers
+    :members:
+    :undoc-members:
+    :show-inheritance:
