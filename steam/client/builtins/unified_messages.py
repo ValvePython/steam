@@ -63,8 +63,12 @@ class SteamUnifiedMessages(EventEmitter):
         proto = get_um(method_name, response=True)
 
         if proto is None:
-            self._LOG("Unable to find proto for %s" % repr(method_name))
+            self._LOG.error("Unable to find proto for %s" % repr(method_name))
             return
+
+        if message.header.eresult != EResult.OK:
+            self._LOG.error("%s (%s): %s" % (method_name, repr(EResult(message.header.eresult)),
+                                             message.header.error_message))
 
         resp = proto()
         resp.ParseFromString(message.body.serialized_method_response)
