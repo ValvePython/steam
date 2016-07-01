@@ -46,6 +46,8 @@ class SteamID(intBase):
         SteamID('STEAM_1:0:2')  # steam2
         SteamID('[g:1:4]')  # steam3
     """
+    EType = EType               #: reference to EType
+    EUniverse = EUniverse       #: reference to EUniverse
 
     def __new__(cls, *args, **kwargs):
         steam64 = make_steam64(*args, **kwargs)
