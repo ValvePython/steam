@@ -9,12 +9,12 @@ Here is quick example of how to use one of the available mixins.
 .. code:: python
 
     from steam import SteamClient
-    from stema.client.mixins.friends import Friends
+    from stema.client.mixins.somemixing import SomeMixing
 
-    class MySteamClient(SteamClient, Friends):
+    class CustomSteamClient(SteamClient, SomeMixing):
         pass
 
-    client = MySteamClient()
+    client = CustomSteamClient()
 
 
 Making custom mixing is just as simple.
@@ -35,10 +35,10 @@ Making custom mixing is just as simple.
             self.my_property = 42
 
         def my_method(self)
-            pass
+            print "Hello!"
 
 
-    class MySteamClient(SteamClient, Friends, MyMixin):
+    class MySteamClient(SteamClient, MyMixin):
         pass
 
     client = MySteamClient()
@@ -47,5 +47,7 @@ Making custom mixing is just as simple.
 
     >>> client.my_property
     42
+    >>> client.my_method()
+    Hello!
 
 """
