@@ -65,7 +65,7 @@ class User(object):
         m = MsgProto(EMsg.ClientRequestFriendData)
         m.body.persona_state_requested = 863
         m.body.friends.extend(steam_ids)
-        self.send_job(m)
+        self.send(m)
 
     def get_user(self, steam_id, fetch_persona_state=True):
         """Get :class:`.SteamUser` instance for ``steam id``
