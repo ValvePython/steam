@@ -23,7 +23,7 @@ class User(object):
 
     def __handle_set_persona(self):
         self.change_status(persona_state=self.persona_state)
-        self.user = self.get_user(self.steam_id)
+        self.user = self.get_user(self.steam_id, False)
 
     def __handle_persona_state(self, message):
         for friend in message.body.friends:
@@ -63,7 +63,7 @@ class User(object):
         :type steam_ids: :class:`list`
         """
         m = MsgProto(EMsg.ClientRequestFriendData)
-        m.body.persona_state_requested = 4294967295  # request all possible flags
+        m.body.persona_state_requested = 863
         m.body.friends.extend(steam_ids)
         self.send_job(m)
 
