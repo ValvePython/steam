@@ -56,6 +56,8 @@ class SteamAuthenticator(object):
     _finalize_attempts = 5
     medium =  None            #: instance of :class:`.MobileWebAuth` or :class:`.SteamClient`
     steam_time_offset = None  #: offset from steam server time
+    align_time_every = 0      #: how often to align time with Steam (``0`` never, otherwise interval in seconds)
+    _offset_last_check = 0
     secrets = None            #: :class:`dict` with authenticator secrets
 
     def __init__(self, secrets=None, medium=None):
@@ -78,9 +80,15 @@ class SteamAuthenticator(object):
         :return: Steam aligned timestamp
         :rtype: int
         """
-        if self.steam_time_offset is None:
+        if (self.steam_time_offset is None
+           or (self.align_time_every and (time() - self._offset_last_check) > self.align_time_every)
+           ):
             self.steam_time_offset = get_time_offset()
-        return int(time() + self.steam_time_offset)
+
+            if self.steam_time_offset is not None:
+                self._offset_last_check = time()
+
+        return int(time() + (self.steam_time_offset or 0))
 
     def get_code(self, timestamp=None):
         """
@@ -244,7 +252,7 @@ def generate_twofactor_code(shared_secret):
     :return: steam two factor code
     :rtype: str
     """
-    return generate_twofactor_code_for_time(shared_secret, time() + get_time_offset())
+    return generate_twofactor_code_for_time(shared_secret, time() + (get_time_offset() or 0))
 
 def generate_twofactor_code_for_time(shared_secret, timestamp):
     """Generate Steam 2FA code for timestamp
@@ -297,13 +305,13 @@ def generate_confirmation_key(identity_secret, tag, timestamp):
 def get_time_offset():
     """Get time offset from steam server time via WebAPI
 
-    :return: time offset
-    :rtype: int
+    :return: time offset (``None`` when Steam WebAPI fails to respond)
+    :rtype: :class:`int`, :class:`None`
     """
     try:
         resp = webapi.post('ITwoFactorService', 'QueryTime', 1, params={'http_timeout': 10})
     except:
-        return 0
+        return None
 
     ts = int(time())
     return int(resp.get('response', {}).get('server_time', ts)) - ts
