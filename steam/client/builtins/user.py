@@ -6,6 +6,15 @@ from steam.core.msg import MsgProto
 from steam.util import proto_fill_from_dict
 
 class User(object):
+    EVENT_CHAT_MESSAGE = 'chat_message'
+    """On new private chat message
+
+    :param user: steam user
+    :type user: :class:`.SteamUser`
+    :param message: message text
+    :type message: str
+    """
+
     persona_state = EPersonaState.Online    #: current persona state
     user = None                             #: :class:`.SteamUser` instance once logged on
 
@@ -17,6 +26,12 @@ class User(object):
         self.on(self.EVENT_DISCONNECTED, self.__handle_disconnect)
         self.on(self.EVENT_LOGGED_ON, self.__handle_set_persona)
         self.on(EMsg.ClientPersonaState, self.__handle_persona_state)
+        self.on(EMsg.ClientFriendMsgIncoming, self.__handle_message_incoming)
+
+    def __handle_message_incoming(self, msg):
+        if msg.body.chat_entry_type == 1:
+            user = self.get_user(msg.body.steamid_from)
+            self.emit("chat_message", user, msg.body.message)
 
     def __handle_disconnect(self):
         self.user = None
