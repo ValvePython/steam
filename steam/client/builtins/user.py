@@ -1,6 +1,6 @@
 from weakref import WeakValueDictionary
 from steam.client.user import SteamUser
-from steam.enums import EPersonaState
+from steam.enums import EPersonaState, EChatEntryType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
 from steam.util import proto_fill_from_dict
@@ -29,7 +29,7 @@ class User(object):
         self.on(EMsg.ClientFriendMsgIncoming, self.__handle_message_incoming)
 
     def __handle_message_incoming(self, msg):
-        if msg.body.chat_entry_type == 1:
+        if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
             user = self.get_user(msg.body.steamid_from)
             self.emit("chat_message", user, msg.body.message)
 

@@ -374,6 +374,23 @@ class ETwoFactorTokenType(SteamIntEnum):
     ValveMobileApp = 1
     ThirdParty = 2
 
+class EChatEntryType(SteamIntEnum):
+    Invalid = 0
+    ChatMsg = 1
+    Typing = 2
+    InviteGame = 3
+    Emote = 4  # No longer supported by clients
+    LobbyGameStart = 5  # Listen for LobbyGameCreated_t callback instead
+    LeftConversation = 6
+    Entered = 7
+    WasKicked = 8
+    WasBanned = 9
+    Disconnected = 10
+    HistoricalChat = 11
+    Reserved1 = 12
+    Reserved2 = 13
+    LinkBlocked = 14
+
 # Do not remove
 from sys import modules
 from enum import EnumMeta

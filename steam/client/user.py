@@ -2,7 +2,7 @@ from datetime import datetime
 from binascii import hexlify
 from gevent.event import Event
 from steam.steamid import SteamID
-from steam.enums import EFriendRelationship, EPersonaState
+from steam.enums import EFriendRelationship, EPersonaState, EChatEntryType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
 
@@ -95,6 +95,6 @@ class SteamUser(object):
         """
         self._steam.send(MsgProto(EMsg.ClientFriendMsg), {
             'steamid': self.steam_id,
-            'chat_entry_type': 1,
+            'chat_entry_type': EChatEntryType.ChatMsg,
             'message': message.encode('utf8'),
             })
