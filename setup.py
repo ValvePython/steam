@@ -23,7 +23,7 @@ install_requires = [
 install_extras = {
     'client': [
         'gevent>=1.1.0',
-        'protobuf>=3.0.0b2',
+        'protobuf>=3.0.0b4',
         'gevent-eventemitter>=1.4',
     ],
 }
