@@ -14,7 +14,7 @@ class SteamUser(object):
     relationship = EFriendRelationship.No   #: friendship status
 
     def __new__(cls, steam_id, *args, **kwargs):
-        return super(SteamUser, cls).__new__(cls, steam_id)
+        return super(SteamUser, cls).__new__(cls) # removed "steam_id" arg from __new__()
 
     def __init__(self, steam_id, steam):
         self._pstate_ready = Event()
