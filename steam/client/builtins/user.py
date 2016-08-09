@@ -37,8 +37,10 @@ class User(object):
         self.user = None
 
     def __handle_set_persona(self):
-        self.change_status(persona_state=self.persona_state)
         self.user = self.get_user(self.steam_id, False)
+
+        if self.persona_state != EPersonaState.Offline:
+            self.change_status(persona_state=self.persona_state)
 
     def __handle_persona_state(self, message):
         for friend in message.body.friends:
@@ -71,14 +73,14 @@ class User(object):
         proto_fill_from_dict(message.body, kwargs)
         self.send(message)
 
-    def request_persona_state(self, steam_ids):
+    def request_persona_state(self, steam_ids, state_flags=863):
         """Request persona state data
 
         :param steam_ids: list of steam ids
         :type steam_ids: :class:`list`
         """
         m = MsgProto(EMsg.ClientRequestFriendData)
-        m.body.persona_state_requested = 863
+        m.body.persona_state_requested = state_flags
         m.body.friends.extend(steam_ids)
         self.send(m)
 
