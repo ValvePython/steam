@@ -1,9 +1,11 @@
 import logging
+from six import itervalues
 from eventemitter import EventEmitter
 from steam.steamid import SteamID, intBase
 from steam.enums import EResult, EFriendRelationship
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
+from steam.client.user import SteamUser
 
 
 class Friends(object):
@@ -92,7 +94,7 @@ class SteamFriendlist(EventEmitter):
             rel = EFriendRelationship(friend.efriendrelationship)
 
             if steamid not in self._fr:
-                self._fr[suser] = suser
+                self._fr[steamid] = suser
                 suser.relationship = rel
                 steamids_to_check.add(steamid)
 
@@ -103,7 +105,7 @@ class SteamFriendlist(EventEmitter):
                 oldrel, suser.relationship = suser.relationship, rel
 
                 if rel == EFriendRelationship.No:
-                    self.emit(self.EVENT_FRIEND_REMOVED, self._fr.pop(suder))
+                    self.emit(self.EVENT_FRIEND_REMOVED, self._fr.pop(steamid))
                 elif oldrel in (2,4) and rel == EFriendRelationship.Friend:
                     self.emit(self.EVENT_FRIEND_NEW, suser)
 
@@ -125,15 +127,19 @@ class SteamFriendlist(EventEmitter):
         return len(self._fr)
 
     def __iter__(self):
-        return iter(self._fr)
+        return itervalues(self._fr)
 
     def __list__(self):
-        return list(self._fr)
+        return list(iter(self))
 
     def __getitem__(self, key):
+        if isinstance(key, SteamUser):
+            key = key.steam_id
         return self._fr[key]
 
     def __contains__(self, friend):
+        if isinstance(friend, SteamUser):
+            friend = friend.steam_id
         return friend in self._fr
 
     def add(self, steamid_or_accountname_or_email):
