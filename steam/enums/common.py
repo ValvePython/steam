@@ -256,7 +256,7 @@ class EOSType(SteamIntEnum):
 
 
 class EFriendRelationship(SteamIntEnum):
-    No = 0
+    NONE = 0
     Blocked = 1
     RequestRecipient = 2
     Friend = 3
@@ -299,7 +299,7 @@ class EAccountFlags(SteamIntEnum):
     GlobalModerator = 134217728
 
 class EFriendFlags(SteamIntEnum):
-    No = 0
+    NONE = 0
     Blocked = 1
     FriendshipRequested = 2
     Immediate = 4

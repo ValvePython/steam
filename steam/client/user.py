@@ -11,7 +11,7 @@ class SteamUser(object):
     """
     _pstate = None
     steam_id = SteamID()
-    relationship = EFriendRelationship.No   #: friendship status
+    relationship = EFriendRelationship.NONE   #: friendship status
 
     def __init__(self, steam_id, steam):
         self._pstate_ready = Event()

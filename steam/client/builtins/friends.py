@@ -104,7 +104,7 @@ class SteamFriendlist(EventEmitter):
             else:
                 oldrel, suser.relationship = suser.relationship, rel
 
-                if rel == EFriendRelationship.No:
+                if rel == EFriendRelationship.NONE:
                     self.emit(self.EVENT_FRIEND_REMOVED, self._fr.pop(steamid))
                 elif oldrel in (2,4) and rel == EFriendRelationship.Friend:
                     self.emit(self.EVENT_FRIEND_NEW, suser)
