@@ -73,7 +73,7 @@ class User(object):
         proto_fill_from_dict(message.body, kwargs)
         self.send(message)
 
-    def request_persona_state(self, steam_ids, state_flags=863):
+    def request_persona_state(self, steam_ids, state_flags=3418):
         """Request persona state data
 
         :param steam_ids: list of steam ids
