@@ -4,11 +4,7 @@ import weakref
 import struct
 import socket
 import sys
-
-if sys.version_info < (3,):
-    _range = xrange
-else:
-    _range = range
+from six.moves import xrange as _range
 
 def ip_from_int(ip):
     """Convert IP to :py:class:`int`
