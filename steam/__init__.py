@@ -1,7 +1,7 @@
-__version__ = "0.8.6"
+__version__ = "0.8.7"
 __author__ = "Rossen Georgiev"
 
-version_info = (0, 8, 6)
+version_info = (0, 8, 7)
 
 from steam.steamid import SteamID
 from steam.globalid import GlobalID
