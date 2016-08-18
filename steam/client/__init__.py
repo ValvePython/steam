@@ -326,7 +326,7 @@ class SteamClient(CMClient, BuiltinBase):
         return response[0].body
 
     def _get_sentry_path(self, username):
-        if self.credential_location is not None:
+        if self.credential_location:
             return os.path.join(self.credential_location,
                                 "%s_sentry.bin" % username
                                  )
