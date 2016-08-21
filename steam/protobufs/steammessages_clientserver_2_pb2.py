@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_clientserver_2.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\"steammessages_clientserver_2.proto\x1a\x18steammessages_base.proto\"\x81\x03\n\x1a\x43MsgClientUCMAddScreenshot\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\x12\x11\n\tthumbname\x18\x03 \x01(\t\x12\x13\n\x0bvr_filename\x18\x0e \x01(\t\x12\x17\n\x0frtime32_created\x18\x04 \x01(\x07\x12\r\n\x05width\x18\x05 \x01(\r\x12\x0e\n\x06height\x18\x06 \x01(\r\x12\x13\n\x0bpermissions\x18\x07 \x01(\r\x12\x0f\n\x07\x63\x61ption\x18\x08 \x01(\t\x12\x15\n\rshortcut_name\x18\t \x01(\t\x12,\n\x03tag\x18\n \x03(\x0b\x32\x1f.CMsgClientUCMAddScreenshot.Tag\x12\x16\n\x0etagged_steamid\x18\x0b \x03(\x06\x12\x13\n\x0bspoiler_tag\x18\x0c \x01(\x08\x12\x1e\n\x16tagged_publishedfileid\x18\r \x03(\x04\x1a*\n\x03Tag\x12\x10\n\x08tag_name\x18\x01 \x01(\t\x12\x11\n\ttag_value\x18\x02 \x01(\t\"d\n\"CMsgClientUCMAddScreenshotResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12*\n\x0cscreenshotid\x18\x02 \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\"K\n\x1d\x43MsgClientUCMDeleteScreenshot\x12*\n\x0cscreenshotid\x18\x01 \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\";\n%CMsgClientUCMDeleteScreenshotResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"\xd1\x02\n\x18\x43MsgClientUCMPublishFile\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x11\n\tfile_name\x18\x02 \x01(\t\x12\x19\n\x11preview_file_name\x18\x03 \x01(\t\x12\x17\n\x0f\x63onsumer_app_id\x18\x04 \x01(\r\x12\r\n\x05title\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x0c\n\x04tags\x18\x08 \x03(\t\x12\x15\n\rworkshop_file\x18\t \x01(\x08\x12\x12\n\nvisibility\x18\n \x01(\x05\x12\x11\n\tfile_type\x18\x0b \x01(\r\x12\x0b\n\x03url\x18\x0c \x01(\t\x12\x16\n\x0evideo_provider\x18\r \x01(\r\x12\x1a\n\x12video_account_name\x18\x0e \x01(\t\x12\x18\n\x10video_identifier\x18\x0f \x01(\t\x12\x13\n\x0bin_progress\x18\x10 \x01(\x08\"\xa1\x01\n CMsgClientUCMPublishFileResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12/\n\x11published_file_id\x18\x02 \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x38\n)needs_workshop_legal_agreement_acceptance\x18\x03 \x01(\x08:\x05\x66\x61lse\"\x9c\x07\n CMsgClientUCMUpdatePublishedFile\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11published_file_id\x18\x02 \x01(\x06\x12\x11\n\tfile_name\x18\x03 \x01(\t\x12\x19\n\x11preview_file_name\x18\x04 \x01(\t\x12\r\n\x05title\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x0c\n\x04tags\x18\x07 \x03(\t\x12\x12\n\nvisibility\x18\x08 \x01(\x05\x12\x13\n\x0bupdate_file\x18\t \x01(\x08\x12\x1b\n\x13update_preview_file\x18\n \x01(\x08\x12\x14\n\x0cupdate_title\x18\x0b \x01(\x08\x12\x1a\n\x12update_description\x18\x0c \x01(\x08\x12\x13\n\x0bupdate_tags\x18\r \x01(\x08\x12\x19\n\x11update_visibility\x18\x0e \x01(\x08\x12\x1a\n\x12\x63hange_description\x18\x0f \x01(\t\x12\x12\n\nupdate_url\x18\x10 \x01(\x08\x12\x0b\n\x03url\x18\x11 \x01(\t\x12\x1f\n\x17update_content_manifest\x18\x12 \x01(\x08\x12\x18\n\x10\x63ontent_manifest\x18\x13 \x01(\x06\x12\x10\n\x08metadata\x18\x14 \x01(\t\x12\x17\n\x0fupdate_metadata\x18\x15 \x01(\x08\x12\x13\n\x08language\x18\x16 \x01(\x05:\x01\x30\x12\x16\n\x0eremoved_kvtags\x18\x17 \x03(\t\x12=\n\x06kvtags\x18\x18 \x03(\x0b\x32-.CMsgClientUCMUpdatePublishedFile.KeyValueTag\x12\x45\n\x08previews\x18\x19 \x03(\x0b\x32\x33.CMsgClientUCMUpdatePublishedFile.AdditionalPreview\x12\x1a\n\x12previews_to_remove\x18\x1a \x03(\x05\x12\x19\n\x11\x63lear_in_progress\x18\x1b \x01(\x08\x1a)\n\x0bKeyValueTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x1a\x8c\x01\n\x11\x41\x64\x64itionalPreview\x12\x1a\n\x12original_file_name\x18\x01 \x01(\t\x12\x1a\n\x12internal_file_name\x18\x02 \x01(\t\x12\x0f\n\x07videoid\x18\x03 \x01(\t\x12\x14\n\x0cpreview_type\x18\x04 \x01(\r\x12\x18\n\x0cupdate_index\x18\x05 \x01(\x05:\x02-1\"x\n(CMsgClientUCMUpdatePublishedFileResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x38\n)needs_workshop_legal_agreement_acceptance\x18\x02 \x01(\x08:\x05\x66\x61lse\"=\n CMsgClientUCMDeletePublishedFile\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\">\n(CMsgClientUCMDeletePublishedFileResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"c\n(CMsgClientUCMEnumerateUserPublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x12\n\nsort_order\x18\x03 \x01(\r\"\xe7\x01\n0CMsgClientUCMEnumerateUserPublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12Z\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x41.CMsgClientUCMEnumerateUserPublishedFilesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\x98\x01\n)CMsgClientUCMEnumerateUserSubscribedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x14\n\tlist_type\x18\x03 \x01(\r:\x01\x31\x12\x1d\n\x12matching_file_type\x18\x04 \x01(\r:\x01\x30\x12\x11\n\x05\x63ount\x18\x05 \x01(\r:\x02\x35\x30\"\x89\x02\n1CMsgClientUCMEnumerateUserSubscribedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\\\n\x10subscribed_files\x18\x02 \x03(\x0b\x32\x42.CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1aK\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1d\n\x12rtime32_subscribed\x18\x02 \x01(\x07:\x01\x30\"o\n4CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x12\n\nstart_time\x18\x03 \x01(\x07\"\x91\x03\n<CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12g\n\x10subscribed_files\x18\x02 \x03(\x0b\x32M.CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1a\xbc\x01\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1d\n\x12rtime32_subscribed\x18\x02 \x01(\x07:\x01\x30\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\x12\x15\n\rfile_hcontent\x18\x04 \x01(\x06\x12\x11\n\tfile_size\x18\x05 \x01(\r\x12\x1c\n\x14rtime32_last_updated\x18\x06 \x01(\x07\x12\x18\n\x10is_depot_content\x18\x07 \x01(\x08\"\xc6\x01\n$CMsgClientUCMPublishedFileSubscribed\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x15\n\rfile_hcontent\x18\x03 \x01(\x06\x12\x11\n\tfile_size\x18\x04 \x01(\r\x12\x18\n\x10rtime_subscribed\x18\x05 \x01(\r\x12\x18\n\x10is_depot_content\x18\x06 \x01(\x08\x12\x15\n\rrtime_updated\x18\x07 \x01(\r\"S\n&CMsgClientUCMPublishedFileUnsubscribed\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"N\n!CMsgClientUCMPublishedFileDeleted\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"\xa3\x01\n!CMsgClientUCMPublishedFileUpdated\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x14\n\x0ctime_updated\x18\x03 \x01(\r\x12\x10\n\x08hcontent\x18\x04 \x01(\x06\x12\x11\n\tfile_size\x18\x05 \x01(\x07\x12\x18\n\x10is_depot_content\x18\x06 \x01(\x08\"k\n$CMsgClientWorkshopItemChangesRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12\x18\n\x10num_items_needed\x18\x03 \x01(\r\"\xfb\x01\n%CMsgClientWorkshopItemChangesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x13\n\x0bupdate_time\x18\x02 \x01(\r\x12O\n\x0eworkshop_items\x18\x05 \x03(\x0b\x32\x37.CMsgClientWorkshopItemChangesResponse.WorkshopItemInfo\x1aX\n\x10WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\"\xd8\x01\n!CMsgClientWorkshopItemInfoRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12G\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32/.CMsgClientWorkshopItemInfoRequest.WorkshopItem\x1a?\n\x0cWorkshopItem\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\"\x9f\x02\n\"CMsgClientWorkshopItemInfoResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x13\n\x0bupdate_time\x18\x02 \x01(\r\x12L\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32\x34.CMsgClientWorkshopItemInfoResponse.WorkshopItemInfo\x12\x15\n\rprivate_items\x18\x04 \x03(\x06\x1ak\n\x10WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\x12\x11\n\tis_legacy\x18\x04 \x01(\x08\"\x94\x01\n%CMsgClientUCMGetPublishedFilesForUser\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x18\n\x10\x63reator_steam_id\x18\x02 \x01(\x06\x12\x15\n\rrequired_tags\x18\x03 \x03(\t\x12\x15\n\rexcluded_tags\x18\x04 \x03(\t\x12\x13\n\x0bstart_index\x18\x05 \x01(\r\"\xe1\x01\n-CMsgClientUCMGetPublishedFilesForUserResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12W\n\x0fpublished_files\x18\x02 \x03(\x0b\x32>.CMsgClientUCMGetPublishedFilesForUserResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"d\n\'CMsgClientUCMSetUserPublishedFileAction\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\x05\"E\n/CMsgClientUCMSetUserPublishedFileActionResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"g\n0CMsgClientUCMEnumeratePublishedFilesByUserAction\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\x05\"\x94\x02\n8CMsgClientUCMEnumeratePublishedFilesByUserActionResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x62\n\x0fpublished_files\x18\x02 \x03(\x0b\x32I.CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1aI\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1b\n\x10rtime_time_stamp\x18\x02 \x01(\x07:\x01\x30\"\x1e\n\x1c\x43MsgClientScreenshotsChanged\"w\n\x1c\x43MsgClientUpdateUserGameInfo\x12\x14\n\x0csteamid_idgs\x18\x01 \x01(\x06\x12\x0e\n\x06gameid\x18\x02 \x01(\x06\x12\x0f\n\x07game_ip\x18\x03 \x01(\r\x12\x11\n\tgame_port\x18\x04 \x01(\r\x12\r\n\x05token\x18\x05 \x01(\x0c\"S\n\x1c\x43MsgClientRichPresenceUpload\x12\x18\n\x10rich_presence_kv\x18\x01 \x01(\x0c\x12\x19\n\x11steamid_broadcast\x18\x02 \x03(\x06\"8\n\x1d\x43MsgClientRichPresenceRequest\x12\x17\n\x0fsteamid_request\x18\x01 \x03(\x06\"\x9d\x01\n\x1a\x43MsgClientRichPresenceInfo\x12?\n\rrich_presence\x18\x01 \x03(\x0b\x32(.CMsgClientRichPresenceInfo.RichPresence\x1a>\n\x0cRichPresence\x12\x14\n\x0csteamid_user\x18\x01 \x01(\x06\x12\x18\n\x10rich_presence_kv\x18\x02 \x01(\x0c\".\n\x1c\x43MsgClientCheckFileSignature\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\"\xf7\x01\n$CMsgClientCheckFileSignatureResponse\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x0b\n\x03pid\x18\x02 \x01(\r\x12\x0f\n\x07\x65result\x18\x03 \x01(\r\x12\x10\n\x08\x66ilename\x18\x04 \x01(\t\x12\x18\n\x10\x65signatureresult\x18\x05 \x01(\r\x12\x10\n\x08sha_file\x18\x06 \x01(\x0c\x12\x17\n\x0fsignatureheader\x18\x07 \x01(\x0c\x12\x10\n\x08\x66ilesize\x18\x08 \x01(\r\x12\x14\n\x0cgetlasterror\x18\t \x01(\r\x12\"\n\x1a\x65valvesignaturecheckdetail\x18\n \x01(\r\"P\n\x19\x43MsgClientReadMachineAuth\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x11\n\tcubtoread\x18\x03 \x01(\r\"\xce\x01\n!CMsgClientReadMachineAuthResponse\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\x12\x10\n\x08\x66ilesize\x18\x03 \x01(\r\x12\x10\n\x08sha_file\x18\x04 \x01(\x0c\x12\x14\n\x0cgetlasterror\x18\x05 \x01(\r\x12\x0e\n\x06offset\x18\x06 \x01(\r\x12\x0f\n\x07\x63ubread\x18\x07 \x01(\r\x12\x12\n\nbytes_read\x18\x08 \x01(\x0c\x12\x17\n\x0f\x66ilename_sentry\x18\t \x01(\t\"\xbd\x01\n\x1b\x43MsgClientUpdateMachineAuth\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x12\n\ncubtowrite\x18\x03 \x01(\r\x12\r\n\x05\x62ytes\x18\x04 \x01(\x0c\x12\x10\n\x08otp_type\x18\x05 \x01(\r\x12\x16\n\x0eotp_identifier\x18\x06 \x01(\t\x12\x18\n\x10otp_sharedsecret\x18\x07 \x01(\x0c\x12\x15\n\rotp_timedrift\x18\x08 \x01(\r\"\xe1\x01\n#CMsgClientUpdateMachineAuthResponse\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\x12\x10\n\x08\x66ilesize\x18\x03 \x01(\r\x12\x10\n\x08sha_file\x18\x04 \x01(\x0c\x12\x14\n\x0cgetlasterror\x18\x05 \x01(\r\x12\x0e\n\x06offset\x18\x06 \x01(\r\x12\x10\n\x08\x63ubwrote\x18\x07 \x01(\r\x12\x10\n\x08otp_type\x18\x08 \x01(\x05\x12\x11\n\totp_value\x18\t \x01(\r\x12\x16\n\x0eotp_identifier\x18\n \x01(\t\"\xa1\x02\n\x1c\x43MsgClientRequestMachineAuth\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x1a\n\x12\x65result_sentryfile\x18\x02 \x01(\r\x12\x10\n\x08\x66ilesize\x18\x03 \x01(\r\x12\x16\n\x0esha_sentryfile\x18\x04 \x01(\x0c\x12\x1b\n\x13lock_account_action\x18\x06 \x01(\x05\x12\x10\n\x08otp_type\x18\x07 \x01(\r\x12\x16\n\x0eotp_identifier\x18\x08 \x01(\t\x12\x18\n\x10otp_sharedsecret\x18\t \x01(\x0c\x12\x11\n\totp_value\x18\n \x01(\r\x12\x14\n\x0cmachine_name\x18\x0b \x01(\t\x12\x1f\n\x17machine_name_userchosen\x18\x0c \x01(\t\"7\n$CMsgClientRequestMachineAuthResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1c\x43MsgClientCreateFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x11\n\tgroupname\x18\x02 \x01(\t\"H\n$CMsgClientCreateFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"@\n\x1c\x43MsgClientDeleteFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"7\n$CMsgClientDeleteFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1c\x43MsgClientRenameFriendsGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x11\n\tgroupname\x18\x02 \x01(\t\"7\n$CMsgClientRenameFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1a\x43MsgClientAddFriendToGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\"5\n\"CMsgClientAddFriendToGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"G\n\x1f\x43MsgClientRemoveFriendFromGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\":\n\'CMsgClientRemoveFriendFromGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"$\n\x15\x43MsgClientRegisterKey\x12\x0b\n\x03key\x18\x01 \x01(\t\"p\n\x1a\x43MsgClientPurchaseResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x1f\n\x17purchase_result_details\x18\x02 \x01(\x05\x12\x1d\n\x15purchase_receipt_info\x18\x03 \x01(\x0c\"\xc5\x01\n\x1c\x43MsgClientActivateOEMLicense\x12\x19\n\x11\x62ios_manufacturer\x18\x01 \x01(\t\x12\x19\n\x11\x62ios_serialnumber\x18\x02 \x01(\t\x12\x14\n\x0clicense_file\x18\x03 \x01(\x0c\x12\x1e\n\x16mainboard_manufacturer\x18\x04 \x01(\t\x12\x19\n\x11mainboard_product\x18\x05 \x01(\t\x12\x1e\n\x16mainboard_serialnumber\x18\x06 \x01(\t\"9\n\x1c\x43MsgClientRegisterOEMMachine\x12\x19\n\x11oem_register_file\x18\x01 \x01(\x0c\"7\n$CMsgClientRegisterOEMMachineResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"K\n\x1f\x43MsgClientPurchaseWithMachineID\x12\x12\n\npackage_id\x18\x01 \x01(\r\x12\x14\n\x0cmachine_info\x18\x02 \x01(\x0c\"g\n CMsgTrading_InitiateTradeRequest\x12\x18\n\x10trade_request_id\x18\x01 \x01(\r\x12\x15\n\rother_steamid\x18\x02 \x01(\x04\x12\x12\n\nother_name\x18\x03 \x01(\t\"\xd2\x02\n!CMsgTrading_InitiateTradeResponse\x12\x10\n\x08response\x18\x01 \x01(\r\x12\x18\n\x10trade_request_id\x18\x02 \x01(\r\x12\x15\n\rother_steamid\x18\x03 \x01(\x04\x12 \n\x18steamguard_required_days\x18\x04 \x01(\r\x12 \n\x18new_device_cooldown_days\x18\x05 \x01(\r\x12-\n%default_password_reset_probation_days\x18\x06 \x01(\r\x12%\n\x1dpassword_reset_probation_days\x18\x07 \x01(\r\x12+\n#default_email_change_probation_days\x18\x08 \x01(\r\x12#\n\x1b\x65mail_change_probation_days\x18\t \x01(\r\"7\n\x1e\x43MsgTrading_CancelTradeRequest\x12\x15\n\rother_steamid\x18\x01 \x01(\x04\"1\n\x18\x43MsgTrading_StartSession\x12\x15\n\rother_steamid\x18\x01 \x01(\x04\"\xaf\x01\n\x15\x43MsgClientEmailChange\x12\x10\n\x08password\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x0c\n\x04\x63ode\x18\x03 \x01(\t\x12\r\n\x05\x66inal\x18\x04 \x01(\x08\x12\x11\n\tnewmethod\x18\x05 \x01(\x08\x12\x16\n\x0etwofactor_code\x18\x06 \x01(\t\x12\x10\n\x08sms_code\x18\x07 \x01(\t\x12\x1b\n\x13\x63lient_supports_sms\x18\x08 \x01(\x08\"N\n\x1d\x43MsgClientEmailChangeResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x19\n\x11requires_sms_code\x18\x02 \x01(\x08\">\n\x19\x43MsgClientGetCDNAuthToken\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x11\n\thost_name\x18\x02 \x01(\t\"C\n\x1f\x43MsgClientGetDepotDecryptionKey\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"m\n\'CMsgClientGetDepotDecryptionKeyResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x10\n\x08\x64\x65pot_id\x18\x02 \x01(\r\x12\x1c\n\x14\x64\x65pot_encryption_key\x18\x03 \x01(\x0c\"F\n\x1e\x43MsgClientCheckAppBetaPassword\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x14\n\x0c\x62\x65tapassword\x18\x02 \x01(\t\"\xc1\x01\n&CMsgClientCheckAppBetaPasswordResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12K\n\rbetapasswords\x18\x04 \x03(\x0b\x32\x34.CMsgClientCheckAppBetaPasswordResponse.BetaPassword\x1a\x36\n\x0c\x42\x65taPassword\x12\x10\n\x08\x62\x65taname\x18\x01 \x01(\t\x12\x14\n\x0c\x62\x65tapassword\x18\x02 \x01(\t\"\xc9\x02\n\x1c\x43MsgClientUpdateAppJobReport\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x11\n\tdepot_ids\x18\x02 \x03(\r\x12\x11\n\tapp_state\x18\x03 \x01(\r\x12\x15\n\rjob_app_error\x18\x04 \x01(\r\x12\x15\n\rerror_details\x18\x05 \x01(\t\x12\x14\n\x0cjob_duration\x18\x06 \x01(\r\x12\x1f\n\x17\x66iles_validation_failed\x18\x07 \x01(\r\x12\x18\n\x10\x62ytes_downloaded\x18\x08 \x01(\x04\x12\x14\n\x0c\x62ytes_staged\x18\t \x01(\x04\x12\x16\n\x0e\x62ytes_comitted\x18\n \x01(\x04\x12\x17\n\x0fstart_app_state\x18\x0b \x01(\r\x12\x18\n\x10stats_machine_id\x18\x0c \x01(\x06\x12\x13\n\x0b\x62ranch_name\x18\r \x01(\t\"\xcb\x01\n\x1e\x43MsgClientDPContentStatsReport\x12\x18\n\x10stats_machine_id\x18\x01 \x01(\x06\x12\x14\n\x0c\x63ountry_code\x18\x02 \x01(\t\x12\x0f\n\x07os_type\x18\x03 \x01(\x05\x12\x10\n\x08language\x18\x04 \x01(\x05\x12\x1b\n\x13num_install_folders\x18\x05 \x01(\r\x12\x1b\n\x13num_installed_games\x18\x06 \x01(\r\x12\x1c\n\x14size_installed_games\x18\x07 \x01(\x04\"_\n!CMsgClientGetCDNAuthTokenResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\r\n\x05token\x18\x02 \x01(\t\x12\x17\n\x0f\x65xpiration_time\x18\x03 \x01(\r\"\xb8\x01\n\x1a\x43MsgDownloadRateStatistics\x12\x0f\n\x07\x63\x65ll_id\x18\x01 \x01(\r\x12\x34\n\x05stats\x18\x02 \x03(\x0b\x32%.CMsgDownloadRateStatistics.StatsInfo\x1aS\n\tStatsInfo\x12\x13\n\x0bsource_type\x18\x01 \x01(\r\x12\x11\n\tsource_id\x18\x02 \x01(\r\x12\x0f\n\x07seconds\x18\x03 \x01(\r\x12\r\n\x05\x62ytes\x18\x04 \x01(\x04\"H\n\x1c\x43MsgClientRequestAccountData\x12\x18\n\x10\x61\x63\x63ount_or_email\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\r\"\xd7\x01\n$CMsgClientRequestAccountDataResponse\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\r\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x03 \x01(\t\x12\x12\n\nct_matches\x18\x04 \x01(\r\x12 \n\x18\x61\x63\x63ount_name_suggestion1\x18\x05 \x01(\t\x12 \n\x18\x61\x63\x63ount_name_suggestion2\x18\x06 \x01(\t\x12 \n\x18\x61\x63\x63ount_name_suggestion3\x18\x07 \x01(\t\"\x99\x01\n\x1b\x43MsgClientUGSGetGlobalStats\x12\x0e\n\x06gameid\x18\x01 \x01(\x04\x12\x1e\n\x16history_days_requested\x18\x02 \x01(\r\x12\x1b\n\x13time_last_requested\x18\x03 \x01(\x07\x12\x18\n\x10\x66irst_day_cached\x18\x04 \x01(\r\x12\x13\n\x0b\x64\x61ys_cached\x18\x05 \x01(\r\"\x95\x02\n#CMsgClientUGSGetGlobalStatsResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x11\n\ttimestamp\x18\x02 \x01(\x07\x12\x13\n\x0b\x64\x61y_current\x18\x03 \x01(\x05\x12\x36\n\x04\x64\x61ys\x18\x04 \x03(\x0b\x32(.CMsgClientUGSGetGlobalStatsResponse.Day\x1az\n\x03\x44\x61y\x12\x0e\n\x06\x64\x61y_id\x18\x01 \x01(\r\x12<\n\x05stats\x18\x02 \x03(\x0b\x32-.CMsgClientUGSGetGlobalStatsResponse.Day.Stat\x1a%\n\x04Stat\x12\x0f\n\x07stat_id\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x03\"\xd4\x03\n\x12\x43MsgGameServerData\x12\x13\n\x0bsteam_id_gs\x18\x01 \x01(\x06\x12\n\n\x02ip\x18\x02 \x01(\r\x12\x12\n\nquery_port\x18\x03 \x01(\r\x12\x11\n\tgame_port\x18\x04 \x01(\r\x12\x15\n\rsourcetv_port\x18\x05 \x01(\r\x12\x0c\n\x04name\x18\x16 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x06 \x01(\r\x12\x0f\n\x07gamedir\x18\x07 \x01(\t\x12\x0f\n\x07version\x18\x08 \x01(\t\x12\x0f\n\x07product\x18\t \x01(\t\x12\x0e\n\x06region\x18\n \x01(\t\x12+\n\x07players\x18\x0b \x03(\x0b\x32\x1a.CMsgGameServerData.Player\x12\x13\n\x0bmax_players\x18\x0c \x01(\r\x12\x11\n\tbot_count\x18\r \x01(\r\x12\x10\n\x08password\x18\x0e \x01(\x08\x12\x0e\n\x06secure\x18\x0f \x01(\x08\x12\x11\n\tdedicated\x18\x10 \x01(\x08\x12\n\n\x02os\x18\x11 \x01(\t\x12\x11\n\tgame_data\x18\x12 \x01(\t\x12\x19\n\x11game_data_version\x18\x13 \x01(\r\x12\x11\n\tgame_type\x18\x14 \x01(\t\x12\x0b\n\x03map\x18\x15 \x01(\t\x1a\x1a\n\x06Player\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\"H\n\x14\x43MsgGameServerRemove\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\x12\n\n\x02ip\x18\x02 \x01(\r\x12\x12\n\nquery_port\x18\x03 \x01(\r\"\x82\x01\n\x18\x43MsgClientGMSServerQuery\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x17\n\x0fgeo_location_ip\x18\x02 \x01(\r\x12\x13\n\x0bregion_code\x18\x03 \x01(\r\x12\x13\n\x0b\x66ilter_text\x18\x04 \x01(\t\x12\x13\n\x0bmax_servers\x18\x05 \x01(\r\"\xb4\x01\n CMsgGMSClientServerQueryResponse\x12\x39\n\x07servers\x18\x01 \x03(\x0b\x32(.CMsgGMSClientServerQueryResponse.Server\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x1a\x46\n\x06Server\x12\x11\n\tserver_ip\x18\x01 \x01(\r\x12\x13\n\x0bserver_port\x18\x02 \x01(\r\x12\x14\n\x0c\x61uth_players\x18\x03 \x01(\r\"O\n\x17\x43MsgGameServerOutOfDate\x12\x13\n\x0bsteam_id_gs\x18\x01 \x01(\x06\x12\x0e\n\x06reject\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t\"2\n\x19\x43MsgClientRedeemGuestPass\x12\x15\n\rguest_pass_id\x18\x01 \x01(\x06\"c\n!CMsgClientRedeemGuestPassResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\x12\n\npackage_id\x18\x02 \x01(\r\x12\x16\n\x0emust_own_appid\x18\x03 \x01(\r\"8\n\x1f\x43MsgClientGetClanActivityCounts\x12\x15\n\rsteamid_clans\x18\x01 \x03(\x04\"=\n\'CMsgClientGetClanActivityCountsResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\"y\n\x19\x43MsgClientOGSReportString\x12\x13\n\x0b\x61\x63\x63umulated\x18\x01 \x01(\x08\x12\x11\n\tsessionid\x18\x02 \x01(\x04\x12\x10\n\x08severity\x18\x03 \x01(\x05\x12\x11\n\tformatter\x18\x04 \x01(\t\x12\x0f\n\x07varargs\x18\x05 \x01(\x0c\"P\n\x16\x43MsgClientOGSReportBug\x12\x11\n\tsessionid\x18\x01 \x01(\x04\x12\x0f\n\x07\x62ugtext\x18\x02 \x01(\t\x12\x12\n\nscreenshot\x18\x03 \x01(\x0c\"0\n\x17\x43MsgGSAssociateWithClan\x12\x15\n\rsteam_id_clan\x18\x01 \x01(\x06\"L\n\x1f\x43MsgGSAssociateWithClanResponse\x12\x15\n\rsteam_id_clan\x18\x01 \x01(\x06\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\"A\n#CMsgGSComputeNewPlayerCompatibility\x12\x1a\n\x12steam_id_candidate\x18\x01 \x01(\x06\"\xcf\x01\n+CMsgGSComputeNewPlayerCompatibilityResponse\x12\x1a\n\x12steam_id_candidate\x18\x01 \x01(\x06\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x16\n\x0eis_clan_member\x18\x03 \x01(\x08\x12\x18\n\x10\x63t_dont_like_you\x18\x04 \x01(\x05\x12\x18\n\x10\x63t_you_dont_like\x18\x05 \x01(\x05\x12$\n\x1c\x63t_clanmembers_dont_like_you\x18\x06 \x01(\x05\"\x14\n\x12\x43MsgClientSentLogs\"`\n\x0c\x43MsgGCClient\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07msgtype\x18\x02 \x01(\r\x12\x0f\n\x07payload\x18\x03 \x01(\x0c\x12\x0f\n\x07steamid\x18\x04 \x01(\x06\x12\x0e\n\x06gcname\x18\x05 \x01(\t\".\n\x1c\x43MsgClientRequestFreeLicense\x12\x0e\n\x06\x61ppids\x18\x02 \x03(\r\"n\n$CMsgClientRequestFreeLicenseResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\x1a\n\x12granted_packageids\x18\x02 \x03(\r\x12\x16\n\x0egranted_appids\x18\x03 \x03(\r\"\xd3\x01\n#CMsgDRMDownloadRequestWithCrashData\x12\x16\n\x0e\x64ownload_flags\x18\x01 \x01(\r\x12\x1c\n\x14\x64ownload_types_known\x18\x02 \x01(\r\x12\x10\n\x08guid_drm\x18\x03 \x01(\x0c\x12\x12\n\nguid_split\x18\x04 \x01(\x0c\x12\x12\n\nguid_merge\x18\x05 \x01(\x0c\x12\x13\n\x0bmodule_name\x18\x06 \x01(\t\x12\x13\n\x0bmodule_path\x18\x07 \x01(\t\x12\x12\n\ncrash_data\x18\x08 \x01(\x0c\"\xdb\x01\n\x17\x43MsgDRMDownloadResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x1a\n\x12\x62lob_download_type\x18\x03 \x01(\r\x12\x12\n\nmerge_guid\x18\x04 \x01(\x0c\x12\x1c\n\x14\x64ownload_file_dfs_ip\x18\x05 \x01(\r\x12\x1e\n\x16\x64ownload_file_dfs_port\x18\x06 \x01(\r\x12\x19\n\x11\x64ownload_file_url\x18\x07 \x01(\t\x12\x13\n\x0bmodule_path\x18\x08 \x01(\t\"\xd7\x01\n\x12\x43MsgDRMFinalResult\x12\x12\n\x07\x65Result\x18\x01 \x01(\r:\x01\x32\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x1a\n\x12\x62lob_download_type\x18\x03 \x01(\r\x12\x14\n\x0c\x65rror_detail\x18\x04 \x01(\r\x12\x12\n\nmerge_guid\x18\x05 \x01(\x0c\x12\x1c\n\x14\x64ownload_file_dfs_ip\x18\x06 \x01(\r\x12\x1e\n\x16\x64ownload_file_dfs_port\x18\x07 \x01(\r\x12\x19\n\x11\x64ownload_file_url\x18\x08 \x01(\t\"3\n\x1e\x43MsgClientDPCheckSpecialSurvey\x12\x11\n\tsurvey_id\x18\x01 \x01(\r\"\x96\x01\n&CMsgClientDPCheckSpecialSurveyResponse\x12\x12\n\x07\x65Result\x18\x01 \x01(\r:\x01\x32\x12\r\n\x05state\x18\x02 \x01(\r\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x12\n\ncustom_url\x18\x04 \x01(\t\x12\x18\n\x10include_software\x18\x05 \x01(\x08\x12\r\n\x05token\x18\x06 \x01(\x0c\"H\n%CMsgClientDPSendSpecialSurveyResponse\x12\x11\n\tsurvey_id\x18\x01 \x01(\r\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"O\n*CMsgClientDPSendSpecialSurveyResponseReply\x12\x12\n\x07\x65Result\x18\x01 \x01(\r:\x01\x32\x12\r\n\x05token\x18\x02 \x01(\x0c\"W\n\'CMsgClientRequestForgottenPasswordEmail\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x16\n\x0epassword_tried\x18\x02 \x01(\t\"_\n/CMsgClientRequestForgottenPasswordEmailResponse\x12\x0f\n\x07\x65Result\x18\x01 \x01(\r\x12\x1b\n\x13use_secret_question\x18\x02 \x01(\x08\"6\n\x1b\x43MsgClientItemAnnouncements\x12\x17\n\x0f\x63ount_new_items\x18\x01 \x01(\r\"$\n\"CMsgClientRequestItemAnnouncements\"\x9e\x01\n\x1b\x43MsgClientUserNotifications\x12@\n\rnotifications\x18\x01 \x03(\x0b\x32).CMsgClientUserNotifications.Notification\x1a=\n\x0cNotification\x12\x1e\n\x16user_notification_type\x18\x01 \x01(\r\x12\r\n\x05\x63ount\x18\x02 \x01(\r\"\x88\x01\n\x1e\x43MsgClientCommentNotifications\x12\x1a\n\x12\x63ount_new_comments\x18\x01 \x01(\r\x12 \n\x18\x63ount_new_comments_owner\x18\x02 \x01(\r\x12(\n count_new_comments_subscriptions\x18\x03 \x01(\r\"\'\n%CMsgClientRequestCommentNotifications\"g\n$CMsgClientOfflineMessageNotification\x12\x18\n\x10offline_messages\x18\x01 \x01(\r\x12%\n\x1d\x66riends_with_offline_messages\x18\x02 \x03(\r\"&\n$CMsgClientRequestOfflineMessageCount\"6\n#CMsgClientFSGetFriendMessageHistory\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"\xf5\x01\n+CMsgClientFSGetFriendMessageHistoryResponse\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0f\n\x07success\x18\x02 \x01(\r\x12L\n\x08messages\x18\x03 \x03(\x0b\x32:.CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage\x1aV\n\rFriendMessage\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x11\n\ttimestamp\x18\x02 \x01(\r\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0e\n\x06unread\x18\x04 \x01(\x08\"7\n5CMsgClientFSGetFriendMessageHistoryForOfflineMessages\"7\n!CMsgClientFSGetFriendsSteamLevels\x12\x12\n\naccountids\x18\x01 \x03(\r\"\x9b\x01\n)CMsgClientFSGetFriendsSteamLevelsResponse\x12\x42\n\x07\x66riends\x18\x01 \x03(\x0b\x32\x31.CMsgClientFSGetFriendsSteamLevelsResponse.Friend\x1a*\n\x06\x46riend\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\r\n\x05level\x18\x02 \x01(\r\"\xeb\x01\n\x17\x43MsgClientEmailAddrInfo\x12\x15\n\remail_address\x18\x01 \x01(\t\x12\x1a\n\x12\x65mail_is_validated\x18\x02 \x01(\x08\x12 \n\x18\x65mail_validation_changed\x18\x03 \x01(\x08\x12\'\n\x1f\x63redential_change_requires_code\x18\x04 \x01(\x08\x12\x31\n)password_or_secretqa_change_requires_code\x18\x05 \x01(\x08\x12\x1f\n\x17remind_user_about_email\x18\x06 \x01(\x08\"\xb7\x01\n\x1e\x43MsgCREEnumeratePublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x12\n\nquery_type\x18\x02 \x01(\x05\x12\x13\n\x0bstart_index\x18\x03 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\r\x12\r\n\x05\x63ount\x18\x05 \x01(\r\x12\x0c\n\x04tags\x18\x06 \x03(\t\x12\x11\n\tuser_tags\x18\x07 \x03(\t\x12\x1e\n\x12matching_file_type\x18\x08 \x01(\r:\x02\x31\x33\"\x9d\x02\n&CMsgCREEnumeratePublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12P\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x37.CMsgCREEnumeratePublishedFilesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1av\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"\x8b\x01\n\x16\x43MsgCREItemVoteSummary\x12\x43\n\x12published_file_ids\x18\x01 \x03(\x0b\x32\'.CMsgCREItemVoteSummary.PublishedFileId\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\xfa\x01\n\x1e\x43MsgCREItemVoteSummaryResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12L\n\x13item_vote_summaries\x18\x02 \x03(\x0b\x32/.CMsgCREItemVoteSummaryResponse.ItemVoteSummary\x1av\n\x0fItemVoteSummary\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"P\n\"CMsgCREUpdateUserPublishedItemVote\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0f\n\x07vote_up\x18\x02 \x01(\x08\"@\n*CMsgCREUpdateUserPublishedItemVoteResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"\xab\x01\n&CMsgCREGetUserPublishedItemVoteDetails\x12S\n\x12published_file_ids\x18\x01 \x03(\x0b\x32\x37.CMsgCREGetUserPublishedItemVoteDetails.PublishedFileId\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\xea\x01\n.CMsgCREGetUserPublishedItemVoteDetailsResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x62\n\x16user_item_vote_details\x18\x02 \x03(\x0b\x32\x42.CMsgCREGetUserPublishedItemVoteDetailsResponse.UserItemVoteDetail\x1a@\n\x12UserItemVoteDetail\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0f\n\x04vote\x18\x02 \x01(\x05:\x01\x30\"\xb9\x01\n\x18\x43MsgGameServerPingSample\x12\r\n\x05my_ip\x18\x01 \x01(\x07\x12\x11\n\tgs_app_id\x18\x02 \x01(\x05\x12\x34\n\ngs_samples\x18\x03 \x03(\x0b\x32 .CMsgGameServerPingSample.Sample\x1a\x45\n\x06Sample\x12\n\n\x02ip\x18\x01 \x01(\x07\x12\x13\n\x0b\x61vg_ping_ms\x18\x02 \x01(\r\x12\x1a\n\x12stddev_ping_ms_x10\x18\x03 \x01(\r\"*\n\x16\x43MsgFSGetFollowerCount\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\"F\n\x1e\x43MsgFSGetFollowerCountResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x10\n\x05\x63ount\x18\x02 \x01(\x05:\x01\x30\"(\n\x14\x43MsgFSGetIsFollowing\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\"O\n\x1c\x43MsgFSGetIsFollowingResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x1b\n\x0cis_following\x18\x02 \x01(\x08:\x05\x66\x61lse\"3\n\x1c\x43MsgFSEnumerateFollowingList\x12\x13\n\x0bstart_index\x18\x01 \x01(\r\"d\n$CMsgFSEnumerateFollowingListResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x15\n\rtotal_results\x18\x02 \x01(\x05\x12\x11\n\tsteam_ids\x18\x03 \x03(\x06\"0\n\x1f\x43MsgDPGetNumberOfCurrentPlayers\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"S\n\'CMsgDPGetNumberOfCurrentPlayersResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x14\n\x0cplayer_count\x18\x02 \x01(\x05\"a\n#CMsgClientFriendUserStatusPublished\x12\x16\n\x0e\x66riend_steamid\x18\x01 \x01(\x06\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x13\n\x0bstatus_text\x18\x03 \x01(\t\"b\n\x17\x43MsgClientServiceMethod\x12\x13\n\x0bmethod_name\x18\x01 \x01(\t\x12\x19\n\x11serialized_method\x18\x02 \x01(\x0c\x12\x17\n\x0fis_notification\x18\x03 \x01(\x08\"Z\n\x1f\x43MsgClientServiceMethodResponse\x12\x13\n\x0bmethod_name\x18\x01 \x01(\t\x12\"\n\x1aserialized_method_response\x18\x02 \x01(\x0c\"\"\n\x10\x43MsgClientUIMode\x12\x0e\n\x06uimode\x18\x01 \x01(\r\"<\n&CMsgClientVanityURLChangedNotification\x12\x12\n\nvanity_url\x18\x01 \x01(\t\"]\n%CMsgClientAuthorizeLocalDeviceRequest\x12\x1a\n\x12\x64\x65vice_description\x18\x01 \x01(\t\x12\x18\n\x10owner_account_id\x18\x02 \x01(\r\"k\n\x1e\x43MsgClientAuthorizeLocalDevice\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x18\n\x10owner_account_id\x18\x02 \x01(\r\x12\x1b\n\x13\x61uthed_device_token\x18\x03 \x01(\x04\"n\n\"CMsgClientDeauthorizeDeviceRequest\x12\"\n\x1a\x64\x65\x61uthorization_account_id\x18\x01 \x01(\r\x12$\n\x1c\x64\x65\x61uthorization_device_token\x18\x02 \x01(\x04\"U\n\x1b\x43MsgClientDeauthorizeDevice\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\"\n\x1a\x64\x65\x61uthorization_account_id\x18\x02 \x01(\r\"\xd1\x01\n&CMsgClientUseLocalDeviceAuthorizations\x12 \n\x18\x61uthorization_account_id\x18\x01 \x03(\r\x12J\n\rdevice_tokens\x18\x02 \x03(\x0b\x32\x33.CMsgClientUseLocalDeviceAuthorizations.DeviceToken\x1a\x39\n\x0b\x44\x65viceToken\x12\x18\n\x10owner_account_id\x18\x01 \x01(\r\x12\x10\n\x08token_id\x18\x02 \x01(\x04\" \n\x1e\x43MsgClientGetAuthorizedDevices\"\xad\x02\n&CMsgClientGetAuthorizedDevicesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12S\n\x11\x61uthorized_device\x18\x02 \x03(\x0b\x32\x38.CMsgClientGetAuthorizedDevicesResponse.AuthorizedDevice\x1a\x99\x01\n\x10\x41uthorizedDevice\x12\x19\n\x11\x61uth_device_token\x18\x01 \x01(\x04\x12\x13\n\x0b\x64\x65vice_name\x18\x02 \x01(\t\x12\x18\n\x10last_access_time\x18\x03 \x01(\r\x12\x13\n\x0b\x62orrower_id\x18\x04 \x01(\r\x12\x12\n\nis_pending\x18\x05 \x01(\x08\x12\x12\n\napp_played\x18\x06 \x01(\r\"\x1b\n\x19\x43MsgClientGetEmoticonList\"v\n\x16\x43MsgClientEmoticonList\x12\x33\n\temoticons\x18\x01 \x03(\x0b\x32 .CMsgClientEmoticonList.Emoticon\x1a\'\n\x08\x45moticon\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\xc2\x01\n!CMsgClientSharedLibraryLockStatus\x12H\n\x0elocked_library\x18\x01 \x03(\x0b\x32\x30.CMsgClientSharedLibraryLockStatus.LockedLibrary\x12\x1d\n\x15own_library_locked_by\x18\x02 \x01(\r\x1a\x34\n\rLockedLibrary\x12\x10\n\x08owner_id\x18\x01 \x01(\r\x12\x11\n\tlocked_by\x18\x02 \x01(\r\"\xa7\x01\n\"CMsgClientSharedLibraryStopPlaying\x12\x14\n\x0cseconds_left\x18\x01 \x01(\x05\x12>\n\tstop_apps\x18\x02 \x03(\x0b\x32+.CMsgClientSharedLibraryStopPlaying.StopApp\x1a+\n\x07StopApp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x10\n\x08owner_id\x18\x02 \x01(\r\"\xf1\x01\n\x15\x43MsgClientServiceCall\x12\x15\n\rsysid_routing\x18\x01 \x01(\x0c\x12\x13\n\x0b\x63\x61ll_handle\x18\x02 \x01(\r\x12\x12\n\nmodule_crc\x18\x03 \x01(\r\x12\x13\n\x0bmodule_hash\x18\x04 \x01(\x0c\x12\x13\n\x0b\x66unction_id\x18\x05 \x01(\r\x12\x16\n\x0e\x63ub_output_max\x18\x06 \x01(\r\x12\r\n\x05\x66lags\x18\x07 \x01(\r\x12\x15\n\rcallparameter\x18\x08 \x01(\x0c\x12\x11\n\tping_only\x18\t \x01(\x08\x12\x1d\n\x15max_outstanding_calls\x18\n \x01(\r\"Z\n\x17\x43MsgClientServiceModule\x12\x12\n\nmodule_crc\x18\x01 \x01(\r\x12\x13\n\x0bmodule_hash\x18\x02 \x01(\x0c\x12\x16\n\x0emodule_content\x18\x03 \x01(\x0c\"\xb8\x04\n\x1d\x43MsgClientServiceCallResponse\x12\x15\n\rsysid_routing\x18\x01 \x01(\x0c\x12\x13\n\x0b\x63\x61ll_handle\x18\x02 \x01(\r\x12\x12\n\nmodule_crc\x18\x03 \x01(\r\x12\x13\n\x0bmodule_hash\x18\x04 \x01(\x0c\x12\x13\n\x0b\x65\x63\x61llresult\x18\x05 \x01(\r\x12\x16\n\x0eresult_content\x18\x06 \x01(\x0c\x12\x17\n\x0fos_version_info\x18\x07 \x01(\x0c\x12\x13\n\x0bsystem_info\x18\x08 \x01(\x0c\x12\x14\n\x0cload_address\x18\t \x01(\x06\x12\x18\n\x10\x65xception_record\x18\n \x01(\x0c\x12 \n\x18portable_os_version_info\x18\x0b \x01(\x0c\x12\x1c\n\x14portable_system_info\x18\x0c \x01(\x0c\x12\x15\n\rwas_converted\x18\r \x01(\x08\x12\x17\n\x0finternal_result\x18\x0e \x01(\r\x12\x15\n\rcurrent_count\x18\x0f \x01(\r\x12\x18\n\x10last_call_handle\x18\x10 \x01(\r\x12\x1c\n\x14last_call_module_crc\x18\x11 \x01(\r\x12\x1f\n\x17last_call_sysid_routing\x18\x12 \x01(\x0c\x12\x18\n\x10last_ecallresult\x18\x13 \x01(\r\x12\x1c\n\x14last_callissue_delta\x18\x14 \x01(\r\x12\x1f\n\x17last_callcomplete_delta\x18\x15 \x01(\r\"\x17\n\x15\x43MsgAMUnlockStreaming\"K\n\x1d\x43MsgAMUnlockStreamingResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x16\n\x0e\x65ncryption_key\x18\x02 \x01(\x0c\"M\n\x1d\x43MsgClientPlayingSessionState\x12\x17\n\x0fplaying_blocked\x18\x02 \x01(\x08\x12\x13\n\x0bplaying_app\x18\x03 \x01(\r\"6\n\x1c\x43MsgClientKickPlayingSession\x12\x16\n\x0eonly_stop_game\x18\x01 \x01(\x08\"b\n\x17\x43MsgClientCreateAccount\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08launcher\x18\x06 \x01(\r\"F\n\x1f\x43MsgClientCreateAccountResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\"v\n\x1f\x43MsgClientVoiceCallPreAuthorize\x12\x16\n\x0e\x63\x61ller_steamid\x18\x01 \x01(\x06\x12\x18\n\x10receiver_steamid\x18\x02 \x01(\x06\x12\x11\n\tcaller_id\x18\x03 \x01(\x05\x12\x0e\n\x06hangup\x18\x04 \x01(\x08\"\x82\x01\n\'CMsgClientVoiceCallPreAuthorizeResponse\x12\x16\n\x0e\x63\x61ller_steamid\x18\x01 \x01(\x06\x12\x18\n\x10receiver_steamid\x18\x02 \x01(\x06\x12\x12\n\x07\x65result\x18\x03 \x01(\x05:\x01\x32\x12\x11\n\tcaller_id\x18\x04 \x01(\x05\x42\x05H\x01\x90\x01\x00')
+  serialized_pb=_b('\n\"steammessages_clientserver_2.proto\x1a\x18steammessages_base.proto\"\x81\x03\n\x1a\x43MsgClientUCMAddScreenshot\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\x12\x11\n\tthumbname\x18\x03 \x01(\t\x12\x13\n\x0bvr_filename\x18\x0e \x01(\t\x12\x17\n\x0frtime32_created\x18\x04 \x01(\x07\x12\r\n\x05width\x18\x05 \x01(\r\x12\x0e\n\x06height\x18\x06 \x01(\r\x12\x13\n\x0bpermissions\x18\x07 \x01(\r\x12\x0f\n\x07\x63\x61ption\x18\x08 \x01(\t\x12\x15\n\rshortcut_name\x18\t \x01(\t\x12,\n\x03tag\x18\n \x03(\x0b\x32\x1f.CMsgClientUCMAddScreenshot.Tag\x12\x16\n\x0etagged_steamid\x18\x0b \x03(\x06\x12\x13\n\x0bspoiler_tag\x18\x0c \x01(\x08\x12\x1e\n\x16tagged_publishedfileid\x18\r \x03(\x04\x1a*\n\x03Tag\x12\x10\n\x08tag_name\x18\x01 \x01(\t\x12\x11\n\ttag_value\x18\x02 \x01(\t\"d\n\"CMsgClientUCMAddScreenshotResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12*\n\x0cscreenshotid\x18\x02 \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\"K\n\x1d\x43MsgClientUCMDeleteScreenshot\x12*\n\x0cscreenshotid\x18\x01 \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\";\n%CMsgClientUCMDeleteScreenshotResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"\xd1\x02\n\x18\x43MsgClientUCMPublishFile\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x11\n\tfile_name\x18\x02 \x01(\t\x12\x19\n\x11preview_file_name\x18\x03 \x01(\t\x12\x17\n\x0f\x63onsumer_app_id\x18\x04 \x01(\r\x12\r\n\x05title\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x0c\n\x04tags\x18\x08 \x03(\t\x12\x15\n\rworkshop_file\x18\t \x01(\x08\x12\x12\n\nvisibility\x18\n \x01(\x05\x12\x11\n\tfile_type\x18\x0b \x01(\r\x12\x0b\n\x03url\x18\x0c \x01(\t\x12\x16\n\x0evideo_provider\x18\r \x01(\r\x12\x1a\n\x12video_account_name\x18\x0e \x01(\t\x12\x18\n\x10video_identifier\x18\x0f \x01(\t\x12\x13\n\x0bin_progress\x18\x10 \x01(\x08\"\xa1\x01\n CMsgClientUCMPublishFileResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12/\n\x11published_file_id\x18\x02 \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x38\n)needs_workshop_legal_agreement_acceptance\x18\x03 \x01(\x08:\x05\x66\x61lse\"\x9c\x07\n CMsgClientUCMUpdatePublishedFile\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11published_file_id\x18\x02 \x01(\x06\x12\x11\n\tfile_name\x18\x03 \x01(\t\x12\x19\n\x11preview_file_name\x18\x04 \x01(\t\x12\r\n\x05title\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x0c\n\x04tags\x18\x07 \x03(\t\x12\x12\n\nvisibility\x18\x08 \x01(\x05\x12\x13\n\x0bupdate_file\x18\t \x01(\x08\x12\x1b\n\x13update_preview_file\x18\n \x01(\x08\x12\x14\n\x0cupdate_title\x18\x0b \x01(\x08\x12\x1a\n\x12update_description\x18\x0c \x01(\x08\x12\x13\n\x0bupdate_tags\x18\r \x01(\x08\x12\x19\n\x11update_visibility\x18\x0e \x01(\x08\x12\x1a\n\x12\x63hange_description\x18\x0f \x01(\t\x12\x12\n\nupdate_url\x18\x10 \x01(\x08\x12\x0b\n\x03url\x18\x11 \x01(\t\x12\x1f\n\x17update_content_manifest\x18\x12 \x01(\x08\x12\x18\n\x10\x63ontent_manifest\x18\x13 \x01(\x06\x12\x10\n\x08metadata\x18\x14 \x01(\t\x12\x17\n\x0fupdate_metadata\x18\x15 \x01(\x08\x12\x13\n\x08language\x18\x16 \x01(\x05:\x01\x30\x12\x16\n\x0eremoved_kvtags\x18\x17 \x03(\t\x12=\n\x06kvtags\x18\x18 \x03(\x0b\x32-.CMsgClientUCMUpdatePublishedFile.KeyValueTag\x12\x45\n\x08previews\x18\x19 \x03(\x0b\x32\x33.CMsgClientUCMUpdatePublishedFile.AdditionalPreview\x12\x1a\n\x12previews_to_remove\x18\x1a \x03(\x05\x12\x19\n\x11\x63lear_in_progress\x18\x1b \x01(\x08\x1a)\n\x0bKeyValueTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x1a\x8c\x01\n\x11\x41\x64\x64itionalPreview\x12\x1a\n\x12original_file_name\x18\x01 \x01(\t\x12\x1a\n\x12internal_file_name\x18\x02 \x01(\t\x12\x0f\n\x07videoid\x18\x03 \x01(\t\x12\x14\n\x0cpreview_type\x18\x04 \x01(\r\x12\x18\n\x0cupdate_index\x18\x05 \x01(\x05:\x02-1\"x\n(CMsgClientUCMUpdatePublishedFileResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x38\n)needs_workshop_legal_agreement_acceptance\x18\x02 \x01(\x08:\x05\x66\x61lse\"=\n CMsgClientUCMDeletePublishedFile\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\">\n(CMsgClientUCMDeletePublishedFileResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"c\n(CMsgClientUCMEnumerateUserPublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x12\n\nsort_order\x18\x03 \x01(\r\"\xe7\x01\n0CMsgClientUCMEnumerateUserPublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12Z\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x41.CMsgClientUCMEnumerateUserPublishedFilesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\x98\x01\n)CMsgClientUCMEnumerateUserSubscribedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x14\n\tlist_type\x18\x03 \x01(\r:\x01\x31\x12\x1d\n\x12matching_file_type\x18\x04 \x01(\r:\x01\x30\x12\x11\n\x05\x63ount\x18\x05 \x01(\r:\x02\x35\x30\"\x89\x02\n1CMsgClientUCMEnumerateUserSubscribedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\\\n\x10subscribed_files\x18\x02 \x03(\x0b\x32\x42.CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1aK\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1d\n\x12rtime32_subscribed\x18\x02 \x01(\x07:\x01\x30\"o\n4CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x12\n\nstart_time\x18\x03 \x01(\x07\"\x91\x03\n<CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12g\n\x10subscribed_files\x18\x02 \x03(\x0b\x32M.CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1a\xbc\x01\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1d\n\x12rtime32_subscribed\x18\x02 \x01(\x07:\x01\x30\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\x12\x15\n\rfile_hcontent\x18\x04 \x01(\x06\x12\x11\n\tfile_size\x18\x05 \x01(\r\x12\x1c\n\x14rtime32_last_updated\x18\x06 \x01(\x07\x12\x18\n\x10is_depot_content\x18\x07 \x01(\x08\"\xc6\x01\n$CMsgClientUCMPublishedFileSubscribed\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x15\n\rfile_hcontent\x18\x03 \x01(\x06\x12\x11\n\tfile_size\x18\x04 \x01(\r\x12\x18\n\x10rtime_subscribed\x18\x05 \x01(\r\x12\x18\n\x10is_depot_content\x18\x06 \x01(\x08\x12\x15\n\rrtime_updated\x18\x07 \x01(\r\"S\n&CMsgClientUCMPublishedFileUnsubscribed\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"N\n!CMsgClientUCMPublishedFileDeleted\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"\xa3\x01\n!CMsgClientUCMPublishedFileUpdated\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x14\n\x0ctime_updated\x18\x03 \x01(\r\x12\x10\n\x08hcontent\x18\x04 \x01(\x06\x12\x11\n\tfile_size\x18\x05 \x01(\x07\x12\x18\n\x10is_depot_content\x18\x06 \x01(\x08\"k\n$CMsgClientWorkshopItemChangesRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12\x18\n\x10num_items_needed\x18\x03 \x01(\r\"\xfb\x01\n%CMsgClientWorkshopItemChangesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x13\n\x0bupdate_time\x18\x02 \x01(\r\x12O\n\x0eworkshop_items\x18\x05 \x03(\x0b\x32\x37.CMsgClientWorkshopItemChangesResponse.WorkshopItemInfo\x1aX\n\x10WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\"\xd8\x01\n!CMsgClientWorkshopItemInfoRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12G\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32/.CMsgClientWorkshopItemInfoRequest.WorkshopItem\x1a?\n\x0cWorkshopItem\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\"\x9f\x02\n\"CMsgClientWorkshopItemInfoResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x13\n\x0bupdate_time\x18\x02 \x01(\r\x12L\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32\x34.CMsgClientWorkshopItemInfoResponse.WorkshopItemInfo\x12\x15\n\rprivate_items\x18\x04 \x03(\x06\x1ak\n\x10WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\x12\x11\n\tis_legacy\x18\x04 \x01(\x08\"\x94\x01\n%CMsgClientUCMGetPublishedFilesForUser\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x18\n\x10\x63reator_steam_id\x18\x02 \x01(\x06\x12\x15\n\rrequired_tags\x18\x03 \x03(\t\x12\x15\n\rexcluded_tags\x18\x04 \x03(\t\x12\x13\n\x0bstart_index\x18\x05 \x01(\r\"\xe1\x01\n-CMsgClientUCMGetPublishedFilesForUserResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12W\n\x0fpublished_files\x18\x02 \x03(\x0b\x32>.CMsgClientUCMGetPublishedFilesForUserResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"d\n\'CMsgClientUCMSetUserPublishedFileAction\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\x05\"E\n/CMsgClientUCMSetUserPublishedFileActionResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"g\n0CMsgClientUCMEnumeratePublishedFilesByUserAction\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\x05\"\x94\x02\n8CMsgClientUCMEnumeratePublishedFilesByUserActionResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x62\n\x0fpublished_files\x18\x02 \x03(\x0b\x32I.CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1aI\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1b\n\x10rtime_time_stamp\x18\x02 \x01(\x07:\x01\x30\"\x1e\n\x1c\x43MsgClientScreenshotsChanged\"w\n\x1c\x43MsgClientUpdateUserGameInfo\x12\x14\n\x0csteamid_idgs\x18\x01 \x01(\x06\x12\x0e\n\x06gameid\x18\x02 \x01(\x06\x12\x0f\n\x07game_ip\x18\x03 \x01(\r\x12\x11\n\tgame_port\x18\x04 \x01(\r\x12\r\n\x05token\x18\x05 \x01(\x0c\"S\n\x1c\x43MsgClientRichPresenceUpload\x12\x18\n\x10rich_presence_kv\x18\x01 \x01(\x0c\x12\x19\n\x11steamid_broadcast\x18\x02 \x03(\x06\"8\n\x1d\x43MsgClientRichPresenceRequest\x12\x17\n\x0fsteamid_request\x18\x01 \x03(\x06\"\x9d\x01\n\x1a\x43MsgClientRichPresenceInfo\x12?\n\rrich_presence\x18\x01 \x03(\x0b\x32(.CMsgClientRichPresenceInfo.RichPresence\x1a>\n\x0cRichPresence\x12\x14\n\x0csteamid_user\x18\x01 \x01(\x06\x12\x18\n\x10rich_presence_kv\x18\x02 \x01(\x0c\".\n\x1c\x43MsgClientCheckFileSignature\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\"\xf7\x01\n$CMsgClientCheckFileSignatureResponse\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x0b\n\x03pid\x18\x02 \x01(\r\x12\x0f\n\x07\x65result\x18\x03 \x01(\r\x12\x10\n\x08\x66ilename\x18\x04 \x01(\t\x12\x18\n\x10\x65signatureresult\x18\x05 \x01(\r\x12\x10\n\x08sha_file\x18\x06 \x01(\x0c\x12\x17\n\x0fsignatureheader\x18\x07 \x01(\x0c\x12\x10\n\x08\x66ilesize\x18\x08 \x01(\r\x12\x14\n\x0cgetlasterror\x18\t \x01(\r\x12\"\n\x1a\x65valvesignaturecheckdetail\x18\n \x01(\r\"P\n\x19\x43MsgClientReadMachineAuth\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x11\n\tcubtoread\x18\x03 \x01(\r\"\xce\x01\n!CMsgClientReadMachineAuthResponse\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\x12\x10\n\x08\x66ilesize\x18\x03 \x01(\r\x12\x10\n\x08sha_file\x18\x04 \x01(\x0c\x12\x14\n\x0cgetlasterror\x18\x05 \x01(\r\x12\x0e\n\x06offset\x18\x06 \x01(\r\x12\x0f\n\x07\x63ubread\x18\x07 \x01(\r\x12\x12\n\nbytes_read\x18\x08 \x01(\x0c\x12\x17\n\x0f\x66ilename_sentry\x18\t \x01(\t\"\xbd\x01\n\x1b\x43MsgClientUpdateMachineAuth\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x12\n\ncubtowrite\x18\x03 \x01(\r\x12\r\n\x05\x62ytes\x18\x04 \x01(\x0c\x12\x10\n\x08otp_type\x18\x05 \x01(\r\x12\x16\n\x0eotp_identifier\x18\x06 \x01(\t\x12\x18\n\x10otp_sharedsecret\x18\x07 \x01(\x0c\x12\x15\n\rotp_timedrift\x18\x08 \x01(\r\"\xe1\x01\n#CMsgClientUpdateMachineAuthResponse\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\x12\x10\n\x08\x66ilesize\x18\x03 \x01(\r\x12\x10\n\x08sha_file\x18\x04 \x01(\x0c\x12\x14\n\x0cgetlasterror\x18\x05 \x01(\r\x12\x0e\n\x06offset\x18\x06 \x01(\r\x12\x10\n\x08\x63ubwrote\x18\x07 \x01(\r\x12\x10\n\x08otp_type\x18\x08 \x01(\x05\x12\x11\n\totp_value\x18\t \x01(\r\x12\x16\n\x0eotp_identifier\x18\n \x01(\t\"\xa1\x02\n\x1c\x43MsgClientRequestMachineAuth\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x1a\n\x12\x65result_sentryfile\x18\x02 \x01(\r\x12\x10\n\x08\x66ilesize\x18\x03 \x01(\r\x12\x16\n\x0esha_sentryfile\x18\x04 \x01(\x0c\x12\x1b\n\x13lock_account_action\x18\x06 \x01(\x05\x12\x10\n\x08otp_type\x18\x07 \x01(\r\x12\x16\n\x0eotp_identifier\x18\x08 \x01(\t\x12\x18\n\x10otp_sharedsecret\x18\t \x01(\x0c\x12\x11\n\totp_value\x18\n \x01(\r\x12\x14\n\x0cmachine_name\x18\x0b \x01(\t\x12\x1f\n\x17machine_name_userchosen\x18\x0c \x01(\t\"7\n$CMsgClientRequestMachineAuthResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1c\x43MsgClientCreateFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x11\n\tgroupname\x18\x02 \x01(\t\"H\n$CMsgClientCreateFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"@\n\x1c\x43MsgClientDeleteFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"7\n$CMsgClientDeleteFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1c\x43MsgClientRenameFriendsGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x11\n\tgroupname\x18\x02 \x01(\t\"7\n$CMsgClientRenameFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1a\x43MsgClientAddFriendToGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\"5\n\"CMsgClientAddFriendToGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"G\n\x1f\x43MsgClientRemoveFriendFromGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\":\n\'CMsgClientRemoveFriendFromGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"$\n\x15\x43MsgClientRegisterKey\x12\x0b\n\x03key\x18\x01 \x01(\t\"p\n\x1a\x43MsgClientPurchaseResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x1f\n\x17purchase_result_details\x18\x02 \x01(\x05\x12\x1d\n\x15purchase_receipt_info\x18\x03 \x01(\x0c\"\xc5\x01\n\x1c\x43MsgClientActivateOEMLicense\x12\x19\n\x11\x62ios_manufacturer\x18\x01 \x01(\t\x12\x19\n\x11\x62ios_serialnumber\x18\x02 \x01(\t\x12\x14\n\x0clicense_file\x18\x03 \x01(\x0c\x12\x1e\n\x16mainboard_manufacturer\x18\x04 \x01(\t\x12\x19\n\x11mainboard_product\x18\x05 \x01(\t\x12\x1e\n\x16mainboard_serialnumber\x18\x06 \x01(\t\"9\n\x1c\x43MsgClientRegisterOEMMachine\x12\x19\n\x11oem_register_file\x18\x01 \x01(\x0c\"7\n$CMsgClientRegisterOEMMachineResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"K\n\x1f\x43MsgClientPurchaseWithMachineID\x12\x12\n\npackage_id\x18\x01 \x01(\r\x12\x14\n\x0cmachine_info\x18\x02 \x01(\x0c\"g\n CMsgTrading_InitiateTradeRequest\x12\x18\n\x10trade_request_id\x18\x01 \x01(\r\x12\x15\n\rother_steamid\x18\x02 \x01(\x04\x12\x12\n\nother_name\x18\x03 \x01(\t\"\xd2\x02\n!CMsgTrading_InitiateTradeResponse\x12\x10\n\x08response\x18\x01 \x01(\r\x12\x18\n\x10trade_request_id\x18\x02 \x01(\r\x12\x15\n\rother_steamid\x18\x03 \x01(\x04\x12 \n\x18steamguard_required_days\x18\x04 \x01(\r\x12 \n\x18new_device_cooldown_days\x18\x05 \x01(\r\x12-\n%default_password_reset_probation_days\x18\x06 \x01(\r\x12%\n\x1dpassword_reset_probation_days\x18\x07 \x01(\r\x12+\n#default_email_change_probation_days\x18\x08 \x01(\r\x12#\n\x1b\x65mail_change_probation_days\x18\t \x01(\r\"7\n\x1e\x43MsgTrading_CancelTradeRequest\x12\x15\n\rother_steamid\x18\x01 \x01(\x04\"1\n\x18\x43MsgTrading_StartSession\x12\x15\n\rother_steamid\x18\x01 \x01(\x04\"\xaf\x01\n\x15\x43MsgClientEmailChange\x12\x10\n\x08password\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x0c\n\x04\x63ode\x18\x03 \x01(\t\x12\r\n\x05\x66inal\x18\x04 \x01(\x08\x12\x11\n\tnewmethod\x18\x05 \x01(\x08\x12\x16\n\x0etwofactor_code\x18\x06 \x01(\t\x12\x10\n\x08sms_code\x18\x07 \x01(\t\x12\x1b\n\x13\x63lient_supports_sms\x18\x08 \x01(\x08\"N\n\x1d\x43MsgClientEmailChangeResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x19\n\x11requires_sms_code\x18\x02 \x01(\x08\"P\n\x19\x43MsgClientGetCDNAuthToken\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x11\n\thost_name\x18\x02 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\"C\n\x1f\x43MsgClientGetDepotDecryptionKey\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"m\n\'CMsgClientGetDepotDecryptionKeyResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x10\n\x08\x64\x65pot_id\x18\x02 \x01(\r\x12\x1c\n\x14\x64\x65pot_encryption_key\x18\x03 \x01(\x0c\"F\n\x1e\x43MsgClientCheckAppBetaPassword\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x14\n\x0c\x62\x65tapassword\x18\x02 \x01(\t\"\xc1\x01\n&CMsgClientCheckAppBetaPasswordResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12K\n\rbetapasswords\x18\x04 \x03(\x0b\x32\x34.CMsgClientCheckAppBetaPasswordResponse.BetaPassword\x1a\x36\n\x0c\x42\x65taPassword\x12\x10\n\x08\x62\x65taname\x18\x01 \x01(\t\x12\x14\n\x0c\x62\x65tapassword\x18\x02 \x01(\t\"\xc9\x02\n\x1c\x43MsgClientUpdateAppJobReport\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x11\n\tdepot_ids\x18\x02 \x03(\r\x12\x11\n\tapp_state\x18\x03 \x01(\r\x12\x15\n\rjob_app_error\x18\x04 \x01(\r\x12\x15\n\rerror_details\x18\x05 \x01(\t\x12\x14\n\x0cjob_duration\x18\x06 \x01(\r\x12\x1f\n\x17\x66iles_validation_failed\x18\x07 \x01(\r\x12\x18\n\x10\x62ytes_downloaded\x18\x08 \x01(\x04\x12\x14\n\x0c\x62ytes_staged\x18\t \x01(\x04\x12\x16\n\x0e\x62ytes_comitted\x18\n \x01(\x04\x12\x17\n\x0fstart_app_state\x18\x0b \x01(\r\x12\x18\n\x10stats_machine_id\x18\x0c \x01(\x06\x12\x13\n\x0b\x62ranch_name\x18\r \x01(\t\"\xcb\x01\n\x1e\x43MsgClientDPContentStatsReport\x12\x18\n\x10stats_machine_id\x18\x01 \x01(\x06\x12\x14\n\x0c\x63ountry_code\x18\x02 \x01(\t\x12\x0f\n\x07os_type\x18\x03 \x01(\x05\x12\x10\n\x08language\x18\x04 \x01(\x05\x12\x1b\n\x13num_install_folders\x18\x05 \x01(\r\x12\x1b\n\x13num_installed_games\x18\x06 \x01(\r\x12\x1c\n\x14size_installed_games\x18\x07 \x01(\x04\"_\n!CMsgClientGetCDNAuthTokenResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\r\n\x05token\x18\x02 \x01(\t\x12\x17\n\x0f\x65xpiration_time\x18\x03 \x01(\r\"\xb8\x01\n\x1a\x43MsgDownloadRateStatistics\x12\x0f\n\x07\x63\x65ll_id\x18\x01 \x01(\r\x12\x34\n\x05stats\x18\x02 \x03(\x0b\x32%.CMsgDownloadRateStatistics.StatsInfo\x1aS\n\tStatsInfo\x12\x13\n\x0bsource_type\x18\x01 \x01(\r\x12\x11\n\tsource_id\x18\x02 \x01(\r\x12\x0f\n\x07seconds\x18\x03 \x01(\r\x12\r\n\x05\x62ytes\x18\x04 \x01(\x04\"H\n\x1c\x43MsgClientRequestAccountData\x12\x18\n\x10\x61\x63\x63ount_or_email\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\r\"\xd7\x01\n$CMsgClientRequestAccountDataResponse\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\r\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x03 \x01(\t\x12\x12\n\nct_matches\x18\x04 \x01(\r\x12 \n\x18\x61\x63\x63ount_name_suggestion1\x18\x05 \x01(\t\x12 \n\x18\x61\x63\x63ount_name_suggestion2\x18\x06 \x01(\t\x12 \n\x18\x61\x63\x63ount_name_suggestion3\x18\x07 \x01(\t\"\x99\x01\n\x1b\x43MsgClientUGSGetGlobalStats\x12\x0e\n\x06gameid\x18\x01 \x01(\x04\x12\x1e\n\x16history_days_requested\x18\x02 \x01(\r\x12\x1b\n\x13time_last_requested\x18\x03 \x01(\x07\x12\x18\n\x10\x66irst_day_cached\x18\x04 \x01(\r\x12\x13\n\x0b\x64\x61ys_cached\x18\x05 \x01(\r\"\x95\x02\n#CMsgClientUGSGetGlobalStatsResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x11\n\ttimestamp\x18\x02 \x01(\x07\x12\x13\n\x0b\x64\x61y_current\x18\x03 \x01(\x05\x12\x36\n\x04\x64\x61ys\x18\x04 \x03(\x0b\x32(.CMsgClientUGSGetGlobalStatsResponse.Day\x1az\n\x03\x44\x61y\x12\x0e\n\x06\x64\x61y_id\x18\x01 \x01(\r\x12<\n\x05stats\x18\x02 \x03(\x0b\x32-.CMsgClientUGSGetGlobalStatsResponse.Day.Stat\x1a%\n\x04Stat\x12\x0f\n\x07stat_id\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x03\"\xd4\x03\n\x12\x43MsgGameServerData\x12\x13\n\x0bsteam_id_gs\x18\x01 \x01(\x06\x12\n\n\x02ip\x18\x02 \x01(\r\x12\x12\n\nquery_port\x18\x03 \x01(\r\x12\x11\n\tgame_port\x18\x04 \x01(\r\x12\x15\n\rsourcetv_port\x18\x05 \x01(\r\x12\x0c\n\x04name\x18\x16 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x06 \x01(\r\x12\x0f\n\x07gamedir\x18\x07 \x01(\t\x12\x0f\n\x07version\x18\x08 \x01(\t\x12\x0f\n\x07product\x18\t \x01(\t\x12\x0e\n\x06region\x18\n \x01(\t\x12+\n\x07players\x18\x0b \x03(\x0b\x32\x1a.CMsgGameServerData.Player\x12\x13\n\x0bmax_players\x18\x0c \x01(\r\x12\x11\n\tbot_count\x18\r \x01(\r\x12\x10\n\x08password\x18\x0e \x01(\x08\x12\x0e\n\x06secure\x18\x0f \x01(\x08\x12\x11\n\tdedicated\x18\x10 \x01(\x08\x12\n\n\x02os\x18\x11 \x01(\t\x12\x11\n\tgame_data\x18\x12 \x01(\t\x12\x19\n\x11game_data_version\x18\x13 \x01(\r\x12\x11\n\tgame_type\x18\x14 \x01(\t\x12\x0b\n\x03map\x18\x15 \x01(\t\x1a\x1a\n\x06Player\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\"H\n\x14\x43MsgGameServerRemove\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\x12\n\n\x02ip\x18\x02 \x01(\r\x12\x12\n\nquery_port\x18\x03 \x01(\r\"\x82\x01\n\x18\x43MsgClientGMSServerQuery\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x17\n\x0fgeo_location_ip\x18\x02 \x01(\r\x12\x13\n\x0bregion_code\x18\x03 \x01(\r\x12\x13\n\x0b\x66ilter_text\x18\x04 \x01(\t\x12\x13\n\x0bmax_servers\x18\x05 \x01(\r\"\xb4\x01\n CMsgGMSClientServerQueryResponse\x12\x39\n\x07servers\x18\x01 \x03(\x0b\x32(.CMsgGMSClientServerQueryResponse.Server\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x1a\x46\n\x06Server\x12\x11\n\tserver_ip\x18\x01 \x01(\r\x12\x13\n\x0bserver_port\x18\x02 \x01(\r\x12\x14\n\x0c\x61uth_players\x18\x03 \x01(\r\"O\n\x17\x43MsgGameServerOutOfDate\x12\x13\n\x0bsteam_id_gs\x18\x01 \x01(\x06\x12\x0e\n\x06reject\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t\"2\n\x19\x43MsgClientRedeemGuestPass\x12\x15\n\rguest_pass_id\x18\x01 \x01(\x06\"c\n!CMsgClientRedeemGuestPassResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\x12\n\npackage_id\x18\x02 \x01(\r\x12\x16\n\x0emust_own_appid\x18\x03 \x01(\r\"8\n\x1f\x43MsgClientGetClanActivityCounts\x12\x15\n\rsteamid_clans\x18\x01 \x03(\x04\"=\n\'CMsgClientGetClanActivityCountsResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\"y\n\x19\x43MsgClientOGSReportString\x12\x13\n\x0b\x61\x63\x63umulated\x18\x01 \x01(\x08\x12\x11\n\tsessionid\x18\x02 \x01(\x04\x12\x10\n\x08severity\x18\x03 \x01(\x05\x12\x11\n\tformatter\x18\x04 \x01(\t\x12\x0f\n\x07varargs\x18\x05 \x01(\x0c\"P\n\x16\x43MsgClientOGSReportBug\x12\x11\n\tsessionid\x18\x01 \x01(\x04\x12\x0f\n\x07\x62ugtext\x18\x02 \x01(\t\x12\x12\n\nscreenshot\x18\x03 \x01(\x0c\"0\n\x17\x43MsgGSAssociateWithClan\x12\x15\n\rsteam_id_clan\x18\x01 \x01(\x06\"L\n\x1f\x43MsgGSAssociateWithClanResponse\x12\x15\n\rsteam_id_clan\x18\x01 \x01(\x06\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\"A\n#CMsgGSComputeNewPlayerCompatibility\x12\x1a\n\x12steam_id_candidate\x18\x01 \x01(\x06\"\xcf\x01\n+CMsgGSComputeNewPlayerCompatibilityResponse\x12\x1a\n\x12steam_id_candidate\x18\x01 \x01(\x06\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x16\n\x0eis_clan_member\x18\x03 \x01(\x08\x12\x18\n\x10\x63t_dont_like_you\x18\x04 \x01(\x05\x12\x18\n\x10\x63t_you_dont_like\x18\x05 \x01(\x05\x12$\n\x1c\x63t_clanmembers_dont_like_you\x18\x06 \x01(\x05\"\x14\n\x12\x43MsgClientSentLogs\"`\n\x0c\x43MsgGCClient\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07msgtype\x18\x02 \x01(\r\x12\x0f\n\x07payload\x18\x03 \x01(\x0c\x12\x0f\n\x07steamid\x18\x04 \x01(\x06\x12\x0e\n\x06gcname\x18\x05 \x01(\t\".\n\x1c\x43MsgClientRequestFreeLicense\x12\x0e\n\x06\x61ppids\x18\x02 \x03(\r\"n\n$CMsgClientRequestFreeLicenseResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\x1a\n\x12granted_packageids\x18\x02 \x03(\r\x12\x16\n\x0egranted_appids\x18\x03 \x03(\r\"\xd3\x01\n#CMsgDRMDownloadRequestWithCrashData\x12\x16\n\x0e\x64ownload_flags\x18\x01 \x01(\r\x12\x1c\n\x14\x64ownload_types_known\x18\x02 \x01(\r\x12\x10\n\x08guid_drm\x18\x03 \x01(\x0c\x12\x12\n\nguid_split\x18\x04 \x01(\x0c\x12\x12\n\nguid_merge\x18\x05 \x01(\x0c\x12\x13\n\x0bmodule_name\x18\x06 \x01(\t\x12\x13\n\x0bmodule_path\x18\x07 \x01(\t\x12\x12\n\ncrash_data\x18\x08 \x01(\x0c\"\xdb\x01\n\x17\x43MsgDRMDownloadResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\r:\x01\x32\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x1a\n\x12\x62lob_download_type\x18\x03 \x01(\r\x12\x12\n\nmerge_guid\x18\x04 \x01(\x0c\x12\x1c\n\x14\x64ownload_file_dfs_ip\x18\x05 \x01(\r\x12\x1e\n\x16\x64ownload_file_dfs_port\x18\x06 \x01(\r\x12\x19\n\x11\x64ownload_file_url\x18\x07 \x01(\t\x12\x13\n\x0bmodule_path\x18\x08 \x01(\t\"\xd7\x01\n\x12\x43MsgDRMFinalResult\x12\x12\n\x07\x65Result\x18\x01 \x01(\r:\x01\x32\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x1a\n\x12\x62lob_download_type\x18\x03 \x01(\r\x12\x14\n\x0c\x65rror_detail\x18\x04 \x01(\r\x12\x12\n\nmerge_guid\x18\x05 \x01(\x0c\x12\x1c\n\x14\x64ownload_file_dfs_ip\x18\x06 \x01(\r\x12\x1e\n\x16\x64ownload_file_dfs_port\x18\x07 \x01(\r\x12\x19\n\x11\x64ownload_file_url\x18\x08 \x01(\t\"3\n\x1e\x43MsgClientDPCheckSpecialSurvey\x12\x11\n\tsurvey_id\x18\x01 \x01(\r\"\x96\x01\n&CMsgClientDPCheckSpecialSurveyResponse\x12\x12\n\x07\x65Result\x18\x01 \x01(\r:\x01\x32\x12\r\n\x05state\x18\x02 \x01(\r\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x12\n\ncustom_url\x18\x04 \x01(\t\x12\x18\n\x10include_software\x18\x05 \x01(\x08\x12\r\n\x05token\x18\x06 \x01(\x0c\"H\n%CMsgClientDPSendSpecialSurveyResponse\x12\x11\n\tsurvey_id\x18\x01 \x01(\r\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"O\n*CMsgClientDPSendSpecialSurveyResponseReply\x12\x12\n\x07\x65Result\x18\x01 \x01(\r:\x01\x32\x12\r\n\x05token\x18\x02 \x01(\x0c\"W\n\'CMsgClientRequestForgottenPasswordEmail\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x16\n\x0epassword_tried\x18\x02 \x01(\t\"_\n/CMsgClientRequestForgottenPasswordEmailResponse\x12\x0f\n\x07\x65Result\x18\x01 \x01(\r\x12\x1b\n\x13use_secret_question\x18\x02 \x01(\x08\"6\n\x1b\x43MsgClientItemAnnouncements\x12\x17\n\x0f\x63ount_new_items\x18\x01 \x01(\r\"$\n\"CMsgClientRequestItemAnnouncements\"\x9e\x01\n\x1b\x43MsgClientUserNotifications\x12@\n\rnotifications\x18\x01 \x03(\x0b\x32).CMsgClientUserNotifications.Notification\x1a=\n\x0cNotification\x12\x1e\n\x16user_notification_type\x18\x01 \x01(\r\x12\r\n\x05\x63ount\x18\x02 \x01(\r\"\x88\x01\n\x1e\x43MsgClientCommentNotifications\x12\x1a\n\x12\x63ount_new_comments\x18\x01 \x01(\r\x12 \n\x18\x63ount_new_comments_owner\x18\x02 \x01(\r\x12(\n count_new_comments_subscriptions\x18\x03 \x01(\r\"\'\n%CMsgClientRequestCommentNotifications\"g\n$CMsgClientOfflineMessageNotification\x12\x18\n\x10offline_messages\x18\x01 \x01(\r\x12%\n\x1d\x66riends_with_offline_messages\x18\x02 \x03(\r\"&\n$CMsgClientRequestOfflineMessageCount\"6\n#CMsgClientFSGetFriendMessageHistory\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"\xf5\x01\n+CMsgClientFSGetFriendMessageHistoryResponse\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0f\n\x07success\x18\x02 \x01(\r\x12L\n\x08messages\x18\x03 \x03(\x0b\x32:.CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage\x1aV\n\rFriendMessage\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x11\n\ttimestamp\x18\x02 \x01(\r\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0e\n\x06unread\x18\x04 \x01(\x08\"7\n5CMsgClientFSGetFriendMessageHistoryForOfflineMessages\"7\n!CMsgClientFSGetFriendsSteamLevels\x12\x12\n\naccountids\x18\x01 \x03(\r\"\x9b\x01\n)CMsgClientFSGetFriendsSteamLevelsResponse\x12\x42\n\x07\x66riends\x18\x01 \x03(\x0b\x32\x31.CMsgClientFSGetFriendsSteamLevelsResponse.Friend\x1a*\n\x06\x46riend\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\r\n\x05level\x18\x02 \x01(\r\"\xeb\x01\n\x17\x43MsgClientEmailAddrInfo\x12\x15\n\remail_address\x18\x01 \x01(\t\x12\x1a\n\x12\x65mail_is_validated\x18\x02 \x01(\x08\x12 \n\x18\x65mail_validation_changed\x18\x03 \x01(\x08\x12\'\n\x1f\x63redential_change_requires_code\x18\x04 \x01(\x08\x12\x31\n)password_or_secretqa_change_requires_code\x18\x05 \x01(\x08\x12\x1f\n\x17remind_user_about_email\x18\x06 \x01(\x08\"\xb7\x01\n\x1e\x43MsgCREEnumeratePublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x12\n\nquery_type\x18\x02 \x01(\x05\x12\x13\n\x0bstart_index\x18\x03 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\r\x12\r\n\x05\x63ount\x18\x05 \x01(\r\x12\x0c\n\x04tags\x18\x06 \x03(\t\x12\x11\n\tuser_tags\x18\x07 \x03(\t\x12\x1e\n\x12matching_file_type\x18\x08 \x01(\r:\x02\x31\x33\"\x9d\x02\n&CMsgCREEnumeratePublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12P\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x37.CMsgCREEnumeratePublishedFilesResponse.PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\x1av\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"\x8b\x01\n\x16\x43MsgCREItemVoteSummary\x12\x43\n\x12published_file_ids\x18\x01 \x03(\x0b\x32\'.CMsgCREItemVoteSummary.PublishedFileId\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\xfa\x01\n\x1e\x43MsgCREItemVoteSummaryResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12L\n\x13item_vote_summaries\x18\x02 \x03(\x0b\x32/.CMsgCREItemVoteSummaryResponse.ItemVoteSummary\x1av\n\x0fItemVoteSummary\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"P\n\"CMsgCREUpdateUserPublishedItemVote\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0f\n\x07vote_up\x18\x02 \x01(\x08\"@\n*CMsgCREUpdateUserPublishedItemVoteResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"\xab\x01\n&CMsgCREGetUserPublishedItemVoteDetails\x12S\n\x12published_file_ids\x18\x01 \x03(\x0b\x32\x37.CMsgCREGetUserPublishedItemVoteDetails.PublishedFileId\x1a,\n\x0fPublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\xea\x01\n.CMsgCREGetUserPublishedItemVoteDetailsResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x62\n\x16user_item_vote_details\x18\x02 \x03(\x0b\x32\x42.CMsgCREGetUserPublishedItemVoteDetailsResponse.UserItemVoteDetail\x1a@\n\x12UserItemVoteDetail\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0f\n\x04vote\x18\x02 \x01(\x05:\x01\x30\"\xb9\x01\n\x18\x43MsgGameServerPingSample\x12\r\n\x05my_ip\x18\x01 \x01(\x07\x12\x11\n\tgs_app_id\x18\x02 \x01(\x05\x12\x34\n\ngs_samples\x18\x03 \x03(\x0b\x32 .CMsgGameServerPingSample.Sample\x1a\x45\n\x06Sample\x12\n\n\x02ip\x18\x01 \x01(\x07\x12\x13\n\x0b\x61vg_ping_ms\x18\x02 \x01(\r\x12\x1a\n\x12stddev_ping_ms_x10\x18\x03 \x01(\r\"*\n\x16\x43MsgFSGetFollowerCount\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\"F\n\x1e\x43MsgFSGetFollowerCountResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x10\n\x05\x63ount\x18\x02 \x01(\x05:\x01\x30\"(\n\x14\x43MsgFSGetIsFollowing\x12\x10\n\x08steam_id\x18\x01 \x01(\x06\"O\n\x1c\x43MsgFSGetIsFollowingResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x1b\n\x0cis_following\x18\x02 \x01(\x08:\x05\x66\x61lse\"3\n\x1c\x43MsgFSEnumerateFollowingList\x12\x13\n\x0bstart_index\x18\x01 \x01(\r\"d\n$CMsgFSEnumerateFollowingListResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x15\n\rtotal_results\x18\x02 \x01(\x05\x12\x11\n\tsteam_ids\x18\x03 \x03(\x06\"0\n\x1f\x43MsgDPGetNumberOfCurrentPlayers\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"S\n\'CMsgDPGetNumberOfCurrentPlayersResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x14\n\x0cplayer_count\x18\x02 \x01(\x05\"a\n#CMsgClientFriendUserStatusPublished\x12\x16\n\x0e\x66riend_steamid\x18\x01 \x01(\x06\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x13\n\x0bstatus_text\x18\x03 \x01(\t\"b\n\x17\x43MsgClientServiceMethod\x12\x13\n\x0bmethod_name\x18\x01 \x01(\t\x12\x19\n\x11serialized_method\x18\x02 \x01(\x0c\x12\x17\n\x0fis_notification\x18\x03 \x01(\x08\"Z\n\x1f\x43MsgClientServiceMethodResponse\x12\x13\n\x0bmethod_name\x18\x01 \x01(\t\x12\"\n\x1aserialized_method_response\x18\x02 \x01(\x0c\"\"\n\x10\x43MsgClientUIMode\x12\x0e\n\x06uimode\x18\x01 \x01(\r\"<\n&CMsgClientVanityURLChangedNotification\x12\x12\n\nvanity_url\x18\x01 \x01(\t\"]\n%CMsgClientAuthorizeLocalDeviceRequest\x12\x1a\n\x12\x64\x65vice_description\x18\x01 \x01(\t\x12\x18\n\x10owner_account_id\x18\x02 \x01(\r\"k\n\x1e\x43MsgClientAuthorizeLocalDevice\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x18\n\x10owner_account_id\x18\x02 \x01(\r\x12\x1b\n\x13\x61uthed_device_token\x18\x03 \x01(\x04\"n\n\"CMsgClientDeauthorizeDeviceRequest\x12\"\n\x1a\x64\x65\x61uthorization_account_id\x18\x01 \x01(\r\x12$\n\x1c\x64\x65\x61uthorization_device_token\x18\x02 \x01(\x04\"U\n\x1b\x43MsgClientDeauthorizeDevice\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\"\n\x1a\x64\x65\x61uthorization_account_id\x18\x02 \x01(\r\"\xd1\x01\n&CMsgClientUseLocalDeviceAuthorizations\x12 \n\x18\x61uthorization_account_id\x18\x01 \x03(\r\x12J\n\rdevice_tokens\x18\x02 \x03(\x0b\x32\x33.CMsgClientUseLocalDeviceAuthorizations.DeviceToken\x1a\x39\n\x0b\x44\x65viceToken\x12\x18\n\x10owner_account_id\x18\x01 \x01(\r\x12\x10\n\x08token_id\x18\x02 \x01(\x04\" \n\x1e\x43MsgClientGetAuthorizedDevices\"\xad\x02\n&CMsgClientGetAuthorizedDevicesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12S\n\x11\x61uthorized_device\x18\x02 \x03(\x0b\x32\x38.CMsgClientGetAuthorizedDevicesResponse.AuthorizedDevice\x1a\x99\x01\n\x10\x41uthorizedDevice\x12\x19\n\x11\x61uth_device_token\x18\x01 \x01(\x04\x12\x13\n\x0b\x64\x65vice_name\x18\x02 \x01(\t\x12\x18\n\x10last_access_time\x18\x03 \x01(\r\x12\x13\n\x0b\x62orrower_id\x18\x04 \x01(\r\x12\x12\n\nis_pending\x18\x05 \x01(\x08\x12\x12\n\napp_played\x18\x06 \x01(\r\"\x1b\n\x19\x43MsgClientGetEmoticonList\"v\n\x16\x43MsgClientEmoticonList\x12\x33\n\temoticons\x18\x01 \x03(\x0b\x32 .CMsgClientEmoticonList.Emoticon\x1a\'\n\x08\x45moticon\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\xc2\x01\n!CMsgClientSharedLibraryLockStatus\x12H\n\x0elocked_library\x18\x01 \x03(\x0b\x32\x30.CMsgClientSharedLibraryLockStatus.LockedLibrary\x12\x1d\n\x15own_library_locked_by\x18\x02 \x01(\r\x1a\x34\n\rLockedLibrary\x12\x10\n\x08owner_id\x18\x01 \x01(\r\x12\x11\n\tlocked_by\x18\x02 \x01(\r\"\xa7\x01\n\"CMsgClientSharedLibraryStopPlaying\x12\x14\n\x0cseconds_left\x18\x01 \x01(\x05\x12>\n\tstop_apps\x18\x02 \x03(\x0b\x32+.CMsgClientSharedLibraryStopPlaying.StopApp\x1a+\n\x07StopApp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x10\n\x08owner_id\x18\x02 \x01(\r\"\xf1\x01\n\x15\x43MsgClientServiceCall\x12\x15\n\rsysid_routing\x18\x01 \x01(\x0c\x12\x13\n\x0b\x63\x61ll_handle\x18\x02 \x01(\r\x12\x12\n\nmodule_crc\x18\x03 \x01(\r\x12\x13\n\x0bmodule_hash\x18\x04 \x01(\x0c\x12\x13\n\x0b\x66unction_id\x18\x05 \x01(\r\x12\x16\n\x0e\x63ub_output_max\x18\x06 \x01(\r\x12\r\n\x05\x66lags\x18\x07 \x01(\r\x12\x15\n\rcallparameter\x18\x08 \x01(\x0c\x12\x11\n\tping_only\x18\t \x01(\x08\x12\x1d\n\x15max_outstanding_calls\x18\n \x01(\r\"Z\n\x17\x43MsgClientServiceModule\x12\x12\n\nmodule_crc\x18\x01 \x01(\r\x12\x13\n\x0bmodule_hash\x18\x02 \x01(\x0c\x12\x16\n\x0emodule_content\x18\x03 \x01(\x0c\"\xb8\x04\n\x1d\x43MsgClientServiceCallResponse\x12\x15\n\rsysid_routing\x18\x01 \x01(\x0c\x12\x13\n\x0b\x63\x61ll_handle\x18\x02 \x01(\r\x12\x12\n\nmodule_crc\x18\x03 \x01(\r\x12\x13\n\x0bmodule_hash\x18\x04 \x01(\x0c\x12\x13\n\x0b\x65\x63\x61llresult\x18\x05 \x01(\r\x12\x16\n\x0eresult_content\x18\x06 \x01(\x0c\x12\x17\n\x0fos_version_info\x18\x07 \x01(\x0c\x12\x13\n\x0bsystem_info\x18\x08 \x01(\x0c\x12\x14\n\x0cload_address\x18\t \x01(\x06\x12\x18\n\x10\x65xception_record\x18\n \x01(\x0c\x12 \n\x18portable_os_version_info\x18\x0b \x01(\x0c\x12\x1c\n\x14portable_system_info\x18\x0c \x01(\x0c\x12\x15\n\rwas_converted\x18\r \x01(\x08\x12\x17\n\x0finternal_result\x18\x0e \x01(\r\x12\x15\n\rcurrent_count\x18\x0f \x01(\r\x12\x18\n\x10last_call_handle\x18\x10 \x01(\r\x12\x1c\n\x14last_call_module_crc\x18\x11 \x01(\r\x12\x1f\n\x17last_call_sysid_routing\x18\x12 \x01(\x0c\x12\x18\n\x10last_ecallresult\x18\x13 \x01(\r\x12\x1c\n\x14last_callissue_delta\x18\x14 \x01(\r\x12\x1f\n\x17last_callcomplete_delta\x18\x15 \x01(\r\"\x17\n\x15\x43MsgAMUnlockStreaming\"K\n\x1d\x43MsgAMUnlockStreamingResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x16\n\x0e\x65ncryption_key\x18\x02 \x01(\x0c\"M\n\x1d\x43MsgClientPlayingSessionState\x12\x17\n\x0fplaying_blocked\x18\x02 \x01(\x08\x12\x13\n\x0bplaying_app\x18\x03 \x01(\r\"6\n\x1c\x43MsgClientKickPlayingSession\x12\x16\n\x0eonly_stop_game\x18\x01 \x01(\x08\"b\n\x17\x43MsgClientCreateAccount\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08launcher\x18\x06 \x01(\r\"F\n\x1f\x43MsgClientCreateAccountResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\"v\n\x1f\x43MsgClientVoiceCallPreAuthorize\x12\x16\n\x0e\x63\x61ller_steamid\x18\x01 \x01(\x06\x12\x18\n\x10receiver_steamid\x18\x02 \x01(\x06\x12\x11\n\tcaller_id\x18\x03 \x01(\x05\x12\x0e\n\x06hangup\x18\x04 \x01(\x08\"\x82\x01\n\'CMsgClientVoiceCallPreAuthorizeResponse\x12\x16\n\x0e\x63\x61ller_steamid\x18\x01 \x01(\x06\x12\x18\n\x10receiver_steamid\x18\x02 \x01(\x06\x12\x12\n\x07\x65result\x18\x03 \x01(\x05:\x01\x32\x12\x11\n\tcaller_id\x18\x04 \x01(\x05\x42\x05H\x01\x90\x01\x00')
   ,
   dependencies=[steammessages__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -3860,7 +3860,7 @@ _CMSGCLIENTGETCDNAUTHTOKEN = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='app_id', full_name='CMsgClientGetCDNAuthToken.app_id', index=0,
+      name='depot_id', full_name='CMsgClientGetCDNAuthToken.depot_id', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -3870,6 +3870,13 @@ _CMSGCLIENTGETCDNAUTHTOKEN = _descriptor.Descriptor(
       name='host_name', full_name='CMsgClientGetCDNAuthToken.host_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientGetCDNAuthToken.app_id', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -3886,7 +3893,7 @@ _CMSGCLIENTGETCDNAUTHTOKEN = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=9804,
-  serialized_end=9866,
+  serialized_end=9884,
 )
 
 
@@ -3923,8 +3930,8 @@ _CMSGCLIENTGETDEPOTDECRYPTIONKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9868,
-  serialized_end=9935,
+  serialized_start=9886,
+  serialized_end=9953,
 )
 
 
@@ -3968,8 +3975,8 @@ _CMSGCLIENTGETDEPOTDECRYPTIONKEYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9937,
-  serialized_end=10046,
+  serialized_start=9955,
+  serialized_end=10064,
 )
 
 
@@ -4006,8 +4013,8 @@ _CMSGCLIENTCHECKAPPBETAPASSWORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10048,
-  serialized_end=10118,
+  serialized_start=10066,
+  serialized_end=10136,
 )
 
 
@@ -4044,8 +4051,8 @@ _CMSGCLIENTCHECKAPPBETAPASSWORDRESPONSE_BETAPASSWORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10260,
-  serialized_end=10314,
+  serialized_start=10278,
+  serialized_end=10332,
 )
 
 _CMSGCLIENTCHECKAPPBETAPASSWORDRESPONSE = _descriptor.Descriptor(
@@ -4081,8 +4088,8 @@ _CMSGCLIENTCHECKAPPBETAPASSWORDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10121,
-  serialized_end=10314,
+  serialized_start=10139,
+  serialized_end=10332,
 )
 
 
@@ -4196,8 +4203,8 @@ _CMSGCLIENTUPDATEAPPJOBREPORT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10317,
-  serialized_end=10646,
+  serialized_start=10335,
+  serialized_end=10664,
 )
 
 
@@ -4269,8 +4276,8 @@ _CMSGCLIENTDPCONTENTSTATSREPORT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10649,
-  serialized_end=10852,
+  serialized_start=10667,
+  serialized_end=10870,
 )
 
 
@@ -4314,8 +4321,8 @@ _CMSGCLIENTGETCDNAUTHTOKENRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10854,
-  serialized_end=10949,
+  serialized_start=10872,
+  serialized_end=10967,
 )
 
 
@@ -4366,8 +4373,8 @@ _CMSGDOWNLOADRATESTATISTICS_STATSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11053,
-  serialized_end=11136,
+  serialized_start=11071,
+  serialized_end=11154,
 )
 
 _CMSGDOWNLOADRATESTATISTICS = _descriptor.Descriptor(
@@ -4403,8 +4410,8 @@ _CMSGDOWNLOADRATESTATISTICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10952,
-  serialized_end=11136,
+  serialized_start=10970,
+  serialized_end=11154,
 )
 
 
@@ -4441,8 +4448,8 @@ _CMSGCLIENTREQUESTACCOUNTDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11138,
-  serialized_end=11210,
+  serialized_start=11156,
+  serialized_end=11228,
 )
 
 
@@ -4514,8 +4521,8 @@ _CMSGCLIENTREQUESTACCOUNTDATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11213,
-  serialized_end=11428,
+  serialized_start=11231,
+  serialized_end=11446,
 )
 
 
@@ -4573,8 +4580,8 @@ _CMSGCLIENTUGSGETGLOBALSTATS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11431,
-  serialized_end=11584,
+  serialized_start=11449,
+  serialized_end=11602,
 )
 
 
@@ -4611,8 +4618,8 @@ _CMSGCLIENTUGSGETGLOBALSTATSRESPONSE_DAY_STAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11827,
-  serialized_end=11864,
+  serialized_start=11845,
+  serialized_end=11882,
 )
 
 _CMSGCLIENTUGSGETGLOBALSTATSRESPONSE_DAY = _descriptor.Descriptor(
@@ -4648,8 +4655,8 @@ _CMSGCLIENTUGSGETGLOBALSTATSRESPONSE_DAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11742,
-  serialized_end=11864,
+  serialized_start=11760,
+  serialized_end=11882,
 )
 
 _CMSGCLIENTUGSGETGLOBALSTATSRESPONSE = _descriptor.Descriptor(
@@ -4699,8 +4706,8 @@ _CMSGCLIENTUGSGETGLOBALSTATSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11587,
-  serialized_end=11864,
+  serialized_start=11605,
+  serialized_end=11882,
 )
 
 
@@ -4730,8 +4737,8 @@ _CMSGGAMESERVERDATA_PLAYER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12309,
-  serialized_end=12335,
+  serialized_start=12327,
+  serialized_end=12353,
 )
 
 _CMSGGAMESERVERDATA = _descriptor.Descriptor(
@@ -4907,8 +4914,8 @@ _CMSGGAMESERVERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11867,
-  serialized_end=12335,
+  serialized_start=11885,
+  serialized_end=12353,
 )
 
 
@@ -4952,8 +4959,8 @@ _CMSGGAMESERVERREMOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12337,
-  serialized_end=12409,
+  serialized_start=12355,
+  serialized_end=12427,
 )
 
 
@@ -5011,8 +5018,8 @@ _CMSGCLIENTGMSSERVERQUERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12412,
-  serialized_end=12542,
+  serialized_start=12430,
+  serialized_end=12560,
 )
 
 
@@ -5056,8 +5063,8 @@ _CMSGGMSCLIENTSERVERQUERYRESPONSE_SERVER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12655,
-  serialized_end=12725,
+  serialized_start=12673,
+  serialized_end=12743,
 )
 
 _CMSGGMSCLIENTSERVERQUERYRESPONSE = _descriptor.Descriptor(
@@ -5093,8 +5100,8 @@ _CMSGGMSCLIENTSERVERQUERYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12545,
-  serialized_end=12725,
+  serialized_start=12563,
+  serialized_end=12743,
 )
 
 
@@ -5138,8 +5145,8 @@ _CMSGGAMESERVEROUTOFDATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12727,
-  serialized_end=12806,
+  serialized_start=12745,
+  serialized_end=12824,
 )
 
 
@@ -5169,8 +5176,8 @@ _CMSGCLIENTREDEEMGUESTPASS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12808,
-  serialized_end=12858,
+  serialized_start=12826,
+  serialized_end=12876,
 )
 
 
@@ -5214,8 +5221,8 @@ _CMSGCLIENTREDEEMGUESTPASSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12860,
-  serialized_end=12959,
+  serialized_start=12878,
+  serialized_end=12977,
 )
 
 
@@ -5245,8 +5252,8 @@ _CMSGCLIENTGETCLANACTIVITYCOUNTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12961,
-  serialized_end=13017,
+  serialized_start=12979,
+  serialized_end=13035,
 )
 
 
@@ -5276,8 +5283,8 @@ _CMSGCLIENTGETCLANACTIVITYCOUNTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13019,
-  serialized_end=13080,
+  serialized_start=13037,
+  serialized_end=13098,
 )
 
 
@@ -5335,8 +5342,8 @@ _CMSGCLIENTOGSREPORTSTRING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13082,
-  serialized_end=13203,
+  serialized_start=13100,
+  serialized_end=13221,
 )
 
 
@@ -5380,8 +5387,8 @@ _CMSGCLIENTOGSREPORTBUG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13205,
-  serialized_end=13285,
+  serialized_start=13223,
+  serialized_end=13303,
 )
 
 
@@ -5411,8 +5418,8 @@ _CMSGGSASSOCIATEWITHCLAN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13287,
-  serialized_end=13335,
+  serialized_start=13305,
+  serialized_end=13353,
 )
 
 
@@ -5449,8 +5456,8 @@ _CMSGGSASSOCIATEWITHCLANRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13337,
-  serialized_end=13413,
+  serialized_start=13355,
+  serialized_end=13431,
 )
 
 
@@ -5480,8 +5487,8 @@ _CMSGGSCOMPUTENEWPLAYERCOMPATIBILITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13415,
-  serialized_end=13480,
+  serialized_start=13433,
+  serialized_end=13498,
 )
 
 
@@ -5546,8 +5553,8 @@ _CMSGGSCOMPUTENEWPLAYERCOMPATIBILITYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13483,
-  serialized_end=13690,
+  serialized_start=13501,
+  serialized_end=13708,
 )
 
 
@@ -5570,8 +5577,8 @@ _CMSGCLIENTSENTLOGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13692,
-  serialized_end=13712,
+  serialized_start=13710,
+  serialized_end=13730,
 )
 
 
@@ -5629,8 +5636,8 @@ _CMSGGCCLIENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13714,
-  serialized_end=13810,
+  serialized_start=13732,
+  serialized_end=13828,
 )
 
 
@@ -5660,8 +5667,8 @@ _CMSGCLIENTREQUESTFREELICENSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13812,
-  serialized_end=13858,
+  serialized_start=13830,
+  serialized_end=13876,
 )
 
 
@@ -5705,8 +5712,8 @@ _CMSGCLIENTREQUESTFREELICENSERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13860,
-  serialized_end=13970,
+  serialized_start=13878,
+  serialized_end=13988,
 )
 
 
@@ -5785,8 +5792,8 @@ _CMSGDRMDOWNLOADREQUESTWITHCRASHDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13973,
-  serialized_end=14184,
+  serialized_start=13991,
+  serialized_end=14202,
 )
 
 
@@ -5865,8 +5872,8 @@ _CMSGDRMDOWNLOADRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14187,
-  serialized_end=14406,
+  serialized_start=14205,
+  serialized_end=14424,
 )
 
 
@@ -5945,8 +5952,8 @@ _CMSGDRMFINALRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14409,
-  serialized_end=14624,
+  serialized_start=14427,
+  serialized_end=14642,
 )
 
 
@@ -5976,8 +5983,8 @@ _CMSGCLIENTDPCHECKSPECIALSURVEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14626,
-  serialized_end=14677,
+  serialized_start=14644,
+  serialized_end=14695,
 )
 
 
@@ -6042,8 +6049,8 @@ _CMSGCLIENTDPCHECKSPECIALSURVEYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14680,
-  serialized_end=14830,
+  serialized_start=14698,
+  serialized_end=14848,
 )
 
 
@@ -6080,8 +6087,8 @@ _CMSGCLIENTDPSENDSPECIALSURVEYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14832,
-  serialized_end=14904,
+  serialized_start=14850,
+  serialized_end=14922,
 )
 
 
@@ -6118,8 +6125,8 @@ _CMSGCLIENTDPSENDSPECIALSURVEYRESPONSEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14906,
-  serialized_end=14985,
+  serialized_start=14924,
+  serialized_end=15003,
 )
 
 
@@ -6156,8 +6163,8 @@ _CMSGCLIENTREQUESTFORGOTTENPASSWORDEMAIL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14987,
-  serialized_end=15074,
+  serialized_start=15005,
+  serialized_end=15092,
 )
 
 
@@ -6194,8 +6201,8 @@ _CMSGCLIENTREQUESTFORGOTTENPASSWORDEMAILRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15076,
-  serialized_end=15171,
+  serialized_start=15094,
+  serialized_end=15189,
 )
 
 
@@ -6225,8 +6232,8 @@ _CMSGCLIENTITEMANNOUNCEMENTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15173,
-  serialized_end=15227,
+  serialized_start=15191,
+  serialized_end=15245,
 )
 
 
@@ -6249,8 +6256,8 @@ _CMSGCLIENTREQUESTITEMANNOUNCEMENTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15229,
-  serialized_end=15265,
+  serialized_start=15247,
+  serialized_end=15283,
 )
 
 
@@ -6287,8 +6294,8 @@ _CMSGCLIENTUSERNOTIFICATIONS_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15365,
-  serialized_end=15426,
+  serialized_start=15383,
+  serialized_end=15444,
 )
 
 _CMSGCLIENTUSERNOTIFICATIONS = _descriptor.Descriptor(
@@ -6317,8 +6324,8 @@ _CMSGCLIENTUSERNOTIFICATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15268,
-  serialized_end=15426,
+  serialized_start=15286,
+  serialized_end=15444,
 )
 
 
@@ -6362,8 +6369,8 @@ _CMSGCLIENTCOMMENTNOTIFICATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15429,
-  serialized_end=15565,
+  serialized_start=15447,
+  serialized_end=15583,
 )
 
 
@@ -6386,8 +6393,8 @@ _CMSGCLIENTREQUESTCOMMENTNOTIFICATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15567,
-  serialized_end=15606,
+  serialized_start=15585,
+  serialized_end=15624,
 )
 
 
@@ -6424,8 +6431,8 @@ _CMSGCLIENTOFFLINEMESSAGENOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15608,
-  serialized_end=15711,
+  serialized_start=15626,
+  serialized_end=15729,
 )
 
 
@@ -6448,8 +6455,8 @@ _CMSGCLIENTREQUESTOFFLINEMESSAGECOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15713,
-  serialized_end=15751,
+  serialized_start=15731,
+  serialized_end=15769,
 )
 
 
@@ -6479,8 +6486,8 @@ _CMSGCLIENTFSGETFRIENDMESSAGEHISTORY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15753,
-  serialized_end=15807,
+  serialized_start=15771,
+  serialized_end=15825,
 )
 
 
@@ -6531,8 +6538,8 @@ _CMSGCLIENTFSGETFRIENDMESSAGEHISTORYRESPONSE_FRIENDMESSAGE = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15969,
-  serialized_end=16055,
+  serialized_start=15987,
+  serialized_end=16073,
 )
 
 _CMSGCLIENTFSGETFRIENDMESSAGEHISTORYRESPONSE = _descriptor.Descriptor(
@@ -6575,8 +6582,8 @@ _CMSGCLIENTFSGETFRIENDMESSAGEHISTORYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15810,
-  serialized_end=16055,
+  serialized_start=15828,
+  serialized_end=16073,
 )
 
 
@@ -6599,8 +6606,8 @@ _CMSGCLIENTFSGETFRIENDMESSAGEHISTORYFOROFFLINEMESSAGES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16057,
-  serialized_end=16112,
+  serialized_start=16075,
+  serialized_end=16130,
 )
 
 
@@ -6630,8 +6637,8 @@ _CMSGCLIENTFSGETFRIENDSSTEAMLEVELS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16114,
-  serialized_end=16169,
+  serialized_start=16132,
+  serialized_end=16187,
 )
 
 
@@ -6668,8 +6675,8 @@ _CMSGCLIENTFSGETFRIENDSSTEAMLEVELSRESPONSE_FRIEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16285,
-  serialized_end=16327,
+  serialized_start=16303,
+  serialized_end=16345,
 )
 
 _CMSGCLIENTFSGETFRIENDSSTEAMLEVELSRESPONSE = _descriptor.Descriptor(
@@ -6698,8 +6705,8 @@ _CMSGCLIENTFSGETFRIENDSSTEAMLEVELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16172,
-  serialized_end=16327,
+  serialized_start=16190,
+  serialized_end=16345,
 )
 
 
@@ -6764,8 +6771,8 @@ _CMSGCLIENTEMAILADDRINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16330,
-  serialized_end=16565,
+  serialized_start=16348,
+  serialized_end=16583,
 )
 
 
@@ -6844,8 +6851,8 @@ _CMSGCREENUMERATEPUBLISHEDFILES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16568,
-  serialized_end=16751,
+  serialized_start=16586,
+  serialized_end=16769,
 )
 
 
@@ -6903,8 +6910,8 @@ _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16921,
-  serialized_end=17039,
+  serialized_start=16939,
+  serialized_end=17057,
 )
 
 _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE = _descriptor.Descriptor(
@@ -6947,8 +6954,8 @@ _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16754,
-  serialized_end=17039,
+  serialized_start=16772,
+  serialized_end=17057,
 )
 
 
@@ -7008,8 +7015,8 @@ _CMSGCREITEMVOTESUMMARY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17042,
-  serialized_end=17181,
+  serialized_start=17060,
+  serialized_end=17199,
 )
 
 
@@ -7067,8 +7074,8 @@ _CMSGCREITEMVOTESUMMARYRESPONSE_ITEMVOTESUMMARY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17316,
-  serialized_end=17434,
+  serialized_start=17334,
+  serialized_end=17452,
 )
 
 _CMSGCREITEMVOTESUMMARYRESPONSE = _descriptor.Descriptor(
@@ -7104,8 +7111,8 @@ _CMSGCREITEMVOTESUMMARYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17184,
-  serialized_end=17434,
+  serialized_start=17202,
+  serialized_end=17452,
 )
 
 
@@ -7142,8 +7149,8 @@ _CMSGCREUPDATEUSERPUBLISHEDITEMVOTE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17436,
-  serialized_end=17516,
+  serialized_start=17454,
+  serialized_end=17534,
 )
 
 
@@ -7173,8 +7180,8 @@ _CMSGCREUPDATEUSERPUBLISHEDITEMVOTERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17518,
-  serialized_end=17582,
+  serialized_start=17536,
+  serialized_end=17600,
 )
 
 
@@ -7234,8 +7241,8 @@ _CMSGCREGETUSERPUBLISHEDITEMVOTEDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17585,
-  serialized_end=17756,
+  serialized_start=17603,
+  serialized_end=17774,
 )
 
 
@@ -7272,8 +7279,8 @@ _CMSGCREGETUSERPUBLISHEDITEMVOTEDETAILSRESPONSE_USERITEMVOTEDETAIL = _descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17929,
-  serialized_end=17993,
+  serialized_start=17947,
+  serialized_end=18011,
 )
 
 _CMSGCREGETUSERPUBLISHEDITEMVOTEDETAILSRESPONSE = _descriptor.Descriptor(
@@ -7309,8 +7316,8 @@ _CMSGCREGETUSERPUBLISHEDITEMVOTEDETAILSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17759,
-  serialized_end=17993,
+  serialized_start=17777,
+  serialized_end=18011,
 )
 
 
@@ -7354,8 +7361,8 @@ _CMSGGAMESERVERPINGSAMPLE_SAMPLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18112,
-  serialized_end=18181,
+  serialized_start=18130,
+  serialized_end=18199,
 )
 
 _CMSGGAMESERVERPINGSAMPLE = _descriptor.Descriptor(
@@ -7398,8 +7405,8 @@ _CMSGGAMESERVERPINGSAMPLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17996,
-  serialized_end=18181,
+  serialized_start=18014,
+  serialized_end=18199,
 )
 
 
@@ -7429,8 +7436,8 @@ _CMSGFSGETFOLLOWERCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18183,
-  serialized_end=18225,
+  serialized_start=18201,
+  serialized_end=18243,
 )
 
 
@@ -7467,8 +7474,8 @@ _CMSGFSGETFOLLOWERCOUNTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18227,
-  serialized_end=18297,
+  serialized_start=18245,
+  serialized_end=18315,
 )
 
 
@@ -7498,8 +7505,8 @@ _CMSGFSGETISFOLLOWING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18299,
-  serialized_end=18339,
+  serialized_start=18317,
+  serialized_end=18357,
 )
 
 
@@ -7536,8 +7543,8 @@ _CMSGFSGETISFOLLOWINGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18341,
-  serialized_end=18420,
+  serialized_start=18359,
+  serialized_end=18438,
 )
 
 
@@ -7567,8 +7574,8 @@ _CMSGFSENUMERATEFOLLOWINGLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18422,
-  serialized_end=18473,
+  serialized_start=18440,
+  serialized_end=18491,
 )
 
 
@@ -7612,8 +7619,8 @@ _CMSGFSENUMERATEFOLLOWINGLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18475,
-  serialized_end=18575,
+  serialized_start=18493,
+  serialized_end=18593,
 )
 
 
@@ -7643,8 +7650,8 @@ _CMSGDPGETNUMBEROFCURRENTPLAYERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18577,
-  serialized_end=18625,
+  serialized_start=18595,
+  serialized_end=18643,
 )
 
 
@@ -7681,8 +7688,8 @@ _CMSGDPGETNUMBEROFCURRENTPLAYERSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18627,
-  serialized_end=18710,
+  serialized_start=18645,
+  serialized_end=18728,
 )
 
 
@@ -7726,8 +7733,8 @@ _CMSGCLIENTFRIENDUSERSTATUSPUBLISHED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18712,
-  serialized_end=18809,
+  serialized_start=18730,
+  serialized_end=18827,
 )
 
 
@@ -7771,8 +7778,8 @@ _CMSGCLIENTSERVICEMETHOD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18811,
-  serialized_end=18909,
+  serialized_start=18829,
+  serialized_end=18927,
 )
 
 
@@ -7809,8 +7816,8 @@ _CMSGCLIENTSERVICEMETHODRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18911,
-  serialized_end=19001,
+  serialized_start=18929,
+  serialized_end=19019,
 )
 
 
@@ -7840,8 +7847,8 @@ _CMSGCLIENTUIMODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19003,
-  serialized_end=19037,
+  serialized_start=19021,
+  serialized_end=19055,
 )
 
 
@@ -7871,8 +7878,8 @@ _CMSGCLIENTVANITYURLCHANGEDNOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19039,
-  serialized_end=19099,
+  serialized_start=19057,
+  serialized_end=19117,
 )
 
 
@@ -7909,8 +7916,8 @@ _CMSGCLIENTAUTHORIZELOCALDEVICEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19101,
-  serialized_end=19194,
+  serialized_start=19119,
+  serialized_end=19212,
 )
 
 
@@ -7954,8 +7961,8 @@ _CMSGCLIENTAUTHORIZELOCALDEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19196,
-  serialized_end=19303,
+  serialized_start=19214,
+  serialized_end=19321,
 )
 
 
@@ -7992,8 +7999,8 @@ _CMSGCLIENTDEAUTHORIZEDEVICEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19305,
-  serialized_end=19415,
+  serialized_start=19323,
+  serialized_end=19433,
 )
 
 
@@ -8030,8 +8037,8 @@ _CMSGCLIENTDEAUTHORIZEDEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19417,
-  serialized_end=19502,
+  serialized_start=19435,
+  serialized_end=19520,
 )
 
 
@@ -8068,8 +8075,8 @@ _CMSGCLIENTUSELOCALDEVICEAUTHORIZATIONS_DEVICETOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19657,
-  serialized_end=19714,
+  serialized_start=19675,
+  serialized_end=19732,
 )
 
 _CMSGCLIENTUSELOCALDEVICEAUTHORIZATIONS = _descriptor.Descriptor(
@@ -8105,8 +8112,8 @@ _CMSGCLIENTUSELOCALDEVICEAUTHORIZATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19505,
-  serialized_end=19714,
+  serialized_start=19523,
+  serialized_end=19732,
 )
 
 
@@ -8129,8 +8136,8 @@ _CMSGCLIENTGETAUTHORIZEDDEVICES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19716,
-  serialized_end=19748,
+  serialized_start=19734,
+  serialized_end=19766,
 )
 
 
@@ -8195,8 +8202,8 @@ _CMSGCLIENTGETAUTHORIZEDDEVICESRESPONSE_AUTHORIZEDDEVICE = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19899,
-  serialized_end=20052,
+  serialized_start=19917,
+  serialized_end=20070,
 )
 
 _CMSGCLIENTGETAUTHORIZEDDEVICESRESPONSE = _descriptor.Descriptor(
@@ -8232,8 +8239,8 @@ _CMSGCLIENTGETAUTHORIZEDDEVICESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19751,
-  serialized_end=20052,
+  serialized_start=19769,
+  serialized_end=20070,
 )
 
 
@@ -8256,8 +8263,8 @@ _CMSGCLIENTGETEMOTICONLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20054,
-  serialized_end=20081,
+  serialized_start=20072,
+  serialized_end=20099,
 )
 
 
@@ -8294,8 +8301,8 @@ _CMSGCLIENTEMOTICONLIST_EMOTICON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20162,
-  serialized_end=20201,
+  serialized_start=20180,
+  serialized_end=20219,
 )
 
 _CMSGCLIENTEMOTICONLIST = _descriptor.Descriptor(
@@ -8324,8 +8331,8 @@ _CMSGCLIENTEMOTICONLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20083,
-  serialized_end=20201,
+  serialized_start=20101,
+  serialized_end=20219,
 )
 
 
@@ -8362,8 +8369,8 @@ _CMSGCLIENTSHAREDLIBRARYLOCKSTATUS_LOCKEDLIBRARY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20346,
-  serialized_end=20398,
+  serialized_start=20364,
+  serialized_end=20416,
 )
 
 _CMSGCLIENTSHAREDLIBRARYLOCKSTATUS = _descriptor.Descriptor(
@@ -8399,8 +8406,8 @@ _CMSGCLIENTSHAREDLIBRARYLOCKSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20204,
-  serialized_end=20398,
+  serialized_start=20222,
+  serialized_end=20416,
 )
 
 
@@ -8437,8 +8444,8 @@ _CMSGCLIENTSHAREDLIBRARYSTOPPLAYING_STOPAPP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20525,
-  serialized_end=20568,
+  serialized_start=20543,
+  serialized_end=20586,
 )
 
 _CMSGCLIENTSHAREDLIBRARYSTOPPLAYING = _descriptor.Descriptor(
@@ -8474,8 +8481,8 @@ _CMSGCLIENTSHAREDLIBRARYSTOPPLAYING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20401,
-  serialized_end=20568,
+  serialized_start=20419,
+  serialized_end=20586,
 )
 
 
@@ -8568,8 +8575,8 @@ _CMSGCLIENTSERVICECALL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20571,
-  serialized_end=20812,
+  serialized_start=20589,
+  serialized_end=20830,
 )
 
 
@@ -8613,8 +8620,8 @@ _CMSGCLIENTSERVICEMODULE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20814,
-  serialized_end=20904,
+  serialized_start=20832,
+  serialized_end=20922,
 )
 
 
@@ -8784,8 +8791,8 @@ _CMSGCLIENTSERVICECALLRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20907,
-  serialized_end=21475,
+  serialized_start=20925,
+  serialized_end=21493,
 )
 
 
@@ -8808,8 +8815,8 @@ _CMSGAMUNLOCKSTREAMING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21477,
-  serialized_end=21500,
+  serialized_start=21495,
+  serialized_end=21518,
 )
 
 
@@ -8846,8 +8853,8 @@ _CMSGAMUNLOCKSTREAMINGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21502,
-  serialized_end=21577,
+  serialized_start=21520,
+  serialized_end=21595,
 )
 
 
@@ -8884,8 +8891,8 @@ _CMSGCLIENTPLAYINGSESSIONSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21579,
-  serialized_end=21656,
+  serialized_start=21597,
+  serialized_end=21674,
 )
 
 
@@ -8915,8 +8922,8 @@ _CMSGCLIENTKICKPLAYINGSESSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21658,
-  serialized_end=21712,
+  serialized_start=21676,
+  serialized_end=21730,
 )
 
 
@@ -8967,8 +8974,8 @@ _CMSGCLIENTCREATEACCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21714,
-  serialized_end=21812,
+  serialized_start=21732,
+  serialized_end=21830,
 )
 
 
@@ -9005,8 +9012,8 @@ _CMSGCLIENTCREATEACCOUNTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21814,
-  serialized_end=21884,
+  serialized_start=21832,
+  serialized_end=21902,
 )
 
 
@@ -9057,8 +9064,8 @@ _CMSGCLIENTVOICECALLPREAUTHORIZE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21886,
-  serialized_end=22004,
+  serialized_start=21904,
+  serialized_end=22022,
 )
 
 
@@ -9109,8 +9116,8 @@ _CMSGCLIENTVOICECALLPREAUTHORIZERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=22007,
-  serialized_end=22137,
+  serialized_start=22025,
+  serialized_end=22155,
 )
 
 _CMSGCLIENTUCMADDSCREENSHOT_TAG.containing_type = _CMSGCLIENTUCMADDSCREENSHOT

@@ -520,8 +520,9 @@ message CMsgClientEmailChangeResponse {
 }
 
 message CMsgClientGetCDNAuthToken {
-	optional uint32 app_id = 1;
+	optional uint32 depot_id = 1;
 	optional string host_name = 2;
+	optional uint32 app_id = 3;
 }
 
 message CMsgClientGetDepotDecryptionKey {
