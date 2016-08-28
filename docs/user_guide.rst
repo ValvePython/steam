@@ -195,7 +195,7 @@ Configuring logging will lets us see the internal interactions.
 
     msg, = client.wait_event(EMsg.ClientAccountInfo)
     print "Logged on as: %s" % msg.body.persona_name
-    print "SteamID: %s" % repr(client.steamid)
+    print "SteamID: %s" % repr(client.steam_id)
 
     try:
         client.run_forever()
