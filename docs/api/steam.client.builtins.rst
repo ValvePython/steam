@@ -50,3 +50,11 @@ Game Servers
     :members:
     :undoc-members:
     :show-inheritance:
+
+Friends
+-------
+
+.. automodule:: steam.client.builtins.friends
+    :members:
+    :undoc-members:
+    :show-inheritance:
