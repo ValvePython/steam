@@ -148,7 +148,7 @@ class SteamFriendlist(EventEmitter):
         When someone sends you an invite, use this method to accept it.
 
         :param steamid_or_accountname_or_email: steamid, account name, or email
-        :type steamid_or_accountname_or_email: :class:`int`, :class:`.SteamID`, :class:`SteamUser`, :class:`str`
+        :type steamid_or_accountname_or_email: :class:`int`, :class:`.SteamID`, :class:`.SteamUser`, :class:`str`
 
         .. note::
             Adding by email doesn't not work. It's only mentioned for the sake of completeness.
@@ -167,7 +167,7 @@ class SteamFriendlist(EventEmitter):
         Remove a friend
 
         :param steamid: their steamid
-        :type steamid: :class:`int`, :class:`.SteamID`, :class:`SteamUser`
+        :type steamid: :class:`int`, :class:`.SteamID`, :class:`.SteamUser`
         """
         self._steam.send(MsgProto(EMsg.ClientRemoveFriend), {'friendid': steamid})
 
