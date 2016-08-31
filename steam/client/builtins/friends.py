@@ -46,9 +46,9 @@ class SteamFriendlist(EventEmitter):
     """Result response after adding a friend
 
     :param eresult: result
-    :param type: :class:`.EResult`
+    :type eresult: :class:`.EResult`
     :param steam_id: steam id
-    :param type: :class:`.SteamID`
+    :type steam_id: :class:`.SteamID`
     """
 
     ready = False  #: indicates whether friend list is ready for use
