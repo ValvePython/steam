@@ -12,7 +12,7 @@ class Friends(object):
     def __init__(self, *args, **kwargs):
         super(Friends, self).__init__(*args, **kwargs)
 
-        #: SteamFriendlist instance
+        #: :class:`.SteamFriendlist` instance
         self.friends = SteamFriendlist(self, logger_name="%s.friends" % self.__class__.__name__)
 
 class SteamFriendlist(EventEmitter):
