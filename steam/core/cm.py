@@ -144,24 +144,7 @@ class CMClient(EventEmitter):
         return True
 
     def disconnect(self):
-        """Close connection
-
-        .. note::
-            When ``reconnect`` is ``True``, the delay before reconnect is determined
-            by exponential backoff algorithm starting from 0 seconds and up to 31 seconds
-
-        :param reconnect: attempt to reconnect
-        :type reconnect: :class:`bool`
-        :param nodelay: set to ``True`` to ignore reconnect delay
-        :type nodelay: :class:`bool`
-
-        Event: ``disconnected``
-
-        Event: ``reconnect`` instead of ``disconnected`` when going to reconnect
-
-        :param delay_seconds: seconds delay before reconnect is attempted
-        :type delay_seconds: :class:`int`
-        """
+        """Close connection"""
 
         if not self.connected:
             return
