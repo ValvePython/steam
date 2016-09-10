@@ -15,8 +15,8 @@ Key features
 * `WebAPI <http://steam.readthedocs.io/en/latest/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
 * `WebAuth <http://steam.readthedocs.io/en/latest/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
 
-Checkout the `User guide <http://steam.readthedocs.io/en/latest/steam/user_guide.html>`_ for examples,
-or the `API Reference <http://steam.readthedocs.io/en/latest/steam/api/index.html>`_ for details.
+Checkout the `User guide <http://steam.readthedocs.io/en/latest/user_guide.html>`_ for examples,
+or the `API Reference <http://steam.readthedocs.io/en/latest/api/index.html>`_ for details.
 
 For questions, issues or general curiosity visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
