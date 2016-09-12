@@ -391,6 +391,43 @@ class EChatEntryType(SteamIntEnum):
     Reserved2 = 13
     LinkBlocked = 14
 
+class ECurrencyCode(SteamIntEnum):
+    Invalid = 0
+    USD = 1
+    GBP = 2
+    EUR = 3
+    CHF = 4
+    RUB = 5
+    PLN = 6
+    BRL = 7
+    JPY = 8
+    NOK = 9
+    IDR = 10
+    MYR = 11
+    PHP = 12
+    SGD = 13
+    THB = 14
+    VND = 15
+    KRW = 16
+    TRY = 17
+    UAH = 18
+    MXN = 19
+    CAD = 20
+    AUD = 21
+    NZD = 22
+    CNY = 23
+    INR = 24
+    CLP = 25
+    PEN = 26
+    COP = 27
+    ZAR = 28
+    HKD = 29
+    TWD = 30
+    SAR = 31
+    AED = 32
+    Max = 33
+
+
 # Do not remove
 from sys import modules
 from enum import EnumMeta
