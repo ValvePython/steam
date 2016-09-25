@@ -107,6 +107,7 @@ class EResult(SteamIntEnum):
     GSOwnerDenied = 103
     InvalidItemType = 104
     IPBanned = 105
+    GSLTExpired = 106
 
 
 class EUniverse(SteamIntEnum):
