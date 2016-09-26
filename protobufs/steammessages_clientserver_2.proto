@@ -559,12 +559,14 @@ message CMsgClientUpdateAppJobReport {
 	optional string error_details = 5;
 	optional uint32 job_duration = 6;
 	optional uint32 files_validation_failed = 7;
-	optional uint64 bytes_downloaded = 8;
-	optional uint64 bytes_staged = 9;
+	optional uint64 job_bytes_downloaded = 8;
+	optional uint64 job_bytes_staged = 9;
 	optional uint64 bytes_comitted = 10;
 	optional uint32 start_app_state = 11;
 	optional fixed64 stats_machine_id = 12;
 	optional string branch_name = 13;
+	optional uint64 total_bytes_downloaded = 14;
+	optional uint64 total_bytes_staged = 15;
 }
 
 message CMsgClientDPContentStatsReport {
