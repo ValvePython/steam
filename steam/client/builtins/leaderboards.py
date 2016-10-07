@@ -63,6 +63,10 @@ class SteamLeaderboard(object):
         for entry in lb[:100]:  # top 100
             print entry
     """
+    ELeaderboardDataRequest = ELeaderboardDataRequest
+    ELeaderboardSortMethod = ELeaderboardSortMethod
+    ELeaderboardDisplayType = ELeaderboardDisplayType
+
     app_id = 0
     name = ''  #: leaderboard name
     id = 0 #: leaderboard id
