@@ -102,7 +102,7 @@ class SteamAuthenticator(object):
 
     def get_confirmation_key(self, tag='', timestamp=None):
         """
-        :param tag: see :func:`generate_confimation_key` for this value
+        :param tag: see :func:`generate_confirmation_key` for this value
         :type tag: str
         :param timestamp: time to use for code generation
         :type timestamp: int
