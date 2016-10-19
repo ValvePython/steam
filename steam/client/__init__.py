@@ -265,7 +265,8 @@ class SteamClient(CMClient, BuiltinBase):
                 (message,) = resp
 
         """
-        jobid = self.current_jobid = (self.current_jobid + 1) % 4294967295
+        jobid = self.current_jobid = ((self.current_jobid + 1) % 10000) or 1
+        self.remove_all_listeners('job_%d' % jobid)
 
         if message.proto:
             message.header.jobid_source = jobid
