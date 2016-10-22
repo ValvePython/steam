@@ -107,9 +107,9 @@ class SteamClient(CMClient, BuiltinBase):
 
     def _handle_cm_list(self, msg):
         if self._cm_servers_timestamp is None:
-            self.cm_servers.clear()
             self._cm_servers_timestamp = int(time())
 
+        self.cm_servers.clear()
         CMClient._handle_cm_list(self, msg)  # just merges the list
 
         if self.credential_location:
