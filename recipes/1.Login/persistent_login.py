@@ -1,4 +1,3 @@
-from __future__ import handle_function
 import logging
 import gevent
 from getpass import getpass
@@ -14,7 +13,7 @@ logon_details = {
     "username": raw_input("Steam user: "),
     "password": getpass("Password: "),
 }
-
+logged_on_once = False
 
 client = SteamClient()
 client.set_credential_location(".")
@@ -29,6 +28,8 @@ def send_login():
         client.relogin()
     else:
         client.login(**logon_details)
+        logon_details.pop('auth_code', None)
+        logon_details.pop('two_factor_code', None)
 
 @client.on("connected")
 def handle_connected():
@@ -42,9 +43,7 @@ def handle_reconnect(delay):
 def handle_disconnect():
     LOG.info("Disconnected.")
 
-    try:
-        client.wait_event("auth_code_required", timeout=2, raises=True)
-    except:
+    if logged_on_once:
         LOG.info("Reconnecting...")
         client.reconnect(maxdelay=30)
 
@@ -55,13 +54,18 @@ def auth_code_prompt(is_2fa, mismatch):
 
     if is_2fa:
         code = raw_input("Enter 2FA Code: ")
-        client.login(two_factor_code=code, **logon_details)
+        logon_details['two_factor_code'] = code
     else:
         code = raw_input("Enter Email Code: ")
-        client.login(auth_code=code, **logon_details)
+        logon_details['auth_code'] = code
+
+    client.connect()
 
 @client.on("logged_on")
 def handle_after_logon():
+    global logged_on_once
+    logged_on_once = True
+
     LOG.info("-"*30)
     LOG.info("Logged on as: %s", client.user.name)
     LOG.info("Community profile: %s", client.steam_id.community_url)
