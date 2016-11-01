@@ -80,5 +80,6 @@ try:
     client.run_forever()
 except KeyboardInterrupt:
     if client.connected:
+        logged_on_once = False
         LOG.info("Logout")
         client.logout()
