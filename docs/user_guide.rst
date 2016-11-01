@@ -257,13 +257,17 @@ Example demonstrating how to use protobuf to send chat messages, and how to rece
 
     def on_chat_message(msg):
         if msg.body.chat_entry_type == EChatEntryType.Typing:
-             print("%s started typing a message to me",
-                         get_name_from_steamid(msg.body.steamid_from))
+             print("{} started typing a message to me".format(
+                         get_name_from_steamid(msg.body.steamid_from)
+                         )
+             )
 
          if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
-             print("Message from %s: %s",
+             print("Message from {}: {}".format(
                          get_name_from_steamid(msg.body.steamid_from),
-                         msg.body.message)
+                         msg.body.message
+                         )
+             )
 
     def get_name_from_steamid(self, steamid):
         suser = self.client.get_user(steamid, False)
