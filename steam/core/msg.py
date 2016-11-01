@@ -202,6 +202,9 @@ cmsg_lookup_predefined = {
     EMsg.ClientFromGC: steammessages_clientserver_2_pb2.CMsgGCClient,
     EMsg.ServiceMethod: steammessages_clientserver_2_pb2.CMsgClientServiceMethod,
     EMsg.ServiceMethodResponse: steammessages_clientserver_2_pb2.CMsgClientServiceMethodResponse,
+    EMsg.ClientGetNumberOfCurrentPlayersDP: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayers,
+    EMsg.ClientGetNumberOfCurrentPlayersDPResponse: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayersResponse,
+
 }
 
 def get_cmsg(emsg):
