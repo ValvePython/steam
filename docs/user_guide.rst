@@ -238,6 +238,47 @@ Alternatively, a callback can be registered to handle the response event every t
     client.on(EMsg.ClientAddFriendResponse, handle_add_response)
 
 
+Sending and receiving chat messages
+-----------------------------------
+
+Example demonstrating how to use protobuf to send chat messages, and how to receive them.
+
+.. code:: python
+
+    import time
+
+    from steam.core.msg import MsgProt
+    from steam.enums import EChatEntryType
+    from steam.enums.emsg import EMsg
+
+    # We're assuming that client is a valid, logged in client instance
+
+    client.on(EMsg.ClientFriendMsgIncoming, on_chat_message)
+
+    def on_chat_message(msg):
+        if msg.body.chat_entry_type == EChatEntryType.Typing:
+             print("%s started typing a message to me",
+                         get_name_from_steamid(msg.body.steamid_from))
+
+         if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
+             print("Message from %s: %s",
+                         get_name_from_steamid(msg.body.steamid_from),
+                         msg.body.message)
+
+    def get_name_from_steamid(self, steamid):
+        suser = self.client.get_user(steamid, False)
+        return suser.name
+
+    def send_msg(steamid, msg):
+        sendmsg = MsgProto(EMsg.ClientFriendMsg)
+        sendmsg.body.steamid = steamid
+        sendmsg.body.chat_entry_type = 1
+        sendmsg.body.message = msg
+        sendmsg.body.rtime32_server_timestamp = int(time.time())
+
+        client.send(sendmsg)
+
+
 Web Authentication
 ==================
 
