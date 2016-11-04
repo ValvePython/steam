@@ -141,6 +141,8 @@ class Msg(object):
             self.body = ChannelEncryptResult(data)
         elif msg == EMsg.ClientLogOnResponse:
             self.body = ClientLogOnResponse(data)
+        elif msg == EMsg.ClientChatMsg:
+            self.body = ClientChatMsg(data)
         else:
             self.body = None
 
@@ -202,9 +204,6 @@ cmsg_lookup_predefined = {
     EMsg.ClientFromGC: steammessages_clientserver_2_pb2.CMsgGCClient,
     EMsg.ServiceMethod: steammessages_clientserver_2_pb2.CMsgClientServiceMethod,
     EMsg.ServiceMethodResponse: steammessages_clientserver_2_pb2.CMsgClientServiceMethodResponse,
-    EMsg.ClientGetNumberOfCurrentPlayersDP: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayers,
-    EMsg.ClientGetNumberOfCurrentPlayersDPResponse: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayersResponse,
-
 }
 
 def get_cmsg(emsg):
@@ -377,7 +376,6 @@ class ChannelEncryptResponse:
                           "crc: %s" % self.crc,
                           ])
 
-
 class ChannelEncryptResult:
     eresult = EResult.Invalid
 
@@ -412,6 +410,37 @@ class ClientLogOnResponse:
     def __str__(self):
         return "eresult: %s" % repr(self.eresult)
 
+class ClientChatMsg:
+    steamIdChatter = 0
+    steamIdChatRoom = 0
+    ChatMsgType = 0
+    ChatMsg = ""
+
+    def __init__(self, data=None):
+        if data:
+            self.load(data)
+
+    def serialize(self):
+        return struct.pack("QQI{}s".format(len(self.ChatMsg)),
+                           self.steamIdChatter,
+                           self.steamIdChatRoom,
+                           self.ChatMsgType,
+                           self.ChatMsg
+                       )
+
+    def load(self, data):
+        (self.steamIdChatter,
+         self.steamIdChatRoom,
+         self.ChatMsgType,
+         self.ChatMsg
+         ) = struct.unpack_from("<QQI{}s".format(len(data) - struct.calcsize("QQI")), data)
+
+    def __str__(self):
+        return '\n'.join(["steamIdChatter: %d" % self.steamIdChatter,
+                          "steamIdChatRoom: %d" % self.steamIdChatRoom,
+                          "ChatMsgType: %d" % self.ChatMsgType,
+                          "ChatMsg: %s" % self.ChatMsg,
+                          ])
 
 class GCMsgHdr:
     _size = struct.calcsize("<Hqq")
