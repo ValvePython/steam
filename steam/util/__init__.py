@@ -71,7 +71,7 @@ def proto_to_dict(message):
             else:
                 data[desc.name] = proto_to_dict(field)
         else:
-            data[desc.name] = field
+            data[desc.name] = list(field) if desc.label == desc.LABEL_REPEATED else field
 
     return data
 
