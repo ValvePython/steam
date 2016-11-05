@@ -422,32 +422,40 @@ class ClientChatMsg:
     steamIdChatter = 0
     steamIdChatRoom = 0
     ChatMsgType = 0
-    ChatMsg = ""
+    text = ""
 
     def __init__(self, data=None):
         if data:
             self.load(data)
 
     def serialize(self):
-        return struct.pack("QQI{}s".format(len(self.ChatMsg)),
-                           self.steamIdChatter,
-                           self.steamIdChatRoom,
-                           self.ChatMsgType,
-                           self.ChatMsg
-                       )
+        rbytes = struct.pack("<QQI",
+                             self.steamIdChatter,
+                             self.steamIdChatRoom,
+                             self.ChatMsgType,
+                            )
+        # utf-8 encode only when unicode in py2 and str in py3
+        rbytes += (self.text.encode('utf-8')
+                   if (not isinstance(self.text, str) and bytes is str)
+                      or isinstance(self.text, str)
+                   else self.text
+                  ) + b'\x00'
+
+        return rbytes
 
     def load(self, data):
         (self.steamIdChatter,
          self.steamIdChatRoom,
          self.ChatMsgType,
-         self.ChatMsg
-         ) = struct.unpack_from("<QQI{}s".format(len(data) - struct.calcsize("QQI")), data)
+         ) = struct.unpack_from("<QQI", data)
+
+        self.text = data[struct.calcsize("<QQI"):-1].decode('utf-8')
 
     def __str__(self):
         return '\n'.join(["steamIdChatter: %d" % self.steamIdChatter,
                           "steamIdChatRoom: %d" % self.steamIdChatRoom,
                           "ChatMsgType: %d" % self.ChatMsgType,
-                          "ChatMsg: %s" % self.ChatMsg,
+                          "text: %s" % repr(self.text),
                           ])
 
 class ClientJoinChat:
