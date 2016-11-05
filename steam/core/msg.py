@@ -141,6 +141,12 @@ class Msg(object):
             self.body = ChannelEncryptResult(data)
         elif msg == EMsg.ClientLogOnResponse:
             self.body = ClientLogOnResponse(data)
+        elif msg == EMsg.ClientChatMsg:
+            self.body = ClientChatMsg(data)
+        elif msg == EMsg.ClientJoinChat:
+            self.body = ClientJoinChat(data)
+        elif msg == EMsg.ClientChatMemberInfo:
+            self.body = ClientChatMemberInfo(data)
         else:
             self.body = None
 
@@ -412,6 +418,96 @@ class ClientLogOnResponse:
     def __str__(self):
         return "eresult: %s" % repr(self.eresult)
 
+class ClientChatMsg:
+    steamIdChatter = 0
+    steamIdChatRoom = 0
+    ChatMsgType = 0
+    ChatMsg = ""
+
+    def __init__(self, data=None):
+        if data:
+            self.load(data)
+
+    def serialize(self):
+        return struct.pack("QQI{}s".format(len(self.ChatMsg)),
+                           self.steamIdChatter,
+                           self.steamIdChatRoom,
+                           self.ChatMsgType,
+                           self.ChatMsg
+                       )
+
+    def load(self, data):
+        (self.steamIdChatter,
+         self.steamIdChatRoom,
+         self.ChatMsgType,
+         self.ChatMsg
+         ) = struct.unpack_from("<QQI{}s".format(len(data) - struct.calcsize("QQI")), data)
+
+    def __str__(self):
+        return '\n'.join(["steamIdChatter: %d" % self.steamIdChatter,
+                          "steamIdChatRoom: %d" % self.steamIdChatRoom,
+                          "ChatMsgType: %d" % self.ChatMsgType,
+                          "ChatMsg: %s" % self.ChatMsg,
+                          ])
+
+class ClientJoinChat:
+    steamIdChat = 0
+    isVoiceSpeaker = False
+
+    def __init__(self, data=None):
+        if data: self.load(data)
+
+    def serialize(self):
+        return struct.pack("<Q?",
+                           self.steamIdChat,
+                           self.isVoiceSpeaker
+        )
+
+    def load(self, data):
+        (self.steamIdChat,
+         self.isVoiceSpeaker
+        ) = struct.unpack_from("<Q?", data)
+
+    def __str__(self):
+        return '\n'.join(["steamIdChat: %d" % self.steamIdChat,
+                          "isVoiceSpeaker: %r" % self.isVoiceSpeaker,
+                          ])
+
+class ClientChatMemberInfo:
+    steamIdChat = 0
+    type = 0
+    steamIdUserActedOn = 0
+    chatAction = 0
+    steamIdUserActedBy = 0
+
+    def __init__(self, data=None):
+        if data:
+            self.load(data)
+
+    def serialize(self):
+        return struct.pack("<QIQIQ",
+                           self.steamIdChat,
+                           self.type,
+                           self.steamIdUserActedOn,
+                           self.chatAction,
+                           self.steamIdUserActedBy
+        )
+
+    def load(self, data):
+        (self.steamIdChat,
+         self.type,
+         self.steamIdUserActedOn,
+         self.chatAction,
+         self.steamIdUserActedBy
+        ) = struct.unpack_from("<QIQIQ", data)
+
+    def __str__(self):
+        return '\n'.join(["steamIdChat: %d" % self.steamIdChat,
+                          "type: %r" % self.type,
+                          "steamIdUserActedOn: %d" % self.steamIdUserActedOn,
+                          "chatAction: %d" % self.chatAction,
+                          "steamIdUserActedBy: %d" % self.steamIdUserActedBy
+                          ])
 
 class GCMsgHdr:
     _size = struct.calcsize("<Hqq")
