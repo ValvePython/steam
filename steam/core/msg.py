@@ -143,6 +143,8 @@ class Msg(object):
             self.body = ClientLogOnResponse(data)
         elif msg == EMsg.ClientChatMsg:
             self.body = ClientChatMsg(data)
+        elif msg == EMsg.ClientJoinChat:
+            self.body = ClientJoinChat(data)
         else:
             self.body = None
 
@@ -444,6 +446,29 @@ class ClientChatMsg:
                           "steamIdChatRoom: %d" % self.steamIdChatRoom,
                           "ChatMsgType: %d" % self.ChatMsgType,
                           "ChatMsg: %s" % self.ChatMsg,
+                          ])
+
+class ClientJoinChat:
+    steamIdChat = 0
+    isVoiceSpeaker = False
+
+    def __init__(self, data=None):
+        if data: self.load(data)
+
+    def serialize(self):
+        return struct.pack("<Q?",
+                           self.steamIdChat,
+                           self.isVoiceSpeaker
+        )
+
+    def load(self, data):
+        (self.steamIdChat,
+         self.isVoiceSpeaker
+        ) = struct.unpack_from("<Q?", data)
+
+    def __str__(self):
+        return '\n'.join(["steamIdChat: %d" % self.steamIdChat,
+                          "isVoiceSpeaker: %r" % self.isVoiceSpeaker,
                           ])
 
 class GCMsgHdr:
