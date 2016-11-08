@@ -3,6 +3,14 @@ builtins
 
 .. automodule:: steam.client.builtins
 
+Apps
+----
+
+.. automodule:: steam.client.builtins.apps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 User
 ----
 
