@@ -19,14 +19,6 @@ Web
     :undoc-members:
     :show-inheritance:
 
-Misc
-----
-
-.. automodule:: steam.client.builtins.misc
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Unified Messages
 ----------------
 

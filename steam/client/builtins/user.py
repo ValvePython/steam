@@ -17,6 +17,7 @@ class User(object):
 
     persona_state = EPersonaState.Online    #: current persona state
     user = None                             #: :class:`.SteamUser` instance once logged on
+    current_games_played = []               #: :class:`list` of app ids currently being played
 
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
@@ -105,3 +106,23 @@ class User(object):
                 self.request_persona_state([steam_id])
 
         return suser
+
+    def games_played(self, app_ids):
+        """
+        Set the apps being played by the user
+
+        :param app_ids: a list of application ids
+        :type app_ids: :class:`list`
+
+        These app ids will be recorded in :attr:`current_games_played`.
+        """
+        if not isinstance(app_ids, list):
+            raise ValueError("Expected app_ids to be of type list")
+
+        self.current_games_played = app_ids = map(int, app_ids)
+
+        self.send(MsgProto(EMsg.ClientGamesPlayed),
+                  {
+                   'games_played': map(lambda app_id: {'game_id': app_id}, app_ids)
+                  }
+                 )
