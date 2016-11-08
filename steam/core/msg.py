@@ -141,6 +141,8 @@ class Msg(object):
             self.body = ChannelEncryptResult(data)
         elif msg == EMsg.ClientLogOnResponse:
             self.body = ClientLogOnResponse(data)
+        elif msg == EMsg.ClientVACBanStatus:
+            self.body = ClientVACBanStatus(data)
         elif msg == EMsg.ClientChatMsg:
             self.body = ClientChatMsg(data)
         elif msg == EMsg.ClientJoinChat:
@@ -417,6 +419,22 @@ class ClientLogOnResponse:
 
     def __str__(self):
         return "eresult: %s" % repr(self.eresult)
+
+class ClientVACBanStatus:
+    numBans = 0
+
+    def __init__(self, data=None):
+        if data: self.load(data)
+
+    def serialize(self):
+        return struct.pack("<L", self.steamIdChat)
+
+    def load(self, data):
+        self.steamIdChat, = struct.unpack_from("<L", data)
+
+    def __str__(self):
+        return '\n'.join(["numBans: %d" % self.numBans,
+                          ])
 
 class ClientChatMsg:
     steamIdChatter = 0
