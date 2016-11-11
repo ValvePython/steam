@@ -180,3 +180,44 @@ class Apps(object):
                     'packages': dict(map(lambda pkg: (pkg.appid, pkg.access_token), resp.package_access_tokens)),
                    }
 
+    def register_product_key(self, key):
+        """Register/Redeem a CD-Key
+
+        :param key: CD-Key
+        :type  key: :class:`str`
+        :return: format ``(eresult, result_details, receipt_info)``
+        :rtype: :class:`tuple`, :class:`None`
+
+        Example ``receipt_info``:
+
+        .. code:: python
+
+            {'MessageObject': {'BasePrice': 0,
+              'CurrencyCode': 0,
+              'ErrorHeadline': '',
+              'ErrorLinkText': '',
+              'ErrorLinkURL': '',
+              'ErrorString': '',
+              'LineItemCount': 1,
+              'PaymentMethod': 1,
+              'PurchaseStatus': 1,
+              'ResultDetail': 0,
+              'Shipping': 0,
+              'Tax': 0,
+              'TotalDiscount': 0,
+              'TransactionID': UINT_64(111111111111111111),
+              'TransactionTime': 1473000000,
+              'lineitems': {'0': {'ItemDescription': 'Half-Life 3',
+                'TransactionID': UINT_64(11111111111111111),
+                'packageid': 1234}},
+              'packageid': -1}}
+        """
+        resp = self.send_job_and_wait(MsgProto(EMsg.ClientRegisterKey),
+                                      {'key': key},
+                                      timeout=20
+                                     )
+
+        if resp:
+            details = vdf.binary_loads(resp.purchase_receipt_info)
+
+            return EResult(resp.eresult), resp.purchase_result_details, details
