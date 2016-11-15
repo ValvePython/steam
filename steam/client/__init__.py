@@ -223,6 +223,23 @@ class SteamClient(CMClient, BuiltinBase):
 
         return self.connect(delay=delay_seconds, retry=retry)
 
+    def wait_msg(self, event, timeout=None, raises=None):
+        """Wait for a message, similiar to :meth:`.wait_event`
+
+        :param event: :class:`.EMsg' or job id
+        :param timeout: seconds to wait before timeout
+        :type timeout: :class:`int`
+        :param raises: On timeout when ``False` returns :class:`None`, else raise :class:`gevent.Timeout`
+        :type raises: :class:`bool`
+        :return: returns a message or :class:`None`
+        :rtype: :class:`None`, or `proto message`
+        :raises: ``gevent.Timeout``
+        """
+        resp = self.wait_event(event, timeout, raises)
+
+        if resp is not None:
+            return resp[0]
+
     def send(self, message, body_params=None):
         """.. versionchanged:: 0.8.4
         Send a message to CM
