@@ -116,17 +116,46 @@ class ClientLogOnResponse(StructMessage):
         return "eresult: %s" % repr(self.eresult)
 
 class ClientVACBanStatus(StructMessage):
-    numBans = 0
+    class VACBanRange(object):
+        start = 0
+        end = 0
 
-    def serialize(self):
-        return struct.pack("<L", self.steamIdChat)
+        def __str__(self):
+            return '\n'.join(["{",
+                              "start: %s" % self.start,
+                              "end: %d" % self.end,
+                              "}",
+                              ])
+
+    @property
+    def numBans(self):
+        return len(self.ranges)
+
+    def __init__(self, data):
+        self.ranges = list()
+        StructMessage.__init__(self, data)
 
     def load(self, data):
-        self.steamIdChat, = struct.unpack_from("<L", data)
+        numBans, = struct.unpack_from("<I", data)
+        offset = 4
+
+        for _ in six.moves.range(numBans):
+            m = self.VACBanRange()
+            m.start, m.end, _ = struct.unpack_from("<III", data, offset)
+            self.ranges.append(m)
+
+            if m.start > m.end:
+                m.start, m.end = m.end, m.start
+
+            offset += 4 + 4 + 4
 
     def __str__(self):
-        return '\n'.join(["numBans: %d" % self.numBans,
-                          ])
+        text =  ["numBans: %d" % self.numBans]
+
+        for m in self.ranges:  # emulate Protobuf text format
+            text.append("ranges " + str(m).replace("\n", "\n    ", 2))
+
+        return '\n'.join(text)
 
 class ClientChatMsg(StructMessage):
     steamIdChatter = 0
@@ -236,13 +265,15 @@ class ClientMarketingMessageUpdate2(StructMessage):
     def count(self):
         return len(self.messages)
 
-    messages = list()
+    def __init__(self, data):
+        self.messages = list()
+        StructMessage.__init__(self, data)
 
     def load(self, data):
-        (self.time, count), self.messages = struct.unpack_from("<II", data), list()
+        self.time, count = struct.unpack_from("<II", data)
         offset = 4 + 4
 
-        while offset < len(data):
+        for _ in six.moves.range(count):
             length, = struct.unpack_from("<I", data, offset)
             url_length = length-4-8-4
             offset += 4
