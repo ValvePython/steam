@@ -10,7 +10,7 @@ def get_struct(emsg):
     return _emsg_map.get(emsg, None)
 
 class StructMessageMeta(type):
-    """Automatically maps subclasses of :class:`StructMessage` to ``EMsg``"""
+    """Automatically adds subclasses of :class:`StructMessage` to the ``EMsg`` map"""
 
     def __new__(metacls, name, bases, classdict):
         cls = type.__new__(metacls, name, bases, classdict)
@@ -64,10 +64,6 @@ class ChannelEncryptResponse(StructMessage):
     key = ''
     crc = 0
 
-    def __init__(self, data=None):
-        if data:
-            self.load(data)
-
     def serialize(self):
         return struct.pack("<II128sII",
                            self.protocolVersion,
@@ -95,10 +91,6 @@ class ChannelEncryptResponse(StructMessage):
 class ChannelEncryptResult(StructMessage):
     eresult = EResult.Invalid
 
-    def __init__(self, data=None):
-        if data:
-            self.load(data)
-
     def serialize(self):
         return struct.pack("<I", self.eresult)
 
@@ -112,10 +104,6 @@ class ChannelEncryptResult(StructMessage):
 class ClientLogOnResponse(StructMessage):
     eresult = EResult.Invalid
 
-    def __init__(self, data=None):
-        if data:
-            self.load(data)
-
     def serialize(self):
         return struct.pack("<I", self.eresult)
 
@@ -128,9 +116,6 @@ class ClientLogOnResponse(StructMessage):
 
 class ClientVACBanStatus(StructMessage):
     numBans = 0
-
-    def __init__(self, data=None):
-        if data: self.load(data)
 
     def serialize(self):
         return struct.pack("<L", self.steamIdChat)
@@ -147,10 +132,6 @@ class ClientChatMsg(StructMessage):
     steamIdChatRoom = 0
     ChatMsgType = 0
     text = ""
-
-    def __init__(self, data=None):
-        if data:
-            self.load(data)
 
     def serialize(self):
         rbytes = struct.pack("<QQI",
@@ -186,9 +167,6 @@ class ClientJoinChat(StructMessage):
     steamIdChat = 0
     isVoiceSpeaker = False
 
-    def __init__(self, data=None):
-        if data: self.load(data)
-
     def serialize(self):
         return struct.pack("<Q?",
                            self.steamIdChat,
@@ -211,10 +189,6 @@ class ClientChatMemberInfo(StructMessage):
     steamIdUserActedOn = 0
     chatAction = 0
     steamIdUserActedBy = 0
-
-    def __init__(self, data=None):
-        if data:
-            self.load(data)
 
     def serialize(self):
         return struct.pack("<QIQIQ",
