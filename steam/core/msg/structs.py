@@ -29,10 +29,11 @@ class StructMessage:
         if data: self.load(data)
 
     def serialize(self):
-        return b''
+        raise NotImplementedError
 
     def load(self, data):
-        pass
+        raise NotImplementedError
+
 
 class ChannelEncryptRequest(StructMessage):
     protocolVersion = 1
