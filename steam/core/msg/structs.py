@@ -100,7 +100,7 @@ class ChannelEncryptResult(StructMessage):
         self.eresult = EResult(result)
 
     def __str__(self):
-        return "result: %s" % repr(self.eresult)
+        return "eresult: %s" % repr(self.eresult)
 
 class ClientLogOnResponse(StructMessage):
     eresult = EResult.Invalid
