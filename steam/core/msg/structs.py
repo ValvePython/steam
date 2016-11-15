@@ -215,3 +215,52 @@ class ClientChatMemberInfo(StructMessage):
                           "chatAction: %d" % self.chatAction,
                           "steamIdUserActedBy: %d" % self.steamIdUserActedBy
                           ])
+
+class ClientMarketingMessageUpdate2(StructMessage):
+    class MarketingMessage(object):
+        id = 0
+        url = ''
+        flags = 0
+
+        def __str__(self):
+            return '\n'.join(["{",
+                              "id: %s" % self.id,
+                              "url: %s" % self.url,
+                              "flags: %d" % self.flags,
+                              "}",
+                              ])
+
+    time = 0
+
+    @property
+    def count(self):
+        return len(self.messages)
+
+    messages = list()
+
+    def load(self, data):
+        (self.time, count), self.messages = struct.unpack_from("<II", data), list()
+        offset = 4 + 4
+
+        while offset < len(data):
+            length, = struct.unpack_from("<I", data, offset)
+            url_length = length-4-8-4
+            offset += 4
+
+            m = self.MarketingMessage()
+            m.id, m.url, _, m.flags = struct.unpack_from("<Q%dssI" % (url_length - 1), data, offset)
+            self.messages.append(m)
+
+            offset += 8 + url_length + 4
+
+    def __str__(self):
+        text = ["time: %s" % self.time,
+                "count: %d" % self.count,
+                ]
+
+        for m in self.messages:  # emulate Protobuf text format
+            text.append("messages " + str(m).replace("\n", "\n    ", 3))
+
+        return '\n'.join(text)
+
+
