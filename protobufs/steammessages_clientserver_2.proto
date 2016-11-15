@@ -1066,12 +1066,19 @@ message CMsgClientVanityURLChangedNotification {
 message CMsgClientAuthorizeLocalDeviceRequest {
 	optional string device_description = 1;
 	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
 }
 
 message CMsgClientAuthorizeLocalDevice {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 owner_account_id = 2;
 	optional uint64 authed_device_token = 3;
+}
+
+message CMsgClientAuthorizeLocalDeviceNotification {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
 }
 
 message CMsgClientDeauthorizeDeviceRequest {

@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_physicalgoods.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n!steammessages_physicalgoods.proto\x1a steammessages_unified_base.proto\"`\n.CPhysicalGoods_RegisterSteamController_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\"1\n/CPhysicalGoods_RegisterSteamController_Response\"l\n:CPhysicalGoods_CompleteSteamControllerRegistration_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\"=\n;CPhysicalGoods_CompleteSteamControllerRegistration_Response\"h\n6CPhysicalGoods_QueryAccountsRegisteredToSerial_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\"k\n7CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x1d\n\x15registration_complete\x18\x02 \x01(\x08\"\x85\x01\n7CPhysicalGoods_QueryAccountsRegisteredToSerial_Response\x12J\n\x08\x61\x63\x63ounts\x18\x01 \x03(\x0b\x32\x38.CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts\"~\n8CPhysicalGoods_SteamControllerSetConfig_ControllerConfig\x12\x13\n\x0b\x61ppidorname\x18\x01 \x01(\t\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x14\n\x0ctemplatename\x18\x03 \x01(\t\"\xc7\x01\n/CPhysicalGoods_SteamControllerSetConfig_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\x12\x11\n\taccountid\x18\x03 \x01(\r\x12Q\n\x0e\x63onfigurations\x18\x04 \x03(\x0b\x32\x39.CPhysicalGoods_SteamControllerSetConfig_ControllerConfig\"2\n0CPhysicalGoods_SteamControllerSetConfig_Response\"\x89\x01\n/CPhysicalGoods_SteamControllerGetConfig_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\x12\x11\n\taccountid\x18\x03 \x01(\r\x12\x13\n\x0b\x61ppidorname\x18\x04 \x01(\t\"~\n8CPhysicalGoods_SteamControllerGetConfig_ControllerConfig\x12\x13\n\x0b\x61ppidorname\x18\x01 \x01(\t\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x14\n\x0ctemplatename\x18\x03 \x01(\t\"\x85\x01\n0CPhysicalGoods_SteamControllerGetConfig_Response\x12Q\n\x0e\x63onfigurations\x18\x01 \x03(\x0b\x32\x39.CPhysicalGoods_SteamControllerGetConfig_ControllerConfig\"u\n0CPhysicalGoods_DeRegisterSteamController_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\x12\x11\n\taccountid\x18\x03 \x01(\r\"3\n1CPhysicalGoods_DeRegisterSteamController_Response\"r\n-CPhysicalGoods_SetPersonalizationFile_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x11\n\taccountid\x18\x03 \x01(\r\"0\n.CPhysicalGoods_SetPersonalizationFile_Response\"Y\n-CPhysicalGoods_GetPersonalizationFile_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x11\n\taccountid\x18\x02 \x01(\r\"I\n.CPhysicalGoods_GetPersonalizationFile_Response\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x32\xd7\x0c\n\rPhysicalGoods\x12\xd4\x01\n\x17RegisterSteamController\x12/.CPhysicalGoods_RegisterSteamController_Request\x1a\x30.CPhysicalGoods_RegisterSteamController_Response\"V\x82\xb5\x18RRecords a serial number and the calling user\'s account info for warranty purposes.\x12\xd3\x01\n#CompleteSteamControllerRegistration\x12;.CPhysicalGoods_CompleteSteamControllerRegistration_Request\x1a<.CPhysicalGoods_CompleteSteamControllerRegistration_Response\"1\x82\xb5\x18-Marks a controller\'s registration as complete\x12\xd7\x01\n#QueryAccountsRegisteredToController\x12\x37.CPhysicalGoods_QueryAccountsRegisteredToSerial_Request\x1a\x38.CPhysicalGoods_QueryAccountsRegisteredToSerial_Response\"=\x82\xb5\x18\x39Sends back a list of accounts registered to a controller.\x12\xb8\x01\n SetDesiredControllerConfigForApp\x12\x30.CPhysicalGoods_SteamControllerSetConfig_Request\x1a\x31.CPhysicalGoods_SteamControllerSetConfig_Response\"/\x82\xb5\x18+Sets a desired controller config for an app\x12\xb8\x01\n GetDesiredControllerConfigForApp\x12\x30.CPhysicalGoods_SteamControllerGetConfig_Request\x1a\x31.CPhysicalGoods_SteamControllerGetConfig_Response\"/\x82\xb5\x18+Gets a desired controller config for an app\x12\xa1\x01\n\x19\x44\x65RegisterSteamController\x12\x31.CPhysicalGoods_DeRegisterSteamController_Request\x1a\x32.CPhysicalGoods_DeRegisterSteamController_Response\"\x1d\x82\xb5\x18\x19\x44\x65 registers a controller\x12\xb7\x01\n SetControllerPersonalizationFile\x12..CPhysicalGoods_SetPersonalizationFile_Request\x1a/.CPhysicalGoods_SetPersonalizationFile_Response\"2\x82\xb5\x18.Stores the file ID of the personalization file\x12\xb5\x01\n GetControllerPersonalizationFile\x12..CPhysicalGoods_GetPersonalizationFile_Request\x1a/.CPhysicalGoods_GetPersonalizationFile_Response\"0\x82\xb5\x18,Gets the file ID of the personalization file\x1a\x33\x82\xb5\x18/A service to use physical goods related methodsB\x03\x90\x01\x01')
+  serialized_pb=_b('\n!steammessages_physicalgoods.proto\x1a steammessages_unified_base.proto\"`\n.CPhysicalGoods_RegisterSteamController_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\"1\n/CPhysicalGoods_RegisterSteamController_Response\"l\n:CPhysicalGoods_CompleteSteamControllerRegistration_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\"=\n;CPhysicalGoods_CompleteSteamControllerRegistration_Response\"h\n6CPhysicalGoods_QueryAccountsRegisteredToSerial_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\"k\n7CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x1d\n\x15registration_complete\x18\x02 \x01(\x08\"\x85\x01\n7CPhysicalGoods_QueryAccountsRegisteredToSerial_Response\x12J\n\x08\x61\x63\x63ounts\x18\x01 \x03(\x0b\x32\x38.CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts\"~\n8CPhysicalGoods_SteamControllerSetConfig_ControllerConfig\x12\x13\n\x0b\x61ppidorname\x18\x01 \x01(\t\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x14\n\x0ctemplatename\x18\x03 \x01(\t\"\x88\x02\n/CPhysicalGoods_SteamControllerSetConfig_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\x12\x11\n\taccountid\x18\x03 \x01(\r\x12Q\n\x0e\x63onfigurations\x18\x04 \x03(\x0b\x32\x39.CPhysicalGoods_SteamControllerSetConfig_ControllerConfig\x12\x1a\n\x0f\x63ontroller_type\x18\x05 \x01(\x05:\x01\x32\x12#\n\x14only_for_this_serial\x18\x06 \x01(\x08:\x05\x66\x61lse\"2\n0CPhysicalGoods_SteamControllerSetConfig_Response\"\xca\x01\n/CPhysicalGoods_SteamControllerGetConfig_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\x12\x11\n\taccountid\x18\x03 \x01(\r\x12\x13\n\x0b\x61ppidorname\x18\x04 \x01(\t\x12\x1a\n\x0f\x63ontroller_type\x18\x05 \x01(\x05:\x01\x32\x12#\n\x14only_for_this_serial\x18\x06 \x01(\x08:\x05\x66\x61lse\"\x95\x01\n8CPhysicalGoods_SteamControllerGetConfig_ControllerConfig\x12\x13\n\x0b\x61ppidorname\x18\x01 \x01(\t\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x14\n\x0ctemplatename\x18\x03 \x01(\t\x12\x15\n\rserial_number\x18\x04 \x01(\t\"\x85\x01\n0CPhysicalGoods_SteamControllerGetConfig_Response\x12Q\n\x0e\x63onfigurations\x18\x01 \x03(\x0b\x32\x39.CPhysicalGoods_SteamControllerGetConfig_ControllerConfig\"u\n0CPhysicalGoods_DeRegisterSteamController_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0f\x63ontroller_code\x18\x02 \x01(\t\x12\x11\n\taccountid\x18\x03 \x01(\r\"3\n1CPhysicalGoods_DeRegisterSteamController_Response\"r\n-CPhysicalGoods_SetPersonalizationFile_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x11\n\taccountid\x18\x03 \x01(\r\"0\n.CPhysicalGoods_SetPersonalizationFile_Response\"Y\n-CPhysicalGoods_GetPersonalizationFile_Request\x12\x15\n\rserial_number\x18\x01 \x01(\t\x12\x11\n\taccountid\x18\x02 \x01(\r\"I\n.CPhysicalGoods_GetPersonalizationFile_Response\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x32\xd7\x0c\n\rPhysicalGoods\x12\xd4\x01\n\x17RegisterSteamController\x12/.CPhysicalGoods_RegisterSteamController_Request\x1a\x30.CPhysicalGoods_RegisterSteamController_Response\"V\x82\xb5\x18RRecords a serial number and the calling user\'s account info for warranty purposes.\x12\xd3\x01\n#CompleteSteamControllerRegistration\x12;.CPhysicalGoods_CompleteSteamControllerRegistration_Request\x1a<.CPhysicalGoods_CompleteSteamControllerRegistration_Response\"1\x82\xb5\x18-Marks a controller\'s registration as complete\x12\xd7\x01\n#QueryAccountsRegisteredToController\x12\x37.CPhysicalGoods_QueryAccountsRegisteredToSerial_Request\x1a\x38.CPhysicalGoods_QueryAccountsRegisteredToSerial_Response\"=\x82\xb5\x18\x39Sends back a list of accounts registered to a controller.\x12\xb8\x01\n SetDesiredControllerConfigForApp\x12\x30.CPhysicalGoods_SteamControllerSetConfig_Request\x1a\x31.CPhysicalGoods_SteamControllerSetConfig_Response\"/\x82\xb5\x18+Sets a desired controller config for an app\x12\xb8\x01\n GetDesiredControllerConfigForApp\x12\x30.CPhysicalGoods_SteamControllerGetConfig_Request\x1a\x31.CPhysicalGoods_SteamControllerGetConfig_Response\"/\x82\xb5\x18+Gets a desired controller config for an app\x12\xa1\x01\n\x19\x44\x65RegisterSteamController\x12\x31.CPhysicalGoods_DeRegisterSteamController_Request\x1a\x32.CPhysicalGoods_DeRegisterSteamController_Response\"\x1d\x82\xb5\x18\x19\x44\x65 registers a controller\x12\xb7\x01\n SetControllerPersonalizationFile\x12..CPhysicalGoods_SetPersonalizationFile_Request\x1a/.CPhysicalGoods_SetPersonalizationFile_Response\"2\x82\xb5\x18.Stores the file ID of the personalization file\x12\xb5\x01\n GetControllerPersonalizationFile\x12..CPhysicalGoods_GetPersonalizationFile_Request\x1a/.CPhysicalGoods_GetPersonalizationFile_Response\"0\x82\xb5\x18,Gets the file ID of the personalization file\x1a\x33\x82\xb5\x18/A service to use physical goods related methodsB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -341,6 +341,20 @@ _CPHYSICALGOODS_STEAMCONTROLLERSETCONFIG_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='controller_type', full_name='CPhysicalGoods_SteamControllerSetConfig_Request.controller_type', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='only_for_this_serial', full_name='CPhysicalGoods_SteamControllerSetConfig_Request.only_for_this_serial', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -354,7 +368,7 @@ _CPHYSICALGOODS_STEAMCONTROLLERSETCONFIG_REQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=873,
-  serialized_end=1072,
+  serialized_end=1137,
 )
 
 
@@ -377,8 +391,8 @@ _CPHYSICALGOODS_STEAMCONTROLLERSETCONFIG_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1074,
-  serialized_end=1124,
+  serialized_start=1139,
+  serialized_end=1189,
 )
 
 
@@ -417,6 +431,20 @@ _CPHYSICALGOODS_STEAMCONTROLLERGETCONFIG_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='controller_type', full_name='CPhysicalGoods_SteamControllerGetConfig_Request.controller_type', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='only_for_this_serial', full_name='CPhysicalGoods_SteamControllerGetConfig_Request.only_for_this_serial', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -429,8 +457,8 @@ _CPHYSICALGOODS_STEAMCONTROLLERGETCONFIG_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1127,
-  serialized_end=1264,
+  serialized_start=1192,
+  serialized_end=1394,
 )
 
 
@@ -462,6 +490,13 @@ _CPHYSICALGOODS_STEAMCONTROLLERGETCONFIG_CONTROLLERCONFIG = _descriptor.Descript
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='serial_number', full_name='CPhysicalGoods_SteamControllerGetConfig_ControllerConfig.serial_number', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -474,8 +509,8 @@ _CPHYSICALGOODS_STEAMCONTROLLERGETCONFIG_CONTROLLERCONFIG = _descriptor.Descript
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1266,
-  serialized_end=1392,
+  serialized_start=1397,
+  serialized_end=1546,
 )
 
 
@@ -505,8 +540,8 @@ _CPHYSICALGOODS_STEAMCONTROLLERGETCONFIG_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1395,
-  serialized_end=1528,
+  serialized_start=1549,
+  serialized_end=1682,
 )
 
 
@@ -550,8 +585,8 @@ _CPHYSICALGOODS_DEREGISTERSTEAMCONTROLLER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1530,
-  serialized_end=1647,
+  serialized_start=1684,
+  serialized_end=1801,
 )
 
 
@@ -574,8 +609,8 @@ _CPHYSICALGOODS_DEREGISTERSTEAMCONTROLLER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1649,
-  serialized_end=1700,
+  serialized_start=1803,
+  serialized_end=1854,
 )
 
 
@@ -619,8 +654,8 @@ _CPHYSICALGOODS_SETPERSONALIZATIONFILE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1702,
-  serialized_end=1816,
+  serialized_start=1856,
+  serialized_end=1970,
 )
 
 
@@ -643,8 +678,8 @@ _CPHYSICALGOODS_SETPERSONALIZATIONFILE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1818,
-  serialized_end=1866,
+  serialized_start=1972,
+  serialized_end=2020,
 )
 
 
@@ -681,8 +716,8 @@ _CPHYSICALGOODS_GETPERSONALIZATIONFILE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1868,
-  serialized_end=1957,
+  serialized_start=2022,
+  serialized_end=2111,
 )
 
 
@@ -712,8 +747,8 @@ _CPHYSICALGOODS_GETPERSONALIZATIONFILE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1959,
-  serialized_end=2032,
+  serialized_start=2113,
+  serialized_end=2186,
 )
 
 _CPHYSICALGOODS_QUERYACCOUNTSREGISTEREDTOSERIAL_RESPONSE.fields_by_name['accounts'].message_type = _CPHYSICALGOODS_QUERYACCOUNTSREGISTEREDTOSERIAL_ACCOUNTS
@@ -882,8 +917,8 @@ _PHYSICALGOODS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030/A service to use physical goods related methods')),
-  serialized_start=2035,
-  serialized_end=3658,
+  serialized_start=2189,
+  serialized_end=3812,
   methods=[
   _descriptor.MethodDescriptor(
     name='RegisterSteamController',

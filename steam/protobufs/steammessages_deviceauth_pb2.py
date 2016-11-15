@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_deviceauth.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1esteammessages_deviceauth.proto\x1a steammessages_unified_base.proto\"X\n+CDeviceAuth_GetOwnAuthorizedDevices_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10include_canceled\x18\x02 \x01(\x08\"\xb8\x02\n,CDeviceAuth_GetOwnAuthorizedDevices_Response\x12\x45\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x34.CDeviceAuth_GetOwnAuthorizedDevices_Response.Device\x1a\xc0\x01\n\x06\x44\x65vice\x12\x19\n\x11\x61uth_device_token\x18\x01 \x01(\x06\x12\x13\n\x0b\x64\x65vice_name\x18\x02 \x01(\t\x12\x12\n\nis_pending\x18\x03 \x01(\x08\x12\x13\n\x0bis_canceled\x18\x04 \x01(\x08\x12\x16\n\x0elast_time_used\x18\x05 \x01(\r\x12\x18\n\x10last_borrower_id\x18\x06 \x01(\x06\x12\x17\n\x0flast_app_played\x18\x07 \x01(\r\x12\x12\n\nis_limited\x18\x08 \x01(\x08\"\x85\x01\n.CDeviceAuth_AcceptAuthorizationRequest_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x61uth_device_token\x18\x02 \x01(\x06\x12\x11\n\tauth_code\x18\x03 \x01(\x06\x12\x14\n\x0c\x66rom_steamid\x18\x04 \x01(\x06\"1\n/CDeviceAuth_AcceptAuthorizationRequest_Response\"W\n)CDeviceAuth_AuthorizeRemoteDevice_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x61uth_device_token\x18\x02 \x01(\x06\",\n*CDeviceAuth_AuthorizeRemoteDevice_Response\"Y\n+CDeviceAuth_DeauthorizeRemoteDevice_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x61uth_device_token\x18\x02 \x01(\x06\".\n,CDeviceAuth_DeauthorizeRemoteDevice_Response\"?\n,CDeviceAuth_GetUsedAuthorizedDevices_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"\xfa\x01\n-CDeviceAuth_GetUsedAuthorizedDevices_Response\x12\x46\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x35.CDeviceAuth_GetUsedAuthorizedDevices_Response.Device\x1a\x80\x01\n\x06\x44\x65vice\x12\x19\n\x11\x61uth_device_token\x18\x01 \x01(\x06\x12\x13\n\x0b\x64\x65vice_name\x18\x02 \x01(\t\x12\x15\n\rowner_steamid\x18\x03 \x01(\x06\x12\x16\n\x0elast_time_used\x18\x04 \x01(\r\x12\x17\n\x0flast_app_played\x18\x05 \x01(\r\"p\n*CDeviceAuth_GetAuthorizedBorrowers_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10include_canceled\x18\x02 \x01(\x08\x12\x17\n\x0finclude_pending\x18\x03 \x01(\x08\"\xd3\x01\n+CDeviceAuth_GetAuthorizedBorrowers_Response\x12H\n\tborrowers\x18\x01 \x03(\x0b\x32\x35.CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower\x1aZ\n\x08\x42orrower\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\nis_pending\x18\x02 \x01(\x08\x12\x13\n\x0bis_canceled\x18\x03 \x01(\x08\x12\x14\n\x0ctime_created\x18\x04 \x01(\r\"W\n*CDeviceAuth_AddAuthorizedBorrowers_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10steamid_borrower\x18\x02 \x03(\x06\"F\n+CDeviceAuth_AddAuthorizedBorrowers_Response\x12\x17\n\x0fseconds_to_wait\x18\x01 \x01(\x05\"Z\n-CDeviceAuth_RemoveAuthorizedBorrowers_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10steamid_borrower\x18\x02 \x03(\x06\"0\n.CDeviceAuth_RemoveAuthorizedBorrowers_Response2\xb7\x0b\n\nDeviceAuth\x12\x9a\x01\n\x17GetOwnAuthorizedDevices\x12,.CDeviceAuth_GetOwnAuthorizedDevices_Request\x1a-.CDeviceAuth_GetOwnAuthorizedDevices_Response\"\"\x82\xb5\x18\x1eGet list of authorized devices\x12\xb5\x01\n\x1a\x41\x63\x63\x65ptAuthorizationRequest\x12/.CDeviceAuth_AcceptAuthorizationRequest_Request\x1a\x30.CDeviceAuth_AcceptAuthorizationRequest_Response\"4\x82\xb5\x18\x30\x41\x63\x63\x65pt an authorization request by another users\x12\xaa\x01\n\x15\x41uthorizeRemoteDevice\x12*.CDeviceAuth_AuthorizeRemoteDevice_Request\x1a+.CDeviceAuth_AuthorizeRemoteDevice_Response\"8\x82\xb5\x18\x34\x41uthorize own remote device that has pending request\x12\x9b\x01\n\x17\x44\x65\x61uthorizeRemoteDevice\x12,.CDeviceAuth_DeauthorizeRemoteDevice_Request\x1a-.CDeviceAuth_DeauthorizeRemoteDevice_Response\"#\x82\xb5\x18\x1fRevoke own device authorization\x12\xbb\x01\n\x18GetUsedAuthorizedDevices\x12-.CDeviceAuth_GetUsedAuthorizedDevices_Request\x1a..CDeviceAuth_GetUsedAuthorizedDevices_Response\"@\x82\xb5\x18<Get list of authorized devices user played borrowed games on\x12\xb2\x01\n\x16GetAuthorizedBorrowers\x12+.CDeviceAuth_GetAuthorizedBorrowers_Request\x1a,.CDeviceAuth_GetAuthorizedBorrowers_Response\"=\x82\xb5\x18\x39Get list of users that can borrow on an authorized device\x12\xb0\x01\n\x16\x41\x64\x64\x41uthorizedBorrowers\x12+.CDeviceAuth_AddAuthorizedBorrowers_Request\x1a,.CDeviceAuth_AddAuthorizedBorrowers_Response\";\x82\xb5\x18\x37\x41\x64\x64 users that can borrow on limited authorized devices\x12\xbc\x01\n\x19RemoveAuthorizedBorrowers\x12..CDeviceAuth_RemoveAuthorizedBorrowers_Request\x1a/.CDeviceAuth_RemoveAuthorizedBorrowers_Response\">\x82\xb5\x18:Remove users that can borrow on limited authorized devices\x1a$\x82\xb5\x18 Library Sharing settings serviceB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1esteammessages_deviceauth.proto\x1a steammessages_unified_base.proto\"X\n+CDeviceAuth_GetOwnAuthorizedDevices_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10include_canceled\x18\x02 \x01(\x08\"\xb8\x02\n,CDeviceAuth_GetOwnAuthorizedDevices_Response\x12\x45\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x34.CDeviceAuth_GetOwnAuthorizedDevices_Response.Device\x1a\xc0\x01\n\x06\x44\x65vice\x12\x19\n\x11\x61uth_device_token\x18\x01 \x01(\x06\x12\x13\n\x0b\x64\x65vice_name\x18\x02 \x01(\t\x12\x12\n\nis_pending\x18\x03 \x01(\x08\x12\x13\n\x0bis_canceled\x18\x04 \x01(\x08\x12\x16\n\x0elast_time_used\x18\x05 \x01(\r\x12\x18\n\x10last_borrower_id\x18\x06 \x01(\x06\x12\x17\n\x0flast_app_played\x18\x07 \x01(\r\x12\x12\n\nis_limited\x18\x08 \x01(\x08\"\x85\x01\n.CDeviceAuth_AcceptAuthorizationRequest_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x61uth_device_token\x18\x02 \x01(\x06\x12\x11\n\tauth_code\x18\x03 \x01(\x06\x12\x14\n\x0c\x66rom_steamid\x18\x04 \x01(\x06\"1\n/CDeviceAuth_AcceptAuthorizationRequest_Response\"W\n)CDeviceAuth_AuthorizeRemoteDevice_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x61uth_device_token\x18\x02 \x01(\x06\",\n*CDeviceAuth_AuthorizeRemoteDevice_Response\"Y\n+CDeviceAuth_DeauthorizeRemoteDevice_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x61uth_device_token\x18\x02 \x01(\x06\".\n,CDeviceAuth_DeauthorizeRemoteDevice_Response\"?\n,CDeviceAuth_GetUsedAuthorizedDevices_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"\xfa\x01\n-CDeviceAuth_GetUsedAuthorizedDevices_Response\x12\x46\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x35.CDeviceAuth_GetUsedAuthorizedDevices_Response.Device\x1a\x80\x01\n\x06\x44\x65vice\x12\x19\n\x11\x61uth_device_token\x18\x01 \x01(\x06\x12\x13\n\x0b\x64\x65vice_name\x18\x02 \x01(\t\x12\x15\n\rowner_steamid\x18\x03 \x01(\x06\x12\x16\n\x0elast_time_used\x18\x04 \x01(\r\x12\x17\n\x0flast_app_played\x18\x05 \x01(\r\"p\n*CDeviceAuth_GetAuthorizedBorrowers_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10include_canceled\x18\x02 \x01(\x08\x12\x17\n\x0finclude_pending\x18\x03 \x01(\x08\"\xd3\x01\n+CDeviceAuth_GetAuthorizedBorrowers_Response\x12H\n\tborrowers\x18\x01 \x03(\x0b\x32\x35.CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower\x1aZ\n\x08\x42orrower\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\nis_pending\x18\x02 \x01(\x08\x12\x13\n\x0bis_canceled\x18\x03 \x01(\x08\x12\x14\n\x0ctime_created\x18\x04 \x01(\r\"W\n*CDeviceAuth_AddAuthorizedBorrowers_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10steamid_borrower\x18\x02 \x03(\x06\"F\n+CDeviceAuth_AddAuthorizedBorrowers_Response\x12\x17\n\x0fseconds_to_wait\x18\x01 \x01(\x05\"Z\n-CDeviceAuth_RemoveAuthorizedBorrowers_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10steamid_borrower\x18\x02 \x03(\x06\"0\n.CDeviceAuth_RemoveAuthorizedBorrowers_Response\"q\n+CDeviceAuth_GetAuthorizedAsBorrower_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10include_canceled\x18\x02 \x01(\x08\x12\x17\n\x0finclude_pending\x18\x03 \x01(\x08\"\xe0\x01\n,CDeviceAuth_GetAuthorizedAsBorrower_Response\x12\x45\n\x07lenders\x18\x01 \x03(\x0b\x32\x34.CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender\x1ai\n\x06Lender\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0ctime_created\x18\x02 \x01(\r\x12\x12\n\nis_pending\x18\x03 \x01(\x08\x12\x13\n\x0bis_canceled\x18\x04 \x01(\x08\x12\x0f\n\x07is_used\x18\x05 \x01(\x08\"@\n-CDeviceAuth_GetExcludedGamesInLibrary_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"\xe6\x01\n.CDeviceAuth_GetExcludedGamesInLibrary_Response\x12T\n\x0e\x65xcluded_games\x18\x01 \x03(\x0b\x32<.CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame\x1a^\n\x0c\x45xcludedGame\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\tgame_name\x18\x02 \x01(\t\x12\x12\n\nvac_banned\x18\x03 \x01(\x08\x12\x18\n\x10package_excluded\x18\x04 \x01(\x08\x32\xa5\x0e\n\nDeviceAuth\x12\x9a\x01\n\x17GetOwnAuthorizedDevices\x12,.CDeviceAuth_GetOwnAuthorizedDevices_Request\x1a-.CDeviceAuth_GetOwnAuthorizedDevices_Response\"\"\x82\xb5\x18\x1eGet list of authorized devices\x12\xb5\x01\n\x1a\x41\x63\x63\x65ptAuthorizationRequest\x12/.CDeviceAuth_AcceptAuthorizationRequest_Request\x1a\x30.CDeviceAuth_AcceptAuthorizationRequest_Response\"4\x82\xb5\x18\x30\x41\x63\x63\x65pt an authorization request by another users\x12\xaa\x01\n\x15\x41uthorizeRemoteDevice\x12*.CDeviceAuth_AuthorizeRemoteDevice_Request\x1a+.CDeviceAuth_AuthorizeRemoteDevice_Response\"8\x82\xb5\x18\x34\x41uthorize own remote device that has pending request\x12\x9b\x01\n\x17\x44\x65\x61uthorizeRemoteDevice\x12,.CDeviceAuth_DeauthorizeRemoteDevice_Request\x1a-.CDeviceAuth_DeauthorizeRemoteDevice_Response\"#\x82\xb5\x18\x1fRevoke own device authorization\x12\xbb\x01\n\x18GetUsedAuthorizedDevices\x12-.CDeviceAuth_GetUsedAuthorizedDevices_Request\x1a..CDeviceAuth_GetUsedAuthorizedDevices_Response\"@\x82\xb5\x18<Get list of authorized devices user played borrowed games on\x12\xb2\x01\n\x16GetAuthorizedBorrowers\x12+.CDeviceAuth_GetAuthorizedBorrowers_Request\x1a,.CDeviceAuth_GetAuthorizedBorrowers_Response\"=\x82\xb5\x18\x39Get list of users that can borrow on an authorized device\x12\xb0\x01\n\x16\x41\x64\x64\x41uthorizedBorrowers\x12+.CDeviceAuth_AddAuthorizedBorrowers_Request\x1a,.CDeviceAuth_AddAuthorizedBorrowers_Response\";\x82\xb5\x18\x37\x41\x64\x64 users that can borrow on limited authorized devices\x12\xbc\x01\n\x19RemoveAuthorizedBorrowers\x12..CDeviceAuth_RemoveAuthorizedBorrowers_Request\x1a/.CDeviceAuth_RemoveAuthorizedBorrowers_Response\">\x82\xb5\x18:Remove users that can borrow on limited authorized devices\x12\xb9\x01\n\x17GetAuthorizedAsBorrower\x12,.CDeviceAuth_GetAuthorizedAsBorrower_Request\x1a-.CDeviceAuth_GetAuthorizedAsBorrower_Response\"A\x82\xb5\x18=Get list of lenders that authorized given account as borrower\x12\xaf\x01\n\x19GetExcludedGamesInLibrary\x12..CDeviceAuth_GetExcludedGamesInLibrary_Request\x1a/.CDeviceAuth_GetExcludedGamesInLibrary_Response\"1\x82\xb5\x18-Get list of excluded games in lenders library\x1a$\x82\xb5\x18 Library Sharing settings serviceB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -755,12 +755,263 @@ _CDEVICEAUTH_REMOVEAUTHORIZEDBORROWERS_RESPONSE = _descriptor.Descriptor(
   serialized_end=1881,
 )
 
+
+_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_REQUEST = _descriptor.Descriptor(
+  name='CDeviceAuth_GetAuthorizedAsBorrower_Request',
+  full_name='CDeviceAuth_GetAuthorizedAsBorrower_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='include_canceled', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Request.include_canceled', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='include_pending', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Request.include_pending', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1883,
+  serialized_end=1996,
+)
+
+
+_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE_LENDER = _descriptor.Descriptor(
+  name='Lender',
+  full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='time_created', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender.time_created', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_pending', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender.is_pending', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_canceled', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender.is_canceled', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_used', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender.is_used', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2118,
+  serialized_end=2223,
+)
+
+_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE = _descriptor.Descriptor(
+  name='CDeviceAuth_GetAuthorizedAsBorrower_Response',
+  full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='lenders', full_name='CDeviceAuth_GetAuthorizedAsBorrower_Response.lenders', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE_LENDER, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1999,
+  serialized_end=2223,
+)
+
+
+_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_REQUEST = _descriptor.Descriptor(
+  name='CDeviceAuth_GetExcludedGamesInLibrary_Request',
+  full_name='CDeviceAuth_GetExcludedGamesInLibrary_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CDeviceAuth_GetExcludedGamesInLibrary_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2225,
+  serialized_end=2289,
+)
+
+
+_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE_EXCLUDEDGAME = _descriptor.Descriptor(
+  name='ExcludedGame',
+  full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='game_name', full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame.game_name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='vac_banned', full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame.vac_banned', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='package_excluded', full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame.package_excluded', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2428,
+  serialized_end=2522,
+)
+
+_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE = _descriptor.Descriptor(
+  name='CDeviceAuth_GetExcludedGamesInLibrary_Response',
+  full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='excluded_games', full_name='CDeviceAuth_GetExcludedGamesInLibrary_Response.excluded_games', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE_EXCLUDEDGAME, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2292,
+  serialized_end=2522,
+)
+
 _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_RESPONSE_DEVICE.containing_type = _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_RESPONSE
 _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_RESPONSE.fields_by_name['devices'].message_type = _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_RESPONSE_DEVICE
 _CDEVICEAUTH_GETUSEDAUTHORIZEDDEVICES_RESPONSE_DEVICE.containing_type = _CDEVICEAUTH_GETUSEDAUTHORIZEDDEVICES_RESPONSE
 _CDEVICEAUTH_GETUSEDAUTHORIZEDDEVICES_RESPONSE.fields_by_name['devices'].message_type = _CDEVICEAUTH_GETUSEDAUTHORIZEDDEVICES_RESPONSE_DEVICE
 _CDEVICEAUTH_GETAUTHORIZEDBORROWERS_RESPONSE_BORROWER.containing_type = _CDEVICEAUTH_GETAUTHORIZEDBORROWERS_RESPONSE
 _CDEVICEAUTH_GETAUTHORIZEDBORROWERS_RESPONSE.fields_by_name['borrowers'].message_type = _CDEVICEAUTH_GETAUTHORIZEDBORROWERS_RESPONSE_BORROWER
+_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE_LENDER.containing_type = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE
+_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE.fields_by_name['lenders'].message_type = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE_LENDER
+_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE_EXCLUDEDGAME.containing_type = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE
+_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE.fields_by_name['excluded_games'].message_type = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE_EXCLUDEDGAME
 DESCRIPTOR.message_types_by_name['CDeviceAuth_GetOwnAuthorizedDevices_Request'] = _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_REQUEST
 DESCRIPTOR.message_types_by_name['CDeviceAuth_GetOwnAuthorizedDevices_Response'] = _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_RESPONSE
 DESCRIPTOR.message_types_by_name['CDeviceAuth_AcceptAuthorizationRequest_Request'] = _CDEVICEAUTH_ACCEPTAUTHORIZATIONREQUEST_REQUEST
@@ -777,6 +1028,10 @@ DESCRIPTOR.message_types_by_name['CDeviceAuth_AddAuthorizedBorrowers_Request'] =
 DESCRIPTOR.message_types_by_name['CDeviceAuth_AddAuthorizedBorrowers_Response'] = _CDEVICEAUTH_ADDAUTHORIZEDBORROWERS_RESPONSE
 DESCRIPTOR.message_types_by_name['CDeviceAuth_RemoveAuthorizedBorrowers_Request'] = _CDEVICEAUTH_REMOVEAUTHORIZEDBORROWERS_REQUEST
 DESCRIPTOR.message_types_by_name['CDeviceAuth_RemoveAuthorizedBorrowers_Response'] = _CDEVICEAUTH_REMOVEAUTHORIZEDBORROWERS_RESPONSE
+DESCRIPTOR.message_types_by_name['CDeviceAuth_GetAuthorizedAsBorrower_Request'] = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_REQUEST
+DESCRIPTOR.message_types_by_name['CDeviceAuth_GetAuthorizedAsBorrower_Response'] = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE
+DESCRIPTOR.message_types_by_name['CDeviceAuth_GetExcludedGamesInLibrary_Request'] = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_REQUEST
+DESCRIPTOR.message_types_by_name['CDeviceAuth_GetExcludedGamesInLibrary_Response'] = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE
 
 CDeviceAuth_GetOwnAuthorizedDevices_Request = _reflection.GeneratedProtocolMessageType('CDeviceAuth_GetOwnAuthorizedDevices_Request', (_message.Message,), dict(
   DESCRIPTOR = _CDEVICEAUTH_GETOWNAUTHORIZEDDEVICES_REQUEST,
@@ -914,6 +1169,50 @@ CDeviceAuth_RemoveAuthorizedBorrowers_Response = _reflection.GeneratedProtocolMe
   ))
 _sym_db.RegisterMessage(CDeviceAuth_RemoveAuthorizedBorrowers_Response)
 
+CDeviceAuth_GetAuthorizedAsBorrower_Request = _reflection.GeneratedProtocolMessageType('CDeviceAuth_GetAuthorizedAsBorrower_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_REQUEST,
+  __module__ = 'steammessages_deviceauth_pb2'
+  # @@protoc_insertion_point(class_scope:CDeviceAuth_GetAuthorizedAsBorrower_Request)
+  ))
+_sym_db.RegisterMessage(CDeviceAuth_GetAuthorizedAsBorrower_Request)
+
+CDeviceAuth_GetAuthorizedAsBorrower_Response = _reflection.GeneratedProtocolMessageType('CDeviceAuth_GetAuthorizedAsBorrower_Response', (_message.Message,), dict(
+
+  Lender = _reflection.GeneratedProtocolMessageType('Lender', (_message.Message,), dict(
+    DESCRIPTOR = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE_LENDER,
+    __module__ = 'steammessages_deviceauth_pb2'
+    # @@protoc_insertion_point(class_scope:CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender)
+    ))
+  ,
+  DESCRIPTOR = _CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE,
+  __module__ = 'steammessages_deviceauth_pb2'
+  # @@protoc_insertion_point(class_scope:CDeviceAuth_GetAuthorizedAsBorrower_Response)
+  ))
+_sym_db.RegisterMessage(CDeviceAuth_GetAuthorizedAsBorrower_Response)
+_sym_db.RegisterMessage(CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender)
+
+CDeviceAuth_GetExcludedGamesInLibrary_Request = _reflection.GeneratedProtocolMessageType('CDeviceAuth_GetExcludedGamesInLibrary_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_REQUEST,
+  __module__ = 'steammessages_deviceauth_pb2'
+  # @@protoc_insertion_point(class_scope:CDeviceAuth_GetExcludedGamesInLibrary_Request)
+  ))
+_sym_db.RegisterMessage(CDeviceAuth_GetExcludedGamesInLibrary_Request)
+
+CDeviceAuth_GetExcludedGamesInLibrary_Response = _reflection.GeneratedProtocolMessageType('CDeviceAuth_GetExcludedGamesInLibrary_Response', (_message.Message,), dict(
+
+  ExcludedGame = _reflection.GeneratedProtocolMessageType('ExcludedGame', (_message.Message,), dict(
+    DESCRIPTOR = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE_EXCLUDEDGAME,
+    __module__ = 'steammessages_deviceauth_pb2'
+    # @@protoc_insertion_point(class_scope:CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame)
+    ))
+  ,
+  DESCRIPTOR = _CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE,
+  __module__ = 'steammessages_deviceauth_pb2'
+  # @@protoc_insertion_point(class_scope:CDeviceAuth_GetExcludedGamesInLibrary_Response)
+  ))
+_sym_db.RegisterMessage(CDeviceAuth_GetExcludedGamesInLibrary_Response)
+_sym_db.RegisterMessage(CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame)
+
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
@@ -924,8 +1223,8 @@ _DEVICEAUTH = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030 Library Sharing settings service')),
-  serialized_start=1884,
-  serialized_end=3347,
+  serialized_start=2525,
+  serialized_end=4354,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOwnAuthorizedDevices',
@@ -998,6 +1297,24 @@ _DEVICEAUTH = _descriptor.ServiceDescriptor(
     input_type=_CDEVICEAUTH_REMOVEAUTHORIZEDBORROWERS_REQUEST,
     output_type=_CDEVICEAUTH_REMOVEAUTHORIZEDBORROWERS_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030:Remove users that can borrow on limited authorized devices')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetAuthorizedAsBorrower',
+    full_name='DeviceAuth.GetAuthorizedAsBorrower',
+    index=8,
+    containing_service=None,
+    input_type=_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_REQUEST,
+    output_type=_CDEVICEAUTH_GETAUTHORIZEDASBORROWER_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030=Get list of lenders that authorized given account as borrower')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetExcludedGamesInLibrary',
+    full_name='DeviceAuth.GetExcludedGamesInLibrary',
+    index=9,
+    containing_service=None,
+    input_type=_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_REQUEST,
+    output_type=_CDEVICEAUTH_GETEXCLUDEDGAMESINLIBRARY_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030-Get list of excluded games in lenders library')),
   ),
 ])
 
