@@ -1,7 +1,7 @@
 import fnmatch
-from steam.core.msg_unified import get_um
-from steam.core.msg_structs import get_struct
-from steam.core.msg_headers import MsgHdr, ExtendedMsgHdr, MsgHdrProtoBuf, GCMsgHdr, GCMsgHdrProto
+from steam.core.msg.unified import get_um
+from steam.core.msg.structs import get_struct
+from steam.core.msg.headers import MsgHdr, ExtendedMsgHdr, MsgHdrProtoBuf, GCMsgHdr, GCMsgHdrProto
 from steam.enums.emsg import EMsg
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
