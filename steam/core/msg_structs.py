@@ -1,5 +1,6 @@
 """Classes to (de)serialize various struct messages"""
 import struct
+import six
 from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
 
@@ -8,7 +9,7 @@ _emsg_map = {}
 def get_struct(emsg):
     return _emsg_map.get(emsg, None)
 
-class MapEMsgMeta(type):
+class StructMessageMeta(type):
     """Automatically maps subclasses of :class:`StructMessage` to ``EMsg``"""
 
     def __new__(metacls, name, bases, classdict):
@@ -22,9 +23,8 @@ class MapEMsgMeta(type):
 
         return cls
 
+@six.add_metaclass(StructMessageMeta)
 class StructMessage:
-    __metaclass__ = MapEMsgMeta
-
     def __init__(self, data=None):
         if data: self.load(data)
 
