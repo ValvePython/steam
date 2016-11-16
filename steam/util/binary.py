@@ -8,9 +8,20 @@ class StructReader(object):
         :type  data: :class:`bytes`
         """
         if not isinstance(data, bytes):
-            raise ValueError("Requires bytes")
+            raise ValueError("Only works with bytes")
         self.data = data
         self.offset = 0
+
+    def __len__(self):
+        return len(self.data)
+
+    def rlen(self):
+        """Number of remaining bytes that can be read
+
+        :return: number of remaining bytes
+        :rtype: :class:`int`
+        """
+        return max(0, len(self) - self.offset)
 
     def read(self, n=1):
         """Return n bytes
