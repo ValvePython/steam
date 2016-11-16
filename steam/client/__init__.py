@@ -398,7 +398,7 @@ class SteamClient(CMClient, BuiltinBase):
             self._LOG.debug("Trying to login while logged on???")
             raise RuntimeError("Already logged on")
 
-        if not self.connected:
+        if not self.connected and not self._connecting:
             self.connect()
 
         if not self.channel_secured:
