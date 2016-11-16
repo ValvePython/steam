@@ -22,4 +22,10 @@ util.web
     :undoc-members:
     :show-inheritance:
 
+util.binary
+-----------
 
+.. automodule:: steam.util.binary
+    :members:
+    :undoc-members:
+    :show-inheritance:

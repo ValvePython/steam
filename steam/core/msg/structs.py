@@ -1,8 +1,10 @@
 """Classes to (de)serialize various struct messages"""
 import struct
 import six
+from six.moves import range
 from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
+from steam.util.binary import StructReader
 
 _emsg_map = {}
 
@@ -136,18 +138,17 @@ class ClientVACBanStatus(StructMessage):
         StructMessage.__init__(self, data)
 
     def load(self, data):
-        numBans, = struct.unpack_from("<I", data)
-        offset = 4
+        buf = StructReader(data)
+        numBans, = buf.read_format("<I")
 
-        for _ in six.moves.range(numBans):
+        for _ in range(numBans):
             m = self.VACBanRange()
-            m.start, m.end, _ = struct.unpack_from("<III", data, offset)
             self.ranges.append(m)
+
+            m.start, m.end, _ = buf.read_format("<III")
 
             if m.start > m.end:
                 m.start, m.end = m.end, m.start
-
-            offset += 4 + 4 + 4
 
     def __str__(self):
         text =  ["numBans: %d" % self.numBans]
@@ -179,12 +180,9 @@ class ClientChatMsg(StructMessage):
         return rbytes
 
     def load(self, data):
-        (self.steamIdChatter,
-         self.steamIdChatRoom,
-         self.ChatMsgType,
-         ) = struct.unpack_from("<QQI", data)
-
-        self.text = data[struct.calcsize("<QQI"):-1].decode('utf-8')
+        buf = StructReader(data)
+        self.steamIdChatter, self.steamIdChatRoom, self.ChatMsgType = buf.read_format("<QQI")
+        self.text = buf.read_cstring().decode('utf-8')
 
     def __str__(self):
         return '\n'.join(["steamIdChatter: %d" % self.steamIdChatter,
@@ -254,7 +252,7 @@ class ClientMarketingMessageUpdate2(StructMessage):
         def __str__(self):
             return '\n'.join(["{",
                               "id: %s" % self.id,
-                              "url: %s" % self.url,
+                              "url: %s" % repr(self.url),
                               "flags: %d" % self.flags,
                               "}",
                               ])
@@ -270,19 +268,16 @@ class ClientMarketingMessageUpdate2(StructMessage):
         StructMessage.__init__(self, data)
 
     def load(self, data):
-        self.time, count = struct.unpack_from("<II", data)
-        offset = 4 + 4
+        buf = StructReader(data)
+        self.time, count = buf.read_format("<II")
 
-        for _ in six.moves.range(count):
-            length, = struct.unpack_from("<I", data, offset)
-            url_length = length-4-8-4
-            offset += 4
-
+        for _ in range(count):
             m = self.MarketingMessage()
-            m.id, m.url, _, m.flags = struct.unpack_from("<Q%dssI" % (url_length - 1), data, offset)
             self.messages.append(m)
 
-            offset += 8 + url_length + 4
+            length, m.id = buf.read_format("<IQ")
+            m.url = buf.read_cstring().decode('utf-8')
+            m.flags = buf.read_format("<I")
 
     def __str__(self):
         text = ["time: %s" % self.time,
