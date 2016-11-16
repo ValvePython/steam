@@ -12,6 +12,7 @@ import os
 import json
 from time import time
 from io import open
+from getpass import getpass
 import logging
 import gevent
 import gevent.monkey
@@ -544,3 +545,72 @@ class SteamClient(CMClient, BuiltinBase):
         """
         while True:
             gevent.sleep(300)
+
+    def cli_login(self, username='', password=''):
+        """Generates CLI prompts to complete the login process
+
+        :param username: optionally provide username
+        :type  username: :class:`str`
+        :param password: optionally provide password
+        :type  password: :class:`str`
+        :return: logon result, see `CMsgClientLogonResponse.eresult <https://github.com/ValvePython/steam/blob/513c68ca081dc9409df932ad86c66100164380a6/protobufs/steammessages_clientserver.proto#L95-L118>`_
+        :rtype: :class:`.EResult`
+
+        Example console output after calling :meth:`cli_login`
+
+        .. code:: python
+
+            In [5]: client.cli_login()
+            Steam username: myusername
+            Password:
+            Steam is down. Keep retrying? [y/n]: y
+            Invalid password for 'myusername'. Enter password:
+            Enter email code: 123
+            Incorrect code. Enter email code: K6VKF
+            Out[5]: <EResult.OK: 1>
+        """
+        if not username:
+            username = raw_input("Username: ")
+        if not password:
+            password = getpass()
+
+        auth_code = two_factor_code = None
+        prompt_for_unavailable = True
+
+        result = self.login(username, password)
+
+        while result in (EResult.AccountLogonDenied, EResult.InvalidLoginAuthCode,
+                         EResult.AccountLoginDeniedNeedTwoFactor, EResult.TwoFactorCodeMismatch,
+                         EResult.TryAnotherCM, EResult.ServiceUnavailable,
+                         EResult.InvalidPassword,
+                         ):
+            gevent.sleep(0.1)
+
+            if result == EResult.InvalidPassword:
+                password = getpass("Invalid password for %s. Enter password: " % repr(username))
+
+            elif result in (EResult.AccountLogonDenied, EResult.InvalidLoginAuthCode):
+                prompt = ("Enter email code: " if result == EResult.AccountLogonDenied else
+                          "Incorrect code. Enter email code: ")
+                auth_code, two_factor_code = raw_input(prompt), None
+
+            elif result in (EResult.AccountLoginDeniedNeedTwoFactor, EResult.TwoFactorCodeMismatch):
+                prompt = ("Enter 2FA code: " if result == EResult.AccountLoginDeniedNeedTwoFactor else
+                          "Incorrect code. Enter 2FA code: ")
+                auth_code, two_factor_code = None, raw_input(prompt)
+
+            elif result in (EResult.TryAnotherCM, EResult.ServiceUnavailable):
+                if prompt_for_unavailable and result == EResult.ServiceUnavailable:
+                    while True:
+                        answer = raw_input("Steam is down. Keep retrying? [y/n]: ").lower()
+                        if answer in 'yn': break
+
+                    prompt_for_unavailable = False
+                    if answer == 'n': break
+
+                self.reconnect(maxdelay=15)  # implements reconnect throttling
+
+            result = self.login(username, password, None, auth_code, two_factor_code)
+
+        return result
+

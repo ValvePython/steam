@@ -156,52 +156,25 @@ The library comes with some Steam client features implemented, see :doc:`api/ste
 CLI example
 -----------
 
-This program will prompt for user and password.
-If an authentication code is required, it will additionally prompt for that.
-Configuring logging will lets us see the internal interactions.
+In this example, the user will be prompted for credential and once logged in will the account name.
+After that we logout.
 
 .. code:: python
-
-    import logging
-    from getpass import getpass
-    logging.basicConfig(format='[%(asctime)s] %(levelname)s %(name)s: %(message)s', level=logging.DEBUG)
 
     from steam import SteamClient
     from steam.enums import EResult
     from steam.enums.emsg import EMsg
 
-    logOnDetails = {
-        'username': raw_input("Steam user: "),
-        'password': getpass("Password: "),
-    }
-
     client = SteamClient()
-    #client.verbose_debug = True
+    client.cli_login()
 
-    @client.on('error')
-    def print_error(result):
-        print "Error:", EResult(result)
-
-    @client.on('auth_code_required')
-    def auth_code_prompt(is_2fa, code_mismatch):
-        if is_2fa:
-            code = raw_input("Enter 2FA Code: ")
-            client.login(two_factor_code=code, **logOnDetails)
-        else:
-            code = raw_input("Enter Email Code: ")
-            client.login(auth_code=code, **logOnDetails)
-
-    client.login(**logOnDetails)
-
-    msg, = client.wait_event(EMsg.ClientAccountInfo)
+    msg = client.wait_msg(EMsg.ClientAccountInfo)
     print "Logged on as: %s" % msg.body.persona_name
     print "SteamID: %s" % repr(client.steam_id)
 
-    try:
-        client.run_forever()
-    except KeyboardInterrupt:
-        client.logout()
+    client.logout()
 
+You can find more examples at https://github.com/ValvePython/steam/tree/master/recipes 
 
 Sending a message
 -----------------

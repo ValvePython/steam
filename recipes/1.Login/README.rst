@@ -1,9 +1,13 @@
 one_off_login.py
 ----------------
 
-Minimal example for login with prompt for email and two factor codes.
-After the login, the code will print some account info and exit.
+Minimal example to login into Steam, print some account info and exit.
 No information is persisted to disk.
+
+diy_one_off_login.py
+--------------------
+
+Same as above, we make our own prompts instead of using ``cli_login()``
 
 persistent_login.py
 -------------------

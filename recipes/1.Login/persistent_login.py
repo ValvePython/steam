@@ -1,21 +1,13 @@
 import logging
-import gevent
-from getpass import getpass
 from steam import SteamClient
+from steam.enums import EResult
 
+# setup logging
 logging.basicConfig(format="%(asctime)s | %(message)s", level=logging.INFO)
 LOG = logging.getLogger()
 
-LOG.info("Persistent logon recipe")
-LOG.info("-"*30)
-
-LOGON_DETAILS = {
-    "username": raw_input("Steam user: "),
-    "password": getpass("Password: "),
-}
-
 client = SteamClient()
-client.set_credential_location(".")
+client.set_credential_location(".")  # where to store sentry files and other stuff
 
 @client.on("error")
 def handle_error(result):
@@ -25,10 +17,6 @@ def handle_error(result):
 def send_login():
     if client.relogin_available:
         client.relogin()
-
-@client.on("new_login_key")
-def got_login_key():
-    LOG.info("got new login key")
 
 @client.on("connected")
 def handle_connected():
@@ -42,20 +30,9 @@ def handle_reconnect(delay):
 def handle_disconnect():
     LOG.info("Disconnected.")
 
-    LOG.info("Reconnecting...")
-    client.reconnect(maxdelay=30)
-
-@client.on("auth_code_required")
-def auth_code_prompt(is_2fa, mismatch):
-    if mismatch:
-        LOG.info("Previous code was incorrect")
-
-    if is_2fa:
-        code = raw_input("Enter 2FA Code: ")
-        client.login(two_factor_code=code, **LOGON_DETAILS)
-    else:
-        code = raw_input("Enter Email Code: ")
-        client.login(auth_code=code, **LOGON_DETAILS)
+    if client.relogin_available:
+        LOG.info("Reconnecting...")
+        client.reconnect(maxdelay=30)
 
 @client.on("logged_on")
 def handle_after_logon():
@@ -68,8 +45,17 @@ def handle_after_logon():
     LOG.info("Press ^C to exit")
 
 
+# main bit
+LOG.info("Persistent logon recipe")
+LOG.info("-"*30)
+
 try:
-    client.login(**LOGON_DETAILS)
+    result = client.cli_login()
+
+    if result != EResult.OK:
+        LOG.info("Failed to login: %s" % repr(result))
+        raise SystemExit
+
     client.run_forever()
 except KeyboardInterrupt:
     if client.connected:
