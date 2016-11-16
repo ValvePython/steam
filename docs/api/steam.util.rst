@@ -6,6 +6,14 @@ util
     :undoc-members:
     :show-inheritance:
 
+util.binary
+-----------
+
+.. automodule:: steam.util.binary
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 util.throttle
 -------------
 
@@ -18,14 +26,6 @@ util.web
 --------
 
 .. automodule:: steam.util.web
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-util.binary
------------
-
-.. automodule:: steam.util.binary
     :members:
     :undoc-members:
     :show-inheritance:

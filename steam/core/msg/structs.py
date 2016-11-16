@@ -139,13 +139,13 @@ class ClientVACBanStatus(StructMessage):
 
     def load(self, data):
         buf = StructReader(data)
-        numBans, = buf.read_format("<I")
+        numBans, = buf.unpack("<I")
 
         for _ in range(numBans):
             m = self.VACBanRange()
             self.ranges.append(m)
 
-            m.start, m.end, _ = buf.read_format("<III")
+            m.start, m.end, _ = buf.unpack("<III")
 
             if m.start > m.end:
                 m.start, m.end = m.end, m.start
@@ -181,7 +181,7 @@ class ClientChatMsg(StructMessage):
 
     def load(self, data):
         buf = StructReader(data)
-        self.steamIdChatter, self.steamIdChatRoom, self.ChatMsgType = buf.read_format("<QQI")
+        self.steamIdChatter, self.steamIdChatRoom, self.ChatMsgType = buf.unpack("<QQI")
         self.text = buf.read_cstring().decode('utf-8')
 
     def __str__(self):
@@ -269,15 +269,15 @@ class ClientMarketingMessageUpdate2(StructMessage):
 
     def load(self, data):
         buf = StructReader(data)
-        self.time, count = buf.read_format("<II")
+        self.time, count = buf.unpack("<II")
 
         for _ in range(count):
             m = self.MarketingMessage()
             self.messages.append(m)
 
-            length, m.id = buf.read_format("<IQ")
+            length, m.id = buf.unpack("<IQ")
             m.url = buf.read_cstring().decode('utf-8')
-            m.flags = buf.read_format("<I")
+            m.flags = buf.unpack("<I")
 
     def __str__(self):
         text = ["time: %s" % self.time,

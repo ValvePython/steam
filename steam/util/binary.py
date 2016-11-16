@@ -12,18 +12,29 @@ class StructReader(object):
         self.data = data
         self.offset = 0
 
-    def read_cstring(self):
+    def read(self, n=1):
+        """Return n bytes
+
+        :param n: number of bytes to return
+        :type  n: :class:`int`
+        :return: bytes
+        :rtype: :class:`bytes`
+        """
+        self.offset += n
+        return self.data[self.offset - n:self.offset]
+
+    def read_cstring(self, terminator=b'\x00'):
         """Reads a single null termianted string
 
         :return: string without bytes
         :rtype: :class:`bytes`
         """
-        null_index = self.data.find(b'\x00', self.offset)
-        text = self.data[self.offset:null_index]  # bytes without the null
-        self.offset = null_index + 1  # advanced past null
-        return text
+        null_index = self.data.find(terminator, self.offset)
+        result = self.data[self.offset:null_index]    # bytes without the terminator
+        self.offset = null_index + len(terminator)  # advance offset past terminator
+        return result
 
-    def read_format(self, format_text):
+    def unpack(self, format_text):
         """Unpack bytes using struct modules format
 
         :param format_text: struct's module format
