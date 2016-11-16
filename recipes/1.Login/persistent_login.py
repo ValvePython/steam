@@ -9,11 +9,10 @@ LOG = logging.getLogger()
 LOG.info("Persistent logon recipe")
 LOG.info("-"*30)
 
-logon_details = {
+LOGON_DETAILS = {
     "username": raw_input("Steam user: "),
     "password": getpass("Password: "),
 }
-logged_on_once = False
 
 client = SteamClient()
 client.set_credential_location(".")
@@ -26,10 +25,10 @@ def handle_error(result):
 def send_login():
     if client.relogin_available:
         client.relogin()
-    else:
-        client.login(**logon_details)
-        logon_details.pop('auth_code', None)
-        logon_details.pop('two_factor_code', None)
+
+@client.on("new_login_key")
+def got_login_key():
+    LOG.info("got new login key")
 
 @client.on("connected")
 def handle_connected():
@@ -43,9 +42,8 @@ def handle_reconnect(delay):
 def handle_disconnect():
     LOG.info("Disconnected.")
 
-    if logged_on_once:
-        LOG.info("Reconnecting...")
-        client.reconnect(maxdelay=30)
+    LOG.info("Reconnecting...")
+    client.reconnect(maxdelay=30)
 
 @client.on("auth_code_required")
 def auth_code_prompt(is_2fa, mismatch):
@@ -54,18 +52,13 @@ def auth_code_prompt(is_2fa, mismatch):
 
     if is_2fa:
         code = raw_input("Enter 2FA Code: ")
-        logon_details['two_factor_code'] = code
+        client.login(two_factor_code=code, **LOGON_DETAILS)
     else:
         code = raw_input("Enter Email Code: ")
-        logon_details['auth_code'] = code
-
-    client.connect()
+        client.login(auth_code=code, **LOGON_DETAILS)
 
 @client.on("logged_on")
 def handle_after_logon():
-    global logged_on_once
-    logged_on_once = True
-
     LOG.info("-"*30)
     LOG.info("Logged on as: %s", client.user.name)
     LOG.info("Community profile: %s", client.steam_id.community_url)
@@ -76,10 +69,9 @@ def handle_after_logon():
 
 
 try:
-    client.connect()
+    client.login(**LOGON_DETAILS)
     client.run_forever()
 except KeyboardInterrupt:
     if client.connected:
-        logged_on_once = False
         LOG.info("Logout")
         client.logout()

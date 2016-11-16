@@ -428,8 +428,7 @@ class SteamClient(CMClient, BuiltinBase):
             self.login(self.username, '', self.login_key)
 
     def login(self, username, password='', login_key=None, auth_code=None, two_factor_code=None):
-        """
-        Login as a specific user
+        """Login as a specific user
 
         :param username: username
         :type username: :class:`str`
@@ -441,6 +440,8 @@ class SteamClient(CMClient, BuiltinBase):
         :type auth_code: :class:`str`
         :param two_factor_code: 2FA authentication code
         :type two_factor_code: :class:`str`
+        :return: logon result, see `CMsgClientLogonResponse.eresult <https://github.com/ValvePython/steam/blob/513c68ca081dc9409df932ad86c66100164380a6/protobufs/steammessages_clientserver.proto#L95-L118>`_
+        :rtype: :class:`.EResult`
 
         .. note::
             Failure to login will result in the server dropping the connection, ``error`` event is fired
@@ -498,9 +499,14 @@ class SteamClient(CMClient, BuiltinBase):
 
         self.send(message)
 
+        resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
+        return EResult(resp.body.eresult) if resp else EResult.Fail
+
     def anonymous_login(self):
-        """
-        Login as anonymous user
+        """Login as anonymous user
+
+        :return: logon result, see `CMsgClientLogonResponse.eresult <https://github.com/ValvePython/steam/blob/513c68ca081dc9409df932ad86c66100164380a6/protobufs/steammessages_clientserver.proto#L95-L118>`_
+        :rtype: :class:`.EResult`
         """
         self._LOG.debug("Attempting Anonymous login")
 
@@ -514,6 +520,9 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.protocol_version = 65579
         self.send(message)
 
+        resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
+        return EResult(resp.body.eresult) if resp else EResult.Fail
+
     def logout(self):
         """
         Logout from steam. Doesn't nothing if not logged on.
@@ -525,6 +534,7 @@ class SteamClient(CMClient, BuiltinBase):
             self.logged_on = False
             self.send(MsgProto(EMsg.ClientLogOff))
             self.wait_event('disconnected')
+            gevent.idle()
 
     def run_forever(self):
         """
