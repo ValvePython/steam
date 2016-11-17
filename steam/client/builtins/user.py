@@ -74,11 +74,13 @@ class User(object):
         proto_fill_from_dict(message.body, kwargs)
         self.send(message)
 
-    def request_persona_state(self, steam_ids, state_flags=3418):
+    def request_persona_state(self, steam_ids, state_flags=863):
         """Request persona state data
 
         :param steam_ids: list of steam ids
-        :type steam_ids: :class:`list`
+        :type  steam_ids: :class:`list`
+        :param state_flags: client state flags
+        :type  state_flags: :class:`.EClientPersonaStateFlag`
         """
         m = MsgProto(EMsg.ClientRequestFriendData)
         m.body.persona_state_requested = state_flags

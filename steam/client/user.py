@@ -26,7 +26,11 @@ class SteamUser(object):
             )
 
     def get_ps(self, field_name, wait_pstate=True):
-        if not wait_pstate or self._pstate_ready.wait(timeout=30):
+        if not wait_pstate or self._pstate_ready.wait(timeout=5):
+            if self._pstate is None and wait_pstate:
+                self._steam.request_persona_state([self.steam_id])
+                self._pstate_ready.wait(timeout=5)
+
             if self._pstate and self._pstate.HasField(field_name):
                 return getattr(self._pstate, field_name)
         return None
