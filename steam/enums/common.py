@@ -328,6 +328,7 @@ class EPersonaState(SteamIntEnum):
 class EPersonaStateFlag(SteamIntEnum):
     HasRichPresence = 1
     InJoinableGame = 2
+    HasGoldenProfile = 4
     OnlineUsingWeb = 256
     OnlineUsingMobile = 512
     OnlineUsingBigPicture = 1024
