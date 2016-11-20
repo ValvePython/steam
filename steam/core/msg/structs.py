@@ -333,7 +333,7 @@ class ClientChatEnter(StructMessage):
         (self.steamIdChat, self.steamIdFriend, self.chatRoomType, self.steamIdOwner,
          self.steamIdClan, self.chatFlags, self.enterResponse, self.numMembers
          ) = buf.unpack("<QQIQQ?II")
-        self.chatRoomName = buf.read_cstring()
+        self.chatRoomName = buf.read_cstring().decode('utf-8')
 
         for _ in range(self.numMembers):
             self.memberList.append(vdf.binary_loads(buf.read(64))['MessageObject'])
@@ -349,5 +349,6 @@ class ClientChatEnter(StructMessage):
                           "chatFlags: %r" % self.chatFlags,
                           "enterResponse: %r" % self.enterResponse,
                           "numMembers: %r" % self.numMembers,
-                          "chatRoomName: %s" % self.chatRoomName
+                          "chatRoomName: %s" % self.chatRoomName,
+                          "memberList: {}".format(self.memberList)
         ])
