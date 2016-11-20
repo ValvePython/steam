@@ -1,6 +1,7 @@
 """Classes to (de)serialize various struct messages"""
 import struct
 import six
+import vdf
 from six.moves import range
 from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
@@ -309,3 +310,44 @@ class ClientUpdateGuestPassesList(StructMessage):
                           "countGuestPassesToGive: %d" % self.countGuestPassesToGive,
                           "countGuestPassesToRedeem: %d" % self.countGuestPassesToRedeem,
                           ])
+
+
+class ClientChatEnter(StructMessage):
+    steamIdChat = 0
+    steamIdFriend = 0
+    chatRoomType = 0
+    steamIdOwner = 0
+    steamIdClan = 0
+    chatFlags = 0
+    enterResponse = 0
+    numMembers = 0
+    chatRoomName = ""
+    memberList = []
+
+    def __init__(self, data=None):
+        if data: self.load(data)
+
+    def load(self, data):
+        buf, self.memberList = StructReader(data), list()
+
+        (self.steamIdChat, self.steamIdFriend, self.chatRoomType, self.steamIdOwner,
+         self.steamIdClan, self.chatFlags, self.enterResponse, self.numMembers
+         ) = buf.unpack("<QQIQQ?II")
+        self.chatRoomName = buf.read_cstring()
+
+        for _ in range(self.numMembers):
+            self.memberList.append(vdf.binary_loads(buf.read(64))['MessageObject'])
+
+        self.UNKNOWN1, = buf.unpack("<I")
+
+    def __str__(self):
+        return '\n'.join(["steamIdChat: %d" % self.steamIdChat,
+                          "steamIdFriend: %d" % self.steamIdFriend,
+                          "chatRoomType: %r" % self.chatRoomType,
+                          "steamIdOwner: %d" % self.steamIdOwner,
+                          "steamIdClan: %d" % self.steamIdClan,
+                          "chatFlags: %r" % self.chatFlags,
+                          "enterResponse: %r" % self.enterResponse,
+                          "numMembers: %r" % self.numMembers,
+                          "chatRoomName: %s" % self.chatRoomName
+        ])
