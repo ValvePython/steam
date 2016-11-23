@@ -186,13 +186,13 @@ class Apps(object):
         :param key: CD-Key
         :type  key: :class:`str`
         :return: format ``(eresult, result_details, receipt_info)``
-        :rtype: :class:`tuple`, :class:`None`
+        :rtype: :class:`tuple`
 
         Example ``receipt_info``:
 
         .. code:: python
 
-            {'MessageObject': {'BasePrice': 0,
+            {'BasePrice': 0,
               'CurrencyCode': 0,
               'ErrorHeadline': '',
               'ErrorLinkText': '',
@@ -210,14 +210,15 @@ class Apps(object):
               'lineitems': {'0': {'ItemDescription': 'Half-Life 3',
                 'TransactionID': UINT_64(11111111111111111),
                 'packageid': 1234}},
-              'packageid': -1}}
+              'packageid': -1}
         """
         resp = self.send_job_and_wait(MsgProto(EMsg.ClientRegisterKey),
                                       {'key': key},
-                                      timeout=20
-                                     )
+                                      timeout=30,
+                                      )
 
         if resp:
-            details = vdf.binary_loads(resp.purchase_receipt_info)
-
+            details = vdf.binary_loads(resp.purchase_receipt_info).get('MessageObject', None)
             return EResult(resp.eresult), resp.purchase_result_details, details
+        else:
+            return EResult.Timeout, None, None
