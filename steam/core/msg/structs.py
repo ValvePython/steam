@@ -349,6 +349,5 @@ class ClientChatEnter(StructMessage):
                           "chatFlags: %r" % self.chatFlags,
                           "enterResponse: %r" % self.enterResponse,
                           "numMembers: %r" % self.numMembers,
-                          "chatRoomName: %s" % self.chatRoomName,
-                          "memberList: {}".format(self.memberList)
-        ])
+                          "chatRoomName: %s" % repr(self.chatRoomName),
+        ] + map(lambda x: "memberList: %s" % x, self.memberList))
