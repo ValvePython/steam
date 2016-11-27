@@ -137,7 +137,7 @@ class TCPConnection(Connection):
 
     def _read_data(self):
         try:
-            return self.socket.recv(2048)
+            return self.socket.recv(16384)
         except socket.error:
             return ''
 
