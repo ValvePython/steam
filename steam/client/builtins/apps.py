@@ -8,21 +8,26 @@ class Apps(object):
     def __init__(self, *args, **kwargs):
         super(Apps, self).__init__(*args, **kwargs)
 
-    def get_player_count(self, app_id):
+    def get_player_count(self, app_id, timeout=5):
         """Get numbers of players for app id
 
         :param app_id: app id
         :type app_id: :class:`int`
         :return: number of players
-        :rtype: :class:`int`, :class:`None`
+        :rtype: :class:`int`, :class:`.EResult`
         """
-        resp = self.send_job_and_wait(MsgProto(EMsgClientGetNumberOfCurrentPlayersDP),
-                                      {'appid': appid},
-                                      timeout=15
+        resp = self.send_job_and_wait(MsgProto(EMsg.ClientGetNumberOfCurrentPlayersDP),
+                                      {'appid': app_id},
+                                      timeout=timeout
                                      )
-        return resp.player_count if resp and resp.eresult == EResult.OK else None
+        if resp is None:
+            return EResult.Timeout
+        elif resp.eresult == EResult.OK:
+            return resp.player_count
+        else:
+            return EResult(resp.eresult)
 
-    def get_product_info(self, apps=[], packages=[]):
+    def get_product_info(self, apps=[], packages=[], timeout=15):
         """Get product info for apps and packages
 
         :param apps: items in the list should be either just ``app_id``, or ``(app_id, access_token)``
@@ -64,13 +69,13 @@ class Apps(object):
         data = dict(apps={}, packages={})
 
         while True:
-            chunk = self.wait_event(job_id, timeout=15)
+            chunk = self.wait_event(job_id, timeout=timeout)
 
             if chunk is None: return
             chunk = chunk[0].body
 
             for app in chunk.apps:
-                data['apps'][app.appid] = vdf.loads(app.buffer[:-1])['appinfo']
+                data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8'))['appinfo']
             for pkg in chunk.packages:
                 data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:])[str(pkg.packageid)]
 
