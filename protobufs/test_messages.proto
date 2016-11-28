@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+message ComplexProtoMessage {
+	message InnerMessage {
+        optional string text = 1;
+        repeated uint32 numbers = 2;
+	}
+	message InnerBuffer {
+        message Flags {
+            optional bool flag = 1;
+        }
+
+		optional bytes data = 1;
+        repeated .ComplexProtoMessage.InnerBuffer.Flags flags = 2;
+	}
+
+    optional uint32 number32 = 1;
+    optional uint64 number64 = 2;
+
+    repeated uint32 list_number32 = 3;
+    repeated uint64 list_number64 = 4;
+
+	repeated .ComplexProtoMessage.InnerMessage messages = 5;
+	repeated .ComplexProtoMessage.InnerBuffer buffers = 6;
+}
