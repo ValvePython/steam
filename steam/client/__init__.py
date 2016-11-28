@@ -14,6 +14,7 @@ from time import time
 from io import open
 from getpass import getpass
 import logging
+import six
 import gevent
 import gevent.monkey
 gevent.monkey.patch_socket()
@@ -28,6 +29,11 @@ from steam.core.cm import CMClient
 from steam import SteamID
 from steam.client.builtins import BuiltinBase
 from steam.util import ip_from_int, proto_fill_from_dict
+
+if six.PY2:
+    _cli_input = raw_input
+else:
+    _cli_input = input
 
 
 class SteamClient(CMClient, BuiltinBase):
@@ -455,10 +461,10 @@ class SteamClient(CMClient, BuiltinBase):
             @steamclient.on(steamclient.EVENT_AUTH_CODE_REQUIRED)
             def auth_code_prompt(is_2fa, code_mismatch):
                 if is_2fa:
-                    code = raw_input("Enter 2FA Code: ")
+                    code = input("Enter 2FA Code: ")
                     steamclient.login(username, password, two_factor_code=code)
                 else:
-                    code = raw_input("Enter Email Code: ")
+                    code = input("Enter Email Code: ")
                     steamclient.login(username, password, auth_code=code)
 
         Codes are required every time a user logins if sentry is not setup.
@@ -570,7 +576,7 @@ class SteamClient(CMClient, BuiltinBase):
             Out[5]: <EResult.OK: 1>
         """
         if not username:
-            username = raw_input("Username: ")
+            username = _cli_input("Username: ")
         if not password:
             password = getpass()
 
@@ -592,17 +598,17 @@ class SteamClient(CMClient, BuiltinBase):
             elif result in (EResult.AccountLogonDenied, EResult.InvalidLoginAuthCode):
                 prompt = ("Enter email code: " if result == EResult.AccountLogonDenied else
                           "Incorrect code. Enter email code: ")
-                auth_code, two_factor_code = raw_input(prompt), None
+                auth_code, two_factor_code = _cli_input(prompt), None
 
             elif result in (EResult.AccountLoginDeniedNeedTwoFactor, EResult.TwoFactorCodeMismatch):
                 prompt = ("Enter 2FA code: " if result == EResult.AccountLoginDeniedNeedTwoFactor else
                           "Incorrect code. Enter 2FA code: ")
-                auth_code, two_factor_code = None, raw_input(prompt)
+                auth_code, two_factor_code = None, _cli_input(prompt)
 
             elif result in (EResult.TryAnotherCM, EResult.ServiceUnavailable):
                 if prompt_for_unavailable and result == EResult.ServiceUnavailable:
                     while True:
-                        answer = raw_input("Steam is down. Keep retrying? [y/n]: ").lower()
+                        answer = _cli_input("Steam is down. Keep retrying? [y/n]: ").lower()
                         if answer in 'yn': break
 
                     prompt_for_unavailable = False
