@@ -121,10 +121,8 @@ class User(object):
         if not isinstance(app_ids, list):
             raise ValueError("Expected app_ids to be of type list")
 
-        self.current_games_played = app_ids = map(int, app_ids)
+        self.current_games_played = app_ids = list(map(int, app_ids))
 
         self.send(MsgProto(EMsg.ClientGamesPlayed),
-                  {
-                   'games_played': map(lambda app_id: {'game_id': app_id}, app_ids)
-                  }
-                 )
+                  {'games_played': [{'game_id': app_id} for app_id in app_ids]}
+                  )
