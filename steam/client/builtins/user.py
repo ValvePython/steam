@@ -36,6 +36,7 @@ class User(object):
 
     def __handle_disconnect(self):
         self.user = None
+        self.current_games_played = []
 
     def __handle_set_persona(self):
         self.user = self.get_user(self.steam_id, False)
