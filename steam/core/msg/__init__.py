@@ -19,7 +19,8 @@ cmsg_lookup_predefined = {
     EMsg.ServiceMethodResponse: steammessages_clientserver_2_pb2.CMsgClientServiceMethodResponse,
     EMsg.ClientGetNumberOfCurrentPlayersDP: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayers,
     EMsg.ClientGetNumberOfCurrentPlayersDPResponse: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayersResponse,
-
+    EMsg.ClientCreateAccountProto: steammessages_clientserver_2_pb2.CMsgClientCreateAccount,
+    EMsg.ClientCreateAccountProtoResponse: steammessages_clientserver_2_pb2.CMsgClientCreateAccountResponse,
 }
 
 def get_cmsg(emsg):
