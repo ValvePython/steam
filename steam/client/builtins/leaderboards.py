@@ -99,16 +99,18 @@ class SteamLeaderboard(object):
     def __len__(self):
         return self.entry_count
 
-    def get_entries(self, start=0, end=0, data_request=ELeaderboardDataRequest.Global):
+    def get_entries(self, start=0, end=0, data_request=None, steam_ids=None):
         """Get leaderboard entries.
 
-        :param start: start entry, not index (e.g. rank 1 is `start=1`)
+        :param start: start entry, not index (e.g. rank 1 is ``start=1``)
         :type start: :class:`int`
-        :param end: end entry, not index (e.g. only one entry then `start=1,end=1`)
+        :param end: end entry, not index (e.g. only one entry then ``start=1,end=1``)
         :type end: :class:`int`
         :param data_request: data being requested
         :type data_request: :class:`steam.enums.common.ELeaderboardDataRequest`
-        :return: a list of entries, see `CMsgClientLBSGetLBEntriesResponse`
+        :param steam_ids: list of steam ids when using :prop:`.ELeaderboardDataRequest.Users`
+        :type steamids: :class:`list`
+        :return: a list of entries, see ``CMsgClientLBSGetLBEntriesResponse``
         :rtype: :class:`list`
         :raises: :class:`LookupError` on message timeout or error
         """
@@ -117,7 +119,10 @@ class SteamLeaderboard(object):
         message.body.leaderboard_id = self.id
         message.body.range_start = start
         message.body.range_end = end
-        message.body.leaderboard_data_request = data_request
+        message.body.leaderboard_data_request = self.data_request if data_request is None else data_request
+
+        if steam_ids:
+            message.body.steamids.extend(steam_ids)
 
         resp = self._steam.send_job_and_wait(message, timeout=15)
 
@@ -146,7 +151,7 @@ class SteamLeaderboard(object):
 
         if start >= stop: return []
 
-        entries = self.get_entries(start+1, stop, self.data_request)
+        entries = self.get_entries(start+1, stop)
 
         return [entries[i] for i in _range(0, len(entries), step)]
 
