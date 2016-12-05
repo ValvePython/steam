@@ -46,7 +46,7 @@ class SteamLeaderboard(object):
     """.. versionadded:: 0.8.2
 
     Steam leaderboard object.
-    Generated via :meth:`Misc.get_leaderboard()`
+    Generated via :meth:`Leaderboards.get_leaderboard()`
     Works more or less like a :class:`list` to access entries.
 
     .. note::
