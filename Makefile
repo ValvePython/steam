@@ -59,6 +59,7 @@ upload: dist register
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt
 	rename -v '.steamclient' '' protobufs/*.proto
+	sed -i '1d' protobufs/test_messages.proto
 	sed -i '1s/^/syntax = "proto2"\;\n/' protobufs/*.proto
 	sed -i 's/cc_generic_services/py_generic_services/' protobufs/*.proto
 	sed -i 's/\.steamclient\.proto/.proto/' protobufs/*.proto
