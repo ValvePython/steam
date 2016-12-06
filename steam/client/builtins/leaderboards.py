@@ -145,15 +145,21 @@ class SteamLeaderboard(object):
             if step < 0:
                 start, stop = stop, start
             step = abs(step)
+
+            if start >= stop: return []
         else:
             if x < 0: x += self.entry_count
             start, stop, step = x, x + 1, 1
 
-        if start >= stop: return []
+            if x < 0 or x >= self.entry_count:
+                raise IndexError('list index out of range')
 
         entries = self.get_entries(start+1, stop)
 
-        return [entries[i] for i in _range(0, len(entries), step)]
+        if isinstance(x, slice):
+            return [entries[i] for i in _range(0, len(entries), step)]
+        else:
+            return entries[0]
 
     def get_iter(self, times, seconds, chunk_size=2000):
         """Make a iterator over the entries
