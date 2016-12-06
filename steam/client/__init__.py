@@ -101,16 +101,18 @@ class SteamClient(CMClient, BuiltinBase):
         if not os.path.isfile(filepath): return
 
         self._LOG.debug("Reading CM servers from %s" % repr(filepath))
+
         try:
             with open(filepath, 'r') as f:
                 data = json.load(f)
+        except ValueError:
+            self._LOG.error("Failed parsing %s", repr(filepath))
         except IOError as e:
-            self._LOG.error("load %s: %s" % (repr(filepath), str(e)))
-            return
-
-        self.cm_servers.clear()
-        self.cm_servers.merge_list(data['servers'])
-        self._cm_servers_timestamp = int(data['timestamp'])
+            self._LOG.error("Failed reading %s (%s)", repr(filepath), str(e))
+        else:
+            self.cm_servers.clear()
+            self.cm_servers.merge_list(data['servers'])
+            self._cm_servers_timestamp = int(data['timestamp'])
 
     def _handle_cm_list(self, msg):
         if self._cm_servers_timestamp is None:
