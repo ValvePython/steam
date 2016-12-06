@@ -24,6 +24,15 @@ message CInventory_ExchangeItem_Request {
 	optional uint64 outputitemdefid = 5;
 }
 
+message CInventory_GetEligiblePromoItemDefIDs_Request {
+	optional uint32 appid = 1;
+	optional uint64 steamid = 2;
+}
+
+message CInventory_GetEligiblePromoItemDefIDs_Response {
+	repeated uint64 itemdefids = 1;
+}
+
 message CInventory_AddItem_Request {
 	optional uint32 appid = 1;
 	repeated uint64 itemdefid = 2;
@@ -98,6 +107,9 @@ service Inventory {
 	}
 	rpc ExchangeItem (.CInventory_ExchangeItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Craft an item in a user's inventory";
+	}
+	rpc GetEligiblePromoItemDefIDs (.CInventory_GetEligiblePromoItemDefIDs_Request) returns (.CInventory_GetEligiblePromoItemDefIDs_Response) {
+		option (method_description) = "Returns a list of promo item defs the user is eligible for";
 	}
 	rpc AddPromoItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Adds a promo item to a user's inventory";
