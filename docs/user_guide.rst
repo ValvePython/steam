@@ -186,6 +186,7 @@ Example of sending a protobuf message and handling the response.
 
     from steam.enums import EResult
     from steam.core.msg import MsgProto
+    from steam.enums.emsg import EMsg
 
     message = MsgProto(EMsg.ClientAddFriend)
     message.body.steamid_to_add = 77777777777
