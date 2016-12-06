@@ -17,5 +17,5 @@ Table of Contents
 .. toctree::
     :maxdepth: 10
 
-    api/index
+    api/steam
 

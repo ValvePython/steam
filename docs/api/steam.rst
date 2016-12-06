@@ -1,7 +1,9 @@
-steam
-=====
+API Reference
+#############
 
 .. toctree::
+    :maxdepth: 10
+
     steam.client
     steam.core
     steam.enums
