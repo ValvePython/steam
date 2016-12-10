@@ -291,22 +291,22 @@ class ClientMarketingMessageUpdate2(StructMessage):
         return '\n'.join(text)
 
 class ClientUpdateGuestPassesList(StructMessage):
-    result = EResult.Invalid
+    eresult = EResult.Invalid
     countGuestPassesToGive = 0
     countGuestPassesToRedeem = 0
     # there is more to parse, but I dont have an sample to figure it out
     # fairly sure this is deprecated anyway since introduction of the invetory system
 
     def load(self, data):
-        (result,
+        (eresult,
          self.countGuestPassesToGive,
          self.countGuestPassesToRedeem,
         ) = struct.unpack_from("<III", data)
 
-        self.result = EResult(result)
+        self.eresult = EResult(eresult)
 
     def __str__(self):
-        return '\n'.join(["result: %s" % repr(self.result),
+        return '\n'.join(["eresult: %s" % repr(self.eresult),
                           "countGuestPassesToGive: %d" % self.countGuestPassesToGive,
                           "countGuestPassesToRedeem: %d" % self.countGuestPassesToRedeem,
                           ])
