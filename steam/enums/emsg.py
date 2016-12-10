@@ -640,9 +640,9 @@ class EMsg(SteamIntEnum):
     GCValidateSessionResponse = 2215
     GCCmdStatus = 2216
     GCRegisterWebInterfaces = 2217  # obsolete
-    GCRegisterWebInterfaces_Deprecated = 2217  # obsolete
+#     GCRegisterWebInterfaces_Deprecated = 2217  # obsolete
     GCGetAccountDetails = 2218  # obsolete
-    GCGetAccountDetails_DEPRECATED = 2218  # obsolete
+#     GCGetAccountDetails_DEPRECATED = 2218  # obsolete
     GCInterAppMessage = 2219
     GCGetEmailTemplate = 2220
     GCGetEmailTemplateResponse = 2221
@@ -1351,8 +1351,8 @@ class EMsg(SteamIntEnum):
     ClientPlayerNicknameList = 5587
     AMClientSetPlayerNickname = 5588
     AMClientSetPlayerNicknameResponse = 5589
-    ClientRequestOAuthTokenForApp = 5590  # obsolete
-    ClientRequestOAuthTokenForAppResponse = 5591  # obsolete
+#     ClientRequestOAuthTokenForApp = 5590  # obsolete
+#     ClientRequestOAuthTokenForAppResponse = 5591  # obsolete
     ClientCreateAccountProto = 5590
     ClientCreateAccountProtoResponse = 5591
     ClientGetNumberOfCurrentPlayersDP = 5592
@@ -1400,8 +1400,8 @@ class EMsg(SteamIntEnum):
     MDSToAMGetDepotDecryptionKeyResponse = 5813
     MDSGetVersionsForDepot = 5814
     MDSGetVersionsForDepotResponse = 5815
-    MDSSetPublicVersionForDepot = 5816  # obsolete
-    MDSSetPublicVersionForDepotResponse = 5817  # obsolete
+#     MDSSetPublicVersionForDepot = 5816  # obsolete
+#     MDSSetPublicVersionForDepotResponse = 5817  # obsolete
     ClientMDSInitWorkshopBuildRequest = 5816  # obsolete
     ClientMDSInitWorkshopBuildResponse = 5817  # obsolete
     ClientMDSGetDepotManifest = 5818  # obsolete
