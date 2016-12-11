@@ -351,3 +351,79 @@ class ClientChatEnter(StructMessage):
                           "numMembers: %r" % self.numMembers,
                           "chatRoomName: %s" % repr(self.chatRoomName),
         ] + map(lambda x: "memberList: %s" % x, self.memberList))
+
+##################################################################################################
+
+class _ResultStruct(StructMessage):
+    eresult = EResult.Invalid
+
+    def serialize(self):
+        return struct.pack("<I", self.eresult)
+
+    def load(self, data):
+        eresult, = struct.unpack_from("<I", data)
+        self.eresult = EResult(eresult)
+
+    def __str__(self):
+        return "eresult: %s" % repr(self.eresult)
+
+##################################################################################################
+
+class ClientRequestValidationMail(StructMessage):
+    UNKNOWN1 = b'\x00'
+
+    def serialize(self):
+        return self.UNKNOWN1
+
+    def load(self, data):
+        self.UNKNOWN1 = data
+
+    def __str__(self):
+        return "UNKNOWN1: %s" % repr(self.UNKNOWN1)
+
+
+class ClientRequestValidationMailResponse(_ResultStruct):
+    pass
+
+##################################################################################################
+
+class ClientRequestChangeMail(StructMessage):
+    password = ''
+    UNKNOWN1 = 0
+
+    def serialize(self):
+        return struct.pack("<81sI", self.password[:80].encode('ascii'), self.UNKNOWN1)
+
+    def __str__(self):
+        return '\n'.join(["password: %s" % repr(self.password),
+                          "UNKNOWN1: %d" % self.UNKNOWN1,
+                          ])
+
+
+class ClientRequestChangeMailResponse(_ResultStruct):
+    pass
+
+##################################################################################################
+
+class ClientPasswordChange3(StructMessage):
+    password = ''
+    new_password = ''
+    code = ''
+
+    def serialize(self):
+        return (b'\x00'
+                + self.password.encode('ascii') + b'\x00'
+                + self.new_password.encode('ascii') + b'\x00'
+                + self.code.encode('ascii') + b'\x00'
+                )
+
+    def __str__(self):
+        return '\n'.join(["password: %s" % repr(self.password),
+                          "new_password: %s" % repr(self.new_password),
+                          "code: %s" % repr(self.code),
+                          ])
+
+
+class ClientPasswordChangeResponse(_ResultStruct):
+    pass
+
