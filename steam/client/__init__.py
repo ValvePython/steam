@@ -28,7 +28,7 @@ from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
 from steam import SteamID
 from steam.client.builtins import BuiltinBase
-from steam.util import ip_from_int, proto_fill_from_dict
+from steam.util import ip_from_int, ip_to_int, proto_fill_from_dict
 
 if six.PY2:
     _cli_input = raw_input
@@ -436,7 +436,7 @@ class SteamClient(CMClient, BuiltinBase):
         if self.relogin_available:
             self.login(self.username, '', self.login_key)
 
-    def login(self, username, password='', login_key=None, auth_code=None, two_factor_code=None):
+    def login(self, username, password='', login_key=None, auth_code=None, two_factor_code=None, login_id=None):
         """Login as a specific user
 
         :param username: username
@@ -449,6 +449,8 @@ class SteamClient(CMClient, BuiltinBase):
         :type auth_code: :class:`str`
         :param two_factor_code: 2FA authentication code
         :type two_factor_code: :class:`str`
+        :param login_id: number used for identifying logon session
+        :type login_id: :class:`int`
         :return: logon result, see `CMsgClientLogonResponse.eresult <https://github.com/ValvePython/steam/blob/513c68ca081dc9409df932ad86c66100164380a6/protobufs/steammessages_clientserver.proto#L95-L118>`_
         :rtype: :class:`.EResult`
 
@@ -486,6 +488,13 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.client_language = "english"
         message.body.should_remember_password = True
         message.body.supports_rate_limit_response = True
+
+        if login_id is None:
+            obfuscationMask = 0xBAADF00D
+            local_address_int = ip_to_int(self.connection.socket.getsockname()[0])
+            message.body.obfustucated_private_ip = local_address_int ^ obfuscationMask
+        else:
+            message.body.obfustucated_private_ip = login_id
 
         message.body.account_name = username
 
