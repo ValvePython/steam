@@ -76,9 +76,10 @@ else:
 class WebAuth(object):
     key = None
     complete = False  #: whether authentication has been completed successfully
-    session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
+    session = None  #: :class:`requests.Session` (with auth cookies after auth is complete)
     captcha_gid = -1
-    steam_id = None    #: :class:`.SteamID` (after auth is complete)
+    steam_id = None  #: :class:`.SteamID` (after auth is complete)
+    _session_id = None
 
     def __init__(self, username, password):
         self.__dict__.update(locals())
@@ -107,16 +108,33 @@ class WebAuth(object):
         """
         try:
             resp = self.session.post('https://steamcommunity.com/login/getrsakey/',
-                                    timeout=15,
-                                    data={
-                                        'username': username,
-                                        'donotchache': int(time() * 1000),
-                                        },
-                                    ).json()
+                                     timeout=15,
+                                     data={
+                                         'username': username,
+                                         'donotchache': int(time() * 1000),
+                                     },
+                                     ).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
         return resp
+
+    @property
+    def session_id(self):
+        if self._session_id:
+            return self._session_id
+        try:
+            headers = {
+                'X-Requested-With': 'com.valvesoftware.android.steam.community'}
+            self.session.get('https://steamcommunity.com/login',
+                              params={'oauth_client_id': 'DE45CD61',
+                                      'oauth_scope': 'read_profile write_profile read_client write_client'
+                                      },
+                              headers=headers, timeout=15)
+        except requests.exceptions.RequestException as e:
+            raise HTTPError(str(e))
+        self._session_id = self.session.cookies['sessionid']
+        return self._session_id
 
     def _load_key(self):
         if not self.key:
@@ -131,7 +149,7 @@ class WebAuth(object):
 
     def _send_login(self, captcha='', email_code='', twofactor_code=''):
         data = {
-            'username' : self.username,
+            'username': self.username,
             "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
             "emailsteamid": str(self.steam_id) if email_code else '',
@@ -216,7 +234,7 @@ class MobileWebAuth(WebAuth):
 
     def _send_login(self, captcha='', email_code='', twofactor_code=''):
         data = {
-            'username' : self.username,
+            'username': self.username,
             "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
             "emailauth": email_code,
             "emailsteamid": str(self.steam_id) if email_code else '',
@@ -251,17 +269,22 @@ class MobileWebAuth(WebAuth):
 class WebAuthException(Exception):
     pass
 
+
 class HTTPError(WebAuthException):
     pass
+
 
 class LoginIncorrect(WebAuthException):
     pass
 
+
 class CaptchaRequired(WebAuthException):
     pass
 
+
 class EmailCodeRequired(WebAuthException):
     pass
+
 
 class TwoFactorCodeRequired(WebAuthException):
     pass
