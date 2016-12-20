@@ -28,6 +28,10 @@ class Connection(object):
 
         self.event_connected = event.Event()
 
+    @property
+    def local_address(self):
+        return self.socket.getsockname()[0]
+
     def connect(self, server_addr):
         self._new_socket()
 
