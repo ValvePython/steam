@@ -491,7 +491,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         if login_id is None:
             obfuscationMask = 0xBAADF00D
-            local_address_int = ip_to_int(self.connection.socket.getsockname()[0])
+            local_address_int = ip_to_int(self.connection.local_address)
             message.body.obfustucated_private_ip = local_address_int ^ obfuscationMask
         else:
             message.body.obfustucated_private_ip = login_id
