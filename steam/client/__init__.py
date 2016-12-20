@@ -490,9 +490,7 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.supports_rate_limit_response = True
 
         if login_id is None:
-            obfuscationMask = 0xBAADF00D
-            local_address_int = ip_to_int(self.connection.local_address)
-            message.body.obfustucated_private_ip = local_address_int ^ obfuscationMask
+            message.body.obfustucated_private_ip = ip_to_int(self.connection.local_address) ^ 0xBAADF00D
         else:
             message.body.obfustucated_private_ip = login_id
 

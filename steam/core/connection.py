@@ -30,7 +30,7 @@ class Connection(object):
 
     @property
     def local_address(self):
-        return self.socket.getsockname()[0] if self.event_connected.is_set() else None
+        return self.socket.getsockname()[0]
 
     def connect(self, server_addr):
         self._new_socket()
