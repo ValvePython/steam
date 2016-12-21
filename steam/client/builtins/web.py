@@ -16,14 +16,14 @@ class Web(object):
         """Get web authentication cookies via WebAPI's ``AuthenticateUser``
 
         .. note::
-            A session is only valid during the current steam session.
+            The cookies are valid only while :class:`.SteamClient` instance is logged on.
 
         :return: dict with authentication cookies
         :rtype: :class:`dict`, :class:`None`
         """
         if not self.logged_on: return None
 
-        resp = self.send_job_and_wait(MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce), timeout=5)
+        resp = self.send_job_and_wait(MsgProto(EMsg.ClientRequestWebAPIAuthenticateUserNonce), timeout=7)
 
         if resp is None: return None
 
@@ -53,6 +53,9 @@ class Web(object):
 
         .. note::
             Auth cookies will only be send to ``(help|store).steampowered.com`` and ``steamcommunity.com`` domains
+
+        .. note::
+            The session is valid only while :class:`.SteamClient` instance is logged on.
 
         :param language: localization language for steam pages
         :type language: :class:`str`
