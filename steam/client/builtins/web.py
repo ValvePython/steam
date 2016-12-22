@@ -5,12 +5,19 @@ from steam import webapi
 from steam.core.msg import MsgProto
 from steam.enums.emsg import EMsg
 from steam.core.crypto import generate_session_key, symmetric_encrypt
-from steam.util.web import make_requests_session
+from steam.util.web import make_requests_session, generate_session_id
 
 
 class Web(object):
+    _web_session = None
+
     def __init__(self, *args, **kwargs):
         super(Web, self).__init__(*args, **kwargs)
+
+        self.on(self.EVENT_DISCONNECTED, self.__handle_disconnect)
+
+    def __handle_disconnect(self):
+        self._web_session = None
 
     def get_web_session_cookies(self):
         """Get web authentication cookies via WebAPI's ``AuthenticateUser``
@@ -62,11 +69,15 @@ class Web(object):
         :return: authenticated Session ready for use
         :rtype: :class:`requests.Session`, :class:`None`
         """
+        if self._web_session:
+            return self._web_session
+
         cookies = self.get_web_session_cookies()
         if cookies is None:
             return None
 
-        session = make_requests_session()
+        self._web_session = session = make_requests_session()
+        session_id = generate_session_id()
 
         for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
             for name, val in cookies.items():
@@ -75,5 +86,6 @@ class Web(object):
 
             session.cookies.set('Steam_Language', language, domain=domain)
             session.cookies.set('birthtime', '-3333', domain=domain)
+            session.cookies.set('sessionid', session_id, domain=domain)
 
         return session

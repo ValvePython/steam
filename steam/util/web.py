@@ -1,4 +1,6 @@
 import requests
+from binascii import hexlify
+from steam.core.crypto import sha1_hash, random_bytes
 
 def make_requests_session():
     """
@@ -13,3 +15,10 @@ def make_requests_session():
     session.headers['User-Agent'] = ua
 
     return session
+
+def generate_session_id():
+    """
+    :returns: session id
+    :rtype: :class:`str`
+    """
+    return hexlify(sha1_hash(random_bytes(32)))[:32]
