@@ -21,4 +21,4 @@ def generate_session_id():
     :returns: session id
     :rtype: :class:`str`
     """
-    return hexlify(sha1_hash(random_bytes(32)))[:32]
+    return hexlify(sha1_hash(random_bytes(32)))[:32].decode('ascii')
