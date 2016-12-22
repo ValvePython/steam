@@ -516,6 +516,10 @@ class SteamClient(CMClient, BuiltinBase):
         self.send(message)
 
         resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
+
+        if resp.body.eresult == EResult.OK:
+            gevent.sleep(0.5)
+
         return EResult(resp.body.eresult) if resp else EResult.Fail
 
     def anonymous_login(self):
