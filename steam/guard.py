@@ -3,7 +3,7 @@ This submodule contains various functionality related to Steam Guard.
 
 :class:`SteamAuthenticator` provides methods for genereating codes
 and enabling 2FA on a Steam account. Operations managing the authenticator
-on an account require an instance of either :class:`.MobileWebAuth` or 
+on an account require an instance of either :class:`.MobileWebAuth` or
 :class:`.SteamClient`. The instance needs to be logged in.
 
 Adding an authenticator
@@ -54,11 +54,11 @@ from steam.util import proto_to_dict
 class SteamAuthenticator(object):
     """Add/Remove authenticator from an account. Generate 2FA and confirmation codes."""
     _finalize_attempts = 5
-    medium =  None            #: instance of :class:`.MobileWebAuth` or :class:`.SteamClient`
-    steam_time_offset = None  #: offset from steam server time
-    align_time_every = 0      #: how often to align time with Steam (``0`` never, otherwise interval in seconds)
+    medium =  None               #: instance of :class:`.MobileWebAuth` or :class:`.SteamClient`
+    steam_time_offset = None     #: offset from steam server time
+    align_time_every = 0         #: how often to align time with Steam (``0`` never, otherwise interval in seconds)
     _offset_last_check = 0
-    secrets = None            #: :class:`dict` with authenticator secrets
+    secrets = None               #: :class:`dict` with authenticator secrets
 
     def __init__(self, secrets=None, medium=None):
         """
@@ -151,6 +151,9 @@ class SteamAuthenticator(object):
 
         :raises: :class:`SteamAuthenticatorError`
         """
+        if not self.has_phone_number():
+            raise SteamAuthenticatorError("Account doesn't have a verified phone number")
+
         resp = self._send_request('AddAuthenticator', {
             'steamid': self.medium.steam_id,
             'authenticator_time': int(time()),
@@ -200,6 +203,8 @@ class SteamAuthenticator(object):
         """
         if not self.secrets:
             raise SteamAuthenticatorError("No authenticator secrets available?")
+        if not isinstance(self.medium, MobileWebAuth):
+            raise SteamAuthenticatorError("Only available via MobileWebAuth")
 
         resp = self._send_request('RemoveAuthenticator', {
             'steamid': self.medium.steam_id,
@@ -238,6 +243,131 @@ class SteamAuthenticator(object):
         :raises: :class:`SteamAuthenticatorError`
         """
         self._send_request('DestroyEmergencyCodes', {'steamid': self.medium.steam_id})
+
+    def _get_web_session(self):
+        """
+        :return: authenticated web session
+        :rtype: :class:`requests.Session`
+        :raises: :class:`RuntimeError` when session is unavailable
+        """
+        if isinstance(self.medium, MobileWebAuth):
+            return self.medium.session
+        else:
+            if self.medium.logged_on:
+                sess = self.medium.get_web_session()
+
+                if sess is None:
+                    raise RuntimeError("Failed to get a web session. Try again in a few minutes")
+                else:
+                    return sess
+            else:
+                raise RuntimeError("SteamClient instance is not connected")
+
+    def add_phone_number(self, phone_number):
+        """Add phone number to account
+
+        Then confirm it via :meth:`confirm_phone_number()`
+
+        :param phone_number: phone number with country code
+        :type  phone_number: :class:`str`
+        :return: success (returns ``False`` on request fail/timeout)
+        :rtype: :class:`bool`
+        """
+        sess = self._get_web_session()
+
+        try:
+            resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
+                            data={
+                                'op': 'add_phone_number',
+                                'arg': phone_number,
+                                'checkfortos': 0,
+                                'skipvoip': 0,
+                                'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                },
+                            timeout=15).json()
+        except:
+            return False
+
+        return (resp or {}).get('success', False)
+
+    def confirm_phone_number(self, sms_code):
+        """Confirm phone number with the recieved SMS code
+
+        :param sms_code: sms code
+        :type  sms_code: :class:`str`
+        :return: success (returns ``False`` on request fail/timeout)
+        :rtype: :class:`bool`
+        """
+        sess = self._get_web_session()
+
+        try:
+            resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
+                            data={
+                                'op': 'check_sms_code',
+                                'arg': sms_code,
+                                'checkfortos': 1,
+                                'skipvoip': 1,
+                                'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                },
+                            timeout=15).json()
+        except:
+            return False
+
+        return (resp or {}).get('success', False)
+
+    def has_phone_number(self):
+        """Check whether the account has a verified phone number
+
+        :return: result
+        :rtype: :class:`bool` or :class:`None`
+
+        .. note::
+            Retruns `None` if the web requests fails for any reason
+        """
+        sess = self._get_web_session()
+
+        try:
+            resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
+                            data={
+                                'op': 'has_phone',
+                                'arg': '0',
+                                'checkfortos': 0,
+                                'skipvoip': 1,
+                                'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                },
+                            timeout=15).json()
+        except:
+            raise
+
+        if resp['success'] == True:
+            return resp['has_phone']
+
+    def validate_phone_number(self, phone_number):
+        """Test whether phone number is valid for Steam
+
+        :param phone_number: phone number with country code
+        :type  phone_number: :class:`str`
+        :return: see example output below
+        :rtype: :class:`dict`
+
+        .. code:: python
+
+            {'is_fixed': False,
+             'is_valid': False,
+             'is_voip': True,
+             'number': '+1 123-555-1111',
+             'success': True}
+        """
+        sess = self._get_web_session()
+
+        try:
+            resp = sess.get('https://store.steampowered.com//phone/validate',
+                            params={'phoneNumber': phone_number},
+                            timeout=15).json()
+        except:
+            resp = {}
+
+        return resp
 
 
 class SteamAuthenticatorError(Exception):

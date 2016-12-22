@@ -65,7 +65,7 @@ from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
 from steam.core.crypto import backend
 
 from steam import SteamID, webapi
-from steam.util.web import make_requests_session
+from steam.util.web import make_requests_session, generate_session_id
 
 if sys.version_info < (3,):
     intBase = long
@@ -75,10 +75,11 @@ else:
 
 class WebAuth(object):
     key = None
-    complete = False  #: whether authentication has been completed successfully
-    session = None    #: :class:`requests.Session` (with auth cookies after auth is complete)
+    complete = False    #: whether authentication has been completed successfully
+    session = None      #: :class:`requests.Session` (with auth cookies after auth is complete)
+    session_id = None   #: :class:`str`, session id string
     captcha_gid = -1
-    steam_id = None    #: :class:`.SteamID` (after auth is complete)
+    steam_id = None     #: :class:`.SteamID` (after auth is complete)
 
     def __init__(self, username, password):
         self.__dict__.update(locals())
@@ -187,9 +188,12 @@ class WebAuth(object):
                 for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
                     self.session.cookies.set(cookie.name, cookie.value, domain=domain, secure=cookie.secure)
 
+            self.session_id = generate_session_id()
+
             for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
                 self.session.cookies.set('Steam_Language', language, domain=domain)
                 self.session.cookies.set('birthtime', '-3333', domain=domain)
+                self.session.cookies.set('sessionid', self.session_id, domain=domain)
 
             self._finalize_login(resp)
 
