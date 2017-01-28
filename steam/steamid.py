@@ -124,7 +124,7 @@ class SteamID(intBase):
 
         """
         return "STEAM_%d:%d:%d" % (
-            self.universe,
+            int(self.universe),
             self.id % 2,
             self.id >> 1,
             )
