@@ -123,7 +123,8 @@ class SteamID(intBase):
 
 
         """
-        return "STEAM_1:%s:%s" % (
+        return "STEAM_%d:%d:%d" % (
+            self.universe,
             self.id % 2,
             self.id >> 1,
             )
@@ -279,7 +280,7 @@ def steam2_to_tuple(value):
     .. note::
         The universe will be always set to ``1``. See :attr:`SteamID.as_steam2`
     """
-    match = re.match(r"^STEAM_(?P<universe>[01])"
+    match = re.match(r"^STEAM_(?P<universe>\d+)"
                      r":(?P<reminder>[0-1])"
                      r":(?P<id>\d+)$", value
                      )
@@ -288,8 +289,13 @@ def steam2_to_tuple(value):
         return None
 
     steam32 = (int(match.group('id')) << 1) | int(match.group('reminder'))
+    universe = int(match.group('universe'))
 
-    return (steam32, EType(1), EUniverse(1), 1)
+    # Games before orange box used to incorrectly display universe as 0, we support that
+    if universe == 0:
+        universe = 1
+
+    return (steam32, EType(1), EUniverse(universe), 1)
 
 
 def steam3_to_tuple(value):
