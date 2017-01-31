@@ -467,7 +467,7 @@ def extract_secrets_from_android_rooted(adb_path='adb'):
         - device in debug mode, connected and paired
 
     .. note::
-        If you know how to make this work, without requiring a the device to be rooted,
+        If you know how to make this work, without requiring the device to be rooted,
         please open a issue on github. Thanks
 
     :param adb_path: path to adb binary
@@ -481,8 +481,10 @@ def extract_secrets_from_android_rooted(adb_path='adb'):
         "'cat /data/data/com.valvesoftware.android.steam.community/files/Steamguard*'"
         ])
 
+    data = data.decode('utf-8')
+
     if data[0] != "{":
         raise RuntimeError("Got invalid data: %s" % repr(data))
 
     return {int(x['steamid']): x
-            for x in map(json.loads, data.replace("}{", '}||||{').split('|||||'))}
+            for x in map(json.loads, data.replace("}{", '}|||||{').split('|||||'))}
