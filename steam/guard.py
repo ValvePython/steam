@@ -481,7 +481,9 @@ def extract_secrets_from_android_rooted(adb_path='adb'):
         "'cat /data/data/com.valvesoftware.android.steam.community/files/Steamguard*'"
         ])
 
-    data = data.decode('utf-8')
+    # When adb daemon is not running, `adb` will print a couple of lines before our data.
+    # The data doesn't have new lines and its always on the last line.
+    data = data.decode('utf-8').split('\n')[-1]
 
     if data[0] != "{":
         raise RuntimeError("Got invalid data: %s" % repr(data))
