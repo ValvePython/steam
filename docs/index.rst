@@ -12,6 +12,7 @@ Table of Contents
 .. toctree::
     :maxdepth: 3
 
+    install
     user_guide
 
 .. toctree::

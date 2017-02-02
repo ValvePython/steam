@@ -23,6 +23,8 @@ For questions, issues or general curiosity visit the repo at `https://github.com
 Installation
 ------------
 
+For details on require system packages, see `Full Installation <http://steam.readthedocs.io/en/latest/install.html>`_.
+
 By default the ``steam`` package doesn't install all dependecies.
 Add ``[client]`` extra if you are going to use ``SteamClient``.
 

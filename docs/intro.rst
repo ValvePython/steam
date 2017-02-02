@@ -24,8 +24,10 @@ Checkout the :doc:`user_guide` for examples, or the :doc:`api/index` for details
 
 For questions, issues, or general curiosity, visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
-Installation
-============
+Quick install
+=============
+
+For details on require system packages, see :doc:`install`.
 
 By default the ``steam`` package doesn't install all dependencies.
 Add ``[client]`` extra if you are going to use :class:`SteamClient <steam.client.SteamClient>`.
