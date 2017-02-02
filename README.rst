@@ -20,8 +20,8 @@ or the `API Reference <http://steam.readthedocs.io/en/latest/api/index.html>`_ f
 
 For questions, issues or general curiosity visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
-Installation
-------------
+Quick install
+-------------
 
 For details on require system packages, see `Full Installation <http://steam.readthedocs.io/en/latest/install.html>`_.
 
