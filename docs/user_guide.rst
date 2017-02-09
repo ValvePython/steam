@@ -174,7 +174,7 @@ After that we logout.
 
     client.logout()
 
-You can find more examples at https://github.com/ValvePython/steam/tree/master/recipes 
+You can find more examples at https://github.com/ValvePython/steam/tree/master/recipes
 
 Sending a message
 -----------------
@@ -189,13 +189,13 @@ Example of sending a protobuf message and handling the response.
     from steam.enums.emsg import EMsg
 
     message = MsgProto(EMsg.ClientAddFriend)
-    message.body.steamid_to_add = 77777777777
+    message.body.steamid_to_add = 76561197960265728
 
     resp = client.send_message_and_wait(message, EMsg.ClientAddFriendResponse)
 
     if resp.eresult == EResult.OK:
-        print "Send a friend request to %s (%d)" % (repr(body.persona_name_added),
-                                                   body.steam_id_added,
+        print "Send a friend request to %s (%d)" % (repr(resp.body.persona_name_added),
+                                                   resp.body.steam_id_added,
                                                    )
     else:
         print "Error: %s" % EResult(resp.eresult)
