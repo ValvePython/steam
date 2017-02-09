@@ -157,6 +157,8 @@ class SteamFriendlist(EventEmitter):
 
         if isinstance(steamid_or_accountname_or_email, (intBase, int)):
             m.body.steamid_to_add = steamid_or_accountname_or_email
+        elif isinstance(steamid_or_accountname_or_email, SteamUser):
+            m.body.steamid_to_add = steamid_or_accountname_or_email.steam_id
         else:
             m.body.accountname_or_email_to_add = steamid_or_accountname_or_email
 
@@ -169,5 +171,8 @@ class SteamFriendlist(EventEmitter):
         :param steamid: their steamid
         :type steamid: :class:`int`, :class:`.SteamID`, :class:`.SteamUser`
         """
+        if isinstance(steamid, SteamUser):
+            steamid = steamid.steam_id
+
         self._steam.send(MsgProto(EMsg.ClientRemoveFriend), {'friendid': steamid})
 
