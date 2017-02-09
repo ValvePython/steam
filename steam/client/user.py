@@ -10,7 +10,7 @@ class SteamUser(object):
     """Holds various functionality and data related to a steam user
     """
     _pstate = None
-    steam_id = SteamID()
+    steam_id = SteamID()  #: steam id
     relationship = EFriendRelationship.NONE   #: friendship status
 
     def __init__(self, steam_id, steam):
