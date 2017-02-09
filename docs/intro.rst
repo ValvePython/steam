@@ -29,17 +29,10 @@ Quick install
 
 For details on require system packages, see :doc:`install`.
 
-By default the ``steam`` package doesn't install all dependencies.
-Add ``[client]`` extra if you are going to use :class:`SteamClient <steam.client.SteamClient>`.
-
 Install latest version from PYPI::
 
     pip install -U steam
-    pip install -U steam[client]
 
 Install the current dev version from ``github``::
 
     pip install git+https://github.com/ValvePython/steam
-    pip install git+https://github.com/ValvePython/steam#egg=steam[client]
-
-For extras syntax in ``requirements.txt`` see `pip docs <https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers>`_

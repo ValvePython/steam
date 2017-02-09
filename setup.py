@@ -19,14 +19,13 @@ install_requires = [
     'cryptography>=1.3',
     'requests>=2.9.1',
     'vdf>=2.0',
+    'gevent>=1.1.0',
+    'protobuf>=3.0.0',
+    'gevent-eventemitter>=2.0',
 ]
 
 install_extras = {
-    'client': [
-        'gevent>=1.1.0',
-        'protobuf>=3.0.0',
-        'gevent-eventemitter>=2.0',
-    ],
+    'client': [],
 }
 
 if sys.version_info < (3, 4):
