@@ -95,21 +95,21 @@ class Account(object):
         else:
             return EResult(resp.eresult)
 
-    def change_email(self, password, email, email_code=''):
+    def change_email(self, password, email, code=''):
         """Change account's email address
 
         :param password: current account password
         :type  password: :class:`str`
-        :param new_email: new account email
-        :type  new_email: :class:`str`
-        :param email_code: email code
-        :type  email_code: :class:`str`
+        :param email: new email address
+        :type  email: :class:`str`
+        :param code: email code
+        :type  code: :class:`str`
         :return: result
         :rtype: :class:`.EResult`
 
         .. note::
-            To change email, first call without ``email_code``
-            and then with to finalize the change
+            To change email, first call without ``code``
+            and then with, to finalize the change
         """
         message = MsgProto(EMsg.ClientEmailChange4)
         message.body.password = password
