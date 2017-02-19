@@ -7,7 +7,7 @@ import sys
 import six
 from six.moves import xrange as _range
 from types import GeneratorType as _GeneratorType
-from google.protobuf.internal.python_message import GeneratedProtocolMessageType as _ProtoMessageType
+from google.protobuf.message import Message as _ProtoMessageType
 
 if six.PY2:
     _list_types = list, xrange, _GeneratorType
@@ -72,7 +72,7 @@ def proto_to_dict(message):
     :rtype: dict
     :raises: :class:`.TypeError` if ``message`` is not a proto message
     """
-    if not isinstance(message.__class__, _ProtoMessageType):
+    if not isinstance(message, _ProtoMessageType):
         raise TypeError("Expected `message` to be a instance of protobuf message")
 
     data = {}
@@ -99,7 +99,7 @@ def proto_fill_from_dict(message, data, clear=True):
     :return: value of message paramater
     :raises: incorrect types or values will raise
     """
-    if not isinstance(message.__class__, _ProtoMessageType):
+    if not isinstance(message, _ProtoMessageType):
         raise TypeError("Expected `message` to be a instance of protobuf message")
     if not isinstance(data, dict):
         raise TypeError("Expected `data` to be of type `dict`")
