@@ -7,7 +7,7 @@ Linux
 Steps assume that ``python`` and ``pip`` are already installed.
 
 1. Install dependencies (see sections below)
-2. Run ``pip install steam[client]``
+2. Run ``pip install steam``
 
 .. note::
     Consider using `virtualenv <https://virtualenv.pypa.io>`_
@@ -53,7 +53,7 @@ Cygwin
     - Open cygwin terminal
     - Run ``easy_install-3.4 pip``
 
-3. Run ``pip install steam[client]``
+3. Run ``pip install steam``
 
 .. note::
     Consider using `virtualenv <https://virtualenv.pypa.io>`_
@@ -71,5 +71,5 @@ Native Python
 .. note::
     Installing for all users will require administrator rights
 
-2. Then from ``cmd`` run ``pip install steam[client]``
+2. Then from ``cmd`` run ``pip install steam``
 
