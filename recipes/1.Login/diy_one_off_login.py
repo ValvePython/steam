@@ -29,7 +29,6 @@ def auth_code_prompt(is_2fa, mismatch):
 
 try:
     client.login(**LOGON_DETAILS)
-    client.wait_event('logged_on')
 except:
     raise SystemExit
 

@@ -14,9 +14,6 @@ if result != EResult.OK:
     raise SystemExit
 
 print("-"*20)
-
-client.wait_event('logged_on')
-
 print("Logged on as:", client.user.name)
 print("Community profile:", client.steam_id.community_url)
 print("Last logon:", client.user.last_logon)
