@@ -1099,6 +1099,8 @@ message CMsgClientWalletInfoUpdate {
 	optional int32 balance = 2;
 	optional int32 currency = 3;
 	optional int32 balance_delayed = 4;
+	optional int64 balance64 = 5;
+	optional int64 balance64_delayed = 6;
 }
 
 message CMsgClientAppInfoUpdate {
