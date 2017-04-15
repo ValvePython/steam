@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_video.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x19steammessages_video.proto\x1a steammessages_unified_base.proto\"\x81\x01\n CVideo_ClientGetVideoURL_Request\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"r\n!CVideo_ClientGetVideoURL_Response\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12-\n\tvideo_url\x18\x02 \x01(\tB\x1a\x82\xb5\x18\x16URL for video manifest\":\n CVideo_UnlockedH264_Notification\x12\x16\n\x0e\x65ncryption_key\x18\x01 \x01(\x0c\x32\xab\x01\n\x05Video\x12\x8e\x01\n\x11\x43lientGetVideoURL\x12!.CVideo_ClientGetVideoURL_Request\x1a\".CVideo_ClientGetVideoURL_Response\"2\x82\xb5\x18.Get the initial URL to begin streaming a video\x1a\x11\x82\xb5\x18\rVideo methods2\x9e\x01\n\x0bVideoClient\x12\x88\x01\n\x12NotifyUnlockedH264\x12!.CVideo_UnlockedH264_Notification\x1a\x0b.NoResponse\"B\x82\xb5\x18>Notification from server to client that h264 has been unlocked\x1a\x04\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x19steammessages_video.proto\x1a steammessages_unified_base.proto\"\x81\x01\n CVideo_ClientGetVideoURL_Request\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"r\n!CVideo_ClientGetVideoURL_Response\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12-\n\tvideo_url\x18\x02 \x01(\tB\x1a\x82\xb5\x18\x16URL for video manifest\":\n CVideo_UnlockedH264_Notification\x12\x16\n\x0e\x65ncryption_key\x18\x01 \x01(\x0c\"\x85\x01\n(CFovasVideo_ClientGetOPFSettings_Request\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"|\n)CFovasVideo_ClientGetOPFSettings_Response\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12\x33\n\x0copf_settings\x18\x02 \x01(\tB\x1d\x82\xb5\x18\x19JSON blob of OPF Settings2\xab\x01\n\x05Video\x12\x8e\x01\n\x11\x43lientGetVideoURL\x12!.CVideo_ClientGetVideoURL_Request\x1a\".CVideo_ClientGetVideoURL_Response\"2\x82\xb5\x18.Get the initial URL to begin streaming a video\x1a\x11\x82\xb5\x18\rVideo methods2\x9e\x01\n\x0bVideoClient\x12\x88\x01\n\x12NotifyUnlockedH264\x12!.CVideo_UnlockedH264_Notification\x1a\x0b.NoResponse\"B\x82\xb5\x18>Notification from server to client that h264 has been unlocked\x1a\x04\xc0\xb5\x18\x02\x32\xf3\x01\n\nFovasVideo\x12\xc3\x01\n\x14\x43lientGetOPFSettings\x12).CFovasVideo_ClientGetOPFSettings_Request\x1a*.CFovasVideo_ClientGetOPFSettings_Response\"T\x82\xb5\x18PRetrieve the OPF settings JSON blob. Available via the Client for 360 Player App\x1a\x1f\x82\xb5\x18\x1b\x46ovas Video Service MethodsB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -136,9 +136,87 @@ _CVIDEO_UNLOCKEDH264_NOTIFICATION = _descriptor.Descriptor(
   serialized_end=369,
 )
 
+
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST = _descriptor.Descriptor(
+  name='CFovasVideo_ClientGetOPFSettings_Request',
+  full_name='CFovasVideo_ClientGetOPFSettings_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CFovasVideo_ClientGetOPFSettings_Request.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))),
+    _descriptor.FieldDescriptor(
+      name='client_cellid', full_name='CFovasVideo_ClientGetOPFSettings_Request.client_cellid', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\"Cell ID of client, zero if unknown'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=372,
+  serialized_end=505,
+)
+
+
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE = _descriptor.Descriptor(
+  name='CFovasVideo_ClientGetOPFSettings_Response',
+  full_name='CFovasVideo_ClientGetOPFSettings_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CFovasVideo_ClientGetOPFSettings_Response.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))),
+    _descriptor.FieldDescriptor(
+      name='opf_settings', full_name='CFovasVideo_ClientGetOPFSettings_Response.opf_settings', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\031JSON blob of OPF Settings'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=507,
+  serialized_end=631,
+)
+
 DESCRIPTOR.message_types_by_name['CVideo_ClientGetVideoURL_Request'] = _CVIDEO_CLIENTGETVIDEOURL_REQUEST
 DESCRIPTOR.message_types_by_name['CVideo_ClientGetVideoURL_Response'] = _CVIDEO_CLIENTGETVIDEOURL_RESPONSE
 DESCRIPTOR.message_types_by_name['CVideo_UnlockedH264_Notification'] = _CVIDEO_UNLOCKEDH264_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CFovasVideo_ClientGetOPFSettings_Request'] = _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST
+DESCRIPTOR.message_types_by_name['CFovasVideo_ClientGetOPFSettings_Response'] = _CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE
 
 CVideo_ClientGetVideoURL_Request = _reflection.GeneratedProtocolMessageType('CVideo_ClientGetVideoURL_Request', (_message.Message,), dict(
   DESCRIPTOR = _CVIDEO_CLIENTGETVIDEOURL_REQUEST,
@@ -161,6 +239,20 @@ CVideo_UnlockedH264_Notification = _reflection.GeneratedProtocolMessageType('CVi
   ))
 _sym_db.RegisterMessage(CVideo_UnlockedH264_Notification)
 
+CFovasVideo_ClientGetOPFSettings_Request = _reflection.GeneratedProtocolMessageType('CFovasVideo_ClientGetOPFSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST,
+  __module__ = 'steammessages_video_pb2'
+  # @@protoc_insertion_point(class_scope:CFovasVideo_ClientGetOPFSettings_Request)
+  ))
+_sym_db.RegisterMessage(CFovasVideo_ClientGetOPFSettings_Request)
+
+CFovasVideo_ClientGetOPFSettings_Response = _reflection.GeneratedProtocolMessageType('CFovasVideo_ClientGetOPFSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE,
+  __module__ = 'steammessages_video_pb2'
+  # @@protoc_insertion_point(class_scope:CFovasVideo_ClientGetOPFSettings_Response)
+  ))
+_sym_db.RegisterMessage(CFovasVideo_ClientGetOPFSettings_Response)
+
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
@@ -172,6 +264,14 @@ _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_id'].has_options = True
 _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\010Video ID'))
 _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_url'].has_options = True
 _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_url']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\026URL for video manifest'))
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['app_id'].has_options = True
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['app_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['client_cellid'].has_options = True
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['client_cellid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\"Cell ID of client, zero if unknown'))
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE.fields_by_name['app_id'].has_options = True
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE.fields_by_name['app_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE.fields_by_name['opf_settings'].has_options = True
+_CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE.fields_by_name['opf_settings']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\031JSON blob of OPF Settings'))
 
 _VIDEO = _descriptor.ServiceDescriptor(
   name='Video',
@@ -179,8 +279,8 @@ _VIDEO = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\rVideo methods')),
-  serialized_start=372,
-  serialized_end=543,
+  serialized_start=634,
+  serialized_end=805,
   methods=[
   _descriptor.MethodDescriptor(
     name='ClientGetVideoURL',
@@ -211,8 +311,8 @@ _VIDEOCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\300\265\030\002')),
-  serialized_start=546,
-  serialized_end=704,
+  serialized_start=808,
+  serialized_end=966,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyUnlockedH264',
@@ -232,6 +332,38 @@ VideoClient = service_reflection.GeneratedServiceType('VideoClient', (_service.S
 
 VideoClient_Stub = service_reflection.GeneratedServiceStubType('VideoClient_Stub', (VideoClient,), dict(
   DESCRIPTOR = _VIDEOCLIENT,
+  __module__ = 'steammessages_video_pb2'
+  ))
+
+
+
+_FOVASVIDEO = _descriptor.ServiceDescriptor(
+  name='FovasVideo',
+  full_name='FovasVideo',
+  file=DESCRIPTOR,
+  index=2,
+  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\033Fovas Video Service Methods')),
+  serialized_start=969,
+  serialized_end=1212,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='ClientGetOPFSettings',
+    full_name='FovasVideo.ClientGetOPFSettings',
+    index=0,
+    containing_service=None,
+    input_type=_CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST,
+    output_type=_CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030PRetrieve the OPF settings JSON blob. Available via the Client for 360 Player App')),
+  ),
+])
+
+FovasVideo = service_reflection.GeneratedServiceType('FovasVideo', (_service.Service,), dict(
+  DESCRIPTOR = _FOVASVIDEO,
+  __module__ = 'steammessages_video_pb2'
+  ))
+
+FovasVideo_Stub = service_reflection.GeneratedServiceStubType('FovasVideo_Stub', (FovasVideo,), dict(
+  DESCRIPTOR = _FOVASVIDEO,
   __module__ = 'steammessages_video_pb2'
   ))
 
