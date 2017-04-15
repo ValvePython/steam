@@ -19,7 +19,7 @@ install_requires = [
     'cryptography>=1.3',
     'requests>=2.9.1',
     'vdf>=2.0',
-    'gevent>=1.1.0',
+    'gevent>=1.2.0',
     'protobuf>=3.0.0',
     'gevent-eventemitter>=2.0',
 ]
