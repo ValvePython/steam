@@ -45,7 +45,7 @@ class Web(object):
         try:
             resp = webapi.post('ISteamUserAuth', 'AuthenticateUser', 1, params=data)
         except Exception as exp:
-            self._logger.debug("get_web_session_cookies error: %s" % str(exp))
+            self._LOG.debug("get_web_session_cookies error: %s" % str(exp))
             return None
 
         return {
