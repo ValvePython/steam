@@ -565,6 +565,14 @@ class SteamClient(CMClient, BuiltinBase):
         while True:
             gevent.sleep(300)
 
+    def sleep(self, seconds):
+        """Yeild and sleep N seconds. Allows other greenlets to run"""
+        gevent.sleep(seconds)
+
+    def idle(self):
+        """Yeild in the current greenlet and let other greenlets run"""
+        gevent.idle()
+
     def cli_login(self, username='', password=''):
         """Generates CLI prompts to complete the login process
 
