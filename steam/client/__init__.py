@@ -8,6 +8,11 @@ Implementation of Steam client based on ``gevent``
     Optional features are available as :mod:`.mixins`. This allows the client to remain light yet flexible.
 
 """
+import gevent
+import gevent.monkey
+gevent.monkey.patch_socket()
+gevent.monkey.patch_ssl()
+
 import os
 import json
 from time import time
@@ -15,10 +20,6 @@ from io import open
 from getpass import getpass
 import logging
 import six
-import gevent
-import gevent.monkey
-gevent.monkey.patch_socket()
-gevent.monkey.patch_ssl()
 
 from steam.core.crypto import sha1_hash
 from eventemitter import EventEmitter

@@ -141,7 +141,7 @@ class SteamAuthenticator(object):
 
             if action == 'AddAuthenticator':
                 for key in ['shared_secret', 'identity_secret', 'secret_1']:
-                    resp[key] = b64encode(resp[key])
+                    resp[key] = b64encode(resp[key]).decode('ascii')
 
         return resp
 
@@ -195,6 +195,9 @@ class SteamAuthenticator(object):
 
     def remove(self):
         """Remove authenticator
+
+        .. note::
+            After removing authenticator Steam Guard will be set to email codes
 
         .. warning::
             Doesn't work via :class:`.SteamClient`. Disabled by Valve
