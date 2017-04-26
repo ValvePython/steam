@@ -29,7 +29,7 @@ init:
 
 test:
 	coverage erase
-	PYTHONHASHSEED=0 nosetests --nologcapture --verbosity 1 --with-coverage --cover-package=steam
+	PYTHONHASHSEED=0 nosetests --nologcapture --verbosity 1 --with-coverage --cover-package=steam tests
 
 webauth_gen:
 	rm -f vcr/webauth*
