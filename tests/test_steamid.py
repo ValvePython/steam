@@ -269,24 +269,24 @@ class steamid_functions(unittest.TestCase):
 
         # try profile urls
         sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/[U:1:12]')
-        self.assertEqual(sid, '76561197960265740')
+        self.assertEqual(sid, 76561197960265740)
 
         sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/76561197960265740')
-        self.assertEqual(sid, '76561197960265740')
+        self.assertEqual(sid, 76561197960265740)
 
         sid = steamid.steam64_from_url('https://steamcommunity.com/id/johnc')
-        self.assertEqual(sid, '76561197960265740')
+        self.assertEqual(sid, 76561197960265740)
 
 
         # try group urls
         sid = steamid.steam64_from_url('https://steamcommunity.com/gid/[g:1:4]')
-        self.assertEqual(sid, '103582791429521412')
+        self.assertEqual(sid, 103582791429521412)
 
         sid = steamid.steam64_from_url('https://steamcommunity.com/gid/103582791429521412')
-        self.assertEqual(sid, '103582791429521412')
+        self.assertEqual(sid, 103582791429521412)
 
         sid = steamid.steam64_from_url('https://steamcommunity.com/groups/Valve')
-        self.assertEqual(sid, '103582791429521412')
+        self.assertEqual(sid, 103582791429521412)
 
     def test_arg_steam2(self):
         self.assertIsNone(steamid.steam2_to_tuple('invalid_format'))

@@ -1,4 +1,4 @@
-from time import time
+import json
 import sys
 import re
 import requests
@@ -358,30 +358,32 @@ def steam64_from_url(url, http_timeout=30):
         https://steamcommunity.com/id/johnc
     """
 
-    match = re.match(r'^https?://steamcommunity.com/'
-                     r'(?P<type>profiles|id|gid|groups)/(?P<value>.*)/?$', url)
+    match = re.match(r'^(?P<clean_url>https?://steamcommunity.com/'
+                     r'(?P<type>profiles|id|gid|groups)/(?P<value>.*?))(?:/(?:.*)?)?$', url)
 
     if not match:
         return None
 
-    url = re.sub(r'^https', 'http', url)  # avoid 1 extra req, https is redirected to http anyway
     web = make_requests_session()
-    nocache = time() * 100000
 
     try:
+        # user profiles
         if match.group('type') in ('id', 'profiles'):
-            xml = web.get("%s/?xml=1&nocache=%d" % (url, nocache), timeout=http_timeout).text
-            match = re.findall('<steamID64>(\d+)</steamID64>', xml)
+            text = web.get(match.group('clean_url'), timeout=http_timeout).text
+            data_match = re.search("g_rgProfileData = (?P<json>.*?);", text)
+
+            if data_match:
+                data = json.loads(data_match.group('json'))
+                return int(data['steamid'])
+        # group profiles
         else:
-            xml = web.get("%s/memberslistxml/?xml=1&nocache=%d" % (url, nocache), timeout=http_timeout).text
-            match = re.findall('<groupID64>(\d+)</groupID64>', xml)
+            text = web.get(match.group('clean_url'), timeout=http_timeout).text
+            data_match = re.search("'steam://friends/joinchat/(?P<steamid>\d+)'", text)
+
+            if data_match:
+                return int(data_match.group('steamid'))
     except requests.exceptions.RequestException:
         return None
-
-    if not match:
-        return None
-
-    return match[0]  # return matched steam64
 
 
 def from_url(url, http_timeout=30):
