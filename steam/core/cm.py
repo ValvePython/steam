@@ -116,7 +116,7 @@ class CMClient(EventEmitter):
         if delay:
             self._LOG.debug("Delayed connect: %d seconds" % delay)
             self.emit(self.EVENT_RECONNECT, delay)
-            gevent.sleep(delay)
+            self.sleep(delay)
 
         self._LOG.debug("Connect initiated.")
 
@@ -134,7 +134,7 @@ class CMClient(EventEmitter):
             self._LOG.debug("Failed to connect. Retrying...")
 
             if diff < 5:
-                gevent.sleep(5 - diff)
+                self.sleep(5 - diff)
 
         self.current_server_addr = server_addr
         self.connected = True
@@ -219,7 +219,7 @@ class CMClient(EventEmitter):
                     message = crypto.symmetric_decrypt(message, self.channel_key)
 
             gevent.spawn(self._parse_message, message)
-            gevent.idle()
+            self.idle()
 
         if not self._seen_logon and self.channel_secured:
             if self.wait_event('disconnected', timeout=5) is not None:
@@ -334,7 +334,7 @@ class CMClient(EventEmitter):
         message = MsgProto(EMsg.ClientHeartBeat)
 
         while True:
-            gevent.sleep(interval)
+            self.sleep(interval)
             self.send(message)
 
     def _handle_logon(self, msg):
@@ -369,6 +369,14 @@ class CMClient(EventEmitter):
 
         new_servers = zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)
         self.cm_servers.merge_list(new_servers)
+
+    def sleep(self, seconds):
+        """Yeild and sleep N seconds. Allows other greenlets to run"""
+        gevent.sleep(seconds)
+
+    def idle(self):
+        """Yeild in the current greenlet and let other greenlets run"""
+        gevent.idle()
 
 
 class CMServerList(object):

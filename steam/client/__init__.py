@@ -193,7 +193,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         if self.logged_on:
             self.send(resp)
-            gevent.idle()
+            self.idle()
             self.login_key = message.body.login_key
             self.emit(self.EVENT_NEW_LOGIN_KEY)
 
@@ -519,7 +519,7 @@ class SteamClient(CMClient, BuiltinBase):
         resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
 
         if resp.body.eresult == EResult.OK:
-            gevent.sleep(0.5)
+            self.sleep(0.5)
 
         return EResult(resp.body.eresult) if resp else EResult.Fail
 
@@ -555,7 +555,7 @@ class SteamClient(CMClient, BuiltinBase):
             self.logged_on = False
             self.send(MsgProto(EMsg.ClientLogOff))
             self.wait_event('disconnected')
-            gevent.idle()
+            self.idle()
 
     def run_forever(self):
         """
@@ -564,15 +564,7 @@ class SteamClient(CMClient, BuiltinBase):
         This is useful when the application is setup and ment to run for a long time
         """
         while True:
-            gevent.sleep(300)
-
-    def sleep(self, seconds):
-        """Yeild and sleep N seconds. Allows other greenlets to run"""
-        gevent.sleep(seconds)
-
-    def idle(self):
-        """Yeild in the current greenlet and let other greenlets run"""
-        gevent.idle()
+            self.sleep(300)
 
     def cli_login(self, username='', password=''):
         """Generates CLI prompts to complete the login process
@@ -612,7 +604,7 @@ class SteamClient(CMClient, BuiltinBase):
                          EResult.TryAnotherCM, EResult.ServiceUnavailable,
                          EResult.InvalidPassword,
                          ):
-            gevent.sleep(0.1)
+            self.sleep(0.1)
 
             if result == EResult.InvalidPassword:
                 password = getpass("Invalid password for %s. Enter password: " % repr(username))
