@@ -4,6 +4,8 @@ https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/e
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_base.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_2.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_login.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_friends.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_video.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_player.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_offline.steamclient.proto
@@ -18,6 +20,7 @@ https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/s
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_unified_base.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_unified_test.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_secrets.steamclient.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_site_license.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_publishedfile.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_broadcast.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_twofactor.steamclient.proto
@@ -25,3 +28,4 @@ https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/s
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_gamenotifications.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_credentials.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_physicalgoods.steamclient.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_useraccount.steamclient.proto

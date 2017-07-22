@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_twofactor.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1dsteammessages_twofactor.proto\x1a steammessages_unified_base.proto\"@\n\x19\x43TwoFactor_Status_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\"\xb1\x07\n\x1a\x43TwoFactor_Status_Response\x12&\n\x05state\x18\x01 \x01(\rB\x17\x82\xb5\x18\x13\x41uthenticator state\x12=\n\x13inactivation_reason\x18\x02 \x01(\rB \x82\xb5\x18\x1cInactivation reason (if any)\x12\x35\n\x12\x61uthenticator_type\x18\x03 \x01(\rB\x19\x82\xb5\x18\x15Type of authenticator\x12L\n\x15\x61uthenticator_allowed\x18\x04 \x01(\x08\x42-\x82\xb5\x18)Account allowed to have an authenticator?\x12;\n\x11steamguard_scheme\x18\x05 \x01(\rB \x82\xb5\x18\x1cSteam Guard scheme in effect\x12\x41\n\ttoken_gid\x18\x06 \x01(\tB.\x82\xb5\x18*String rep of token GID assigned by server\x12\x42\n\x0f\x65mail_validated\x18\x07 \x01(\x08\x42)\x82\xb5\x18%Account has verified email capability\x12?\n\x11\x64\x65vice_identifier\x18\x08 \x01(\tB$\x82\xb5\x18 Authenticator (phone) identifier\x12\x34\n\x0ctime_created\x18\t \x01(\rB\x1e\x82\xb5\x18\x1aWhen the token was created\x12W\n\x1drevocation_attempts_remaining\x18\n \x01(\rB0\x82\xb5\x18,Number of revocation code attempts remaining\x12^\n\x10\x63lassified_agent\x18\x0b \x01(\tBD\x82\xb5\x18@Agent that added the authenticator (e.g., ios / android / other)\x12g\n\x1c\x61llow_external_authenticator\x18\x0c \x01(\x08\x42\x41\x82\xb5\x18=Allow a third-party authenticator (in addition to two-factor)\x12J\n\x1b\x65xternal_authenticator_type\x18\r \x01(\rB%\x82\xb5\x18!Type of third-party authenticator\"\xb2\x03\n#CTwoFactor_AddAuthenticator_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\x12:\n\x12\x61uthenticator_time\x18\x02 \x01(\x04\x42\x1e\x82\xb5\x18\x1a\x43urrent authenticator time\x12?\n\rserial_number\x18\x03 \x01(\x06\x42(\x82\xb5\x18$locally computed serial (deprecated)\x12\x32\n\x12\x61uthenticator_type\x18\x04 \x01(\rB\x16\x82\xb5\x18\x12\x41uthenticator type\x12\x37\n\x11\x64\x65vice_identifier\x18\x05 \x01(\tB\x1c\x82\xb5\x18\x18\x41uthenticator identifier\x12\x41\n\x0csms_phone_id\x18\x06 \x01(\tB+\x82\xb5\x18\'ID of phone to use for SMS verification\x12\x39\n\x0chttp_headers\x18\x07 \x03(\tB#\x82\xb5\x18\x1fHTTP headers alternating by K/V\"\xf3\x04\n$CTwoFactor_AddAuthenticator_Response\x12I\n\rshared_secret\x18\x01 \x01(\x0c\x42\x32\x82\xb5\x18.Shared secret between server and authenticator\x12I\n\rserial_number\x18\x02 \x01(\x06\x42\x32\x82\xb5\x18.Authenticator serial number (unique per token)\x12>\n\x0frevocation_code\x18\x03 \x01(\tB%\x82\xb5\x18!code used to revoke authenticator\x12+\n\x03uri\x18\x04 \x01(\tB\x1e\x82\xb5\x18\x1aURI for QR code generation\x12,\n\x0bserver_time\x18\x05 \x01(\x04\x42\x17\x82\xb5\x18\x13\x43urrent server time\x12\x41\n\x0c\x61\x63\x63ount_name\x18\x06 \x01(\tB+\x82\xb5\x18\'Account name to display on token client\x12\x33\n\ttoken_gid\x18\x07 \x01(\tB \x82\xb5\x18\x1cToken GID assigned by server\x12V\n\x0fidentity_secret\x18\x08 \x01(\x0c\x42=\x82\xb5\x18\x39Secret used for identity attestation (e.g., for eventing)\x12)\n\x08secret_1\x18\t \x01(\x0c\x42\x17\x82\xb5\x18\x13Spare shared secret\x12\x1f\n\x06status\x18\n \x01(\x05\x42\x0f\x82\xb5\x18\x0bResult code\"\xdd\x01\n\x1c\x43TwoFactor_SendEmail_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0eSteamid to use\x12\x46\n\nemail_type\x18\x02 \x01(\rB2\x82\xb5\x18.Type of email to send (ETwoFactorEmailType::*)\x12P\n\x17include_activation_code\x18\x03 \x01(\x08\x42/\x82\xb5\x18+Include activation code in email parameters\"\x1f\n\x1d\x43TwoFactor_SendEmail_Response\"\xc3\x02\n+CTwoFactor_FinalizeAddAuthenticator_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\x12\x31\n\x12\x61uthenticator_code\x18\x02 \x01(\tB\x15\x82\xb5\x18\x11\x43urrent auth code\x12:\n\x12\x61uthenticator_time\x18\x03 \x01(\x04\x42\x1e\x82\xb5\x18\x1a\x43urrent authenticator time\x12\x45\n\x0f\x61\x63tivation_code\x18\x04 \x01(\tB,\x82\xb5\x18(Activation code from out-of-band message\x12\x39\n\x0chttp_headers\x18\x05 \x03(\tB#\x82\xb5\x18\x1fHTTP headers alternating by K/V\"\xe9\x01\n,CTwoFactor_FinalizeAddAuthenticator_Response\x12:\n\x07success\x18\x01 \x01(\x08\x42)\x82\xb5\x18%True if succeeded, or want more tries\x12.\n\twant_more\x18\x02 \x01(\x08\x42\x1b\x82\xb5\x18\x17True if want more tries\x12,\n\x0bserver_time\x18\x03 \x01(\x04\x42\x17\x82\xb5\x18\x13\x43urrent server time\x12\x1f\n\x06status\x18\x04 \x01(\x05\x42\x0f\x82\xb5\x18\x0bResult code\"\xcb\x02\n&CTwoFactor_RemoveAuthenticator_Request\x12<\n\x0frevocation_code\x18\x02 \x01(\tB#\x82\xb5\x18\x1fPassword needed to remove token\x12H\n\x11revocation_reason\x18\x05 \x01(\rB-\x82\xb5\x18)Reason the authenticator is being removed\x12O\n\x11steamguard_scheme\x18\x06 \x01(\rB4\x82\xb5\x18\x30Type of Steam Guard to use once token is removed\x12H\n\x1dremove_all_steamguard_cookies\x18\x07 \x01(\x08\x42!\x82\xb5\x18\x1dRemove all steamguard cookies\"\xfe\x01\n\'CTwoFactor_RemoveAuthenticator_Response\x12L\n\x07success\x18\x01 \x01(\x08\x42;\x82\xb5\x18\x37True if request succeeeded. The mobile app checks this.\x12,\n\x0bserver_time\x18\x03 \x01(\x04\x42\x17\x82\xb5\x18\x13\x43urrent server time\x12W\n\x1drevocation_attempts_remaining\x18\x05 \x01(\rB0\x82\xb5\x18,Number of revocation code attempts remaining\")\n\'CTwoFactor_CreateEmergencyCodes_Request\"N\n(CTwoFactor_CreateEmergencyCodes_Response\x12\"\n\x05\x63odes\x18\x01 \x03(\tB\x13\x82\xb5\x18\x0f\x45mergency codes\"O\n(CTwoFactor_DestroyEmergencyCodes_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\"+\n)CTwoFactor_DestroyEmergencyCodes_Response\"F\n CTwoFactor_ValidateToken_Request\x12\"\n\x04\x63ode\x18\x01 \x01(\tB\x14\x82\xb5\x18\x10\x63ode to validate\"L\n!CTwoFactor_ValidateToken_Response\x12\'\n\x05valid\x18\x01 \x01(\x08\x42\x18\x82\xb5\x18\x14result of validation2\x84\n\n\tTwoFactor\x12\x8c\x01\n\x0bQueryStatus\x12\x1a.CTwoFactor_Status_Request\x1a\x1b.CTwoFactor_Status_Response\"D\x82\xb5\x18@Get two-factor authentication settings for the logged-in account\x12\x9a\x01\n\x10\x41\x64\x64\x41uthenticator\x12$.CTwoFactor_AddAuthenticator_Request\x1a%.CTwoFactor_AddAuthenticator_Response\"9\x82\xb5\x18\x35\x41\x64\x64 two-factor authenticator to the logged-in account\x12i\n\tSendEmail\x12\x1d.CTwoFactor_SendEmail_Request\x1a\x1e.CTwoFactor_SendEmail_Response\"\x1d\x82\xb5\x18\x19Send email to the account\x12\xc1\x01\n\x18\x46inalizeAddAuthenticator\x12,.CTwoFactor_FinalizeAddAuthenticator_Request\x1a-.CTwoFactor_FinalizeAddAuthenticator_Response\"H\x82\xb5\x18\x44\x46inalize two-factor authentication addition to the logged-in account\x12\xb2\x01\n\x13RemoveAuthenticator\x12\'.CTwoFactor_RemoveAuthenticator_Request\x1a(.CTwoFactor_RemoveAuthenticator_Response\"H\x82\xb5\x18\x44Remove two-factor authentication addition from the logged-in account\x12\x97\x01\n\x14\x43reateEmergencyCodes\x12(.CTwoFactor_CreateEmergencyCodes_Request\x1a).CTwoFactor_CreateEmergencyCodes_Response\"*\x82\xb5\x18&Generate emergency authenticator codes\x12\xa9\x01\n\x15\x44\x65stroyEmergencyCodes\x12).CTwoFactor_DestroyEmergencyCodes_Request\x1a*.CTwoFactor_DestroyEmergencyCodes_Response\"9\x82\xb5\x18\x35\x44\x65stroy emergency authenticator codes for the account\x12z\n\rValidateToken\x12!.CTwoFactor_ValidateToken_Request\x1a\".CTwoFactor_ValidateToken_Response\"\"\x82\xb5\x18\x1eValidate (and consume) a token\x1a%\x82\xb5\x18!Two Factor Authentication ServiceB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1dsteammessages_twofactor.proto\x1a steammessages_unified_base.proto\"@\n\x19\x43TwoFactor_Status_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\"\xc6\x07\n\x1a\x43TwoFactor_Status_Response\x12&\n\x05state\x18\x01 \x01(\rB\x17\x82\xb5\x18\x13\x41uthenticator state\x12=\n\x13inactivation_reason\x18\x02 \x01(\rB \x82\xb5\x18\x1cInactivation reason (if any)\x12\x35\n\x12\x61uthenticator_type\x18\x03 \x01(\rB\x19\x82\xb5\x18\x15Type of authenticator\x12L\n\x15\x61uthenticator_allowed\x18\x04 \x01(\x08\x42-\x82\xb5\x18)Account allowed to have an authenticator?\x12;\n\x11steamguard_scheme\x18\x05 \x01(\rB \x82\xb5\x18\x1cSteam Guard scheme in effect\x12\x41\n\ttoken_gid\x18\x06 \x01(\tB.\x82\xb5\x18*String rep of token GID assigned by server\x12\x42\n\x0f\x65mail_validated\x18\x07 \x01(\x08\x42)\x82\xb5\x18%Account has verified email capability\x12?\n\x11\x64\x65vice_identifier\x18\x08 \x01(\tB$\x82\xb5\x18 Authenticator (phone) identifier\x12\x34\n\x0ctime_created\x18\t \x01(\rB\x1e\x82\xb5\x18\x1aWhen the token was created\x12W\n\x1drevocation_attempts_remaining\x18\n \x01(\rB0\x82\xb5\x18,Number of revocation code attempts remaining\x12^\n\x10\x63lassified_agent\x18\x0b \x01(\tBD\x82\xb5\x18@Agent that added the authenticator (e.g., ios / android / other)\x12g\n\x1c\x61llow_external_authenticator\x18\x0c \x01(\x08\x42\x41\x82\xb5\x18=Allow a third-party authenticator (in addition to two-factor)\x12_\n\x10time_transferred\x18\r \x01(\rBE\x82\xb5\x18\x41When the token was transferred from another device, if applicable\"\xb2\x03\n#CTwoFactor_AddAuthenticator_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\x12:\n\x12\x61uthenticator_time\x18\x02 \x01(\x04\x42\x1e\x82\xb5\x18\x1a\x43urrent authenticator time\x12?\n\rserial_number\x18\x03 \x01(\x06\x42(\x82\xb5\x18$locally computed serial (deprecated)\x12\x32\n\x12\x61uthenticator_type\x18\x04 \x01(\rB\x16\x82\xb5\x18\x12\x41uthenticator type\x12\x37\n\x11\x64\x65vice_identifier\x18\x05 \x01(\tB\x1c\x82\xb5\x18\x18\x41uthenticator identifier\x12\x41\n\x0csms_phone_id\x18\x06 \x01(\tB+\x82\xb5\x18\'ID of phone to use for SMS verification\x12\x39\n\x0chttp_headers\x18\x07 \x03(\tB#\x82\xb5\x18\x1fHTTP headers alternating by K/V\"\xf3\x04\n$CTwoFactor_AddAuthenticator_Response\x12I\n\rshared_secret\x18\x01 \x01(\x0c\x42\x32\x82\xb5\x18.Shared secret between server and authenticator\x12I\n\rserial_number\x18\x02 \x01(\x06\x42\x32\x82\xb5\x18.Authenticator serial number (unique per token)\x12>\n\x0frevocation_code\x18\x03 \x01(\tB%\x82\xb5\x18!code used to revoke authenticator\x12+\n\x03uri\x18\x04 \x01(\tB\x1e\x82\xb5\x18\x1aURI for QR code generation\x12,\n\x0bserver_time\x18\x05 \x01(\x04\x42\x17\x82\xb5\x18\x13\x43urrent server time\x12\x41\n\x0c\x61\x63\x63ount_name\x18\x06 \x01(\tB+\x82\xb5\x18\'Account name to display on token client\x12\x33\n\ttoken_gid\x18\x07 \x01(\tB \x82\xb5\x18\x1cToken GID assigned by server\x12V\n\x0fidentity_secret\x18\x08 \x01(\x0c\x42=\x82\xb5\x18\x39Secret used for identity attestation (e.g., for eventing)\x12)\n\x08secret_1\x18\t \x01(\x0c\x42\x17\x82\xb5\x18\x13Spare shared secret\x12\x1f\n\x06status\x18\n \x01(\x05\x42\x0f\x82\xb5\x18\x0bResult code\"\xdd\x01\n\x1c\x43TwoFactor_SendEmail_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0eSteamid to use\x12\x46\n\nemail_type\x18\x02 \x01(\rB2\x82\xb5\x18.Type of email to send (ETwoFactorEmailType::*)\x12P\n\x17include_activation_code\x18\x03 \x01(\x08\x42/\x82\xb5\x18+Include activation code in email parameters\"\x1f\n\x1d\x43TwoFactor_SendEmail_Response\"\xc3\x02\n+CTwoFactor_FinalizeAddAuthenticator_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\x12\x31\n\x12\x61uthenticator_code\x18\x02 \x01(\tB\x15\x82\xb5\x18\x11\x43urrent auth code\x12:\n\x12\x61uthenticator_time\x18\x03 \x01(\x04\x42\x1e\x82\xb5\x18\x1a\x43urrent authenticator time\x12\x45\n\x0f\x61\x63tivation_code\x18\x04 \x01(\tB,\x82\xb5\x18(Activation code from out-of-band message\x12\x39\n\x0chttp_headers\x18\x05 \x03(\tB#\x82\xb5\x18\x1fHTTP headers alternating by K/V\"\xe9\x01\n,CTwoFactor_FinalizeAddAuthenticator_Response\x12:\n\x07success\x18\x01 \x01(\x08\x42)\x82\xb5\x18%True if succeeded, or want more tries\x12.\n\twant_more\x18\x02 \x01(\x08\x42\x1b\x82\xb5\x18\x17True if want more tries\x12,\n\x0bserver_time\x18\x03 \x01(\x04\x42\x17\x82\xb5\x18\x13\x43urrent server time\x12\x1f\n\x06status\x18\x04 \x01(\x05\x42\x0f\x82\xb5\x18\x0bResult code\"\xcb\x02\n&CTwoFactor_RemoveAuthenticator_Request\x12<\n\x0frevocation_code\x18\x02 \x01(\tB#\x82\xb5\x18\x1fPassword needed to remove token\x12H\n\x11revocation_reason\x18\x05 \x01(\rB-\x82\xb5\x18)Reason the authenticator is being removed\x12O\n\x11steamguard_scheme\x18\x06 \x01(\rB4\x82\xb5\x18\x30Type of Steam Guard to use once token is removed\x12H\n\x1dremove_all_steamguard_cookies\x18\x07 \x01(\x08\x42!\x82\xb5\x18\x1dRemove all steamguard cookies\"\xfe\x01\n\'CTwoFactor_RemoveAuthenticator_Response\x12L\n\x07success\x18\x01 \x01(\x08\x42;\x82\xb5\x18\x37True if request succeeeded. The mobile app checks this.\x12,\n\x0bserver_time\x18\x03 \x01(\x04\x42\x17\x82\xb5\x18\x13\x43urrent server time\x12W\n\x1drevocation_attempts_remaining\x18\x05 \x01(\rB0\x82\xb5\x18,Number of revocation code attempts remaining\")\n\'CTwoFactor_CreateEmergencyCodes_Request\"N\n(CTwoFactor_CreateEmergencyCodes_Response\x12\"\n\x05\x63odes\x18\x01 \x03(\tB\x13\x82\xb5\x18\x0f\x45mergency codes\"O\n(CTwoFactor_DestroyEmergencyCodes_Request\x12#\n\x07steamid\x18\x01 \x01(\x06\x42\x12\x82\xb5\x18\x0esteamid to use\"+\n)CTwoFactor_DestroyEmergencyCodes_Response\"F\n CTwoFactor_ValidateToken_Request\x12\"\n\x04\x63ode\x18\x01 \x01(\tB\x14\x82\xb5\x18\x10\x63ode to validate\"L\n!CTwoFactor_ValidateToken_Response\x12\'\n\x05valid\x18\x01 \x01(\x08\x42\x18\x82\xb5\x18\x14result of validation2\x84\n\n\tTwoFactor\x12\x8c\x01\n\x0bQueryStatus\x12\x1a.CTwoFactor_Status_Request\x1a\x1b.CTwoFactor_Status_Response\"D\x82\xb5\x18@Get two-factor authentication settings for the logged-in account\x12\x9a\x01\n\x10\x41\x64\x64\x41uthenticator\x12$.CTwoFactor_AddAuthenticator_Request\x1a%.CTwoFactor_AddAuthenticator_Response\"9\x82\xb5\x18\x35\x41\x64\x64 two-factor authenticator to the logged-in account\x12i\n\tSendEmail\x12\x1d.CTwoFactor_SendEmail_Request\x1a\x1e.CTwoFactor_SendEmail_Response\"\x1d\x82\xb5\x18\x19Send email to the account\x12\xc1\x01\n\x18\x46inalizeAddAuthenticator\x12,.CTwoFactor_FinalizeAddAuthenticator_Request\x1a-.CTwoFactor_FinalizeAddAuthenticator_Response\"H\x82\xb5\x18\x44\x46inalize two-factor authentication addition to the logged-in account\x12\xb2\x01\n\x13RemoveAuthenticator\x12\'.CTwoFactor_RemoveAuthenticator_Request\x1a(.CTwoFactor_RemoveAuthenticator_Response\"H\x82\xb5\x18\x44Remove two-factor authentication addition from the logged-in account\x12\x97\x01\n\x14\x43reateEmergencyCodes\x12(.CTwoFactor_CreateEmergencyCodes_Request\x1a).CTwoFactor_CreateEmergencyCodes_Response\"*\x82\xb5\x18&Generate emergency authenticator codes\x12\xa9\x01\n\x15\x44\x65stroyEmergencyCodes\x12).CTwoFactor_DestroyEmergencyCodes_Request\x1a*.CTwoFactor_DestroyEmergencyCodes_Response\"9\x82\xb5\x18\x35\x44\x65stroy emergency authenticator codes for the account\x12z\n\rValidateToken\x12!.CTwoFactor_ValidateToken_Request\x1a\".CTwoFactor_ValidateToken_Response\"\"\x82\xb5\x18\x1eValidate (and consume) a token\x1a%\x82\xb5\x18!Two Factor Authentication ServiceB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -153,12 +153,12 @@ _CTWOFACTOR_STATUS_RESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030=Allow a third-party authenticator (in addition to two-factor)'))),
     _descriptor.FieldDescriptor(
-      name='external_authenticator_type', full_name='CTwoFactor_Status_Response.external_authenticator_type', index=12,
+      name='time_transferred', full_name='CTwoFactor_Status_Response.time_transferred', index=12,
       number=13, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030!Type of third-party authenticator'))),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030AWhen the token was transferred from another device, if applicable'))),
   ],
   extensions=[
   ],
@@ -172,7 +172,7 @@ _CTWOFACTOR_STATUS_RESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=134,
-  serialized_end=1079,
+  serialized_end=1100,
 )
 
 
@@ -244,8 +244,8 @@ _CTWOFACTOR_ADDAUTHENTICATOR_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1082,
-  serialized_end=1516,
+  serialized_start=1103,
+  serialized_end=1537,
 )
 
 
@@ -338,8 +338,8 @@ _CTWOFACTOR_ADDAUTHENTICATOR_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1519,
-  serialized_end=2146,
+  serialized_start=1540,
+  serialized_end=2167,
 )
 
 
@@ -383,8 +383,8 @@ _CTWOFACTOR_SENDEMAIL_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2149,
-  serialized_end=2370,
+  serialized_start=2170,
+  serialized_end=2391,
 )
 
 
@@ -407,8 +407,8 @@ _CTWOFACTOR_SENDEMAIL_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2372,
-  serialized_end=2403,
+  serialized_start=2393,
+  serialized_end=2424,
 )
 
 
@@ -466,8 +466,8 @@ _CTWOFACTOR_FINALIZEADDAUTHENTICATOR_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2406,
-  serialized_end=2729,
+  serialized_start=2427,
+  serialized_end=2750,
 )
 
 
@@ -518,8 +518,8 @@ _CTWOFACTOR_FINALIZEADDAUTHENTICATOR_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2732,
-  serialized_end=2965,
+  serialized_start=2753,
+  serialized_end=2986,
 )
 
 
@@ -570,8 +570,8 @@ _CTWOFACTOR_REMOVEAUTHENTICATOR_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2968,
-  serialized_end=3299,
+  serialized_start=2989,
+  serialized_end=3320,
 )
 
 
@@ -615,8 +615,8 @@ _CTWOFACTOR_REMOVEAUTHENTICATOR_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3302,
-  serialized_end=3556,
+  serialized_start=3323,
+  serialized_end=3577,
 )
 
 
@@ -639,8 +639,8 @@ _CTWOFACTOR_CREATEEMERGENCYCODES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3558,
-  serialized_end=3599,
+  serialized_start=3579,
+  serialized_end=3620,
 )
 
 
@@ -670,8 +670,8 @@ _CTWOFACTOR_CREATEEMERGENCYCODES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3601,
-  serialized_end=3679,
+  serialized_start=3622,
+  serialized_end=3700,
 )
 
 
@@ -701,8 +701,8 @@ _CTWOFACTOR_DESTROYEMERGENCYCODES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3681,
-  serialized_end=3760,
+  serialized_start=3702,
+  serialized_end=3781,
 )
 
 
@@ -725,8 +725,8 @@ _CTWOFACTOR_DESTROYEMERGENCYCODES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3762,
-  serialized_end=3805,
+  serialized_start=3783,
+  serialized_end=3826,
 )
 
 
@@ -756,8 +756,8 @@ _CTWOFACTOR_VALIDATETOKEN_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3807,
-  serialized_end=3877,
+  serialized_start=3828,
+  serialized_end=3898,
 )
 
 
@@ -787,8 +787,8 @@ _CTWOFACTOR_VALIDATETOKEN_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3879,
-  serialized_end=3955,
+  serialized_start=3900,
+  serialized_end=3976,
 )
 
 DESCRIPTOR.message_types_by_name['CTwoFactor_Status_Request'] = _CTWOFACTOR_STATUS_REQUEST
@@ -949,8 +949,8 @@ _CTWOFACTOR_STATUS_RESPONSE.fields_by_name['classified_agent'].has_options = Tru
 _CTWOFACTOR_STATUS_RESPONSE.fields_by_name['classified_agent']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030@Agent that added the authenticator (e.g., ios / android / other)'))
 _CTWOFACTOR_STATUS_RESPONSE.fields_by_name['allow_external_authenticator'].has_options = True
 _CTWOFACTOR_STATUS_RESPONSE.fields_by_name['allow_external_authenticator']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030=Allow a third-party authenticator (in addition to two-factor)'))
-_CTWOFACTOR_STATUS_RESPONSE.fields_by_name['external_authenticator_type'].has_options = True
-_CTWOFACTOR_STATUS_RESPONSE.fields_by_name['external_authenticator_type']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030!Type of third-party authenticator'))
+_CTWOFACTOR_STATUS_RESPONSE.fields_by_name['time_transferred'].has_options = True
+_CTWOFACTOR_STATUS_RESPONSE.fields_by_name['time_transferred']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030AWhen the token was transferred from another device, if applicable'))
 _CTWOFACTOR_ADDAUTHENTICATOR_REQUEST.fields_by_name['steamid'].has_options = True
 _CTWOFACTOR_ADDAUTHENTICATOR_REQUEST.fields_by_name['steamid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\016steamid to use'))
 _CTWOFACTOR_ADDAUTHENTICATOR_REQUEST.fields_by_name['authenticator_time'].has_options = True
@@ -1038,8 +1038,8 @@ _TWOFACTOR = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030!Two Factor Authentication Service')),
-  serialized_start=3958,
-  serialized_end=5242,
+  serialized_start=3979,
+  serialized_end=5263,
   methods=[
   _descriptor.MethodDescriptor(
     name='QueryStatus',

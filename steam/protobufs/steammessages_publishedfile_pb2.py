@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_publishedfile.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n!steammessages_publishedfile.proto\x1a steammessages_unified_base.proto\"t\n CPublishedFile_Subscribe_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x11\n\tlist_type\x18\x02 \x01(\r\x12\r\n\x05\x61ppid\x18\x03 \x01(\x05\x12\x15\n\rnotify_client\x18\x04 \x01(\x08\"#\n!CPublishedFile_Subscribe_Response\"v\n\"CPublishedFile_Unsubscribe_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x11\n\tlist_type\x18\x02 \x01(\r\x12\r\n\x05\x61ppid\x18\x03 \x01(\x05\x12\x15\n\rnotify_client\x18\x04 \x01(\x08\"%\n#CPublishedFile_Unsubscribe_Response\">\n#CPublishedFile_CanSubscribe_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\"=\n$CPublishedFile_CanSubscribe_Response\x12\x15\n\rcan_subscribe\x18\x01 \x01(\x08\"\xcc\n\n\x1e\x43PublishedFile_Publish_Request\x12<\n\x05\x61ppid\x18\x01 \x01(\rB-\x82\xb5\x18)App Id this file is being published FROM.\x12\x43\n\x0e\x63onsumer_appid\x18\x02 \x01(\rB+\x82\xb5\x18\'App Id this file is being published TO.\x12K\n\rcloudfilename\x18\x03 \x01(\tB4\x82\xb5\x18\x30Name of the file to publish in the user\'s cloud.\x12[\n\x15preview_cloudfilename\x18\x04 \x01(\tB<\x82\xb5\x18\x38Name of the file to use as the published file\'s preview.\x12\x35\n\x05title\x18\x05 \x01(\tB&\x82\xb5\x18\"Text title for the published file.\x12\x46\n\x10\x66ile_description\x18\x06 \x01(\tB,\x82\xb5\x18(Text description for the published file.\x12L\n\tfile_type\x18\x07 \x01(\rB9\x82\xb5\x18\x35(EWorkshopFileType) Type of Workshop file to publish.\x12I\n\x16\x63onsumer_shortcut_name\x18\x08 \x01(\tB)\x82\xb5\x18%Shortcut name for the published file.\x12I\n\x10youtube_username\x18\t \x01(\tB/\x82\xb5\x18+(Optional) User\'s YouTube account username.\x12\\\n\x0fyoutube_videoid\x18\n \x01(\tBC\x82\xb5\x18?(Optional) Video Id of a YouTube video for this published file.\x12\x81\x01\n\nvisibility\x18\x0b \x01(\rBm\x82\xb5\x18i(ERemoteStoragePublishedFileVisibility) Visibility of the published file (private, friends, public, etc.)\x12k\n\x0credirect_uri\x18\x0c \x01(\tBU\x82\xb5\x18Q(Optional) If supplied, the resulting published file\'s Id is appended to the URI.\x12\x44\n\x04tags\x18\r \x03(\tB6\x82\xb5\x18\x32\x41rray of text tags to apply to the published file.\x12Y\n\x0f\x63ollection_type\x18\x0e \x01(\tB@\x82\xb5\x18<(Optional) Type of collection the published file represents.\x12M\n\tgame_type\x18\x0f \x01(\tB:\x82\xb5\x18\x36(Optional) Type of game the published file represents.\x12[\n\x03url\x18\x10 \x01(\tBN\x82\xb5\x18J(Optional) If this represents a game, this is the URL to that game\'s page.\"P\n\x1f\x43PublishedFile_Publish_Response\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x14\n\x0credirect_uri\x18\x02 \x01(\t\"\xd6\x07\n!CPublishedFile_GetDetails_Request\x12P\n\x10publishedfileids\x18\x01 \x03(\x06\x42\x36\x82\xb5\x18\x32Set of published file Ids to retrieve details for.\x12Q\n\x0bincludetags\x18\x02 \x01(\x08\x42<\x82\xb5\x18\x38If true, return tag information in the returned details.\x12\x63\n\x19includeadditionalpreviews\x18\x03 \x01(\x08\x42@\x82\xb5\x18<If true, return preview information in the returned details.\x12N\n\x0fincludechildren\x18\x04 \x01(\x08\x42\x35\x82\xb5\x18\x31If true, return children in the returned details.\x12R\n\rincludekvtags\x18\x05 \x01(\x08\x42;\x82\xb5\x18\x37If true, return key value tags in the returned details.\x12L\n\x0cincludevotes\x18\x06 \x01(\x08\x42\x36\x82\xb5\x18\x32If true, return vote data in the returned details.\x12\x63\n\x11short_description\x18\x08 \x01(\x08\x42H\x82\xb5\x18\x44If true, return a short description instead of the full description.\x12L\n\x12includeforsaledata\x18\n \x01(\x08\x42\x30\x82\xb5\x18,If true, return pricing data, if applicable.\x12\x42\n\x0fincludemetadata\x18\x0b \x01(\x08\x42)\x82\xb5\x18%If true, populate the metadata field.\x12U\n\x08language\x18\x0c \x01(\x05:\x01\x30\x42@\x82\xb5\x18<Specifies the localized text to return. Defaults to English.\x12g\n\x15return_playtime_stats\x18\r \x01(\rBH\x82\xb5\x18\x44Return playtime stats for the specified number of days before today.\"\xd5\x15\n\x14PublishedFileDetails\x12\x0e\n\x06result\x18\x01 \x01(\r\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x0f\n\x07\x63reator\x18\x03 \x01(\x06\x12\x15\n\rcreator_appid\x18\x04 \x01(\r\x12\x16\n\x0e\x63onsumer_appid\x18\x05 \x01(\r\x12\x1b\n\x13\x63onsumer_shortcutid\x18\x06 \x01(\r\x12\x10\n\x08\x66ilename\x18\x07 \x01(\t\x12\x11\n\tfile_size\x18\x08 \x01(\x04\x12\x19\n\x11preview_file_size\x18\t \x01(\x04\x12\x10\n\x08\x66ile_url\x18\n \x01(\t\x12\x13\n\x0bpreview_url\x18\x0b \x01(\t\x12\x16\n\x0eyoutubevideoid\x18\x0c \x01(\t\x12\x0b\n\x03url\x18\r \x01(\t\x12\x15\n\rhcontent_file\x18\x0e \x01(\x06\x12\x18\n\x10hcontent_preview\x18\x0f \x01(\x06\x12\r\n\x05title\x18\x10 \x01(\t\x12\x18\n\x10\x66ile_description\x18\x11 \x01(\t\x12\x19\n\x11short_description\x18\x12 \x01(\t\x12\x14\n\x0ctime_created\x18\x13 \x01(\r\x12\x14\n\x0ctime_updated\x18\x14 \x01(\r\x12\x12\n\nvisibility\x18\x15 \x01(\r\x12\r\n\x05\x66lags\x18\x16 \x01(\r\x12\x15\n\rworkshop_file\x18\x17 \x01(\x08\x12\x19\n\x11workshop_accepted\x18\x18 \x01(\x08\x12\x1a\n\x12show_subscribe_all\x18\x19 \x01(\x08\x12\x1e\n\x16num_comments_developer\x18\x1a \x01(\x05\x12\x1b\n\x13num_comments_public\x18\x1b \x01(\x05\x12\x0e\n\x06\x62\x61nned\x18\x1c \x01(\x08\x12\x12\n\nban_reason\x18\x1d \x01(\t\x12\x0e\n\x06\x62\x61nner\x18\x1e \x01(\x06\x12\x16\n\x0e\x63\x61n_be_deleted\x18\x1f \x01(\x08\x12\x14\n\x0cincompatible\x18  \x01(\x08\x12\x10\n\x08\x61pp_name\x18! \x01(\t\x12\x11\n\tfile_type\x18\" \x01(\r\x12\x15\n\rcan_subscribe\x18# \x01(\x08\x12\x15\n\rsubscriptions\x18$ \x01(\r\x12\x11\n\tfavorited\x18% \x01(\r\x12\x11\n\tfollowers\x18& \x01(\r\x12\x1e\n\x16lifetime_subscriptions\x18\' \x01(\r\x12\x1a\n\x12lifetime_favorited\x18( \x01(\r\x12\x1a\n\x12lifetime_followers\x18) \x01(\r\x12\x19\n\x11lifetime_playtime\x18> \x01(\x04\x12\"\n\x1alifetime_playtime_sessions\x18? \x01(\x04\x12\r\n\x05views\x18* \x01(\r\x12\x13\n\x0bimage_width\x18+ \x01(\r\x12\x14\n\x0cimage_height\x18, \x01(\r\x12\x11\n\timage_url\x18- \x01(\t\x12\x13\n\x0bspoiler_tag\x18. \x01(\x08\x12\x12\n\nshortcutid\x18/ \x01(\r\x12\x14\n\x0cshortcutname\x18\x30 \x01(\t\x12\x14\n\x0cnum_children\x18\x31 \x01(\r\x12\x13\n\x0bnum_reports\x18\x32 \x01(\r\x12/\n\x08previews\x18\x33 \x03(\x0b\x32\x1d.PublishedFileDetails.Preview\x12\'\n\x04tags\x18\x34 \x03(\x0b\x32\x19.PublishedFileDetails.Tag\x12-\n\x08\x63hildren\x18\x35 \x03(\x0b\x32\x1b.PublishedFileDetails.Child\x12+\n\x06kvtags\x18\x36 \x03(\x0b\x32\x1b.PublishedFileDetails.KVTag\x12\x31\n\tvote_data\x18\x37 \x01(\x0b\x32\x1e.PublishedFileDetails.VoteData\x12;\n\x0eplaytime_stats\x18@ \x01(\x0b\x32#.PublishedFileDetails.PlaytimeStats\x12r\n\x0ftime_subscribed\x18\x38 \x01(\rBY\x82\xb5\x18UOnly valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls\x12\x61\n\rfor_sale_data\x18\x39 \x01(\x0b\x32!.PublishedFileDetails.ForSaleDataB\'\x82\xb5\x18#Pricing information, if applicable.\x12\x37\n\x08metadata\x18: \x01(\tB%\x82\xb5\x18!Metadata associated with the item\x12\x1a\n\x12incompatible_actor\x18; \x01(\x06\x12\x1e\n\x16incompatible_timestamp\x18< \x01(\r\x12\x43\n\x08language\x18= \x01(\x05:\x01\x30\x42.\x82\xb5\x18*The language of the title and description.\x1a%\n\x03Tag\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x11\n\tadminonly\x18\x02 \x01(\x08\x1a\xa6\x01\n\x07Preview\x12\x11\n\tpreviewid\x18\x01 \x01(\x04\x12\x11\n\tsortorder\x18\x02 \x01(\r\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0c\n\x04size\x18\x04 \x01(\r\x12\x10\n\x08\x66ilename\x18\x05 \x01(\t\x12\x16\n\x0eyoutubevideoid\x18\x06 \x01(\t\x12\x14\n\x0cpreview_type\x18\x07 \x01(\r\x12\x1a\n\x12\x65xternal_reference\x18\x08 \x01(\t\x1a\x46\n\x05\x43hild\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x11\n\tsortorder\x18\x02 \x01(\r\x12\x11\n\tfile_type\x18\x03 \x01(\r\x1a#\n\x05KVTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x1a?\n\x08VoteData\x12\r\n\x05score\x18\x01 \x01(\x02\x12\x10\n\x08votes_up\x18\x02 \x01(\r\x12\x12\n\nvotes_down\x18\x03 \x01(\r\x1a\xf1\x01\n\x0b\x46orSaleData\x12\x13\n\x0bis_for_sale\x18\x01 \x01(\x08\x12\x16\n\x0eprice_category\x18\x02 \x01(\r\x12V\n\x07\x65status\x18\x03 \x01(\x0e\x32\x31.PublishedFileDetails.EPublishedFileForSaleStatus:\x12k_PFFSS_NotForSale\x12\x1c\n\x14price_category_floor\x18\x04 \x01(\r\x12\"\n\x1aprice_is_pay_what_you_want\x18\x05 \x01(\x08\x12\x1b\n\x13\x64iscount_percentage\x18\x06 \x01(\r\x1a?\n\rPlaytimeStats\x12\x18\n\x10playtime_seconds\x18\x01 \x01(\x04\x12\x14\n\x0cnum_sessions\x18\x02 \x01(\x04\"\xc8\x01\n\x1b\x45PublishedFileForSaleStatus\x12\x16\n\x12k_PFFSS_NotForSale\x10\x00\x12\x1b\n\x17k_PFFSS_PendingApproval\x10\x01\x12\x1b\n\x17k_PFFSS_ApprovedForSale\x10\x02\x12\x1b\n\x17k_PFFSS_RejectedForSale\x10\x03\x12\x1b\n\x17k_PFFSS_NoLongerForSale\x10\x04\x12\x1d\n\x19k_PFFSS_TentativeApproval\x10\x05\"Y\n\"CPublishedFile_GetDetails_Response\x12\x33\n\x14publishedfiledetails\x18\x01 \x03(\x0b\x32\x15.PublishedFileDetails\"\xda\x01\n\"CPublishedFile_GetItemInfo_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12H\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32\x30.CPublishedFile_GetItemInfo_Request.WorkshopItem\x1a?\n\x0cWorkshopItem\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\"\xf2\x01\n#CPublishedFile_GetItemInfo_Response\x12\x13\n\x0bupdate_time\x18\x01 \x01(\r\x12M\n\x0eworkshop_items\x18\x02 \x03(\x0b\x32\x35.CPublishedFile_GetItemInfo_Response.WorkshopItemInfo\x1ag\n\x10WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\x12\r\n\x05\x66lags\x18\x04 \x01(\r\"\xdf\x11\n#CPublishedFile_GetUserFiles_Request\x12J\n\x07steamid\x18\x01 \x01(\x06\x42\x39\x82\xb5\x18\x35Steam ID of the user whose files are being requested.\x12\x46\n\x05\x61ppid\x18\x02 \x01(\rB7\x82\xb5\x18\x33\x41pp Id of the app that the files were published to.\x12:\n\x04page\x18\x04 \x01(\r:\x01\x31\x42)\x82\xb5\x18%(Optional) Starting page for results.\x12P\n\nnumperpage\x18\x05 \x01(\r:\x01\x31\x42\x39\x82\xb5\x18\x35(Optional) The number of results, per page to return.\x12\x43\n\x04type\x18\x06 \x01(\t:\x07myfilesB,\x82\xb5\x18((Optional) Type of files to be returned.\x12Y\n\nsortmethod\x18\x07 \x01(\t:\x0blastupdatedB8\x82\xb5\x18\x34(Optional) Sorting method to use on returned values.\x12;\n\x07privacy\x18\t \x01(\rB*\x82\xb5\x18&(optional) Filter by privacy settings.\x12h\n\x0crequiredtags\x18\n \x03(\tBR\x82\xb5\x18N(Optional) Tags that must be present on a published file to satisfy the query.\x12l\n\x0c\x65xcludedtags\x18\x0b \x03(\tBV\x82\xb5\x18R(Optional) Tags that must NOT be present on a published file to satisfy the query.\x12n\n\x10required_kv_tags\x18\x1e \x03(\x0b\x32*.CPublishedFile_GetUserFiles_Request.KVTagB(\x82\xb5\x18$Required key-value tags to match on.\x12=\n\x08\x66iletype\x18\x0e \x01(\rB+\x82\xb5\x18\'(Optional) File type to match files to.\x12\x61\n\rcreator_appid\x18\x0f \x01(\rBJ\x82\xb5\x18\x46\x41pp Id of the app that published the files, only matched if specified.\x12I\n\x14match_cloud_filename\x18\x10 \x01(\tB+\x82\xb5\x18\'Match this cloud filename if specified.\x12j\n\x15\x63\x61\x63he_max_age_seconds\x18\x1b \x01(\r:\x01\x30\x42H\x82\xb5\x18\x44\x41llow stale data to be returned for the specified number of seconds.\x12U\n\x08language\x18\x1d \x01(\x05:\x01\x30\x42@\x82\xb5\x18<Specifies the localized text to return. Defaults to English.\x12i\n\ttotalonly\x18\x11 \x01(\x08\x42V\x82\xb5\x18R(Optional) If true, only return the total number of files that satisfy this query.\x12n\n\x08ids_only\x18\x12 \x01(\x08\x42\\\x82\xb5\x18X(Optional) If true, only return the published file ids of files that satisfy this query.\x12\x34\n\x10return_vote_data\x18\x13 \x01(\x08:\x04trueB\x14\x82\xb5\x18\x10Return vote data\x12\x38\n\x0breturn_tags\x18\x14 \x01(\x08\x42#\x82\xb5\x18\x1fReturn tags in the file details\x12K\n\x0ereturn_kv_tags\x18\x15 \x01(\x08:\x04trueB-\x82\xb5\x18)Return key-value tags in the file details\x12W\n\x0freturn_previews\x18\x16 \x01(\x08\x42>\x82\xb5\x18:Return preview image and video details in the file details\x12\x46\n\x0freturn_children\x18\x17 \x01(\x08\x42-\x82\xb5\x18)Return child item ids in the file details\x12l\n\x18return_short_description\x18\x18 \x01(\x08:\x04trueBD\x82\xb5\x18@Populate the short_description field instead of file_description\x12K\n\x14return_for_sale_data\x18\x1a \x01(\x08\x42-\x82\xb5\x18)Return pricing information, if applicable\x12?\n\x0freturn_metadata\x18\x1c \x01(\x08:\x05\x66\x61lseB\x1f\x82\xb5\x18\x1bPopulate the metadata field\x12g\n\x15return_playtime_stats\x18\x1f \x01(\rBH\x82\xb5\x18\x44Return playtime stats for the specified number of days before today.\x1a#\n\x05KVTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x80\x02\n$CPublishedFile_GetUserFiles_Response\x12\r\n\x05total\x18\x01 \x01(\r\x12\x12\n\nstartindex\x18\x02 \x01(\r\x12\x33\n\x14publishedfiledetails\x18\x03 \x03(\x0b\x32\x15.PublishedFileDetails\x12\x37\n\x04\x61pps\x18\x04 \x03(\x0b\x32).CPublishedFile_GetUserFiles_Response.App\x1aG\n\x03\x41pp\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\nshortcutid\x18\x03 \x01(\r\x12\x0f\n\x07private\x18\x04 \x01(\x08\"\x91\x06\n\x1d\x43PublishedFile_Update_Request\x12\x39\n\x05\x61ppid\x18\x01 \x01(\rB*\x82\xb5\x18&App Id this published file belongs to.\x12L\n\x0fpublishedfileid\x18\x02 \x01(\x06\x42\x33\x82\xb5\x18/Published file id of the file we\'d like update.\x12:\n\x05title\x18\x03 \x01(\tB+\x82\xb5\x18\'(Optional) Title of the published file.\x12K\n\x10\x66ile_description\x18\x04 \x01(\tB1\x82\xb5\x18-(Optional) Description of the published file.\x12\x44\n\nvisibility\x18\x05 \x01(\rB0\x82\xb5\x18,(Optional) Visibility of the published file.\x12@\n\x04tags\x18\x06 \x03(\tB2\x82\xb5\x18.(Optional) Set of tags for the published file.\x12\x41\n\x08\x66ilename\x18\x07 \x01(\tB/\x82\xb5\x18+(Optional) Filename for the published file.\x12Q\n\x10preview_filename\x18\x08 \x01(\tB7\x82\xb5\x18\x33(Optional) Preview filename for the published file.\x12^\n\x0bimage_width\x18\x0f \x01(\rBI\x82\xb5\x18\x45(Optional) If this is an image file, you can specify the image width.\x12`\n\x0cimage_height\x18\x10 \x01(\rBJ\x82\xb5\x18\x46(Optional) If this is an image file, you can specify the image height.\" \n\x1e\x43PublishedFile_Update_Response\"\xb8\x01\n,CPublishedFile_GetChangeHistoryEntry_Request\x12\x63\n\x0fpublishedfileid\x18\x01 \x01(\x06\x42J\x82\xb5\x18\x46Published file id of the file we\'d like to get the change history for.\x12\x11\n\ttimestamp\x18\x02 \x01(\r\x12\x10\n\x08language\x18\x03 \x01(\x05\"]\n-CPublishedFile_GetChangeHistoryEntry_Response\x12\x1a\n\x12\x63hange_description\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\x05\"\x9e\x02\n\'CPublishedFile_GetChangeHistory_Request\x12\x63\n\x0fpublishedfileid\x18\x01 \x01(\x06\x42J\x82\xb5\x18\x46Published file id of the file we\'d like to get the change history for.\x12@\n\ntotal_only\x18\x02 \x01(\x08\x42,\x82\xb5\x18(Return the total number of changes only.\x12\x12\n\nstartindex\x18\x03 \x01(\r\x12\r\n\x05\x63ount\x18\x04 \x01(\r\x12)\n\x08language\x18\x05 \x01(\x05:\x01\x30\x42\x14\x82\xb5\x18\x10\x44\x65sired language\"\xcd\x01\n(CPublishedFile_GetChangeHistory_Response\x12\x44\n\x07\x63hanges\x18\x01 \x03(\x0b\x32\x33.CPublishedFile_GetChangeHistory_Response.ChangeLog\x12\r\n\x05total\x18\x02 \x01(\r\x1aL\n\tChangeLog\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x1a\n\x12\x63hange_description\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\x05\"\xbb\x04\n)CPublishedFile_RefreshVotingQueue_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x42\n\x12matching_file_type\x18\x02 \x01(\rB&\x82\xb5\x18\"EPublishedFileInfoMatchingFileType\x12l\n\x04tags\x18\x03 \x03(\tB^\x82\xb5\x18ZInclude files that have all the tags or any of the tags if match_all_tags is set to false.\x12\x95\x01\n\x0ematch_all_tags\x18\x04 \x01(\x08:\x04trueBw\x82\xb5\x18sIf true, then files must have all the tags specified.  If false, then must have at least one of the tags specified.\x12I\n\rexcluded_tags\x18\x05 \x03(\tB2\x82\xb5\x18.Exclude any files that have any of these tags.\x12j\n\x12\x64\x65sired_queue_size\x18\x06 \x01(\rBN\x82\xb5\x18JDesired number of items in the voting queue.  May be clamped by the server\",\n*CPublishedFile_RefreshVotingQueue_Response\"\xab\x14\n!CPublishedFile_QueryFiles_Request\x12L\n\nquery_type\x18\x01 \x01(\rB8\x82\xb5\x18\x34\x65numeration EPublishedFileQueryType in clientenums.h\x12\x1e\n\x04page\x18\x02 \x01(\rB\x10\x82\xb5\x18\x0c\x43urrent page\x12P\n\nnumperpage\x18\x03 \x01(\r:\x01\x31\x42\x39\x82\xb5\x18\x35(Optional) The number of results, per page to return.\x12\x35\n\rcreator_appid\x18\x04 \x01(\rB\x1e\x82\xb5\x18\x1a\x41pp that created the files\x12.\n\x05\x61ppid\x18\x05 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp that consumes the files\x12N\n\x0crequiredtags\x18\x06 \x03(\tB8\x82\xb5\x18\x34Tags to match on. See match_all_tags parameter below\x12l\n\x0c\x65xcludedtags\x18\x07 \x03(\tBV\x82\xb5\x18R(Optional) Tags that must NOT be present on a published file to satisfy the query.\x12\x8a\x01\n\x0ematch_all_tags\x18\x08 \x01(\x08:\x04trueBl\x82\xb5\x18hIf true, then items must have all the tags specified, otherwise they must have at least one of the tags.\x12Q\n\x0erequired_flags\x18\t \x03(\tB9\x82\xb5\x18\x35Required flags that must be set on any returned items\x12K\n\romitted_flags\x18\n \x03(\tB4\x82\xb5\x18\x30\x46lags that must not be set on any returned items\x12I\n\x0bsearch_text\x18\x0b \x01(\tB4\x82\xb5\x18\x30Text to match in the item\'s title or description\x12\x38\n\x08\x66iletype\x18\x0c \x01(\rB&\x82\xb5\x18\"EPublishedFileInfoMatchingFileType\x12P\n\x15\x63hild_publishedfileid\x18\r \x01(\x06\x42\x31\x82\xb5\x18-Find all items that reference the given item.\x12\x82\x01\n\x04\x64\x61ys\x18\x0e \x01(\rBt\x82\xb5\x18pIf query_type is k_PublishedFileQueryType_RankedByTrend, then this is the number of days to get votes for [1,7].\x12\xb0\x01\n\x19include_recent_votes_only\x18\x0f \x01(\x08\x42\x8c\x01\x82\xb5\x18\x87\x01If query_type is k_PublishedFileQueryType_RankedByTrend, then limit result set just to items that have votes within the day range given\x12j\n\x15\x63\x61\x63he_max_age_seconds\x18\x1f \x01(\r:\x01\x30\x42H\x82\xb5\x18\x44\x41llow stale data to be returned for the specified number of seconds.\x12`\n\x08language\x18! \x01(\x05:\x01\x30\x42K\x82\xb5\x18GLanguage to search in and also what gets returned. Defaults to English.\x12l\n\x10required_kv_tags\x18\" \x03(\x0b\x32(.CPublishedFile_QueryFiles_Request.KVTagB(\x82\xb5\x18$Required key-value tags to match on.\x12i\n\ttotalonly\x18\x10 \x01(\x08\x42V\x82\xb5\x18R(Optional) If true, only return the total number of files that satisfy this query.\x12n\n\x08ids_only\x18# \x01(\x08\x42\\\x82\xb5\x18X(Optional) If true, only return the published file ids of files that satisfy this query.\x12.\n\x10return_vote_data\x18\x11 \x01(\x08\x42\x14\x82\xb5\x18\x10Return vote data\x12\x38\n\x0breturn_tags\x18\x12 \x01(\x08\x42#\x82\xb5\x18\x1fReturn tags in the file details\x12\x45\n\x0ereturn_kv_tags\x18\x13 \x01(\x08\x42-\x82\xb5\x18)Return key-value tags in the file details\x12W\n\x0freturn_previews\x18\x14 \x01(\x08\x42>\x82\xb5\x18:Return preview image and video details in the file details\x12\x46\n\x0freturn_children\x18\x15 \x01(\x08\x42-\x82\xb5\x18)Return child item ids in the file details\x12\x66\n\x18return_short_description\x18\x16 \x01(\x08\x42\x44\x82\xb5\x18@Populate the short_description field instead of file_description\x12K\n\x14return_for_sale_data\x18\x1e \x01(\x08\x42-\x82\xb5\x18)Return pricing information, if applicable\x12\x39\n\x0freturn_metadata\x18  \x01(\x08:\x05\x66\x61lseB\x19\x82\xb5\x18\x15Populate the metadata\x12g\n\x15return_playtime_stats\x18$ \x01(\rBH\x82\xb5\x18\x44Return playtime stats for the specified number of days before today.\x1a#\n\x05KVTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x8a\x02\n\"CPublishedFile_QueryFiles_Response\x12T\n\x05total\x18\x01 \x01(\rBE\x82\xb5\x18\x41Number of matches found, not necessarily number of items returned\x12\x8d\x01\n\x14publishedfiledetails\x18\x02 \x03(\x0b\x32\x15.PublishedFileDetailsBX\x82\xb5\x18TEach file details will be populated, depending on what return values were requested.\"W\n,CPublishedFile_StartPlaytimeTracking_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x18\n\x10publishedfileids\x18\x02 \x03(\x04\"/\n-CPublishedFile_StartPlaytimeTracking_Response\"V\n+CPublishedFile_StopPlaytimeTracking_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x18\n\x10publishedfileids\x18\x02 \x03(\x04\".\n,CPublishedFile_StopPlaytimeTracking_Response\"J\n9CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"<\n:CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response\"\x81\x02\n6CPublishedFile_SetPlaytimeForControllerConfigs_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12n\n\x17\x63ontroller_config_usage\x18\x02 \x03(\x0b\x32M.CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage\x1aH\n\x15\x43ontrollerConfigUsage\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x16\n\x0eseconds_active\x18\x02 \x01(\x02\"9\n7CPublishedFile_SetPlaytimeForControllerConfigs_Response\"Y\n\x1f\x43PublishedFile_AddChild_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x1d\n\x15\x63hild_publishedfileid\x18\x02 \x01(\x04\"\"\n CPublishedFile_AddChild_Response\"\\\n\"CPublishedFile_RemoveChild_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x1d\n\x15\x63hild_publishedfileid\x18\x02 \x01(\x04\"%\n#CPublishedFile_RemoveChild_Response2\xc7\x17\n\rPublishedFile\x12\x81\x01\n\tSubscribe\x12!.CPublishedFile_Subscribe_Request\x1a\".CPublishedFile_Subscribe_Response\"-\x82\xb5\x18)Subscribes the user to the published file\x12\x8b\x01\n\x0bUnsubscribe\x12#.CPublishedFile_Unsubscribe_Request\x1a$.CPublishedFile_Unsubscribe_Response\"1\x82\xb5\x18-Unsubscribes the user from the published file\x12\x96\x01\n\x0c\x43\x61nSubscribe\x12$.CPublishedFile_CanSubscribe_Request\x1a%.CPublishedFile_CanSubscribe_Response\"9\x82\xb5\x18\x35\x43heck if the user can subscribe to the published file\x12\x80\x01\n\x07Publish\x12\x1f.CPublishedFile_Publish_Request\x1a .CPublishedFile_Publish_Response\"2\x82\xb5\x18.Publishes a clouded user file to the Workshop.\x12\x90\x01\n\nGetDetails\x12\".CPublishedFile_GetDetails_Request\x1a#.CPublishedFile_GetDetails_Response\"9\x82\xb5\x18\x35Retrieves information about a set of published files.\x12\x93\x01\n\x0bGetItemInfo\x12#.CPublishedFile_GetItemInfo_Request\x1a$.CPublishedFile_GetItemInfo_Response\"9\x82\xb5\x18\x35Retrieves information about a set of published files.\x12\x85\x01\n\x0cGetUserFiles\x12$.CPublishedFile_GetUserFiles_Request\x1a%.CPublishedFile_GetUserFiles_Response\"(\x82\xb5\x18$Retrieves files published by a user.\x12z\n\x06Update\x12\x1e.CPublishedFile_Update_Request\x1a\x1f.CPublishedFile_Update_Response\"/\x82\xb5\x18+Updates information about a published file.\x12\xc0\x01\n\x15GetChangeHistoryEntry\x12-.CPublishedFile_GetChangeHistoryEntry_Request\x1a..CPublishedFile_GetChangeHistoryEntry_Response\"H\x82\xb5\x18\x44Returns data on a specific change history entry for a published file\x12\xa4\x01\n\x10GetChangeHistory\x12(.CPublishedFile_GetChangeHistory_Request\x1a).CPublishedFile_GetChangeHistory_Response\";\x82\xb5\x18\x37Returns data on the change history for a published file\x12\x98\x01\n\x12RefreshVotingQueue\x12*.CPublishedFile_RefreshVotingQueue_Request\x1a+.CPublishedFile_RefreshVotingQueue_Response\")\x82\xb5\x18%Refresh the voting queue for the user\x12\x86\x01\n\nQueryFiles\x12\".CPublishedFile_QueryFiles_Request\x1a#.CPublishedFile_QueryFiles_Response\"/\x82\xb5\x18+Performs a search query for published files\x12\xb3\x01\n\x15StartPlaytimeTracking\x12-.CPublishedFile_StartPlaytimeTracking_Request\x1a..CPublishedFile_StartPlaytimeTracking_Response\";\x82\xb5\x18\x37Start usage tracking for a given set of published files\x12\xb0\x01\n\x14StopPlaytimeTracking\x12,.CPublishedFile_StopPlaytimeTracking_Request\x1a-.CPublishedFile_StopPlaytimeTracking_Response\";\x82\xb5\x18\x37Stops usage tracking for a given set of published files\x12\xed\x01\n\"StopPlaytimeTrackingForAllAppItems\x12:.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request\x1a;.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response\"N\x82\xb5\x18JStops usage tracking for all items currently tracked for the specified app\x12\x98\x02\n\x1fSetPlaytimeForControllerConfigs\x12\x37.CPublishedFile_SetPlaytimeForControllerConfigs_Request\x1a\x38.CPublishedFile_SetPlaytimeForControllerConfigs_Response\"\x81\x01\x82\xb5\x18}Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs\x12\x8f\x01\n\x08\x41\x64\x64\x43hild\x12 .CPublishedFile_AddChild_Request\x1a!.CPublishedFile_AddChild_Response\">\x82\xb5\x18:Adds a parent->child relationship between the given items.\x12\x99\x01\n\x0bRemoveChild\x12#.CPublishedFile_RemoveChild_Request\x1a$.CPublishedFile_RemoveChild_Response\"?\x82\xb5\x18;Removes parent->child relationship between the given items.\x1a+\x82\xb5\x18\'A service to access published file dataB\x03\x90\x01\x01')
+  serialized_pb=_b('\n!steammessages_publishedfile.proto\x1a steammessages_unified_base.proto\"t\n CPublishedFile_Subscribe_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x11\n\tlist_type\x18\x02 \x01(\r\x12\r\n\x05\x61ppid\x18\x03 \x01(\x05\x12\x15\n\rnotify_client\x18\x04 \x01(\x08\"#\n!CPublishedFile_Subscribe_Response\"v\n\"CPublishedFile_Unsubscribe_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x11\n\tlist_type\x18\x02 \x01(\r\x12\r\n\x05\x61ppid\x18\x03 \x01(\x05\x12\x15\n\rnotify_client\x18\x04 \x01(\x08\"%\n#CPublishedFile_Unsubscribe_Response\">\n#CPublishedFile_CanSubscribe_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\"=\n$CPublishedFile_CanSubscribe_Response\x12\x15\n\rcan_subscribe\x18\x01 \x01(\x08\"\xcc\n\n\x1e\x43PublishedFile_Publish_Request\x12<\n\x05\x61ppid\x18\x01 \x01(\rB-\x82\xb5\x18)App Id this file is being published FROM.\x12\x43\n\x0e\x63onsumer_appid\x18\x02 \x01(\rB+\x82\xb5\x18\'App Id this file is being published TO.\x12K\n\rcloudfilename\x18\x03 \x01(\tB4\x82\xb5\x18\x30Name of the file to publish in the user\'s cloud.\x12[\n\x15preview_cloudfilename\x18\x04 \x01(\tB<\x82\xb5\x18\x38Name of the file to use as the published file\'s preview.\x12\x35\n\x05title\x18\x05 \x01(\tB&\x82\xb5\x18\"Text title for the published file.\x12\x46\n\x10\x66ile_description\x18\x06 \x01(\tB,\x82\xb5\x18(Text description for the published file.\x12L\n\tfile_type\x18\x07 \x01(\rB9\x82\xb5\x18\x35(EWorkshopFileType) Type of Workshop file to publish.\x12I\n\x16\x63onsumer_shortcut_name\x18\x08 \x01(\tB)\x82\xb5\x18%Shortcut name for the published file.\x12I\n\x10youtube_username\x18\t \x01(\tB/\x82\xb5\x18+(Optional) User\'s YouTube account username.\x12\\\n\x0fyoutube_videoid\x18\n \x01(\tBC\x82\xb5\x18?(Optional) Video Id of a YouTube video for this published file.\x12\x81\x01\n\nvisibility\x18\x0b \x01(\rBm\x82\xb5\x18i(ERemoteStoragePublishedFileVisibility) Visibility of the published file (private, friends, public, etc.)\x12k\n\x0credirect_uri\x18\x0c \x01(\tBU\x82\xb5\x18Q(Optional) If supplied, the resulting published file\'s Id is appended to the URI.\x12\x44\n\x04tags\x18\r \x03(\tB6\x82\xb5\x18\x32\x41rray of text tags to apply to the published file.\x12Y\n\x0f\x63ollection_type\x18\x0e \x01(\tB@\x82\xb5\x18<(Optional) Type of collection the published file represents.\x12M\n\tgame_type\x18\x0f \x01(\tB:\x82\xb5\x18\x36(Optional) Type of game the published file represents.\x12[\n\x03url\x18\x10 \x01(\tBN\x82\xb5\x18J(Optional) If this represents a game, this is the URL to that game\'s page.\"P\n\x1f\x43PublishedFile_Publish_Response\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x14\n\x0credirect_uri\x18\x02 \x01(\t\"\xd6\x07\n!CPublishedFile_GetDetails_Request\x12P\n\x10publishedfileids\x18\x01 \x03(\x06\x42\x36\x82\xb5\x18\x32Set of published file Ids to retrieve details for.\x12Q\n\x0bincludetags\x18\x02 \x01(\x08\x42<\x82\xb5\x18\x38If true, return tag information in the returned details.\x12\x63\n\x19includeadditionalpreviews\x18\x03 \x01(\x08\x42@\x82\xb5\x18<If true, return preview information in the returned details.\x12N\n\x0fincludechildren\x18\x04 \x01(\x08\x42\x35\x82\xb5\x18\x31If true, return children in the returned details.\x12R\n\rincludekvtags\x18\x05 \x01(\x08\x42;\x82\xb5\x18\x37If true, return key value tags in the returned details.\x12L\n\x0cincludevotes\x18\x06 \x01(\x08\x42\x36\x82\xb5\x18\x32If true, return vote data in the returned details.\x12\x63\n\x11short_description\x18\x08 \x01(\x08\x42H\x82\xb5\x18\x44If true, return a short description instead of the full description.\x12L\n\x12includeforsaledata\x18\n \x01(\x08\x42\x30\x82\xb5\x18,If true, return pricing data, if applicable.\x12\x42\n\x0fincludemetadata\x18\x0b \x01(\x08\x42)\x82\xb5\x18%If true, populate the metadata field.\x12U\n\x08language\x18\x0c \x01(\x05:\x01\x30\x42@\x82\xb5\x18<Specifies the localized text to return. Defaults to English.\x12g\n\x15return_playtime_stats\x18\r \x01(\rBH\x82\xb5\x18\x44Return playtime stats for the specified number of days before today.\"\xd5\x15\n\x14PublishedFileDetails\x12\x0e\n\x06result\x18\x01 \x01(\r\x12\x17\n\x0fpublishedfileid\x18\x02 \x01(\x04\x12\x0f\n\x07\x63reator\x18\x03 \x01(\x06\x12\x15\n\rcreator_appid\x18\x04 \x01(\r\x12\x16\n\x0e\x63onsumer_appid\x18\x05 \x01(\r\x12\x1b\n\x13\x63onsumer_shortcutid\x18\x06 \x01(\r\x12\x10\n\x08\x66ilename\x18\x07 \x01(\t\x12\x11\n\tfile_size\x18\x08 \x01(\x04\x12\x19\n\x11preview_file_size\x18\t \x01(\x04\x12\x10\n\x08\x66ile_url\x18\n \x01(\t\x12\x13\n\x0bpreview_url\x18\x0b \x01(\t\x12\x16\n\x0eyoutubevideoid\x18\x0c \x01(\t\x12\x0b\n\x03url\x18\r \x01(\t\x12\x15\n\rhcontent_file\x18\x0e \x01(\x06\x12\x18\n\x10hcontent_preview\x18\x0f \x01(\x06\x12\r\n\x05title\x18\x10 \x01(\t\x12\x18\n\x10\x66ile_description\x18\x11 \x01(\t\x12\x19\n\x11short_description\x18\x12 \x01(\t\x12\x14\n\x0ctime_created\x18\x13 \x01(\r\x12\x14\n\x0ctime_updated\x18\x14 \x01(\r\x12\x12\n\nvisibility\x18\x15 \x01(\r\x12\r\n\x05\x66lags\x18\x16 \x01(\r\x12\x15\n\rworkshop_file\x18\x17 \x01(\x08\x12\x19\n\x11workshop_accepted\x18\x18 \x01(\x08\x12\x1a\n\x12show_subscribe_all\x18\x19 \x01(\x08\x12\x1e\n\x16num_comments_developer\x18\x1a \x01(\x05\x12\x1b\n\x13num_comments_public\x18\x1b \x01(\x05\x12\x0e\n\x06\x62\x61nned\x18\x1c \x01(\x08\x12\x12\n\nban_reason\x18\x1d \x01(\t\x12\x0e\n\x06\x62\x61nner\x18\x1e \x01(\x06\x12\x16\n\x0e\x63\x61n_be_deleted\x18\x1f \x01(\x08\x12\x14\n\x0cincompatible\x18  \x01(\x08\x12\x10\n\x08\x61pp_name\x18! \x01(\t\x12\x11\n\tfile_type\x18\" \x01(\r\x12\x15\n\rcan_subscribe\x18# \x01(\x08\x12\x15\n\rsubscriptions\x18$ \x01(\r\x12\x11\n\tfavorited\x18% \x01(\r\x12\x11\n\tfollowers\x18& \x01(\r\x12\x1e\n\x16lifetime_subscriptions\x18\' \x01(\r\x12\x1a\n\x12lifetime_favorited\x18( \x01(\r\x12\x1a\n\x12lifetime_followers\x18) \x01(\r\x12\x19\n\x11lifetime_playtime\x18> \x01(\x04\x12\"\n\x1alifetime_playtime_sessions\x18? \x01(\x04\x12\r\n\x05views\x18* \x01(\r\x12\x13\n\x0bimage_width\x18+ \x01(\r\x12\x14\n\x0cimage_height\x18, \x01(\r\x12\x11\n\timage_url\x18- \x01(\t\x12\x13\n\x0bspoiler_tag\x18. \x01(\x08\x12\x12\n\nshortcutid\x18/ \x01(\r\x12\x14\n\x0cshortcutname\x18\x30 \x01(\t\x12\x14\n\x0cnum_children\x18\x31 \x01(\r\x12\x13\n\x0bnum_reports\x18\x32 \x01(\r\x12/\n\x08previews\x18\x33 \x03(\x0b\x32\x1d.PublishedFileDetails.Preview\x12\'\n\x04tags\x18\x34 \x03(\x0b\x32\x19.PublishedFileDetails.Tag\x12-\n\x08\x63hildren\x18\x35 \x03(\x0b\x32\x1b.PublishedFileDetails.Child\x12+\n\x06kvtags\x18\x36 \x03(\x0b\x32\x1b.PublishedFileDetails.KVTag\x12\x31\n\tvote_data\x18\x37 \x01(\x0b\x32\x1e.PublishedFileDetails.VoteData\x12;\n\x0eplaytime_stats\x18@ \x01(\x0b\x32#.PublishedFileDetails.PlaytimeStats\x12r\n\x0ftime_subscribed\x18\x38 \x01(\rBY\x82\xb5\x18UOnly valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls\x12\x61\n\rfor_sale_data\x18\x39 \x01(\x0b\x32!.PublishedFileDetails.ForSaleDataB\'\x82\xb5\x18#Pricing information, if applicable.\x12\x37\n\x08metadata\x18: \x01(\tB%\x82\xb5\x18!Metadata associated with the item\x12\x1a\n\x12incompatible_actor\x18; \x01(\x06\x12\x1e\n\x16incompatible_timestamp\x18< \x01(\r\x12\x43\n\x08language\x18= \x01(\x05:\x01\x30\x42.\x82\xb5\x18*The language of the title and description.\x1a%\n\x03Tag\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x11\n\tadminonly\x18\x02 \x01(\x08\x1a\xa6\x01\n\x07Preview\x12\x11\n\tpreviewid\x18\x01 \x01(\x04\x12\x11\n\tsortorder\x18\x02 \x01(\r\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0c\n\x04size\x18\x04 \x01(\r\x12\x10\n\x08\x66ilename\x18\x05 \x01(\t\x12\x16\n\x0eyoutubevideoid\x18\x06 \x01(\t\x12\x14\n\x0cpreview_type\x18\x07 \x01(\r\x12\x1a\n\x12\x65xternal_reference\x18\x08 \x01(\t\x1a\x46\n\x05\x43hild\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x11\n\tsortorder\x18\x02 \x01(\r\x12\x11\n\tfile_type\x18\x03 \x01(\r\x1a#\n\x05KVTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x1a?\n\x08VoteData\x12\r\n\x05score\x18\x01 \x01(\x02\x12\x10\n\x08votes_up\x18\x02 \x01(\r\x12\x12\n\nvotes_down\x18\x03 \x01(\r\x1a\xf1\x01\n\x0b\x46orSaleData\x12\x13\n\x0bis_for_sale\x18\x01 \x01(\x08\x12\x16\n\x0eprice_category\x18\x02 \x01(\r\x12V\n\x07\x65status\x18\x03 \x01(\x0e\x32\x31.PublishedFileDetails.EPublishedFileForSaleStatus:\x12k_PFFSS_NotForSale\x12\x1c\n\x14price_category_floor\x18\x04 \x01(\r\x12\"\n\x1aprice_is_pay_what_you_want\x18\x05 \x01(\x08\x12\x1b\n\x13\x64iscount_percentage\x18\x06 \x01(\r\x1a?\n\rPlaytimeStats\x12\x18\n\x10playtime_seconds\x18\x01 \x01(\x04\x12\x14\n\x0cnum_sessions\x18\x02 \x01(\x04\"\xc8\x01\n\x1b\x45PublishedFileForSaleStatus\x12\x16\n\x12k_PFFSS_NotForSale\x10\x00\x12\x1b\n\x17k_PFFSS_PendingApproval\x10\x01\x12\x1b\n\x17k_PFFSS_ApprovedForSale\x10\x02\x12\x1b\n\x17k_PFFSS_RejectedForSale\x10\x03\x12\x1b\n\x17k_PFFSS_NoLongerForSale\x10\x04\x12\x1d\n\x19k_PFFSS_TentativeApproval\x10\x05\"Y\n\"CPublishedFile_GetDetails_Response\x12\x33\n\x14publishedfiledetails\x18\x01 \x03(\x0b\x32\x15.PublishedFileDetails\"\xda\x01\n\"CPublishedFile_GetItemInfo_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12H\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32\x30.CPublishedFile_GetItemInfo_Request.WorkshopItem\x1a?\n\x0cWorkshopItem\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\"\xf2\x01\n#CPublishedFile_GetItemInfo_Response\x12\x13\n\x0bupdate_time\x18\x01 \x01(\r\x12M\n\x0eworkshop_items\x18\x02 \x03(\x0b\x32\x35.CPublishedFile_GetItemInfo_Response.WorkshopItemInfo\x1ag\n\x10WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\x12\r\n\x05\x66lags\x18\x04 \x01(\r\"\xdf\x11\n#CPublishedFile_GetUserFiles_Request\x12J\n\x07steamid\x18\x01 \x01(\x06\x42\x39\x82\xb5\x18\x35Steam ID of the user whose files are being requested.\x12\x46\n\x05\x61ppid\x18\x02 \x01(\rB7\x82\xb5\x18\x33\x41pp Id of the app that the files were published to.\x12:\n\x04page\x18\x04 \x01(\r:\x01\x31\x42)\x82\xb5\x18%(Optional) Starting page for results.\x12P\n\nnumperpage\x18\x05 \x01(\r:\x01\x31\x42\x39\x82\xb5\x18\x35(Optional) The number of results, per page to return.\x12\x43\n\x04type\x18\x06 \x01(\t:\x07myfilesB,\x82\xb5\x18((Optional) Type of files to be returned.\x12Y\n\nsortmethod\x18\x07 \x01(\t:\x0blastupdatedB8\x82\xb5\x18\x34(Optional) Sorting method to use on returned values.\x12;\n\x07privacy\x18\t \x01(\rB*\x82\xb5\x18&(optional) Filter by privacy settings.\x12h\n\x0crequiredtags\x18\n \x03(\tBR\x82\xb5\x18N(Optional) Tags that must be present on a published file to satisfy the query.\x12l\n\x0c\x65xcludedtags\x18\x0b \x03(\tBV\x82\xb5\x18R(Optional) Tags that must NOT be present on a published file to satisfy the query.\x12n\n\x10required_kv_tags\x18\x1e \x03(\x0b\x32*.CPublishedFile_GetUserFiles_Request.KVTagB(\x82\xb5\x18$Required key-value tags to match on.\x12=\n\x08\x66iletype\x18\x0e \x01(\rB+\x82\xb5\x18\'(Optional) File type to match files to.\x12\x61\n\rcreator_appid\x18\x0f \x01(\rBJ\x82\xb5\x18\x46\x41pp Id of the app that published the files, only matched if specified.\x12I\n\x14match_cloud_filename\x18\x10 \x01(\tB+\x82\xb5\x18\'Match this cloud filename if specified.\x12j\n\x15\x63\x61\x63he_max_age_seconds\x18\x1b \x01(\r:\x01\x30\x42H\x82\xb5\x18\x44\x41llow stale data to be returned for the specified number of seconds.\x12U\n\x08language\x18\x1d \x01(\x05:\x01\x30\x42@\x82\xb5\x18<Specifies the localized text to return. Defaults to English.\x12i\n\ttotalonly\x18\x11 \x01(\x08\x42V\x82\xb5\x18R(Optional) If true, only return the total number of files that satisfy this query.\x12n\n\x08ids_only\x18\x12 \x01(\x08\x42\\\x82\xb5\x18X(Optional) If true, only return the published file ids of files that satisfy this query.\x12\x34\n\x10return_vote_data\x18\x13 \x01(\x08:\x04trueB\x14\x82\xb5\x18\x10Return vote data\x12\x38\n\x0breturn_tags\x18\x14 \x01(\x08\x42#\x82\xb5\x18\x1fReturn tags in the file details\x12K\n\x0ereturn_kv_tags\x18\x15 \x01(\x08:\x04trueB-\x82\xb5\x18)Return key-value tags in the file details\x12W\n\x0freturn_previews\x18\x16 \x01(\x08\x42>\x82\xb5\x18:Return preview image and video details in the file details\x12\x46\n\x0freturn_children\x18\x17 \x01(\x08\x42-\x82\xb5\x18)Return child item ids in the file details\x12l\n\x18return_short_description\x18\x18 \x01(\x08:\x04trueBD\x82\xb5\x18@Populate the short_description field instead of file_description\x12K\n\x14return_for_sale_data\x18\x1a \x01(\x08\x42-\x82\xb5\x18)Return pricing information, if applicable\x12?\n\x0freturn_metadata\x18\x1c \x01(\x08:\x05\x66\x61lseB\x1f\x82\xb5\x18\x1bPopulate the metadata field\x12g\n\x15return_playtime_stats\x18\x1f \x01(\rBH\x82\xb5\x18\x44Return playtime stats for the specified number of days before today.\x1a#\n\x05KVTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x80\x02\n$CPublishedFile_GetUserFiles_Response\x12\r\n\x05total\x18\x01 \x01(\r\x12\x12\n\nstartindex\x18\x02 \x01(\r\x12\x33\n\x14publishedfiledetails\x18\x03 \x03(\x0b\x32\x15.PublishedFileDetails\x12\x37\n\x04\x61pps\x18\x04 \x03(\x0b\x32).CPublishedFile_GetUserFiles_Response.App\x1aG\n\x03\x41pp\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\nshortcutid\x18\x03 \x01(\r\x12\x0f\n\x07private\x18\x04 \x01(\x08\"\x91\x06\n\x1d\x43PublishedFile_Update_Request\x12\x39\n\x05\x61ppid\x18\x01 \x01(\rB*\x82\xb5\x18&App Id this published file belongs to.\x12L\n\x0fpublishedfileid\x18\x02 \x01(\x06\x42\x33\x82\xb5\x18/Published file id of the file we\'d like update.\x12:\n\x05title\x18\x03 \x01(\tB+\x82\xb5\x18\'(Optional) Title of the published file.\x12K\n\x10\x66ile_description\x18\x04 \x01(\tB1\x82\xb5\x18-(Optional) Description of the published file.\x12\x44\n\nvisibility\x18\x05 \x01(\rB0\x82\xb5\x18,(Optional) Visibility of the published file.\x12@\n\x04tags\x18\x06 \x03(\tB2\x82\xb5\x18.(Optional) Set of tags for the published file.\x12\x41\n\x08\x66ilename\x18\x07 \x01(\tB/\x82\xb5\x18+(Optional) Filename for the published file.\x12Q\n\x10preview_filename\x18\x08 \x01(\tB7\x82\xb5\x18\x33(Optional) Preview filename for the published file.\x12^\n\x0bimage_width\x18\x0f \x01(\rBI\x82\xb5\x18\x45(Optional) If this is an image file, you can specify the image width.\x12`\n\x0cimage_height\x18\x10 \x01(\rBJ\x82\xb5\x18\x46(Optional) If this is an image file, you can specify the image height.\" \n\x1e\x43PublishedFile_Update_Response\"\xb8\x01\n,CPublishedFile_GetChangeHistoryEntry_Request\x12\x63\n\x0fpublishedfileid\x18\x01 \x01(\x06\x42J\x82\xb5\x18\x46Published file id of the file we\'d like to get the change history for.\x12\x11\n\ttimestamp\x18\x02 \x01(\r\x12\x10\n\x08language\x18\x03 \x01(\x05\"]\n-CPublishedFile_GetChangeHistoryEntry_Response\x12\x1a\n\x12\x63hange_description\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\x05\"\x9e\x02\n\'CPublishedFile_GetChangeHistory_Request\x12\x63\n\x0fpublishedfileid\x18\x01 \x01(\x06\x42J\x82\xb5\x18\x46Published file id of the file we\'d like to get the change history for.\x12@\n\ntotal_only\x18\x02 \x01(\x08\x42,\x82\xb5\x18(Return the total number of changes only.\x12\x12\n\nstartindex\x18\x03 \x01(\r\x12\r\n\x05\x63ount\x18\x04 \x01(\r\x12)\n\x08language\x18\x05 \x01(\x05:\x01\x30\x42\x14\x82\xb5\x18\x10\x44\x65sired language\"\xcd\x01\n(CPublishedFile_GetChangeHistory_Response\x12\x44\n\x07\x63hanges\x18\x01 \x03(\x0b\x32\x33.CPublishedFile_GetChangeHistory_Response.ChangeLog\x12\r\n\x05total\x18\x02 \x01(\r\x1aL\n\tChangeLog\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x1a\n\x12\x63hange_description\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\x05\"\xbb\x04\n)CPublishedFile_RefreshVotingQueue_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x42\n\x12matching_file_type\x18\x02 \x01(\rB&\x82\xb5\x18\"EPublishedFileInfoMatchingFileType\x12l\n\x04tags\x18\x03 \x03(\tB^\x82\xb5\x18ZInclude files that have all the tags or any of the tags if match_all_tags is set to false.\x12\x95\x01\n\x0ematch_all_tags\x18\x04 \x01(\x08:\x04trueBw\x82\xb5\x18sIf true, then files must have all the tags specified.  If false, then must have at least one of the tags specified.\x12I\n\rexcluded_tags\x18\x05 \x03(\tB2\x82\xb5\x18.Exclude any files that have any of these tags.\x12j\n\x12\x64\x65sired_queue_size\x18\x06 \x01(\rBN\x82\xb5\x18JDesired number of items in the voting queue.  May be clamped by the server\",\n*CPublishedFile_RefreshVotingQueue_Response\"\xab\x14\n!CPublishedFile_QueryFiles_Request\x12L\n\nquery_type\x18\x01 \x01(\rB8\x82\xb5\x18\x34\x65numeration EPublishedFileQueryType in clientenums.h\x12\x1e\n\x04page\x18\x02 \x01(\rB\x10\x82\xb5\x18\x0c\x43urrent page\x12P\n\nnumperpage\x18\x03 \x01(\r:\x01\x31\x42\x39\x82\xb5\x18\x35(Optional) The number of results, per page to return.\x12\x35\n\rcreator_appid\x18\x04 \x01(\rB\x1e\x82\xb5\x18\x1a\x41pp that created the files\x12.\n\x05\x61ppid\x18\x05 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp that consumes the files\x12N\n\x0crequiredtags\x18\x06 \x03(\tB8\x82\xb5\x18\x34Tags to match on. See match_all_tags parameter below\x12l\n\x0c\x65xcludedtags\x18\x07 \x03(\tBV\x82\xb5\x18R(Optional) Tags that must NOT be present on a published file to satisfy the query.\x12\x8a\x01\n\x0ematch_all_tags\x18\x08 \x01(\x08:\x04trueBl\x82\xb5\x18hIf true, then items must have all the tags specified, otherwise they must have at least one of the tags.\x12Q\n\x0erequired_flags\x18\t \x03(\tB9\x82\xb5\x18\x35Required flags that must be set on any returned items\x12K\n\romitted_flags\x18\n \x03(\tB4\x82\xb5\x18\x30\x46lags that must not be set on any returned items\x12I\n\x0bsearch_text\x18\x0b \x01(\tB4\x82\xb5\x18\x30Text to match in the item\'s title or description\x12\x38\n\x08\x66iletype\x18\x0c \x01(\rB&\x82\xb5\x18\"EPublishedFileInfoMatchingFileType\x12P\n\x15\x63hild_publishedfileid\x18\r \x01(\x06\x42\x31\x82\xb5\x18-Find all items that reference the given item.\x12\x82\x01\n\x04\x64\x61ys\x18\x0e \x01(\rBt\x82\xb5\x18pIf query_type is k_PublishedFileQueryType_RankedByTrend, then this is the number of days to get votes for [1,7].\x12\xb0\x01\n\x19include_recent_votes_only\x18\x0f \x01(\x08\x42\x8c\x01\x82\xb5\x18\x87\x01If query_type is k_PublishedFileQueryType_RankedByTrend, then limit result set just to items that have votes within the day range given\x12j\n\x15\x63\x61\x63he_max_age_seconds\x18\x1f \x01(\r:\x01\x30\x42H\x82\xb5\x18\x44\x41llow stale data to be returned for the specified number of seconds.\x12`\n\x08language\x18! \x01(\x05:\x01\x30\x42K\x82\xb5\x18GLanguage to search in and also what gets returned. Defaults to English.\x12l\n\x10required_kv_tags\x18\" \x03(\x0b\x32(.CPublishedFile_QueryFiles_Request.KVTagB(\x82\xb5\x18$Required key-value tags to match on.\x12i\n\ttotalonly\x18\x10 \x01(\x08\x42V\x82\xb5\x18R(Optional) If true, only return the total number of files that satisfy this query.\x12n\n\x08ids_only\x18# \x01(\x08\x42\\\x82\xb5\x18X(Optional) If true, only return the published file ids of files that satisfy this query.\x12.\n\x10return_vote_data\x18\x11 \x01(\x08\x42\x14\x82\xb5\x18\x10Return vote data\x12\x38\n\x0breturn_tags\x18\x12 \x01(\x08\x42#\x82\xb5\x18\x1fReturn tags in the file details\x12\x45\n\x0ereturn_kv_tags\x18\x13 \x01(\x08\x42-\x82\xb5\x18)Return key-value tags in the file details\x12W\n\x0freturn_previews\x18\x14 \x01(\x08\x42>\x82\xb5\x18:Return preview image and video details in the file details\x12\x46\n\x0freturn_children\x18\x15 \x01(\x08\x42-\x82\xb5\x18)Return child item ids in the file details\x12\x66\n\x18return_short_description\x18\x16 \x01(\x08\x42\x44\x82\xb5\x18@Populate the short_description field instead of file_description\x12K\n\x14return_for_sale_data\x18\x1e \x01(\x08\x42-\x82\xb5\x18)Return pricing information, if applicable\x12\x39\n\x0freturn_metadata\x18  \x01(\x08:\x05\x66\x61lseB\x19\x82\xb5\x18\x15Populate the metadata\x12g\n\x15return_playtime_stats\x18$ \x01(\rBH\x82\xb5\x18\x44Return playtime stats for the specified number of days before today.\x1a#\n\x05KVTag\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x8a\x02\n\"CPublishedFile_QueryFiles_Response\x12T\n\x05total\x18\x01 \x01(\rBE\x82\xb5\x18\x41Number of matches found, not necessarily number of items returned\x12\x8d\x01\n\x14publishedfiledetails\x18\x02 \x03(\x0b\x32\x15.PublishedFileDetailsBX\x82\xb5\x18TEach file details will be populated, depending on what return values were requested.\"i\n)CPublishedFile_AddAppRelationship_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x14\n\x0crelationship\x18\x03 \x01(\r\",\n*CPublishedFile_AddAppRelationship_Response\"l\n,CPublishedFile_RemoveAppRelationship_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x14\n\x0crelationship\x18\x03 \x01(\r\"/\n-CPublishedFile_RemoveAppRelationship_Response\"E\n*CPublishedFile_GetAppRelationships_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\"\xbe\x01\n+CPublishedFile_GetAppRelationships_Response\x12W\n\x11\x61pp_relationships\x18\x03 \x03(\x0b\x32<.CPublishedFile_GetAppRelationships_Response.AppRelationship\x1a\x36\n\x0f\x41ppRelationship\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x14\n\x0crelationship\x18\x02 \x01(\r\"W\n,CPublishedFile_StartPlaytimeTracking_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x18\n\x10publishedfileids\x18\x02 \x03(\x04\"/\n-CPublishedFile_StartPlaytimeTracking_Response\"V\n+CPublishedFile_StopPlaytimeTracking_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x18\n\x10publishedfileids\x18\x02 \x03(\x04\".\n,CPublishedFile_StopPlaytimeTracking_Response\"J\n9CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"<\n:CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response\"\x81\x02\n6CPublishedFile_SetPlaytimeForControllerConfigs_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12n\n\x17\x63ontroller_config_usage\x18\x02 \x03(\x0b\x32M.CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage\x1aH\n\x15\x43ontrollerConfigUsage\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x16\n\x0eseconds_active\x18\x02 \x01(\x02\"9\n7CPublishedFile_SetPlaytimeForControllerConfigs_Response\"Y\n\x1f\x43PublishedFile_AddChild_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x1d\n\x15\x63hild_publishedfileid\x18\x02 \x01(\x04\"\"\n CPublishedFile_AddChild_Response\"\\\n\"CPublishedFile_RemoveChild_Request\x12\x17\n\x0fpublishedfileid\x18\x01 \x01(\x04\x12\x1d\n\x15\x63hild_publishedfileid\x18\x02 \x01(\x04\"%\n#CPublishedFile_RemoveChild_Response2\xf4\x1b\n\rPublishedFile\x12\x81\x01\n\tSubscribe\x12!.CPublishedFile_Subscribe_Request\x1a\".CPublishedFile_Subscribe_Response\"-\x82\xb5\x18)Subscribes the user to the published file\x12\x8b\x01\n\x0bUnsubscribe\x12#.CPublishedFile_Unsubscribe_Request\x1a$.CPublishedFile_Unsubscribe_Response\"1\x82\xb5\x18-Unsubscribes the user from the published file\x12\x96\x01\n\x0c\x43\x61nSubscribe\x12$.CPublishedFile_CanSubscribe_Request\x1a%.CPublishedFile_CanSubscribe_Response\"9\x82\xb5\x18\x35\x43heck if the user can subscribe to the published file\x12\x80\x01\n\x07Publish\x12\x1f.CPublishedFile_Publish_Request\x1a .CPublishedFile_Publish_Response\"2\x82\xb5\x18.Publishes a clouded user file to the Workshop.\x12\x90\x01\n\nGetDetails\x12\".CPublishedFile_GetDetails_Request\x1a#.CPublishedFile_GetDetails_Response\"9\x82\xb5\x18\x35Retrieves information about a set of published files.\x12\x93\x01\n\x0bGetItemInfo\x12#.CPublishedFile_GetItemInfo_Request\x1a$.CPublishedFile_GetItemInfo_Response\"9\x82\xb5\x18\x35Retrieves information about a set of published files.\x12\x85\x01\n\x0cGetUserFiles\x12$.CPublishedFile_GetUserFiles_Request\x1a%.CPublishedFile_GetUserFiles_Response\"(\x82\xb5\x18$Retrieves files published by a user.\x12z\n\x06Update\x12\x1e.CPublishedFile_Update_Request\x1a\x1f.CPublishedFile_Update_Response\"/\x82\xb5\x18+Updates information about a published file.\x12\xc0\x01\n\x15GetChangeHistoryEntry\x12-.CPublishedFile_GetChangeHistoryEntry_Request\x1a..CPublishedFile_GetChangeHistoryEntry_Response\"H\x82\xb5\x18\x44Returns data on a specific change history entry for a published file\x12\xa4\x01\n\x10GetChangeHistory\x12(.CPublishedFile_GetChangeHistory_Request\x1a).CPublishedFile_GetChangeHistory_Response\";\x82\xb5\x18\x37Returns data on the change history for a published file\x12\x98\x01\n\x12RefreshVotingQueue\x12*.CPublishedFile_RefreshVotingQueue_Request\x1a+.CPublishedFile_RefreshVotingQueue_Response\")\x82\xb5\x18%Refresh the voting queue for the user\x12\x86\x01\n\nQueryFiles\x12\".CPublishedFile_QueryFiles_Request\x1a#.CPublishedFile_QueryFiles_Response\"/\x82\xb5\x18+Performs a search query for published files\x12\xb3\x01\n\x12\x41\x64\x64\x41ppRelationship\x12*.CPublishedFile_AddAppRelationship_Request\x1a+.CPublishedFile_AddAppRelationship_Response\"D\x82\xb5\x18@Adds a relationship between the published file and the given app\x12\xbe\x01\n\x15RemoveAppRelationship\x12-.CPublishedFile_RemoveAppRelationship_Request\x1a..CPublishedFile_RemoveAppRelationship_Response\"F\x82\xb5\x18\x42Remove a relationship between the published file and the given app\x12\xb3\x01\n\x13GetAppRelationships\x12+.CPublishedFile_GetAppRelationships_Request\x1a,.CPublishedFile_GetAppRelationships_Response\"A\x82\xb5\x18=Returns the list of app relationships for this published file\x12\xb3\x01\n\x15StartPlaytimeTracking\x12-.CPublishedFile_StartPlaytimeTracking_Request\x1a..CPublishedFile_StartPlaytimeTracking_Response\";\x82\xb5\x18\x37Start usage tracking for a given set of published files\x12\xb0\x01\n\x14StopPlaytimeTracking\x12,.CPublishedFile_StopPlaytimeTracking_Request\x1a-.CPublishedFile_StopPlaytimeTracking_Response\";\x82\xb5\x18\x37Stops usage tracking for a given set of published files\x12\xed\x01\n\"StopPlaytimeTrackingForAllAppItems\x12:.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request\x1a;.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response\"N\x82\xb5\x18JStops usage tracking for all items currently tracked for the specified app\x12\x98\x02\n\x1fSetPlaytimeForControllerConfigs\x12\x37.CPublishedFile_SetPlaytimeForControllerConfigs_Request\x1a\x38.CPublishedFile_SetPlaytimeForControllerConfigs_Response\"\x81\x01\x82\xb5\x18}Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs\x12\x8f\x01\n\x08\x41\x64\x64\x43hild\x12 .CPublishedFile_AddChild_Request\x1a!.CPublishedFile_AddChild_Response\">\x82\xb5\x18:Adds a parent->child relationship between the given items.\x12\x99\x01\n\x0bRemoveChild\x12#.CPublishedFile_RemoveChild_Request\x1a$.CPublishedFile_RemoveChild_Response\"?\x82\xb5\x18;Removes parent->child relationship between the given items.\x1a+\x82\xb5\x18\'A service to access published file dataB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -2655,6 +2655,243 @@ _CPUBLISHEDFILE_QUERYFILES_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CPUBLISHEDFILE_ADDAPPRELATIONSHIP_REQUEST = _descriptor.Descriptor(
+  name='CPublishedFile_AddAppRelationship_Request',
+  full_name='CPublishedFile_AddAppRelationship_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='publishedfileid', full_name='CPublishedFile_AddAppRelationship_Request.publishedfileid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CPublishedFile_AddAppRelationship_Request.appid', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='relationship', full_name='CPublishedFile_AddAppRelationship_Request.relationship', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13900,
+  serialized_end=14005,
+)
+
+
+_CPUBLISHEDFILE_ADDAPPRELATIONSHIP_RESPONSE = _descriptor.Descriptor(
+  name='CPublishedFile_AddAppRelationship_Response',
+  full_name='CPublishedFile_AddAppRelationship_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14007,
+  serialized_end=14051,
+)
+
+
+_CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_REQUEST = _descriptor.Descriptor(
+  name='CPublishedFile_RemoveAppRelationship_Request',
+  full_name='CPublishedFile_RemoveAppRelationship_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='publishedfileid', full_name='CPublishedFile_RemoveAppRelationship_Request.publishedfileid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CPublishedFile_RemoveAppRelationship_Request.appid', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='relationship', full_name='CPublishedFile_RemoveAppRelationship_Request.relationship', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14053,
+  serialized_end=14161,
+)
+
+
+_CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_RESPONSE = _descriptor.Descriptor(
+  name='CPublishedFile_RemoveAppRelationship_Response',
+  full_name='CPublishedFile_RemoveAppRelationship_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14163,
+  serialized_end=14210,
+)
+
+
+_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_REQUEST = _descriptor.Descriptor(
+  name='CPublishedFile_GetAppRelationships_Request',
+  full_name='CPublishedFile_GetAppRelationships_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='publishedfileid', full_name='CPublishedFile_GetAppRelationships_Request.publishedfileid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14212,
+  serialized_end=14281,
+)
+
+
+_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE_APPRELATIONSHIP = _descriptor.Descriptor(
+  name='AppRelationship',
+  full_name='CPublishedFile_GetAppRelationships_Response.AppRelationship',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CPublishedFile_GetAppRelationships_Response.AppRelationship.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='relationship', full_name='CPublishedFile_GetAppRelationships_Response.AppRelationship.relationship', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14420,
+  serialized_end=14474,
+)
+
+_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE = _descriptor.Descriptor(
+  name='CPublishedFile_GetAppRelationships_Response',
+  full_name='CPublishedFile_GetAppRelationships_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_relationships', full_name='CPublishedFile_GetAppRelationships_Response.app_relationships', index=0,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE_APPRELATIONSHIP, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14284,
+  serialized_end=14474,
+)
+
+
 _CPUBLISHEDFILE_STARTPLAYTIMETRACKING_REQUEST = _descriptor.Descriptor(
   name='CPublishedFile_StartPlaytimeTracking_Request',
   full_name='CPublishedFile_StartPlaytimeTracking_Request',
@@ -2688,8 +2925,8 @@ _CPUBLISHEDFILE_STARTPLAYTIMETRACKING_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13900,
-  serialized_end=13987,
+  serialized_start=14476,
+  serialized_end=14563,
 )
 
 
@@ -2712,8 +2949,8 @@ _CPUBLISHEDFILE_STARTPLAYTIMETRACKING_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13989,
-  serialized_end=14036,
+  serialized_start=14565,
+  serialized_end=14612,
 )
 
 
@@ -2750,8 +2987,8 @@ _CPUBLISHEDFILE_STOPPLAYTIMETRACKING_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14038,
-  serialized_end=14124,
+  serialized_start=14614,
+  serialized_end=14700,
 )
 
 
@@ -2774,8 +3011,8 @@ _CPUBLISHEDFILE_STOPPLAYTIMETRACKING_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14126,
-  serialized_end=14172,
+  serialized_start=14702,
+  serialized_end=14748,
 )
 
 
@@ -2805,8 +3042,8 @@ _CPUBLISHEDFILE_STOPPLAYTIMETRACKINGFORALLAPPITEMS_REQUEST = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14174,
-  serialized_end=14248,
+  serialized_start=14750,
+  serialized_end=14824,
 )
 
 
@@ -2829,8 +3066,8 @@ _CPUBLISHEDFILE_STOPPLAYTIMETRACKINGFORALLAPPITEMS_RESPONSE = _descriptor.Descri
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14250,
-  serialized_end=14310,
+  serialized_start=14826,
+  serialized_end=14886,
 )
 
 
@@ -2867,8 +3104,8 @@ _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST_CONTROLLERCONFIGUSAGE = 
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14498,
-  serialized_end=14570,
+  serialized_start=15074,
+  serialized_end=15146,
 )
 
 _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST = _descriptor.Descriptor(
@@ -2904,8 +3141,8 @@ _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14313,
-  serialized_end=14570,
+  serialized_start=14889,
+  serialized_end=15146,
 )
 
 
@@ -2928,8 +3165,8 @@ _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_RESPONSE = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14572,
-  serialized_end=14629,
+  serialized_start=15148,
+  serialized_end=15205,
 )
 
 
@@ -2966,8 +3203,8 @@ _CPUBLISHEDFILE_ADDCHILD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14631,
-  serialized_end=14720,
+  serialized_start=15207,
+  serialized_end=15296,
 )
 
 
@@ -2990,8 +3227,8 @@ _CPUBLISHEDFILE_ADDCHILD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14722,
-  serialized_end=14756,
+  serialized_start=15298,
+  serialized_end=15332,
 )
 
 
@@ -3028,8 +3265,8 @@ _CPUBLISHEDFILE_REMOVECHILD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14758,
-  serialized_end=14850,
+  serialized_start=15334,
+  serialized_end=15426,
 )
 
 
@@ -3052,8 +3289,8 @@ _CPUBLISHEDFILE_REMOVECHILD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14852,
-  serialized_end=14889,
+  serialized_start=15428,
+  serialized_end=15465,
 )
 
 _PUBLISHEDFILEDETAILS_TAG.containing_type = _PUBLISHEDFILEDETAILS
@@ -3087,6 +3324,8 @@ _CPUBLISHEDFILE_GETCHANGEHISTORY_RESPONSE.fields_by_name['changes'].message_type
 _CPUBLISHEDFILE_QUERYFILES_REQUEST_KVTAG.containing_type = _CPUBLISHEDFILE_QUERYFILES_REQUEST
 _CPUBLISHEDFILE_QUERYFILES_REQUEST.fields_by_name['required_kv_tags'].message_type = _CPUBLISHEDFILE_QUERYFILES_REQUEST_KVTAG
 _CPUBLISHEDFILE_QUERYFILES_RESPONSE.fields_by_name['publishedfiledetails'].message_type = _PUBLISHEDFILEDETAILS
+_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE_APPRELATIONSHIP.containing_type = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE
+_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE.fields_by_name['app_relationships'].message_type = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE_APPRELATIONSHIP
 _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST_CONTROLLERCONFIGUSAGE.containing_type = _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST
 _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST.fields_by_name['controller_config_usage'].message_type = _CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST_CONTROLLERCONFIGUSAGE
 DESCRIPTOR.message_types_by_name['CPublishedFile_Subscribe_Request'] = _CPUBLISHEDFILE_SUBSCRIBE_REQUEST
@@ -3114,6 +3353,12 @@ DESCRIPTOR.message_types_by_name['CPublishedFile_RefreshVotingQueue_Request'] = 
 DESCRIPTOR.message_types_by_name['CPublishedFile_RefreshVotingQueue_Response'] = _CPUBLISHEDFILE_REFRESHVOTINGQUEUE_RESPONSE
 DESCRIPTOR.message_types_by_name['CPublishedFile_QueryFiles_Request'] = _CPUBLISHEDFILE_QUERYFILES_REQUEST
 DESCRIPTOR.message_types_by_name['CPublishedFile_QueryFiles_Response'] = _CPUBLISHEDFILE_QUERYFILES_RESPONSE
+DESCRIPTOR.message_types_by_name['CPublishedFile_AddAppRelationship_Request'] = _CPUBLISHEDFILE_ADDAPPRELATIONSHIP_REQUEST
+DESCRIPTOR.message_types_by_name['CPublishedFile_AddAppRelationship_Response'] = _CPUBLISHEDFILE_ADDAPPRELATIONSHIP_RESPONSE
+DESCRIPTOR.message_types_by_name['CPublishedFile_RemoveAppRelationship_Request'] = _CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_REQUEST
+DESCRIPTOR.message_types_by_name['CPublishedFile_RemoveAppRelationship_Response'] = _CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_RESPONSE
+DESCRIPTOR.message_types_by_name['CPublishedFile_GetAppRelationships_Request'] = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_REQUEST
+DESCRIPTOR.message_types_by_name['CPublishedFile_GetAppRelationships_Response'] = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE
 DESCRIPTOR.message_types_by_name['CPublishedFile_StartPlaytimeTracking_Request'] = _CPUBLISHEDFILE_STARTPLAYTIMETRACKING_REQUEST
 DESCRIPTOR.message_types_by_name['CPublishedFile_StartPlaytimeTracking_Response'] = _CPUBLISHEDFILE_STARTPLAYTIMETRACKING_RESPONSE
 DESCRIPTOR.message_types_by_name['CPublishedFile_StopPlaytimeTracking_Request'] = _CPUBLISHEDFILE_STOPPLAYTIMETRACKING_REQUEST
@@ -3405,6 +3650,56 @@ CPublishedFile_QueryFiles_Response = _reflection.GeneratedProtocolMessageType('C
   # @@protoc_insertion_point(class_scope:CPublishedFile_QueryFiles_Response)
   ))
 _sym_db.RegisterMessage(CPublishedFile_QueryFiles_Response)
+
+CPublishedFile_AddAppRelationship_Request = _reflection.GeneratedProtocolMessageType('CPublishedFile_AddAppRelationship_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPUBLISHEDFILE_ADDAPPRELATIONSHIP_REQUEST,
+  __module__ = 'steammessages_publishedfile_pb2'
+  # @@protoc_insertion_point(class_scope:CPublishedFile_AddAppRelationship_Request)
+  ))
+_sym_db.RegisterMessage(CPublishedFile_AddAppRelationship_Request)
+
+CPublishedFile_AddAppRelationship_Response = _reflection.GeneratedProtocolMessageType('CPublishedFile_AddAppRelationship_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPUBLISHEDFILE_ADDAPPRELATIONSHIP_RESPONSE,
+  __module__ = 'steammessages_publishedfile_pb2'
+  # @@protoc_insertion_point(class_scope:CPublishedFile_AddAppRelationship_Response)
+  ))
+_sym_db.RegisterMessage(CPublishedFile_AddAppRelationship_Response)
+
+CPublishedFile_RemoveAppRelationship_Request = _reflection.GeneratedProtocolMessageType('CPublishedFile_RemoveAppRelationship_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_REQUEST,
+  __module__ = 'steammessages_publishedfile_pb2'
+  # @@protoc_insertion_point(class_scope:CPublishedFile_RemoveAppRelationship_Request)
+  ))
+_sym_db.RegisterMessage(CPublishedFile_RemoveAppRelationship_Request)
+
+CPublishedFile_RemoveAppRelationship_Response = _reflection.GeneratedProtocolMessageType('CPublishedFile_RemoveAppRelationship_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_RESPONSE,
+  __module__ = 'steammessages_publishedfile_pb2'
+  # @@protoc_insertion_point(class_scope:CPublishedFile_RemoveAppRelationship_Response)
+  ))
+_sym_db.RegisterMessage(CPublishedFile_RemoveAppRelationship_Response)
+
+CPublishedFile_GetAppRelationships_Request = _reflection.GeneratedProtocolMessageType('CPublishedFile_GetAppRelationships_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_REQUEST,
+  __module__ = 'steammessages_publishedfile_pb2'
+  # @@protoc_insertion_point(class_scope:CPublishedFile_GetAppRelationships_Request)
+  ))
+_sym_db.RegisterMessage(CPublishedFile_GetAppRelationships_Request)
+
+CPublishedFile_GetAppRelationships_Response = _reflection.GeneratedProtocolMessageType('CPublishedFile_GetAppRelationships_Response', (_message.Message,), dict(
+
+  AppRelationship = _reflection.GeneratedProtocolMessageType('AppRelationship', (_message.Message,), dict(
+    DESCRIPTOR = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE_APPRELATIONSHIP,
+    __module__ = 'steammessages_publishedfile_pb2'
+    # @@protoc_insertion_point(class_scope:CPublishedFile_GetAppRelationships_Response.AppRelationship)
+    ))
+  ,
+  DESCRIPTOR = _CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE,
+  __module__ = 'steammessages_publishedfile_pb2'
+  # @@protoc_insertion_point(class_scope:CPublishedFile_GetAppRelationships_Response)
+  ))
+_sym_db.RegisterMessage(CPublishedFile_GetAppRelationships_Response)
+_sym_db.RegisterMessage(CPublishedFile_GetAppRelationships_Response.AppRelationship)
 
 CPublishedFile_StartPlaytimeTracking_Request = _reflection.GeneratedProtocolMessageType('CPublishedFile_StartPlaytimeTracking_Request', (_message.Message,), dict(
   DESCRIPTOR = _CPUBLISHEDFILE_STARTPLAYTIMETRACKING_REQUEST,
@@ -3722,8 +4017,8 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\'A service to access published file data')),
-  serialized_start=14892,
-  serialized_end=17907,
+  serialized_start=15468,
+  serialized_end=19040,
   methods=[
   _descriptor.MethodDescriptor(
     name='Subscribe',
@@ -3834,9 +4129,36 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030+Performs a search query for published files')),
   ),
   _descriptor.MethodDescriptor(
+    name='AddAppRelationship',
+    full_name='PublishedFile.AddAppRelationship',
+    index=12,
+    containing_service=None,
+    input_type=_CPUBLISHEDFILE_ADDAPPRELATIONSHIP_REQUEST,
+    output_type=_CPUBLISHEDFILE_ADDAPPRELATIONSHIP_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030@Adds a relationship between the published file and the given app')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveAppRelationship',
+    full_name='PublishedFile.RemoveAppRelationship',
+    index=13,
+    containing_service=None,
+    input_type=_CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_REQUEST,
+    output_type=_CPUBLISHEDFILE_REMOVEAPPRELATIONSHIP_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030BRemove a relationship between the published file and the given app')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetAppRelationships',
+    full_name='PublishedFile.GetAppRelationships',
+    index=14,
+    containing_service=None,
+    input_type=_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_REQUEST,
+    output_type=_CPUBLISHEDFILE_GETAPPRELATIONSHIPS_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030=Returns the list of app relationships for this published file')),
+  ),
+  _descriptor.MethodDescriptor(
     name='StartPlaytimeTracking',
     full_name='PublishedFile.StartPlaytimeTracking',
-    index=12,
+    index=15,
     containing_service=None,
     input_type=_CPUBLISHEDFILE_STARTPLAYTIMETRACKING_REQUEST,
     output_type=_CPUBLISHEDFILE_STARTPLAYTIMETRACKING_RESPONSE,
@@ -3845,7 +4167,7 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='StopPlaytimeTracking',
     full_name='PublishedFile.StopPlaytimeTracking',
-    index=13,
+    index=16,
     containing_service=None,
     input_type=_CPUBLISHEDFILE_STOPPLAYTIMETRACKING_REQUEST,
     output_type=_CPUBLISHEDFILE_STOPPLAYTIMETRACKING_RESPONSE,
@@ -3854,7 +4176,7 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='StopPlaytimeTrackingForAllAppItems',
     full_name='PublishedFile.StopPlaytimeTrackingForAllAppItems',
-    index=14,
+    index=17,
     containing_service=None,
     input_type=_CPUBLISHEDFILE_STOPPLAYTIMETRACKINGFORALLAPPITEMS_REQUEST,
     output_type=_CPUBLISHEDFILE_STOPPLAYTIMETRACKINGFORALLAPPITEMS_RESPONSE,
@@ -3863,7 +4185,7 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='SetPlaytimeForControllerConfigs',
     full_name='PublishedFile.SetPlaytimeForControllerConfigs',
-    index=15,
+    index=18,
     containing_service=None,
     input_type=_CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_REQUEST,
     output_type=_CPUBLISHEDFILE_SETPLAYTIMEFORCONTROLLERCONFIGS_RESPONSE,
@@ -3872,7 +4194,7 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='AddChild',
     full_name='PublishedFile.AddChild',
-    index=16,
+    index=19,
     containing_service=None,
     input_type=_CPUBLISHEDFILE_ADDCHILD_REQUEST,
     output_type=_CPUBLISHEDFILE_ADDCHILD_RESPONSE,
@@ -3881,7 +4203,7 @@ _PUBLISHEDFILE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='RemoveChild',
     full_name='PublishedFile.RemoveChild',
-    index=17,
+    index=20,
     containing_service=None,
     input_type=_CPUBLISHEDFILE_REMOVECHILD_REQUEST,
     output_type=_CPUBLISHEDFILE_REMOVECHILD_RESPONSE,

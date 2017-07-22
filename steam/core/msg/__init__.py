@@ -6,10 +6,9 @@ from steam.enums.emsg import EMsg
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2
+from steam.protobufs import steammessages_clientserver_friends_pb2
+from steam.protobufs import steammessages_clientserver_login_pb2
 
-
-cmsg_lookup = None
-cmsg_lookup2 = None
 
 cmsg_lookup_predefined = {
     EMsg.Multi: steammessages_base_pb2.CMsgMulti,
@@ -25,6 +24,21 @@ cmsg_lookup_predefined = {
     EMsg.ClientEmailChangeResponse4: steammessages_clientserver_2_pb2.CMsgClientEmailChangeResponse,
 }
 
+cmsg_lookup = dict()
+
+for proto_module in [
+                    steammessages_clientserver_pb2,
+                    steammessages_clientserver_2_pb2,
+                    steammessages_clientserver_friends_pb2,
+                    steammessages_clientserver_login_pb2,
+                    ]:
+    cmsg_list = proto_module.__dict__
+    cmsg_list = fnmatch.filter(cmsg_list, 'CMsg*')
+    cmsg_lookup.update(dict(zip(map(lambda cmsg_name: cmsg_name.lower(), cmsg_list),
+                                map(lambda cmsg_name: getattr(proto_module, cmsg_name), cmsg_list)
+                               )))
+
+
 def get_cmsg(emsg):
     """Get protobuf for a given EMsg
 
@@ -32,8 +46,6 @@ def get_cmsg(emsg):
     :type emsg: :class:`steam.enums.emsg.EMsg`, :class:`int`
     :return: protobuf message
     """
-    global cmsg_lookup, cmsg_lookup2
-
     if not isinstance(emsg, EMsg):
         emsg = EMsg(emsg)
 
@@ -45,26 +57,7 @@ def get_cmsg(emsg):
             enum_name = enum_name[4:]
         cmsg_name = "cmsg" + enum_name
 
-    if not cmsg_lookup:
-        cmsg_list = steammessages_clientserver_pb2.__dict__
-        cmsg_list = fnmatch.filter(cmsg_list, 'CMsg*')
-        cmsg_lookup = dict(zip(map(lambda x: x.lower(), cmsg_list), cmsg_list))
-
-    name = cmsg_lookup.get(cmsg_name, None)
-    if name:
-        return getattr(steammessages_clientserver_pb2, name)
-
-    if not cmsg_lookup2:
-        cmsg_list = steammessages_clientserver_2_pb2.__dict__
-        cmsg_list = fnmatch.filter(cmsg_list, 'CMsg*')
-        cmsg_lookup2 = dict(zip(map(lambda x: x.lower(), cmsg_list), cmsg_list))
-
-    name = cmsg_lookup2.get(cmsg_name, None)
-    if name:
-        return getattr(steammessages_clientserver_2_pb2, name)
-
-    return None
-
+    return cmsg_lookup.get(cmsg_name, None)
 
 class Msg(object):
     proto = False

@@ -24,6 +24,8 @@ service_lookup = {
     'TwoFactor':           'steam.protobufs.steammessages_twofactor_pb2',
     'MsgTest':             'steam.protobufs.steammessages_unified_test_pb2',
     'Video':               'steam.protobufs.steammessages_video_pb2',
+    'SiteLicense':         'steam.protobufs.steammessages_site_license_pb2',
+    'UserAccount':         'steam.protobufs.steammessages_useraccount_pb2',
 }
 
 method_lookup = {
