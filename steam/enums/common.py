@@ -140,7 +140,7 @@ class EServerType(SteamIntEnum):
     Invalid = -1
     First = 0
     GM = 1
-    BUM = 2
+    BUM = 2 # obsolete
     AM = 3
     BS = 4
     VS = 5
@@ -158,6 +158,7 @@ class EServerType(SteamIntEnum):
     DP = 17
     WG = 18
     SM = 19
+    SLC = 20
     UFS = 21
     Util = 23
     DSS = 24
@@ -166,7 +167,7 @@ class EServerType(SteamIntEnum):
     AppInformation = 26
     Spare = 27
     FTS = 28
-    EPM = 29
+    EPM = 29 # obsolete
     PS = 30
     IS = 31
     CCS = 32
@@ -188,7 +189,8 @@ class EServerType(SteamIntEnum):
     Econ = 48
     Backpack = 49
     UGS = 50
-    Store = 51
+#   Store = 51 # obsolete
+    StoreFeature = 51
     MoneyStats = 52
     CRE = 53
     UMQ = 54
@@ -204,11 +206,47 @@ class EServerType(SteamIntEnum):
     WDS = 64
     ACS = 65
     PNP = 66
-    Max = 67
+    TaxForm = 67
+    ExternalMonitor = 68
+    Parental = 69
+    PartnerUpload = 70
+    Partner = 71
+    ES = 72
+    DepotWebContent = 73
+    ExternalConfig = 74
+    GameNotifications = 75
+    MarketRepl = 76
+    MarketSearch = 77
+    Localization = 78
+    Steam2Emulator = 79
+    PublicTest = 80
+    SolrMgr = 81
+    BroadcastRelay = 82
+    BroadcastDirectory = 83
+    VideoManager = 84
+    TradeOffer = 85
+    BroadcastChat = 86
+    Phone = 87
+    AccountScore = 88
+    Support = 89
+    LogRequest = 90
+    LogWorker = 91
+    EmailDelivery = 92
+    InventoryManagement = 93
+    Auth = 94
+    StoreCatalog = 95
+    HLTVRelay = 96
+
+    Max = 97
 
 
 class EOSType(SteamIntEnum):
     Unknown = -1
+
+    IOSUnknown = -600
+
+    AndroidUnknown = -500
+
     UMQ = -400
 
     PS3 = -300
@@ -225,6 +263,9 @@ class EOSType(SteamIntEnum):
     MacOS108 = -89
     MacOS109 = -88
     MacOS1010 = -87
+    MacOS1011 = -86
+    MacOS1012 = -85
+    MacOSMax = -1
 
     LinuxUnknown = -203
     Linux22 = -202
@@ -234,6 +275,7 @@ class EOSType(SteamIntEnum):
     Linux35 = -198
     Linux36 = -197
     Linux310 = -196
+    LinuxMax = -103
 
     WinUnknown = 0
     Win311 = 1
@@ -241,17 +283,22 @@ class EOSType(SteamIntEnum):
     Win98 = 3
     WinME = 4
     WinNT = 5
-    Win200 = 6
+#   Win200 = 6 # obsolete
+    Win2000 = 6
     WinXP = 7
     Win2003 = 8
     WinVista = 9
-    Win7 = 10
+#   Win7 = 10 # obsolete
+    Windows7 = 10
     Win2008 = 11
     Win2012 = 12
-    Win8 = 13
-    Win81 = 14
+#   Win8 = 13 # obsolete "renamed to Windows8"
+    Windows8 = 13
+#   Win81 = 14 # obsolete "renamed to Windows81"
+    Windows81 = 14
     Win2012R2 = 15
-    Win10 = 16
+#   Win10 = 16 # obsolete "renamed to Windows10"
+    Windows10 = 16
 
     WinMAX = 15
 
@@ -300,6 +347,10 @@ class EAccountFlags(SteamIntEnum):
     BannedFromWebAPI = 33554432
     ClansOnlyFromFriends = 67108864
     GlobalModerator = 134217728
+    ParentalSettings = 268435456
+    ThirdPartySupport = 536870912
+    NeedsSSANextSteamLogon = 1073741824
+
 
 class EFriendFlags(SteamIntEnum):
     NONE = 0
@@ -313,6 +364,7 @@ class EFriendFlags(SteamIntEnum):
     Ignored = 512
     IgnoredFriend = 1024
     Suggested = 2048
+    ChatMember = 4096
     FlagAll = 65535
 
 
@@ -331,10 +383,15 @@ class EPersonaStateFlag(SteamIntEnum):
     HasRichPresence = 1
     InJoinableGame = 2
     HasGoldenProfile = 4
-    OnlineUsingWeb = 256
-    OnlineUsingMobile = 512
-    OnlineUsingBigPicture = 1024
-    OnlineUsingVR = 2048
+#   OnlineUsingWeb = 256 obsolete "renamed to ClientTypeWeb"
+    ClientTypeWeb = 256
+#   OnlineUsingMobile = 512 obsolete "renamed to ClientTypeMobile"
+    ClientTypeMobile = 512
+#   OnlineUsingBigPicture = 1024 obsolete "renamed to ClientTypeTenfoot"
+    ClientTypeTenfoot = 1024
+#   OnlineUsingVR = 2048 obsolete "renamed to ClientTypeVR"
+    ClientTypeVR = 2048
+    LaunchTypeGamepad = 4096
 
 
 class EClientPersonaStateFlag(SteamIntEnum):
@@ -343,7 +400,7 @@ class EClientPersonaStateFlag(SteamIntEnum):
     QueryPort = 4
     SourceID = 8
     Presence = 16
-    Metadata = 32
+    Metadata = 32 # obsolete
     LastSeen = 64
     ClanInfo = 128
     GameExtraInfo = 256
@@ -429,7 +486,8 @@ class ECurrencyCode(SteamIntEnum):
     TWD = 30
     SAR = 31
     AED = 32
-    Max = 33
+    SEK = 33
+    Max = 34
 
 
 # Do not remove

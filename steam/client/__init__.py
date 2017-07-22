@@ -485,7 +485,7 @@ class SteamClient(CMClient, BuiltinBase):
         message.header.steamid = SteamID(type='Individual', universe='Public')
         message.body.protocol_version = 65579
         message.body.client_package_version = 1771
-        message.body.client_os_type = EOSType.Win10
+        message.body.client_os_type = EOSType.Windows10
         message.body.client_language = "english"
         message.body.should_remember_password = True
         message.body.supports_rate_limit_response = True
