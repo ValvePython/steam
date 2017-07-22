@@ -41,7 +41,7 @@ setup(
     author_email='rossen@rgp.io',
     license='MIT',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Natural Language :: English',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
@@ -50,6 +50,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords='valve steam steamid api webapi steamcommunity',
     packages=['steam'] + ['steam.'+x for x in find_packages(where='steam')],
