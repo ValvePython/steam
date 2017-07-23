@@ -1891,8 +1891,8 @@ class EMsg(SteamIntEnum):
     RemoteClientGetControllerConfigResposne = 9511
     RemoteClientStreamingEnabled = 9512
 
+    ClientPlayingSessionState = 9600 # obsolete
     ClientConcurrentSessionsBase = 9600
-#   ClientPlayingSessionState = 9600 # obsolete
     ClientKickPlayingSession = 9601
 
 #   ClientBroadcastInit = 9700 # obsolete
