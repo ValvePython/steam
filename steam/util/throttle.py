@@ -1,6 +1,5 @@
 import sys
 import time
-import gevent
 
 if sys.version_info >= (3,3):
     _monotonic = time.monotonic
@@ -9,19 +8,19 @@ else:
 
 
 class ConstantRateLimit(object):
-    def __init__(self, times, seconds, exit_wait=False, use_gevent=False):
+    def __init__(self, times, seconds, exit_wait=False, sleep_func=time.sleep):
         """Context manager for enforcing constant rate on code inside the block .
 
         `rate = seconds / times`
 
         :param times: times to execute per...
-        :type times: :class:`int`
+        :type  times: :class:`int`
         :param seconds: ...seconds
-        :type seconds: :class:`int`
+        :type  seconds: :class:`int`
         :param exit_wait: whether to automatically call :meth:`wait` before exiting the block
-        :type exit_wait: :class:`bool`
-        :param use_gevent: whether to use `gevent.sleep()` instead of `time.sleep()`
-        :type use_gevent: :class:`bool`
+        :type  exit_wait: :class:`bool`
+        :param sleep_func: Sleep function in seconds. Default: :func:`time.sleep`
+        :type  sleep_func: :class:`bool`
 
         Example:
 
@@ -37,6 +36,7 @@ class ConstantRateLimit(object):
         """
         self.__dict__.update(locals())
         self.rate = float(seconds) / times
+        self.sleep_func = sleep_func
 
     def __enter__(self):
         self._update_ref()
@@ -54,10 +54,7 @@ class ConstantRateLimit(object):
         now = _monotonic()
         if now < self._ref:
             delay = max(0, self._ref - now)
-            if self.use_gevent:
-                gevent.sleep(delay)
-            else:
-                time.sleep(delay)
+            self.sleep_func(delay)
         self._update_ref()
 
 

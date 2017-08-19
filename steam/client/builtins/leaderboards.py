@@ -176,7 +176,7 @@ class SteamLeaderboard(object):
         For example, the ``__iter__`` method on this class uses ``get_iter(1, 1, 2000)``
         """
         def entry_generator():
-            with ConstantRateLimit(times, seconds, use_gevent=True) as r:
+            with ConstantRateLimit(times, seconds, sleep_func=self._steam.sleep) as r:
                 for entries in chunks(self, chunk_size):
                     if not entries:
                         raise StopIteration
