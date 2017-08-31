@@ -32,7 +32,7 @@ class User(object):
     def __handle_message_incoming(self, msg):
         if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
             user = self.get_user(msg.body.steamid_from)
-            self.emit("chat_message", user, msg.body.message[:-1].decode('utf-8'))
+            self.emit("chat_message", user, msg.body.message.decode('utf-8'))
 
     def __handle_disconnect(self):
         self.user = None
