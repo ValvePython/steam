@@ -370,7 +370,7 @@ def steam64_from_url(url, http_timeout=30):
         # user profiles
         if match.group('type') in ('id', 'profiles'):
             text = web.get(match.group('clean_url'), timeout=http_timeout).text
-            data_match = re.search("g_rgProfileData = (?P<json>.*?);", text)
+            data_match = re.search("g_rgProfileData = (?P<json>{.*?});[ \t\r]*\n", text)
 
             if data_match:
                 data = json.loads(data_match.group('json'))
