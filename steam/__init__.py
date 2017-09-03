@@ -1,7 +1,7 @@
-__version__ = "0.8.20"
+__version__ = "0.8.21"
 __author__ = "Rossen Georgiev"
 
-version_info = (0, 8, 20)
+version_info = tuple(map(int, __version__.split('.')))
 
 from steam.steamid import SteamID
 from steam.globalid import GlobalID
@@ -11,6 +11,7 @@ from steam.webauth import WebAuth, MobileWebAuth
 
 # proxy object
 # avoids importing steam.enums.emsg unless it's needed
+# avoids gevent monkey patching
 class SteamClient(object):
     def __new__(cls, *args, **kwargs):
         from steam.client import SteamClient as SC
