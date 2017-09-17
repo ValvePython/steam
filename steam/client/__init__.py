@@ -554,7 +554,10 @@ class SteamClient(CMClient, BuiltinBase):
         if self.logged_on:
             self.logged_on = False
             self.send(MsgProto(EMsg.ClientLogOff))
-            self.wait_event('disconnected')
+            try:
+                self.wait_event(self.EVENT_DISCONNECTED, timeout=5, raises=True)
+            except:
+                self.disconnect()
             self.idle()
 
     def run_forever(self):
