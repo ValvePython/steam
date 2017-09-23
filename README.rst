@@ -25,32 +25,55 @@ Quick install
 
 For details on require system packages, see `Full Installation <http://steam.readthedocs.io/en/latest/install.html>`_.
 
-Install latest version from PYPI::
+Install latest version from PYPI
+
+.. code:: bash
 
     pip install -U steam
 
-Install the current dev version from ``github``::
+Install the current dev version from ``github``
+
+.. code:: bash
 
     pip install git+https://github.com/ValvePython/steam
 
-
-Testing
+Vagrant
 -------
 
-To run the test suite with the current ``python``, use::
+The repo includes a `Vagrantfile` to setup enviroment for expermentation and development.
+We assume you've already have ``vagrant`` and ``virtualbox`` set up.
+The VM is ``Ubuntu 16.04`` with all necessary packages installed, and virtualenv for ``python2`` and ``python3``.
+
+
+.. code:: bash
+
+    vagrant up    # spin the VM and let it setup
+    vagrant ssh
+    # for python2
+    $ source venv2/bin/activate
+    # for python3
+    $ source venv3/bin/activate
+
+
+
+Local Testing
+-------------
+
+To run the test suite with the current ``python``, use
+
+.. code:: bash
 
     make test
 
-To run for specific version, setup a ``virtual environment``::
+To run for specific version, setup a virtual environment
+
+.. code:: bash
 
     virtualenv -p python3 py3
     source py3/bin/active
     pip install -r requirements.txt
     make test
 
-To run for ``python 2.7`` and ``3.4`` assuming you have them installed::
-
-    tox
 
 
 .. _Steam: https://store.steampowered.com/
