@@ -466,9 +466,9 @@ class CMServerList(object):
         """
         self._LOG.debug("Attempting bootstrap via WebAPI")
 
-        from steam import _webapi
+        from steam import webapi
         try:
-            resp = _webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid})
+            resp = webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid})
         except Exception as exp:
             self._LOG.error("WebAPI boostrap failed: %s" % str(exp))
             return False
