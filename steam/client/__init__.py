@@ -412,7 +412,15 @@ class SteamClient(CMClient, BuiltinBase):
             self.connect()
 
         if not self.channel_secured:
-            self.wait_event("channel_secured")
+            resp = self.wait_event(self.EVENT_CHANNEL_SECURED, timeout=10)
+
+            # some CMs will not send hello
+            if resp is None:
+                if self.connected:
+                    self.wait_event(self.EVENT_DISCONNECTED)
+                return False
+
+        return True
 
     @property
     def relogin_available(self):
@@ -477,7 +485,8 @@ class SteamClient(CMClient, BuiltinBase):
         """
         self._LOG.debug("Attempting login")
 
-        self._pre_login()
+        if not self._pre_login():
+            return EResult.TryAnotherCM
 
         self.username = username
 
@@ -518,7 +527,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
 
-        if resp.body.eresult == EResult.OK:
+        if resp and resp.body.eresult == EResult.OK:
             self.sleep(0.5)
 
         return EResult(resp.body.eresult) if resp else EResult.Fail
