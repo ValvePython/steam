@@ -525,7 +525,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         self.send(message)
 
-        resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
+        resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30, raises=True)
 
         if resp and resp.body.eresult == EResult.OK:
             self.sleep(0.5)
