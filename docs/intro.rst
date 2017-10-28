@@ -9,7 +9,7 @@ Intro - steam |version|
 
 A python module for interacting with various parts of Steam_.
 
-Supports Python ``2.7+`` and ``3.3+``.
+Supports Python ``2.7+`` and ``3.4+``.
 
 Key features
 ============
