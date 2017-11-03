@@ -29,7 +29,7 @@ Making custom mixing is just as simple.
 .. code:: python
 
     class MyMixin(object):
-        def __init__(*args, **kwargs):
+        def __init__(self, *args, **kwargs):
             super(MyMixin, self).__init__(*args, **kwargs)
 
             self.my_property = 42
