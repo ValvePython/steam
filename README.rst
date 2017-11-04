@@ -74,6 +74,10 @@ To run for specific version, setup a virtual environment
     pip install -r requirements.txt
     make test
 
+Contact
+-------
+
+IRC: irc.gamesurge.net / #opensteamworks
 
 
 .. _Steam: https://store.steampowered.com/
