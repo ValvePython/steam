@@ -21,15 +21,15 @@ service_lookup = {
     'Player':              'steam.protobufs.steammessages_player_pb2',
     'PublishedFile':       'steam.protobufs.steammessages_publishedfile_pb2',
     'KeyEscrow':           'steam.protobufs.steammessages_secrets_pb2',
+    'SiteLicense':         'steam.protobufs.steammessages_site_license_pb2',
     'TwoFactor':           'steam.protobufs.steammessages_twofactor_pb2',
     'MsgTest':             'steam.protobufs.steammessages_unified_test_pb2',
-    'Video':               'steam.protobufs.steammessages_video_pb2',
-    'SiteLicense':         'steam.protobufs.steammessages_site_license_pb2',
     'UserAccount':         'steam.protobufs.steammessages_useraccount_pb2',
+    'Video':               'steam.protobufs.steammessages_video_pb2',
 }
 
-method_lookup = {
-}
+method_lookup = {}
+
 
 def get_um(method_name, response=False):
     """Get protobuf for given method name
@@ -50,7 +50,7 @@ def get_um(method_name, response=False):
         interface, method, version = match[0]
 
         if interface not in service_lookup:
-            raise None
+            return None
 
         package = import_module(service_lookup[interface])
 

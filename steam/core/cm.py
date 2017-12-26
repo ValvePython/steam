@@ -8,7 +8,6 @@ from collections import defaultdict
 from io import BytesIO
 
 import gevent
-from gevent import event, queue
 from random import shuffle
 
 from steam.steamid import SteamID
@@ -248,10 +247,11 @@ class CMClient(EventEmitter):
                     msg = Msg(emsg, message, extended=True)
             except Exception as e:
                 self._LOG.fatal("Failed to deserialize message: %s (is_proto: %s)",
-                             str(emsg),
-                             is_proto(emsg_id)
-                             )
+                                str(emsg),
+                                is_proto(emsg_id)
+                                )
                 self._LOG.exception(e)
+                return
 
         if self.verbose_debug:
             self._LOG.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))
