@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_inventory.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1dsteammessages_inventory.proto\x1a steammessages_unified_base.proto\"A\n\x1f\x43Inventory_GetInventory_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\"\xbf\x01\n\x13\x43Inventory_Response\x12\x0c\n\x04\x65tag\x18\x01 \x01(\t\x12\x16\n\x0eremoveditemids\x18\x02 \x03(\x04\x12\x11\n\titem_json\x18\x03 \x01(\t\x12\x14\n\x0citemdef_json\x18\x04 \x01(\t\x12\x0e\n\x06ticket\x18\x05 \x01(\x0c\x12I\n\x08replayed\x18\x06 \x01(\x08\x42\x37\x82\xb5\x18\x33If true, the requestid given was processed earlier.\"\x8e\x01\n\x1f\x43Inventory_ExchangeItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x17\n\x0fmaterialsitemid\x18\x03 \x03(\x04\x12\x19\n\x11materialsquantity\x18\x04 \x03(\r\x12\x17\n\x0foutputitemdefid\x18\x05 \x01(\x04\"O\n-CInventory_GetEligiblePromoItemDefIDs_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\"D\n.CInventory_GetEligiblePromoItemDefIDs_Response\x12\x12\n\nitemdefids\x18\x01 \x03(\x04\"\xd7\x01\n\x1a\x43Inventory_AddItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\titemdefid\x18\x02 \x03(\x04\x12\x15\n\ritempropsjson\x18\x03 \x03(\t\x12\x0f\n\x07steamid\x18\x04 \x01(\x04\x12\\\n\x06notify\x18\x05 \x01(\x08\x42L\x82\xb5\x18HShould notify the user that the item was added to their Steam Inventory.\x12\x11\n\trequestid\x18\x06 \x01(\x04\"i\n!CInventory_SafeModifyItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0e\n\x06\x61\x63\x63tid\x18\x02 \x01(\x04\x12\x0e\n\x06itemid\x18\x03 \x01(\x04\x12\x15\n\ritempropsjson\x18\x04 \x01(\t\"F\n\"CInventory_ConsumePlaytime_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\titemdefid\x18\x02 \x01(\x04\"\x88\x01\n\x1e\x43Inventory_ConsumeItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0e\n\x06itemid\x18\x02 \x01(\x04\x12\x10\n\x08quantity\x18\x03 \x01(\r\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0f\n\x07steamid\x18\x05 \x01(\x04\x12\x11\n\trequestid\x18\x06 \x01(\x04\"W\n!CInventory_DevSetNextDrop_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\titemdefid\x18\x02 \x01(\x04\x12\x10\n\x08\x64roptime\x18\x03 \x01(\t\"g\n!CInventory_SplitItemStack_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0e\n\x06itemid\x18\x02 \x01(\x04\x12\x10\n\x08quantity\x18\x03 \x01(\r\x12\x11\n\ttimestamp\x18\x04 \x01(\t\"\x9d\x01\n$CInventory_CombineItemStacks_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\nfromitemid\x18\x02 \x01(\x04\x12\x12\n\ndestitemid\x18\x03 \x01(\x04\x12\x10\n\x08quantity\x18\x04 \x01(\r\x12\x15\n\rfromtimestamp\x18\x05 \x01(\t\x12\x15\n\rdesttimestamp\x18\x06 \x01(\t\"2\n!CInventory_GetItemDefMeta_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"F\n\"CInventory_GetItemDefMeta_Response\x12\x10\n\x08modified\x18\x01 \x01(\r\x12\x0e\n\x06\x64igest\x18\x02 \x01(\t2\xa4\x0c\n\tInventory\x12z\n\x0cGetInventory\x12 .CInventory_GetInventory_Request\x1a\x14.CInventory_Response\"2\x82\xb5\x18.Retrieves a users inventory as a big JSON blob\x12o\n\x0c\x45xchangeItem\x12 .CInventory_ExchangeItem_Request\x1a\x14.CInventory_Response\"\'\x82\xb5\x18#Craft an item in a user\'s inventory\x12\xbd\x01\n\x1aGetEligiblePromoItemDefIDs\x12..CInventory_GetEligiblePromoItemDefIDs_Request\x1a/.CInventory_GetEligiblePromoItemDefIDs_Response\">\x82\xb5\x18:Returns a list of promo item defs the user is eligible for\x12n\n\x0c\x41\x64\x64PromoItem\x12\x1b.CInventory_AddItem_Request\x1a\x14.CInventory_Response\"+\x82\xb5\x18\'Adds a promo item to a user\'s inventory\x12\x8b\x01\n\x0eSafeModifyItem\x12\".CInventory_SafeModifyItem_Request\x1a\x14.CInventory_Response\"?\x82\xb5\x18;Modify an item in a user\'s inventory (safe properties only)\x12\x87\x01\n\x0f\x43onsumePlaytime\x12#.CInventory_ConsumePlaytime_Request\x1a\x14.CInventory_Response\"9\x82\xb5\x18\x35\x43onsumes playtime and possibly returns a granted item\x12Y\n\x0b\x43onsumeItem\x12\x1f.CInventory_ConsumeItem_Request\x1a\x14.CInventory_Response\"\x13\x82\xb5\x18\x0f\x43onsume an item\x12n\n\x0f\x44\x65vGenerateItem\x12\x1b.CInventory_AddItem_Request\x1a\x14.CInventory_Response\"(\x82\xb5\x18$Grant an item when in developer mode\x12_\n\x0e\x44\x65vSetNextDrop\x12\".CInventory_DevSetNextDrop_Request\x1a\x14.CInventory_Response\"\x13\x82\xb5\x18\x0f\x43onsume an item\x12s\n\x0eSplitItemStack\x12\".CInventory_SplitItemStack_Request\x1a\x14.CInventory_Response\"\'\x82\xb5\x18#Split an item stack into two stacks\x12q\n\x11\x43ombineItemStacks\x12%.CInventory_CombineItemStacks_Request\x1a\x14.CInventory_Response\"\x1f\x82\xb5\x18\x1b\x43ombine two stacks of items\x12\x9c\x01\n\x0eGetItemDefMeta\x12\".CInventory_GetItemDefMeta_Request\x1a#.CInventory_GetItemDefMeta_Response\"A\x82\xb5\x18=Get metadata about the current item definition for this game.\x1a/\x82\xb5\x18+A service that provides access to inventoryB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1dsteammessages_inventory.proto\x1a steammessages_unified_base.proto\"A\n\x1f\x43Inventory_GetInventory_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\"\xbf\x01\n\x13\x43Inventory_Response\x12\x0c\n\x04\x65tag\x18\x01 \x01(\t\x12\x16\n\x0eremoveditemids\x18\x02 \x03(\x04\x12\x11\n\titem_json\x18\x03 \x01(\t\x12\x14\n\x0citemdef_json\x18\x04 \x01(\t\x12\x0e\n\x06ticket\x18\x05 \x01(\x0c\x12I\n\x08replayed\x18\x06 \x01(\x08\x42\x37\x82\xb5\x18\x33If true, the requestid given was processed earlier.\"\x8e\x01\n\x1f\x43Inventory_ExchangeItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x17\n\x0fmaterialsitemid\x18\x03 \x03(\x04\x12\x19\n\x11materialsquantity\x18\x04 \x03(\r\x12\x17\n\x0foutputitemdefid\x18\x05 \x01(\x04\"O\n-CInventory_GetEligiblePromoItemDefIDs_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\"D\n.CInventory_GetEligiblePromoItemDefIDs_Response\x12\x12\n\nitemdefids\x18\x01 \x03(\x04\"\xd7\x01\n\x1a\x43Inventory_AddItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\titemdefid\x18\x02 \x03(\x04\x12\x15\n\ritempropsjson\x18\x03 \x03(\t\x12\x0f\n\x07steamid\x18\x04 \x01(\x04\x12\\\n\x06notify\x18\x05 \x01(\x08\x42L\x82\xb5\x18HShould notify the user that the item was added to their Steam Inventory.\x12\x11\n\trequestid\x18\x06 \x01(\x04\"\xe5\x02\n\x1e\x43Inventory_ModifyItems_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x43\n\x07updates\x18\x03 \x03(\x0b\x32\x32.CInventory_ModifyItems_Request.ItemPropertyUpdate\x12\x11\n\ttimestamp\x18\x04 \x01(\r\x1a\xca\x01\n\x12ItemPropertyUpdate\x12\x0e\n\x06itemid\x18\x01 \x01(\x04\x12\x17\n\x0fremove_property\x18\x02 \x01(\x08\x12\x15\n\rproperty_name\x18\x03 \x01(\t\x12\x1b\n\x13property_value_bool\x18\x04 \x01(\x08\x12\x1a\n\x12property_value_int\x18\x05 \x01(\x03\x12\x1d\n\x15property_value_string\x18\x06 \x01(\t\x12\x1c\n\x14property_value_float\x18\x07 \x01(\x02\"F\n\"CInventory_ConsumePlaytime_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\titemdefid\x18\x02 \x01(\x04\"\x88\x01\n\x1e\x43Inventory_ConsumeItem_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0e\n\x06itemid\x18\x02 \x01(\x04\x12\x10\n\x08quantity\x18\x03 \x01(\r\x12\x11\n\ttimestamp\x18\x04 \x01(\t\x12\x0f\n\x07steamid\x18\x05 \x01(\x04\x12\x11\n\trequestid\x18\x06 \x01(\x04\"W\n!CInventory_DevSetNextDrop_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\titemdefid\x18\x02 \x01(\x04\x12\x10\n\x08\x64roptime\x18\x03 \x01(\t\"g\n!CInventory_SplitItemStack_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0e\n\x06itemid\x18\x02 \x01(\x04\x12\x10\n\x08quantity\x18\x03 \x01(\r\x12\x11\n\ttimestamp\x18\x04 \x01(\t\"\x9d\x01\n$CInventory_CombineItemStacks_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\nfromitemid\x18\x02 \x01(\x04\x12\x12\n\ndestitemid\x18\x03 \x01(\x04\x12\x10\n\x08quantity\x18\x04 \x01(\r\x12\x15\n\rfromtimestamp\x18\x05 \x01(\t\x12\x15\n\rdesttimestamp\x18\x06 \x01(\t\"2\n!CInventory_GetItemDefMeta_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"F\n\"CInventory_GetItemDefMeta_Response\x12\x10\n\x08modified\x18\x01 \x01(\r\x12\x0e\n\x06\x64igest\x18\x02 \x01(\t\"(\n&CInventory_GetUserPurchaseInfo_Request\"<\n\'CInventory_GetUserPurchaseInfo_Response\x12\x11\n\tecurrency\x18\x01 \x01(\x05\"\xb2\x01\n\x1f\x43Inventory_PurchaseInit_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08language\x18\x02 \x01(\x05\x12=\n\nline_items\x18\x03 \x03(\x0b\x32).CInventory_PurchaseInit_Request.LineItem\x1a/\n\x08LineItem\x12\x11\n\titemdefid\x18\x01 \x01(\x04\x12\x10\n\x08quantity\x18\x02 \x01(\r\"D\n CInventory_PurchaseInit_Response\x12\x0f\n\x07orderid\x18\x01 \x01(\x04\x12\x0f\n\x07transid\x18\x02 \x01(\x04\"W\n#CInventory_PurchaseFinalize_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08language\x18\x02 \x01(\x05\x12\x0f\n\x07orderid\x18\x03 \x01(\x04\x32\xc1\x0f\n\tInventory\x12z\n\x0cGetInventory\x12 .CInventory_GetInventory_Request\x1a\x14.CInventory_Response\"2\x82\xb5\x18.Retrieves a users inventory as a big JSON blob\x12o\n\x0c\x45xchangeItem\x12 .CInventory_ExchangeItem_Request\x1a\x14.CInventory_Response\"\'\x82\xb5\x18#Craft an item in a user\'s inventory\x12\xbd\x01\n\x1aGetEligiblePromoItemDefIDs\x12..CInventory_GetEligiblePromoItemDefIDs_Request\x1a/.CInventory_GetEligiblePromoItemDefIDs_Response\">\x82\xb5\x18:Returns a list of promo item defs the user is eligible for\x12n\n\x0c\x41\x64\x64PromoItem\x12\x1b.CInventory_AddItem_Request\x1a\x14.CInventory_Response\"+\x82\xb5\x18\'Adds a promo item to a user\'s inventory\x12\x89\x01\n\x0fSafeModifyItems\x12\x1f.CInventory_ModifyItems_Request\x1a\x14.CInventory_Response\"?\x82\xb5\x18;Modify an item in a user\'s inventory (safe properties only)\x12\x87\x01\n\x0f\x43onsumePlaytime\x12#.CInventory_ConsumePlaytime_Request\x1a\x14.CInventory_Response\"9\x82\xb5\x18\x35\x43onsumes playtime and possibly returns a granted item\x12Y\n\x0b\x43onsumeItem\x12\x1f.CInventory_ConsumeItem_Request\x1a\x14.CInventory_Response\"\x13\x82\xb5\x18\x0f\x43onsume an item\x12n\n\x0f\x44\x65vGenerateItem\x12\x1b.CInventory_AddItem_Request\x1a\x14.CInventory_Response\"(\x82\xb5\x18$Grant an item when in developer mode\x12_\n\x0e\x44\x65vSetNextDrop\x12\".CInventory_DevSetNextDrop_Request\x1a\x14.CInventory_Response\"\x13\x82\xb5\x18\x0f\x43onsume an item\x12s\n\x0eSplitItemStack\x12\".CInventory_SplitItemStack_Request\x1a\x14.CInventory_Response\"\'\x82\xb5\x18#Split an item stack into two stacks\x12q\n\x11\x43ombineItemStacks\x12%.CInventory_CombineItemStacks_Request\x1a\x14.CInventory_Response\"\x1f\x82\xb5\x18\x1b\x43ombine two stacks of items\x12\x9c\x01\n\x0eGetItemDefMeta\x12\".CInventory_GetItemDefMeta_Request\x1a#.CInventory_GetItemDefMeta_Response\"A\x82\xb5\x18=Get metadata about the current item definition for this game.\x12\xa7\x01\n\x13GetUserPurchaseInfo\x12\'.CInventory_GetUserPurchaseInfo_Request\x1a(.CInventory_GetUserPurchaseInfo_Response\"=\x82\xb5\x18\x39Returns information about the user such as their currency\x12|\n\x0cPurchaseInit\x12 .CInventory_PurchaseInit_Request\x1a!.CInventory_PurchaseInit_Response\"\'\x82\xb5\x18#Initializes a purchase for the user\x12u\n\x10PurchaseFinalize\x12$.CInventory_PurchaseFinalize_Request\x1a\x14.CInventory_Response\"%\x82\xb5\x18!Finalizes a purchase for the user\x1a/\x82\xb5\x18+A service that provides access to inventoryB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -328,38 +328,59 @@ _CINVENTORY_ADDITEM_REQUEST = _descriptor.Descriptor(
 )
 
 
-_CINVENTORY_SAFEMODIFYITEM_REQUEST = _descriptor.Descriptor(
-  name='CInventory_SafeModifyItem_Request',
-  full_name='CInventory_SafeModifyItem_Request',
+_CINVENTORY_MODIFYITEMS_REQUEST_ITEMPROPERTYUPDATE = _descriptor.Descriptor(
+  name='ItemPropertyUpdate',
+  full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='appid', full_name='CInventory_SafeModifyItem_Request.appid', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      name='itemid', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.itemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='acctid', full_name='CInventory_SafeModifyItem_Request.acctid', index=1,
-      number=2, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
+      name='remove_property', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.remove_property', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='itemid', full_name='CInventory_SafeModifyItem_Request.itemid', index=2,
-      number=3, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='itempropsjson', full_name='CInventory_SafeModifyItem_Request.itempropsjson', index=3,
-      number=4, type=9, cpp_type=9, label=1,
+      name='property_name', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.property_name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='property_value_bool', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.property_value_bool', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='property_value_int', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.property_value_int', index=4,
+      number=5, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='property_value_string', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.property_value_string', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='property_value_float', full_name='CInventory_ModifyItems_Request.ItemPropertyUpdate.property_value_float', index=6,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -375,8 +396,59 @@ _CINVENTORY_SAFEMODIFYITEM_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=842,
-  serialized_end=947,
+  serialized_start=998,
+  serialized_end=1200,
+)
+
+_CINVENTORY_MODIFYITEMS_REQUEST = _descriptor.Descriptor(
+  name='CInventory_ModifyItems_Request',
+  full_name='CInventory_ModifyItems_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CInventory_ModifyItems_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CInventory_ModifyItems_Request.steamid', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='updates', full_name='CInventory_ModifyItems_Request.updates', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='CInventory_ModifyItems_Request.timestamp', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CINVENTORY_MODIFYITEMS_REQUEST_ITEMPROPERTYUPDATE, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=843,
+  serialized_end=1200,
 )
 
 
@@ -413,8 +485,8 @@ _CINVENTORY_CONSUMEPLAYTIME_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=949,
-  serialized_end=1019,
+  serialized_start=1202,
+  serialized_end=1272,
 )
 
 
@@ -479,8 +551,8 @@ _CINVENTORY_CONSUMEITEM_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1022,
-  serialized_end=1158,
+  serialized_start=1275,
+  serialized_end=1411,
 )
 
 
@@ -524,8 +596,8 @@ _CINVENTORY_DEVSETNEXTDROP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1160,
-  serialized_end=1247,
+  serialized_start=1413,
+  serialized_end=1500,
 )
 
 
@@ -576,8 +648,8 @@ _CINVENTORY_SPLITITEMSTACK_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1249,
-  serialized_end=1352,
+  serialized_start=1502,
+  serialized_end=1605,
 )
 
 
@@ -642,8 +714,8 @@ _CINVENTORY_COMBINEITEMSTACKS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1355,
-  serialized_end=1512,
+  serialized_start=1608,
+  serialized_end=1765,
 )
 
 
@@ -673,8 +745,8 @@ _CINVENTORY_GETITEMDEFMETA_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1514,
-  serialized_end=1564,
+  serialized_start=1767,
+  serialized_end=1817,
 )
 
 
@@ -711,17 +783,241 @@ _CINVENTORY_GETITEMDEFMETA_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1566,
-  serialized_end=1636,
+  serialized_start=1819,
+  serialized_end=1889,
 )
 
+
+_CINVENTORY_GETUSERPURCHASEINFO_REQUEST = _descriptor.Descriptor(
+  name='CInventory_GetUserPurchaseInfo_Request',
+  full_name='CInventory_GetUserPurchaseInfo_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1891,
+  serialized_end=1931,
+)
+
+
+_CINVENTORY_GETUSERPURCHASEINFO_RESPONSE = _descriptor.Descriptor(
+  name='CInventory_GetUserPurchaseInfo_Response',
+  full_name='CInventory_GetUserPurchaseInfo_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ecurrency', full_name='CInventory_GetUserPurchaseInfo_Response.ecurrency', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1933,
+  serialized_end=1993,
+)
+
+
+_CINVENTORY_PURCHASEINIT_REQUEST_LINEITEM = _descriptor.Descriptor(
+  name='LineItem',
+  full_name='CInventory_PurchaseInit_Request.LineItem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='itemdefid', full_name='CInventory_PurchaseInit_Request.LineItem.itemdefid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='quantity', full_name='CInventory_PurchaseInit_Request.LineItem.quantity', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2127,
+  serialized_end=2174,
+)
+
+_CINVENTORY_PURCHASEINIT_REQUEST = _descriptor.Descriptor(
+  name='CInventory_PurchaseInit_Request',
+  full_name='CInventory_PurchaseInit_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CInventory_PurchaseInit_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CInventory_PurchaseInit_Request.language', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='line_items', full_name='CInventory_PurchaseInit_Request.line_items', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CINVENTORY_PURCHASEINIT_REQUEST_LINEITEM, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1996,
+  serialized_end=2174,
+)
+
+
+_CINVENTORY_PURCHASEINIT_RESPONSE = _descriptor.Descriptor(
+  name='CInventory_PurchaseInit_Response',
+  full_name='CInventory_PurchaseInit_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='orderid', full_name='CInventory_PurchaseInit_Response.orderid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='transid', full_name='CInventory_PurchaseInit_Response.transid', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2176,
+  serialized_end=2244,
+)
+
+
+_CINVENTORY_PURCHASEFINALIZE_REQUEST = _descriptor.Descriptor(
+  name='CInventory_PurchaseFinalize_Request',
+  full_name='CInventory_PurchaseFinalize_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CInventory_PurchaseFinalize_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CInventory_PurchaseFinalize_Request.language', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='orderid', full_name='CInventory_PurchaseFinalize_Request.orderid', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2246,
+  serialized_end=2333,
+)
+
+_CINVENTORY_MODIFYITEMS_REQUEST_ITEMPROPERTYUPDATE.containing_type = _CINVENTORY_MODIFYITEMS_REQUEST
+_CINVENTORY_MODIFYITEMS_REQUEST.fields_by_name['updates'].message_type = _CINVENTORY_MODIFYITEMS_REQUEST_ITEMPROPERTYUPDATE
+_CINVENTORY_PURCHASEINIT_REQUEST_LINEITEM.containing_type = _CINVENTORY_PURCHASEINIT_REQUEST
+_CINVENTORY_PURCHASEINIT_REQUEST.fields_by_name['line_items'].message_type = _CINVENTORY_PURCHASEINIT_REQUEST_LINEITEM
 DESCRIPTOR.message_types_by_name['CInventory_GetInventory_Request'] = _CINVENTORY_GETINVENTORY_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_Response'] = _CINVENTORY_RESPONSE
 DESCRIPTOR.message_types_by_name['CInventory_ExchangeItem_Request'] = _CINVENTORY_EXCHANGEITEM_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_GetEligiblePromoItemDefIDs_Request'] = _CINVENTORY_GETELIGIBLEPROMOITEMDEFIDS_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_GetEligiblePromoItemDefIDs_Response'] = _CINVENTORY_GETELIGIBLEPROMOITEMDEFIDS_RESPONSE
 DESCRIPTOR.message_types_by_name['CInventory_AddItem_Request'] = _CINVENTORY_ADDITEM_REQUEST
-DESCRIPTOR.message_types_by_name['CInventory_SafeModifyItem_Request'] = _CINVENTORY_SAFEMODIFYITEM_REQUEST
+DESCRIPTOR.message_types_by_name['CInventory_ModifyItems_Request'] = _CINVENTORY_MODIFYITEMS_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_ConsumePlaytime_Request'] = _CINVENTORY_CONSUMEPLAYTIME_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_ConsumeItem_Request'] = _CINVENTORY_CONSUMEITEM_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_DevSetNextDrop_Request'] = _CINVENTORY_DEVSETNEXTDROP_REQUEST
@@ -729,6 +1025,11 @@ DESCRIPTOR.message_types_by_name['CInventory_SplitItemStack_Request'] = _CINVENT
 DESCRIPTOR.message_types_by_name['CInventory_CombineItemStacks_Request'] = _CINVENTORY_COMBINEITEMSTACKS_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_GetItemDefMeta_Request'] = _CINVENTORY_GETITEMDEFMETA_REQUEST
 DESCRIPTOR.message_types_by_name['CInventory_GetItemDefMeta_Response'] = _CINVENTORY_GETITEMDEFMETA_RESPONSE
+DESCRIPTOR.message_types_by_name['CInventory_GetUserPurchaseInfo_Request'] = _CINVENTORY_GETUSERPURCHASEINFO_REQUEST
+DESCRIPTOR.message_types_by_name['CInventory_GetUserPurchaseInfo_Response'] = _CINVENTORY_GETUSERPURCHASEINFO_RESPONSE
+DESCRIPTOR.message_types_by_name['CInventory_PurchaseInit_Request'] = _CINVENTORY_PURCHASEINIT_REQUEST
+DESCRIPTOR.message_types_by_name['CInventory_PurchaseInit_Response'] = _CINVENTORY_PURCHASEINIT_RESPONSE
+DESCRIPTOR.message_types_by_name['CInventory_PurchaseFinalize_Request'] = _CINVENTORY_PURCHASEFINALIZE_REQUEST
 
 CInventory_GetInventory_Request = _reflection.GeneratedProtocolMessageType('CInventory_GetInventory_Request', (_message.Message,), dict(
   DESCRIPTOR = _CINVENTORY_GETINVENTORY_REQUEST,
@@ -772,12 +1073,20 @@ CInventory_AddItem_Request = _reflection.GeneratedProtocolMessageType('CInventor
   ))
 _sym_db.RegisterMessage(CInventory_AddItem_Request)
 
-CInventory_SafeModifyItem_Request = _reflection.GeneratedProtocolMessageType('CInventory_SafeModifyItem_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CINVENTORY_SAFEMODIFYITEM_REQUEST,
+CInventory_ModifyItems_Request = _reflection.GeneratedProtocolMessageType('CInventory_ModifyItems_Request', (_message.Message,), dict(
+
+  ItemPropertyUpdate = _reflection.GeneratedProtocolMessageType('ItemPropertyUpdate', (_message.Message,), dict(
+    DESCRIPTOR = _CINVENTORY_MODIFYITEMS_REQUEST_ITEMPROPERTYUPDATE,
+    __module__ = 'steammessages_inventory_pb2'
+    # @@protoc_insertion_point(class_scope:CInventory_ModifyItems_Request.ItemPropertyUpdate)
+    ))
+  ,
+  DESCRIPTOR = _CINVENTORY_MODIFYITEMS_REQUEST,
   __module__ = 'steammessages_inventory_pb2'
-  # @@protoc_insertion_point(class_scope:CInventory_SafeModifyItem_Request)
+  # @@protoc_insertion_point(class_scope:CInventory_ModifyItems_Request)
   ))
-_sym_db.RegisterMessage(CInventory_SafeModifyItem_Request)
+_sym_db.RegisterMessage(CInventory_ModifyItems_Request)
+_sym_db.RegisterMessage(CInventory_ModifyItems_Request.ItemPropertyUpdate)
 
 CInventory_ConsumePlaytime_Request = _reflection.GeneratedProtocolMessageType('CInventory_ConsumePlaytime_Request', (_message.Message,), dict(
   DESCRIPTOR = _CINVENTORY_CONSUMEPLAYTIME_REQUEST,
@@ -828,6 +1137,49 @@ CInventory_GetItemDefMeta_Response = _reflection.GeneratedProtocolMessageType('C
   ))
 _sym_db.RegisterMessage(CInventory_GetItemDefMeta_Response)
 
+CInventory_GetUserPurchaseInfo_Request = _reflection.GeneratedProtocolMessageType('CInventory_GetUserPurchaseInfo_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CINVENTORY_GETUSERPURCHASEINFO_REQUEST,
+  __module__ = 'steammessages_inventory_pb2'
+  # @@protoc_insertion_point(class_scope:CInventory_GetUserPurchaseInfo_Request)
+  ))
+_sym_db.RegisterMessage(CInventory_GetUserPurchaseInfo_Request)
+
+CInventory_GetUserPurchaseInfo_Response = _reflection.GeneratedProtocolMessageType('CInventory_GetUserPurchaseInfo_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CINVENTORY_GETUSERPURCHASEINFO_RESPONSE,
+  __module__ = 'steammessages_inventory_pb2'
+  # @@protoc_insertion_point(class_scope:CInventory_GetUserPurchaseInfo_Response)
+  ))
+_sym_db.RegisterMessage(CInventory_GetUserPurchaseInfo_Response)
+
+CInventory_PurchaseInit_Request = _reflection.GeneratedProtocolMessageType('CInventory_PurchaseInit_Request', (_message.Message,), dict(
+
+  LineItem = _reflection.GeneratedProtocolMessageType('LineItem', (_message.Message,), dict(
+    DESCRIPTOR = _CINVENTORY_PURCHASEINIT_REQUEST_LINEITEM,
+    __module__ = 'steammessages_inventory_pb2'
+    # @@protoc_insertion_point(class_scope:CInventory_PurchaseInit_Request.LineItem)
+    ))
+  ,
+  DESCRIPTOR = _CINVENTORY_PURCHASEINIT_REQUEST,
+  __module__ = 'steammessages_inventory_pb2'
+  # @@protoc_insertion_point(class_scope:CInventory_PurchaseInit_Request)
+  ))
+_sym_db.RegisterMessage(CInventory_PurchaseInit_Request)
+_sym_db.RegisterMessage(CInventory_PurchaseInit_Request.LineItem)
+
+CInventory_PurchaseInit_Response = _reflection.GeneratedProtocolMessageType('CInventory_PurchaseInit_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CINVENTORY_PURCHASEINIT_RESPONSE,
+  __module__ = 'steammessages_inventory_pb2'
+  # @@protoc_insertion_point(class_scope:CInventory_PurchaseInit_Response)
+  ))
+_sym_db.RegisterMessage(CInventory_PurchaseInit_Response)
+
+CInventory_PurchaseFinalize_Request = _reflection.GeneratedProtocolMessageType('CInventory_PurchaseFinalize_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CINVENTORY_PURCHASEFINALIZE_REQUEST,
+  __module__ = 'steammessages_inventory_pb2'
+  # @@protoc_insertion_point(class_scope:CInventory_PurchaseFinalize_Request)
+  ))
+_sym_db.RegisterMessage(CInventory_PurchaseFinalize_Request)
+
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
@@ -842,8 +1194,8 @@ _INVENTORY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030+A service that provides access to inventory')),
-  serialized_start=1639,
-  serialized_end=3211,
+  serialized_start=2336,
+  serialized_end=4321,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetInventory',
@@ -882,11 +1234,11 @@ _INVENTORY = _descriptor.ServiceDescriptor(
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030\'Adds a promo item to a user\'s inventory')),
   ),
   _descriptor.MethodDescriptor(
-    name='SafeModifyItem',
-    full_name='Inventory.SafeModifyItem',
+    name='SafeModifyItems',
+    full_name='Inventory.SafeModifyItems',
     index=4,
     containing_service=None,
-    input_type=_CINVENTORY_SAFEMODIFYITEM_REQUEST,
+    input_type=_CINVENTORY_MODIFYITEMS_REQUEST,
     output_type=_CINVENTORY_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030;Modify an item in a user\'s inventory (safe properties only)')),
   ),
@@ -952,6 +1304,33 @@ _INVENTORY = _descriptor.ServiceDescriptor(
     input_type=_CINVENTORY_GETITEMDEFMETA_REQUEST,
     output_type=_CINVENTORY_GETITEMDEFMETA_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030=Get metadata about the current item definition for this game.')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetUserPurchaseInfo',
+    full_name='Inventory.GetUserPurchaseInfo',
+    index=12,
+    containing_service=None,
+    input_type=_CINVENTORY_GETUSERPURCHASEINFO_REQUEST,
+    output_type=_CINVENTORY_GETUSERPURCHASEINFO_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0309Returns information about the user such as their currency')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='PurchaseInit',
+    full_name='Inventory.PurchaseInit',
+    index=13,
+    containing_service=None,
+    input_type=_CINVENTORY_PURCHASEINIT_REQUEST,
+    output_type=_CINVENTORY_PURCHASEINIT_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030#Initializes a purchase for the user')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='PurchaseFinalize',
+    full_name='Inventory.PurchaseFinalize',
+    index=14,
+    containing_service=None,
+    input_type=_CINVENTORY_PURCHASEFINALIZE_REQUEST,
+    output_type=_CINVENTORY_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030!Finalizes a purchase for the user')),
   ),
 ])
 

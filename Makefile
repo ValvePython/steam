@@ -57,7 +57,7 @@ upload: dist register
 	twine upload -r pypi dist/*
 
 pb_fetch:
-	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt
+	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt || exit 0
 	rename -v '.steamclient' '' protobufs/*.proto
 	sed -i '1d' protobufs/test_messages.proto
 	sed -i '1s/^/package foobar;\n/' protobufs/gc.proto

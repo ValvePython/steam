@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_video.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x19steammessages_video.proto\x1a steammessages_unified_base.proto\"\x81\x01\n CVideo_ClientGetVideoURL_Request\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"r\n!CVideo_ClientGetVideoURL_Response\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12-\n\tvideo_url\x18\x02 \x01(\tB\x1a\x82\xb5\x18\x16URL for video manifest\":\n CVideo_UnlockedH264_Notification\x12\x16\n\x0e\x65ncryption_key\x18\x01 \x01(\x0c\"\x85\x01\n(CFovasVideo_ClientGetOPFSettings_Request\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"|\n)CFovasVideo_ClientGetOPFSettings_Response\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12\x33\n\x0copf_settings\x18\x02 \x01(\tB\x1d\x82\xb5\x18\x19JSON blob of OPF Settings2\xab\x01\n\x05Video\x12\x8e\x01\n\x11\x43lientGetVideoURL\x12!.CVideo_ClientGetVideoURL_Request\x1a\".CVideo_ClientGetVideoURL_Response\"2\x82\xb5\x18.Get the initial URL to begin streaming a video\x1a\x11\x82\xb5\x18\rVideo methods2\x9e\x01\n\x0bVideoClient\x12\x88\x01\n\x12NotifyUnlockedH264\x12!.CVideo_UnlockedH264_Notification\x1a\x0b.NoResponse\"B\x82\xb5\x18>Notification from server to client that h264 has been unlocked\x1a\x04\xc0\xb5\x18\x02\x32\xf3\x01\n\nFovasVideo\x12\xc3\x01\n\x14\x43lientGetOPFSettings\x12).CFovasVideo_ClientGetOPFSettings_Request\x1a*.CFovasVideo_ClientGetOPFSettings_Response\"T\x82\xb5\x18PRetrieve the OPF settings JSON blob. Available via the Client for 360 Player App\x1a\x1f\x82\xb5\x18\x1b\x46ovas Video Service MethodsB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x19steammessages_video.proto\x1a steammessages_unified_base.proto\"\x81\x01\n CVideo_ClientGetVideoURL_Request\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"r\n!CVideo_ClientGetVideoURL_Response\x12\x1e\n\x08video_id\x18\x01 \x01(\x04\x42\x0c\x82\xb5\x18\x08Video ID\x12-\n\tvideo_url\x18\x02 \x01(\tB\x1a\x82\xb5\x18\x16URL for video manifest\"\xb1\x02\n\rVideoBookmark\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12]\n\x1cplayback_position_in_seconds\x18\x02 \x01(\rB7\x82\xb5\x18\x33How many seconds into the video the bookmark is for\x12/\n\x0evideo_track_id\x18\x03 \x01(\x04\x42\x17\x82\xb5\x18\x13video track choice.\x12/\n\x0e\x61udio_track_id\x18\x04 \x01(\x04\x42\x17\x82\xb5\x18\x13\x61udio track choice.\x12\x43\n\x12timedtext_track_id\x18\x05 \x01(\x04\x42\'\x82\xb5\x18#timedtimed or subtitle track choice\"r\n$CVideo_SetVideoBookmark_Notification\x12J\n\tbookmarks\x18\x01 \x03(\x0b\x32\x0e.VideoBookmarkB\'\x82\xb5\x18#list of bookmarks we want to store.\"\x81\x02\n CVideo_GetVideoBookmarks_Request\x12_\n\x06\x61ppids\x18\x01 \x03(\rBO\x82\xb5\x18KList of App IDs to grab bookmarks for. Can be empty if using updated_since.\x12|\n\rupdated_since\x18\x02 \x01(\rBe\x82\xb5\x18\x61Only return results after time. Min value is 1. (seconds since epoch January 1st, 1970 Unix Time)\"u\n!CVideo_GetVideoBookmarks_Response\x12P\n\tbookmarks\x18\x01 \x03(\x0b\x32\x0e.VideoBookmarkB-\x82\xb5\x18)List of bookmarks we found. Can be empty.\":\n CVideo_UnlockedH264_Notification\x12\x16\n\x0e\x65ncryption_key\x18\x01 \x01(\x0c\"\x85\x01\n(CFovasVideo_ClientGetOPFSettings_Request\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12=\n\rclient_cellid\x18\x02 \x01(\rB&\x82\xb5\x18\"Cell ID of client, zero if unknown\"|\n)CFovasVideo_ClientGetOPFSettings_Response\x12\x1a\n\x06\x61pp_id\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12\x33\n\x0copf_settings\x18\x02 \x01(\tB\x1d\x82\xb5\x18\x19JSON blob of OPF Settings2\xb5\x04\n\x05Video\x12\x8e\x01\n\x11\x43lientGetVideoURL\x12!.CVideo_ClientGetVideoURL_Request\x1a\".CVideo_ClientGetVideoURL_Response\"2\x82\xb5\x18.Get the initial URL to begin streaming a video\x12\xc1\x01\n\x10SetVideoBookmark\x12%.CVideo_SetVideoBookmark_Notification\x1a\x0b.NoResponse\"y\x82\xb5\x18uBookmarks the locations in the video the user has reached. As as record playback settings per video. Fire and forget.\x12\xc3\x01\n\x11GetVideoBookmarks\x12!.CVideo_GetVideoBookmarks_Request\x1a\".CVideo_GetVideoBookmarks_Response\"g\x82\xb5\x18\x63Returns the video bookmarks locations for the specific videos. Includes playback settings per video\x1a\x11\x82\xb5\x18\rVideo methods2\x9e\x01\n\x0bVideoClient\x12\x88\x01\n\x12NotifyUnlockedH264\x12!.CVideo_UnlockedH264_Notification\x1a\x0b.NoResponse\"B\x82\xb5\x18>Notification from server to client that h264 has been unlocked\x1a\x04\xc0\xb5\x18\x02\x32\xf3\x01\n\nFovasVideo\x12\xc3\x01\n\x14\x43lientGetOPFSettings\x12).CFovasVideo_ClientGetOPFSettings_Request\x1a*.CFovasVideo_ClientGetOPFSettings_Response\"T\x82\xb5\x18PRetrieve the OPF settings JSON blob. Available via the Client for 360 Player App\x1a\x1f\x82\xb5\x18\x1b\x46ovas Video Service MethodsB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -106,6 +106,165 @@ _CVIDEO_CLIENTGETVIDEOURL_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_VIDEOBOOKMARK = _descriptor.Descriptor(
+  name='VideoBookmark',
+  full_name='VideoBookmark',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='VideoBookmark.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))),
+    _descriptor.FieldDescriptor(
+      name='playback_position_in_seconds', full_name='VideoBookmark.playback_position_in_seconds', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0303How many seconds into the video the bookmark is for'))),
+    _descriptor.FieldDescriptor(
+      name='video_track_id', full_name='VideoBookmark.video_track_id', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\023video track choice.'))),
+    _descriptor.FieldDescriptor(
+      name='audio_track_id', full_name='VideoBookmark.audio_track_id', index=3,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\023audio track choice.'))),
+    _descriptor.FieldDescriptor(
+      name='timedtext_track_id', full_name='VideoBookmark.timedtext_track_id', index=4,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030#timedtimed or subtitle track choice'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=312,
+  serialized_end=617,
+)
+
+
+_CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION = _descriptor.Descriptor(
+  name='CVideo_SetVideoBookmark_Notification',
+  full_name='CVideo_SetVideoBookmark_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='bookmarks', full_name='CVideo_SetVideoBookmark_Notification.bookmarks', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030#list of bookmarks we want to store.'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=619,
+  serialized_end=733,
+)
+
+
+_CVIDEO_GETVIDEOBOOKMARKS_REQUEST = _descriptor.Descriptor(
+  name='CVideo_GetVideoBookmarks_Request',
+  full_name='CVideo_GetVideoBookmarks_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appids', full_name='CVideo_GetVideoBookmarks_Request.appids', index=0,
+      number=1, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030KList of App IDs to grab bookmarks for. Can be empty if using updated_since.'))),
+    _descriptor.FieldDescriptor(
+      name='updated_since', full_name='CVideo_GetVideoBookmarks_Request.updated_since', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030aOnly return results after time. Min value is 1. (seconds since epoch January 1st, 1970 Unix Time)'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=736,
+  serialized_end=993,
+)
+
+
+_CVIDEO_GETVIDEOBOOKMARKS_RESPONSE = _descriptor.Descriptor(
+  name='CVideo_GetVideoBookmarks_Response',
+  full_name='CVideo_GetVideoBookmarks_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='bookmarks', full_name='CVideo_GetVideoBookmarks_Response.bookmarks', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030)List of bookmarks we found. Can be empty.'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=995,
+  serialized_end=1112,
+)
+
+
 _CVIDEO_UNLOCKEDH264_NOTIFICATION = _descriptor.Descriptor(
   name='CVideo_UnlockedH264_Notification',
   full_name='CVideo_UnlockedH264_Notification',
@@ -132,8 +291,8 @@ _CVIDEO_UNLOCKEDH264_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=311,
-  serialized_end=369,
+  serialized_start=1114,
+  serialized_end=1172,
 )
 
 
@@ -170,8 +329,8 @@ _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=372,
-  serialized_end=505,
+  serialized_start=1175,
+  serialized_end=1308,
 )
 
 
@@ -208,12 +367,18 @@ _CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=507,
-  serialized_end=631,
+  serialized_start=1310,
+  serialized_end=1434,
 )
 
+_CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION.fields_by_name['bookmarks'].message_type = _VIDEOBOOKMARK
+_CVIDEO_GETVIDEOBOOKMARKS_RESPONSE.fields_by_name['bookmarks'].message_type = _VIDEOBOOKMARK
 DESCRIPTOR.message_types_by_name['CVideo_ClientGetVideoURL_Request'] = _CVIDEO_CLIENTGETVIDEOURL_REQUEST
 DESCRIPTOR.message_types_by_name['CVideo_ClientGetVideoURL_Response'] = _CVIDEO_CLIENTGETVIDEOURL_RESPONSE
+DESCRIPTOR.message_types_by_name['VideoBookmark'] = _VIDEOBOOKMARK
+DESCRIPTOR.message_types_by_name['CVideo_SetVideoBookmark_Notification'] = _CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CVideo_GetVideoBookmarks_Request'] = _CVIDEO_GETVIDEOBOOKMARKS_REQUEST
+DESCRIPTOR.message_types_by_name['CVideo_GetVideoBookmarks_Response'] = _CVIDEO_GETVIDEOBOOKMARKS_RESPONSE
 DESCRIPTOR.message_types_by_name['CVideo_UnlockedH264_Notification'] = _CVIDEO_UNLOCKEDH264_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CFovasVideo_ClientGetOPFSettings_Request'] = _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST
 DESCRIPTOR.message_types_by_name['CFovasVideo_ClientGetOPFSettings_Response'] = _CFOVASVIDEO_CLIENTGETOPFSETTINGS_RESPONSE
@@ -231,6 +396,34 @@ CVideo_ClientGetVideoURL_Response = _reflection.GeneratedProtocolMessageType('CV
   # @@protoc_insertion_point(class_scope:CVideo_ClientGetVideoURL_Response)
   ))
 _sym_db.RegisterMessage(CVideo_ClientGetVideoURL_Response)
+
+VideoBookmark = _reflection.GeneratedProtocolMessageType('VideoBookmark', (_message.Message,), dict(
+  DESCRIPTOR = _VIDEOBOOKMARK,
+  __module__ = 'steammessages_video_pb2'
+  # @@protoc_insertion_point(class_scope:VideoBookmark)
+  ))
+_sym_db.RegisterMessage(VideoBookmark)
+
+CVideo_SetVideoBookmark_Notification = _reflection.GeneratedProtocolMessageType('CVideo_SetVideoBookmark_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION,
+  __module__ = 'steammessages_video_pb2'
+  # @@protoc_insertion_point(class_scope:CVideo_SetVideoBookmark_Notification)
+  ))
+_sym_db.RegisterMessage(CVideo_SetVideoBookmark_Notification)
+
+CVideo_GetVideoBookmarks_Request = _reflection.GeneratedProtocolMessageType('CVideo_GetVideoBookmarks_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CVIDEO_GETVIDEOBOOKMARKS_REQUEST,
+  __module__ = 'steammessages_video_pb2'
+  # @@protoc_insertion_point(class_scope:CVideo_GetVideoBookmarks_Request)
+  ))
+_sym_db.RegisterMessage(CVideo_GetVideoBookmarks_Request)
+
+CVideo_GetVideoBookmarks_Response = _reflection.GeneratedProtocolMessageType('CVideo_GetVideoBookmarks_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CVIDEO_GETVIDEOBOOKMARKS_RESPONSE,
+  __module__ = 'steammessages_video_pb2'
+  # @@protoc_insertion_point(class_scope:CVideo_GetVideoBookmarks_Response)
+  ))
+_sym_db.RegisterMessage(CVideo_GetVideoBookmarks_Response)
 
 CVideo_UnlockedH264_Notification = _reflection.GeneratedProtocolMessageType('CVideo_UnlockedH264_Notification', (_message.Message,), dict(
   DESCRIPTOR = _CVIDEO_UNLOCKEDH264_NOTIFICATION,
@@ -264,6 +457,24 @@ _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_id'].has_options = True
 _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\010Video ID'))
 _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_url'].has_options = True
 _CVIDEO_CLIENTGETVIDEOURL_RESPONSE.fields_by_name['video_url']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\026URL for video manifest'))
+_VIDEOBOOKMARK.fields_by_name['app_id'].has_options = True
+_VIDEOBOOKMARK.fields_by_name['app_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))
+_VIDEOBOOKMARK.fields_by_name['playback_position_in_seconds'].has_options = True
+_VIDEOBOOKMARK.fields_by_name['playback_position_in_seconds']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0303How many seconds into the video the bookmark is for'))
+_VIDEOBOOKMARK.fields_by_name['video_track_id'].has_options = True
+_VIDEOBOOKMARK.fields_by_name['video_track_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\023video track choice.'))
+_VIDEOBOOKMARK.fields_by_name['audio_track_id'].has_options = True
+_VIDEOBOOKMARK.fields_by_name['audio_track_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\023audio track choice.'))
+_VIDEOBOOKMARK.fields_by_name['timedtext_track_id'].has_options = True
+_VIDEOBOOKMARK.fields_by_name['timedtext_track_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030#timedtimed or subtitle track choice'))
+_CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION.fields_by_name['bookmarks'].has_options = True
+_CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION.fields_by_name['bookmarks']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030#list of bookmarks we want to store.'))
+_CVIDEO_GETVIDEOBOOKMARKS_REQUEST.fields_by_name['appids'].has_options = True
+_CVIDEO_GETVIDEOBOOKMARKS_REQUEST.fields_by_name['appids']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030KList of App IDs to grab bookmarks for. Can be empty if using updated_since.'))
+_CVIDEO_GETVIDEOBOOKMARKS_REQUEST.fields_by_name['updated_since'].has_options = True
+_CVIDEO_GETVIDEOBOOKMARKS_REQUEST.fields_by_name['updated_since']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030aOnly return results after time. Min value is 1. (seconds since epoch January 1st, 1970 Unix Time)'))
+_CVIDEO_GETVIDEOBOOKMARKS_RESPONSE.fields_by_name['bookmarks'].has_options = True
+_CVIDEO_GETVIDEOBOOKMARKS_RESPONSE.fields_by_name['bookmarks']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030)List of bookmarks we found. Can be empty.'))
 _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['app_id'].has_options = True
 _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['app_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\006App ID'))
 _CFOVASVIDEO_CLIENTGETOPFSETTINGS_REQUEST.fields_by_name['client_cellid'].has_options = True
@@ -279,8 +490,8 @@ _VIDEO = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\rVideo methods')),
-  serialized_start=634,
-  serialized_end=805,
+  serialized_start=1437,
+  serialized_end=2002,
   methods=[
   _descriptor.MethodDescriptor(
     name='ClientGetVideoURL',
@@ -290,6 +501,24 @@ _VIDEO = _descriptor.ServiceDescriptor(
     input_type=_CVIDEO_CLIENTGETVIDEOURL_REQUEST,
     output_type=_CVIDEO_CLIENTGETVIDEOURL_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030.Get the initial URL to begin streaming a video')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetVideoBookmark',
+    full_name='Video.SetVideoBookmark',
+    index=1,
+    containing_service=None,
+    input_type=_CVIDEO_SETVIDEOBOOKMARK_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030uBookmarks the locations in the video the user has reached. As as record playback settings per video. Fire and forget.')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetVideoBookmarks',
+    full_name='Video.GetVideoBookmarks',
+    index=2,
+    containing_service=None,
+    input_type=_CVIDEO_GETVIDEOBOOKMARKS_REQUEST,
+    output_type=_CVIDEO_GETVIDEOBOOKMARKS_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030cReturns the video bookmarks locations for the specific videos. Includes playback settings per video')),
   ),
 ])
 
@@ -311,8 +540,8 @@ _VIDEOCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\300\265\030\002')),
-  serialized_start=808,
-  serialized_end=966,
+  serialized_start=2005,
+  serialized_end=2163,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyUnlockedH264',
@@ -343,8 +572,8 @@ _FOVASVIDEO = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\033Fovas Video Service Methods')),
-  serialized_start=969,
-  serialized_end=1212,
+  serialized_start=2166,
+  serialized_end=2409,
   methods=[
   _descriptor.MethodDescriptor(
     name='ClientGetOPFSettings',

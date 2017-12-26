@@ -55,6 +55,7 @@ message CMsgClientLogon {
 	optional string two_factor_code = 101;
 	optional bool supports_rate_limit_response = 102;
 	optional string web_logon_nonce = 103;
+	optional int32 priority_reason = 104;
 }
 
 message CMsgClientLogonResponse {

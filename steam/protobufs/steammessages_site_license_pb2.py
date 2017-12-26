@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_site_license.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n steammessages_site_license.proto\x1a steammessages_unified_base.proto\"\x8d\x01\n)CSiteManagerClient_IncomingClient_Request\x12\x17\n\x0fsite_instanceid\x18\x01 \x01(\x06\x12\x16\n\x0e\x63lient_steamid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\x12\x16\n\x0e\x63onnection_key\x18\x04 \x01(\x0c\",\n*CSiteManagerClient_IncomingClient_Response\"r\n(CSiteLicense_InitiateAssociation_Request\x12\x14\n\x0csite_steamid\x18\x01 \x01(\x06\x12\x17\n\x0fsite_instanceid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\"C\n)CSiteLicense_InitiateAssociation_Response\x12\x16\n\x0e\x63onnection_key\x18\x01 \x01(\x0c\":\n$CSiteLicense_LCSAuthenticate_Request\x12\x12\n\ninstanceid\x18\x01 \x01(\x06\"`\n%CSiteLicense_LCSAuthenticate_Response\x12\x0f\n\x07site_id\x18\x01 \x01(\x04\x12\x11\n\tsite_name\x18\x02 \x01(\t\x12\x13\n\x0bnew_session\x18\x03 \x01(\x08\"^\n%CSiteLicense_LCSAssociateUser_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08local_ip\x18\x02 \x01(\x07\x12\x12\n\ninstanceid\x18\x03 \x01(\x06\"(\n&CSiteLicense_LCSAssociateUser_Response\"p\n\'CSiteLicense_ClientSeatCheckout_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\x11\n\tpackageid\x18\x03 \x01(\r\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\"*\n(CSiteLicense_ClientSeatCheckout_Response\"A\n,CSiteLicense_ClientGetAvailableSeats_Request\x12\x11\n\tpackageid\x18\x01 \x01(\r\"H\n-CSiteLicense_ClientGetAvailableSeats_Response\x12\x17\n\x0f\x61vailable_seats\x18\x01 \x01(\r2\xf0\x01\n\x11SiteManagerClient\x12\xaf\x01\n\x0eIncomingClient\x12*.CSiteManagerClient_IncomingClient_Request\x1a+.CSiteManagerClient_IncomingClient_Response\"D\x82\xb5\x18@Rack informing site manager of new inbound client PSK connection\x1a)\x82\xb5\x18!Local site manager client service\xc0\xb5\x18\x02\x32\xd5\x06\n\x0bSiteLicense\x12\xa4\x01\n\x13InitiateAssociation\x12).CSiteLicense_InitiateAssociation_Request\x1a*.CSiteLicense_InitiateAssociation_Response\"6\x82\xb5\x18\x32\x43lient is requesting connetion info for local site\x12\x86\x01\n\x0fLCSAuthenticate\x12%.CSiteLicense_LCSAuthenticate_Request\x1a&.CSiteLicense_LCSAuthenticate_Response\"$\x82\xb5\x18 Local cafe server authentication\x12\x9d\x01\n\x10LCSAssociateUser\x12&.CSiteLicense_LCSAssociateUser_Request\x1a\'.CSiteLicense_LCSAssociateUser_Response\"8\x82\xb5\x18\x34Local cafe server wants to grant user access to site\x12\x9e\x01\n\x12\x43lientSeatCheckout\x12(.CSiteLicense_ClientSeatCheckout_Request\x1a).CSiteLicense_ClientSeatCheckout_Response\"3\x82\xb5\x18/Client is requesting use of a site license seat\x12\xba\x01\n\x17\x43lientGetAvailableSeats\x12-.CSiteLicense_ClientGetAvailableSeats_Request\x1a..CSiteLicense_ClientGetAvailableSeats_Response\"@\x82\xb5\x18<Client is requesting the number of currently available seats\x1a\x18\x82\xb5\x18\x14Site License serviceB\x03\x90\x01\x01')
+  serialized_pb=_b('\n steammessages_site_license.proto\x1a steammessages_unified_base.proto\"\x8d\x01\n)CSiteManagerClient_IncomingClient_Request\x12\x17\n\x0fsite_instanceid\x18\x01 \x01(\x06\x12\x16\n\x0e\x63lient_steamid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\x12\x16\n\x0e\x63onnection_key\x18\x04 \x01(\x0c\",\n*CSiteManagerClient_IncomingClient_Response\"N\n,CSiteLicense_ClientSeatCheckout_Notification\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\"r\n(CSiteLicense_InitiateAssociation_Request\x12\x14\n\x0csite_steamid\x18\x01 \x01(\x06\x12\x17\n\x0fsite_instanceid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\"C\n)CSiteLicense_InitiateAssociation_Response\x12\x16\n\x0e\x63onnection_key\x18\x01 \x01(\x0c\":\n$CSiteLicense_LCSAuthenticate_Request\x12\x12\n\ninstanceid\x18\x01 \x01(\x06\"`\n%CSiteLicense_LCSAuthenticate_Response\x12\x0f\n\x07site_id\x18\x01 \x01(\x04\x12\x11\n\tsite_name\x18\x02 \x01(\t\x12\x13\n\x0bnew_session\x18\x03 \x01(\x08\"^\n%CSiteLicense_LCSAssociateUser_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08local_ip\x18\x02 \x01(\x07\x12\x12\n\ninstanceid\x18\x03 \x01(\x06\"(\n&CSiteLicense_LCSAssociateUser_Response\"]\n\'CSiteLicense_ClientSeatCheckout_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\"*\n(CSiteLicense_ClientSeatCheckout_Response\"b\n,CSiteLicense_ClientGetAvailableSeats_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\"H\n-CSiteLicense_ClientGetAvailableSeats_Response\x12\x17\n\x0f\x61vailable_seats\x18\x01 \x01(\r2\x86\x03\n\x11SiteManagerClient\x12\xaf\x01\n\x0eIncomingClient\x12*.CSiteManagerClient_IncomingClient_Request\x1a+.CSiteManagerClient_IncomingClient_Response\"D\x82\xb5\x18@Rack informing site manager of new inbound client PSK connection\x12\x93\x01\n\x1e\x43lientSeatCheckoutNotification\x12-.CSiteLicense_ClientSeatCheckout_Notification\x1a\x0b.NoResponse\"5\x82\xb5\x18\x31Notify client directly about seat checkout result\x1a)\x82\xb5\x18!Local site manager client service\xc0\xb5\x18\x02\x32\xd5\x06\n\x0bSiteLicense\x12\xa4\x01\n\x13InitiateAssociation\x12).CSiteLicense_InitiateAssociation_Request\x1a*.CSiteLicense_InitiateAssociation_Response\"6\x82\xb5\x18\x32\x43lient is requesting connetion info for local site\x12\x86\x01\n\x0fLCSAuthenticate\x12%.CSiteLicense_LCSAuthenticate_Request\x1a&.CSiteLicense_LCSAuthenticate_Response\"$\x82\xb5\x18 Local cafe server authentication\x12\x9d\x01\n\x10LCSAssociateUser\x12&.CSiteLicense_LCSAssociateUser_Request\x1a\'.CSiteLicense_LCSAssociateUser_Response\"8\x82\xb5\x18\x34Local cafe server wants to grant user access to site\x12\x9e\x01\n\x12\x43lientSeatCheckout\x12(.CSiteLicense_ClientSeatCheckout_Request\x1a).CSiteLicense_ClientSeatCheckout_Response\"3\x82\xb5\x18/Client is requesting use of a site license seat\x12\xba\x01\n\x17\x43lientGetAvailableSeats\x12-.CSiteLicense_ClientGetAvailableSeats_Request\x1a..CSiteLicense_ClientGetAvailableSeats_Response\"@\x82\xb5\x18<Client is requesting the number of currently available seats\x1a\x18\x82\xb5\x18\x14Site License serviceB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -106,6 +106,44 @@ _CSITEMANAGERCLIENT_INCOMINGCLIENT_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION = _descriptor.Descriptor(
+  name='CSiteLicense_ClientSeatCheckout_Notification',
+  full_name='CSiteLicense_ClientSeatCheckout_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CSiteLicense_ClientSeatCheckout_Notification.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CSiteLicense_ClientSeatCheckout_Notification.eresult', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=260,
+  serialized_end=338,
+)
+
+
 _CSITELICENSE_INITIATEASSOCIATION_REQUEST = _descriptor.Descriptor(
   name='CSiteLicense_InitiateAssociation_Request',
   full_name='CSiteLicense_InitiateAssociation_Request',
@@ -146,8 +184,8 @@ _CSITELICENSE_INITIATEASSOCIATION_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=260,
-  serialized_end=374,
+  serialized_start=340,
+  serialized_end=454,
 )
 
 
@@ -177,8 +215,8 @@ _CSITELICENSE_INITIATEASSOCIATION_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=376,
-  serialized_end=443,
+  serialized_start=456,
+  serialized_end=523,
 )
 
 
@@ -208,8 +246,8 @@ _CSITELICENSE_LCSAUTHENTICATE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=445,
-  serialized_end=503,
+  serialized_start=525,
+  serialized_end=583,
 )
 
 
@@ -253,8 +291,8 @@ _CSITELICENSE_LCSAUTHENTICATE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=505,
-  serialized_end=601,
+  serialized_start=585,
+  serialized_end=681,
 )
 
 
@@ -298,8 +336,8 @@ _CSITELICENSE_LCSASSOCIATEUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=603,
-  serialized_end=697,
+  serialized_start=683,
+  serialized_end=777,
 )
 
 
@@ -322,8 +360,8 @@ _CSITELICENSE_LCSASSOCIATEUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=699,
-  serialized_end=739,
+  serialized_start=779,
+  serialized_end=819,
 )
 
 
@@ -349,15 +387,8 @@ _CSITELICENSE_CLIENTSEATCHECKOUT_REQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='packageid', full_name='CSiteLicense_ClientSeatCheckout_Request.packageid', index=2,
+      name='appid', full_name='CSiteLicense_ClientSeatCheckout_Request.appid', index=2,
       number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='CSiteLicense_ClientSeatCheckout_Request.appid', index=3,
-      number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -374,8 +405,8 @@ _CSITELICENSE_CLIENTSEATCHECKOUT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=741,
-  serialized_end=853,
+  serialized_start=821,
+  serialized_end=914,
 )
 
 
@@ -398,8 +429,8 @@ _CSITELICENSE_CLIENTSEATCHECKOUT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=855,
-  serialized_end=897,
+  serialized_start=916,
+  serialized_end=958,
 )
 
 
@@ -411,8 +442,22 @@ _CSITELICENSE_CLIENTGETAVAILABLESEATS_REQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='packageid', full_name='CSiteLicense_ClientGetAvailableSeats_Request.packageid', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      name='steamid', full_name='CSiteLicense_ClientGetAvailableSeats_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='instanceid', full_name='CSiteLicense_ClientGetAvailableSeats_Request.instanceid', index=1,
+      number=2, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CSiteLicense_ClientGetAvailableSeats_Request.appid', index=2,
+      number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -429,8 +474,8 @@ _CSITELICENSE_CLIENTGETAVAILABLESEATS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=899,
-  serialized_end=964,
+  serialized_start=960,
+  serialized_end=1058,
 )
 
 
@@ -460,12 +505,13 @@ _CSITELICENSE_CLIENTGETAVAILABLESEATS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=966,
-  serialized_end=1038,
+  serialized_start=1060,
+  serialized_end=1132,
 )
 
 DESCRIPTOR.message_types_by_name['CSiteManagerClient_IncomingClient_Request'] = _CSITEMANAGERCLIENT_INCOMINGCLIENT_REQUEST
 DESCRIPTOR.message_types_by_name['CSiteManagerClient_IncomingClient_Response'] = _CSITEMANAGERCLIENT_INCOMINGCLIENT_RESPONSE
+DESCRIPTOR.message_types_by_name['CSiteLicense_ClientSeatCheckout_Notification'] = _CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CSiteLicense_InitiateAssociation_Request'] = _CSITELICENSE_INITIATEASSOCIATION_REQUEST
 DESCRIPTOR.message_types_by_name['CSiteLicense_InitiateAssociation_Response'] = _CSITELICENSE_INITIATEASSOCIATION_RESPONSE
 DESCRIPTOR.message_types_by_name['CSiteLicense_LCSAuthenticate_Request'] = _CSITELICENSE_LCSAUTHENTICATE_REQUEST
@@ -490,6 +536,13 @@ CSiteManagerClient_IncomingClient_Response = _reflection.GeneratedProtocolMessag
   # @@protoc_insertion_point(class_scope:CSiteManagerClient_IncomingClient_Response)
   ))
 _sym_db.RegisterMessage(CSiteManagerClient_IncomingClient_Response)
+
+CSiteLicense_ClientSeatCheckout_Notification = _reflection.GeneratedProtocolMessageType('CSiteLicense_ClientSeatCheckout_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION,
+  __module__ = 'steammessages_site_license_pb2'
+  # @@protoc_insertion_point(class_scope:CSiteLicense_ClientSeatCheckout_Notification)
+  ))
+_sym_db.RegisterMessage(CSiteLicense_ClientSeatCheckout_Notification)
 
 CSiteLicense_InitiateAssociation_Request = _reflection.GeneratedProtocolMessageType('CSiteLicense_InitiateAssociation_Request', (_message.Message,), dict(
   DESCRIPTOR = _CSITELICENSE_INITIATEASSOCIATION_REQUEST,
@@ -571,8 +624,8 @@ _SITEMANAGERCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030!Local site manager client service\300\265\030\002')),
-  serialized_start=1041,
-  serialized_end=1281,
+  serialized_start=1135,
+  serialized_end=1525,
   methods=[
   _descriptor.MethodDescriptor(
     name='IncomingClient',
@@ -582,6 +635,15 @@ _SITEMANAGERCLIENT = _descriptor.ServiceDescriptor(
     input_type=_CSITEMANAGERCLIENT_INCOMINGCLIENT_REQUEST,
     output_type=_CSITEMANAGERCLIENT_INCOMINGCLIENT_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030@Rack informing site manager of new inbound client PSK connection')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='ClientSeatCheckoutNotification',
+    full_name='SiteManagerClient.ClientSeatCheckoutNotification',
+    index=1,
+    containing_service=None,
+    input_type=_CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0301Notify client directly about seat checkout result')),
   ),
 ])
 
@@ -603,8 +665,8 @@ _SITELICENSE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\024Site License service')),
-  serialized_start=1284,
-  serialized_end=2137,
+  serialized_start=1528,
+  serialized_end=2381,
   methods=[
   _descriptor.MethodDescriptor(
     name='InitiateAssociation',

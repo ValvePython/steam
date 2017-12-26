@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_player.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1asteammessages_player.proto\x1a steammessages_unified_base.proto\"3\n\"CPlayer_GetGameBadgeLevels_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xb5\x01\n#CPlayer_GetGameBadgeLevels_Response\x12\x14\n\x0cplayer_level\x18\x01 \x01(\r\x12:\n\x06\x62\x61\x64ges\x18\x02 \x03(\x0b\x32*.CPlayer_GetGameBadgeLevels_Response.Badge\x1a<\n\x05\x42\x61\x64ge\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0e\n\x06series\x18\x02 \x01(\x05\x12\x14\n\x0c\x62order_color\x18\x03 \x01(\r\"\x82\x01\n\"CPlayer_GetLastPlayedTimes_Request\x12\\\n\x0fmin_last_played\x18\x01 \x01(\rBC\x82\xb5\x18?The most recent last-played time the client already knows about\"\xc0\x01\n#CPlayer_GetLastPlayedTimes_Response\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\x1a_\n\x04Game\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x15\n\rlast_playtime\x18\x02 \x01(\r\x12\x17\n\x0fplaytime_2weeks\x18\x03 \x01(\x05\x12\x18\n\x10playtime_forever\x18\x04 \x01(\x05\"\x1b\n\x19\x43Player_AcceptSSA_Request\"\x1c\n\x1a\x43Player_AcceptSSA_Response\"`\n$CPlayer_LastPlayedTimes_Notification\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game2\xed\x03\n\x06Player\x12\xb6\x01\n\x12GetGameBadgeLevels\x12#.CPlayer_GetGameBadgeLevels_Request\x1a$.CPlayer_GetGameBadgeLevels_Response\"U\x82\xb5\x18QReturns the Steam Level of a user, the Badge level for the game, and if it\'s foil\x12\x95\x01\n\x18\x43lientGetLastPlayedTimes\x12#.CPlayer_GetLastPlayedTimes_Request\x1a$.CPlayer_GetLastPlayedTimes_Response\".\x82\xb5\x18*Gets the last-played times for the account\x12\x63\n\tAcceptSSA\x12\x1a.CPlayer_AcceptSSA_Request\x1a\x1b.CPlayer_AcceptSSA_Response\"\x1d\x82\xb5\x18\x19User is accepting the SSA\x1a-\x82\xb5\x18)A service for accessing Steam player data2\xcd\x01\n\x0cPlayerClient\x12\x8c\x01\n\x15NotifyLastPlayedTimes\x12%.CPlayer_LastPlayedTimes_Notification\x1a\x0b.NoResponse\"?\x82\xb5\x18;Notification from server to client of more recent play time\x1a.\x82\xb5\x18&Steam player data client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1asteammessages_player.proto\x1a steammessages_unified_base.proto\"3\n\"CPlayer_GetGameBadgeLevels_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xb5\x01\n#CPlayer_GetGameBadgeLevels_Response\x12\x14\n\x0cplayer_level\x18\x01 \x01(\r\x12:\n\x06\x62\x61\x64ges\x18\x02 \x03(\x0b\x32*.CPlayer_GetGameBadgeLevels_Response.Badge\x1a<\n\x05\x42\x61\x64ge\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0e\n\x06series\x18\x02 \x01(\x05\x12\x14\n\x0c\x62order_color\x18\x03 \x01(\r\"\x82\x01\n\"CPlayer_GetLastPlayedTimes_Request\x12\\\n\x0fmin_last_played\x18\x01 \x01(\rBC\x82\xb5\x18?The most recent last-played time the client already knows about\"\xc0\x01\n#CPlayer_GetLastPlayedTimes_Response\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\x1a_\n\x04Game\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x15\n\rlast_playtime\x18\x02 \x01(\r\x12\x17\n\x0fplaytime_2weeks\x18\x03 \x01(\x05\x12\x18\n\x10playtime_forever\x18\x04 \x01(\x05\"\x1b\n\x19\x43Player_AcceptSSA_Request\"\x1c\n\x1a\x43Player_AcceptSSA_Response\"!\n\x1f\x43Player_GetNicknameList_Request\"\x9e\x01\n CPlayer_GetNicknameList_Response\x12\x43\n\tnicknames\x18\x01 \x03(\x0b\x32\x30.CPlayer_GetNicknameList_Response.PlayerNickname\x1a\x35\n\x0ePlayerNickname\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\"`\n$CPlayer_LastPlayedTimes_Notification\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\"Q\n*CPlayer_FriendNicknameChanged_Notification\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t2\x84\x05\n\x06Player\x12\xb6\x01\n\x12GetGameBadgeLevels\x12#.CPlayer_GetGameBadgeLevels_Request\x1a$.CPlayer_GetGameBadgeLevels_Response\"U\x82\xb5\x18QReturns the Steam Level of a user, the Badge level for the game, and if it\'s foil\x12\x95\x01\n\x18\x43lientGetLastPlayedTimes\x12#.CPlayer_GetLastPlayedTimes_Request\x1a$.CPlayer_GetLastPlayedTimes_Response\".\x82\xb5\x18*Gets the last-played times for the account\x12\x63\n\tAcceptSSA\x12\x1a.CPlayer_AcceptSSA_Request\x1a\x1b.CPlayer_AcceptSSA_Response\"\x1d\x82\xb5\x18\x19User is accepting the SSA\x12\x94\x01\n\x0fGetNicknameList\x12 .CPlayer_GetNicknameList_Request\x1a!.CPlayer_GetNicknameList_Response\"<\x82\xb5\x18\x38Gets the list of nicknames this user has for other users\x1a-\x82\xb5\x18)A service for accessing Steam player data2\xf4\x02\n\x0cPlayerClient\x12\x8c\x01\n\x15NotifyLastPlayedTimes\x12%.CPlayer_LastPlayedTimes_Notification\x1a\x0b.NoResponse\"?\x82\xb5\x18;Notification from server to client of more recent play time\x12\xa4\x01\n\x1bNotifyFriendNicknameChanged\x12+.CPlayer_FriendNicknameChanged_Notification\x1a\x0b.NoResponse\"K\x82\xb5\x18GNotification from server to client that a friend\'s nickname has changed\x1a.\x82\xb5\x18&Steam player data client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -304,6 +304,98 @@ _CPLAYER_ACCEPTSSA_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CPLAYER_GETNICKNAMELIST_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetNicknameList_Request',
+  full_name='CPlayer_GetNicknameList_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=688,
+  serialized_end=721,
+)
+
+
+_CPLAYER_GETNICKNAMELIST_RESPONSE_PLAYERNICKNAME = _descriptor.Descriptor(
+  name='PlayerNickname',
+  full_name='CPlayer_GetNicknameList_Response.PlayerNickname',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='accountid', full_name='CPlayer_GetNicknameList_Response.PlayerNickname.accountid', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='nickname', full_name='CPlayer_GetNicknameList_Response.PlayerNickname.nickname', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=829,
+  serialized_end=882,
+)
+
+_CPLAYER_GETNICKNAMELIST_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetNicknameList_Response',
+  full_name='CPlayer_GetNicknameList_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nicknames', full_name='CPlayer_GetNicknameList_Response.nicknames', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CPLAYER_GETNICKNAMELIST_RESPONSE_PLAYERNICKNAME, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=724,
+  serialized_end=882,
+)
+
+
 _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION = _descriptor.Descriptor(
   name='CPlayer_LastPlayedTimes_Notification',
   full_name='CPlayer_LastPlayedTimes_Notification',
@@ -330,14 +422,54 @@ _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=688,
-  serialized_end=784,
+  serialized_start=884,
+  serialized_end=980,
+)
+
+
+_CPLAYER_FRIENDNICKNAMECHANGED_NOTIFICATION = _descriptor.Descriptor(
+  name='CPlayer_FriendNicknameChanged_Notification',
+  full_name='CPlayer_FriendNicknameChanged_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='accountid', full_name='CPlayer_FriendNicknameChanged_Notification.accountid', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='nickname', full_name='CPlayer_FriendNicknameChanged_Notification.nickname', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=982,
+  serialized_end=1063,
 )
 
 _CPLAYER_GETGAMEBADGELEVELS_RESPONSE_BADGE.containing_type = _CPLAYER_GETGAMEBADGELEVELS_RESPONSE
 _CPLAYER_GETGAMEBADGELEVELS_RESPONSE.fields_by_name['badges'].message_type = _CPLAYER_GETGAMEBADGELEVELS_RESPONSE_BADGE
 _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE_GAME.containing_type = _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE
 _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE.fields_by_name['games'].message_type = _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE_GAME
+_CPLAYER_GETNICKNAMELIST_RESPONSE_PLAYERNICKNAME.containing_type = _CPLAYER_GETNICKNAMELIST_RESPONSE
+_CPLAYER_GETNICKNAMELIST_RESPONSE.fields_by_name['nicknames'].message_type = _CPLAYER_GETNICKNAMELIST_RESPONSE_PLAYERNICKNAME
 _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION.fields_by_name['games'].message_type = _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE_GAME
 DESCRIPTOR.message_types_by_name['CPlayer_GetGameBadgeLevels_Request'] = _CPLAYER_GETGAMEBADGELEVELS_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_GetGameBadgeLevels_Response'] = _CPLAYER_GETGAMEBADGELEVELS_RESPONSE
@@ -345,7 +477,10 @@ DESCRIPTOR.message_types_by_name['CPlayer_GetLastPlayedTimes_Request'] = _CPLAYE
 DESCRIPTOR.message_types_by_name['CPlayer_GetLastPlayedTimes_Response'] = _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_AcceptSSA_Request'] = _CPLAYER_ACCEPTSSA_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_AcceptSSA_Response'] = _CPLAYER_ACCEPTSSA_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetNicknameList_Request'] = _CPLAYER_GETNICKNAMELIST_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetNicknameList_Response'] = _CPLAYER_GETNICKNAMELIST_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_LastPlayedTimes_Notification'] = _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CPlayer_FriendNicknameChanged_Notification'] = _CPLAYER_FRIENDNICKNAMECHANGED_NOTIFICATION
 
 CPlayer_GetGameBadgeLevels_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetGameBadgeLevels_Request', (_message.Message,), dict(
   DESCRIPTOR = _CPLAYER_GETGAMEBADGELEVELS_REQUEST,
@@ -405,12 +540,41 @@ CPlayer_AcceptSSA_Response = _reflection.GeneratedProtocolMessageType('CPlayer_A
   ))
 _sym_db.RegisterMessage(CPlayer_AcceptSSA_Response)
 
+CPlayer_GetNicknameList_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetNicknameList_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETNICKNAMELIST_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetNicknameList_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetNicknameList_Request)
+
+CPlayer_GetNicknameList_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetNicknameList_Response', (_message.Message,), dict(
+
+  PlayerNickname = _reflection.GeneratedProtocolMessageType('PlayerNickname', (_message.Message,), dict(
+    DESCRIPTOR = _CPLAYER_GETNICKNAMELIST_RESPONSE_PLAYERNICKNAME,
+    __module__ = 'steammessages_player_pb2'
+    # @@protoc_insertion_point(class_scope:CPlayer_GetNicknameList_Response.PlayerNickname)
+    ))
+  ,
+  DESCRIPTOR = _CPLAYER_GETNICKNAMELIST_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetNicknameList_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetNicknameList_Response)
+_sym_db.RegisterMessage(CPlayer_GetNicknameList_Response.PlayerNickname)
+
 CPlayer_LastPlayedTimes_Notification = _reflection.GeneratedProtocolMessageType('CPlayer_LastPlayedTimes_Notification', (_message.Message,), dict(
   DESCRIPTOR = _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION,
   __module__ = 'steammessages_player_pb2'
   # @@protoc_insertion_point(class_scope:CPlayer_LastPlayedTimes_Notification)
   ))
 _sym_db.RegisterMessage(CPlayer_LastPlayedTimes_Notification)
+
+CPlayer_FriendNicknameChanged_Notification = _reflection.GeneratedProtocolMessageType('CPlayer_FriendNicknameChanged_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_FRIENDNICKNAMECHANGED_NOTIFICATION,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_FriendNicknameChanged_Notification)
+  ))
+_sym_db.RegisterMessage(CPlayer_FriendNicknameChanged_Notification)
 
 
 DESCRIPTOR.has_options = True
@@ -424,8 +588,8 @@ _PLAYER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030)A service for accessing Steam player data')),
-  serialized_start=787,
-  serialized_end=1280,
+  serialized_start=1066,
+  serialized_end=1710,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetGameBadgeLevels',
@@ -454,6 +618,15 @@ _PLAYER = _descriptor.ServiceDescriptor(
     output_type=_CPLAYER_ACCEPTSSA_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030\031User is accepting the SSA')),
   ),
+  _descriptor.MethodDescriptor(
+    name='GetNicknameList',
+    full_name='Player.GetNicknameList',
+    index=3,
+    containing_service=None,
+    input_type=_CPLAYER_GETNICKNAMELIST_REQUEST,
+    output_type=_CPLAYER_GETNICKNAMELIST_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0308Gets the list of nicknames this user has for other users')),
+  ),
 ])
 
 Player = service_reflection.GeneratedServiceType('Player', (_service.Service,), dict(
@@ -474,8 +647,8 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030&Steam player data client notifications\300\265\030\002')),
-  serialized_start=1283,
-  serialized_end=1488,
+  serialized_start=1713,
+  serialized_end=2085,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyLastPlayedTimes',
@@ -485,6 +658,15 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
     input_type=_CPLAYER_LASTPLAYEDTIMES_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030;Notification from server to client of more recent play time')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='NotifyFriendNicknameChanged',
+    full_name='PlayerClient.NotifyFriendNicknameChanged',
+    index=1,
+    containing_service=None,
+    input_type=_CPLAYER_FRIENDNICKNAMECHANGED_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030GNotification from server to client that a friend\'s nickname has changed')),
   ),
 ])
 

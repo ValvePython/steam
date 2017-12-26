@@ -10,6 +10,7 @@ message CBroadcast_BeginBroadcastSession_Request {
 	optional string title = 4;
 	optional uint32 cellid = 5;
 	optional uint64 rtmp_token = 6;
+	optional bool thumbnail_upload = 7;
 }
 
 message CBroadcast_BeginBroadcastSession_Response {
@@ -17,7 +18,6 @@ message CBroadcast_BeginBroadcastSession_Response {
 	optional string thumbnail_upload_address = 2 [(description) = "Http address to upload the thumbnail data."];
 	optional string thumbnail_upload_token = 3 [(description) = "token to authorize as broadcaster to upload content to the relay."];
 	optional uint32 thumbnail_interval_seconds = 4 [(description) = "how many seconds between thumbnails"];
-	optional fixed64 thumbnail_broadcast_relay_id = 5 [(description) = "unique identifier on the broadcast relay"];
 }
 
 message CBroadcast_EndBroadcastSession_Request {
@@ -38,6 +38,8 @@ message CBroadcast_StartBroadcastUpload_Response {
 	optional string upload_token = 1;
 	optional string upload_address = 2;
 	optional fixed64 upload_relay_id = 3;
+	optional string thumbnail_upload_address = 4;
+	optional uint32 thumbnail_interval_seconds = 5;
 }
 
 message CBroadcast_NotifyBroadcastUploadStop_Notification {
@@ -213,7 +215,7 @@ message CBroadcast_BroadcastStatus_Notification {
 
 message CBroadcast_SendThumbnailToRelay_Notification {
 	optional string thumbnail_upload_token = 1;
-	optional fixed64 thumbnail_broadcast_relay_id = 2;
+	optional fixed64 thumbnail_broadcast_session_id = 2;
 	optional bytes thumbnail_data = 3;
 	optional uint32 thumbnail_width = 4;
 	optional uint32 thumbnail_height = 5;

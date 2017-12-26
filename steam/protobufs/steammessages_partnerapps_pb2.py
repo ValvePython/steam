@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_partnerapps.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1fsteammessages_partnerapps.proto\x1a steammessages_unified_base.proto\"J\n\'CPartnerApps_RequestUploadToken_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\"f\n(CPartnerApps_RequestUploadToken_Response\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x10\n\x08location\x18\x02 \x01(\t\x12\x12\n\nrouting_id\x18\x03 \x01(\x04\"]\n!CPartnerApps_FinishUpload_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\"H\n(CPartnerApps_FinishUploadKVSign_Response\x12\x1c\n\x14signed_installscript\x18\x01 \x01(\t\"\x88\x01\n*CPartnerApps_FinishUploadLegacyDRM_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\x12\r\n\x05\x66lags\x18\x04 \x01(\r\x12\x11\n\ttool_name\x18\x05 \x01(\t\">\n+CPartnerApps_FinishUploadLegacyDRM_Response\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\"$\n\"CPartnerApps_FinishUpload_Response\"5\n#CPartnerApps_FindDRMUploads_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\x05\"\xb4\x01\n\x1e\x43PartnerApps_ExistingDRMUpload\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x10\n\x08\x61\x63tor_id\x18\x03 \x01(\x05\x12\x15\n\rsupplied_name\x18\x05 \x01(\t\x12\r\n\x05\x66lags\x18\x06 \x01(\r\x12\x10\n\x08mod_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x07\x12\x14\n\x0corig_file_id\x18\t \x01(\t\"X\n$CPartnerApps_FindDRMUploads_Response\x12\x30\n\x07uploads\x18\x01 \x03(\x0b\x32\x1f.CPartnerApps_ExistingDRMUpload\"@\n\x1d\x43PartnerApps_Download_Request\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\"F\n\x1e\x43PartnerApps_Download_Response\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\x32\xac\n\n\x0bPartnerApps\x12\xb1\x01\n\x18RequestKVSignUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for installscript file upload / signing\x12\xae\x01\n\x15RequestDRMUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for executable file upload / processing\x12\xb5\x01\n\x15RequestCEGUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"G\x82\xb5\x18\x43Request upload token for custom executable file upload / processing\x12\xab\x01\n\x12\x46inishUploadKVSign\x12\".CPartnerApps_FinishUpload_Request\x1a).CPartnerApps_FinishUploadKVSign_Response\"F\x82\xb5\x18\x42\x43ommit method to sign an installscript after an upload is complete\x12\xa4\x01\n\x15\x46inishUploadDRMUpload\x12+.CPartnerApps_FinishUploadLegacyDRM_Request\x1a,.CPartnerApps_FinishUploadLegacyDRM_Response\"0\x82\xb5\x18,Commit method for executable file processing\x12\x99\x01\n\x15\x46inishUploadCEGUpload\x12\".CPartnerApps_FinishUpload_Request\x1a#.CPartnerApps_FinishUpload_Response\"7\x82\xb5\x18\x33\x43ommit method for custom executable file processing\x12\x8d\x01\n\x0e\x46indDRMUploads\x12$.CPartnerApps_FindDRMUploads_Request\x1a%.CPartnerApps_FindDRMUploads_Response\".\x82\xb5\x18*Finds N most recent prior uploads by appid\x12K\n\x08\x44ownload\x12\x1e.CPartnerApps_Download_Request\x1a\x1f.CPartnerApps_Download_Response\x1a\x32\x82\xb5\x18.Service methods for app management by partnersB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1fsteammessages_partnerapps.proto\x1a steammessages_unified_base.proto\"J\n\'CPartnerApps_RequestUploadToken_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\"f\n(CPartnerApps_RequestUploadToken_Response\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x10\n\x08location\x18\x02 \x01(\t\x12\x12\n\nrouting_id\x18\x03 \x01(\x04\"]\n!CPartnerApps_FinishUpload_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\"H\n(CPartnerApps_FinishUploadKVSign_Response\x12\x1c\n\x14signed_installscript\x18\x01 \x01(\t\"\x88\x01\n*CPartnerApps_FinishUploadLegacyDRM_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\x12\r\n\x05\x66lags\x18\x04 \x01(\r\x12\x11\n\ttool_name\x18\x05 \x01(\t\">\n+CPartnerApps_FinishUploadLegacyDRM_Response\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\"$\n\"CPartnerApps_FinishUpload_Response\"\x89\x01\n&CPartnerApps_FinishUploadDepot_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\x12\x10\n\x08\x64\x65pot_id\x18\x04 \x01(\r\x12\x13\n\x0b\x62uild_flags\x18\x05 \x01(\r\")\n\'CPartnerApps_FinishUploadDepot_Response\"T\n(CPartnerApps_GetDepotBuildResult_Request\x12\x14\n\x0cupload_token\x18\x01 \x01(\x04\x12\x12\n\nrouting_id\x18\x02 \x01(\x04\"S\n)CPartnerApps_GetDepotBuildResult_Response\x12\x13\n\x0bmanifest_id\x18\x01 \x01(\x04\x12\x11\n\terror_msg\x18\x02 \x01(\t\"5\n#CPartnerApps_FindDRMUploads_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\x05\"\xb4\x01\n\x1e\x43PartnerApps_ExistingDRMUpload\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\x12\x10\n\x08\x61\x63tor_id\x18\x03 \x01(\x05\x12\x15\n\rsupplied_name\x18\x05 \x01(\t\x12\r\n\x05\x66lags\x18\x06 \x01(\r\x12\x10\n\x08mod_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x07\x12\x14\n\x0corig_file_id\x18\t \x01(\t\"X\n$CPartnerApps_FindDRMUploads_Response\x12\x30\n\x07uploads\x18\x01 \x03(\x0b\x32\x1f.CPartnerApps_ExistingDRMUpload\"@\n\x1d\x43PartnerApps_Download_Request\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\"F\n\x1e\x43PartnerApps_Download_Response\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\x05\x32\xa1\x0e\n\x0bPartnerApps\x12\xb1\x01\n\x18RequestKVSignUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for installscript file upload / signing\x12\xae\x01\n\x15RequestDRMUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"@\x82\xb5\x18<Request upload token for executable file upload / processing\x12\xb5\x01\n\x15RequestCEGUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"G\x82\xb5\x18\x43Request upload token for custom executable file upload / processing\x12\xa3\x01\n\x17RequestDepotUploadToken\x12(.CPartnerApps_RequestUploadToken_Request\x1a).CPartnerApps_RequestUploadToken_Response\"3\x82\xb5\x18/Request upload token for steampipe depot upload\x12\xab\x01\n\x12\x46inishUploadKVSign\x12\".CPartnerApps_FinishUpload_Request\x1a).CPartnerApps_FinishUploadKVSign_Response\"F\x82\xb5\x18\x42\x43ommit method to sign an installscript after an upload is complete\x12\xa4\x01\n\x15\x46inishUploadDRMUpload\x12+.CPartnerApps_FinishUploadLegacyDRM_Request\x1a,.CPartnerApps_FinishUploadLegacyDRM_Response\"0\x82\xb5\x18,Commit method for executable file processing\x12\x99\x01\n\x15\x46inishUploadCEGUpload\x12\".CPartnerApps_FinishUpload_Request\x1a#.CPartnerApps_FinishUpload_Response\"7\x82\xb5\x18\x33\x43ommit method for custom executable file processing\x12\xa5\x01\n\x17\x46inishUploadDepotUpload\x12\'.CPartnerApps_FinishUploadDepot_Request\x1a(.CPartnerApps_FinishUploadDepot_Response\"7\x82\xb5\x18\x33\x43ommit method for custom executable file processing\x12\xa4\x01\n\x13GetDepotBuildResult\x12).CPartnerApps_GetDepotBuildResult_Request\x1a*.CPartnerApps_GetDepotBuildResult_Response\"6\x82\xb5\x18\x32Get build status for previously uploaded depot ZIP\x12\x8d\x01\n\x0e\x46indDRMUploads\x12$.CPartnerApps_FindDRMUploads_Request\x1a%.CPartnerApps_FindDRMUploads_Response\".\x82\xb5\x18*Finds N most recent prior uploads by appid\x12K\n\x08\x44ownload\x12\x1e.CPartnerApps_Download_Request\x1a\x1f.CPartnerApps_Download_Response\x1a\x32\x82\xb5\x18.Service methods for app management by partnersB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -303,6 +303,165 @@ _CPARTNERAPPS_FINISHUPLOAD_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CPARTNERAPPS_FINISHUPLOADDEPOT_REQUEST = _descriptor.Descriptor(
+  name='CPartnerApps_FinishUploadDepot_Request',
+  full_name='CPartnerApps_FinishUploadDepot_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='upload_token', full_name='CPartnerApps_FinishUploadDepot_Request.upload_token', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='routing_id', full_name='CPartnerApps_FinishUploadDepot_Request.routing_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CPartnerApps_FinishUploadDepot_Request.app_id', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='depot_id', full_name='CPartnerApps_FinishUploadDepot_Request.depot_id', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='build_flags', full_name='CPartnerApps_FinishUploadDepot_Request.build_flags', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=660,
+  serialized_end=797,
+)
+
+
+_CPARTNERAPPS_FINISHUPLOADDEPOT_RESPONSE = _descriptor.Descriptor(
+  name='CPartnerApps_FinishUploadDepot_Response',
+  full_name='CPartnerApps_FinishUploadDepot_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=799,
+  serialized_end=840,
+)
+
+
+_CPARTNERAPPS_GETDEPOTBUILDRESULT_REQUEST = _descriptor.Descriptor(
+  name='CPartnerApps_GetDepotBuildResult_Request',
+  full_name='CPartnerApps_GetDepotBuildResult_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='upload_token', full_name='CPartnerApps_GetDepotBuildResult_Request.upload_token', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='routing_id', full_name='CPartnerApps_GetDepotBuildResult_Request.routing_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=842,
+  serialized_end=926,
+)
+
+
+_CPARTNERAPPS_GETDEPOTBUILDRESULT_RESPONSE = _descriptor.Descriptor(
+  name='CPartnerApps_GetDepotBuildResult_Response',
+  full_name='CPartnerApps_GetDepotBuildResult_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='manifest_id', full_name='CPartnerApps_GetDepotBuildResult_Response.manifest_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='error_msg', full_name='CPartnerApps_GetDepotBuildResult_Response.error_msg', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=928,
+  serialized_end=1011,
+)
+
+
 _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST = _descriptor.Descriptor(
   name='CPartnerApps_FindDRMUploads_Request',
   full_name='CPartnerApps_FindDRMUploads_Request',
@@ -329,8 +488,8 @@ _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=659,
-  serialized_end=712,
+  serialized_start=1013,
+  serialized_end=1066,
 )
 
 
@@ -409,8 +568,8 @@ _CPARTNERAPPS_EXISTINGDRMUPLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=715,
-  serialized_end=895,
+  serialized_start=1069,
+  serialized_end=1249,
 )
 
 
@@ -440,8 +599,8 @@ _CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=897,
-  serialized_end=985,
+  serialized_start=1251,
+  serialized_end=1339,
 )
 
 
@@ -478,8 +637,8 @@ _CPARTNERAPPS_DOWNLOAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=987,
-  serialized_end=1051,
+  serialized_start=1341,
+  serialized_end=1405,
 )
 
 
@@ -516,8 +675,8 @@ _CPARTNERAPPS_DOWNLOAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1053,
-  serialized_end=1123,
+  serialized_start=1407,
+  serialized_end=1477,
 )
 
 _CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE.fields_by_name['uploads'].message_type = _CPARTNERAPPS_EXISTINGDRMUPLOAD
@@ -528,6 +687,10 @@ DESCRIPTOR.message_types_by_name['CPartnerApps_FinishUploadKVSign_Response'] = _
 DESCRIPTOR.message_types_by_name['CPartnerApps_FinishUploadLegacyDRM_Request'] = _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST
 DESCRIPTOR.message_types_by_name['CPartnerApps_FinishUploadLegacyDRM_Response'] = _CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE
 DESCRIPTOR.message_types_by_name['CPartnerApps_FinishUpload_Response'] = _CPARTNERAPPS_FINISHUPLOAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CPartnerApps_FinishUploadDepot_Request'] = _CPARTNERAPPS_FINISHUPLOADDEPOT_REQUEST
+DESCRIPTOR.message_types_by_name['CPartnerApps_FinishUploadDepot_Response'] = _CPARTNERAPPS_FINISHUPLOADDEPOT_RESPONSE
+DESCRIPTOR.message_types_by_name['CPartnerApps_GetDepotBuildResult_Request'] = _CPARTNERAPPS_GETDEPOTBUILDRESULT_REQUEST
+DESCRIPTOR.message_types_by_name['CPartnerApps_GetDepotBuildResult_Response'] = _CPARTNERAPPS_GETDEPOTBUILDRESULT_RESPONSE
 DESCRIPTOR.message_types_by_name['CPartnerApps_FindDRMUploads_Request'] = _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST
 DESCRIPTOR.message_types_by_name['CPartnerApps_ExistingDRMUpload'] = _CPARTNERAPPS_EXISTINGDRMUPLOAD
 DESCRIPTOR.message_types_by_name['CPartnerApps_FindDRMUploads_Response'] = _CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE
@@ -583,6 +746,34 @@ CPartnerApps_FinishUpload_Response = _reflection.GeneratedProtocolMessageType('C
   ))
 _sym_db.RegisterMessage(CPartnerApps_FinishUpload_Response)
 
+CPartnerApps_FinishUploadDepot_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUploadDepot_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADDEPOT_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
+  # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUploadDepot_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUploadDepot_Request)
+
+CPartnerApps_FinishUploadDepot_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_FinishUploadDepot_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_FINISHUPLOADDEPOT_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
+  # @@protoc_insertion_point(class_scope:CPartnerApps_FinishUploadDepot_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_FinishUploadDepot_Response)
+
+CPartnerApps_GetDepotBuildResult_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_GetDepotBuildResult_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_GETDEPOTBUILDRESULT_REQUEST,
+  __module__ = 'steammessages_partnerapps_pb2'
+  # @@protoc_insertion_point(class_scope:CPartnerApps_GetDepotBuildResult_Request)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_GetDepotBuildResult_Request)
+
+CPartnerApps_GetDepotBuildResult_Response = _reflection.GeneratedProtocolMessageType('CPartnerApps_GetDepotBuildResult_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPARTNERAPPS_GETDEPOTBUILDRESULT_RESPONSE,
+  __module__ = 'steammessages_partnerapps_pb2'
+  # @@protoc_insertion_point(class_scope:CPartnerApps_GetDepotBuildResult_Response)
+  ))
+_sym_db.RegisterMessage(CPartnerApps_GetDepotBuildResult_Response)
+
 CPartnerApps_FindDRMUploads_Request = _reflection.GeneratedProtocolMessageType('CPartnerApps_FindDRMUploads_Request', (_message.Message,), dict(
   DESCRIPTOR = _CPARTNERAPPS_FINDDRMUPLOADS_REQUEST,
   __module__ = 'steammessages_partnerapps_pb2'
@@ -628,8 +819,8 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030.Service methods for app management by partners')),
-  serialized_start=1126,
-  serialized_end=2450,
+  serialized_start=1480,
+  serialized_end=3305,
   methods=[
   _descriptor.MethodDescriptor(
     name='RequestKVSignUploadToken',
@@ -659,9 +850,18 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030CRequest upload token for custom executable file upload / processing')),
   ),
   _descriptor.MethodDescriptor(
+    name='RequestDepotUploadToken',
+    full_name='PartnerApps.RequestDepotUploadToken',
+    index=3,
+    containing_service=None,
+    input_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_REQUEST,
+    output_type=_CPARTNERAPPS_REQUESTUPLOADTOKEN_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030/Request upload token for steampipe depot upload')),
+  ),
+  _descriptor.MethodDescriptor(
     name='FinishUploadKVSign',
     full_name='PartnerApps.FinishUploadKVSign',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_CPARTNERAPPS_FINISHUPLOAD_REQUEST,
     output_type=_CPARTNERAPPS_FINISHUPLOADKVSIGN_RESPONSE,
@@ -670,7 +870,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='FinishUploadDRMUpload',
     full_name='PartnerApps.FinishUploadDRMUpload',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_CPARTNERAPPS_FINISHUPLOADLEGACYDRM_REQUEST,
     output_type=_CPARTNERAPPS_FINISHUPLOADLEGACYDRM_RESPONSE,
@@ -679,16 +879,34 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='FinishUploadCEGUpload',
     full_name='PartnerApps.FinishUploadCEGUpload',
-    index=5,
+    index=6,
     containing_service=None,
     input_type=_CPARTNERAPPS_FINISHUPLOAD_REQUEST,
     output_type=_CPARTNERAPPS_FINISHUPLOAD_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0303Commit method for custom executable file processing')),
   ),
   _descriptor.MethodDescriptor(
+    name='FinishUploadDepotUpload',
+    full_name='PartnerApps.FinishUploadDepotUpload',
+    index=7,
+    containing_service=None,
+    input_type=_CPARTNERAPPS_FINISHUPLOADDEPOT_REQUEST,
+    output_type=_CPARTNERAPPS_FINISHUPLOADDEPOT_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0303Commit method for custom executable file processing')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDepotBuildResult',
+    full_name='PartnerApps.GetDepotBuildResult',
+    index=8,
+    containing_service=None,
+    input_type=_CPARTNERAPPS_GETDEPOTBUILDRESULT_REQUEST,
+    output_type=_CPARTNERAPPS_GETDEPOTBUILDRESULT_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0302Get build status for previously uploaded depot ZIP')),
+  ),
+  _descriptor.MethodDescriptor(
     name='FindDRMUploads',
     full_name='PartnerApps.FindDRMUploads',
-    index=6,
+    index=9,
     containing_service=None,
     input_type=_CPARTNERAPPS_FINDDRMUPLOADS_REQUEST,
     output_type=_CPARTNERAPPS_FINDDRMUPLOADS_RESPONSE,
@@ -697,7 +915,7 @@ _PARTNERAPPS = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Download',
     full_name='PartnerApps.Download',
-    index=7,
+    index=10,
     containing_service=None,
     input_type=_CPARTNERAPPS_DOWNLOAD_REQUEST,
     output_type=_CPARTNERAPPS_DOWNLOAD_RESPONSE,

@@ -13,6 +13,11 @@ message CSiteManagerClient_IncomingClient_Request {
 message CSiteManagerClient_IncomingClient_Response {
 }
 
+message CSiteLicense_ClientSeatCheckout_Notification {
+	optional uint32 appid = 1;
+	optional uint32 eresult = 2;
+}
+
 message CSiteLicense_InitiateAssociation_Request {
 	optional fixed64 site_steamid = 1;
 	optional fixed64 site_instanceid = 2;
@@ -45,15 +50,16 @@ message CSiteLicense_LCSAssociateUser_Response {
 message CSiteLicense_ClientSeatCheckout_Request {
 	optional fixed64 steamid = 1;
 	optional fixed64 instanceid = 2;
-	optional uint32 packageid = 3;
-	optional uint32 appid = 4;
+	optional uint32 appid = 3;
 }
 
 message CSiteLicense_ClientSeatCheckout_Response {
 }
 
 message CSiteLicense_ClientGetAvailableSeats_Request {
-	optional uint32 packageid = 1;
+	optional fixed64 steamid = 1;
+	optional fixed64 instanceid = 2;
+	optional uint32 appid = 3;
 }
 
 message CSiteLicense_ClientGetAvailableSeats_Response {
@@ -65,6 +71,9 @@ service SiteManagerClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc IncomingClient (.CSiteManagerClient_IncomingClient_Request) returns (.CSiteManagerClient_IncomingClient_Response) {
 		option (method_description) = "Rack informing site manager of new inbound client PSK connection";
+	}
+	rpc ClientSeatCheckoutNotification (.CSiteLicense_ClientSeatCheckout_Notification) returns (.NoResponse) {
+		option (method_description) = "Notify client directly about seat checkout result";
 	}
 }
 service SiteLicense {
