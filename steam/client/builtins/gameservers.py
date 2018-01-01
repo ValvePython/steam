@@ -103,16 +103,20 @@ class SteamGameServers(object):
         resp = self.steam.unified_messages.send_and_wait("GameServers.GetServerList#1", {
                                                 "filter": filter_text,
                                                 "limit": max_servers,
-                                                }, timeout=30)
+                                                }, timeout=20)
 
-        if resp is None: return None
+        if resp is None:
+            return None
 
         resp = proto_to_dict(resp)
 
-        for server in resp['servers']:
-            server['steamid'] = SteamID(server['steamid'])
+        if not resp:
+            return []
+        else:
+            for server in resp['servers']:
+                server['steamid'] = SteamID(server['steamid'])
 
-        return resp['servers']
+            return resp['servers']
 
     def get_ips_from_steamid(self, server_steam_ids):
         """Resolve IPs from SteamIDs
