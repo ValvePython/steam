@@ -1,4 +1,5 @@
-import struct
+from struct import unpack_from as _unpack_from, calcsize as _calcsize
+
 
 class StructReader(object):
     def __init__(self, data):
@@ -53,8 +54,8 @@ class StructReader(object):
         :return data: result from :func:`struct.unpack_from`
         :rtype: :class:`tuple`
         """
-        data = struct.unpack_from(format_text, self.data, self.offset)
-        self.offset += struct.calcsize(format_text)
+        data = _unpack_from(format_text, self.data, self.offset)
+        self.offset += _calcsize(format_text)
         return data
 
     def skip(self, n):
