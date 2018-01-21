@@ -42,7 +42,9 @@ class StructReader(object):
         :rtype: :class:`bytes`
         """
         null_index = self.data.find(terminator, self.offset)
-        result = self.data[self.offset:null_index]    # bytes without the terminator
+        if null_index == -1:
+            raise RuntimeError("Reached end of buffer")
+        result = self.data[self.offset:null_index]  # bytes without the terminator
         self.offset = null_index + len(terminator)  # advance offset past terminator
         return result
 
