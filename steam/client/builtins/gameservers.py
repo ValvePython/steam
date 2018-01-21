@@ -1,5 +1,38 @@
-"""
-Game Servers related functionality
+r"""
+Listing and information about game servers through Steam
+
+Filters
+-------
+
+.. note::
+    Multiple filters can be joined to together (Eg. ``\app\730\white\1\empty\1``)
+
+=========================== =========================================================================================================================
+Filter code                 What it does
+=========================== =========================================================================================================================
+\\nor\\[x]                  A special filter, specifies that servers matching any of the following [x] conditions should not be returned
+\\nand\\[x]                 A special filter, specifies that servers matching all of the following [x] conditions should not be returned
+\\dedicated\\1              Servers running dedicated
+\\secure\\1                 Servers using anti-cheat technology (VAC, but potentially others as well)
+\\gamedir\\[mod]            Servers running the specified modification (ex. cstrike)
+\\map\\[map]                Servers running the specified map (ex. cs_italy)
+\\linux\\1                  Servers running on a Linux platform
+\\password\\0               Servers that are not password protected
+\\empty\\1                  Servers that are not empty
+\\full\\1                   Servers that are not full
+\\proxy\\1                  Servers that are spectator proxies
+\\appid\\[appid]            Servers that are running game [appid]
+\\napp\\[appid]             Servers that are NOT running game [appid] (This was introduced to block Left 4 Dead games from the Steam Server Browser)
+\\noplayers\\1              Servers that are empty
+\\white\\1                  Servers that are whitelisted
+\\gametype\\[tag,...]       Servers with all of the given tag(s) in sv_tags
+\\gamedata\\[tag,...]       Servers with all of the given tag(s) in their 'hidden' tags (L4D2)
+\\gamedataor\\[tag,...]     Servers with any of the given tag(s) in their 'hidden' tags (L4D2)
+\\name_match\\[hostname]    Servers with their hostname matching [hostname] (can use * as a wildcard)
+\\version_match\\[version]  Servers running version [version] (can use * as a wildcard)
+\\collapse_addr_hash\\1     Return only one server for each unique IP address matched
+\\gameaddr\\[ip]            Return only servers on the specified IP address (port supported and optional)
+=========================== =========================================================================================================================
 """
 from steam.steamid import SteamID
 from steam.core.msg import MsgProto

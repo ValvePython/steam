@@ -9,6 +9,7 @@ API Reference
     steam.enums
     steam.globalid
     steam.guard
+    steam.master_server
     steam.steamid
     steam.webapi
     steam.webauth
