@@ -179,7 +179,7 @@ class SteamLeaderboard(object):
             with ConstantRateLimit(times, seconds, sleep_func=self._steam.sleep) as r:
                 for entries in chunks(self, chunk_size):
                     if not entries:
-                        raise StopIteration
+                        return
                     for entry in entries:
                         yield entry
                     r.wait()

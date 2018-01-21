@@ -116,7 +116,7 @@ def query(filter_text=r'\napp\500', region=MSRegion.World, master=MSServer.Sourc
 
             # check if we've reach the end of the list
             if ip == '0.0.0.0' and port == 0:
-                raise StopIteration
+                return
 
             yield ip, port
 
