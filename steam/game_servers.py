@@ -64,7 +64,7 @@ class MSServer:
     Source_27015 = ('208.64.200.65', 27015)          #: ``hl2master`` but on different port
 
 
-def query(filter_text=r'\napp\500', region=MSRegion.World, master=MSServer.Source):
+def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServer.Source):
     r"""Generator that returns (IP,port) pairs of serveras
 
     .. warning::
