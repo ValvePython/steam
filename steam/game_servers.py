@@ -121,7 +121,7 @@ from re import match as _re_match
 from struct import pack as _pack, unpack_from as _unpack_from
 from time import time as _time
 from enum import IntEnum
-from steam.util.binary import StructReader
+from steam.util.binary import StructReader as _StructReader
 
 __all__ = ['query_master', 'a2s_info', 'a2s_players', 'a2s_rules', 'a2s_ping']
 
@@ -130,7 +130,7 @@ def _u(data):
     return data.decode('utf-8', 'replace')
 
 
-class StructReader(StructReader):
+class StructReader(_StructReader):
     def read_cstring(self):
         return _u(super(StructReader, self).read_cstring())
 
@@ -225,7 +225,7 @@ def _handle_a2s_response(sock):
         sock.settimeout(0.3)
         return _handle_a2s_multi_packet_response(sock, packet)
     else:
-        raise RuntimeError("Invalid reponse header")
+        raise RuntimeError("Invalid reponse header - %d" % header)
 
 
 def _handle_a2s_multi_packet_response(sock, packet):
@@ -450,29 +450,35 @@ def a2s_players(server_addr, timeout=2, challenge=0):
     ss.settimeout(timeout)
 
     # request challenge number
+    header = None
+
     if challenge in (-1, 0):
         ss.send(_pack('<lci', -1, b'U', challenge))
         try:
-            _, header, challange = _unpack_from('<lcl', ss.recv(512))
+            data = ss.recv(512)
+            _, header, challenge = _unpack_from('<lcl', data)
         except:
             ss.close()
             raise
 
-        if header != b'A':
-            raise RuntimeError("Unexpected challange response - %s" % repr(header))
+        if header not in b'AD':  # work around for CSGO sending only max players
+            raise RuntimeError("Unexpected challenge response - %s" % repr(header))
 
     # request player info
-    ss.send(_pack('<lci', -1, b'U', challange))
+    if header == b'D':  # work around for CSGO sending only max players
+        data = StructReader(data)
+    else:
+        ss.send(_pack('<lci', -1, b'U', challenge))
 
-    try:
-        data = StructReader(_handle_a2s_response(ss))
-    finally:
-        ss.close()
+        try:
+            data = StructReader(_handle_a2s_response(ss))
+        finally:
+            ss.close()
 
     header, num_players = data.unpack('<4xcB')
 
     if header != b'D':
-        return None
+        raise RuntimeError("Invalid reponse header - %s" % repr(header))
 
     players = []
 
@@ -511,16 +517,16 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     if challenge in (-1, 0):
         ss.send(_pack('<lci', -1, b'V', challenge))
         try:
-            _, header, challange = _unpack_from('<lcl', ss.recv(512))
+            _, header, challenge = _unpack_from('<lcl', ss.recv(512))
         except:
             ss.close()
             raise
 
         if header != b'A':
-            raise RuntimeError("Unexpected challange response")
+            raise RuntimeError("Unexpected challenge response")
 
     # request player info
-    ss.send(_pack('<lci', -1, b'V', challange))
+    ss.send(_pack('<lci', -1, b'V', challenge))
 
     try:
         data = StructReader(_handle_a2s_response(ss))
@@ -530,7 +536,7 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     header, num_rules = data.unpack('<4xcH')
 
     if header != b'E':
-        return None
+        raise RuntimeError("Invalid reponse header - %s" % repr(header))
 
     rules = {}
 
