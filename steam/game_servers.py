@@ -120,7 +120,7 @@ from bz2 import decompress as _bz2_decompress
 from re import match as _re_match
 from struct import pack as _pack, unpack_from as _unpack_from
 from time import time as _time
-from enum import IntEnum, Enum
+from enum import IntEnum
 from steam.util.binary import StructReader
 
 
@@ -161,7 +161,7 @@ def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServe
     :type  region: :class:`.MSRegion`
     :param master: (optional) master server to query
     :type  master: (:class:`str`, :class:`int`)
-    :raises: This function will raise in various situations
+    :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a generator yielding (ip, port) pairs
     :rtype: :class:`generator`
     """
@@ -292,8 +292,9 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     :type  force_goldsrc: :class:`bool`
     :param timeout: (optional) timeout in seconds
     :type  timeout: float
+    :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a dict with information or `None` on timeout
-    :rtype: :class:`dict`, :class:`None`
+    :rtype: :class:`dict`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
@@ -306,36 +307,32 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     # handle response(s)
     try:
         data = _handle_a2s_response(ss)
-    except socket.timeout:
+    except:
         ss.close()
-        return None
+        raise
 
     ping = max(0.0, _time() - start) * 1000
 
     if force_goldsrc:
         if data[4:5] != b'm':
             ss.close()
-            return None
+            raise socket.timeout('time out')
     else:
         # we got a valid GoldSrc response, check if it is followed by Source response
         if data[4:5] == b'm':
             ss.settimeout(0.3)
             try:
-                data2 = _handle_a2s_response(ss)
+                data = _handle_a2s_response(ss)
             except socket.timeout:
                 pass
 
-            if data2[4:5] == b'I':
-                data = data2
-
     ss.close()
     data = StructReader(data)
-    data.skip(4)  # packet header
-    header, = data.unpack('<c')
+    header, = data.unpack('<4xc')
 
     # invalid header
     if header not in b'mI':
-        return None
+        raise RuntimeError("Invalid reponse header - %s" % repr(header))
     # GoldSrc response
     elif header == b'm':
         info = {
@@ -402,8 +399,9 @@ def a2s_players(server_addr, timeout=2, challenge=0):
     :type  timeout: float
     :param challenge: (optional) challenge number
     :type  challenge: int
+    :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a list of players
-    :rtype: :class:`list`, :class:`None`
+    :rtype: :class:`list`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
@@ -411,11 +409,12 @@ def a2s_players(server_addr, timeout=2, challenge=0):
 
     # request challenge number
     if challenge in (-1, 0):
+        ss.send(_pack('<lci', -1, b'U', challenge))
         try:
-            ss.send(_pack('<lci', -1, b'U', challenge))
-        except socket.timeout:
-            return None
-        _, header, challange = _unpack_from('<lcl', ss.recv(512))
+            _, header, challange = _unpack_from('<lcl', ss.recv(512))
+        except:
+            ss.close()
+            raise
 
         if header != b'A':
             raise RuntimeError("Unexpected challange response - %s" % repr(header))
@@ -425,13 +424,10 @@ def a2s_players(server_addr, timeout=2, challenge=0):
 
     try:
         data = StructReader(_handle_a2s_response(ss))
-    except socket.timeout:
-        return None
     finally:
         ss.close()
 
-    data.skip(4)  # skip packet header
-    header, num_players = data.unpack('<cB')
+    header, num_players = data.unpack('<4xcB')
 
     if header != b'D':
         return None
@@ -461,8 +457,9 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     :type  timeout: float
     :param challenge: (optional) challenge number
     :type  challenge: int
+    :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a list of players
-    :rtype: :class:`list`, :class:`None`
+    :rtype: :class:`list`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
@@ -470,11 +467,12 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
 
     # request challenge number
     if challenge in (-1, 0):
+        ss.send(_pack('<lci', -1, b'V', challenge))
         try:
-            ss.send(_pack('<lci', -1, b'V', challenge))
-        except socket.timeout:
-            return None
-        _, header, challange = _unpack_from('<lcl', ss.recv(512))
+            _, header, challange = _unpack_from('<lcl', ss.recv(512))
+        except:
+            ss.close()
+            raise
 
         if header != b'A':
             raise RuntimeError("Unexpected challange response")
@@ -484,13 +482,10 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
 
     try:
         data = StructReader(_handle_a2s_response(ss))
-    except socket.timeout:
-        return None
     finally:
         ss.close()
 
-    data.skip(4)  # skip packet header
-    header, num_rules = data.unpack('<cH')
+    header, num_rules = data.unpack('<4xcH')
 
     if header != b'E':
         return None
@@ -503,6 +498,8 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
 
         if _re_match(r'^\-?[0-9]+$', value):
             value = int(value)
+        elif _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
+            value = float(value)
 
         rules[name] = value
 
@@ -513,15 +510,16 @@ def a2s_ping(server_addr, timeout=2):
     """Ping a server
 
     .. warning::
-        This method for pinging is considered deprecated and will not work on newer sources games.
+        This method for pinging is considered deprecated and may not work on certian servers.
         Use :func:`.a2s_info` instead.
 
     :param server_addr: (ip, port) for the server
     :type  server_addr: tuple
     :param timeout: (optional) timeout in seconds
     :type  timeout: float
+    :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: ping response in milliseconds or `None` for timeout
-    :rtype: :class:`float`, :class:`None`
+    :rtype: :class:`float`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
@@ -532,8 +530,6 @@ def a2s_ping(server_addr, timeout=2):
 
     try:
         data = _handle_a2s_response(ss)
-    except socket.timeout:
-        return None
     finally:
         ss.close()
 
