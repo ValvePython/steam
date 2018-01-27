@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 r""" Master Server Query Protocol
 
 This module implements the legacy Steam master server protocol.
@@ -38,8 +39,85 @@ Filter code                 What it does
 \\collapse_addr_hash\\1     Return only one server for each unique IP address matched
 \\gameaddr\\[ip]            Return only servers on the specified IP address (port supported and optional)
 =========================== =========================================================================================================================
+
+Examples
+--------
+
+Team Fortress 2 (Source)
+
+.. code:: python
+
+    >>> from steam import game_servers as gs
+    >>> server_addr = next(gs.query_master(r'\appid\40\empty\1\secure\1'))  # single TF2 Server
+    >>> gs.a2s_ping(server_addr)
+    68.60899925231934
+    >>> gs.a2s_info(server_addr)
+    {'_ping': 74.61714744567871,
+     '_type': 'source',
+     'app_id': 40,
+     'bots': 0,
+     'environment': 'l',
+     'folder': u'dmc',
+     'game': u'DMC\t\t\t\t\t\t\t\t1',
+     'map': u'crossfire',
+     'max_players': 32,
+     'name': u'\t\t\u2605\t\t All Guns party \u2605\t \tCrossfire 24/7\t\t',
+     'players': 21,
+     'protocol': 48,
+     'server_type': 'd',
+     'vac': 1,
+     'visibility': 0}
+    >>> gs.a2s_players(server_addr)
+    [{'duration': 192.3097381591797, 'index': 0, 'name': '(2)Player', 'score': 4},
+     {'duration': 131.6618194580078, 'index': 1, 'name': 'BOLT', 'score': 2},
+     {'duration': 16.548809051513672, 'index': 2, 'name': 'Alpha', 'score': 0},
+     {'duration': 1083.1539306640625, 'index': 3, 'name': 'Player', 'score': 29},
+     {'duration': 446.7716064453125, 'index': 4, 'name': '(1)Player', 'score': 11},
+     {'duration': 790.9588012695312, 'index': 5, 'name': 'ИВАНГАЙ', 'score': 11}]
+    >>> gs.a2s_rules(server_addr)
+    {'amx_client_languages': 1,
+     'amx_nextmap': 'crossfire',
+     'amx_timeleft': '00:00',
+     'amxmodx_version': '1.8.2',
+     ....
+
+Ricohet (GoldSrc)
+
+.. code:: python
+
+    >>> from steam import game_servers as gs
+    >>> server_addr = next(gs.query_master(r'\appid\60'))  # get a single ip from hl2 master
+    >>> gs.a2s_info(server_addr, force_goldsrc=True)       # only accept goldsrc response
+    {'_ping': 26.59320831298828,
+     '_type': 'goldsrc',
+     'address': '127.0.0.1:27050',
+     'bots': 0,
+     'ddl': 0,
+     'download_link': '',
+     'environment': 'w',
+     'folder': 'ricochet',
+     'game': 'Ricochet',
+     'link': '',
+     'map': 'rc_deathmatch2',
+     'max_players': 32,
+     'mod': 1,
+     'name': 'Anitalink.com Ricochet',
+     'players': 1,
+     'protocol': 47,
+     'server_type': 'd',
+     'size': 0,
+     'type': 1,
+     'vac': 1,
+     'version': 1,
+     'visibility': 0}
+
+API
+---
 """
 import socket
+from binascii import crc32
+from bz2 import decompress as _bz2_decompress
+from re import match as _re_match
 from struct import pack as _pack, unpack_from as _unpack_from
 from time import time as _time
 from enum import IntEnum, Enum
@@ -65,7 +143,7 @@ class MSServer:
 
 
 def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServer.Source):
-    r"""Generator that returns (IP,port) pairs of serveras
+    r"""Generator that returns (IP,port) pairs of servers
 
     .. warning::
         Valve's master servers seem to be heavily rate limited.
@@ -102,11 +180,11 @@ def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServe
     while True:
         ms.send(req_prefix + next_ip + req_suffix)
 
-        data = ms.recv(2048)
-        data = StructReader(data)
+        data = StructReader(ms.recv(2048))
 
         # verify response header
         if data.read(6) != b'\xFF\xFF\xFF\xFF\x66\x0A':
+            ms.close()
             raise RuntimeError("Invalid response from master server")
 
         # read list of servers
@@ -114,13 +192,16 @@ def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServe
             ip = '.'.join(map(str, data.unpack('>BBBB')))
             port, = data.unpack('>H')
 
-            # check if we've reach the end of the list
+            # check if we've reached the end of the list
             if ip == '0.0.0.0' and port == 0:
+                ms.close()
                 return
 
             yield ip, port
 
         next_ip = '{}:{}'.format(ip, port).encode('utf-8')
+
+    ms.close()
 
 
 def _handle_a2s_response(sock):
@@ -128,22 +209,89 @@ def _handle_a2s_response(sock):
     header, = _unpack_from('<l', packet)
 
     if header == -1:  # single packet response
-        return packet[4:]
+        return packet
     elif header == -2:  # multi packet response
-        raise RuntimeError("Multi packet response not implemented yet")
+        sock.settimeout(0.3)
+        return _handle_a2s_multi_packet_response(sock, packet)
     else:
         raise RuntimeError("Invalid reponse header")
 
 
-def a2s_info(server_addr, goldsrc=False, timeout=6):
+def _handle_a2s_multi_packet_response(sock, packet):
+    packets, payload_offset = [packet], -1
+
+    # locate first packet and handle out of order packets
+    while payload_offset == -1:
+        # locate payload offset in uncompressed packet
+        payload_offset = packet.find(b'\xff\xff\xff\xff', 0, 18)
+
+        # locate payload offset in compressed packet
+        if payload_offset == -1:
+            payload_offset = packet.find(b'BZh', 0, 21)
+
+        # if we still haven't found the offset receive the next packet
+        if payload_offset == -1:
+            packet = sock.recv(2048)
+            packets.append(packet)
+
+    # read header
+    pkt_idx, num_pkts, compressed = _unpack_multipacket_header(payload_offset, packet)
+
+    if pkt_idx != 0:
+        raise RuntimeError("Unexpected first packet index")
+
+    # recv any remaining packets
+    while len(packets) < num_pkts:
+        packets.append(sock.recv(2048))
+
+    # ensure packets are in correct order
+    packets = sorted(map(lambda pkt: (_unpack_multipacket_header(payload_offset, pkt)[0], pkt),
+                         packets,
+                         ),
+                     key=lambda x: x[0])
+
+    # reconstruct full response
+    data = b''.join(map(lambda x: x[1][payload_offset:], packets))
+
+    # decompress response if needed
+    if compressed:
+        size, checksum = _unpack_from('<ll', packet, 10)
+        data = _bz2_decompress(data)
+
+        if len(data) != size:
+            raise RuntimeError("Response size mismatch - %d %d" % (len(data), size))
+        if checksum != crc32(data):
+            raise RuntimeError("Response checksum mismatch - %d %d" % (checksum, crc32(data)))
+
+    return data
+
+
+def _unpack_multipacket_header(payload_offset, packet):
+    if payload_offset == 9:  # GoldSrc
+        pkt_byte, = _unpack_from('<B', packet, 8)
+        return pkt_byte >> 2, pkt_byte & 0xF, False  # idx, total, compressed
+    elif payload_offset in (10, 12, 18):  # Source
+        pkt_id, num_pkts, pkt_idx, = _unpack_from('<LBB', packet, 4)
+        return pkt_idx, num_pkts, (pkt_id & 0x80000000) != 0   # idx, total, compressed
+    else:
+        raise RuntimeError("Unexpected payload_offset - %d" % payload_offset)
+
+
+def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     """Get information from a server
+
+    .. note::
+        All ``GoldSrc`` games have been updated to reply in ``Source`` format.
+        ``GoldSrc`` format is essentially DEPRECATED.
+        By default the function will prefer to return ``Source`` format, and will
+        automatically fallback to ``GoldSrc`` if available.
 
     :param server_addr: (ip, port) for the server
     :type  server_addr: tuple
-    :param goldsrc: (optional) Weather to expect GoldSrc or Source response format
-    :type  goldsrc: :class:`bool`
+    :param force_goldsrc: (optional) only accept ``GoldSrc`` response format
+    :type  force_goldsrc: :class:`bool`
     :param timeout: (optional) timeout in seconds
-    :type  timeout: int
+    :type  timeout: float
     :returns: a dict with information or `None` on timeout
     :rtype: :class:`dict`, :class:`None`
     """
@@ -153,28 +301,51 @@ def a2s_info(server_addr, goldsrc=False, timeout=6):
 
     # request server info
     ss.send(_pack('<lc', -1, b'T') + b'Source Engine Query\x00')
-    resp_header = b'm' if goldsrc else b'I'
+    start = _time()
 
-    while True:
-        try:
-            data = _handle_a2s_response(ss)
-        except socket.timeout:
+    # handle response(s)
+    try:
+        data = _handle_a2s_response(ss)
+    except socket.timeout:
+        ss.close()
+        return None
+
+    ping = max(0.0, _time() - start) * 1000
+
+    if force_goldsrc:
+        if data[4:5] != b'm':
+            ss.close()
             return None
-        else:
-            if data[0:1] == resp_header:
-                break
+    else:
+        # we got a valid GoldSrc response, check if it is followed by Source response
+        if data[4:5] == b'm':
+            ss.settimeout(0.3)
+            try:
+                data2 = _handle_a2s_response(ss)
+            except socket.timeout:
+                pass
 
+            if data2[4:5] == b'I':
+                data = data2
+
+    ss.close()
     data = StructReader(data)
-    data.skip(1)  # header
+    data.skip(4)  # packet header
+    header, = data.unpack('<c')
 
+    # invalid header
+    if header not in b'mI':
+        return None
     # GoldSrc response
-    if goldsrc:
+    elif header == b'm':
         info = {
-            'address': data.read_cstring(),
-            'name': data.read_cstring(),
-            'map': data.read_cstring(),
-            'folder': data.read_cstring(),
-            'game': data.read_cstring(),
+            '_ping': ping,
+            '_type': b'goldsrc',
+            'address': data.read_cstring().decode('utf-8', 'replace'),
+            'name': data.read_cstring().decode('utf-8', 'replace'),
+            'map': data.read_cstring().decode('utf-8', 'replace'),
+            'folder': data.read_cstring().decode('utf-8', 'replace'),
+            'game': data.read_cstring().decode('utf-8', 'replace'),
         }
 
         (info['players'],
@@ -187,8 +358,8 @@ def a2s_info(server_addr, goldsrc=False, timeout=6):
          ) = data.unpack('<BBBccBB')
 
         if info['mod'] == 1:
-            info['link'] = data.read_cstring(),
-            info['download_link'] = data.read_cstring(),
+            info['link'] = data.read_cstring().decode('utf-8', 'replace')
+            info['download_link'] = data.read_cstring().decode('utf-8', 'replace')
 
             (info['version'],
              info['size'],
@@ -198,13 +369,15 @@ def a2s_info(server_addr, goldsrc=False, timeout=6):
 
         info['vac'], info['bots'] = data.unpack('<BB')
     # Source response
-    else:
+    elif header == b'I':
         info = {
+            '_ping': ping,
+            '_type': 'source',
             'protocol': data.unpack('<b')[0],
-            'name': data.read_cstring(),
-            'map': data.read_cstring(),
-            'folder': data.read_cstring(),
-            'game': data.read_cstring(),
+            'name': data.read_cstring().decode('utf-8', 'replace'),
+            'map': data.read_cstring().decode('utf-8', 'replace'),
+            'folder': data.read_cstring().decode('utf-8', 'replace'),
+            'game': data.read_cstring().decode('utf-8', 'replace'),
         }
 
         (info['app_id'],
@@ -220,15 +393,15 @@ def a2s_info(server_addr, goldsrc=False, timeout=6):
     return info
 
 
-def a2s_player(server_addr, challenge=0, timeout=8):
+def a2s_players(server_addr, timeout=2, challenge=0):
     """Get list of players and their info
 
     :param server_addr: (ip, port) for the server
     :type  server_addr: tuple
+    :param timeout: (optional) timeout in seconds
+    :type  timeout: float
     :param challenge: (optional) challenge number
     :type  challenge: int
-    :param timeout: (optional) timeout in seconds
-    :type  timeout: int
     :returns: a list of players
     :rtype: :class:`list`, :class:`None`
     """
@@ -238,11 +411,14 @@ def a2s_player(server_addr, challenge=0, timeout=8):
 
     # request challenge number
     if challenge in (-1, 0):
-        ss.send(_pack('<lci', -1, b'U', challenge))
+        try:
+            ss.send(_pack('<lci', -1, b'U', challenge))
+        except socket.timeout:
+            return None
         _, header, challange = _unpack_from('<lcl', ss.recv(512))
 
         if header != b'A':
-            raise RuntimeError("Unexpected challange response")
+            raise RuntimeError("Unexpected challange response - %s" % repr(header))
 
     # request player info
     ss.send(_pack('<lci', -1, b'U', challange))
@@ -251,15 +427,21 @@ def a2s_player(server_addr, challenge=0, timeout=8):
         data = StructReader(_handle_a2s_response(ss))
     except socket.timeout:
         return None
+    finally:
+        ss.close()
 
-    header, num_players = data.unpack('<BB')
+    data.skip(4)  # skip packet header
+    header, num_players = data.unpack('<cB')
+
+    if header != b'D':
+        return None
 
     players = []
 
-    while len(players) != num_players:
+    while len(players) < num_players:
         player = dict()
         player['index'] = data.unpack('<B')[0]
-        player['name'] = data.read_cstring()
+        player['name'] = data.read_cstring().decode('utf-8', 'replace')
         player['score'], player['duration'] = data.unpack('<lf')
         players.append(player)
 
@@ -270,17 +452,75 @@ def a2s_player(server_addr, challenge=0, timeout=8):
     return players
 
 
-def a2s_ping(server_addr, timeout=8):
-    """Ping a server
-
-    .. warning::
-        This method for pinging is considered deprecated and will not work on newer sources games
+def a2s_rules(server_addr, timeout=2, challenge=0):
+    """Get rules from server
 
     :param server_addr: (ip, port) for the server
     :type  server_addr: tuple
     :param timeout: (optional) timeout in seconds
-    :type  timeout: int
-    :returns: ping response in seconds or `None` for timeout
+    :type  timeout: float
+    :param challenge: (optional) challenge number
+    :type  challenge: int
+    :returns: a list of players
+    :rtype: :class:`list`, :class:`None`
+    """
+    ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    ss.connect(server_addr)
+    ss.settimeout(timeout)
+
+    # request challenge number
+    if challenge in (-1, 0):
+        try:
+            ss.send(_pack('<lci', -1, b'V', challenge))
+        except socket.timeout:
+            return None
+        _, header, challange = _unpack_from('<lcl', ss.recv(512))
+
+        if header != b'A':
+            raise RuntimeError("Unexpected challange response")
+
+    # request player info
+    ss.send(_pack('<lci', -1, b'V', challange))
+
+    try:
+        data = StructReader(_handle_a2s_response(ss))
+    except socket.timeout:
+        return None
+    finally:
+        ss.close()
+
+    data.skip(4)  # skip packet header
+    header, num_rules = data.unpack('<cH')
+
+    if header != b'E':
+        return None
+
+    rules = {}
+
+    while len(rules) != num_rules:
+        name = data.read_cstring().decode('utf-8', 'replace')
+        value = data.read_cstring().decode('utf-8', 'replace')
+
+        if _re_match(r'^\-?[0-9]+$', value):
+            value = int(value)
+
+        rules[name] = value
+
+    return rules
+
+
+def a2s_ping(server_addr, timeout=2):
+    """Ping a server
+
+    .. warning::
+        This method for pinging is considered deprecated and will not work on newer sources games.
+        Use :func:`.a2s_info` instead.
+
+    :param server_addr: (ip, port) for the server
+    :type  server_addr: tuple
+    :param timeout: (optional) timeout in seconds
+    :type  timeout: float
+    :returns: ping response in milliseconds or `None` for timeout
     :rtype: :class:`float`, :class:`None`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -294,8 +534,10 @@ def a2s_ping(server_addr, timeout=8):
         data = _handle_a2s_response(ss)
     except socket.timeout:
         return None
+    finally:
+        ss.close()
 
-    diff = _time() - start
+    ping = max(0.0, _time() - start) * 1000
 
-    if data[0:1] == b'j':
-        return diff
+    if data[4:5] == b'j':
+        return ping
