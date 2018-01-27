@@ -293,7 +293,7 @@ texinfo_documents = [
 # LINK PYTHON DOCS
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3.4', None),
+    'python': ('https://docs.python.org/3.6', None),
     'gevent': ('http://www.gevent.org', None),
     'requests': ('http://docs.python-requests.org/en/master', None),
     }
