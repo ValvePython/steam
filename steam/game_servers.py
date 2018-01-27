@@ -123,6 +123,17 @@ from time import time as _time
 from enum import IntEnum
 from steam.util.binary import StructReader
 
+__all__ = ['query_master', 'a2s_info', 'a2s_players', 'a2s_rules', 'a2s_ping']
+
+
+def _u(data):
+    return data.decode('utf-8', 'replace')
+
+
+class StructReader(StructReader):
+    def read_cstring(self):
+        return _u(super(StructReader, self).read_cstring())
+
 
 class MSRegion(IntEnum):
     US_East = 0x00
@@ -338,11 +349,11 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
         info = {
             '_ping': ping,
             '_type': b'goldsrc',
-            'address': data.read_cstring().decode('utf-8', 'replace'),
-            'name': data.read_cstring().decode('utf-8', 'replace'),
-            'map': data.read_cstring().decode('utf-8', 'replace'),
-            'folder': data.read_cstring().decode('utf-8', 'replace'),
-            'game': data.read_cstring().decode('utf-8', 'replace'),
+            'address': data.read_cstring(),
+            'name': data.read_cstring(),
+            'map': data.read_cstring(),
+            'folder': data.read_cstring(),
+            'game': data.read_cstring(),
         }
 
         (info['players'],
@@ -354,9 +365,12 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
          info['mod'],
          ) = data.unpack('<BBBccBB')
 
+        info['server_type'] = _u(info['server_type'])
+        info['environment'] = _u(info['environment'])
+
         if info['mod'] == 1:
-            info['link'] = data.read_cstring().decode('utf-8', 'replace')
-            info['download_link'] = data.read_cstring().decode('utf-8', 'replace')
+            info['link'] = data.read_cstring()
+            info['download_link'] = data.read_cstring()
 
             (info['version'],
              info['size'],
@@ -371,10 +385,10 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
             '_ping': ping,
             '_type': 'source',
             'protocol': data.unpack('<b')[0],
-            'name': data.read_cstring().decode('utf-8', 'replace'),
-            'map': data.read_cstring().decode('utf-8', 'replace'),
-            'folder': data.read_cstring().decode('utf-8', 'replace'),
-            'game': data.read_cstring().decode('utf-8', 'replace'),
+            'name': data.read_cstring(),
+            'map': data.read_cstring(),
+            'folder': data.read_cstring(),
+            'game': data.read_cstring(),
         }
 
         (info['app_id'],
@@ -386,6 +400,34 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
          info['visibility'],
          info['vac'],
          ) = data.unpack('<HBBBccBB')
+
+        info['server_type'] = _u(info['server_type'])
+        info['environment'] = _u(info['environment'])
+
+        if info['app_id'] == 2400:
+            (info['mode'],
+             info['witnesses'],
+             info['duration'],
+             ) = data.unpack('<BBB')
+
+        info['version'] = data.read_cstring()
+
+        if data.rlen():
+            edf, = data.unpack('<B')
+            info['edf'] = edf
+
+            if edf & 0x80:
+                info['port'], = data.unpack('<H')
+            if edf & 0x10:
+                info['steam_id'], = data.unpack('<Q')
+            if edf & 0x40:
+                info['sourcetv_port'], = data.unpack('<H')
+                info['sourcetv_name'] = data.read_cstring()
+            if edf & 0x20:
+                info['keywords'] = data.read_cstring()
+            if edf & 0x01:
+                info['game_id'], = data.unpack('<Q')
+                info['app_id'] = info['game_id'] & 0xFFFFFF
 
     return info
 
@@ -437,7 +479,7 @@ def a2s_players(server_addr, timeout=2, challenge=0):
     while len(players) < num_players:
         player = dict()
         player['index'] = data.unpack('<B')[0]
-        player['name'] = data.read_cstring().decode('utf-8', 'replace')
+        player['name'] = data.read_cstring()
         player['score'], player['duration'] = data.unpack('<lf')
         players.append(player)
 
@@ -493,8 +535,8 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     rules = {}
 
     while len(rules) != num_rules:
-        name = data.read_cstring().decode('utf-8', 'replace')
-        value = data.read_cstring().decode('utf-8', 'replace')
+        name = data.read_cstring()
+        value = data.read_cstring()
 
         if _re_match(r'^\-?[0-9]+$', value):
             value = int(value)
