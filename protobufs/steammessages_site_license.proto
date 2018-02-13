@@ -42,6 +42,7 @@ message CSiteLicense_LCSAssociateUser_Request {
 	optional fixed64 steamid = 1;
 	optional fixed32 local_ip = 2;
 	optional fixed64 instanceid = 3;
+	optional string machine_name = 4;
 }
 
 message CSiteLicense_LCSAssociateUser_Response {

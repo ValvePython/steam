@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_clientserver_login.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n&steammessages_clientserver_login.proto\x1a\x18steammessages_base.proto\"\x15\n\x13\x43MsgClientHeartBeat\"\xb4\n\n\x0f\x43MsgClientLogon\x12\x18\n\x10protocol_version\x18\x01 \x01(\r\x12\x1f\n\x17obfustucated_private_ip\x18\x02 \x01(\r\x12\x0f\n\x07\x63\x65ll_id\x18\x03 \x01(\r\x12\x17\n\x0flast_session_id\x18\x04 \x01(\r\x12\x1e\n\x16\x63lient_package_version\x18\x05 \x01(\r\x12\x17\n\x0f\x63lient_language\x18\x06 \x01(\t\x12\x16\n\x0e\x63lient_os_type\x18\x07 \x01(\r\x12\'\n\x18should_remember_password\x18\x08 \x01(\x08:\x05\x66\x61lse\x12\x14\n\x0cwine_version\x18\t \x01(\t\x12 \n\x18ping_ms_from_cell_search\x18\n \x01(\r\x12\x11\n\tpublic_ip\x18\x14 \x01(\r\x12\x11\n\tqos_level\x18\x15 \x01(\r\x12 \n\x18\x63lient_supplied_steam_id\x18\x16 \x01(\x06\x12\x12\n\nmachine_id\x18\x1e \x01(\x0c\x12\x18\n\rlauncher_type\x18\x1f \x01(\r:\x01\x30\x12\x12\n\x07ui_mode\x18  \x01(\r:\x01\x30\x12\x1a\n\x12steam2_auth_ticket\x18) \x01(\x0c\x12\x15\n\remail_address\x18* \x01(\t\x12 \n\x18rtime32_account_creation\x18+ \x01(\x07\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x32 \x01(\t\x12\x10\n\x08password\x18\x33 \x01(\t\x12\x19\n\x11game_server_token\x18\x34 \x01(\t\x12\x11\n\tlogin_key\x18< \x01(\t\x12+\n\x1cwas_converted_deprecated_msg\x18\x46 \x01(\x08:\x05\x66\x61lse\x12%\n\x1d\x61non_user_target_account_name\x18P \x01(\t\x12\x1e\n\x16resolved_user_steam_id\x18Q \x01(\x06\x12\x1a\n\x12\x65result_sentryfile\x18R \x01(\x05\x12\x16\n\x0esha_sentryfile\x18S \x01(\x0c\x12\x11\n\tauth_code\x18T \x01(\t\x12\x10\n\x08otp_type\x18U \x01(\x05\x12\x11\n\totp_value\x18V \x01(\r\x12\x16\n\x0eotp_identifier\x18W \x01(\t\x12\x1d\n\x15steam2_ticket_request\x18X \x01(\x08\x12\x17\n\x0fsony_psn_ticket\x18Z \x01(\x0c\x12\x1b\n\x13sony_psn_service_id\x18[ \x01(\t\x12\x36\n\'create_new_psn_linked_account_if_needed\x18\\ \x01(\x08:\x05\x66\x61lse\x12\x15\n\rsony_psn_name\x18] \x01(\t\x12\x1a\n\x12game_server_app_id\x18^ \x01(\x05\x12)\n!steamguard_dont_remember_computer\x18_ \x01(\x08\x12\x14\n\x0cmachine_name\x18` \x01(\t\x12\x1f\n\x17machine_name_userchosen\x18\x61 \x01(\t\x12\x18\n\x10\x63ountry_override\x18\x62 \x01(\t\x12\x14\n\x0cis_steam_box\x18\x63 \x01(\x08\x12\x1a\n\x12\x63lient_instance_id\x18\x64 \x01(\x04\x12\x17\n\x0ftwo_factor_code\x18\x65 \x01(\t\x12$\n\x1csupports_rate_limit_response\x18\x66 \x01(\x08\x12\x17\n\x0fweb_logon_nonce\x18g \x01(\t\x12\x17\n\x0fpriority_reason\x18h \x01(\x05\"\xaf\x05\n\x17\x43MsgClientLogonResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12%\n\x1dout_of_game_heartbeat_seconds\x18\x02 \x01(\x05\x12!\n\x19in_game_heartbeat_seconds\x18\x03 \x01(\x05\x12\x11\n\tpublic_ip\x18\x04 \x01(\r\x12\x1b\n\x13rtime32_server_time\x18\x05 \x01(\x07\x12\x15\n\raccount_flags\x18\x06 \x01(\r\x12\x0f\n\x07\x63\x65ll_id\x18\x07 \x01(\r\x12\x14\n\x0c\x65mail_domain\x18\x08 \x01(\t\x12\x15\n\rsteam2_ticket\x18\t \x01(\x0c\x12\x18\n\x10\x65result_extended\x18\n \x01(\x05\x12&\n\x1ewebapi_authenticate_user_nonce\x18\x0b \x01(\t\x12\x1e\n\x16\x63\x65ll_id_ping_threshold\x18\x0c \x01(\r\x12\x10\n\x08use_pics\x18\r \x01(\x08\x12\x12\n\nvanity_url\x18\x0e \x01(\t\x12\x1f\n\x17\x63lient_supplied_steamid\x18\x14 \x01(\x06\x12\x17\n\x0fip_country_code\x18\x15 \x01(\t\x12\x19\n\x11parental_settings\x18\x16 \x01(\x0c\x12\"\n\x1aparental_setting_signature\x18\x17 \x01(\x0c\x12&\n\x1e\x63ount_loginfailures_to_migrate\x18\x18 \x01(\x05\x12$\n\x1c\x63ount_disconnects_to_migrate\x18\x19 \x01(\x05\x12#\n\x1bogs_data_report_time_window\x18\x1a \x01(\x05\x12\x1a\n\x12\x63lient_instance_id\x18\x1b \x01(\x04\x12!\n\x19\x66orce_client_update_check\x18\x1c \x01(\x08\"F\n,CMsgClientRequestWebAPIAuthenticateUserNonce\x12\x16\n\ntoken_type\x18\x01 \x01(\x05:\x02-1\"\x8a\x01\n4CMsgClientRequestWebAPIAuthenticateUserNonceResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12&\n\x1ewebapi_authenticate_user_nonce\x18\x0b \x01(\t\x12\x16\n\ntoken_type\x18\x03 \x01(\x05:\x02-1\"\x12\n\x10\x43MsgClientLogOff\")\n\x13\x43MsgClientLoggedOff\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"=\n\x15\x43MsgClientNewLoginKey\x12\x11\n\tunique_id\x18\x01 \x01(\r\x12\x11\n\tlogin_key\x18\x02 \x01(\t\"2\n\x1d\x43MsgClientNewLoginKeyAccepted\x12\x11\n\tunique_id\x18\x01 \x01(\r\"\xee\x02\n\x15\x43MsgClientAccountInfo\x12\x14\n\x0cpersona_name\x18\x01 \x01(\t\x12\x12\n\nip_country\x18\x02 \x01(\t\x12\x1e\n\x16\x63ount_authed_computers\x18\x05 \x01(\x05\x12\x15\n\raccount_flags\x18\x07 \x01(\r\x12\x13\n\x0b\x66\x61\x63\x65\x62ook_id\x18\x08 \x01(\x04\x12\x15\n\rfacebook_name\x18\t \x01(\t\x12%\n\x1dsteamguard_notify_newmachines\x18\x0e \x01(\x08\x12+\n#steamguard_machine_name_user_chosen\x18\x0f \x01(\t\x12\x19\n\x11is_phone_verified\x18\x10 \x01(\x08\x12\x18\n\x10two_factor_state\x18\x11 \x01(\r\x12\x1c\n\x14is_phone_identifying\x18\x12 \x01(\x08\x12!\n\x19is_phone_needing_reverify\x18\x13 \x01(\x08\x42\x05H\x01\x90\x01\x00')
+  serialized_pb=_b('\n&steammessages_clientserver_login.proto\x1a\x18steammessages_base.proto\"\x15\n\x13\x43MsgClientHeartBeat\"D\n CMsgClientServerTimestampRequest\x12 \n\x18\x63lient_request_timestamp\x18\x01 \x01(\x04\"b\n!CMsgClientServerTimestampResponse\x12 \n\x18\x63lient_request_timestamp\x18\x01 \x01(\x04\x12\x1b\n\x13server_timestamp_ms\x18\x02 \x01(\x04\"\xca\n\n\x0f\x43MsgClientLogon\x12\x18\n\x10protocol_version\x18\x01 \x01(\r\x12\x1f\n\x17obfustucated_private_ip\x18\x02 \x01(\r\x12\x0f\n\x07\x63\x65ll_id\x18\x03 \x01(\r\x12\x17\n\x0flast_session_id\x18\x04 \x01(\r\x12\x1e\n\x16\x63lient_package_version\x18\x05 \x01(\r\x12\x17\n\x0f\x63lient_language\x18\x06 \x01(\t\x12\x16\n\x0e\x63lient_os_type\x18\x07 \x01(\r\x12\'\n\x18should_remember_password\x18\x08 \x01(\x08:\x05\x66\x61lse\x12\x14\n\x0cwine_version\x18\t \x01(\t\x12 \n\x18ping_ms_from_cell_search\x18\n \x01(\r\x12\x11\n\tpublic_ip\x18\x14 \x01(\r\x12\x11\n\tqos_level\x18\x15 \x01(\r\x12 \n\x18\x63lient_supplied_steam_id\x18\x16 \x01(\x06\x12\x12\n\nmachine_id\x18\x1e \x01(\x0c\x12\x18\n\rlauncher_type\x18\x1f \x01(\r:\x01\x30\x12\x12\n\x07ui_mode\x18  \x01(\r:\x01\x30\x12\x14\n\tchat_mode\x18! \x01(\r:\x01\x30\x12\x1a\n\x12steam2_auth_ticket\x18) \x01(\x0c\x12\x15\n\remail_address\x18* \x01(\t\x12 \n\x18rtime32_account_creation\x18+ \x01(\x07\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x32 \x01(\t\x12\x10\n\x08password\x18\x33 \x01(\t\x12\x19\n\x11game_server_token\x18\x34 \x01(\t\x12\x11\n\tlogin_key\x18< \x01(\t\x12+\n\x1cwas_converted_deprecated_msg\x18\x46 \x01(\x08:\x05\x66\x61lse\x12%\n\x1d\x61non_user_target_account_name\x18P \x01(\t\x12\x1e\n\x16resolved_user_steam_id\x18Q \x01(\x06\x12\x1a\n\x12\x65result_sentryfile\x18R \x01(\x05\x12\x16\n\x0esha_sentryfile\x18S \x01(\x0c\x12\x11\n\tauth_code\x18T \x01(\t\x12\x10\n\x08otp_type\x18U \x01(\x05\x12\x11\n\totp_value\x18V \x01(\r\x12\x16\n\x0eotp_identifier\x18W \x01(\t\x12\x1d\n\x15steam2_ticket_request\x18X \x01(\x08\x12\x17\n\x0fsony_psn_ticket\x18Z \x01(\x0c\x12\x1b\n\x13sony_psn_service_id\x18[ \x01(\t\x12\x36\n\'create_new_psn_linked_account_if_needed\x18\\ \x01(\x08:\x05\x66\x61lse\x12\x15\n\rsony_psn_name\x18] \x01(\t\x12\x1a\n\x12game_server_app_id\x18^ \x01(\x05\x12)\n!steamguard_dont_remember_computer\x18_ \x01(\x08\x12\x14\n\x0cmachine_name\x18` \x01(\t\x12\x1f\n\x17machine_name_userchosen\x18\x61 \x01(\t\x12\x18\n\x10\x63ountry_override\x18\x62 \x01(\t\x12\x14\n\x0cis_steam_box\x18\x63 \x01(\x08\x12\x1a\n\x12\x63lient_instance_id\x18\x64 \x01(\x04\x12\x17\n\x0ftwo_factor_code\x18\x65 \x01(\t\x12$\n\x1csupports_rate_limit_response\x18\x66 \x01(\x08\x12\x17\n\x0fweb_logon_nonce\x18g \x01(\t\x12\x17\n\x0fpriority_reason\x18h \x01(\x05\"\xaf\x05\n\x17\x43MsgClientLogonResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12%\n\x1dout_of_game_heartbeat_seconds\x18\x02 \x01(\x05\x12!\n\x19in_game_heartbeat_seconds\x18\x03 \x01(\x05\x12\x11\n\tpublic_ip\x18\x04 \x01(\r\x12\x1b\n\x13rtime32_server_time\x18\x05 \x01(\x07\x12\x15\n\raccount_flags\x18\x06 \x01(\r\x12\x0f\n\x07\x63\x65ll_id\x18\x07 \x01(\r\x12\x14\n\x0c\x65mail_domain\x18\x08 \x01(\t\x12\x15\n\rsteam2_ticket\x18\t \x01(\x0c\x12\x18\n\x10\x65result_extended\x18\n \x01(\x05\x12&\n\x1ewebapi_authenticate_user_nonce\x18\x0b \x01(\t\x12\x1e\n\x16\x63\x65ll_id_ping_threshold\x18\x0c \x01(\r\x12\x10\n\x08use_pics\x18\r \x01(\x08\x12\x12\n\nvanity_url\x18\x0e \x01(\t\x12\x1f\n\x17\x63lient_supplied_steamid\x18\x14 \x01(\x06\x12\x17\n\x0fip_country_code\x18\x15 \x01(\t\x12\x19\n\x11parental_settings\x18\x16 \x01(\x0c\x12\"\n\x1aparental_setting_signature\x18\x17 \x01(\x0c\x12&\n\x1e\x63ount_loginfailures_to_migrate\x18\x18 \x01(\x05\x12$\n\x1c\x63ount_disconnects_to_migrate\x18\x19 \x01(\x05\x12#\n\x1bogs_data_report_time_window\x18\x1a \x01(\x05\x12\x1a\n\x12\x63lient_instance_id\x18\x1b \x01(\x04\x12!\n\x19\x66orce_client_update_check\x18\x1c \x01(\x08\"F\n,CMsgClientRequestWebAPIAuthenticateUserNonce\x12\x16\n\ntoken_type\x18\x01 \x01(\x05:\x02-1\"\x8a\x01\n4CMsgClientRequestWebAPIAuthenticateUserNonceResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12&\n\x1ewebapi_authenticate_user_nonce\x18\x0b \x01(\t\x12\x16\n\ntoken_type\x18\x03 \x01(\x05:\x02-1\"\x12\n\x10\x43MsgClientLogOff\")\n\x13\x43MsgClientLoggedOff\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\"=\n\x15\x43MsgClientNewLoginKey\x12\x11\n\tunique_id\x18\x01 \x01(\r\x12\x11\n\tlogin_key\x18\x02 \x01(\t\"2\n\x1d\x43MsgClientNewLoginKeyAccepted\x12\x11\n\tunique_id\x18\x01 \x01(\r\"\xee\x02\n\x15\x43MsgClientAccountInfo\x12\x14\n\x0cpersona_name\x18\x01 \x01(\t\x12\x12\n\nip_country\x18\x02 \x01(\t\x12\x1e\n\x16\x63ount_authed_computers\x18\x05 \x01(\x05\x12\x15\n\raccount_flags\x18\x07 \x01(\r\x12\x13\n\x0b\x66\x61\x63\x65\x62ook_id\x18\x08 \x01(\x04\x12\x15\n\rfacebook_name\x18\t \x01(\t\x12%\n\x1dsteamguard_notify_newmachines\x18\x0e \x01(\x08\x12+\n#steamguard_machine_name_user_chosen\x18\x0f \x01(\t\x12\x19\n\x11is_phone_verified\x18\x10 \x01(\x08\x12\x18\n\x10two_factor_state\x18\x11 \x01(\r\x12\x1c\n\x14is_phone_identifying\x18\x12 \x01(\x08\x12!\n\x19is_phone_needing_reverify\x18\x13 \x01(\x08\x42\x05H\x01\x90\x01\x00')
   ,
   dependencies=[steammessages__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -49,6 +49,75 @@ _CMSGCLIENTHEARTBEAT = _descriptor.Descriptor(
   ],
   serialized_start=68,
   serialized_end=89,
+)
+
+
+_CMSGCLIENTSERVERTIMESTAMPREQUEST = _descriptor.Descriptor(
+  name='CMsgClientServerTimestampRequest',
+  full_name='CMsgClientServerTimestampRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='client_request_timestamp', full_name='CMsgClientServerTimestampRequest.client_request_timestamp', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=91,
+  serialized_end=159,
+)
+
+
+_CMSGCLIENTSERVERTIMESTAMPRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientServerTimestampResponse',
+  full_name='CMsgClientServerTimestampResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='client_request_timestamp', full_name='CMsgClientServerTimestampResponse.client_request_timestamp', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='server_timestamp_ms', full_name='CMsgClientServerTimestampResponse.server_timestamp_ms', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=161,
+  serialized_end=259,
 )
 
 
@@ -172,224 +241,231 @@ _CMSGCLIENTLOGON = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='steam2_auth_ticket', full_name='CMsgClientLogon.steam2_auth_ticket', index=16,
+      name='chat_mode', full_name='CMsgClientLogon.chat_mode', index=16,
+      number=33, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='steam2_auth_ticket', full_name='CMsgClientLogon.steam2_auth_ticket', index=17,
       number=41, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='email_address', full_name='CMsgClientLogon.email_address', index=17,
+      name='email_address', full_name='CMsgClientLogon.email_address', index=18,
       number=42, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='rtime32_account_creation', full_name='CMsgClientLogon.rtime32_account_creation', index=18,
+      name='rtime32_account_creation', full_name='CMsgClientLogon.rtime32_account_creation', index=19,
       number=43, type=7, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='account_name', full_name='CMsgClientLogon.account_name', index=19,
+      name='account_name', full_name='CMsgClientLogon.account_name', index=20,
       number=50, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='password', full_name='CMsgClientLogon.password', index=20,
+      name='password', full_name='CMsgClientLogon.password', index=21,
       number=51, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='game_server_token', full_name='CMsgClientLogon.game_server_token', index=21,
+      name='game_server_token', full_name='CMsgClientLogon.game_server_token', index=22,
       number=52, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='login_key', full_name='CMsgClientLogon.login_key', index=22,
+      name='login_key', full_name='CMsgClientLogon.login_key', index=23,
       number=60, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='was_converted_deprecated_msg', full_name='CMsgClientLogon.was_converted_deprecated_msg', index=23,
+      name='was_converted_deprecated_msg', full_name='CMsgClientLogon.was_converted_deprecated_msg', index=24,
       number=70, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='anon_user_target_account_name', full_name='CMsgClientLogon.anon_user_target_account_name', index=24,
+      name='anon_user_target_account_name', full_name='CMsgClientLogon.anon_user_target_account_name', index=25,
       number=80, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='resolved_user_steam_id', full_name='CMsgClientLogon.resolved_user_steam_id', index=25,
+      name='resolved_user_steam_id', full_name='CMsgClientLogon.resolved_user_steam_id', index=26,
       number=81, type=6, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='eresult_sentryfile', full_name='CMsgClientLogon.eresult_sentryfile', index=26,
+      name='eresult_sentryfile', full_name='CMsgClientLogon.eresult_sentryfile', index=27,
       number=82, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sha_sentryfile', full_name='CMsgClientLogon.sha_sentryfile', index=27,
+      name='sha_sentryfile', full_name='CMsgClientLogon.sha_sentryfile', index=28,
       number=83, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='auth_code', full_name='CMsgClientLogon.auth_code', index=28,
+      name='auth_code', full_name='CMsgClientLogon.auth_code', index=29,
       number=84, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='otp_type', full_name='CMsgClientLogon.otp_type', index=29,
+      name='otp_type', full_name='CMsgClientLogon.otp_type', index=30,
       number=85, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='otp_value', full_name='CMsgClientLogon.otp_value', index=30,
+      name='otp_value', full_name='CMsgClientLogon.otp_value', index=31,
       number=86, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='otp_identifier', full_name='CMsgClientLogon.otp_identifier', index=31,
+      name='otp_identifier', full_name='CMsgClientLogon.otp_identifier', index=32,
       number=87, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='steam2_ticket_request', full_name='CMsgClientLogon.steam2_ticket_request', index=32,
+      name='steam2_ticket_request', full_name='CMsgClientLogon.steam2_ticket_request', index=33,
       number=88, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sony_psn_ticket', full_name='CMsgClientLogon.sony_psn_ticket', index=33,
+      name='sony_psn_ticket', full_name='CMsgClientLogon.sony_psn_ticket', index=34,
       number=90, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sony_psn_service_id', full_name='CMsgClientLogon.sony_psn_service_id', index=34,
+      name='sony_psn_service_id', full_name='CMsgClientLogon.sony_psn_service_id', index=35,
       number=91, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='create_new_psn_linked_account_if_needed', full_name='CMsgClientLogon.create_new_psn_linked_account_if_needed', index=35,
+      name='create_new_psn_linked_account_if_needed', full_name='CMsgClientLogon.create_new_psn_linked_account_if_needed', index=36,
       number=92, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sony_psn_name', full_name='CMsgClientLogon.sony_psn_name', index=36,
+      name='sony_psn_name', full_name='CMsgClientLogon.sony_psn_name', index=37,
       number=93, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='game_server_app_id', full_name='CMsgClientLogon.game_server_app_id', index=37,
+      name='game_server_app_id', full_name='CMsgClientLogon.game_server_app_id', index=38,
       number=94, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='steamguard_dont_remember_computer', full_name='CMsgClientLogon.steamguard_dont_remember_computer', index=38,
+      name='steamguard_dont_remember_computer', full_name='CMsgClientLogon.steamguard_dont_remember_computer', index=39,
       number=95, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='machine_name', full_name='CMsgClientLogon.machine_name', index=39,
+      name='machine_name', full_name='CMsgClientLogon.machine_name', index=40,
       number=96, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='machine_name_userchosen', full_name='CMsgClientLogon.machine_name_userchosen', index=40,
+      name='machine_name_userchosen', full_name='CMsgClientLogon.machine_name_userchosen', index=41,
       number=97, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='country_override', full_name='CMsgClientLogon.country_override', index=41,
+      name='country_override', full_name='CMsgClientLogon.country_override', index=42,
       number=98, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='is_steam_box', full_name='CMsgClientLogon.is_steam_box', index=42,
+      name='is_steam_box', full_name='CMsgClientLogon.is_steam_box', index=43,
       number=99, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='client_instance_id', full_name='CMsgClientLogon.client_instance_id', index=43,
+      name='client_instance_id', full_name='CMsgClientLogon.client_instance_id', index=44,
       number=100, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='two_factor_code', full_name='CMsgClientLogon.two_factor_code', index=44,
+      name='two_factor_code', full_name='CMsgClientLogon.two_factor_code', index=45,
       number=101, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='supports_rate_limit_response', full_name='CMsgClientLogon.supports_rate_limit_response', index=45,
+      name='supports_rate_limit_response', full_name='CMsgClientLogon.supports_rate_limit_response', index=46,
       number=102, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='web_logon_nonce', full_name='CMsgClientLogon.web_logon_nonce', index=46,
+      name='web_logon_nonce', full_name='CMsgClientLogon.web_logon_nonce', index=47,
       number=103, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='priority_reason', full_name='CMsgClientLogon.priority_reason', index=47,
+      name='priority_reason', full_name='CMsgClientLogon.priority_reason', index=48,
       number=104, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -407,8 +483,8 @@ _CMSGCLIENTLOGON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=92,
-  serialized_end=1424,
+  serialized_start=262,
+  serialized_end=1616,
 )
 
 
@@ -592,8 +668,8 @@ _CMSGCLIENTLOGONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1427,
-  serialized_end=2114,
+  serialized_start=1619,
+  serialized_end=2306,
 )
 
 
@@ -623,8 +699,8 @@ _CMSGCLIENTREQUESTWEBAPIAUTHENTICATEUSERNONCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2116,
-  serialized_end=2186,
+  serialized_start=2308,
+  serialized_end=2378,
 )
 
 
@@ -668,8 +744,8 @@ _CMSGCLIENTREQUESTWEBAPIAUTHENTICATEUSERNONCERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2189,
-  serialized_end=2327,
+  serialized_start=2381,
+  serialized_end=2519,
 )
 
 
@@ -692,8 +768,8 @@ _CMSGCLIENTLOGOFF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2329,
-  serialized_end=2347,
+  serialized_start=2521,
+  serialized_end=2539,
 )
 
 
@@ -723,8 +799,8 @@ _CMSGCLIENTLOGGEDOFF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2349,
-  serialized_end=2390,
+  serialized_start=2541,
+  serialized_end=2582,
 )
 
 
@@ -761,8 +837,8 @@ _CMSGCLIENTNEWLOGINKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2392,
-  serialized_end=2453,
+  serialized_start=2584,
+  serialized_end=2645,
 )
 
 
@@ -792,8 +868,8 @@ _CMSGCLIENTNEWLOGINKEYACCEPTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2455,
-  serialized_end=2505,
+  serialized_start=2647,
+  serialized_end=2697,
 )
 
 
@@ -900,11 +976,13 @@ _CMSGCLIENTACCOUNTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2508,
-  serialized_end=2874,
+  serialized_start=2700,
+  serialized_end=3066,
 )
 
 DESCRIPTOR.message_types_by_name['CMsgClientHeartBeat'] = _CMSGCLIENTHEARTBEAT
+DESCRIPTOR.message_types_by_name['CMsgClientServerTimestampRequest'] = _CMSGCLIENTSERVERTIMESTAMPREQUEST
+DESCRIPTOR.message_types_by_name['CMsgClientServerTimestampResponse'] = _CMSGCLIENTSERVERTIMESTAMPRESPONSE
 DESCRIPTOR.message_types_by_name['CMsgClientLogon'] = _CMSGCLIENTLOGON
 DESCRIPTOR.message_types_by_name['CMsgClientLogonResponse'] = _CMSGCLIENTLOGONRESPONSE
 DESCRIPTOR.message_types_by_name['CMsgClientRequestWebAPIAuthenticateUserNonce'] = _CMSGCLIENTREQUESTWEBAPIAUTHENTICATEUSERNONCE
@@ -921,6 +999,20 @@ CMsgClientHeartBeat = _reflection.GeneratedProtocolMessageType('CMsgClientHeartB
   # @@protoc_insertion_point(class_scope:CMsgClientHeartBeat)
   ))
 _sym_db.RegisterMessage(CMsgClientHeartBeat)
+
+CMsgClientServerTimestampRequest = _reflection.GeneratedProtocolMessageType('CMsgClientServerTimestampRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTSERVERTIMESTAMPREQUEST,
+  __module__ = 'steammessages_clientserver_login_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientServerTimestampRequest)
+  ))
+_sym_db.RegisterMessage(CMsgClientServerTimestampRequest)
+
+CMsgClientServerTimestampResponse = _reflection.GeneratedProtocolMessageType('CMsgClientServerTimestampResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTSERVERTIMESTAMPRESPONSE,
+  __module__ = 'steammessages_clientserver_login_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientServerTimestampResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientServerTimestampResponse)
 
 CMsgClientLogon = _reflection.GeneratedProtocolMessageType('CMsgClientLogon', (_message.Message,), dict(
   DESCRIPTOR = _CMSGCLIENTLOGON,

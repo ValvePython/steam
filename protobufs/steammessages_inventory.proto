@@ -41,6 +41,7 @@ message CInventory_AddItem_Request {
 	optional uint64 steamid = 4;
 	optional bool notify = 5 [(description) = "Should notify the user that the item was added to their Steam Inventory."];
 	optional uint64 requestid = 6;
+	optional bool trade_restriction = 7 [(description) = "If true, apply the default trade and market restriction times to this item."];
 }
 
 message CInventory_ModifyItems_Request {

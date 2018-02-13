@@ -104,5 +104,9 @@ message CCuratorPreferences {
 	optional uint32 timestamp_updated = 8;
 	repeated uint32 tagids_curated = 9;
 	repeated uint32 tagids_filtered = 10;
+	optional string website_title = 11;
+	optional string website_url = 12;
+	optional string discussion_url = 13;
+	optional bool show_broadcast = 14;
 }
 

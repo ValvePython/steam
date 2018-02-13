@@ -8,6 +8,8 @@ service_lookup = {
     'Credentials':         'steam.protobufs.steammessages_credentials_pb2',
     'ContentBuilder':      'steam.protobufs.steammessages_depotbuilder_pb2',
     'DeviceAuth':          'steam.protobufs.steammessages_deviceauth_pb2',
+    'DataPublisher':       'steam.protobufs.steammessages_datapublisher_pb2',
+    'ValveHWSurvey':       'steam.protobufs.steammessages_datapublisher_pb2',
     'Econ':                'steam.protobufs.steammessages_econ_pb2',
     'GameNotifications':   'steam.protobufs.steammessages_gamenotifications_pb2',
     'GameServers':         'steam.protobufs.steammessages_gameservers_pb2',

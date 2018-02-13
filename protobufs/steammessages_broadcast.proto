@@ -99,6 +99,16 @@ message CBroadcast_GetBroadcastStatus_Response {
 	optional bool is_publisher = 7;
 }
 
+message CBroadcast_GetBroadcastThumbnail_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 broadcast_id = 2;
+}
+
+message CBroadcast_GetBroadcastThumbnail_Response {
+	optional string thumbnail_url = 1;
+	optional int32 update_interval = 2;
+}
+
 message CBroadcast_InviteToBroadcast_Request {
 	optional fixed64 steamid = 1;
 	optional bool approval_response = 2;
@@ -240,6 +250,9 @@ service Broadcast {
 	}
 	rpc GetBroadcastStatus (.CBroadcast_GetBroadcastStatus_Request) returns (.CBroadcast_GetBroadcastStatus_Response) {
 		option (method_description) = "Request from viewer about broadcast details";
+	}
+	rpc GetBroadcastThumbnail (.CBroadcast_GetBroadcastThumbnail_Request) returns (.CBroadcast_GetBroadcastThumbnail_Response) {
+		option (method_description) = "Request thumbnail URL for broadcast";
 	}
 	rpc InviteToBroadcast (.CBroadcast_InviteToBroadcast_Request) returns (.CBroadcast_InviteToBroadcast_Response) {
 		option (method_description) = "Invites another steam user to watch the caller's broadcast";
