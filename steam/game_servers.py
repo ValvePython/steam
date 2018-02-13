@@ -43,6 +43,17 @@ Filter code                 What it does
 Examples
 --------
 
+Query HL Master
+
+.. code:: python
+
+    >>> for server_addr in gs.query_master(r'\appid\730\white\1', max_servers=3):
+    ...     print(server_addr)
+    ...
+    ('146.66.152.197', 27073)
+    ('146.66.153.124', 27057)
+    ('146.66.152.56', 27053)
+
 Team Fortress 2 (Source)
 
 .. code:: python
@@ -153,7 +164,7 @@ class MSServer:
     Source_27015 = ('208.64.200.65', 27015)          #: ``hl2master`` but on different port
 
 
-def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServer.Source):
+def query_master(filter_text=r'\napp\500', max_servers=20, region=MSRegion.World, master=MSServer.Source, timeout=2):
     r"""Generator that returns (IP,port) pairs of servers
 
     .. warning::
@@ -182,11 +193,12 @@ def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServe
 
     ms = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ms.connect(master)
-    ms.settimeout(8)
+    ms.settimeout(timeout)
 
     next_ip = b'0.0.0.0:0'
     req_prefix = b'1' + _pack('>B', region)
     req_suffix = b'\x00' + filter_text.encode('utf-8') + b'\x00'
+    n = 0
 
     while True:
         ms.send(req_prefix + next_ip + req_suffix)
@@ -202,6 +214,7 @@ def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServe
         while data.rlen():
             ip = '.'.join(map(str, data.unpack('>BBBB')))
             port, = data.unpack('>H')
+            n += 1
 
             # check if we've reached the end of the list
             if ip == '0.0.0.0' and port == 0:
@@ -209,6 +222,10 @@ def query_master(filter_text=r'\napp\500', region=MSRegion.World, master=MSServe
                 return
 
             yield ip, port
+
+            if n >= max_servers:
+                ms.close()
+                return
 
         next_ip = '{}:{}'.format(ip, port).encode('utf-8')
 
@@ -348,7 +365,7 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     elif header == b'm':
         info = {
             '_ping': ping,
-            '_type': b'goldsrc',
+            '_type': 'goldsrc',
             'address': data.read_cstring(),
             'name': data.read_cstring(),
             'map': data.read_cstring(),
