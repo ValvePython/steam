@@ -11,6 +11,9 @@ class Account(object):
     def create_account(self, account_name, password, email=''):
         """Create a new Steam account
 
+        .. warning::
+            Disabled by Valve
+
         :param account_name: desired account name
         :type  account_name: :class:`str`
         :param password: desired password
