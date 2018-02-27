@@ -136,6 +136,18 @@ class EType(SteamIntEnum):
     Max = 11
 
 
+class EInstanceFlag(SteamIntEnum):
+    MMSLobby = 0x20000
+    Lobby = 0x40000
+    Clan = 0x80000
+
+
+class EVanityUrlType(SteamIntEnum):
+    Individual = 1
+    Group = 2
+    GameGroup = 3
+
+
 class EServerType(SteamIntEnum):
     Invalid = -1
     First = 0

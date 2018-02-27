@@ -3,7 +3,7 @@ import sys
 import re
 import requests
 from steam.enums.base import SteamIntEnum
-from steam.enums import EType, EUniverse
+from steam.enums import EType, EUniverse, EInstanceFlag
 from steam.util.web import make_requests_session
 
 if sys.version_info < (3,):
@@ -21,14 +21,14 @@ class ETypeChar(SteamIntEnum):
     C = EType.ContentServer
     g = EType.Clan
     T = EType.Chat
-    c = EType.Chat
-    L = EType.Chat
+    L = EType.Chat # lobby chat, 'c' for clan chat
+    c = EType.Chat # clan chat
     a = EType.AnonUser
 
     def __str__(self):
         return self.name
 
-ETypeChars = ''.join(map(str, list(ETypeChar)))
+ETypeChars = ''.join(ETypeChar.__members__.keys())
 
 
 class SteamID(intBase):
@@ -46,8 +46,9 @@ class SteamID(intBase):
         SteamID('STEAM_1:0:2')  # steam2
         SteamID('[g:1:4]')  # steam3
     """
-    EType = EType               #: reference to EType
-    EUniverse = EUniverse       #: reference to EUniverse
+    EType = EType                  #: reference to EType
+    EUniverse = EUniverse          #: reference to EUniverse
+    EInstanceFlag = EInstanceFlag  #: reference to EInstanceFlag
 
     def __new__(cls, *args, **kwargs):
         steam64 = make_steam64(*args, **kwargs)
@@ -146,19 +147,28 @@ class SteamID(intBase):
         :return: steam3 format (e.g ``[U:1:1234]``)
         :rtype: :class:`str`
         """
-        if self.type is EType.AnonGameServer:
-            return "[%s:%s:%s:%s]" % (
-                str(ETypeChar(self.type)),
-                int(self.universe),
-                self.id,
-                self.instance
-                )
-        else:
-            return "[%s:%s:%s]" % (
-                str(ETypeChar(self.type)),
-                int(self.universe),
-                self.id,
-                )
+        typechar = str(ETypeChar(self.type))
+        instance = None
+
+        if self.type in (EType.AnonGameServer, EType.Multiseat):
+            instance = self.instance
+        elif self.type == EType.Individual:
+            if self.instance != 1:
+                instance = self.instance
+        elif self.type == EType.Chat:
+            if self.instance & EInstanceFlag.Clan:
+                typechar = 'c'
+            elif self.instance & EInstanceFlag.Lobby:
+                typechar = 'L'
+            else:
+                typechar = 'T'
+
+        parts = [typechar, int(self.universe), self.id]
+
+        if instance is not None:
+            parts.append(instance)
+
+        return '[%s]' % (':'.join(map(str, parts)))
 
     @property
     def community_url(self):
@@ -178,12 +188,26 @@ class SteamID(intBase):
 
     def is_valid(self):
         """
+        Check whether this SteamID is valid
+
         :rtype: :py:class:`bool`
         """
-        return (self.id > 0
-                and self.type is not EType.Invalid
-                and self.universe is not EUniverse.Invalid
-                )
+        if self.id == 0:
+            return False
+
+        if self.type == EType.Invalid or self.type >= EType.Max:
+            return False
+
+        if self.universe == EUniverse.Invalid or self.universe >= EUniverse.Max:
+            return False
+
+        if self.type == EType.Individual and self.instance > 4:
+            return False
+
+        if self.type == EType.Clan and self.instance != 0:
+            return False
+
+        return True
 
 
 def make_steam64(id=0, *args, **kwargs):
@@ -306,9 +330,9 @@ def steam3_to_tuple(value):
     :rtype: :class:`tuple` or :class:`None`
     """
     match = re.match(r"^\["
-                     r"(?P<type>[%s]):"        # type char
-                     r"(?P<universe>\d+):"     # universe
-                     r"(?P<id>\d+)"            # accountid
+                     r"(?P<type>[i%s]):"        # type char
+                     r"(?P<universe>[0-4]):"     # universe
+                     r"(?P<id>\d{1,10})"            # accountid
                      r"(:(?P<instance>\d+))?"  # instance
                      r"\]$" % ETypeChars,
                      value
@@ -318,16 +342,24 @@ def steam3_to_tuple(value):
 
     steam32 = int(match.group('id'))
     universe = EUniverse(int(match.group('universe')))
-    etype = ETypeChar[match.group('type')]
+    typechar = match.group('type').replace('i', 'I')
+    etype = EType(ETypeChar[typechar])
     instance = match.group('instance')
 
-    if instance is None:
-        if etype in (EType.Individual, EType.GameServer):
-            instance = 1
-        else:
-            instance = 0
-    else:
+    if typechar in 'gT':
+        instance = 0
+    elif instance is not None:
         instance = int(instance)
+    elif typechar == 'L':
+        instance = EInstanceFlag.Lobby
+    elif typechar == 'c':
+        instance = EInstanceFlag.Clan
+    elif etype in (EType.Individual, EType.GameServer):
+        instance = 1
+    else:
+        instance = 0
+
+    instance = int(instance)
 
     return (steam32, etype, universe, instance)
 

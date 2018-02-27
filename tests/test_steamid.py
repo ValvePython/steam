@@ -5,7 +5,7 @@ import vcr
 import requests
 from steam import steamid
 from steam.steamid import SteamID, ETypeChar
-from steam.enums import EType, EUniverse
+from steam.enums import EType, EUniverse, EInstanceFlag
 
 
 class SteamID_initialization(unittest.TestCase):
@@ -181,6 +181,36 @@ class SteamID_properties(unittest.TestCase):
         # just to cover in coverage
         repr(SteamID())
 
+    def test_is_valid(self):
+        # default
+        self.assertFalse(SteamID().is_valid())
+        # id = 0
+        self.assertFalse(SteamID(0).is_valid())
+        self.assertFalse(SteamID(id=0).is_valid())
+        self.assertFalse(SteamID(-50).is_valid())
+        self.assertFalse(SteamID(id=-50).is_valid())
+        # id > 0
+        self.assertTrue(SteamID(5).is_valid())
+        # type out of bound
+        self.assertFalse(SteamID(1, EType.Max).is_valid())
+        # universe out of bound
+        self.assertFalse(SteamID(1, universe=EUniverse.Max).is_valid())
+        # individual
+        self.assertTrue(SteamID(123, EType.Individual, EUniverse.Public, instance=0).is_valid())
+        self.assertTrue(SteamID(123, EType.Individual, EUniverse.Public, instance=1).is_valid())
+        self.assertTrue(SteamID(123, EType.Individual, EUniverse.Public, instance=2).is_valid())
+        self.assertTrue(SteamID(123, EType.Individual, EUniverse.Public, instance=3).is_valid())
+        self.assertTrue(SteamID(123, EType.Individual, EUniverse.Public, instance=4).is_valid())
+        self.assertFalse(SteamID(123, EType.Individual, EUniverse.Public, instance=5).is_valid())
+        self.assertFalse(SteamID(123, EType.Individual, EUniverse.Public, instance=333).is_valid())
+        # clan
+        self.assertTrue(SteamID(1, EType.Clan, EUniverse.Public, instance=0).is_valid())
+        self.assertFalse(SteamID(1, EType.Clan, EUniverse.Public, instance=1).is_valid())
+        self.assertFalse(SteamID(1, EType.Clan, EUniverse.Public, instance=1234).is_valid())
+
+        s = SteamID(123, type=EType.Clan, universe=EUniverse.Public, instance=333)
+        self.assertFalse(s.is_valid())
+
     def test_rich_comperison(self):
         for test_value in [SteamID(5), 5]:
             self.assertFalse(SteamID(10) == test_value)
@@ -213,9 +243,13 @@ class SteamID_properties(unittest.TestCase):
 
     def test_as_steam3(self):
         self.assertEqual(SteamID('[U:1:1234]').as_steam3, '[U:1:1234]')
+        self.assertEqual(SteamID('[U:1:1234:56]').as_steam3, '[U:1:1234:56]')
         self.assertEqual(SteamID('[g:1:4]').as_steam3, '[g:1:4]')
         self.assertEqual(SteamID('[A:1:1234:567]').as_steam3, '[A:1:1234:567]')
         self.assertEqual(SteamID('[G:1:1234:567]').as_steam3, '[G:1:1234]')
+        self.assertEqual(SteamID('[T:1:1234]').as_steam3, '[T:1:1234]')
+        self.assertEqual(SteamID('[c:1:1234]').as_steam3, '[c:1:1234]')
+        self.assertEqual(SteamID('[L:1:1234]').as_steam3, '[L:1:1234]')
 
     def test_as_32(self):
         self.assertEqual(SteamID(76580280500085312).as_32, 123456)
@@ -312,6 +346,20 @@ class steamid_functions(unittest.TestCase):
 
     def test_arg_steam3(self):
         self.assertIsNone(steamid.steam3_to_tuple('invalid_format'))
+        self.assertIsNone(steamid.steam3_to_tuple(''))
+        self.assertIsNone(steamid.steam3_to_tuple(' '))
+        self.assertIsNone(steamid.steam3_to_tuple('[U:5:1234]'))
+        self.assertIsNone(steamid.steam3_to_tuple('[i:5:1234]'))
+
+        self.assertEqual(steamid.steam3_to_tuple("[i:1:1234]"),
+                         (1234, EType.Invalid, EUniverse.Public, 0)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[I:1:1234]"),
+                         (1234, EType.Invalid, EUniverse.Public, 0)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[U:0:1234]"),
+                         (1234, EType.Individual, EUniverse.Invalid, 1)
+                         )
 
         self.assertEqual(steamid.steam3_to_tuple("[U:1:1234]"),
                          (1234, EType.Individual, EUniverse.Public, 1)
@@ -327,5 +375,14 @@ class steamid_functions(unittest.TestCase):
                          )
         self.assertEqual(steamid.steam3_to_tuple("[A:1:1234:567]"),
                          (1234, EType.AnonGameServer, EUniverse.Public, 567)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[T:1:1234]"),
+                         (1234, EType.Chat, EUniverse.Public, 0)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[L:1:1234]"),
+                         (1234, EType.Chat, EUniverse.Public, EInstanceFlag.Lobby)
+                         )
+        self.assertEqual(steamid.steam3_to_tuple("[c:1:1234]"),
+                         (1234, EType.Chat, EUniverse.Public, EInstanceFlag.Clan)
                          )
 
