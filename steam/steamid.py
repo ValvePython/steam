@@ -192,20 +192,27 @@ class SteamID(intBase):
 
         :rtype: :py:class:`bool`
         """
-        if self.id == 0:
-            return False
-
         if self.type == EType.Invalid or self.type >= EType.Max:
             return False
 
         if self.universe == EUniverse.Invalid or self.universe >= EUniverse.Max:
             return False
 
-        if self.type == EType.Individual and self.instance > 4:
-            return False
+        if self.type == EType.Individual:
+            if self.id == 0 or self.instance > 4:
+                return False
 
-        if self.type == EType.Clan and self.instance != 0:
-            return False
+        if self.type == EType.Clan:
+            if self.id == 0 or self.instance != 0:
+                return False
+
+        if self.type == EType.GameServer:
+            if self.id == 0:
+                return False
+
+        if self.type == EType.AnonGameServer:
+            if self.id == 0 and self.instance == 0:
+                return False
 
         return True
 
