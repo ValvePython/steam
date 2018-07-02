@@ -67,7 +67,6 @@ class Msg(object):
     def __init__(self, msg, data=None, extended=False):
         self.extended = extended
         self.header = ExtendedMsgHdr(data) if extended else MsgHdr(data)
-        self.header.msg = msg
         self.msg = msg
 
         if data:
@@ -77,6 +76,14 @@ class Msg(object):
 
         if deserializer:
             self.body = deserializer(data)
+
+    @property
+    def msg(self):
+        return self.header.msg
+
+    @msg.setter
+    def msg(self, value):
+        self.header.msg = EMsg(value)
 
     def serialize(self):
         return self.header.serialize() + self.body.serialize()
@@ -133,8 +140,8 @@ class MsgProto(object):
 
     def __init__(self, msg, data=None):
         self._header = MsgHdrProtoBuf(data)
-        self.msg = self._header.msg = msg
         self.header = self._header.proto
+        self.msg = msg
 
         if msg == EMsg.ServiceMethod:
             proto = get_um(self.header.target_job_name)
@@ -151,6 +158,14 @@ class MsgProto(object):
             if data:
                 data = data[self._header._fullsize:]
                 self.body.ParseFromString(data)
+
+    @property
+    def msg(self):
+        return self._header.msg
+
+    @msg.setter
+    def msg(self, value):
+        self._header.msg = EMsg(value)
 
     def serialize(self):
         return self._header.serialize() + self.body.SerializeToString()
