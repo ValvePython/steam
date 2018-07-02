@@ -119,17 +119,12 @@ class Msg(object):
         rows = ["Msg"]
 
         header = str(self.header)
-        if header:
-            rows.append("-------------- header --")
-            rows.append(header)
+        rows.append("-------------- header --")
+        rows.append(header if header else "(empty)")
 
         body = str(self.body)
-        if body:
-            rows.append("---------------- body --")
-            rows.append(body)
-
-        if len(rows) == 1:
-            rows[0] += " (empty)"
+        rows.append("---------------- body --")
+        rows.append(body if body else "(empty)")
 
         return '\n'.join(rows)
 
@@ -190,21 +185,15 @@ class MsgProto(object):
         return "<MsgProto %s>" % repr(self.msg)
 
     def __str__(self):
-        rows = ["MsgProto"]
+        rows = ["MsgProto %s" % repr(self.msg)]
 
         header = str(self.header).rstrip()
-        if header:
-            rows.append("-------------- header --")
-            rows.append(header)
+        rows.append("-------------- header --")
+        rows.append(header if header else "(empty)")
 
         body = str(self.body).rstrip()
-        if body:
-            rows.append("---------------- body --")
-            rows.append(body)
-
-        if len(rows) == 1:
-            rows[0] += " (empty)"
+        rows.append("---------------- body --")
+        rows.append(body if body else "(empty)")
 
         return '\n'.join(rows)
-
 
