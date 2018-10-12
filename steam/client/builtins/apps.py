@@ -75,7 +75,7 @@ class Apps(object):
             chunk = chunk[0].body
 
             for app in chunk.apps:
-                data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8'))['appinfo']
+                data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'ignore'))['appinfo']
             for pkg in chunk.packages:
                 data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:])[str(pkg.packageid)]
 
