@@ -36,6 +36,7 @@ message CSiteLicense_LCSAuthenticate_Response {
 	optional uint64 site_id = 1;
 	optional string site_name = 2;
 	optional bool new_session = 3;
+	optional bool no_site_licenses = 4;
 }
 
 message CSiteLicense_LCSAssociateUser_Request {

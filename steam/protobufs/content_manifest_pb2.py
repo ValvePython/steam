@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='content_manifest.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x16\x63ontent_manifest.proto\"\xef\x02\n\x16\x43ontentManifestPayload\x12\x35\n\x08mappings\x18\x01 \x03(\x0b\x32#.ContentManifestPayload.FileMapping\x1a\x9d\x02\n\x0b\x46ileMapping\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\x04\x12\r\n\x05\x66lags\x18\x03 \x01(\r\x12\x14\n\x0csha_filename\x18\x04 \x01(\x0c\x12\x13\n\x0bsha_content\x18\x05 \x01(\x0c\x12=\n\x06\x63hunks\x18\x06 \x03(\x0b\x32-.ContentManifestPayload.FileMapping.ChunkData\x12\x12\n\nlinktarget\x18\x07 \x01(\t\x1a\x61\n\tChunkData\x12\x0b\n\x03sha\x18\x01 \x01(\x0c\x12\x0b\n\x03\x63rc\x18\x02 \x01(\x07\x12\x0e\n\x06offset\x18\x03 \x01(\x04\x12\x13\n\x0b\x63\x62_original\x18\x04 \x01(\r\x12\x15\n\rcb_compressed\x18\x05 \x01(\r\"\xec\x01\n\x17\x43ontentManifestMetadata\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x14\n\x0cgid_manifest\x18\x02 \x01(\x04\x12\x15\n\rcreation_time\x18\x03 \x01(\r\x12\x1b\n\x13\x66ilenames_encrypted\x18\x04 \x01(\x08\x12\x18\n\x10\x63\x62_disk_original\x18\x05 \x01(\x04\x12\x1a\n\x12\x63\x62_disk_compressed\x18\x06 \x01(\x04\x12\x15\n\runique_chunks\x18\x07 \x01(\r\x12\x15\n\rcrc_encrypted\x18\x08 \x01(\r\x12\x11\n\tcrc_clear\x18\t \x01(\r\"-\n\x18\x43ontentManifestSignature\x12\x11\n\tsignature\x18\x01 \x01(\x0c\x42\x05H\x01\x90\x01\x00')
+  serialized_pb=_b('\n\x16\x63ontent_manifest.proto\"\xef\x02\n\x16\x43ontentManifestPayload\x12\x35\n\x08mappings\x18\x01 \x03(\x0b\x32#.ContentManifestPayload.FileMapping\x1a\x9d\x02\n\x0b\x46ileMapping\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\x04\x12\r\n\x05\x66lags\x18\x03 \x01(\r\x12\x14\n\x0csha_filename\x18\x04 \x01(\x0c\x12\x13\n\x0bsha_content\x18\x05 \x01(\x0c\x12=\n\x06\x63hunks\x18\x06 \x03(\x0b\x32-.ContentManifestPayload.FileMapping.ChunkData\x12\x12\n\nlinktarget\x18\x07 \x01(\t\x1a\x61\n\tChunkData\x12\x0b\n\x03sha\x18\x01 \x01(\x0c\x12\x0b\n\x03\x63rc\x18\x02 \x01(\x07\x12\x0e\n\x06offset\x18\x03 \x01(\x04\x12\x13\n\x0b\x63\x62_original\x18\x04 \x01(\r\x12\x15\n\rcb_compressed\x18\x05 \x01(\r\"\xec\x01\n\x17\x43ontentManifestMetadata\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x14\n\x0cgid_manifest\x18\x02 \x01(\x04\x12\x15\n\rcreation_time\x18\x03 \x01(\r\x12\x1b\n\x13\x66ilenames_encrypted\x18\x04 \x01(\x08\x12\x18\n\x10\x63\x62_disk_original\x18\x05 \x01(\x04\x12\x1a\n\x12\x63\x62_disk_compressed\x18\x06 \x01(\x04\x12\x15\n\runique_chunks\x18\x07 \x01(\r\x12\x15\n\rcrc_encrypted\x18\x08 \x01(\r\x12\x11\n\tcrc_clear\x18\t \x01(\r\"-\n\x18\x43ontentManifestSignature\x12\x11\n\tsignature\x18\x01 \x01(\x0c\"\x85\x02\n\x12\x43ontentDeltaChunks\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x1a\n\x12manifest_id_source\x18\x02 \x01(\x04\x12\x1a\n\x12manifest_id_target\x18\x03 \x01(\x04\x12\x33\n\x0b\x64\x65ltaChunks\x18\x04 \x03(\x0b\x32\x1e.ContentDeltaChunks.DeltaChunk\x1ap\n\nDeltaChunk\x12\x12\n\nsha_source\x18\x01 \x01(\x0c\x12\x12\n\nsha_target\x18\x02 \x01(\x0c\x12\x15\n\rsize_original\x18\x03 \x01(\r\x12\x14\n\x0cpatch_method\x18\x04 \x01(\r\x12\r\n\x05\x63hunk\x18\x05 \x01(\x0c\x42\x05H\x01\x90\x01\x00')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -304,13 +304,126 @@ _CONTENTMANIFESTSIGNATURE = _descriptor.Descriptor(
   serialized_end=680,
 )
 
+
+_CONTENTDELTACHUNKS_DELTACHUNK = _descriptor.Descriptor(
+  name='DeltaChunk',
+  full_name='ContentDeltaChunks.DeltaChunk',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='sha_source', full_name='ContentDeltaChunks.DeltaChunk.sha_source', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sha_target', full_name='ContentDeltaChunks.DeltaChunk.sha_target', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='size_original', full_name='ContentDeltaChunks.DeltaChunk.size_original', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='patch_method', full_name='ContentDeltaChunks.DeltaChunk.patch_method', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='chunk', full_name='ContentDeltaChunks.DeltaChunk.chunk', index=4,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=832,
+  serialized_end=944,
+)
+
+_CONTENTDELTACHUNKS = _descriptor.Descriptor(
+  name='ContentDeltaChunks',
+  full_name='ContentDeltaChunks',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='depot_id', full_name='ContentDeltaChunks.depot_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='manifest_id_source', full_name='ContentDeltaChunks.manifest_id_source', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='manifest_id_target', full_name='ContentDeltaChunks.manifest_id_target', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='deltaChunks', full_name='ContentDeltaChunks.deltaChunks', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CONTENTDELTACHUNKS_DELTACHUNK, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=683,
+  serialized_end=944,
+)
+
 _CONTENTMANIFESTPAYLOAD_FILEMAPPING_CHUNKDATA.containing_type = _CONTENTMANIFESTPAYLOAD_FILEMAPPING
 _CONTENTMANIFESTPAYLOAD_FILEMAPPING.fields_by_name['chunks'].message_type = _CONTENTMANIFESTPAYLOAD_FILEMAPPING_CHUNKDATA
 _CONTENTMANIFESTPAYLOAD_FILEMAPPING.containing_type = _CONTENTMANIFESTPAYLOAD
 _CONTENTMANIFESTPAYLOAD.fields_by_name['mappings'].message_type = _CONTENTMANIFESTPAYLOAD_FILEMAPPING
+_CONTENTDELTACHUNKS_DELTACHUNK.containing_type = _CONTENTDELTACHUNKS
+_CONTENTDELTACHUNKS.fields_by_name['deltaChunks'].message_type = _CONTENTDELTACHUNKS_DELTACHUNK
 DESCRIPTOR.message_types_by_name['ContentManifestPayload'] = _CONTENTMANIFESTPAYLOAD
 DESCRIPTOR.message_types_by_name['ContentManifestMetadata'] = _CONTENTMANIFESTMETADATA
 DESCRIPTOR.message_types_by_name['ContentManifestSignature'] = _CONTENTMANIFESTSIGNATURE
+DESCRIPTOR.message_types_by_name['ContentDeltaChunks'] = _CONTENTDELTACHUNKS
 
 ContentManifestPayload = _reflection.GeneratedProtocolMessageType('ContentManifestPayload', (_message.Message,), dict(
 
@@ -348,6 +461,21 @@ ContentManifestSignature = _reflection.GeneratedProtocolMessageType('ContentMani
   # @@protoc_insertion_point(class_scope:ContentManifestSignature)
   ))
 _sym_db.RegisterMessage(ContentManifestSignature)
+
+ContentDeltaChunks = _reflection.GeneratedProtocolMessageType('ContentDeltaChunks', (_message.Message,), dict(
+
+  DeltaChunk = _reflection.GeneratedProtocolMessageType('DeltaChunk', (_message.Message,), dict(
+    DESCRIPTOR = _CONTENTDELTACHUNKS_DELTACHUNK,
+    __module__ = 'content_manifest_pb2'
+    # @@protoc_insertion_point(class_scope:ContentDeltaChunks.DeltaChunk)
+    ))
+  ,
+  DESCRIPTOR = _CONTENTDELTACHUNKS,
+  __module__ = 'content_manifest_pb2'
+  # @@protoc_insertion_point(class_scope:ContentDeltaChunks)
+  ))
+_sym_db.RegisterMessage(ContentDeltaChunks)
+_sym_db.RegisterMessage(ContentDeltaChunks.DeltaChunk)
 
 
 DESCRIPTOR.has_options = True

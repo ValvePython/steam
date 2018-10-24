@@ -526,6 +526,8 @@ message CMsgClientUpdateAppJobReport {
 	optional bool is_borrowed = 17;
 	optional bool is_free_weekend = 18;
 	optional uint64 total_bytes_legacy = 19;
+	optional uint64 total_bytes_patched = 20;
+	optional uint64 total_bytes_saved = 21;
 }
 
 message CMsgClientDPContentStatsReport {
@@ -720,6 +722,7 @@ message CMsgGCClient {
 	optional bytes payload = 3;
 	optional fixed64 steamid = 4;
 	optional string gcname = 5;
+	optional uint32 ip = 6;
 }
 
 message CMsgClientRequestFreeLicense {
@@ -1147,6 +1150,13 @@ message CMsgAMUnlockStreamingResponse {
 	optional bytes encryption_key = 2;
 }
 
+message CMsgAMUnlockHEVC {
+}
+
+message CMsgAMUnlockHEVCResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
 message CMsgClientPlayingSessionState {
 	optional bool playing_blocked = 2;
 	optional uint32 playing_app = 3;
@@ -1154,19 +1164,6 @@ message CMsgClientPlayingSessionState {
 
 message CMsgClientKickPlayingSession {
 	optional bool only_stop_game = 1;
-}
-
-message CMsgClientCreateAccount {
-	optional string account_name = 1;
-	optional string password = 2;
-	optional string email = 3;
-	optional uint32 launcher = 6;
-	optional uint32 language = 7;
-}
-
-message CMsgClientCreateAccountResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 steamid = 2;
 }
 
 message CMsgClientVoiceCallPreAuthorize {
