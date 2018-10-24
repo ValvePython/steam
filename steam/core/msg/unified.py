@@ -30,6 +30,12 @@ service_lookup = {
     'MsgTest':             'steam.protobufs.steammessages_unified_test_pb2',
     'UserAccount':         'steam.protobufs.steammessages_useraccount_pb2',
     'Video':               'steam.protobufs.steammessages_video_pb2',
+    'Chat':                'steam.protobufs.steammessages_chat_pb2',
+    'ChatRoom':            'steam.protobufs.steammessages_chat_pb2',
+    'ClanChatRooms':       'steam.protobufs.steammessages_chat_pb2',
+    'ChatRoomClient':      'steam.protobufs.steammessages_chat_pb2',
+    'ChatUsability':       'steam.protobufs.steammessages_chat_pb2',
+    'ChatUsabilityClient': 'steam.protobufs.steammessages_chat_pb2',
 }
 
 method_lookup = {}
