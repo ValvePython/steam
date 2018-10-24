@@ -42,6 +42,7 @@ message CInventory_AddItem_Request {
 	optional bool notify = 5 [(description) = "Should notify the user that the item was added to their Steam Inventory."];
 	optional uint64 requestid = 6;
 	optional bool trade_restriction = 7 [(description) = "If true, apply the default trade and market restriction times to this item."];
+	optional bool is_purchase = 8 [default = false, (description) = "If set, treat requestid as a txnid and create this item as a result of user microtransaction purchase."];
 }
 
 message CInventory_ModifyItems_Request {
@@ -85,7 +86,6 @@ message CInventory_SplitItemStack_Request {
 	optional uint32 appid = 1;
 	optional uint64 itemid = 2;
 	optional uint32 quantity = 3;
-	optional string timestamp = 4;
 }
 
 message CInventory_CombineItemStacks_Request {
@@ -93,8 +93,6 @@ message CInventory_CombineItemStacks_Request {
 	optional uint64 fromitemid = 2;
 	optional uint64 destitemid = 3;
 	optional uint32 quantity = 4;
-	optional string fromtimestamp = 5;
-	optional string desttimestamp = 6;
 }
 
 message CInventory_GetItemDefMeta_Request {
@@ -133,6 +131,11 @@ message CInventory_PurchaseFinalize_Request {
 	optional uint32 appid = 1;
 	optional int32 language = 2;
 	optional uint64 orderid = 3;
+}
+
+message CInventoryClient_NewItems_Notification {
+	optional uint32 appid = 1;
+	optional .CInventory_Response inventory_response = 2;
 }
 
 service Inventory {
@@ -181,5 +184,12 @@ service Inventory {
 	}
 	rpc PurchaseFinalize (.CInventory_PurchaseFinalize_Request) returns (.CInventory_Response) {
 		option (method_description) = "Finalizes a purchase for the user";
+	}
+}
+service InventoryClient {
+	option (service_description) = "Client notifications inventory service events";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyNewItems (.CInventoryClient_NewItems_Notification) returns (.NoResponse) {
+		option (method_description) = "Notify client that the user received new items";
 	}
 }

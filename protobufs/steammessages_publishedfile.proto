@@ -189,9 +189,9 @@ message PublishedFileDetails {
 	optional uint32 time_subscribed = 56 [(description) = "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"];
 	optional .PublishedFileDetails.ForSaleData for_sale_data = 57 [(description) = "Pricing information, if applicable."];
 	optional string metadata = 58 [(description) = "Metadata associated with the item"];
-	optional fixed64 incompatible_actor = 59;
-	optional uint32 incompatible_timestamp = 60;
 	optional int32 language = 61 [default = 0, (description) = "The language of the title and description."];
+	optional bool maybe_inappropriate_sex = 65;
+	optional bool maybe_inappropriate_violence = 66;
 }
 
 message CPublishedFile_GetDetails_Response {

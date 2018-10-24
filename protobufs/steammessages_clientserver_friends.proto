@@ -9,6 +9,7 @@ message CMsgClientFriendMsg {
 	optional int32 chat_entry_type = 2;
 	optional bytes message = 3;
 	optional fixed32 rtime32_server_timestamp = 4;
+	optional bool echo_to_sender = 5;
 }
 
 message CMsgClientFriendMsgIncoming {
@@ -101,6 +102,7 @@ message CMsgClientChangeStatus {
 	optional bool high_priority = 4;
 	optional bool persona_set_by_user = 5;
 	optional uint32 persona_state_flags = 6 [default = 0];
+	optional bool need_persona_response = 7;
 }
 
 message CMsgPersonaChangeResponse {
@@ -110,6 +112,11 @@ message CMsgPersonaChangeResponse {
 
 message CMsgClientPersonaState {
 	message Friend {
+		message ClanData {
+			optional uint32 ogg_app_id = 1;
+			optional uint64 chat_group_id = 2;
+		}
+
 		message KV {
 			optional string key = 1;
 			optional string value = 2;
@@ -130,15 +137,20 @@ message CMsgClientPersonaState {
 		optional bytes avatar_hash = 31;
 		optional uint32 last_logoff = 45;
 		optional uint32 last_logon = 46;
+		optional uint32 last_seen_online = 47;
 		optional uint32 clan_rank = 50;
 		optional string game_name = 55;
 		optional fixed64 gameid = 56;
 		optional bytes game_data_blob = 60;
+		optional .CMsgClientPersonaState.Friend.ClanData clan_data = 64;
 		optional string clan_tag = 65;
-		optional string facebook_name = 66;
-		optional uint64 facebook_id = 67;
 		repeated .CMsgClientPersonaState.Friend.KV rich_presence = 71;
 		optional fixed64 broadcast_id = 72;
+		optional fixed64 game_lobby_id = 73;
+		optional uint32 watching_broadcast_accountid = 74;
+		optional uint32 watching_broadcast_appid = 75;
+		optional uint32 watching_broadcast_viewers = 76;
+		optional string watching_broadcast_title = 77;
 	}
 
 	optional uint32 status_flags = 1;
@@ -164,6 +176,7 @@ message CMsgClientFriendProfileInfoResponse {
 message CMsgClientCreateFriendsGroup {
 	optional fixed64 steamid = 1;
 	optional string groupname = 2;
+	repeated fixed64 steamid_friends = 3;
 }
 
 message CMsgClientCreateFriendsGroupResponse {
@@ -180,12 +193,14 @@ message CMsgClientDeleteFriendsGroupResponse {
 	optional uint32 eresult = 1;
 }
 
-message CMsgClientRenameFriendsGroup {
+message CMsgClientManageFriendsGroup {
 	optional int32 groupid = 1;
 	optional string groupname = 2;
+	repeated fixed64 steamid_friends_added = 3;
+	repeated fixed64 steamid_friends_removed = 4;
 }
 
-message CMsgClientRenameFriendsGroupResponse {
+message CMsgClientManageFriendsGroupResponse {
 	optional uint32 eresult = 1;
 }
 
@@ -214,6 +229,9 @@ message CMsgClientEmoticonList {
 	message Emoticon {
 		optional string name = 1;
 		optional int32 count = 2;
+		optional uint32 time_last_used = 3;
+		optional uint32 use_count = 4;
+		optional uint32 time_received = 5;
 	}
 
 	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;

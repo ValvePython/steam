@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_useraccount.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1fsteammessages_useraccount.proto\x1a steammessages_unified_base.proto\"+\n)CUserAccount_GetAccountLinkStatus_Request\"Y\n*CUserAccount_GetAccountLinkStatus_Response\x12\x0c\n\x04pwid\x18\x01 \x01(\r\x12\x1d\n\x15identity_verification\x18\x02 \x01(\r2\xcf\x01\n\x0bUserAccount\x12\x90\x01\n\x14GetAccountLinkStatus\x12*.CUserAccount_GetAccountLinkStatus_Request\x1a+.CUserAccount_GetAccountLinkStatus_Response\"\x1f\x82\xb5\x18\x1b\x46\x65tches account link status\x1a-\x82\xb5\x18)A service to get user account informationB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1fsteammessages_useraccount.proto\x1a steammessages_unified_base.proto\"+\n)CUserAccount_GetAccountLinkStatus_Request\"Y\n*CUserAccount_GetAccountLinkStatus_Response\x12\x0c\n\x04pwid\x18\x01 \x01(\r\x12\x1d\n\x15identity_verification\x18\x02 \x01(\r\">\n\'CUserAccount_RegisterCompatTool_Request\x12\x13\n\x0b\x63ompat_tool\x18\x01 \x01(\r\"*\n(CUserAccount_RegisterCompatTool_Response2\xea\x02\n\x0bUserAccount\x12\x90\x01\n\x14GetAccountLinkStatus\x12*.CUserAccount_GetAccountLinkStatus_Request\x1a+.CUserAccount_GetAccountLinkStatus_Response\"\x1f\x82\xb5\x18\x1b\x46\x65tches account link status\x12\x98\x01\n\x12RegisterCompatTool\x12(.CUserAccount_RegisterCompatTool_Request\x1a).CUserAccount_RegisterCompatTool_Response\"-\x82\xb5\x18)Register intended account usage of a tool\x1a-\x82\xb5\x18)A service to get user account informationB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -91,8 +91,65 @@ _CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE = _descriptor.Descriptor(
   serialized_end=203,
 )
 
+
+_CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST = _descriptor.Descriptor(
+  name='CUserAccount_RegisterCompatTool_Request',
+  full_name='CUserAccount_RegisterCompatTool_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='compat_tool', full_name='CUserAccount_RegisterCompatTool_Request.compat_tool', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=205,
+  serialized_end=267,
+)
+
+
+_CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE = _descriptor.Descriptor(
+  name='CUserAccount_RegisterCompatTool_Response',
+  full_name='CUserAccount_RegisterCompatTool_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=269,
+  serialized_end=311,
+)
+
 DESCRIPTOR.message_types_by_name['CUserAccount_GetAccountLinkStatus_Request'] = _CUSERACCOUNT_GETACCOUNTLINKSTATUS_REQUEST
 DESCRIPTOR.message_types_by_name['CUserAccount_GetAccountLinkStatus_Response'] = _CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE
+DESCRIPTOR.message_types_by_name['CUserAccount_RegisterCompatTool_Request'] = _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST
+DESCRIPTOR.message_types_by_name['CUserAccount_RegisterCompatTool_Response'] = _CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE
 
 CUserAccount_GetAccountLinkStatus_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_GetAccountLinkStatus_Request', (_message.Message,), dict(
   DESCRIPTOR = _CUSERACCOUNT_GETACCOUNTLINKSTATUS_REQUEST,
@@ -108,6 +165,20 @@ CUserAccount_GetAccountLinkStatus_Response = _reflection.GeneratedProtocolMessag
   ))
 _sym_db.RegisterMessage(CUserAccount_GetAccountLinkStatus_Response)
 
+CUserAccount_RegisterCompatTool_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_RegisterCompatTool_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_RegisterCompatTool_Request)
+  ))
+_sym_db.RegisterMessage(CUserAccount_RegisterCompatTool_Request)
+
+CUserAccount_RegisterCompatTool_Response = _reflection.GeneratedProtocolMessageType('CUserAccount_RegisterCompatTool_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_RegisterCompatTool_Response)
+  ))
+_sym_db.RegisterMessage(CUserAccount_RegisterCompatTool_Response)
+
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
@@ -118,8 +189,8 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030)A service to get user account information')),
-  serialized_start=206,
-  serialized_end=413,
+  serialized_start=314,
+  serialized_end=676,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAccountLinkStatus',
@@ -129,6 +200,15 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
     input_type=_CUSERACCOUNT_GETACCOUNTLINKSTATUS_REQUEST,
     output_type=_CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030\033Fetches account link status')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='RegisterCompatTool',
+    full_name='UserAccount.RegisterCompatTool',
+    index=1,
+    containing_service=None,
+    input_type=_CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST,
+    output_type=_CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030)Register intended account usage of a tool')),
   ),
 ])
 
