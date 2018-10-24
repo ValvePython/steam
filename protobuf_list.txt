@@ -4,9 +4,10 @@ https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/e
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_base.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_2.proto
-https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_login.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_friends.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_clientserver_login.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_broadcast.steamclient.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_chat.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_cloud.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_credentials.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_datapublisher.steamclient.proto

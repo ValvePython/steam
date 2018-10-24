@@ -1,0 +1,1006 @@
+syntax = "proto2";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+enum EChatRoomJoinState {
+	k_EChatRoomJoinState_Default = 0;
+	k_EChatRoomJoinState_None = 1;
+	k_EChatRoomJoinState_Joined = 2;
+	k_EChatRoomJoinState_TestInvalid = 99;
+}
+
+enum EChatRoomGroupRank {
+	k_EChatRoomGroupRank_Default = 0;
+	k_EChatRoomGroupRank_Viewer = 10;
+	k_EChatRoomGroupRank_Guest = 15;
+	k_EChatRoomGroupRank_Member = 20;
+	k_EChatRoomGroupRank_Moderator = 30;
+	k_EChatRoomGroupRank_Officer = 40;
+	k_EChatRoomGroupRank_Owner = 50;
+	k_EChatRoomGroupRank_TestInvalid = 99;
+}
+
+enum EChatRoomNotificationLevel {
+	k_EChatroomNotificationLevel_Invalid = 0;
+	k_EChatroomNotificationLevel_None = 1;
+	k_EChatroomNotificationLevel_MentionMe = 2;
+	k_EChatroomNotificationLevel_MentionAll = 3;
+	k_EChatroomNotificationLevel_AllMessages = 4;
+}
+
+enum EChatRoomServerMessage {
+	k_EChatRoomServerMsg_Invalid = 0;
+	k_EChatRoomServerMsg_RenameChatRoom = 1;
+	k_EChatRoomServerMsg_Joined = 2;
+	k_EChatRoomServerMsg_Parted = 3;
+	k_EChatRoomServerMsg_Kicked = 4;
+	k_EChatRoomServerMsg_Invited = 5;
+	k_EChatRoomServerMsg_InviteDismissed = 8;
+	k_EChatRoomServerMsg_ChatRoomTaglineChanged = 9;
+	k_EChatRoomServerMsg_ChatRoomAvatarChanged = 10;
+	k_EChatRoomServerMsg_AppCustom = 11;
+}
+
+enum EChatRoomMemberStateChange {
+	k_EChatRoomMemberStateChange_Invalid = 0;
+	k_EChatRoomMemberStateChange_Joined = 1;
+	k_EChatRoomMemberStateChange_Parted = 2;
+	k_EChatRoomMemberStateChange_Kicked = 3;
+	k_EChatRoomMemberStateChange_Invited = 4;
+	k_EChatRoomMemberStateChange_RankChanged = 7;
+	k_EChatRoomMemberStateChange_InviteDismissed = 8;
+	k_EChatRoomMemberStateChange_Muted = 9;
+	k_EChatRoomMemberStateChange_Banned = 10;
+	k_EChatRoomMemberStateChange_RolesChanged = 12;
+}
+
+message CChat_RequestFriendPersonaStates_Request {
+}
+
+message CChat_RequestFriendPersonaStates_Response {
+}
+
+message CChatRoom_CreateChatRoomGroup_Request {
+	optional fixed64 steamid_partner = 1;
+	optional fixed64 steamid_invited = 2;
+	optional string name = 3;
+	repeated fixed64 steamid_invitees = 4;
+	optional uint32 watching_broadcast_accountid = 6;
+}
+
+message CChatRole {
+	optional uint64 role_id = 1;
+	optional string name = 2;
+	optional uint32 ordinal = 3;
+}
+
+message CChatRoleActions {
+	optional uint64 role_id = 1;
+	optional bool can_create_rename_delete_channel = 2;
+	optional bool can_kick = 3;
+	optional bool can_ban = 4;
+	optional bool can_invite = 5;
+	optional bool can_change_tagline_avatar_name = 6;
+	optional bool can_chat = 7;
+	optional bool can_view_history = 8;
+	optional bool can_change_group_roles = 9;
+	optional bool can_change_user_roles = 10;
+	optional bool can_mention_all = 11;
+	optional bool can_set_watching_broadcast = 12;
+}
+
+message CChatPartyBeacon {
+	optional uint32 app_id = 1;
+	optional fixed64 steamid_owner = 2;
+	optional fixed64 beacon_id = 3;
+	optional string game_metadata = 4;
+}
+
+message CChatRoomGroupHeaderState {
+	optional uint64 chat_group_id = 1;
+	optional string chat_name = 2;
+	optional uint32 clanid = 13;
+	optional uint32 accountid_owner = 14;
+	optional uint32 appid = 21;
+	optional string tagline = 15;
+	optional bytes avatar_sha = 16;
+	optional uint64 default_role_id = 17;
+	repeated .CChatRole roles = 18;
+	repeated .CChatRoleActions role_actions = 19;
+	optional uint32 watching_broadcast_accountid = 20;
+	repeated .CChatPartyBeacon party_beacons = 22;
+}
+
+message CChatRoomMember {
+	optional uint32 accountid = 1;
+	optional .EChatRoomJoinState state = 3 [default = k_EChatRoomJoinState_Default];
+	optional .EChatRoomGroupRank rank = 4 [default = k_EChatRoomGroupRank_Default];
+	optional uint32 time_kick_expire = 6;
+	repeated uint64 role_ids = 7;
+}
+
+message CChatRoomState {
+	optional uint64 chat_id = 1;
+	optional string chat_name = 2;
+	optional bool voice_allowed = 3;
+	repeated uint32 members_in_voice = 4;
+	optional uint32 time_last_message = 5;
+	optional uint32 sort_order = 6;
+}
+
+message CChatRoomGroupState {
+	optional .CChatRoomGroupHeaderState header_state = 1;
+	repeated .CChatRoomMember members = 2;
+	optional uint64 default_chat_id = 4;
+	repeated .CChatRoomState chat_rooms = 5;
+	repeated .CChatRoomMember kicked = 7;
+}
+
+message CUserChatRoomState {
+	optional uint64 chat_id = 1;
+	optional uint32 time_joined = 2;
+	optional uint32 time_last_ack = 3;
+	optional .EChatRoomNotificationLevel desktop_notification_level = 4 [default = k_EChatroomNotificationLevel_Invalid];
+	optional .EChatRoomNotificationLevel mobile_notification_level = 5 [default = k_EChatroomNotificationLevel_Invalid];
+	optional uint32 time_last_mention = 6;
+	optional bool unread_indicator_muted = 7 [default = false];
+}
+
+message CUserChatRoomGroupState {
+	optional uint64 chat_group_id = 1;
+	optional uint32 time_joined = 2;
+	repeated .CUserChatRoomState user_chat_room_state = 3;
+	optional .EChatRoomNotificationLevel desktop_notification_level = 4 [default = k_EChatroomNotificationLevel_Invalid];
+	optional .EChatRoomNotificationLevel mobile_notification_level = 5 [default = k_EChatroomNotificationLevel_Invalid];
+	optional uint32 time_last_group_ack = 6;
+	optional bool unread_indicator_muted = 7 [default = false];
+}
+
+message CChatRoom_CreateChatRoomGroup_Response {
+	optional uint64 chat_group_id = 1;
+	optional .CChatRoomGroupState state = 2;
+	optional .CUserChatRoomGroupState user_chat_state = 3;
+}
+
+message CChatRoom_SaveChatRoomGroup_Request {
+	optional uint64 chat_group_id = 1;
+	optional string name = 2;
+}
+
+message CChatRoom_SaveChatRoomGroup_Response {
+}
+
+message CChatRoom_RenameChatRoomGroup_Request {
+	optional uint64 chat_group_id = 1;
+	optional string name = 2;
+}
+
+message CChatRoom_RenameChatRoomGroup_Response {
+	optional string name = 1;
+}
+
+message CChatRoom_SetChatRoomGroupTagline_Request {
+	optional uint64 chat_group_id = 1;
+	optional string tagline = 2;
+}
+
+message CChatRoom_SetChatRoomGroupTagline_Response {
+}
+
+message CChatRoom_SetChatRoomGroupAvatar_Request {
+	optional uint64 chat_group_id = 1;
+	optional bytes avatar_sha = 2;
+}
+
+message CChatRoom_SetChatRoomGroupAvatar_Response {
+}
+
+message CChatRoom_SetChatRoomGroupWatchingBroadcast_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint32 watching_broadcast_accountid = 2;
+}
+
+message CChatRoom_SetChatRoomGroupWatchingBroadcast_Response {
+}
+
+message CChatRoom_MuteUser_Request {
+	optional uint64 chat_group_id = 1;
+	optional fixed64 steamid = 2;
+	optional int32 expiration = 3;
+}
+
+message CChatRoom_MuteUser_Response {
+}
+
+message CChatRoom_KickUser_Request {
+	optional uint64 chat_group_id = 1;
+	optional fixed64 steamid = 2;
+	optional int32 expiration = 3;
+}
+
+message CChatRoom_KickUser_Response {
+}
+
+message CChatRoom_SetUserBanState_Request {
+	optional uint64 chat_group_id = 1;
+	optional fixed64 steamid = 2;
+	optional bool ban_state = 3;
+}
+
+message CChatRoom_SetUserBanState_Response {
+}
+
+message CChatRoom_RevokeInvite_Request {
+	optional uint64 chat_group_id = 1;
+	optional fixed64 steamid = 2;
+}
+
+message CChatRoom_RevokeInvite_Response {
+}
+
+message CChatRoom_CreateRole_Request {
+	optional uint64 chat_group_id = 1;
+	optional string name = 2;
+}
+
+message CChatRoom_CreateRole_Response {
+	optional .CChatRoleActions actions = 2;
+}
+
+message CChatRoom_GetRoles_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_GetRoles_Response {
+	repeated .CChatRole roles = 1;
+}
+
+message CChatRoom_RenameRole_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 2;
+	optional string name = 3;
+}
+
+message CChatRoom_RenameRole_Response {
+}
+
+message CChatRoom_ReorderRole_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 2;
+	optional uint32 ordinal = 3;
+}
+
+message CChatRoom_ReorderRole_Response {
+}
+
+message CChatRoom_DeleteRole_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 2;
+}
+
+message CChatRoom_DeleteRole_Response {
+}
+
+message CChatRoom_GetRoleActions_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 2;
+}
+
+message CChatRoom_GetRoleActions_Response {
+	repeated .CChatRoleActions actions = 1;
+}
+
+message CChatRoom_ReplaceRoleActions_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 2;
+	optional .CChatRoleActions actions = 4;
+}
+
+message CChatRoom_ReplaceRoleActions_Response {
+}
+
+message CChatRoom_AddRoleToUser_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 3;
+	optional fixed64 steamid = 4;
+}
+
+message CChatRoom_AddRoleToUser_Response {
+}
+
+message CChatRoom_GetRolesForUser_Request {
+	optional uint64 chat_group_id = 1;
+	optional fixed64 steamid = 3;
+}
+
+message CChatRoom_GetRolesForUser_Response {
+	repeated uint64 role_ids = 1;
+}
+
+message CChatRoom_DeleteRoleFromUser_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 role_id = 3;
+	optional fixed64 steamid = 4;
+}
+
+message CChatRoom_DeleteRoleFromUser_Response {
+}
+
+message CChatRoom_JoinChatRoomGroup_Request {
+	optional uint64 chat_group_id = 1;
+	optional string invite_code = 2;
+	optional uint64 chat_id = 3;
+}
+
+message CChatRoom_JoinChatRoomGroup_Response {
+	optional .CChatRoomGroupState state = 1;
+	optional .CUserChatRoomGroupState user_chat_state = 3;
+	optional uint64 join_chat_id = 4;
+	optional uint32 time_expire = 5;
+}
+
+message CChatRoom_InviteFriendToChatRoomGroup_Request {
+	optional uint64 chat_group_id = 1;
+	optional fixed64 steamid = 2;
+	optional uint64 chat_id = 3;
+	optional bool skip_friendsui_check = 4;
+}
+
+message CChatRoom_InviteFriendToChatRoomGroup_Response {
+}
+
+message CChatRoom_LeaveChatRoomGroup_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_LeaveChatRoomGroup_Response {
+}
+
+message CChatRoom_CreateChatRoom_Request {
+	optional uint64 chat_group_id = 1;
+	optional string name = 2;
+	optional bool allow_voice = 3;
+}
+
+message CChatRoom_CreateChatRoom_Response {
+	optional .CChatRoomState chat_room = 1;
+}
+
+message CChatRoom_DeleteChatRoom_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+}
+
+message CChatRoom_DeleteChatRoom_Response {
+}
+
+message CChatRoom_RenameChatRoom_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional string name = 3;
+}
+
+message CChatRoom_RenameChatRoom_Response {
+}
+
+message CChatRoom_ReorderChatRoom_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional uint64 move_after_chat_id = 3;
+}
+
+message CChatRoom_ReorderChatRoom_Response {
+}
+
+message CChatRoom_SendChatMessage_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional string message = 3;
+}
+
+message CChatRoom_SendChatMessage_Response {
+	optional string modified_message = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+}
+
+message CChatRoom_JoinVoiceChat_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+}
+
+message CChatRoom_JoinVoiceChat_Response {
+	optional uint64 voice_chatid = 1;
+}
+
+message CChatRoom_LeaveVoiceChat_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+}
+
+message CChatRoom_LeaveVoiceChat_Response {
+}
+
+message CChatRoom_GetMessageHistory_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional uint32 last_time = 3;
+	optional uint32 last_ordinal = 4;
+	optional uint32 start_time = 5;
+	optional uint32 start_ordinal = 6;
+	optional uint32 max_count = 7;
+}
+
+message ServerMessage {
+	optional .EChatRoomServerMessage message = 1 [default = k_EChatRoomServerMsg_Invalid];
+	optional string string_param = 2;
+	optional uint32 accountid_param = 3;
+}
+
+message CChatRoom_GetMessageHistory_Response {
+	message ChatMessage {
+		optional uint32 sender = 1;
+		optional uint32 server_timestamp = 2;
+		optional string message = 3;
+		optional uint32 ordinal = 4;
+		optional .ServerMessage server_message = 5;
+		optional bool deleted = 6;
+	}
+
+	repeated .CChatRoom_GetMessageHistory_Response.ChatMessage messages = 1;
+	optional bool more_available = 4;
+}
+
+message CChatRoom_GetMyChatRoomGroups_Request {
+}
+
+message CChatRoom_GetChatRoomGroupSummary_Response {
+	optional uint64 chat_group_id = 1;
+	optional string chat_group_name = 2;
+	optional uint32 active_member_count = 3;
+	optional uint32 active_voice_member_count = 4;
+	optional uint64 default_chat_id = 5;
+	repeated .CChatRoomState chat_rooms = 6;
+	optional uint32 clanid = 7;
+	optional string chat_group_tagline = 8;
+	optional uint32 accountid_owner = 9;
+	repeated uint32 top_members = 10;
+	optional bytes chat_group_avatar_sha = 11;
+	optional .EChatRoomGroupRank rank = 12 [default = k_EChatRoomGroupRank_Default];
+	optional uint64 default_role_id = 13;
+	repeated uint64 role_ids = 14;
+	repeated .CChatRoleActions role_actions = 15;
+	optional uint32 watching_broadcast_accountid = 16;
+	optional uint32 appid = 17;
+	repeated .CChatPartyBeacon party_beacons = 18;
+}
+
+message CChatRoomSummaryPair {
+	optional .CUserChatRoomGroupState user_chat_group_state = 1;
+	optional .CChatRoom_GetChatRoomGroupSummary_Response group_summary = 2;
+}
+
+message CChatRoom_GetMyChatRoomGroups_Response {
+	repeated .CChatRoomSummaryPair chat_room_groups = 1;
+}
+
+message CChatRoom_GetChatRoomGroupState_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_GetChatRoomGroupState_Response {
+	optional .CChatRoomGroupState state = 1;
+}
+
+message CChatRoom_GetChatRoomGroupSummary_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_AckChatMessage_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional uint32 timestamp = 3;
+}
+
+message CChatRoom_CreateInviteLink_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint32 seconds_valid = 2;
+	optional uint64 chat_id = 3;
+}
+
+message CChatRoom_CreateInviteLink_Response {
+	optional string invite_code = 1;
+	optional uint32 seconds_valid = 2;
+}
+
+message CChatRoom_GetInviteLinkInfo_Request {
+	optional string invite_code = 1;
+}
+
+message CChatRoom_GetInviteLinkInfo_Response {
+	optional fixed64 steamid_sender = 3;
+	optional uint32 time_expires = 4;
+	optional uint64 chat_id = 6;
+	optional .CChatRoom_GetChatRoomGroupSummary_Response group_summary = 8;
+	optional .CUserChatRoomGroupState user_chat_group_state = 9;
+	optional uint32 time_kick_expire = 10;
+	optional bool banned = 11;
+}
+
+message CChatRoom_GetInviteInfo_Request {
+	optional fixed64 steamid_invitee = 1;
+	optional uint64 chat_group_id = 2;
+	optional uint64 chat_id = 3;
+	optional string invite_code = 4;
+}
+
+message CChatRoom_GetInviteInfo_Response {
+	optional .CChatRoom_GetChatRoomGroupSummary_Response group_summary = 1;
+	optional uint32 time_kick_expire = 2;
+	optional bool banned = 3;
+}
+
+message CChatRoom_GetInviteLinksForGroup_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_GetInviteLinksForGroup_Response {
+	message LinkInfo {
+		optional string invite_code = 1;
+		optional fixed64 steamid_creator = 2;
+		optional uint32 time_expires = 3;
+		optional uint64 chat_id = 4;
+	}
+
+	repeated .CChatRoom_GetInviteLinksForGroup_Response.LinkInfo invite_links = 1;
+}
+
+message CChatRoom_GetBanList_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_GetBanList_Response {
+	message BanInfo {
+		optional uint32 accountid = 1;
+		optional uint32 accountid_actor = 2;
+		optional uint32 time_banned = 3;
+		optional string ban_reason = 4;
+	}
+
+	repeated .CChatRoom_GetBanList_Response.BanInfo bans = 1;
+}
+
+message CChatRoom_GetInviteList_Request {
+	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoomGroupInvite {
+	optional uint32 accountid = 1;
+	optional uint32 accountid_actor = 2;
+	optional uint32 time_invited = 3;
+}
+
+message CChatRoom_GetInviteList_Response {
+	repeated .CChatRoomGroupInvite invites = 1;
+}
+
+message CChatRoom_DeleteInviteLink_Request {
+	optional uint64 chat_group_id = 1;
+	optional string invite_code = 2;
+}
+
+message CChatRoom_DeleteInviteLink_Response {
+}
+
+message CChatRoom_SetSessionActiveChatRoomGroups_Request {
+	repeated uint64 chat_group_ids = 1;
+	repeated uint64 chat_groups_data_requested = 2;
+}
+
+message CChatRoom_SetSessionActiveChatRoomGroups_Response {
+	repeated .CChatRoomGroupState chat_states = 1;
+}
+
+message CChatRoom_SetUserChatGroupPreferences_Request {
+	message ChatGroupPreferences {
+		optional .EChatRoomNotificationLevel desktop_notification_level = 1 [default = k_EChatroomNotificationLevel_Invalid];
+		optional .EChatRoomNotificationLevel mobile_notification_level = 2 [default = k_EChatroomNotificationLevel_Invalid];
+		optional bool unread_indicator_muted = 3;
+	}
+
+	message ChatRoomPreferences {
+		optional uint64 chat_id = 1;
+		optional .EChatRoomNotificationLevel desktop_notification_level = 2 [default = k_EChatroomNotificationLevel_Invalid];
+		optional .EChatRoomNotificationLevel mobile_notification_level = 3 [default = k_EChatroomNotificationLevel_Invalid];
+		optional bool unread_indicator_muted = 4;
+	}
+
+	optional uint64 chat_group_id = 1;
+	optional .CChatRoom_SetUserChatGroupPreferences_Request.ChatGroupPreferences chat_group_preferences = 2;
+	repeated .CChatRoom_SetUserChatGroupPreferences_Request.ChatRoomPreferences chat_room_preferences = 3;
+}
+
+message CChatRoom_SetUserChatGroupPreferences_Response {
+}
+
+message CChatRoom_DeleteChatMessages_Request {
+	message Message {
+		optional uint32 server_timestamp = 1;
+		optional uint32 ordinal = 2;
+	}
+
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	repeated .CChatRoom_DeleteChatMessages_Request.Message messages = 3;
+}
+
+message CChatRoom_DeleteChatMessages_Response {
+}
+
+message CClanChatRooms_GetClanChatRoomInfo_Request {
+	optional fixed64 steamid = 1;
+	optional bool autocreate = 2 [default = true, (description) = "Create a default chat room if none has been created before."];
+}
+
+message CClanChatRooms_GetClanChatRoomInfo_Response {
+	optional .CChatRoom_GetChatRoomGroupSummary_Response chat_group_summary = 1;
+}
+
+message CClanChatRooms_SetClanChatRoomPrivate_Request {
+	optional fixed64 steamid = 1;
+	optional bool chat_room_private = 2;
+}
+
+message CClanChatRooms_SetClanChatRoomPrivate_Response {
+	optional bool chat_room_private = 1;
+}
+
+message CChatMentions {
+	optional bool mention_all = 1;
+	optional bool mention_here = 2;
+	repeated uint32 mention_accountids = 3;
+}
+
+message CChatRoom_IncomingChatMessage_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional fixed64 steamid_sender = 3;
+	optional string message = 4;
+	optional uint32 timestamp = 5;
+	optional .CChatMentions mentions = 6;
+	optional uint32 ordinal = 7;
+	optional .ServerMessage server_message = 8;
+	optional string message_no_bbcode = 9;
+}
+
+message CChatRoom_ChatMessageModified_Notification {
+	message ChatMessage {
+		optional uint32 server_timestamp = 1;
+		optional uint32 ordinal = 2;
+		optional bool deleted = 3;
+	}
+
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	repeated .CChatRoom_ChatMessageModified_Notification.ChatMessage messages = 3;
+}
+
+message CChatRoom_MemberStateChange_Notification {
+	optional uint64 chat_group_id = 1;
+	optional .CChatRoomMember member = 2;
+	optional .EChatRoomMemberStateChange change = 3 [default = k_EChatRoomMemberStateChange_Invalid];
+}
+
+message CChatRoom_ChatRoomHeaderState_Notification {
+	optional .CChatRoomGroupHeaderState header_state = 1;
+}
+
+message CChatRoom_ChatRoomGroupRoomsChange_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint64 default_chat_id = 2;
+	repeated .CChatRoomState chat_rooms = 3;
+}
+
+message CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification {
+	optional uint64 chat_id = 1;
+	optional uint64 chat_group_id = 2;
+}
+
+message ChatRoomClient_NotifyChatGroupUserStateChanged_Notification {
+	optional uint64 chat_group_id = 1;
+	optional .CUserChatRoomGroupState user_chat_group_state = 2;
+	optional .CChatRoom_GetChatRoomGroupSummary_Response group_summary = 3;
+	optional .EChatRoomMemberStateChange user_action = 4 [default = k_EChatRoomMemberStateChange_Invalid];
+}
+
+message CChatUsability_ClientUsabilityMetrics_Notification {
+	message Settings {
+		optional bool notifications_show_ingame = 1;
+		optional bool notifications_show_online = 2;
+		optional bool notifications_show_message = 3;
+		optional bool notifications_events_and_announcements = 4;
+		optional bool sounds_play_ingame = 5;
+		optional bool sounds_play_online = 6;
+		optional bool sounds_play_message = 7;
+		optional bool sounds_events_and_announcements = 8;
+		optional bool always_new_chat_window = 9;
+		optional bool force_alphabetic_friend_sorting = 10;
+		optional int32 chat_flash_mode = 11;
+		optional bool remember_open_chats = 12;
+		optional bool compact_quick_access = 13;
+		optional bool compact_friends_list = 14;
+		optional bool notifications_show_chat_room_notification = 15;
+		optional bool sounds_play_chat_room_notification = 16;
+		optional bool hide_offline_friends_in_tag_groups = 17;
+		optional bool hide_categorized_friends = 18;
+		optional bool categorize_in_game_friends_by_game = 19;
+		optional int32 chat_font_size = 20;
+		optional bool use24hour_clock = 21;
+		optional bool do_not_disturb_mode = 22;
+		optional bool disable_embed_inlining = 23;
+		optional bool sign_into_friends = 24;
+	}
+
+	message VoiceSettings {
+		optional float voice_input_gain = 1;
+		optional float voice_output_gain = 2;
+		optional int32 noise_gate_level = 3;
+		optional bool voice_use_echo_cancellation = 4;
+		optional bool voice_use_noise_cancellation = 5;
+		optional bool voice_use_auto_gain_control = 6;
+		optional bool selected_non_default_mic = 7;
+		optional bool selected_non_default_output = 8;
+		optional bool push_to_talk_enabled = 9;
+		optional bool push_to_mute_enabled = 10;
+		optional bool play_ptt_sounds = 11;
+	}
+
+	message UIState {
+		message CategoryCollapseState {
+			optional bool in_game_collapsed = 1;
+			optional bool online_collapsed = 2;
+			optional bool offline_collapsed = 3;
+			optional int32 game_groups_collapsed = 4;
+			optional int32 categories_collapsed = 5;
+		}
+
+		optional int32 friends_list_height = 1;
+		optional int32 friends_list_width = 2;
+		optional bool friends_list_docked = 3;
+		optional bool friends_list_collapsed = 4;
+		optional int32 friends_list_group_chats_height = 5;
+		optional bool friends_list_visible = 6;
+		optional int32 chat_popups_opened = 7;
+		optional int32 group_chat_tabs_opened = 8;
+		optional int32 friend_chat_tabs_opened = 9;
+		optional int32 chat_window_width = 10;
+		optional int32 chat_window_height = 11;
+		optional .CChatUsability_ClientUsabilityMetrics_Notification.UIState.CategoryCollapseState category_collapse = 12;
+		optional int32 group_chat_left_col_collapsed = 13;
+		optional int32 group_chat_right_col_collapsed = 14;
+		optional bool in_one_on_one_voice_chat = 15;
+		optional bool in_group_voice_chat = 16;
+	}
+
+	message Metrics {
+		optional int32 friends_count = 1;
+		optional int32 friends_category_count = 2;
+		optional int32 friends_categorized_count = 3;
+		optional int32 friends_online_count = 4;
+		optional int32 friends_in_game_count = 5;
+		optional int32 friends_in_game_singleton_count = 6;
+		optional int32 game_group_count = 7;
+		optional int32 friends_favorite_count = 8;
+		optional int32 group_chat_count = 9;
+		optional int32 group_chat_favorite_count = 10;
+	}
+
+	optional uint32 metrics_run_id = 1;
+	optional uint32 client_build = 2;
+	optional uint32 metrics_version = 3;
+	optional bool in_web = 4;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification.Settings settings = 10;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification.VoiceSettings voice_settings = 11;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification.UIState ui_state = 12;
+	optional .CChatUsability_ClientUsabilityMetrics_Notification.Metrics metrics = 13;
+}
+
+message CChatUsability_RequestClientUsabilityMetrics_Notification {
+	optional uint32 metrics_run_id = 1;
+}
+
+service Chat {
+	option (service_description) = "Chat-related services";
+	rpc RequestFriendPersonaStates (.CChat_RequestFriendPersonaStates_Request) returns (.CChat_RequestFriendPersonaStates_Response) {
+		option (method_description) = "Request to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState.";
+	}
+}
+service ChatRoom {
+	option (service_description) = "Service for joining, managing, and using multi-user chat rooms";
+	rpc CreateChatRoomGroup (.CChatRoom_CreateChatRoomGroup_Request) returns (.CChatRoom_CreateChatRoomGroup_Response) {
+		option (method_description) = "Create's a chat group that can contain other chat rooms";
+	}
+	rpc SaveChatRoomGroup (.CChatRoom_SaveChatRoomGroup_Request) returns (.CChatRoom_SaveChatRoomGroup_Response) {
+		option (method_description) = "Saves's a chat group";
+	}
+	rpc RenameChatRoomGroup (.CChatRoom_RenameChatRoomGroup_Request) returns (.CChatRoom_RenameChatRoomGroup_Response) {
+		option (method_description) = "Rename a chat room group";
+	}
+	rpc SetChatRoomGroupTagline (.CChatRoom_SetChatRoomGroupTagline_Request) returns (.CChatRoom_SetChatRoomGroupTagline_Response) {
+		option (method_description) = "Set tagline for a chat room group";
+	}
+	rpc SetChatRoomGroupAvatar (.CChatRoom_SetChatRoomGroupAvatar_Request) returns (.CChatRoom_SetChatRoomGroupAvatar_Response) {
+		option (method_description) = "Set avatar SHA for a chat room group";
+	}
+	rpc SetChatRoomGroupWatchingBroadcast (.CChatRoom_SetChatRoomGroupWatchingBroadcast_Request) returns (.CChatRoom_SetChatRoomGroupWatchingBroadcast_Response) {
+		option (method_description) = "Sets a broadcast that the chat room group is watching";
+	}
+	rpc MuteUserInGroup (.CChatRoom_MuteUser_Request) returns (.CChatRoom_MuteUser_Response) {
+		option (method_description) = "Mute user in group";
+	}
+	rpc KickUserFromGroup (.CChatRoom_KickUser_Request) returns (.CChatRoom_KickUser_Response) {
+		option (method_description) = "Kick user from group";
+	}
+	rpc SetUserBanState (.CChatRoom_SetUserBanState_Request) returns (.CChatRoom_SetUserBanState_Response) {
+		option (method_description) = "Ban/unban user from group";
+	}
+	rpc RevokeInviteToGroup (.CChatRoom_RevokeInvite_Request) returns (.CChatRoom_RevokeInvite_Response) {
+		option (method_description) = "Revoke a direct invitation of a user";
+	}
+	rpc CreateRole (.CChatRoom_CreateRole_Request) returns (.CChatRoom_CreateRole_Response) {
+		option (method_description) = "Create role for goup";
+	}
+	rpc GetRoles (.CChatRoom_GetRoles_Request) returns (.CChatRoom_GetRoles_Response) {
+		option (method_description) = "Get all roles in group";
+	}
+	rpc RenameRole (.CChatRoom_RenameRole_Request) returns (.CChatRoom_RenameRole_Response) {
+		option (method_description) = "Rename role for goup";
+	}
+	rpc ReorderRole (.CChatRoom_ReorderRole_Request) returns (.CChatRoom_ReorderRole_Response) {
+		option (method_description) = "Reorder role with a goup";
+	}
+	rpc DeleteRole (.CChatRoom_DeleteRole_Request) returns (.CChatRoom_DeleteRole_Response) {
+		option (method_description) = "Delete role from group";
+	}
+	rpc GetRoleActions (.CChatRoom_GetRoleActions_Request) returns (.CChatRoom_GetRoleActions_Response) {
+		option (method_description) = "Get all defined roles and actions in group";
+	}
+	rpc ReplaceRoleActions (.CChatRoom_ReplaceRoleActions_Request) returns (.CChatRoom_ReplaceRoleActions_Response) {
+		option (method_description) = "Replace role actions in group";
+	}
+	rpc AddRoleToUser (.CChatRoom_AddRoleToUser_Request) returns (.CChatRoom_AddRoleToUser_Response) {
+		option (method_description) = "Add role to user in group";
+	}
+	rpc GetRolesForUser (.CChatRoom_GetRolesForUser_Request) returns (.CChatRoom_GetRolesForUser_Response) {
+		option (method_description) = "Get all roles assigned to user in group";
+	}
+	rpc DeleteRoleFromUser (.CChatRoom_DeleteRoleFromUser_Request) returns (.CChatRoom_DeleteRoleFromUser_Response) {
+		option (method_description) = "Delete role from user in group";
+	}
+	rpc JoinChatRoomGroup (.CChatRoom_JoinChatRoomGroup_Request) returns (.CChatRoom_JoinChatRoomGroup_Response) {
+		option (method_description) = "Join a multi-user chat room";
+	}
+	rpc InviteFriendToChatRoomGroup (.CChatRoom_InviteFriendToChatRoomGroup_Request) returns (.CChatRoom_InviteFriendToChatRoomGroup_Response) {
+		option (method_description) = "Invite a friend to a multi-user chat room";
+	}
+	rpc LeaveChatRoomGroup (.CChatRoom_LeaveChatRoomGroup_Request) returns (.CChatRoom_LeaveChatRoomGroup_Response) {
+		option (method_description) = "Leaves a chat room group and all related chats";
+	}
+	rpc CreateChatRoom (.CChatRoom_CreateChatRoom_Request) returns (.CChatRoom_CreateChatRoom_Response) {
+		option (method_description) = "Creates a chat room inside a chat room group";
+	}
+	rpc DeleteChatRoom (.CChatRoom_DeleteChatRoom_Request) returns (.CChatRoom_DeleteChatRoom_Response) {
+		option (method_description) = "Deletes a chat room inside a chat room group";
+	}
+	rpc RenameChatRoom (.CChatRoom_RenameChatRoom_Request) returns (.CChatRoom_RenameChatRoom_Response) {
+		option (method_description) = "Renames a chat room inside a chat room group";
+	}
+	rpc ReorderChatRoom (.CChatRoom_ReorderChatRoom_Request) returns (.CChatRoom_ReorderChatRoom_Response) {
+		option (method_description) = "Reorders a chat room inside a chat room group";
+	}
+	rpc SendChatMessage (.CChatRoom_SendChatMessage_Request) returns (.CChatRoom_SendChatMessage_Response) {
+		option (method_description) = "Send a chat message to a multi-user chat room";
+	}
+	rpc JoinVoiceChat (.CChatRoom_JoinVoiceChat_Request) returns (.CChatRoom_JoinVoiceChat_Response) {
+		option (method_description) = "Join the voice chat in a multi-room chat (should already be in the chat room)";
+	}
+	rpc LeaveVoiceChat (.CChatRoom_LeaveVoiceChat_Request) returns (.CChatRoom_LeaveVoiceChat_Response) {
+		option (method_description) = "Leave the voice chat in a multi-room chat";
+	}
+	rpc GetMessageHistory (.CChatRoom_GetMessageHistory_Request) returns (.CChatRoom_GetMessageHistory_Response) {
+		option (method_description) = "Get the history of messages in a chat room.  You must currently be a member of the chat room.";
+	}
+	rpc GetMyChatRoomGroups (.CChatRoom_GetMyChatRoomGroups_Request) returns (.CChatRoom_GetMyChatRoomGroups_Response) {
+		option (method_description) = "Get a list of our chat rooms";
+	}
+	rpc GetChatRoomGroupState (.CChatRoom_GetChatRoomGroupState_Request) returns (.CChatRoom_GetChatRoomGroupState_Response) {
+		option (method_description) = "Get information about a single chat room";
+	}
+	rpc GetChatRoomGroupSummary (.CChatRoom_GetChatRoomGroupSummary_Request) returns (.CChatRoom_GetChatRoomGroupSummary_Response) {
+		option (method_description) = "Get basic information about a chat room group";
+	}
+	rpc AckChatMessage (.CChatRoom_AckChatMessage_Notification) returns (.NoResponse) {
+		option (method_description) = "Acknowledge that we have seen the most recent chat message in a chat";
+	}
+	rpc CreateInviteLink (.CChatRoom_CreateInviteLink_Request) returns (.CChatRoom_CreateInviteLink_Response) {
+		option (method_description) = "Creates a chatroom invite link";
+	}
+	rpc GetInviteLinkInfo (.CChatRoom_GetInviteLinkInfo_Request) returns (.CChatRoom_GetInviteLinkInfo_Response) {
+		option (method_description) = "Returns chat room info about provided link";
+	}
+	rpc GetInviteInfo (.CChatRoom_GetInviteInfo_Request) returns (.CChatRoom_GetInviteInfo_Response) {
+		option (method_description) = "Returns chat room info about any invite involving the sender and passed group id";
+	}
+	rpc GetInviteLinksForGroup (.CChatRoom_GetInviteLinksForGroup_Request) returns (.CChatRoom_GetInviteLinksForGroup_Response) {
+		option (method_description) = "Returns all invite links for the specified group";
+	}
+	rpc GetBanList (.CChatRoom_GetBanList_Request) returns (.CChatRoom_GetBanList_Response) {
+		option (method_description) = "Gets a list of users who have been banned from a chat room";
+	}
+	rpc GetInviteList (.CChatRoom_GetInviteList_Request) returns (.CChatRoom_GetInviteList_Response) {
+		option (method_description) = "Gets a list of users who have been invited to a chat room";
+	}
+	rpc DeleteInviteLink (.CChatRoom_DeleteInviteLink_Request) returns (.CChatRoom_DeleteInviteLink_Response) {
+		option (method_description) = "Deletes specified invite link";
+	}
+	rpc SetSessionActiveChatRoomGroups (.CChatRoom_SetSessionActiveChatRoomGroups_Request) returns (.CChatRoom_SetSessionActiveChatRoomGroups_Response) {
+		option (method_description) = "Set which chat rooms we are using in the active session";
+	}
+	rpc SetUserChatGroupPreferences (.CChatRoom_SetUserChatGroupPreferences_Request) returns (.CChatRoom_SetUserChatGroupPreferences_Response) {
+		option (method_description) = "Set preferences around chat notifications for a group";
+	}
+	rpc DeleteChatMessages (.CChatRoom_DeleteChatMessages_Request) returns (.CChatRoom_DeleteChatMessages_Response) {
+		option (method_description) = "Deletes specified chat messages";
+	}
+}
+service ClanChatRooms {
+	option (service_description) = "Methods for getting clan chat information";
+	rpc GetClanChatRoomInfo (.CClanChatRooms_GetClanChatRoomInfo_Request) returns (.CClanChatRooms_GetClanChatRoomInfo_Response) {
+		option (method_description) = "Get a list of chat rooms for a clan, optionally creating a new one";
+	}
+	rpc SetClanChatRoomPrivate (.CClanChatRooms_SetClanChatRoomPrivate_Request) returns (.CClanChatRooms_SetClanChatRoomPrivate_Response) {
+		option (method_description) = "Set a clan chat room to be members only (or public)";
+	}
+}
+service ChatRoomClient {
+	option (service_description) = "Client notifications for chat events";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyIncomingChatMessage (.CChatRoom_IncomingChatMessage_Notification) returns (.NoResponse) {
+		option (method_description) = "New chat message for a chat room";
+	}
+	rpc NotifyChatMessageModified (.CChatRoom_ChatMessageModified_Notification) returns (.NoResponse) {
+		option (method_description) = "An existing chat message has been modified on the backend";
+	}
+	rpc NotifyMemberStateChange (.CChatRoom_MemberStateChange_Notification) returns (.NoResponse) {
+		option (method_description) = "A chat room member's state has changed (join/part/permissions)";
+	}
+	rpc NotifyChatRoomHeaderStateChange (.CChatRoom_ChatRoomHeaderState_Notification) returns (.NoResponse) {
+		option (method_description) = "Chat Room header / metadata has changed";
+	}
+	rpc NotifyChatRoomGroupRoomsChange (.CChatRoom_ChatRoomGroupRoomsChange_Notification) returns (.NoResponse) {
+		option (method_description) = "Something about a chatroom group changed (created, deleted, etc.)";
+	}
+	rpc NotifyShouldRejoinChatRoomVoiceChat (.CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification) returns (.NoResponse) {
+		option (method_description) = "Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat.";
+	}
+	rpc NotifyChatGroupUserStateChanged (.ChatRoomClient_NotifyChatGroupUserStateChanged_Notification) returns (.NoResponse) {
+		option (method_description) = "User chat group state (preferences, ack state, etc) have changed.";
+	}
+	rpc NotifyAckChatMessageEcho (.CChatRoom_AckChatMessage_Notification) returns (.NoResponse) {
+		option (method_description) = "A session acked an unread message, echo to other sessions.";
+	}
+}
+service ChatUsability {
+	option (service_description) = "Client notifications for chat events";
+	rpc NotifyClientUsabilityMetrics (.CChatUsability_ClientUsabilityMetrics_Notification) returns (.NoResponse) {
+		option (method_description) = "Incoming metrics from the client";
+	}
+}
+service ChatUsabilityClient {
+	option (service_description) = "Client notifications for chat usability";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyRequestClientUsabilityMetrics (.CChatUsability_RequestClientUsabilityMetrics_Notification) returns (.NoResponse) {
+		option (method_description) = "Request client send usability metrics";
+	}
+}
