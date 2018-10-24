@@ -30,6 +30,10 @@ class ETypeChar(SteamIntEnum):
 
 ETypeChars = ''.join(ETypeChar.__members__.keys())
 
+_steam_invite_hex = "0123456789abcdef"
+_steam_invite_valid_chrs = "0123456789abcdefghjkmnpqrtvw"
+steam_invite_dictionary = dict(zip(_steam_invite_hex, "bcdfghjkmnpqrtvw"))
+
 
 class SteamID(intBase):
     """
@@ -172,6 +176,31 @@ class SteamID(intBase):
             parts.append(instance)
 
         return '[%s]' % (':'.join(map(str, parts)))
+
+    @property
+    def as_invite_code(self):
+        """
+        :return: s.team invite code format (e.g. ``ABCD-1234``)
+        :rtype: :class:`str`
+        """
+        def repl_mapper(x):
+            return steam_invite_dictionary[x.group()]
+
+        invite_code = re.sub("["+_steam_invite_hex+"]", repl_mapper, "%x" % self.id)
+        split_idx = len(invite_code) // 2
+
+        if split_idx:
+            invite_code = invite_code[:split_idx] + '-' + invite_code[split_idx:]
+
+        return invite_code
+
+    @property
+    def steam_invite_url(self):
+        """
+        :return: e.g https://s.team/p/abcd-1234
+        :rtype: :class:`str`
+        """
+        return "https://s.team/p/" + self.as_invite_code
 
     @property
     def community_url(self):
