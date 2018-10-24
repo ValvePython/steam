@@ -8,35 +8,6 @@ class Account(object):
     def __init__(self, *args, **kwargs):
         super(Account, self).__init__(*args, **kwargs)
 
-    def create_account(self, account_name, password, email=''):
-        """Create a new Steam account
-
-        .. warning::
-            Disabled by Valve
-
-        :param account_name: desired account name
-        :type  account_name: :class:`str`
-        :param password: desired password
-        :type  password: :class:`str`
-        :param email: desired email
-        :type  email: :class:`str`
-        :return: (EResult, SteamID)
-        :rtype: :class:`tuple`
-        """
-        message = MsgProto(EMsg.ClientCreateAccountProto)
-        message.body.account_name = account_name
-        message.body.password = password
-
-        if email:
-            message.body.email = email
-
-        resp = self.send_job_and_wait(message, timeout=10)
-
-        if resp is None:
-            return EResult.Timeout, None
-        else:
-            return EResult(resp.eresult), SteamID(resp.steamid) if resp.steamid else None
-
     def request_validation_mail(self):
         """Request validation email
 
