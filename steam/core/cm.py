@@ -7,6 +7,7 @@ from collections import defaultdict
 
 from io import BytesIO
 
+import socket
 import gevent
 from random import shuffle
 
@@ -99,7 +100,7 @@ class CMClient(EventEmitter):
 
         :param retry: number of retries before returning. Unlimited when set to ``None``
         :type retry: :class:`int`
-        :param delay: delay in secnds before connection attempt
+        :param delay: delay in seconds before connection attempt
         :type delay: :class:`int`
         :return: successful connection
         :rtype: :class:`bool`
@@ -119,18 +120,26 @@ class CMClient(EventEmitter):
 
         self._LOG.debug("Connect initiated.")
 
+        if len(self.cm_servers) == 0 and not self.cm_servers.auto_discovery:
+            self._LOG.error("CM server list is empty.")
+            self._connecting = False
+            return False
+
         for i, server_addr in enumerate(self.cm_servers):
             if retry and i > retry:
+                self._connecting = False
                 return False
 
             start = time()
 
-            if self.connection.connect(server_addr):
-                break
+            if server_addr:
+                if self.connection.connect(server_addr):
+                    break
+                self._LOG.debug("Failed to connect. Retrying...")
+            else:
+                self._LOG.debug("No servers available. Retrying...")
 
             diff = time() - start
-
-            self._LOG.debug("Failed to connect. Retrying...")
 
             if diff < 5:
                 self.sleep(5 - diff)
@@ -400,6 +409,7 @@ class CMServerList(object):
 
     Good = 1
     Bad = 2
+    auto_discovery = True  #: whether to automatically try to bootstrap CM server list
 
     def __init__(self, bad_timespan=300):
         self._LOG = logging.getLogger("CMServerList")
@@ -407,7 +417,11 @@ class CMServerList(object):
         self.bad_timespan = bad_timespan
         self.list = defaultdict(dict)
 
-        self.bootstrap_from_builtin_list()
+    def __len__(self):
+        return len(self.list)
+
+    def __repr__(self):
+        return "<%s: %d servers>" % (self.__class__.__name__, len(self))
 
     def clear(self):
         """Clears the server list"""
@@ -415,38 +429,30 @@ class CMServerList(object):
             self._LOG.debug("List cleared.")
         self.list.clear()
 
-    def bootstrap_from_builtin_list(self):
+    def bootstrap_from_dns(self):
         """
-        Resets the server list to the built in one.
-        This method is called during initialization.
+        Fetches CM server list from WebAPI and replaces the current one
         """
-        self._LOG.debug("Bootstraping from builtin list")
-        self.clear()
+        self._LOG.debug("Attempting bootstrap via DNS")
 
-        # build-in list
-        self.merge_list([
-            ('162.254.193.7', 27018),
-            ('208.78.164.9', 27018),
-            ('208.78.164.11', 27017),
-            ('162.254.193.7', 27019),
-            ('162.254.193.47', 27017),
-            ('155.133.242.9', 27019),
-            ('208.78.164.14', 27018),
-            ('155.133.242.8', 27018),
-            ('162.254.195.45', 27017),
-            ('208.78.164.10', 27018),
-            ('208.78.164.12', 27017),
-            ('208.64.201.176', 27018),
-            ('146.66.152.10', 27017),
-            ('162.254.193.46', 27019),
-            ('185.25.180.14', 27017),
-            ('162.254.193.46', 27018),
-            ('155.133.242.9', 27017),
-            ('162.254.195.44', 27018),
-            ('162.254.195.45', 27018),
-            ('208.78.164.9', 27017),
-            ('208.78.164.11', 27019)
-        ])
+        try:
+            answer = socket.getaddrinfo("cm0.steampowered.com",
+                                        27017,
+                                        socket.AF_INET,
+                                        proto=socket.IPPROTO_TCP)
+        except Exception as exp:
+            self._LOG.error("DNS boostrap failed: %s" % str(exp))
+            return False
+
+        servers = list(map(lambda addr: addr[4], answer))
+
+        if servers:
+            self.clear()
+            self.merge_list(servers)
+            return True
+        else:
+            self._LOG.error("DNS boostrap: cm0.steampowered.com resolved no A records")
+            return False
 
     def bootstrap_from_webapi(self, cellid=0):
         """
@@ -461,7 +467,8 @@ class CMServerList(object):
 
         from steam import webapi
         try:
-            resp = webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid})
+            resp = webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid,
+                                                                         'http_timeout': 3})
         except Exception as exp:
             self._LOG.error("WebAPI boostrap failed: %s" % str(exp))
             return False
@@ -485,9 +492,22 @@ class CMServerList(object):
         return True
 
     def __iter__(self):
-        def genfunc():
+        def cm_server_iter():
             while True:
-                good_servers = list(filter(lambda x: x[1]['quality'] == CMServerList.Good, self.list.items()))
+                if self.auto_discovery:
+                    if not self.list:
+                        self.bootstrap_from_webapi()
+                    if not self.list:
+                        self.bootstrap_from_dns()
+                    if not self.list:
+                        yield None
+                elif not self.list:
+                    self._LOG.error("Server list is empty.")
+                    return
+
+                good_servers = list(filter(lambda x: x[1]['quality'] == CMServerList.Good,
+                                           self.list.items()
+                                           ))
 
                 if len(good_servers) == 0:
                     self.reset_all()
@@ -498,7 +518,7 @@ class CMServerList(object):
                 for server_addr, meta in good_servers:
                     yield server_addr
 
-        return genfunc()
+        return cm_server_iter()
 
     def reset_all(self):
         """Reset status for all servers in the list"""
