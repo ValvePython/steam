@@ -36,6 +36,18 @@ class UnifiedMessages(object):
         self.unified_messages = SteamUnifiedMessages(self, name)  #: instance of :class:`SteamUnifiedMessages`
 
 
+class UnifiedMessageError(object):
+    def __init__(self, eresult, message):
+        self.eresult = eresult
+        self.message = message
+
+    def __repr__(self):
+        return "%s(%s, %s)" % (self.__class__.__name__, self.eresult, repr(self.message))
+
+    def __str__(self):
+        return self.message
+
+
 class SteamUnifiedMessages(EventEmitter):
     """Simple API for send/recv of unified messages
 
@@ -66,18 +78,21 @@ class SteamUnifiedMessages(EventEmitter):
             self._LOG.error("Unable to find proto for %s" % repr(method_name))
             return
 
+        error = None
         if message.header.eresult != EResult.OK:
             self._LOG.error("%s (%s): %s" % (method_name, repr(EResult(message.header.eresult)),
                                              message.header.error_message))
+            error =  UnifiedMessageError(EResult(message.header.eresult),
+                                         message.header.error_message)
 
         resp = proto()
         resp.ParseFromString(message.body.serialized_method_response)
 
-        self.emit(method_name, resp)
+        self.emit(method_name, resp, error)
 
         jobid = message.header.jobid_target
         if jobid not in (-1, 18446744073709551615):
-            self.emit("job_%d" % jobid, resp)
+            self.emit("job_%d" % jobid, resp, error)
 
     def get(self, method_name):
         """Get request proto instance for given methed name
@@ -113,7 +128,7 @@ class SteamUnifiedMessages(EventEmitter):
         if isinstance(message, str):
             message = self.get(message)
         if message not in self._data:
-            raise ValueError("Supplied message seems to be invalid. Did you use 'get' method?")
+            raise ValueError("Supplied message is invalid. Use 'get' method.")
 
         if params:
             proto_fill_from_dict(message, params)
@@ -138,7 +153,7 @@ class SteamUnifiedMessages(EventEmitter):
         :param raises: (optional) On timeout if :class:`False` return :class:`None`, else raise :class:`gevent.Timeout`
         :type raises: :class:`bool`
         :return: response proto message instance
-        :rtype: proto message, :class:`None`
+        :rtype: (proto message, :class:`.UnifiedMessageError`)
         :raises: :class:`gevent.Timeout`
         """
         job_id = self.send(message, params)
@@ -146,4 +161,4 @@ class SteamUnifiedMessages(EventEmitter):
         if resp is None and not raises:
             return None
         else:
-            return resp[0]
+            return resp
