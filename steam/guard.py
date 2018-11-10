@@ -132,10 +132,13 @@ class SteamAuthenticator(object):
             if not medium.logged_on:
                 raise SteamAuthenticatorError("SteamClient instance not logged in")
 
-            resp = medium.unified_messages.send_and_wait("TwoFactor.%s#1" % action,
-                                                         params, timeout=10)
+            resp, error = medium.unified_messages.send_and_wait("TwoFactor.%s#1" % action,
+                                                                params, timeout=10)
+
+            if error:
+                raise SteamAuthenticatorError("Failed: %s" % str(error))
             if resp is None:
-                raise SteamAuthenticatorError("Failed to add authenticator. Request timeout")
+                raise SteamAuthenticatorError("Failed. Request timeout")
 
             resp = proto_to_dict(resp)
 
