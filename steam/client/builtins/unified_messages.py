@@ -36,8 +36,8 @@ class UnifiedMessages(object):
         self.unified_messages = SteamUnifiedMessages(self, name)  #: instance of :class:`SteamUnifiedMessages`
 
 
-class UnifiedMessageError(object):
-    def __init__(self, eresult, message):
+class UnifiedMessageError(Exception):
+    def __init__(self, message, eresult=EResult.Invalid):
         self.eresult = eresult
         self.message = message
 
@@ -45,7 +45,8 @@ class UnifiedMessageError(object):
         return "%s(%s, %s)" % (self.__class__.__name__, self.eresult, repr(self.message))
 
     def __str__(self):
-        return self.message
+        return "(%s) %s" % (self.eresult, self.message)
+
 
 
 class SteamUnifiedMessages(EventEmitter):
@@ -80,10 +81,9 @@ class SteamUnifiedMessages(EventEmitter):
 
         error = None
         if message.header.eresult != EResult.OK:
-            self._LOG.error("%s (%s): %s" % (method_name, repr(EResult(message.header.eresult)),
-                                             message.header.error_message))
-            error =  UnifiedMessageError(EResult(message.header.eresult),
-                                         message.header.error_message)
+            error = UnifiedMessageError(message.header.error_message,
+                                        EResult(message.header.eresult),
+                                        )
 
         resp = proto()
         resp.ParseFromString(message.body.serialized_method_response)
@@ -139,7 +139,7 @@ class SteamUnifiedMessages(EventEmitter):
 
         return self._steam.send_job(capsule)
 
-    def send_and_wait(self, message, params=None, timeout=None, raises=False):
+    def send_and_wait(self, message, params=None, timeout=10, raises=False):
         """Send service method request and wait for response
 
         :param message:
@@ -158,7 +158,4 @@ class SteamUnifiedMessages(EventEmitter):
         """
         job_id = self.send(message, params)
         resp = self.wait_event(job_id, timeout, raises=raises)
-        if resp is None and not raises:
-            return None
-        else:
-            return resp
+        return (None, None) if resp is None else resp

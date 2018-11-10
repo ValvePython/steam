@@ -10,7 +10,7 @@ from steam.client.builtins.gameservers import GameServers
 from steam.client.builtins.friends import Friends
 from steam.client.builtins.apps import Apps
 
-class BuiltinBase(Account, User, Web, UnifiedMessages, Leaderboards, GameServers, Friends, Apps):
+class BuiltinBase(GameServers, UnifiedMessages, Account, User, Web, Leaderboards, Friends, Apps):
     """
     This object is used as base to implement all high level functionality.
     The features are separated into submodules.
