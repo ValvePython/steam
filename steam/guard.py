@@ -367,9 +367,13 @@ class SteamAuthenticator(object):
         sess = self._get_web_session()
 
         try:
-            resp = sess.get('https://store.steampowered.com//phone/validate',
-                            params={'phoneNumber': phone_number},
-                            timeout=15).json()
+            resp = sess.post('https://store.steampowered.com/phone/validate',
+                             data={
+                                'phoneNumber': phone_number,
+                                'sessionID': sess.cookies.get('sessionid', domain='store.steampowered.com'),
+                                },
+                             allow_redirects=False,
+                             timeout=15).json()
         except:
             resp = {}
 
