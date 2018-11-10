@@ -241,7 +241,7 @@ class SteamAuthenticator(object):
         :return: list of codes
         :rtype: list
         """
-        return self._send_request('CreateEmergencyCodes', {}).get('code', [])
+        return self._send_request('CreateEmergencyCodes', {}).get('codes', [])
 
     def destroy_emergency_codes(self):
         """Destroy all emergency codes
