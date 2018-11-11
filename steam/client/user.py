@@ -26,6 +26,10 @@ class SteamUser(object):
             )
 
     def get_ps(self, field_name, wait_pstate=True):
+        """Get property from PersonaState
+
+        `See full list of available fields_names <https://github.com/ValvePython/steam/blob/fa8a5127e9bb23185483930da0b6ae85e93055a7/protobufs/steammessages_clientserver_friends.proto#L125-L153>`_
+        """
         if not wait_pstate or self._pstate_ready.wait(timeout=5):
             if self._pstate is None and wait_pstate:
                 self._steam.request_persona_state([self.steam_id])
