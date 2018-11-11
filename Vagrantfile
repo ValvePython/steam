@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
   end
   config.vm.define :ubuntu do |box|
-    box.vm.box = "bento/ubuntu-16.04"
+    box.vm.box = "bento/ubuntu-18.04"
     box.vm.host_name = 'ubuntu.local'
     box.vm.network "private_network", ip: "192.168.50.10"
 
