@@ -31,8 +31,7 @@ class SteamUser(object):
                 self._steam.request_persona_state([self.steam_id])
                 self._pstate_ready.wait(timeout=5)
 
-            if self._pstate and self._pstate.HasField(field_name):
-                return getattr(self._pstate, field_name)
+            return getattr(self._pstate, field_name)
         return None
 
     @property
@@ -63,6 +62,21 @@ class SteamUser(object):
         """
         state = self.get_ps('persona_state', False)
         return EPersonaState(state) if state else EPersonaState.Offline
+
+    @property
+    def rich_presence(self):
+        """Contains Rich Presence key-values
+
+        :rtype: dict
+        """
+        kvs = self.get_ps('rich_presence')
+        data = {}
+
+        if kvs:
+            for kv in kvs:
+                data[kv.key] = kv.value
+
+        return data
 
     def get_avatar_url(self, size=2):
         """Get URL to avatar picture
