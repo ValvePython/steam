@@ -23,7 +23,7 @@ For questions, issues or general curiosity visit the repo at `https://github.com
 Quick install
 -------------
 
-For system specific details, see `Install Details <http://steam.readthedocs.io/en/latest/install.html>`_.
+For system specific details, see `Installation Details <http://steam.readthedocs.io/en/latest/install.html>`_.
 
 Install latest version from PYPI
 

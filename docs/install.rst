@@ -1,5 +1,5 @@
-Full Installation
-=================
+Installation Details
+====================
 
 Linux
 -----
