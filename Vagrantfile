@@ -15,12 +15,13 @@ Vagrant.configure("2") do |config|
 #   box.vm.synced_folder "../csgo-python/csgo/", "/home/vagrant/csgo"
 
     box.vm.provision "shell", inline: <<-SHELL
+      set -x
       apt-get update
-      apt-get -y install build-essential libssl-dev libffi-dev python-dev
       apt-get -y install python-pip python-virtualenv
     SHELL
 
     box.vm.provision "shell", privileged: false, inline: <<-SHELL
+      set -x
       virtualenv -p python2 venv2
       source venv2/bin/activate
       pip install -r /vagrant/requirements.txt ipython

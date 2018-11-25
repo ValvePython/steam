@@ -16,14 +16,14 @@ Key features
 * `WebAuth <http://steam.readthedocs.io/en/latest/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
 
 Checkout the `User guide <http://steam.readthedocs.io/en/latest/user_guide.html>`_ for examples,
-or the `API Reference <http://steam.readthedocs.io/en/latest/api/index.html>`_ for details.
+or the `API Reference <http://steam.readthedocs.io/en/latest/api/steam.html>`_ for details.
 
 For questions, issues or general curiosity visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
 Quick install
 -------------
 
-For details on require system packages, see `Full Installation <http://steam.readthedocs.io/en/latest/install.html>`_.
+For system specific details, see `Install Details <http://steam.readthedocs.io/en/latest/install.html>`_.
 
 Install latest version from PYPI
 

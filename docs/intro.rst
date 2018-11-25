@@ -20,14 +20,14 @@ Key features
 * :doc:`WebAPI <api/steam.webapi>` - simple API for Steam's Web API with automatic population of interfaces
 * :doc:`WebAuth <api/steam.webauth>` - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
 
-Checkout the :doc:`user_guide` for examples, or the :doc:`api/index` for details.
+Checkout the :doc:`user_guide` for examples, or the :doc:`api/steam` for details.
 
 For questions, issues, or general curiosity, visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
 Quick install
 =============
 
-For details on require system packages, see :doc:`install`.
+For system specific details, see :doc:`install`.
 
 Install latest version from PYPI::
 

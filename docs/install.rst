@@ -14,23 +14,6 @@ Steps assume that ``python`` and ``pip`` are already installed.
     in order to keep you system packages untouched.
 
 
-Ubuntu/Debian
-^^^^^^^^^^^^^
-
-Replace ``python-dev`` with ``python3-dev`` for Python 3.
-
-.. code-block:: console
-
-    $ sudo apt-get install build-essential libssl-dev libffi-dev python-dev
-
-RHEL-based
-^^^^^^^^^^
-
-.. code-block:: console
-
-    $ sudo yum install gcc libffi-devel python-devel openssl-devel
-
-
 Windows
 -------
 
@@ -41,13 +24,7 @@ Cygwin
 
 2. During the setup select these additional packages
     - ``python3``
-    - ``python3-devel``
     - ``python3-setuptools``
-    - ``gcc-core``
-    - ``gcc-g++``
-    - ``libffi6``
-    - ``libffi-devel``
-    - ``openssl-devel``
 
 4. Install pip
     - Open cygwin terminal

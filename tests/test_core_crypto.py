@@ -45,18 +45,20 @@ class crypto_testcase(unittest.TestCase):
 #         self.assertEqual(key, expected_key)
 #         self.assertEqual(ekey, expected_ekey)
 
-    def test_encryption(self):
+    def test_encryption_legacy(self):
         message = b'My secret message'
         key = b'9' * 32
-        hmac = b'3' * 16
 
-        # legacy
         cyphertext = crypto.symmetric_encrypt(message, key)
         dmessage = crypto.symmetric_decrypt(cyphertext, key)
 
         self.assertEqual(message, dmessage)
 
-        # with HMAC
+    def test_encryption_hmac(self):
+        message = b'My secret message'
+        key = b'9' * 32
+        hmac = b'3' * 16
+
         cyphertext = crypto.symmetric_encrypt_HMAC(message, key, hmac)
         dmessage = crypto.symmetric_decrypt_HMAC(cyphertext, key, hmac)
 
