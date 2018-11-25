@@ -10,8 +10,8 @@
     :target: https://pypi.python.org/pypi/steam
     :alt: MIT License
 
-.. |coverage| image:: https://img.shields.io/coveralls/ValvePython/steam/master.svg?style=flat
-    :target: https://coveralls.io/r/ValvePython/steam?branch=master
+.. |coverage| image:: https://scrutinizer-ci.com/g/ValvePython/steam/badges/coverage.png?b=master
+    :target: https://scrutinizer-ci.com/g/ValvePython/steam/?branch=master
     :alt: Test coverage
 
 .. |scru| image:: https://scrutinizer-ci.com/g/ValvePython/steam/badges/quality-score.png?b=master

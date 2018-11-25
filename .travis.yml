@@ -8,11 +8,9 @@ python:
     - "3.6"
 install:
     - make init
-    - pip install coveralls
     - pip install scrutinizer-ocular
 script:
     - make test
     - make docs
 after_script:
-    - coveralls
     - ocular
