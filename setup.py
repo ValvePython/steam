@@ -16,7 +16,7 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
 
 install_requires = [
     'six>=1.10',
-    'cryptography>=1.3',
+    'pycryptodomex>=3.7.0',
     'requests>=2.9.1',
     'vdf>=2.0',
     'gevent>=1.2.0',
@@ -50,6 +50,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: PyPy',
     ],
     keywords='valve steam steamid api webapi steamcommunity',
     packages=['steam'] + ['steam.'+x for x in find_packages(where='steam')],

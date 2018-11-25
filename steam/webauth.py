@@ -60,12 +60,9 @@ from time import time
 from base64 import b64encode
 import requests
 
-from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicNumbers
-from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
-from steam.core.crypto import backend
-
 from steam import SteamID, webapi
 from steam.util.web import make_requests_session, generate_session_id
+from steam.core.crypto import rsa_publickey, pkcs1v15_encrypt
 
 if sys.version_info < (3,):
     intBase = long
@@ -108,12 +105,12 @@ class WebAuth(object):
         """
         try:
             resp = self.session.post('https://steamcommunity.com/login/getrsakey/',
-                                    timeout=15,
-                                    data={
-                                        'username': username,
-                                        'donotchache': int(time() * 1000),
-                                        },
-                                    ).json()
+                                     timeout=15,
+                                     data={
+                                         'username': username,
+                                         'donotchache': int(time() * 1000),
+                                         },
+                                     ).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
@@ -123,17 +120,15 @@ class WebAuth(object):
         if not self.key:
             resp = self.get_rsa_key(self.username)
 
-            nums = RSAPublicNumbers(intBase(resp['publickey_exp'], 16),
-                                    intBase(resp['publickey_mod'], 16),
-                                    )
-
-            self.key = backend.load_rsa_public_numbers(nums)
+            self.key = rsa_publickey(intBase(resp['publickey_mod'], 16),
+                                     intBase(resp['publickey_exp'], 16),
+                                     )
             self.timestamp = resp['timestamp']
 
     def _send_login(self, captcha='', email_code='', twofactor_code=''):
         data = {
-            'username' : self.username,
-            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
+            'username': self.username,
+            "password": b64encode(pkcs1v15_encrypt(self.key, self.password.encode('ascii'))),
             "emailauth": email_code,
             "emailsteamid": str(self.steam_id) if email_code else '',
             "twofactorcode": twofactor_code,

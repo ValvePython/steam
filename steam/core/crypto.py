@@ -5,20 +5,17 @@ import sys
 from os import urandom as random_bytes
 from struct import pack
 from base64 import b64decode
-from cryptography.hazmat.primitives.hmac import HMAC
-from cryptography.hazmat.primitives.hashes import Hash, SHA1
-from cryptography.hazmat.primitives.asymmetric.padding import PSS, OAEP, MGF1
-from cryptography.hazmat.primitives.ciphers import Cipher
-from cryptography.hazmat.primitives.ciphers.algorithms import AES
-from cryptography.hazmat.primitives.ciphers.modes import CBC, ECB
-import cryptography.hazmat.backends
-backend = cryptography.hazmat.backends.default_backend()
+
+from Cryptodome.Hash import SHA1, HMAC
+from Cryptodome.PublicKey.RSA import import_key as rsa_import_key, construct as rsa_construct
+from Cryptodome.Cipher import PKCS1_OAEP, PKCS1_v1_5
+from Cryptodome.Cipher import AES as AES
 
 
 class UniverseKey(object):
     """Public keys for Universes"""
 
-    Public = backend.load_der_public_key(b64decode("""
+    Public = rsa_import_key(b64decode("""
 MIGdMA0GCSqGSIb3DQEBAQUAA4GLADCBhwKBgQDf7BrWLBBmLBc1OhSwfFkRf53T
 2Ct64+AVzRkeRuh7h3SiGEYxqQMUeYKO6UWiSRKpI2hzic9pobFhRr3Bvr/WARvY
 gdTckPv+T1JzZsuVcNfFjrocejN1oWI0Rrtgt4Bo+hOneoo3S57G9F1fOpn5nsQ6
@@ -42,9 +39,9 @@ def generate_session_key(hmac_secret=b''):
     :rtype: :class:`tuple`
     """
     session_key = random_bytes(32)
-    encrypted_session_key = UniverseKey.Public.encrypt(session_key + hmac_secret,
-                                                       OAEP(MGF1(SHA1()), SHA1(), None)
-                                                       )
+    encrypted_session_key = PKCS1_OAEP.new(UniverseKey.Public, SHA1)\
+                                      .encrypt(session_key + hmac_secret)
+
     return (session_key, encrypted_session_key)
 
 def symmetric_encrypt(message, key):
@@ -58,13 +55,11 @@ def symmetric_encrypt_HMAC(message, key, hmac_secret):
     return symmetric_encrypt_with_iv(message, key, iv)
 
 def symmetric_encrypt_iv(iv, key):
-    encryptor =  Cipher(AES(key), ECB(), backend).encryptor()
-    return encryptor.update(iv) + encryptor.finalize()
+    return AES.new(key, AES.MODE_ECB).encrypt(iv)
 
 def symmetric_encrypt_with_iv(message, key, iv):
     encrypted_iv = symmetric_encrypt_iv(iv, key)
-    encryptor =  Cipher(AES(key), CBC(iv), backend).encryptor()
-    cyphertext = encryptor.update(pad(message)) + encryptor.finalize()
+    cyphertext = AES.new(key, AES.MODE_CBC, iv).encrypt(pad(message))
     return encrypted_iv + cyphertext
 
 def symmetric_decrypt(cyphertext, key):
@@ -84,19 +79,19 @@ def symmetric_decrypt_HMAC(cyphertext, key, hmac_secret):
     return message
 
 def symmetric_decrypt_iv(cyphertext, key):
-    decryptor =  Cipher(AES(key), ECB(), backend).decryptor()
-    return decryptor.update(cyphertext[:BS]) + decryptor.finalize()
+    return AES.new(key, AES.MODE_ECB).decrypt(cyphertext[:BS])
 
 def symmetric_decrypt_with_iv(cyphertext, key, iv):
-    decryptor =  Cipher(AES(key), CBC(iv), backend).decryptor()
-    return unpad(decryptor.update(cyphertext[BS:]) + decryptor.finalize())
+    return unpad(AES.new(key, AES.MODE_CBC, iv).decrypt(cyphertext[BS:]))
 
 def hmac_sha1(secret, data):
-    hmac = HMAC(secret, SHA1(), backend)
-    hmac.update(data)
-    return hmac.finalize()
+    return HMAC.new(secret, data, SHA1).digest()
 
 def sha1_hash(data):
-    sha = Hash(SHA1(), backend)
-    sha.update(data)
-    return sha.finalize()
+    return SHA1.new(data).digest()
+
+def rsa_publickey(mod, exp):
+    return rsa_construct((mod, exp))
+
+def pkcs1v15_encrypt(key, message):
+    return PKCS1_v1_5.new(key).encrypt(message)
