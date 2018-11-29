@@ -216,7 +216,7 @@ class MobileWebAuth(WebAuth):
     def _send_login(self, captcha='', email_code='', twofactor_code=''):
         data = {
             'username' : self.username,
-            "password": b64encode(self.key.encrypt(self.password.encode('ascii'), PKCS1v15())),
+            "password": b64encode(pkcs1v15_encrypt(self.key, self.password.encode('ascii'))),
             "emailauth": email_code,
             "emailsteamid": str(self.steam_id) if email_code else '',
             "twofactorcode": twofactor_code,
