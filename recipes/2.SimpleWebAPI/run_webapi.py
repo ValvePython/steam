@@ -1,5 +1,9 @@
+# https://github.com/ValvePython/steam/issues/97
+import gevent.monkey
+gevent.monkey.patch_all()
+
 from getpass import getpass
-from gevent.wsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 from steam_worker import SteamWorker
 from flask import Flask, request, abort, jsonify
 
@@ -39,11 +43,7 @@ if __name__ == "__main__":
     LOG.info("Starting Steam worker...")
 
     worker = SteamWorker()
-
-    try:
-        worker.start(username=raw_input('Username: '), password=getpass())
-    except:
-        raise SystemExit
+    worker.prompt_login()
 
     LOG.info("Starting HTTP server...")
     http_server = WSGIServer(('', 5000), app)

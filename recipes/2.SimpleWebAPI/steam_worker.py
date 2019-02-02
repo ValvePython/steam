@@ -13,7 +13,6 @@ LOG = logging.getLogger("Steam Worker")
 class SteamWorker(object):
     def __init__(self):
         self.logged_on_once = False
-        self.logon_details = {}
 
         self.steam = client = SteamClient()
         client.set_credential_location(".")
@@ -22,44 +21,14 @@ class SteamWorker(object):
         def handle_error(result):
             LOG.info("Logon result: %s", repr(result))
 
-        @client.on("channel_secured")
-        def send_login():
-            if client.relogin_available:
-                client.relogin()
-            else:
-                client.login(**self.logon_details)
-                self.logon_details.pop('auth_code', None)
-                self.logon_details.pop('two_factor_code', None)
-
         @client.on("connected")
         def handle_connected():
             LOG.info("Connected to %s", client.current_server_addr)
 
-        @client.on("reconnect")
-        def handle_reconnect(delay):
-            LOG.info("Reconnect in %ds...", delay)
-
-        @client.on("disconnected")
-        def handle_disconnect():
-            LOG.info("Disconnected.")
-
-            if self.logged_on_once:
-                LOG.info("Reconnecting...")
-                client.reconnect(maxdelay=30)
-
-        @client.on("auth_code_required")
-        def auth_code_prompt(is_2fa, mismatch):
-            if mismatch:
-                LOG.info("Previous code was incorrect")
-
-            if is_2fa:
-                code = raw_input("Enter 2FA Code: ")
-                self.logon_details['two_factor_code'] = code
-            else:
-                code = raw_input("Enter Email Code: ")
-                self.logon_details['auth_code'] = code
-
-            client.connect()
+        @client.on("channel_secured")
+        def send_login():
+            if self.logged_on_once and self.steam.relogin_available:
+                self.steam.relogin()
 
         @client.on("logged_on")
         def handle_after_logon():
@@ -72,21 +41,28 @@ class SteamWorker(object):
             LOG.info("Last logoff: %s", client.user.last_logoff)
             LOG.info("-"*30)
 
+        @client.on("disconnected")
+        def handle_disconnect():
+            LOG.info("Disconnected.")
 
-    def start(self, username, password):
-        self.logon_details = {
-            'username': username,
-            'password': password,
-            }
+            if self.logged_on_once:
+                LOG.info("Reconnecting...")
+                client.reconnect(maxdelay=30)
 
-        self.steam.connect()
-        self.steam.wait_event('logged_on')
+        @client.on("reconnect")
+        def handle_reconnect(delay):
+            LOG.info("Reconnect in %ds...", delay)
+
+    def prompt_login(self):
+        self.steam.cli_login()
 
     def close(self):
-        if self.steam.connected:
+        if self.steam.logged_on:
             self.logged_on_once = False
             LOG.info("Logout")
             self.steam.logout()
+        if self.steam.connected:
+            self.steam.disconnect()
 
     def get_product_info(self, appids=[], packageids=[]):
         resp = self.steam.send_job_and_wait(MsgProto(EMsg.ClientPICSProductInfoRequest),
@@ -102,11 +78,11 @@ class SteamWorker(object):
         resp = proto_to_dict(resp)
 
         for app in resp.get('apps', []):
-            app['appinfo'] = vdf.loads(app.pop('buffer').rstrip('\x00'))['appinfo']
-            app['sha'] = hexlify(app['sha'])
+            app['appinfo'] = vdf.loads(app.pop('buffer')[:-1].decode('utf-8', 'replace'))['appinfo']
+            app['sha'] = hexlify(app['sha']).decode('utf-8')
         for pkg in resp.get('packages', []):
             pkg['appinfo'] = vdf.binary_loads(pkg.pop('buffer')[4:])[str(pkg['packageid'])]
-            pkg['sha'] = hexlify(pkg['sha'])
+            pkg['sha'] = hexlify(pkg['sha']).decode('utf-8')
 
         return resp
 
