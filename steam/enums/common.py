@@ -528,7 +528,15 @@ class ECurrencyCode(SteamIntEnum):
     SAR = 31
     AED = 32
     SEK = 33
-    Max = 34
+    ARS = 34
+    ILS = 35
+    BYN = 36
+    KZT = 37
+    KWD = 38
+    QAR = 39
+    CRC = 40
+    UYU = 41
+    Max = 42
 
 
 # Do not remove
