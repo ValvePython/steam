@@ -458,22 +458,6 @@ message CMsgTrading_StartSession {
 	optional uint64 other_steamid = 1;
 }
 
-message CMsgClientEmailChange {
-	optional string password = 1;
-	optional string email = 2;
-	optional string code = 3;
-	optional bool final = 4;
-	optional bool newmethod = 5;
-	optional string twofactor_code = 6;
-	optional string sms_code = 7;
-	optional bool client_supports_sms = 8;
-}
-
-message CMsgClientEmailChangeResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional bool requires_sms_code = 2;
-}
-
 message CMsgClientGetCDNAuthToken {
 	optional uint32 depot_id = 1;
 	optional string host_name = 2;

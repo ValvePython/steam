@@ -1,5 +1,6 @@
 syntax = "proto2";
 package foobar;
+
 enum GCProtoBufMsgSrc {
 	GCProtoBufMsgSrc_Unspecified = 0;
 	GCProtoBufMsgSrc_FromSystem = 1;

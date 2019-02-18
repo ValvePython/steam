@@ -336,6 +336,7 @@ message CPublishedFile_QueryFiles_Request {
 
 	optional uint32 query_type = 1 [(description) = "enumeration EPublishedFileQueryType in clientenums.h"];
 	optional uint32 page = 2 [(description) = "Current page"];
+	optional string cursor = 39 [(description) = "Cursor to paginate through the results (set to '*' for the first request).  Prefer this over using the page parameter, as it will allow you to do deep pagination.  When used, the page parameter will be ignored."];
 	optional uint32 numperpage = 3 [default = 1, (description) = "(Optional) The number of results, per page to return."];
 	optional uint32 creator_appid = 4 [(description) = "App that created the files"];
 	optional uint32 appid = 5 [(description) = "App that consumes the files"];
@@ -370,6 +371,7 @@ message CPublishedFile_QueryFiles_Request {
 message CPublishedFile_QueryFiles_Response {
 	optional uint32 total = 1 [(description) = "Number of matches found, not necessarily number of items returned"];
 	repeated .PublishedFileDetails publishedfiledetails = 2 [(description) = "Each file details will be populated, depending on what return values were requested."];
+	optional string next_cursor = 3 [(description) = "If a paging cursor was used, then this will be the next cursor to use for paging through results"];
 }
 
 message CPublishedFile_AddAppRelationship_Request {

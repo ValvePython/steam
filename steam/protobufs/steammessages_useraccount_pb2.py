@@ -3,6 +3,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -22,11 +23,101 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_useraccount.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x1fsteammessages_useraccount.proto\x1a steammessages_unified_base.proto\"+\n)CUserAccount_GetAccountLinkStatus_Request\"Y\n*CUserAccount_GetAccountLinkStatus_Response\x12\x0c\n\x04pwid\x18\x01 \x01(\r\x12\x1d\n\x15identity_verification\x18\x02 \x01(\r\">\n\'CUserAccount_RegisterCompatTool_Request\x12\x13\n\x0b\x63ompat_tool\x18\x01 \x01(\r\"*\n(CUserAccount_RegisterCompatTool_Response2\xea\x02\n\x0bUserAccount\x12\x90\x01\n\x14GetAccountLinkStatus\x12*.CUserAccount_GetAccountLinkStatus_Request\x1a+.CUserAccount_GetAccountLinkStatus_Response\"\x1f\x82\xb5\x18\x1b\x46\x65tches account link status\x12\x98\x01\n\x12RegisterCompatTool\x12(.CUserAccount_RegisterCompatTool_Request\x1a).CUserAccount_RegisterCompatTool_Response\"-\x82\xb5\x18)Register intended account usage of a tool\x1a-\x82\xb5\x18)A service to get user account informationB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1fsteammessages_useraccount.proto\x1a steammessages_unified_base.proto\"+\n)CUserAccount_GetAccountLinkStatus_Request\"Y\n*CUserAccount_GetAccountLinkStatus_Response\x12\x0c\n\x04pwid\x18\x01 \x01(\r\x12\x1d\n\x15identity_verification\x18\x02 \x01(\r\"r\n,CUserAccount_CreateFriendInviteToken_Request\x12\x14\n\x0cinvite_limit\x18\x01 \x01(\r\x12\x17\n\x0finvite_duration\x18\x02 \x01(\r\x12\x13\n\x0binvite_note\x18\x03 \x01(\t\"\x99\x01\n-CUserAccount_CreateFriendInviteToken_Response\x12\x14\n\x0cinvite_token\x18\x01 \x01(\t\x12\x14\n\x0cinvite_limit\x18\x02 \x01(\x04\x12\x17\n\x0finvite_duration\x18\x03 \x01(\x04\x12\x14\n\x0ctime_created\x18\x04 \x01(\x07\x12\r\n\x05valid\x18\x05 \x01(\x08\",\n*CUserAccount_GetFriendInviteTokens_Request\"m\n+CUserAccount_GetFriendInviteTokens_Response\x12>\n\x06tokens\x18\x01 \x03(\x0b\x32..CUserAccount_CreateFriendInviteToken_Response\"D\n,CUserAccount_RevokeFriendInviteToken_Request\x12\x14\n\x0cinvite_token\x18\x01 \x01(\t\"/\n-CUserAccount_RevokeFriendInviteToken_Response\">\n\'CUserAccount_RegisterCompatTool_Request\x12\x13\n\x0b\x63ompat_tool\x18\x01 \x01(\r\"*\n(CUserAccount_RegisterCompatTool_Response\"\x9c\x03\n,CAccountLinking_GetLinkedAccountInfo_Request\x12H\n\x0c\x61\x63\x63ount_type\x18\x01 \x01(\x0e\x32\x15.EInternalAccountType:\x1bk_EInternalSteamAccountType\x12+\n\naccount_id\x18\x02 \x01(\x04\x42\x17\x82\xb5\x18\x13Internal account ID\x12t\n\x06\x66ilter\x18\x03 \x01(\x0e\x32\x15.EExternalAccountType:\x0fk_EExternalNoneB<\x82\xb5\x18\x38if specified then only return this external account type\x12\x7f\n\x13return_access_token\x18\x04 \x01(\x08\x42\x62\x82\xb5\x18^if provided and true, then returns valid access token if available. It may refresh the token. \"\x8b\x06\n-CAccountLinking_GetLinkedAccountInfo_Response\x12h\n\x11\x65xternal_accounts\x18\x01 \x03(\x0b\x32M.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response\x1a\xef\x04\n\x1e\x43\x45xternalAccountTuple_Response\x12=\n\rexternal_type\x18\x01 \x01(\x0e\x32\x15.EExternalAccountType:\x0fk_EExternalNone\x12;\n\x0b\x65xternal_id\x18\x02 \x01(\tB&\x82\xb5\x18\"unique external account identifier\x12:\n\x12\x65xternal_user_name\x18\x03 \x01(\tB\x1e\x82\xb5\x18\x1auser readable; best effort\x12S\n\x0c\x65xternal_url\x18\x04 \x01(\tB=\x82\xb5\x18\x39required for all, can be a sentinal to verify correctness\x12@\n\x0c\x61\x63\x63\x65ss_token\x18\x05 \x01(\tB*\x82\xb5\x18&provided if requeest and it was valid.\x12k\n\x13\x61\x63\x63\x65ss_token_secret\x18\x06 \x01(\tBN\x82\xb5\x18Jrequired for OAuth v1 and signing the message, provided with access token.\x12\x90\x01\n\x08is_valid\x18\x07 \x01(\x08\x42~\x82\xb5\x18zIf false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh.*\x8d\x01\n\x14\x45InternalAccountType\x12\x1f\n\x1bk_EInternalSteamAccountType\x10\x01\x12\x17\n\x13k_EInternalClanType\x10\x02\x12\x16\n\x12k_EInternalAppType\x10\x03\x12#\n\x1fk_EInternalBroadcastChannelType\x10\x04*\x86\x02\n\x14\x45\x45xternalAccountType\x12\x13\n\x0fk_EExternalNone\x10\x00\x12\x1b\n\x17k_EExternalSteamAccount\x10\x01\x12\x1c\n\x18k_EExternalGoogleAccount\x10\x02\x12\x1e\n\x1ak_EExternalFacebookAccount\x10\x03\x12\x1d\n\x19k_EExternalTwitterAccount\x10\x04\x12\x1c\n\x18k_EExternalTwitchAccount\x10\x05\x12$\n k_EExternalYouTubeChannelAccount\x10\x06\x12\x1b\n\x17k_EExternalFacebookPage\x10\x07\x32\xfa\x06\n\x0bUserAccount\x12\x90\x01\n\x14GetAccountLinkStatus\x12*.CUserAccount_GetAccountLinkStatus_Request\x1a+.CUserAccount_GetAccountLinkStatus_Response\"\x1f\x82\xb5\x18\x1b\x46\x65tches account link status\x12\xc4\x01\n\x17\x43reateFriendInviteToken\x12-.CUserAccount_CreateFriendInviteToken_Request\x1a..CUserAccount_CreateFriendInviteToken_Response\"J\x82\xb5\x18\x46\x43reate a limited-use token that can be used to create a friend request\x12\xa1\x01\n\x15GetFriendInviteTokens\x12+.CUserAccount_GetFriendInviteTokens_Request\x1a,.CUserAccount_GetFriendInviteTokens_Response\"-\x82\xb5\x18)Get the set of active tokens for the user\x12\xa2\x01\n\x17RevokeFriendInviteToken\x12-.CUserAccount_RevokeFriendInviteToken_Request\x1a..CUserAccount_RevokeFriendInviteToken_Response\"(\x82\xb5\x18$Revoke an active friend invite token\x12\x98\x01\n\x12RegisterCompatTool\x12(.CUserAccount_RegisterCompatTool_Request\x1a).CUserAccount_RegisterCompatTool_Response\"-\x82\xb5\x18)Register intended account usage of a tool\x1a-\x82\xb5\x18)A service to get user account information2\x9d\x02\n\x0e\x41\x63\x63ountLinking\x12\xd3\x01\n\x14GetLinkedAccountInfo\x12-.CAccountLinking_GetLinkedAccountInfo_Request\x1a..CAccountLinking_GetLinkedAccountInfo_Response\"\\\x82\xb5\x18XList all my active linked external accounts; may be requested to return the access token\x1a\x35\x82\xb5\x18\x31\x41 service to manage and link to external accountsB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
+_EINTERNALACCOUNTTYPE = _descriptor.EnumDescriptor(
+  name='EInternalAccountType',
+  full_name='EInternalAccountType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EInternalSteamAccountType', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EInternalClanType', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EInternalAppType', index=2, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EInternalBroadcastChannelType', index=3, number=4,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=2059,
+  serialized_end=2200,
+)
+_sym_db.RegisterEnumDescriptor(_EINTERNALACCOUNTTYPE)
+
+EInternalAccountType = enum_type_wrapper.EnumTypeWrapper(_EINTERNALACCOUNTTYPE)
+_EEXTERNALACCOUNTTYPE = _descriptor.EnumDescriptor(
+  name='EExternalAccountType',
+  full_name='EExternalAccountType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalNone', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalSteamAccount', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalGoogleAccount', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalFacebookAccount', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalTwitterAccount', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalTwitchAccount', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalYouTubeChannelAccount', index=6, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EExternalFacebookPage', index=7, number=7,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=2203,
+  serialized_end=2465,
+)
+_sym_db.RegisterEnumDescriptor(_EEXTERNALACCOUNTTYPE)
+
+EExternalAccountType = enum_type_wrapper.EnumTypeWrapper(_EEXTERNALACCOUNTTYPE)
+k_EInternalSteamAccountType = 1
+k_EInternalClanType = 2
+k_EInternalAppType = 3
+k_EInternalBroadcastChannelType = 4
+k_EExternalNone = 0
+k_EExternalSteamAccount = 1
+k_EExternalGoogleAccount = 2
+k_EExternalFacebookAccount = 3
+k_EExternalTwitterAccount = 4
+k_EExternalTwitchAccount = 5
+k_EExternalYouTubeChannelAccount = 6
+k_EExternalFacebookPage = 7
 
 
 
@@ -92,6 +183,220 @@ _CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CUSERACCOUNT_CREATEFRIENDINVITETOKEN_REQUEST = _descriptor.Descriptor(
+  name='CUserAccount_CreateFriendInviteToken_Request',
+  full_name='CUserAccount_CreateFriendInviteToken_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='invite_limit', full_name='CUserAccount_CreateFriendInviteToken_Request.invite_limit', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='invite_duration', full_name='CUserAccount_CreateFriendInviteToken_Request.invite_duration', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='invite_note', full_name='CUserAccount_CreateFriendInviteToken_Request.invite_note', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=205,
+  serialized_end=319,
+)
+
+
+_CUSERACCOUNT_CREATEFRIENDINVITETOKEN_RESPONSE = _descriptor.Descriptor(
+  name='CUserAccount_CreateFriendInviteToken_Response',
+  full_name='CUserAccount_CreateFriendInviteToken_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='invite_token', full_name='CUserAccount_CreateFriendInviteToken_Response.invite_token', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='invite_limit', full_name='CUserAccount_CreateFriendInviteToken_Response.invite_limit', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='invite_duration', full_name='CUserAccount_CreateFriendInviteToken_Response.invite_duration', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='time_created', full_name='CUserAccount_CreateFriendInviteToken_Response.time_created', index=3,
+      number=4, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='valid', full_name='CUserAccount_CreateFriendInviteToken_Response.valid', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=322,
+  serialized_end=475,
+)
+
+
+_CUSERACCOUNT_GETFRIENDINVITETOKENS_REQUEST = _descriptor.Descriptor(
+  name='CUserAccount_GetFriendInviteTokens_Request',
+  full_name='CUserAccount_GetFriendInviteTokens_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=477,
+  serialized_end=521,
+)
+
+
+_CUSERACCOUNT_GETFRIENDINVITETOKENS_RESPONSE = _descriptor.Descriptor(
+  name='CUserAccount_GetFriendInviteTokens_Response',
+  full_name='CUserAccount_GetFriendInviteTokens_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tokens', full_name='CUserAccount_GetFriendInviteTokens_Response.tokens', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=523,
+  serialized_end=632,
+)
+
+
+_CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_REQUEST = _descriptor.Descriptor(
+  name='CUserAccount_RevokeFriendInviteToken_Request',
+  full_name='CUserAccount_RevokeFriendInviteToken_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='invite_token', full_name='CUserAccount_RevokeFriendInviteToken_Request.invite_token', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=634,
+  serialized_end=702,
+)
+
+
+_CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_RESPONSE = _descriptor.Descriptor(
+  name='CUserAccount_RevokeFriendInviteToken_Response',
+  full_name='CUserAccount_RevokeFriendInviteToken_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=704,
+  serialized_end=751,
+)
+
+
 _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST = _descriptor.Descriptor(
   name='CUserAccount_RegisterCompatTool_Request',
   full_name='CUserAccount_RegisterCompatTool_Request',
@@ -118,8 +423,8 @@ _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=205,
-  serialized_end=267,
+  serialized_start=753,
+  serialized_end=815,
 )
 
 
@@ -142,14 +447,185 @@ _CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=269,
-  serialized_end=311,
+  serialized_start=817,
+  serialized_end=859,
 )
 
+
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST = _descriptor.Descriptor(
+  name='CAccountLinking_GetLinkedAccountInfo_Request',
+  full_name='CAccountLinking_GetLinkedAccountInfo_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='account_type', full_name='CAccountLinking_GetLinkedAccountInfo_Request.account_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='CAccountLinking_GetLinkedAccountInfo_Request.account_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\023Internal account ID'))),
+    _descriptor.FieldDescriptor(
+      name='filter', full_name='CAccountLinking_GetLinkedAccountInfo_Request.filter', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0308if specified then only return this external account type'))),
+    _descriptor.FieldDescriptor(
+      name='return_access_token', full_name='CAccountLinking_GetLinkedAccountInfo_Request.return_access_token', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030^if provided and true, then returns valid access token if available. It may refresh the token. '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=862,
+  serialized_end=1274,
+)
+
+
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE = _descriptor.Descriptor(
+  name='CExternalAccountTuple_Response',
+  full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='external_type', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.external_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='external_id', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.external_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\"unique external account identifier'))),
+    _descriptor.FieldDescriptor(
+      name='external_user_name', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.external_user_name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\032user readable; best effort'))),
+    _descriptor.FieldDescriptor(
+      name='external_url', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.external_url', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0309required for all, can be a sentinal to verify correctness'))),
+    _descriptor.FieldDescriptor(
+      name='access_token', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.access_token', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030&provided if requeest and it was valid.'))),
+    _descriptor.FieldDescriptor(
+      name='access_token_secret', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.access_token_secret', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030Jrequired for OAuth v1 and signing the message, provided with access token.'))),
+    _descriptor.FieldDescriptor(
+      name='is_valid', full_name='CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.is_valid', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030zIf false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh.'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1433,
+  serialized_end=2056,
+)
+
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE = _descriptor.Descriptor(
+  name='CAccountLinking_GetLinkedAccountInfo_Response',
+  full_name='CAccountLinking_GetLinkedAccountInfo_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='external_accounts', full_name='CAccountLinking_GetLinkedAccountInfo_Response.external_accounts', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1277,
+  serialized_end=2056,
+)
+
+_CUSERACCOUNT_GETFRIENDINVITETOKENS_RESPONSE.fields_by_name['tokens'].message_type = _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_RESPONSE
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['account_type'].enum_type = _EINTERNALACCOUNTTYPE
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['filter'].enum_type = _EEXTERNALACCOUNTTYPE
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_type'].enum_type = _EEXTERNALACCOUNTTYPE
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.containing_type = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE.fields_by_name['external_accounts'].message_type = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE
 DESCRIPTOR.message_types_by_name['CUserAccount_GetAccountLinkStatus_Request'] = _CUSERACCOUNT_GETACCOUNTLINKSTATUS_REQUEST
 DESCRIPTOR.message_types_by_name['CUserAccount_GetAccountLinkStatus_Response'] = _CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE
+DESCRIPTOR.message_types_by_name['CUserAccount_CreateFriendInviteToken_Request'] = _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_REQUEST
+DESCRIPTOR.message_types_by_name['CUserAccount_CreateFriendInviteToken_Response'] = _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_RESPONSE
+DESCRIPTOR.message_types_by_name['CUserAccount_GetFriendInviteTokens_Request'] = _CUSERACCOUNT_GETFRIENDINVITETOKENS_REQUEST
+DESCRIPTOR.message_types_by_name['CUserAccount_GetFriendInviteTokens_Response'] = _CUSERACCOUNT_GETFRIENDINVITETOKENS_RESPONSE
+DESCRIPTOR.message_types_by_name['CUserAccount_RevokeFriendInviteToken_Request'] = _CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_REQUEST
+DESCRIPTOR.message_types_by_name['CUserAccount_RevokeFriendInviteToken_Response'] = _CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_RESPONSE
 DESCRIPTOR.message_types_by_name['CUserAccount_RegisterCompatTool_Request'] = _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST
 DESCRIPTOR.message_types_by_name['CUserAccount_RegisterCompatTool_Response'] = _CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE
+DESCRIPTOR.message_types_by_name['CAccountLinking_GetLinkedAccountInfo_Request'] = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST
+DESCRIPTOR.message_types_by_name['CAccountLinking_GetLinkedAccountInfo_Response'] = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE
+DESCRIPTOR.enum_types_by_name['EInternalAccountType'] = _EINTERNALACCOUNTTYPE
+DESCRIPTOR.enum_types_by_name['EExternalAccountType'] = _EEXTERNALACCOUNTTYPE
 
 CUserAccount_GetAccountLinkStatus_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_GetAccountLinkStatus_Request', (_message.Message,), dict(
   DESCRIPTOR = _CUSERACCOUNT_GETACCOUNTLINKSTATUS_REQUEST,
@@ -165,6 +641,48 @@ CUserAccount_GetAccountLinkStatus_Response = _reflection.GeneratedProtocolMessag
   ))
 _sym_db.RegisterMessage(CUserAccount_GetAccountLinkStatus_Response)
 
+CUserAccount_CreateFriendInviteToken_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_CreateFriendInviteToken_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_REQUEST,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_CreateFriendInviteToken_Request)
+  ))
+_sym_db.RegisterMessage(CUserAccount_CreateFriendInviteToken_Request)
+
+CUserAccount_CreateFriendInviteToken_Response = _reflection.GeneratedProtocolMessageType('CUserAccount_CreateFriendInviteToken_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_RESPONSE,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_CreateFriendInviteToken_Response)
+  ))
+_sym_db.RegisterMessage(CUserAccount_CreateFriendInviteToken_Response)
+
+CUserAccount_GetFriendInviteTokens_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_GetFriendInviteTokens_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_GETFRIENDINVITETOKENS_REQUEST,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_GetFriendInviteTokens_Request)
+  ))
+_sym_db.RegisterMessage(CUserAccount_GetFriendInviteTokens_Request)
+
+CUserAccount_GetFriendInviteTokens_Response = _reflection.GeneratedProtocolMessageType('CUserAccount_GetFriendInviteTokens_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_GETFRIENDINVITETOKENS_RESPONSE,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_GetFriendInviteTokens_Response)
+  ))
+_sym_db.RegisterMessage(CUserAccount_GetFriendInviteTokens_Response)
+
+CUserAccount_RevokeFriendInviteToken_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_RevokeFriendInviteToken_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_REQUEST,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_RevokeFriendInviteToken_Request)
+  ))
+_sym_db.RegisterMessage(CUserAccount_RevokeFriendInviteToken_Request)
+
+CUserAccount_RevokeFriendInviteToken_Response = _reflection.GeneratedProtocolMessageType('CUserAccount_RevokeFriendInviteToken_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_RESPONSE,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CUserAccount_RevokeFriendInviteToken_Response)
+  ))
+_sym_db.RegisterMessage(CUserAccount_RevokeFriendInviteToken_Response)
+
 CUserAccount_RegisterCompatTool_Request = _reflection.GeneratedProtocolMessageType('CUserAccount_RegisterCompatTool_Request', (_message.Message,), dict(
   DESCRIPTOR = _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST,
   __module__ = 'steammessages_useraccount_pb2'
@@ -179,9 +697,49 @@ CUserAccount_RegisterCompatTool_Response = _reflection.GeneratedProtocolMessageT
   ))
 _sym_db.RegisterMessage(CUserAccount_RegisterCompatTool_Response)
 
+CAccountLinking_GetLinkedAccountInfo_Request = _reflection.GeneratedProtocolMessageType('CAccountLinking_GetLinkedAccountInfo_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CAccountLinking_GetLinkedAccountInfo_Request)
+  ))
+_sym_db.RegisterMessage(CAccountLinking_GetLinkedAccountInfo_Request)
+
+CAccountLinking_GetLinkedAccountInfo_Response = _reflection.GeneratedProtocolMessageType('CAccountLinking_GetLinkedAccountInfo_Response', (_message.Message,), dict(
+
+  CExternalAccountTuple_Response = _reflection.GeneratedProtocolMessageType('CExternalAccountTuple_Response', (_message.Message,), dict(
+    DESCRIPTOR = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE,
+    __module__ = 'steammessages_useraccount_pb2'
+    # @@protoc_insertion_point(class_scope:CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response)
+    ))
+  ,
+  DESCRIPTOR = _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE,
+  __module__ = 'steammessages_useraccount_pb2'
+  # @@protoc_insertion_point(class_scope:CAccountLinking_GetLinkedAccountInfo_Response)
+  ))
+_sym_db.RegisterMessage(CAccountLinking_GetLinkedAccountInfo_Response)
+_sym_db.RegisterMessage(CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response)
+
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['account_id'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['account_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\023Internal account ID'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['filter'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['filter']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0308if specified then only return this external account type'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['return_access_token'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST.fields_by_name['return_access_token']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030^if provided and true, then returns valid access token if available. It may refresh the token. '))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_id'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_id']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\"unique external account identifier'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_user_name'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_user_name']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030\032user readable; best effort'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_url'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['external_url']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0309required for all, can be a sentinal to verify correctness'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['access_token'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['access_token']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030&provided if requeest and it was valid.'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['access_token_secret'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['access_token_secret']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030Jrequired for OAuth v1 and signing the message, provided with access token.'))
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['is_valid'].has_options = True
+_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE.fields_by_name['is_valid']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030zIf false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh.'))
 
 _USERACCOUNT = _descriptor.ServiceDescriptor(
   name='UserAccount',
@@ -189,8 +747,8 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030)A service to get user account information')),
-  serialized_start=314,
-  serialized_end=676,
+  serialized_start=2468,
+  serialized_end=3358,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAccountLinkStatus',
@@ -202,9 +760,36 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030\033Fetches account link status')),
   ),
   _descriptor.MethodDescriptor(
+    name='CreateFriendInviteToken',
+    full_name='UserAccount.CreateFriendInviteToken',
+    index=1,
+    containing_service=None,
+    input_type=_CUSERACCOUNT_CREATEFRIENDINVITETOKEN_REQUEST,
+    output_type=_CUSERACCOUNT_CREATEFRIENDINVITETOKEN_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030FCreate a limited-use token that can be used to create a friend request')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetFriendInviteTokens',
+    full_name='UserAccount.GetFriendInviteTokens',
+    index=2,
+    containing_service=None,
+    input_type=_CUSERACCOUNT_GETFRIENDINVITETOKENS_REQUEST,
+    output_type=_CUSERACCOUNT_GETFRIENDINVITETOKENS_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030)Get the set of active tokens for the user')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='RevokeFriendInviteToken',
+    full_name='UserAccount.RevokeFriendInviteToken',
+    index=3,
+    containing_service=None,
+    input_type=_CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_REQUEST,
+    output_type=_CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030$Revoke an active friend invite token')),
+  ),
+  _descriptor.MethodDescriptor(
     name='RegisterCompatTool',
     full_name='UserAccount.RegisterCompatTool',
-    index=1,
+    index=4,
     containing_service=None,
     input_type=_CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST,
     output_type=_CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE,
@@ -219,6 +804,38 @@ UserAccount = service_reflection.GeneratedServiceType('UserAccount', (_service.S
 
 UserAccount_Stub = service_reflection.GeneratedServiceStubType('UserAccount_Stub', (UserAccount,), dict(
   DESCRIPTOR = _USERACCOUNT,
+  __module__ = 'steammessages_useraccount_pb2'
+  ))
+
+
+
+_ACCOUNTLINKING = _descriptor.ServiceDescriptor(
+  name='AccountLinking',
+  full_name='AccountLinking',
+  file=DESCRIPTOR,
+  index=1,
+  options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\0301A service to manage and link to external accounts')),
+  serialized_start=3361,
+  serialized_end=3646,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='GetLinkedAccountInfo',
+    full_name='AccountLinking.GetLinkedAccountInfo',
+    index=0,
+    containing_service=None,
+    input_type=_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST,
+    output_type=_CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\030XList all my active linked external accounts; may be requested to return the access token')),
+  ),
+])
+
+AccountLinking = service_reflection.GeneratedServiceType('AccountLinking', (_service.Service,), dict(
+  DESCRIPTOR = _ACCOUNTLINKING,
+  __module__ = 'steammessages_useraccount_pb2'
+  ))
+
+AccountLinking_Stub = service_reflection.GeneratedServiceStubType('AccountLinking_Stub', (AccountLinking,), dict(
+  DESCRIPTOR = _ACCOUNTLINKING,
   __module__ = 'steammessages_useraccount_pb2'
   ))
 

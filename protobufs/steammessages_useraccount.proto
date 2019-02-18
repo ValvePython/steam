@@ -3,12 +3,58 @@ import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
 
+enum EInternalAccountType {
+	k_EInternalSteamAccountType = 1;
+	k_EInternalClanType = 2;
+	k_EInternalAppType = 3;
+	k_EInternalBroadcastChannelType = 4;
+}
+
+enum EExternalAccountType {
+	k_EExternalNone = 0;
+	k_EExternalSteamAccount = 1;
+	k_EExternalGoogleAccount = 2;
+	k_EExternalFacebookAccount = 3;
+	k_EExternalTwitterAccount = 4;
+	k_EExternalTwitchAccount = 5;
+	k_EExternalYouTubeChannelAccount = 6;
+	k_EExternalFacebookPage = 7;
+}
+
 message CUserAccount_GetAccountLinkStatus_Request {
 }
 
 message CUserAccount_GetAccountLinkStatus_Response {
 	optional uint32 pwid = 1;
 	optional uint32 identity_verification = 2;
+}
+
+message CUserAccount_CreateFriendInviteToken_Request {
+	optional uint32 invite_limit = 1;
+	optional uint32 invite_duration = 2;
+	optional string invite_note = 3;
+}
+
+message CUserAccount_CreateFriendInviteToken_Response {
+	optional string invite_token = 1;
+	optional uint64 invite_limit = 2;
+	optional uint64 invite_duration = 3;
+	optional fixed32 time_created = 4;
+	optional bool valid = 5;
+}
+
+message CUserAccount_GetFriendInviteTokens_Request {
+}
+
+message CUserAccount_GetFriendInviteTokens_Response {
+	repeated .CUserAccount_CreateFriendInviteToken_Response tokens = 1;
+}
+
+message CUserAccount_RevokeFriendInviteToken_Request {
+	optional string invite_token = 1;
+}
+
+message CUserAccount_RevokeFriendInviteToken_Response {
 }
 
 message CUserAccount_RegisterCompatTool_Request {
@@ -18,12 +64,48 @@ message CUserAccount_RegisterCompatTool_Request {
 message CUserAccount_RegisterCompatTool_Response {
 }
 
+message CAccountLinking_GetLinkedAccountInfo_Request {
+	optional .EInternalAccountType account_type = 1 [default = k_EInternalSteamAccountType];
+	optional uint64 account_id = 2 [(description) = "Internal account ID"];
+	optional .EExternalAccountType filter = 3 [default = k_EExternalNone, (description) = "if specified then only return this external account type"];
+	optional bool return_access_token = 4 [(description) = "if provided and true, then returns valid access token if available. It may refresh the token. "];
+}
+
+message CAccountLinking_GetLinkedAccountInfo_Response {
+	message CExternalAccountTuple_Response {
+		optional .EExternalAccountType external_type = 1 [default = k_EExternalNone];
+		optional string external_id = 2 [(description) = "unique external account identifier"];
+		optional string external_user_name = 3 [(description) = "user readable; best effort"];
+		optional string external_url = 4 [(description) = "required for all, can be a sentinal to verify correctness"];
+		optional string access_token = 5 [(description) = "provided if requeest and it was valid."];
+		optional string access_token_secret = 6 [(description) = "required for OAuth v1 and signing the message, provided with access token."];
+		optional bool is_valid = 7 [(description) = "If false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh."];
+	}
+
+	repeated .CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response external_accounts = 1;
+}
+
 service UserAccount {
 	option (service_description) = "A service to get user account information";
 	rpc GetAccountLinkStatus (.CUserAccount_GetAccountLinkStatus_Request) returns (.CUserAccount_GetAccountLinkStatus_Response) {
 		option (method_description) = "Fetches account link status";
 	}
+	rpc CreateFriendInviteToken (.CUserAccount_CreateFriendInviteToken_Request) returns (.CUserAccount_CreateFriendInviteToken_Response) {
+		option (method_description) = "Create a limited-use token that can be used to create a friend request";
+	}
+	rpc GetFriendInviteTokens (.CUserAccount_GetFriendInviteTokens_Request) returns (.CUserAccount_GetFriendInviteTokens_Response) {
+		option (method_description) = "Get the set of active tokens for the user";
+	}
+	rpc RevokeFriendInviteToken (.CUserAccount_RevokeFriendInviteToken_Request) returns (.CUserAccount_RevokeFriendInviteToken_Response) {
+		option (method_description) = "Revoke an active friend invite token";
+	}
 	rpc RegisterCompatTool (.CUserAccount_RegisterCompatTool_Request) returns (.CUserAccount_RegisterCompatTool_Response) {
 		option (method_description) = "Register intended account usage of a tool";
+	}
+}
+service AccountLinking {
+	option (service_description) = "A service to manage and link to external accounts";
+	rpc GetLinkedAccountInfo (.CAccountLinking_GetLinkedAccountInfo_Request) returns (.CAccountLinking_GetLinkedAccountInfo_Response) {
+		option (method_description) = "List all my active linked external accounts; may be requested to return the access token";
 	}
 }

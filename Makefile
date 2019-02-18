@@ -58,16 +58,15 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt || exit 0
+	rename -v '.proto' '.proto.notouch' protobufs/{steammessages_physicalgoods,gc,test_messages}.proto
 	rename -v '.steamclient' '' protobufs/*.proto
-	sed -i '1d' protobufs/{steammessages_physicalgoods,test_messages}.proto
-	sed -i '1s/^/package foobar;\n/' protobufs/gc.proto
-	sed -i 's/optional \./optional foobar./' protobufs/gc.proto
 	sed -i '1s/^/syntax = "proto2"\;\n/' protobufs/*.proto
 	sed -i 's/cc_generic_services/py_generic_services/' protobufs/*.proto
 	sed -i 's/\.steamclient\.proto/.proto/' protobufs/*.proto
+	rename -v '.notouch' '' protobufs/*.proto.notouch
 
 pb_compile:
-	for filepath in `ls ./protobufs/*.proto`; do \
+	for filepath in ./protobufs/*.proto; do \
 		protoc3 --python_out ./steam/protobufs/ --proto_path=./protobufs "$$filepath"; \
 	done;
 	sed -i '/^import sys/! s/^import /import steam.protobufs./' steam/protobufs/*_pb2.py

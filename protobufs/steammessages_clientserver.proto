@@ -152,6 +152,7 @@ message CMsgClientGamesPlayed {
 		optional uint32 total_steam_controller_count = 18 [default = 0];
 		optional uint32 total_non_steam_controller_count = 19 [default = 0];
 		optional uint64 controller_workshop_file_id = 20 [default = 0];
+		optional uint32 launch_source = 21 [default = 0];
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
@@ -1170,5 +1171,15 @@ message CMsgClientClanState {
 	repeated .CMsgClientClanState.Event events = 6;
 	repeated .CMsgClientClanState.Event announcements = 7;
 	optional bool chat_room_private = 8;
+}
+
+message CMsgClientUnsignedInstallScript {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional uint32 file_size = 3;
+	optional bool signature_broken = 4;
+	optional uint32 depot_id = 5;
+	optional uint64 manifest_id = 6;
+	optional uint32 file_flags = 7;
 }
 

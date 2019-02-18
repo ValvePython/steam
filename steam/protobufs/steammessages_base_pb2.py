@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_base.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x18steammessages_base.proto\x1a google/protobuf/descriptor.proto\"\xc5\x04\n\x12\x43MsgProtoBufHeader\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10\x63lient_sessionid\x18\x02 \x01(\x05\x12\x15\n\rrouting_appid\x18\x03 \x01(\r\x12*\n\x0cjobid_source\x18\n \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12*\n\x0cjobid_target\x18\x0b \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x17\n\x0ftarget_job_name\x18\x0c \x01(\t\x12\x0f\n\x07seq_num\x18\x18 \x01(\x05\x12\x12\n\x07\x65result\x18\r \x01(\x05:\x01\x32\x12\x15\n\rerror_message\x18\x0e \x01(\t\x12\n\n\x02ip\x18\x0f \x01(\r\x12\x1a\n\x12\x61uth_account_flags\x18\x10 \x01(\r\x12\x14\n\x0ctoken_source\x18\x16 \x01(\r\x12\x1b\n\x13\x61\x64min_spoofing_user\x18\x17 \x01(\x08\x12\x1a\n\x0ftransport_error\x18\x11 \x01(\x05:\x01\x31\x12\'\n\tmessageid\x18\x12 \x01(\x04:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x1a\n\x12publisher_group_id\x18\x13 \x01(\r\x12\r\n\x05sysid\x18\x14 \x01(\r\x12\x11\n\ttrace_tag\x18\x15 \x01(\x04\x12\x15\n\rwebapi_key_id\x18\x19 \x01(\r\x12\x1f\n\x17is_from_external_source\x18\x1a \x01(\x08\x12\x18\n\x10\x66orward_to_sysid\x18\x1b \x03(\r\x12\x10\n\x08\x63m_sysid\x18\x1c \x01(\r\"8\n\tCMsgMulti\x12\x15\n\rsize_unzipped\x18\x01 \x01(\r\x12\x14\n\x0cmessage_body\x18\x02 \x01(\x0c\"+\n\x13\x43MsgProtobufWrapped\x12\x14\n\x0cmessage_body\x18\x01 \x01(\x0c\"\x8f\x01\n\x0e\x43MsgAuthTicket\x12\x0e\n\x06\x65state\x18\x01 \x01(\r\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x0e\n\x06gameid\x18\x04 \x01(\x06\x12\x14\n\x0ch_steam_pipe\x18\x05 \x01(\r\x12\x12\n\nticket_crc\x18\x06 \x01(\r\x12\x0e\n\x06ticket\x18\x07 \x01(\x0c\"\xf6\x01\n\x14\x43\x43\x44\x44\x42\x41ppDetailCommon\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x0c\n\x04logo\x18\x04 \x01(\t\x12\x12\n\nlogo_small\x18\x05 \x01(\t\x12\x0c\n\x04tool\x18\x06 \x01(\x08\x12\x0c\n\x04\x64\x65mo\x18\x07 \x01(\x08\x12\r\n\x05media\x18\x08 \x01(\x08\x12\x1f\n\x17\x63ommunity_visible_stats\x18\t \x01(\x08\x12\x15\n\rfriendly_name\x18\n \x01(\t\x12\x13\n\x0bpropagation\x18\x0b \x01(\t\x12\x19\n\x11has_adult_content\x18\x0c \x01(\x08\"\xef\x02\n\rCMsgAppRights\x12\x11\n\tedit_info\x18\x01 \x01(\x08\x12\x0f\n\x07publish\x18\x02 \x01(\x08\x12\x17\n\x0fview_error_data\x18\x03 \x01(\x08\x12\x10\n\x08\x64ownload\x18\x04 \x01(\x08\x12\x15\n\rupload_cdkeys\x18\x05 \x01(\x08\x12\x17\n\x0fgenerate_cdkeys\x18\x06 \x01(\x08\x12\x17\n\x0fview_financials\x18\x07 \x01(\x08\x12\x12\n\nmanage_ceg\x18\x08 \x01(\x08\x12\x16\n\x0emanage_signing\x18\t \x01(\x08\x12\x15\n\rmanage_cdkeys\x18\n \x01(\x08\x12\x16\n\x0e\x65\x64it_marketing\x18\x0b \x01(\x08\x12\x17\n\x0f\x65\x63onomy_support\x18\x0c \x01(\x08\x12\"\n\x1a\x65\x63onomy_support_supervisor\x18\r \x01(\x08\x12\x16\n\x0emanage_pricing\x18\x0e \x01(\x08\x12\x16\n\x0e\x62roadcast_live\x18\x0f \x01(\x08\"\xf1\x02\n\x13\x43\x43uratorPreferences\x12\x1b\n\x13supported_languages\x18\x01 \x01(\r\x12\x18\n\x10platform_windows\x18\x02 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x03 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x04 \x01(\x08\x12\x12\n\nvr_content\x18\x05 \x01(\x08\x12\x1e\n\x16\x61\x64ult_content_violence\x18\x06 \x01(\x08\x12\x19\n\x11\x61\x64ult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x16\n\x0etagids_curated\x18\t \x03(\r\x12\x17\n\x0ftagids_filtered\x18\n \x03(\r\x12\x15\n\rwebsite_title\x18\x0b \x01(\t\x12\x13\n\x0bwebsite_url\x18\x0c \x01(\t\x12\x16\n\x0e\x64iscussion_url\x18\r \x01(\t\x12\x16\n\x0eshow_broadcast\x18\x0e \x01(\x08\"@\n\x12\x43LocalizationToken\x12\x10\n\x08language\x18\x01 \x01(\r\x12\x18\n\x10localized_string\x18\x02 \x01(\t:A\n\x12msgpool_soft_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd0\x86\x03 \x01(\x05:\x02\x33\x32:B\n\x12msgpool_hard_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd1\x86\x03 \x01(\x05:\x03\x33\x38\x34:C\n\x14\x66orce_php_generation\x12\x1c.google.protobuf.FileOptions\x18\xd0\x86\x03 \x01(\x08:\x05\x66\x61lse:H\n\x18php_output_always_number\x12\x1d.google.protobuf.FieldOptions\x18\xe4\x86\x03 \x01(\x08:\x05\x66\x61lseB\x05H\x01\x90\x01\x00')
+  serialized_pb=_b('\n\x18steammessages_base.proto\x1a google/protobuf/descriptor.proto\"1\n\rCMsgIPAddress\x12\x0c\n\x02v4\x18\x01 \x01(\x07H\x00\x12\x0c\n\x02v6\x18\x02 \x01(\x0cH\x00\x42\x04\n\x02ip\"\xf5\x04\n\x12\x43MsgProtoBufHeader\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10\x63lient_sessionid\x18\x02 \x01(\x05\x12\x15\n\rrouting_appid\x18\x03 \x01(\r\x12*\n\x0cjobid_source\x18\n \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12*\n\x0cjobid_target\x18\x0b \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x17\n\x0ftarget_job_name\x18\x0c \x01(\t\x12\x0f\n\x07seq_num\x18\x18 \x01(\x05\x12\x12\n\x07\x65result\x18\r \x01(\x05:\x01\x32\x12\x15\n\rerror_message\x18\x0e \x01(\t\x12\x1a\n\x12\x61uth_account_flags\x18\x10 \x01(\r\x12\x14\n\x0ctoken_source\x18\x16 \x01(\r\x12\x1b\n\x13\x61\x64min_spoofing_user\x18\x17 \x01(\x08\x12\x1a\n\x0ftransport_error\x18\x11 \x01(\x05:\x01\x31\x12\'\n\tmessageid\x18\x12 \x01(\x04:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x1a\n\x12publisher_group_id\x18\x13 \x01(\r\x12\r\n\x05sysid\x18\x14 \x01(\r\x12\x11\n\ttrace_tag\x18\x15 \x01(\x04\x12\x15\n\rwebapi_key_id\x18\x19 \x01(\r\x12\x1f\n\x17is_from_external_source\x18\x1a \x01(\x08\x12\x18\n\x10\x66orward_to_sysid\x18\x1b \x03(\r\x12\x10\n\x08\x63m_sysid\x18\x1c \x01(\r\x12\x10\n\x08wg_token\x18\x1e \x01(\t\x12\x0c\n\x02ip\x18\x0f \x01(\rH\x00\x12\x0f\n\x05ip_v6\x18\x1d \x01(\x0cH\x00\x42\t\n\x07ip_addr\"8\n\tCMsgMulti\x12\x15\n\rsize_unzipped\x18\x01 \x01(\r\x12\x14\n\x0cmessage_body\x18\x02 \x01(\x0c\"+\n\x13\x43MsgProtobufWrapped\x12\x14\n\x0cmessage_body\x18\x01 \x01(\x0c\"\x8f\x01\n\x0e\x43MsgAuthTicket\x12\x0e\n\x06\x65state\x18\x01 \x01(\r\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x0e\n\x06gameid\x18\x04 \x01(\x06\x12\x14\n\x0ch_steam_pipe\x18\x05 \x01(\r\x12\x12\n\nticket_crc\x18\x06 \x01(\r\x12\x0e\n\x06ticket\x18\x07 \x01(\x0c\"\xf6\x01\n\x14\x43\x43\x44\x44\x42\x41ppDetailCommon\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x0c\n\x04logo\x18\x04 \x01(\t\x12\x12\n\nlogo_small\x18\x05 \x01(\t\x12\x0c\n\x04tool\x18\x06 \x01(\x08\x12\x0c\n\x04\x64\x65mo\x18\x07 \x01(\x08\x12\r\n\x05media\x18\x08 \x01(\x08\x12\x1f\n\x17\x63ommunity_visible_stats\x18\t \x01(\x08\x12\x15\n\rfriendly_name\x18\n \x01(\t\x12\x13\n\x0bpropagation\x18\x0b \x01(\t\x12\x19\n\x11has_adult_content\x18\x0c \x01(\x08\"\xef\x02\n\rCMsgAppRights\x12\x11\n\tedit_info\x18\x01 \x01(\x08\x12\x0f\n\x07publish\x18\x02 \x01(\x08\x12\x17\n\x0fview_error_data\x18\x03 \x01(\x08\x12\x10\n\x08\x64ownload\x18\x04 \x01(\x08\x12\x15\n\rupload_cdkeys\x18\x05 \x01(\x08\x12\x17\n\x0fgenerate_cdkeys\x18\x06 \x01(\x08\x12\x17\n\x0fview_financials\x18\x07 \x01(\x08\x12\x12\n\nmanage_ceg\x18\x08 \x01(\x08\x12\x16\n\x0emanage_signing\x18\t \x01(\x08\x12\x15\n\rmanage_cdkeys\x18\n \x01(\x08\x12\x16\n\x0e\x65\x64it_marketing\x18\x0b \x01(\x08\x12\x17\n\x0f\x65\x63onomy_support\x18\x0c \x01(\x08\x12\"\n\x1a\x65\x63onomy_support_supervisor\x18\r \x01(\x08\x12\x16\n\x0emanage_pricing\x18\x0e \x01(\x08\x12\x16\n\x0e\x62roadcast_live\x18\x0f \x01(\x08\"\xf1\x02\n\x13\x43\x43uratorPreferences\x12\x1b\n\x13supported_languages\x18\x01 \x01(\r\x12\x18\n\x10platform_windows\x18\x02 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x03 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x04 \x01(\x08\x12\x12\n\nvr_content\x18\x05 \x01(\x08\x12\x1e\n\x16\x61\x64ult_content_violence\x18\x06 \x01(\x08\x12\x19\n\x11\x61\x64ult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x16\n\x0etagids_curated\x18\t \x03(\r\x12\x17\n\x0ftagids_filtered\x18\n \x03(\r\x12\x15\n\rwebsite_title\x18\x0b \x01(\t\x12\x13\n\x0bwebsite_url\x18\x0c \x01(\t\x12\x16\n\x0e\x64iscussion_url\x18\r \x01(\t\x12\x16\n\x0eshow_broadcast\x18\x0e \x01(\x08\"@\n\x12\x43LocalizationToken\x12\x10\n\x08language\x18\x01 \x01(\r\x12\x18\n\x10localized_string\x18\x02 \x01(\t:A\n\x12msgpool_soft_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd0\x86\x03 \x01(\x05:\x02\x33\x32:B\n\x12msgpool_hard_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd1\x86\x03 \x01(\x05:\x03\x33\x38\x34:C\n\x14\x66orce_php_generation\x12\x1c.google.protobuf.FileOptions\x18\xd0\x86\x03 \x01(\x08:\x05\x66\x61lse:H\n\x18php_output_always_number\x12\x1d.google.protobuf.FieldOptions\x18\xe4\x86\x03 \x01(\x08:\x05\x66\x61lseB\x05H\x01\x90\x01\x00')
   ,
   dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -58,6 +58,47 @@ php_output_always_number = _descriptor.FieldDescriptor(
   message_type=None, enum_type=None, containing_type=None,
   is_extension=True, extension_scope=None,
   options=None)
+
+
+_CMSGIPADDRESS = _descriptor.Descriptor(
+  name='CMsgIPAddress',
+  full_name='CMsgIPAddress',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='v4', full_name='CMsgIPAddress.v4', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='v6', full_name='CMsgIPAddress.v6', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='ip', full_name='CMsgIPAddress.ip',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=62,
+  serialized_end=111,
+)
 
 
 _CMSGPROTOBUFHEADER = _descriptor.Descriptor(
@@ -131,93 +172,107 @@ _CMSGPROTOBUFHEADER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ip', full_name='CMsgProtoBufHeader.ip', index=9,
-      number=15, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='auth_account_flags', full_name='CMsgProtoBufHeader.auth_account_flags', index=10,
+      name='auth_account_flags', full_name='CMsgProtoBufHeader.auth_account_flags', index=9,
       number=16, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='token_source', full_name='CMsgProtoBufHeader.token_source', index=11,
+      name='token_source', full_name='CMsgProtoBufHeader.token_source', index=10,
       number=22, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='admin_spoofing_user', full_name='CMsgProtoBufHeader.admin_spoofing_user', index=12,
+      name='admin_spoofing_user', full_name='CMsgProtoBufHeader.admin_spoofing_user', index=11,
       number=23, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='transport_error', full_name='CMsgProtoBufHeader.transport_error', index=13,
+      name='transport_error', full_name='CMsgProtoBufHeader.transport_error', index=12,
       number=17, type=5, cpp_type=1, label=1,
       has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='messageid', full_name='CMsgProtoBufHeader.messageid', index=14,
+      name='messageid', full_name='CMsgProtoBufHeader.messageid', index=13,
       number=18, type=4, cpp_type=4, label=1,
       has_default_value=True, default_value=18446744073709551615,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='publisher_group_id', full_name='CMsgProtoBufHeader.publisher_group_id', index=15,
+      name='publisher_group_id', full_name='CMsgProtoBufHeader.publisher_group_id', index=14,
       number=19, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sysid', full_name='CMsgProtoBufHeader.sysid', index=16,
+      name='sysid', full_name='CMsgProtoBufHeader.sysid', index=15,
       number=20, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='trace_tag', full_name='CMsgProtoBufHeader.trace_tag', index=17,
+      name='trace_tag', full_name='CMsgProtoBufHeader.trace_tag', index=16,
       number=21, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='webapi_key_id', full_name='CMsgProtoBufHeader.webapi_key_id', index=18,
+      name='webapi_key_id', full_name='CMsgProtoBufHeader.webapi_key_id', index=17,
       number=25, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='is_from_external_source', full_name='CMsgProtoBufHeader.is_from_external_source', index=19,
+      name='is_from_external_source', full_name='CMsgProtoBufHeader.is_from_external_source', index=18,
       number=26, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='forward_to_sysid', full_name='CMsgProtoBufHeader.forward_to_sysid', index=20,
+      name='forward_to_sysid', full_name='CMsgProtoBufHeader.forward_to_sysid', index=19,
       number=27, type=13, cpp_type=3, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='cm_sysid', full_name='CMsgProtoBufHeader.cm_sysid', index=21,
+      name='cm_sysid', full_name='CMsgProtoBufHeader.cm_sysid', index=20,
       number=28, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='wg_token', full_name='CMsgProtoBufHeader.wg_token', index=21,
+      number=30, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='CMsgProtoBufHeader.ip', index=22,
+      number=15, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ip_v6', full_name='CMsgProtoBufHeader.ip_v6', index=23,
+      number=29, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -232,9 +287,12 @@ _CMSGPROTOBUFHEADER = _descriptor.Descriptor(
   syntax='proto2',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='ip_addr', full_name='CMsgProtoBufHeader.ip_addr',
+      index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=63,
-  serialized_end=644,
+  serialized_start=114,
+  serialized_end=743,
 )
 
 
@@ -271,8 +329,8 @@ _CMSGMULTI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=646,
-  serialized_end=702,
+  serialized_start=745,
+  serialized_end=801,
 )
 
 
@@ -302,8 +360,8 @@ _CMSGPROTOBUFWRAPPED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=704,
-  serialized_end=747,
+  serialized_start=803,
+  serialized_end=846,
 )
 
 
@@ -375,8 +433,8 @@ _CMSGAUTHTICKET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=750,
-  serialized_end=893,
+  serialized_start=849,
+  serialized_end=992,
 )
 
 
@@ -483,8 +541,8 @@ _CCDDBAPPDETAILCOMMON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=896,
-  serialized_end=1142,
+  serialized_start=995,
+  serialized_end=1241,
 )
 
 
@@ -612,8 +670,8 @@ _CMSGAPPRIGHTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1145,
-  serialized_end=1512,
+  serialized_start=1244,
+  serialized_end=1611,
 )
 
 
@@ -734,8 +792,8 @@ _CCURATORPREFERENCES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1515,
-  serialized_end=1884,
+  serialized_start=1614,
+  serialized_end=1983,
 )
 
 
@@ -772,10 +830,23 @@ _CLOCALIZATIONTOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1886,
-  serialized_end=1950,
+  serialized_start=1985,
+  serialized_end=2049,
 )
 
+_CMSGIPADDRESS.oneofs_by_name['ip'].fields.append(
+  _CMSGIPADDRESS.fields_by_name['v4'])
+_CMSGIPADDRESS.fields_by_name['v4'].containing_oneof = _CMSGIPADDRESS.oneofs_by_name['ip']
+_CMSGIPADDRESS.oneofs_by_name['ip'].fields.append(
+  _CMSGIPADDRESS.fields_by_name['v6'])
+_CMSGIPADDRESS.fields_by_name['v6'].containing_oneof = _CMSGIPADDRESS.oneofs_by_name['ip']
+_CMSGPROTOBUFHEADER.oneofs_by_name['ip_addr'].fields.append(
+  _CMSGPROTOBUFHEADER.fields_by_name['ip'])
+_CMSGPROTOBUFHEADER.fields_by_name['ip'].containing_oneof = _CMSGPROTOBUFHEADER.oneofs_by_name['ip_addr']
+_CMSGPROTOBUFHEADER.oneofs_by_name['ip_addr'].fields.append(
+  _CMSGPROTOBUFHEADER.fields_by_name['ip_v6'])
+_CMSGPROTOBUFHEADER.fields_by_name['ip_v6'].containing_oneof = _CMSGPROTOBUFHEADER.oneofs_by_name['ip_addr']
+DESCRIPTOR.message_types_by_name['CMsgIPAddress'] = _CMSGIPADDRESS
 DESCRIPTOR.message_types_by_name['CMsgProtoBufHeader'] = _CMSGPROTOBUFHEADER
 DESCRIPTOR.message_types_by_name['CMsgMulti'] = _CMSGMULTI
 DESCRIPTOR.message_types_by_name['CMsgProtobufWrapped'] = _CMSGPROTOBUFWRAPPED
@@ -788,6 +859,13 @@ DESCRIPTOR.extensions_by_name['msgpool_soft_limit'] = msgpool_soft_limit
 DESCRIPTOR.extensions_by_name['msgpool_hard_limit'] = msgpool_hard_limit
 DESCRIPTOR.extensions_by_name['force_php_generation'] = force_php_generation
 DESCRIPTOR.extensions_by_name['php_output_always_number'] = php_output_always_number
+
+CMsgIPAddress = _reflection.GeneratedProtocolMessageType('CMsgIPAddress', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGIPADDRESS,
+  __module__ = 'steammessages_base_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgIPAddress)
+  ))
+_sym_db.RegisterMessage(CMsgIPAddress)
 
 CMsgProtoBufHeader = _reflection.GeneratedProtocolMessageType('CMsgProtoBufHeader', (_message.Message,), dict(
   DESCRIPTOR = _CMSGPROTOBUFHEADER,
