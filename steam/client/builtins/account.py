@@ -68,37 +68,3 @@ class Account(object):
             return EResult.Timeout
         else:
             return EResult(resp.eresult)
-
-    def change_email(self, password, email, code=''):
-        """Change account's email address
-
-        :param password: current account password
-        :type  password: :class:`str`
-        :param email: new email address
-        :type  email: :class:`str`
-        :param code: email code
-        :type  code: :class:`str`
-        :return: result
-        :rtype: :class:`.EResult`
-
-        .. note::
-            To change email, first call without ``code``
-            and then with, to finalize the change
-        """
-        message = MsgProto(EMsg.ClientEmailChange4)
-        message.body.password = password
-        message.body.email = email
-
-        if code:
-            message.body.code = code
-
-        message.body.final = not not code
-        message.body.newmethod = True
-        message.body.client_supports_sms = True
-
-        resp = self.send_job_and_wait(message, timeout=10)
-
-        if resp is None:
-            return EResult.Timeout
-        else:
-            return EResult(resp.eresult)

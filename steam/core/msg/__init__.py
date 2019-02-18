@@ -18,8 +18,8 @@ cmsg_lookup_predefined = {
     EMsg.ServiceMethodResponse: steammessages_clientserver_2_pb2.CMsgClientServiceMethodResponse,
     EMsg.ClientGetNumberOfCurrentPlayersDP: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayers,
     EMsg.ClientGetNumberOfCurrentPlayersDPResponse: steammessages_clientserver_2_pb2.CMsgDPGetNumberOfCurrentPlayersResponse,
-    EMsg.ClientEmailChange4: steammessages_clientserver_2_pb2.CMsgClientEmailChange,
-    EMsg.ClientEmailChangeResponse4: steammessages_clientserver_2_pb2.CMsgClientEmailChangeResponse,
+#   EMsg.ClientEmailChange4: steammessages_clientserver_2_pb2.CMsgClientEmailChange,
+#   EMsg.ClientEmailChangeResponse4: steammessages_clientserver_2_pb2.CMsgClientEmailChangeResponse,
     EMsg.ClientLogonGameServer: steammessages_clientserver_login_pb2.CMsgClientLogon,
 }
 
