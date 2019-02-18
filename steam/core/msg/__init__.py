@@ -23,6 +23,7 @@ cmsg_lookup_predefined = {
 #   EMsg.ClientEmailChange4: steammessages_clientserver_2_pb2.CMsgClientEmailChange,
 #   EMsg.ClientEmailChangeResponse4: steammessages_clientserver_2_pb2.CMsgClientEmailChangeResponse,
     EMsg.ClientLogonGameServer: steammessages_clientserver_login_pb2.CMsgClientLogon,
+    EMsg.ClientCurrentUIMode: steammessages_clientserver_2_pb2.CMsgClientUIMode,
 }
 
 cmsg_lookup = dict()

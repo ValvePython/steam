@@ -533,6 +533,8 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.client_language = "english"
         message.body.should_remember_password = True
         message.body.supports_rate_limit_response = True
+        message.body.ui_mode = 0
+        message.body.chat_mode = 2
 
         if login_id is None:
             message.body.obfustucated_private_ip = ip_to_int(self.connection.local_address) ^ 0xF00DBAAD
