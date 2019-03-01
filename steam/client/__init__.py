@@ -52,7 +52,6 @@ class SteamClient(CMClient, BuiltinBase):
     _reconnect_backoff_c = 0
     current_jobid = 0
     cell_id = 0
-    servers = {}
     credential_location = None         #: location for sentry
     username = None                    #: username when logged on
     login_key = None                   #: can be used for subsequent logins (no 2FA code will be required)
@@ -119,6 +118,7 @@ class SteamClient(CMClient, BuiltinBase):
             self._cm_servers_timestamp = int(data['timestamp'])
 
     def _handle_server_list(self, msg):
+        self.servers = {}
         for server in msg.body.servers:
             if server.server_type not in self.servers:
                 self.servers[server.server_type] = []
