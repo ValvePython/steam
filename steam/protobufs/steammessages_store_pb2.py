@@ -3,6 +3,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -22,11 +23,41 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_store.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x19steammessages_store.proto\x1a steammessages_unified_base.proto\"J\n&CStore_GetLocalizedNameForTags_Request\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x0e\n\x06tagids\x18\x02 \x03(\r\"\x9f\x01\n\'CStore_GetLocalizedNameForTags_Response\x12:\n\x04tags\x18\x01 \x03(\x0b\x32,.CStore_GetLocalizedNameForTags_Response.Tag\x1a\x38\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x14\n\x0c\x65nglish_name\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"$\n\"CStore_GetStorePreferences_Request\"\xcf\x02\n\x16\x43Store_UserPreferences\x12\x18\n\x10primary_language\x18\x01 \x01(\r\x12\x1b\n\x13secondary_languages\x18\x02 \x01(\r\x12\x18\n\x10platform_windows\x18\x03 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x04 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x05 \x01(\x08\x12#\n\x1bhide_adult_content_violence\x18\x06 \x01(\x08\x12\x1e\n\x16hide_adult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x1c\n\x14hide_store_broadcast\x18\t \x01(\x08\x12\x38\n0timestamp_content_descriptor_preferences_updated\x18\n \x01(\x05\"\x91\x01\n\x19\x43Store_UserTagPreferences\x12\x37\n\x0ftags_to_exclude\x18\x01 \x03(\x0b\x32\x1e.CStore_UserTagPreferences.Tag\x1a;\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0ftimestamp_added\x18\x03 \x01(\r\"\xd9\x01\n\'CStore_UserContentDescriptorPreferences\x12\x62\n\x1e\x63ontent_descriptors_to_exclude\x18\x01 \x03(\x0b\x32:.CStore_UserContentDescriptorPreferences.ContentDescriptor\x1aJ\n\x11\x43ontentDescriptor\x12\x1c\n\x14\x63ontent_descriptorid\x18\x01 \x01(\r\x12\x17\n\x0ftimestamp_added\x18\x02 \x01(\r\"\xda\x01\n#CStore_GetStorePreferences_Response\x12,\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x17.CStore_UserPreferences\x12\x33\n\x0ftag_preferences\x18\x02 \x01(\x0b\x32\x1a.CStore_UserTagPreferences\x12P\n\x1e\x63ontent_descriptor_preferences\x18\x03 \x01(\x0b\x32(.CStore_UserContentDescriptorPreferences2\xf9\x02\n\x05Store\x12\x98\x01\n\x17GetLocalizedNameForTags\x12\'.CStore_GetLocalizedNameForTags_Request\x1a(.CStore_GetLocalizedNameForTags_Response\"*\x82\xb5\x18&Gets tag names in a different language\x12\xaf\x01\n\x13GetStorePreferences\x12#.CStore_GetStorePreferences_Request\x1a$.CStore_GetStorePreferences_Response\"M\x82\xb5\x18IReturns the desired ratings board and maximum rating to show on the store\x1a#\x82\xb5\x18\x1f\x41 service to access store data.B\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x19steammessages_store.proto\x1a steammessages_unified_base.proto\"J\n&CStore_GetLocalizedNameForTags_Request\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x0e\n\x06tagids\x18\x02 \x03(\r\"\x9f\x01\n\'CStore_GetLocalizedNameForTags_Response\x12:\n\x04tags\x18\x01 \x03(\x0b\x32,.CStore_GetLocalizedNameForTags_Response.Tag\x1a\x38\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x14\n\x0c\x65nglish_name\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"$\n\"CStore_GetStorePreferences_Request\"\xb1\x03\n\x16\x43Store_UserPreferences\x12\x18\n\x10primary_language\x18\x01 \x01(\r\x12\x1b\n\x13secondary_languages\x18\x02 \x01(\r\x12\x18\n\x10platform_windows\x18\x03 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x04 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x05 \x01(\x08\x12#\n\x1bhide_adult_content_violence\x18\x06 \x01(\x08\x12\x1e\n\x16hide_adult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x1c\n\x14hide_store_broadcast\x18\t \x01(\x08\x12`\n\x17review_score_preference\x18\n \x01(\x0e\x32\x1b.EUserReviewScorePreference:\"k_EUserReviewScorePreference_Unset\x12\x38\n0timestamp_content_descriptor_preferences_updated\x18\x0b \x01(\x05\"\x91\x01\n\x19\x43Store_UserTagPreferences\x12\x37\n\x0ftags_to_exclude\x18\x01 \x03(\x0b\x32\x1e.CStore_UserTagPreferences.Tag\x1a;\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0ftimestamp_added\x18\x03 \x01(\r\"\xd9\x01\n\'CStore_UserContentDescriptorPreferences\x12\x62\n\x1e\x63ontent_descriptors_to_exclude\x18\x01 \x03(\x0b\x32:.CStore_UserContentDescriptorPreferences.ContentDescriptor\x1aJ\n\x11\x43ontentDescriptor\x12\x1c\n\x14\x63ontent_descriptorid\x18\x01 \x01(\r\x12\x17\n\x0ftimestamp_added\x18\x02 \x01(\r\"\xda\x01\n#CStore_GetStorePreferences_Response\x12,\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x17.CStore_UserPreferences\x12\x33\n\x0ftag_preferences\x18\x02 \x01(\x0b\x32\x1a.CStore_UserTagPreferences\x12P\n\x1e\x63ontent_descriptor_preferences\x18\x03 \x01(\x0b\x32(.CStore_UserContentDescriptorPreferences*\xa0\x01\n\x1a\x45UserReviewScorePreference\x12&\n\"k_EUserReviewScorePreference_Unset\x10\x00\x12+\n\'k_EUserReviewScorePreference_IncludeAll\x10\x01\x12-\n)k_EUserReviewScorePreference_ExcludeBombs\x10\x02\x32\xf9\x02\n\x05Store\x12\x98\x01\n\x17GetLocalizedNameForTags\x12\'.CStore_GetLocalizedNameForTags_Request\x1a(.CStore_GetLocalizedNameForTags_Response\"*\x82\xb5\x18&Gets tag names in a different language\x12\xaf\x01\n\x13GetStorePreferences\x12#.CStore_GetStorePreferences_Request\x1a$.CStore_GetStorePreferences_Response\"M\x82\xb5\x18IReturns the desired ratings board and maximum rating to show on the store\x1a#\x82\xb5\x18\x1f\x41 service to access store data.B\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
+_EUSERREVIEWSCOREPREFERENCE = _descriptor.EnumDescriptor(
+  name='EUserReviewScorePreference',
+  full_name='EUserReviewScorePreference',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EUserReviewScorePreference_Unset', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EUserReviewScorePreference_IncludeAll', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EUserReviewScorePreference_ExcludeBombs', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1365,
+  serialized_end=1525,
+)
+_sym_db.RegisterEnumDescriptor(_EUSERREVIEWSCOREPREFERENCE)
+
+EUserReviewScorePreference = enum_type_wrapper.EnumTypeWrapper(_EUSERREVIEWSCOREPREFERENCE)
+k_EUserReviewScorePreference_Unset = 0
+k_EUserReviewScorePreference_IncludeAll = 1
+k_EUserReviewScorePreference_ExcludeBombs = 2
 
 
 
@@ -238,8 +269,15 @@ _CSTORE_USERPREFERENCES = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='timestamp_content_descriptor_preferences_updated', full_name='CStore_UserPreferences.timestamp_content_descriptor_preferences_updated', index=9,
-      number=10, type=5, cpp_type=1, label=1,
+      name='review_score_preference', full_name='CStore_UserPreferences.review_score_preference', index=9,
+      number=10, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp_content_descriptor_preferences_updated', full_name='CStore_UserPreferences.timestamp_content_descriptor_preferences_updated', index=10,
+      number=11, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -257,7 +295,7 @@ _CSTORE_USERPREFERENCES = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=340,
-  serialized_end=675,
+  serialized_end=773,
 )
 
 
@@ -301,8 +339,8 @@ _CSTORE_USERTAGPREFERENCES_TAG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=764,
-  serialized_end=823,
+  serialized_start=862,
+  serialized_end=921,
 )
 
 _CSTORE_USERTAGPREFERENCES = _descriptor.Descriptor(
@@ -331,8 +369,8 @@ _CSTORE_USERTAGPREFERENCES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=678,
-  serialized_end=823,
+  serialized_start=776,
+  serialized_end=921,
 )
 
 
@@ -369,8 +407,8 @@ _CSTORE_USERCONTENTDESCRIPTORPREFERENCES_CONTENTDESCRIPTOR = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=969,
-  serialized_end=1043,
+  serialized_start=1067,
+  serialized_end=1141,
 )
 
 _CSTORE_USERCONTENTDESCRIPTORPREFERENCES = _descriptor.Descriptor(
@@ -399,8 +437,8 @@ _CSTORE_USERCONTENTDESCRIPTORPREFERENCES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=826,
-  serialized_end=1043,
+  serialized_start=924,
+  serialized_end=1141,
 )
 
 
@@ -444,12 +482,13 @@ _CSTORE_GETSTOREPREFERENCES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1046,
-  serialized_end=1264,
+  serialized_start=1144,
+  serialized_end=1362,
 )
 
 _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE_TAG.containing_type = _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE
 _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE.fields_by_name['tags'].message_type = _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE_TAG
+_CSTORE_USERPREFERENCES.fields_by_name['review_score_preference'].enum_type = _EUSERREVIEWSCOREPREFERENCE
 _CSTORE_USERTAGPREFERENCES_TAG.containing_type = _CSTORE_USERTAGPREFERENCES
 _CSTORE_USERTAGPREFERENCES.fields_by_name['tags_to_exclude'].message_type = _CSTORE_USERTAGPREFERENCES_TAG
 _CSTORE_USERCONTENTDESCRIPTORPREFERENCES_CONTENTDESCRIPTOR.containing_type = _CSTORE_USERCONTENTDESCRIPTORPREFERENCES
@@ -464,6 +503,7 @@ DESCRIPTOR.message_types_by_name['CStore_UserPreferences'] = _CSTORE_USERPREFERE
 DESCRIPTOR.message_types_by_name['CStore_UserTagPreferences'] = _CSTORE_USERTAGPREFERENCES
 DESCRIPTOR.message_types_by_name['CStore_UserContentDescriptorPreferences'] = _CSTORE_USERCONTENTDESCRIPTORPREFERENCES
 DESCRIPTOR.message_types_by_name['CStore_GetStorePreferences_Response'] = _CSTORE_GETSTOREPREFERENCES_RESPONSE
+DESCRIPTOR.enum_types_by_name['EUserReviewScorePreference'] = _EUSERREVIEWSCOREPREFERENCE
 
 CStore_GetLocalizedNameForTags_Request = _reflection.GeneratedProtocolMessageType('CStore_GetLocalizedNameForTags_Request', (_message.Message,), dict(
   DESCRIPTOR = _CSTORE_GETLOCALIZEDNAMEFORTAGS_REQUEST,
@@ -548,8 +588,8 @@ _STORE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\037A service to access store data.')),
-  serialized_start=1267,
-  serialized_end=1644,
+  serialized_start=1528,
+  serialized_end=1905,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLocalizedNameForTags',

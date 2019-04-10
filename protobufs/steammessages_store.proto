@@ -3,6 +3,12 @@ import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
 
+enum EUserReviewScorePreference {
+	k_EUserReviewScorePreference_Unset = 0;
+	k_EUserReviewScorePreference_IncludeAll = 1;
+	k_EUserReviewScorePreference_ExcludeBombs = 2;
+}
+
 message CStore_GetLocalizedNameForTags_Request {
 	optional string language = 1;
 	repeated uint32 tagids = 2;
@@ -31,7 +37,8 @@ message CStore_UserPreferences {
 	optional bool hide_adult_content_sex = 7;
 	optional uint32 timestamp_updated = 8;
 	optional bool hide_store_broadcast = 9;
-	optional int32 timestamp_content_descriptor_preferences_updated = 10;
+	optional .EUserReviewScorePreference review_score_preference = 10 [default = k_EUserReviewScorePreference_Unset];
+	optional int32 timestamp_content_descriptor_preferences_updated = 11;
 }
 
 message CStore_UserTagPreferences {

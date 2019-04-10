@@ -18,6 +18,24 @@ message CSiteLicense_ClientSeatCheckout_Notification {
 	optional uint32 eresult = 2;
 }
 
+message CSiteManagerClient_TrackedPayments_Notification {
+	message Payment {
+		optional uint64 transid = 1;
+		optional uint64 steamid = 2;
+		optional int64 amount = 3;
+		optional uint32 ecurrency = 4;
+		optional int32 time_created = 5;
+		optional int32 purchase_status = 6;
+		optional string machine_name = 7;
+		optional string persona_name = 8;
+		optional string profile_url = 9;
+		optional string avatar_url = 10;
+	}
+
+	optional fixed64 site_id = 1;
+	repeated .CSiteManagerClient_TrackedPayments_Notification.Payment payments = 2;
+}
+
 message CSiteLicense_InitiateAssociation_Request {
 	optional fixed64 site_steamid = 1;
 	optional fixed64 site_instanceid = 2;
@@ -76,6 +94,9 @@ service SiteManagerClient {
 	}
 	rpc ClientSeatCheckoutNotification (.CSiteLicense_ClientSeatCheckout_Notification) returns (.NoResponse) {
 		option (method_description) = "Notify client directly about seat checkout result";
+	}
+	rpc TrackedPaymentsNotification (.CSiteManagerClient_TrackedPayments_Notification) returns (.NoResponse) {
+		option (method_description) = "Rack informing site manager of existing tracked payments";
 	}
 }
 service SiteLicense {

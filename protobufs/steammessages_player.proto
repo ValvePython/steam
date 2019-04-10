@@ -21,6 +21,33 @@ message CPlayer_GetMutualFriendsForIncomingInvites_Response {
 	repeated .CPlayer_IncomingInviteMutualFriendList incoming_invite_mutual_friends_lists = 1;
 }
 
+message CPlayer_GetFriendsGameplayInfo_Request {
+	optional uint32 appid = 1;
+}
+
+message CPlayer_GetFriendsGameplayInfo_Response {
+	message FriendsGameplayInfo {
+		optional fixed64 steamid = 1;
+		optional uint32 minutes_played = 2;
+		optional uint32 minutes_played_forever = 3;
+	}
+
+	message OwnGameplayInfo {
+		optional fixed64 steamid = 1;
+		optional uint32 minutes_played = 2;
+		optional uint32 minutes_played_forever = 3;
+		optional bool in_wishlist = 4;
+		optional bool owned = 5;
+	}
+
+	optional .CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo your_info = 1;
+	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo in_game = 2;
+	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo played_recently = 3;
+	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo played_ever = 4;
+	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo owns = 5;
+	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo in_wishlist = 6;
+}
+
 message CPlayer_GetGameBadgeLevels_Request {
 	optional uint32 appid = 1;
 }
@@ -34,6 +61,21 @@ message CPlayer_GetGameBadgeLevels_Response {
 
 	optional uint32 player_level = 1;
 	repeated .CPlayer_GetGameBadgeLevels_Response.Badge badges = 2;
+}
+
+message CPlayer_GetEmoticonList_Request {
+}
+
+message CPlayer_GetEmoticonList_Response {
+	message Emoticon {
+		optional string name = 1;
+		optional int32 count = 2;
+		optional uint32 time_last_used = 3;
+		optional uint32 use_count = 4;
+		optional uint32 time_received = 5;
+	}
+
+	repeated .CPlayer_GetEmoticonList_Response.Emoticon emoticons = 1;
 }
 
 message CPlayer_GetLastPlayedTimes_Request {
@@ -82,6 +124,7 @@ message PerFriendPreferences {
 	optional .ENotificationSetting sounds_showingame = 6 [default = k_ENotificationSettingNotifyUseDefault];
 	optional .ENotificationSetting sounds_showonline = 7 [default = k_ENotificationSettingNotifyUseDefault];
 	optional .ENotificationSetting sounds_showmessages = 8 [default = k_ENotificationSettingNotifyUseDefault];
+	optional .ENotificationSetting notifications_sendmobile = 9 [default = k_ENotificationSettingNotifyUseDefault];
 }
 
 message CPlayer_GetPerFriendPreferences_Response {
@@ -162,6 +205,22 @@ message CPlayer_UpdateSteamAnnouncementLastRead_Request {
 message CPlayer_UpdateSteamAnnouncementLastRead_Response {
 }
 
+message CPlayer_GetPrivacySettings_Request {
+}
+
+message CPrivacySettings {
+	optional int32 privacy_state = 1;
+	optional int32 privacy_state_inventory = 2;
+	optional int32 privacy_state_gifts = 3;
+	optional int32 privacy_state_ownedgames = 4;
+	optional int32 privacy_state_playtime = 5;
+	optional int32 privacy_state_friendslist = 6;
+}
+
+message CPlayer_GetPrivacySettings_Response {
+	optional .CPrivacySettings privacy_settings = 1;
+}
+
 message CPlayer_LastPlayedTimes_Notification {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
 }
@@ -189,13 +248,23 @@ message CPlayer_PerFriendPreferencesChanged_Notification {
 	optional .PerFriendPreferences preferences = 2;
 }
 
+message CPlayer_PrivacySettingsChanged_Notification {
+	optional .CPrivacySettings privacy_settings = 1;
+}
+
 service Player {
 	option (service_description) = "A service for accessing Steam player data";
 	rpc GetMutualFriendsForIncomingInvites (.CPlayer_GetMutualFriendsForIncomingInvites_Request) returns (.CPlayer_GetMutualFriendsForIncomingInvites_Response) {
 		option (method_description) = "Get me the mutual friends for each of my pending incoming invites (individuals and clans).";
 	}
+	rpc GetFriendsGameplayInfo (.CPlayer_GetFriendsGameplayInfo_Request) returns (.CPlayer_GetFriendsGameplayInfo_Response) {
+		option (method_description) = "Get a list of friends who are playing, have played, own, or want a game";
+	}
 	rpc GetGameBadgeLevels (.CPlayer_GetGameBadgeLevels_Request) returns (.CPlayer_GetGameBadgeLevels_Response) {
 		option (method_description) = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil";
+	}
+	rpc GetEmoticonList (.CPlayer_GetEmoticonList_Request) returns (.CPlayer_GetEmoticonList_Response) {
+		option (method_description) = "Gets a list of the emoticons a user has with metadata";
 	}
 	rpc ClientGetLastPlayedTimes (.CPlayer_GetLastPlayedTimes_Request) returns (.CPlayer_GetLastPlayedTimes_Response) {
 		option (method_description) = "Gets the last-played times for the account";
@@ -233,6 +302,9 @@ service Player {
 	rpc UpdateSteamAnnouncementLastRead (.CPlayer_UpdateSteamAnnouncementLastRead_Request) returns (.CPlayer_UpdateSteamAnnouncementLastRead_Response) {
 		option (method_description) = "Marks latest announcement timestamp read by user";
 	}
+	rpc GetPrivacySettings (.CPlayer_GetPrivacySettings_Request) returns (.CPlayer_GetPrivacySettings_Response) {
+		option (method_description) = "Get current privacy settings.";
+	}
 }
 service PlayerClient {
 	option (service_description) = "Steam player data client notifications";
@@ -251,5 +323,8 @@ service PlayerClient {
 	}
 	rpc NotifyPerFriendPreferencesChanged (.CPlayer_PerFriendPreferencesChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server that per-friend preferences have changed";
+	}
+	rpc NotifyPrivacyPrivacySettingsChanged (.CPlayer_PrivacySettingsChanged_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server that privacy settings changed";
 	}
 }

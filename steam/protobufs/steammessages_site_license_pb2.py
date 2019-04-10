@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_site_license.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n steammessages_site_license.proto\x1a steammessages_unified_base.proto\"\x8d\x01\n)CSiteManagerClient_IncomingClient_Request\x12\x17\n\x0fsite_instanceid\x18\x01 \x01(\x06\x12\x16\n\x0e\x63lient_steamid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\x12\x16\n\x0e\x63onnection_key\x18\x04 \x01(\x0c\",\n*CSiteManagerClient_IncomingClient_Response\"N\n,CSiteLicense_ClientSeatCheckout_Notification\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\"r\n(CSiteLicense_InitiateAssociation_Request\x12\x14\n\x0csite_steamid\x18\x01 \x01(\x06\x12\x17\n\x0fsite_instanceid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\"C\n)CSiteLicense_InitiateAssociation_Response\x12\x16\n\x0e\x63onnection_key\x18\x01 \x01(\x0c\":\n$CSiteLicense_LCSAuthenticate_Request\x12\x12\n\ninstanceid\x18\x01 \x01(\x06\"z\n%CSiteLicense_LCSAuthenticate_Response\x12\x0f\n\x07site_id\x18\x01 \x01(\x04\x12\x11\n\tsite_name\x18\x02 \x01(\t\x12\x13\n\x0bnew_session\x18\x03 \x01(\x08\x12\x18\n\x10no_site_licenses\x18\x04 \x01(\x08\"t\n%CSiteLicense_LCSAssociateUser_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08local_ip\x18\x02 \x01(\x07\x12\x12\n\ninstanceid\x18\x03 \x01(\x06\x12\x14\n\x0cmachine_name\x18\x04 \x01(\t\"(\n&CSiteLicense_LCSAssociateUser_Response\"]\n\'CSiteLicense_ClientSeatCheckout_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\"*\n(CSiteLicense_ClientSeatCheckout_Response\"b\n,CSiteLicense_ClientGetAvailableSeats_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\"H\n-CSiteLicense_ClientGetAvailableSeats_Response\x12\x17\n\x0f\x61vailable_seats\x18\x01 \x01(\r2\x86\x03\n\x11SiteManagerClient\x12\xaf\x01\n\x0eIncomingClient\x12*.CSiteManagerClient_IncomingClient_Request\x1a+.CSiteManagerClient_IncomingClient_Response\"D\x82\xb5\x18@Rack informing site manager of new inbound client PSK connection\x12\x93\x01\n\x1e\x43lientSeatCheckoutNotification\x12-.CSiteLicense_ClientSeatCheckout_Notification\x1a\x0b.NoResponse\"5\x82\xb5\x18\x31Notify client directly about seat checkout result\x1a)\x82\xb5\x18!Local site manager client service\xc0\xb5\x18\x02\x32\xd5\x06\n\x0bSiteLicense\x12\xa4\x01\n\x13InitiateAssociation\x12).CSiteLicense_InitiateAssociation_Request\x1a*.CSiteLicense_InitiateAssociation_Response\"6\x82\xb5\x18\x32\x43lient is requesting connetion info for local site\x12\x86\x01\n\x0fLCSAuthenticate\x12%.CSiteLicense_LCSAuthenticate_Request\x1a&.CSiteLicense_LCSAuthenticate_Response\"$\x82\xb5\x18 Local cafe server authentication\x12\x9d\x01\n\x10LCSAssociateUser\x12&.CSiteLicense_LCSAssociateUser_Request\x1a\'.CSiteLicense_LCSAssociateUser_Response\"8\x82\xb5\x18\x34Local cafe server wants to grant user access to site\x12\x9e\x01\n\x12\x43lientSeatCheckout\x12(.CSiteLicense_ClientSeatCheckout_Request\x1a).CSiteLicense_ClientSeatCheckout_Response\"3\x82\xb5\x18/Client is requesting use of a site license seat\x12\xba\x01\n\x17\x43lientGetAvailableSeats\x12-.CSiteLicense_ClientGetAvailableSeats_Request\x1a..CSiteLicense_ClientGetAvailableSeats_Response\"@\x82\xb5\x18<Client is requesting the number of currently available seats\x1a\x18\x82\xb5\x18\x14Site License serviceB\x03\x90\x01\x01')
+  serialized_pb=_b('\n steammessages_site_license.proto\x1a steammessages_unified_base.proto\"\x8d\x01\n)CSiteManagerClient_IncomingClient_Request\x12\x17\n\x0fsite_instanceid\x18\x01 \x01(\x06\x12\x16\n\x0e\x63lient_steamid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\x12\x16\n\x0e\x63onnection_key\x18\x04 \x01(\x0c\",\n*CSiteManagerClient_IncomingClient_Response\"N\n,CSiteLicense_ClientSeatCheckout_Notification\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x65result\x18\x02 \x01(\r\"\xe3\x02\n/CSiteManagerClient_TrackedPayments_Notification\x12\x0f\n\x07site_id\x18\x01 \x01(\x06\x12J\n\x08payments\x18\x02 \x03(\x0b\x32\x38.CSiteManagerClient_TrackedPayments_Notification.Payment\x1a\xd2\x01\n\x07Payment\x12\x0f\n\x07transid\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x03\x12\x11\n\tecurrency\x18\x04 \x01(\r\x12\x14\n\x0ctime_created\x18\x05 \x01(\x05\x12\x17\n\x0fpurchase_status\x18\x06 \x01(\x05\x12\x14\n\x0cmachine_name\x18\x07 \x01(\t\x12\x14\n\x0cpersona_name\x18\x08 \x01(\t\x12\x13\n\x0bprofile_url\x18\t \x01(\t\x12\x12\n\navatar_url\x18\n \x01(\t\"r\n(CSiteLicense_InitiateAssociation_Request\x12\x14\n\x0csite_steamid\x18\x01 \x01(\x06\x12\x17\n\x0fsite_instanceid\x18\x02 \x01(\x06\x12\x17\n\x0f\x63lient_local_ip\x18\x03 \x01(\x07\"C\n)CSiteLicense_InitiateAssociation_Response\x12\x16\n\x0e\x63onnection_key\x18\x01 \x01(\x0c\":\n$CSiteLicense_LCSAuthenticate_Request\x12\x12\n\ninstanceid\x18\x01 \x01(\x06\"z\n%CSiteLicense_LCSAuthenticate_Response\x12\x0f\n\x07site_id\x18\x01 \x01(\x04\x12\x11\n\tsite_name\x18\x02 \x01(\t\x12\x13\n\x0bnew_session\x18\x03 \x01(\x08\x12\x18\n\x10no_site_licenses\x18\x04 \x01(\x08\"t\n%CSiteLicense_LCSAssociateUser_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08local_ip\x18\x02 \x01(\x07\x12\x12\n\ninstanceid\x18\x03 \x01(\x06\x12\x14\n\x0cmachine_name\x18\x04 \x01(\t\"(\n&CSiteLicense_LCSAssociateUser_Response\"]\n\'CSiteLicense_ClientSeatCheckout_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\"*\n(CSiteLicense_ClientSeatCheckout_Response\"b\n,CSiteLicense_ClientGetAvailableSeats_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x12\n\ninstanceid\x18\x02 \x01(\x06\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\"H\n-CSiteLicense_ClientGetAvailableSeats_Response\x12\x17\n\x0f\x61vailable_seats\x18\x01 \x01(\r2\xa3\x04\n\x11SiteManagerClient\x12\xaf\x01\n\x0eIncomingClient\x12*.CSiteManagerClient_IncomingClient_Request\x1a+.CSiteManagerClient_IncomingClient_Response\"D\x82\xb5\x18@Rack informing site manager of new inbound client PSK connection\x12\x93\x01\n\x1e\x43lientSeatCheckoutNotification\x12-.CSiteLicense_ClientSeatCheckout_Notification\x1a\x0b.NoResponse\"5\x82\xb5\x18\x31Notify client directly about seat checkout result\x12\x9a\x01\n\x1bTrackedPaymentsNotification\x12\x30.CSiteManagerClient_TrackedPayments_Notification\x1a\x0b.NoResponse\"<\x82\xb5\x18\x38Rack informing site manager of existing tracked payments\x1a)\x82\xb5\x18!Local site manager client service\xc0\xb5\x18\x02\x32\xd5\x06\n\x0bSiteLicense\x12\xa4\x01\n\x13InitiateAssociation\x12).CSiteLicense_InitiateAssociation_Request\x1a*.CSiteLicense_InitiateAssociation_Response\"6\x82\xb5\x18\x32\x43lient is requesting connetion info for local site\x12\x86\x01\n\x0fLCSAuthenticate\x12%.CSiteLicense_LCSAuthenticate_Request\x1a&.CSiteLicense_LCSAuthenticate_Response\"$\x82\xb5\x18 Local cafe server authentication\x12\x9d\x01\n\x10LCSAssociateUser\x12&.CSiteLicense_LCSAssociateUser_Request\x1a\'.CSiteLicense_LCSAssociateUser_Response\"8\x82\xb5\x18\x34Local cafe server wants to grant user access to site\x12\x9e\x01\n\x12\x43lientSeatCheckout\x12(.CSiteLicense_ClientSeatCheckout_Request\x1a).CSiteLicense_ClientSeatCheckout_Response\"3\x82\xb5\x18/Client is requesting use of a site license seat\x12\xba\x01\n\x17\x43lientGetAvailableSeats\x12-.CSiteLicense_ClientGetAvailableSeats_Request\x1a..CSiteLicense_ClientGetAvailableSeats_Response\"@\x82\xb5\x18<Client is requesting the number of currently available seats\x1a\x18\x82\xb5\x18\x14Site License serviceB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -144,6 +144,137 @@ _CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION = _descriptor.Descriptor(
 )
 
 
+_CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION_PAYMENT = _descriptor.Descriptor(
+  name='Payment',
+  full_name='CSiteManagerClient_TrackedPayments_Notification.Payment',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='transid', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.transid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.steamid', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='amount', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.amount', index=2,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ecurrency', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.ecurrency', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='time_created', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.time_created', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='purchase_status', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.purchase_status', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='machine_name', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.machine_name', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='persona_name', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.persona_name', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='profile_url', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.profile_url', index=8,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='avatar_url', full_name='CSiteManagerClient_TrackedPayments_Notification.Payment.avatar_url', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=486,
+  serialized_end=696,
+)
+
+_CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION = _descriptor.Descriptor(
+  name='CSiteManagerClient_TrackedPayments_Notification',
+  full_name='CSiteManagerClient_TrackedPayments_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='site_id', full_name='CSiteManagerClient_TrackedPayments_Notification.site_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='payments', full_name='CSiteManagerClient_TrackedPayments_Notification.payments', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION_PAYMENT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=341,
+  serialized_end=696,
+)
+
+
 _CSITELICENSE_INITIATEASSOCIATION_REQUEST = _descriptor.Descriptor(
   name='CSiteLicense_InitiateAssociation_Request',
   full_name='CSiteLicense_InitiateAssociation_Request',
@@ -184,8 +315,8 @@ _CSITELICENSE_INITIATEASSOCIATION_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=340,
-  serialized_end=454,
+  serialized_start=698,
+  serialized_end=812,
 )
 
 
@@ -215,8 +346,8 @@ _CSITELICENSE_INITIATEASSOCIATION_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=456,
-  serialized_end=523,
+  serialized_start=814,
+  serialized_end=881,
 )
 
 
@@ -246,8 +377,8 @@ _CSITELICENSE_LCSAUTHENTICATE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=525,
-  serialized_end=583,
+  serialized_start=883,
+  serialized_end=941,
 )
 
 
@@ -298,8 +429,8 @@ _CSITELICENSE_LCSAUTHENTICATE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=585,
-  serialized_end=707,
+  serialized_start=943,
+  serialized_end=1065,
 )
 
 
@@ -350,8 +481,8 @@ _CSITELICENSE_LCSASSOCIATEUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=709,
-  serialized_end=825,
+  serialized_start=1067,
+  serialized_end=1183,
 )
 
 
@@ -374,8 +505,8 @@ _CSITELICENSE_LCSASSOCIATEUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=827,
-  serialized_end=867,
+  serialized_start=1185,
+  serialized_end=1225,
 )
 
 
@@ -419,8 +550,8 @@ _CSITELICENSE_CLIENTSEATCHECKOUT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=869,
-  serialized_end=962,
+  serialized_start=1227,
+  serialized_end=1320,
 )
 
 
@@ -443,8 +574,8 @@ _CSITELICENSE_CLIENTSEATCHECKOUT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=964,
-  serialized_end=1006,
+  serialized_start=1322,
+  serialized_end=1364,
 )
 
 
@@ -488,8 +619,8 @@ _CSITELICENSE_CLIENTGETAVAILABLESEATS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1008,
-  serialized_end=1106,
+  serialized_start=1366,
+  serialized_end=1464,
 )
 
 
@@ -519,13 +650,16 @@ _CSITELICENSE_CLIENTGETAVAILABLESEATS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1108,
-  serialized_end=1180,
+  serialized_start=1466,
+  serialized_end=1538,
 )
 
+_CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION_PAYMENT.containing_type = _CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION
+_CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION.fields_by_name['payments'].message_type = _CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION_PAYMENT
 DESCRIPTOR.message_types_by_name['CSiteManagerClient_IncomingClient_Request'] = _CSITEMANAGERCLIENT_INCOMINGCLIENT_REQUEST
 DESCRIPTOR.message_types_by_name['CSiteManagerClient_IncomingClient_Response'] = _CSITEMANAGERCLIENT_INCOMINGCLIENT_RESPONSE
 DESCRIPTOR.message_types_by_name['CSiteLicense_ClientSeatCheckout_Notification'] = _CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CSiteManagerClient_TrackedPayments_Notification'] = _CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CSiteLicense_InitiateAssociation_Request'] = _CSITELICENSE_INITIATEASSOCIATION_REQUEST
 DESCRIPTOR.message_types_by_name['CSiteLicense_InitiateAssociation_Response'] = _CSITELICENSE_INITIATEASSOCIATION_RESPONSE
 DESCRIPTOR.message_types_by_name['CSiteLicense_LCSAuthenticate_Request'] = _CSITELICENSE_LCSAUTHENTICATE_REQUEST
@@ -557,6 +691,21 @@ CSiteLicense_ClientSeatCheckout_Notification = _reflection.GeneratedProtocolMess
   # @@protoc_insertion_point(class_scope:CSiteLicense_ClientSeatCheckout_Notification)
   ))
 _sym_db.RegisterMessage(CSiteLicense_ClientSeatCheckout_Notification)
+
+CSiteManagerClient_TrackedPayments_Notification = _reflection.GeneratedProtocolMessageType('CSiteManagerClient_TrackedPayments_Notification', (_message.Message,), dict(
+
+  Payment = _reflection.GeneratedProtocolMessageType('Payment', (_message.Message,), dict(
+    DESCRIPTOR = _CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION_PAYMENT,
+    __module__ = 'steammessages_site_license_pb2'
+    # @@protoc_insertion_point(class_scope:CSiteManagerClient_TrackedPayments_Notification.Payment)
+    ))
+  ,
+  DESCRIPTOR = _CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION,
+  __module__ = 'steammessages_site_license_pb2'
+  # @@protoc_insertion_point(class_scope:CSiteManagerClient_TrackedPayments_Notification)
+  ))
+_sym_db.RegisterMessage(CSiteManagerClient_TrackedPayments_Notification)
+_sym_db.RegisterMessage(CSiteManagerClient_TrackedPayments_Notification.Payment)
 
 CSiteLicense_InitiateAssociation_Request = _reflection.GeneratedProtocolMessageType('CSiteLicense_InitiateAssociation_Request', (_message.Message,), dict(
   DESCRIPTOR = _CSITELICENSE_INITIATEASSOCIATION_REQUEST,
@@ -638,8 +787,8 @@ _SITEMANAGERCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030!Local site manager client service\300\265\030\002')),
-  serialized_start=1183,
-  serialized_end=1573,
+  serialized_start=1541,
+  serialized_end=2088,
   methods=[
   _descriptor.MethodDescriptor(
     name='IncomingClient',
@@ -658,6 +807,15 @@ _SITEMANAGERCLIENT = _descriptor.ServiceDescriptor(
     input_type=_CSITELICENSE_CLIENTSEATCHECKOUT_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0301Notify client directly about seat checkout result')),
+  ),
+  _descriptor.MethodDescriptor(
+    name='TrackedPaymentsNotification',
+    full_name='SiteManagerClient.TrackedPaymentsNotification',
+    index=2,
+    containing_service=None,
+    input_type=_CSITEMANAGERCLIENT_TRACKEDPAYMENTS_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\265\0308Rack informing site manager of existing tracked payments')),
   ),
 ])
 
@@ -679,8 +837,8 @@ _SITELICENSE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\024Site License service')),
-  serialized_start=1576,
-  serialized_end=2429,
+  serialized_start=2091,
+  serialized_end=2944,
   methods=[
   _descriptor.MethodDescriptor(
     name='InitiateAssociation',

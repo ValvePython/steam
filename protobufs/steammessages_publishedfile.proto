@@ -270,6 +270,23 @@ message CPublishedFile_GetUserFiles_Response {
 	repeated .CPublishedFile_GetUserFiles_Response.App apps = 4;
 }
 
+message CPublishedFile_AreFilesInSubscriptionList_Request {
+	optional uint32 appid = 1;
+	repeated fixed64 publishedfileids = 2;
+	optional uint32 listtype = 3 [(description) = "See EUCMListType"];
+	optional uint32 filetype = 4 [(description) = "See EPublishedFileInfoMatchingFileType"];
+	optional uint32 workshopfiletype = 5 [(description) = "See EWorkshopFileType.  If specified, overrides filetype"];
+}
+
+message CPublishedFile_AreFilesInSubscriptionList_Response {
+	message InList {
+		optional fixed64 publishedfileid = 1;
+		optional bool inlist = 2;
+	}
+
+	repeated .CPublishedFile_AreFilesInSubscriptionList_Response.InList files = 1;
+}
+
 message CPublishedFile_Update_Request {
 	optional uint32 appid = 1 [(description) = "App Id this published file belongs to."];
 	optional fixed64 publishedfileid = 2 [(description) = "Published file id of the file we'd like update."];
@@ -457,6 +474,26 @@ message CPublishedFile_RemoveChild_Request {
 message CPublishedFile_RemoveChild_Response {
 }
 
+message CPublishedFile_FileSubscribed_Notification {
+	optional fixed64 published_file_id = 1 [(description) = "PublishedFileID_t for the content"];
+	optional uint32 app_id = 2;
+	optional fixed64 file_hcontent = 3 [(description) = "UGC file handle or manifest GID"];
+	optional uint32 file_size = 4;
+	optional uint32 rtime_subscribed = 5;
+	optional bool is_depot_content = 6 [(description) = "True if workshop item is delivered via Steampipe"];
+	optional uint32 rtime_updated = 7 [(description) = "Last time content updated"];
+}
+
+message CPublishedFile_FileUnsubscribed_Notification {
+	optional fixed64 published_file_id = 1 [(description) = "PublishedFileID_t for the content"];
+	optional uint32 app_id = 2;
+}
+
+message CPublishedFile_FileDeleted_Client_Notification {
+	optional fixed64 published_file_id = 1 [(description) = "PublishedFileID_t for the content"];
+	optional uint32 app_id = 2;
+}
+
 service PublishedFile {
 	option (service_description) = "A service to access published file data";
 	rpc Subscribe (.CPublishedFile_Subscribe_Request) returns (.CPublishedFile_Subscribe_Response) {
@@ -479,6 +516,9 @@ service PublishedFile {
 	}
 	rpc GetUserFiles (.CPublishedFile_GetUserFiles_Request) returns (.CPublishedFile_GetUserFiles_Response) {
 		option (method_description) = "Retrieves files published by a user.";
+	}
+	rpc AreFilesInSubscriptionList (.CPublishedFile_AreFilesInSubscriptionList_Request) returns (.CPublishedFile_AreFilesInSubscriptionList_Response) {
+		option (method_description) = "Determines which files in the given list are in a user's subscription list";
 	}
 	rpc Update (.CPublishedFile_Update_Request) returns (.CPublishedFile_Update_Response) {
 		option (method_description) = "Updates information about a published file.";
@@ -521,5 +561,18 @@ service PublishedFile {
 	}
 	rpc RemoveChild (.CPublishedFile_RemoveChild_Request) returns (.CPublishedFile_RemoveChild_Response) {
 		option (method_description) = "Removes parent->child relationship between the given items.";
+	}
+}
+service PublishedFileClient {
+	option (service_description) = "Published file client notifications";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyFileSubscribed (.CPublishedFile_FileSubscribed_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from the server when a user subscribes to a file";
+	}
+	rpc NotifyFileUnsubscribed (.CPublishedFile_FileUnsubscribed_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from the server when a user unsubscribes from a file";
+	}
+	rpc NotifyFileDeleted (.CPublishedFile_FileDeleted_Client_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from the server when a published file is deleted";
 	}
 }

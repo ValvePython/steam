@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='steammessages_chat.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x18steammessages_chat.proto\x1a steammessages_unified_base.proto\"*\n(CChat_RequestFriendPersonaStates_Request\"+\n)CChat_RequestFriendPersonaStates_Response\"\xa7\x01\n%CChatRoom_CreateChatRoomGroup_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_invited\x18\x02 \x01(\x06\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x18\n\x10steamid_invitees\x18\x04 \x03(\x06\x12$\n\x1cwatching_broadcast_accountid\x18\x06 \x01(\r\";\n\tCChatRole\x12\x0f\n\x07role_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\"\xd4\x02\n\x10\x43\x43hatRoleActions\x12\x0f\n\x07role_id\x18\x01 \x01(\x04\x12(\n can_create_rename_delete_channel\x18\x02 \x01(\x08\x12\x10\n\x08\x63\x61n_kick\x18\x03 \x01(\x08\x12\x0f\n\x07\x63\x61n_ban\x18\x04 \x01(\x08\x12\x12\n\ncan_invite\x18\x05 \x01(\x08\x12&\n\x1e\x63\x61n_change_tagline_avatar_name\x18\x06 \x01(\x08\x12\x10\n\x08\x63\x61n_chat\x18\x07 \x01(\x08\x12\x18\n\x10\x63\x61n_view_history\x18\x08 \x01(\x08\x12\x1e\n\x16\x63\x61n_change_group_roles\x18\t \x01(\x08\x12\x1d\n\x15\x63\x61n_change_user_roles\x18\n \x01(\x08\x12\x17\n\x0f\x63\x61n_mention_all\x18\x0b \x01(\x08\x12\"\n\x1a\x63\x61n_set_watching_broadcast\x18\x0c \x01(\x08\"c\n\x10\x43\x43hatPartyBeacon\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x15\n\rsteamid_owner\x18\x02 \x01(\x06\x12\x11\n\tbeacon_id\x18\x03 \x01(\x06\x12\x15\n\rgame_metadata\x18\x04 \x01(\t\"\xcf\x02\n\x19\x43\x43hatRoomGroupHeaderState\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x11\n\tchat_name\x18\x02 \x01(\t\x12\x0e\n\x06\x63lanid\x18\r \x01(\r\x12\x17\n\x0f\x61\x63\x63ountid_owner\x18\x0e \x01(\r\x12\r\n\x05\x61ppid\x18\x15 \x01(\r\x12\x0f\n\x07tagline\x18\x0f \x01(\t\x12\x12\n\navatar_sha\x18\x10 \x01(\x0c\x12\x17\n\x0f\x64\x65\x66\x61ult_role_id\x18\x11 \x01(\x04\x12\x19\n\x05roles\x18\x12 \x03(\x0b\x32\n.CChatRole\x12\'\n\x0crole_actions\x18\x13 \x03(\x0b\x32\x11.CChatRoleActions\x12$\n\x1cwatching_broadcast_accountid\x18\x14 \x01(\r\x12(\n\rparty_beacons\x18\x16 \x03(\x0b\x32\x11.CChatPartyBeacon\"\xd3\x01\n\x0f\x43\x43hatRoomMember\x12\x11\n\taccountid\x18\x01 \x01(\r\x12@\n\x05state\x18\x03 \x01(\x0e\x32\x13.EChatRoomJoinState:\x1ck_EChatRoomJoinState_Default\x12?\n\x04rank\x18\x04 \x01(\x0e\x32\x13.EChatRoomGroupRank:\x1ck_EChatRoomGroupRank_Default\x12\x18\n\x10time_kick_expire\x18\x06 \x01(\r\x12\x10\n\x08role_ids\x18\x07 \x03(\x04\"\x94\x01\n\x0e\x43\x43hatRoomState\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x11\n\tchat_name\x18\x02 \x01(\t\x12\x15\n\rvoice_allowed\x18\x03 \x01(\x08\x12\x18\n\x10members_in_voice\x18\x04 \x03(\r\x12\x19\n\x11time_last_message\x18\x05 \x01(\r\x12\x12\n\nsort_order\x18\x06 \x01(\r\"\xca\x01\n\x13\x43\x43hatRoomGroupState\x12\x30\n\x0cheader_state\x18\x01 \x01(\x0b\x32\x1a.CChatRoomGroupHeaderState\x12!\n\x07members\x18\x02 \x03(\x0b\x32\x10.CChatRoomMember\x12\x17\n\x0f\x64\x65\x66\x61ult_chat_id\x18\x04 \x01(\x04\x12#\n\nchat_rooms\x18\x05 \x03(\x0b\x32\x0f.CChatRoomState\x12 \n\x06kicked\x18\x07 \x03(\x0b\x32\x10.CChatRoomMember\"\xe0\x02\n\x12\x43UserChatRoomState\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x13\n\x0btime_joined\x18\x02 \x01(\r\x12\x15\n\rtime_last_ack\x18\x03 \x01(\r\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x04 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x05 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x19\n\x11time_last_mention\x18\x06 \x01(\r\x12%\n\x16unread_indicator_muted\x18\x07 \x01(\x08:\x05\x66\x61lse\"\x89\x03\n\x17\x43UserChatRoomGroupState\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x13\n\x0btime_joined\x18\x02 \x01(\r\x12\x31\n\x14user_chat_room_state\x18\x03 \x03(\x0b\x32\x13.CUserChatRoomState\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x04 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x05 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x1b\n\x13time_last_group_ack\x18\x06 \x01(\r\x12%\n\x16unread_indicator_muted\x18\x07 \x01(\x08:\x05\x66\x61lse\"\x97\x01\n&CChatRoom_CreateChatRoomGroup_Response\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12#\n\x05state\x18\x02 \x01(\x0b\x32\x14.CChatRoomGroupState\x12\x31\n\x0fuser_chat_state\x18\x03 \x01(\x0b\x32\x18.CUserChatRoomGroupState\"J\n#CChatRoom_SaveChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"&\n$CChatRoom_SaveChatRoomGroup_Response\"L\n%CChatRoom_RenameChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"6\n&CChatRoom_RenameChatRoomGroup_Response\x12\x0c\n\x04name\x18\x01 \x01(\t\"S\n)CChatRoom_SetChatRoomGroupTagline_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07tagline\x18\x02 \x01(\t\",\n*CChatRoom_SetChatRoomGroupTagline_Response\"U\n(CChatRoom_SetChatRoomGroupAvatar_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x12\n\navatar_sha\x18\x02 \x01(\x0c\"+\n)CChatRoom_SetChatRoomGroupAvatar_Response\"r\n3CChatRoom_SetChatRoomGroupWatchingBroadcast_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12$\n\x1cwatching_broadcast_accountid\x18\x02 \x01(\r\"6\n4CChatRoom_SetChatRoomGroupWatchingBroadcast_Response\"X\n\x1a\x43\x43hatRoom_MuteUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x12\n\nexpiration\x18\x03 \x01(\x05\"\x1d\n\x1b\x43\x43hatRoom_MuteUser_Response\"X\n\x1a\x43\x43hatRoom_KickUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x12\n\nexpiration\x18\x03 \x01(\x05\"\x1d\n\x1b\x43\x43hatRoom_KickUser_Response\"^\n!CChatRoom_SetUserBanState_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x11\n\tban_state\x18\x03 \x01(\x08\"$\n\"CChatRoom_SetUserBanState_Response\"H\n\x1e\x43\x43hatRoom_RevokeInvite_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\"!\n\x1f\x43\x43hatRoom_RevokeInvite_Response\"C\n\x1c\x43\x43hatRoom_CreateRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"C\n\x1d\x43\x43hatRoom_CreateRole_Response\x12\"\n\x07\x61\x63tions\x18\x02 \x01(\x0b\x32\x11.CChatRoleActions\"3\n\x1a\x43\x43hatRoom_GetRoles_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"8\n\x1b\x43\x43hatRoom_GetRoles_Response\x12\x19\n\x05roles\x18\x01 \x03(\x0b\x32\n.CChatRole\"T\n\x1c\x43\x43hatRoom_RenameRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\x12\x0c\n\x04name\x18\x03 \x01(\t\"\x1f\n\x1d\x43\x43hatRoom_RenameRole_Response\"X\n\x1d\x43\x43hatRoom_ReorderRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\" \n\x1e\x43\x43hatRoom_ReorderRole_Response\"F\n\x1c\x43\x43hatRoom_DeleteRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\"\x1f\n\x1d\x43\x43hatRoom_DeleteRole_Response\"J\n CChatRoom_GetRoleActions_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\"G\n!CChatRoom_GetRoleActions_Response\x12\"\n\x07\x61\x63tions\x18\x01 \x03(\x0b\x32\x11.CChatRoleActions\"r\n$CChatRoom_ReplaceRoleActions_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\x12\"\n\x07\x61\x63tions\x18\x04 \x01(\x0b\x32\x11.CChatRoleActions\"\'\n%CChatRoom_ReplaceRoleActions_Response\"Z\n\x1f\x43\x43hatRoom_AddRoleToUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x03 \x01(\x04\x12\x0f\n\x07steamid\x18\x04 \x01(\x06\"\"\n CChatRoom_AddRoleToUser_Response\"K\n!CChatRoom_GetRolesForUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\"6\n\"CChatRoom_GetRolesForUser_Response\x12\x10\n\x08role_ids\x18\x01 \x03(\x04\"_\n$CChatRoom_DeleteRoleFromUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x03 \x01(\x04\x12\x0f\n\x07steamid\x18\x04 \x01(\x06\"\'\n%CChatRoom_DeleteRoleFromUser_Response\"b\n#CChatRoom_JoinChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x13\n\x0binvite_code\x18\x02 \x01(\t\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\"\xa9\x01\n$CChatRoom_JoinChatRoomGroup_Response\x12#\n\x05state\x18\x01 \x01(\x0b\x32\x14.CChatRoomGroupState\x12\x31\n\x0fuser_chat_state\x18\x03 \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x14\n\x0cjoin_chat_id\x18\x04 \x01(\x04\x12\x13\n\x0btime_expire\x18\x05 \x01(\r\"\x86\x01\n-CChatRoom_InviteFriendToChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\x12\x1c\n\x14skip_friendsui_check\x18\x04 \x01(\x08\"0\n.CChatRoom_InviteFriendToChatRoomGroup_Response\"=\n$CChatRoom_LeaveChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"\'\n%CChatRoom_LeaveChatRoomGroup_Response\"\\\n CChatRoom_CreateChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x61llow_voice\x18\x03 \x01(\x08\"G\n!CChatRoom_CreateChatRoom_Response\x12\"\n\tchat_room\x18\x01 \x01(\x0b\x32\x0f.CChatRoomState\"J\n CChatRoom_DeleteChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\"#\n!CChatRoom_DeleteChatRoom_Response\"X\n CChatRoom_RenameChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x0c\n\x04name\x18\x03 \x01(\t\"#\n!CChatRoom_RenameChatRoom_Response\"g\n!CChatRoom_ReorderChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x1a\n\x12move_after_chat_id\x18\x03 \x01(\x04\"$\n\"CChatRoom_ReorderChatRoom_Response\"\\\n!CChatRoom_SendChatMessage_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x0f\n\x07message\x18\x03 \x01(\t\"i\n\"CChatRoom_SendChatMessage_Response\x12\x18\n\x10modified_message\x18\x01 \x01(\t\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\"I\n\x1f\x43\x43hatRoom_JoinVoiceChat_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\"8\n CChatRoom_JoinVoiceChat_Response\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x04\"J\n CChatRoom_LeaveVoiceChat_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\"#\n!CChatRoom_LeaveVoiceChat_Response\"\xb4\x01\n#CChatRoom_GetMessageHistory_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x11\n\tlast_time\x18\x03 \x01(\r\x12\x14\n\x0clast_ordinal\x18\x04 \x01(\r\x12\x12\n\nstart_time\x18\x05 \x01(\r\x12\x15\n\rstart_ordinal\x18\x06 \x01(\r\x12\x11\n\tmax_count\x18\x07 \x01(\r\"\x86\x01\n\rServerMessage\x12\x46\n\x07message\x18\x01 \x01(\x0e\x32\x17.EChatRoomServerMessage:\x1ck_EChatRoomServerMsg_Invalid\x12\x14\n\x0cstring_param\x18\x02 \x01(\t\x12\x17\n\x0f\x61\x63\x63ountid_param\x18\x03 \x01(\r\"\x98\x02\n$CChatRoom_GetMessageHistory_Response\x12\x43\n\x08messages\x18\x01 \x03(\x0b\x32\x31.CChatRoom_GetMessageHistory_Response.ChatMessage\x12\x16\n\x0emore_available\x18\x04 \x01(\x08\x1a\x92\x01\n\x0b\x43hatMessage\x12\x0e\n\x06sender\x18\x01 \x01(\r\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0f\n\x07ordinal\x18\x04 \x01(\r\x12&\n\x0eserver_message\x18\x05 \x01(\x0b\x32\x0e.ServerMessage\x12\x0f\n\x07\x64\x65leted\x18\x06 \x01(\x08\"\'\n%CChatRoom_GetMyChatRoomGroups_Request\"\xc7\x04\n*CChatRoom_GetChatRoomGroupSummary_Response\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x17\n\x0f\x63hat_group_name\x18\x02 \x01(\t\x12\x1b\n\x13\x61\x63tive_member_count\x18\x03 \x01(\r\x12!\n\x19\x61\x63tive_voice_member_count\x18\x04 \x01(\r\x12\x17\n\x0f\x64\x65\x66\x61ult_chat_id\x18\x05 \x01(\x04\x12#\n\nchat_rooms\x18\x06 \x03(\x0b\x32\x0f.CChatRoomState\x12\x0e\n\x06\x63lanid\x18\x07 \x01(\r\x12\x1a\n\x12\x63hat_group_tagline\x18\x08 \x01(\t\x12\x17\n\x0f\x61\x63\x63ountid_owner\x18\t \x01(\r\x12\x13\n\x0btop_members\x18\n \x03(\r\x12\x1d\n\x15\x63hat_group_avatar_sha\x18\x0b \x01(\x0c\x12?\n\x04rank\x18\x0c \x01(\x0e\x32\x13.EChatRoomGroupRank:\x1ck_EChatRoomGroupRank_Default\x12\x17\n\x0f\x64\x65\x66\x61ult_role_id\x18\r \x01(\x04\x12\x10\n\x08role_ids\x18\x0e \x03(\x04\x12\'\n\x0crole_actions\x18\x0f \x03(\x0b\x32\x11.CChatRoleActions\x12$\n\x1cwatching_broadcast_accountid\x18\x10 \x01(\r\x12\r\n\x05\x61ppid\x18\x11 \x01(\r\x12(\n\rparty_beacons\x18\x12 \x03(\x0b\x32\x11.CChatPartyBeacon\"\x93\x01\n\x14\x43\x43hatRoomSummaryPair\x12\x37\n\x15user_chat_group_state\x18\x01 \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x42\n\rgroup_summary\x18\x02 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\"Y\n&CChatRoom_GetMyChatRoomGroups_Response\x12/\n\x10\x63hat_room_groups\x18\x01 \x03(\x0b\x32\x15.CChatRoomSummaryPair\"@\n\'CChatRoom_GetChatRoomGroupState_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"O\n(CChatRoom_GetChatRoomGroupState_Response\x12#\n\x05state\x18\x01 \x01(\x0b\x32\x14.CChatRoomGroupState\"B\n)CChatRoom_GetChatRoomGroupSummary_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"b\n%CChatRoom_AckChatMessage_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x11\n\ttimestamp\x18\x03 \x01(\r\"c\n\"CChatRoom_CreateInviteLink_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x15\n\rseconds_valid\x18\x02 \x01(\r\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\"Q\n#CChatRoom_CreateInviteLink_Response\x12\x13\n\x0binvite_code\x18\x01 \x01(\t\x12\x15\n\rseconds_valid\x18\x02 \x01(\r\":\n#CChatRoom_GetInviteLinkInfo_Request\x12\x13\n\x0binvite_code\x18\x01 \x01(\t\"\x8c\x02\n$CChatRoom_GetInviteLinkInfo_Response\x12\x16\n\x0esteamid_sender\x18\x03 \x01(\x06\x12\x14\n\x0ctime_expires\x18\x04 \x01(\r\x12\x0f\n\x07\x63hat_id\x18\x06 \x01(\x04\x12\x42\n\rgroup_summary\x18\x08 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\x12\x37\n\x15user_chat_group_state\x18\t \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x18\n\x10time_kick_expire\x18\n \x01(\r\x12\x0e\n\x06\x62\x61nned\x18\x0b \x01(\x08\"w\n\x1f\x43\x43hatRoom_GetInviteInfo_Request\x12\x17\n\x0fsteamid_invitee\x18\x01 \x01(\x06\x12\x15\n\rchat_group_id\x18\x02 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\x12\x13\n\x0binvite_code\x18\x04 \x01(\t\"\x90\x01\n CChatRoom_GetInviteInfo_Response\x12\x42\n\rgroup_summary\x18\x01 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\x12\x18\n\x10time_kick_expire\x18\x02 \x01(\r\x12\x0e\n\x06\x62\x61nned\x18\x03 \x01(\x08\"A\n(CChatRoom_GetInviteLinksForGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"\xd7\x01\n)CChatRoom_GetInviteLinksForGroup_Response\x12I\n\x0cinvite_links\x18\x01 \x03(\x0b\x32\x33.CChatRoom_GetInviteLinksForGroup_Response.LinkInfo\x1a_\n\x08LinkInfo\x12\x13\n\x0binvite_code\x18\x01 \x01(\t\x12\x17\n\x0fsteamid_creator\x18\x02 \x01(\x06\x12\x14\n\x0ctime_expires\x18\x03 \x01(\r\x12\x0f\n\x07\x63hat_id\x18\x04 \x01(\x04\"5\n\x1c\x43\x43hatRoom_GetBanList_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"\xb5\x01\n\x1d\x43\x43hatRoom_GetBanList_Response\x12\x34\n\x04\x62\x61ns\x18\x01 \x03(\x0b\x32&.CChatRoom_GetBanList_Response.BanInfo\x1a^\n\x07\x42\x61nInfo\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x17\n\x0f\x61\x63\x63ountid_actor\x18\x02 \x01(\r\x12\x13\n\x0btime_banned\x18\x03 \x01(\r\x12\x12\n\nban_reason\x18\x04 \x01(\t\"8\n\x1f\x43\x43hatRoom_GetInviteList_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"X\n\x14\x43\x43hatRoomGroupInvite\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x17\n\x0f\x61\x63\x63ountid_actor\x18\x02 \x01(\r\x12\x14\n\x0ctime_invited\x18\x03 \x01(\r\"J\n CChatRoom_GetInviteList_Response\x12&\n\x07invites\x18\x01 \x03(\x0b\x32\x15.CChatRoomGroupInvite\"P\n\"CChatRoom_DeleteInviteLink_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x13\n\x0binvite_code\x18\x02 \x01(\t\"%\n#CChatRoom_DeleteInviteLink_Response\"n\n0CChatRoom_SetSessionActiveChatRoomGroups_Request\x12\x16\n\x0e\x63hat_group_ids\x18\x01 \x03(\x04\x12\"\n\x1a\x63hat_groups_data_requested\x18\x02 \x03(\x04\"^\n1CChatRoom_SetSessionActiveChatRoomGroups_Response\x12)\n\x0b\x63hat_states\x18\x01 \x03(\x0b\x32\x14.CChatRoomGroupState\"\xaa\x06\n-CChatRoom_SetUserChatGroupPreferences_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x63\n\x16\x63hat_group_preferences\x18\x02 \x01(\x0b\x32\x43.CChatRoom_SetUserChatGroupPreferences_Request.ChatGroupPreferences\x12\x61\n\x15\x63hat_room_preferences\x18\x03 \x03(\x0b\x32\x42.CChatRoom_SetUserChatGroupPreferences_Request.ChatRoomPreferences\x1a\x83\x02\n\x14\x43hatGroupPreferences\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x01 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x02 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x1e\n\x16unread_indicator_muted\x18\x03 \x01(\x08\x1a\x93\x02\n\x13\x43hatRoomPreferences\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x02 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x03 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x1e\n\x16unread_indicator_muted\x18\x04 \x01(\x08\"0\n.CChatRoom_SetUserChatGroupPreferences_Response\"\xc5\x01\n$CChatRoom_DeleteChatMessages_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12?\n\x08messages\x18\x03 \x03(\x0b\x32-.CChatRoom_DeleteChatMessages_Request.Message\x1a\x34\n\x07Message\x12\x18\n\x10server_timestamp\x18\x01 \x01(\r\x12\x0f\n\x07ordinal\x18\x02 \x01(\r\"\'\n%CChatRoom_DeleteChatMessages_Response\"\x98\x01\n*CClanChatRooms_GetClanChatRoomInfo_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12Y\n\nautocreate\x18\x02 \x01(\x08:\x04trueB?\x82\xb5\x18;Create a default chat room if none has been created before.\"v\n+CClanChatRooms_GetClanChatRoomInfo_Response\x12G\n\x12\x63hat_group_summary\x18\x01 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\"[\n-CClanChatRooms_SetClanChatRoomPrivate_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x63hat_room_private\x18\x02 \x01(\x08\"K\n.CClanChatRooms_SetClanChatRoomPrivate_Response\x12\x19\n\x11\x63hat_room_private\x18\x01 \x01(\x08\"V\n\rCChatMentions\x12\x13\n\x0bmention_all\x18\x01 \x01(\x08\x12\x14\n\x0cmention_here\x18\x02 \x01(\x08\x12\x1a\n\x12mention_accountids\x18\x03 \x03(\r\"\x86\x02\n*CChatRoom_IncomingChatMessage_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x16\n\x0esteamid_sender\x18\x03 \x01(\x06\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\r\x12 \n\x08mentions\x18\x06 \x01(\x0b\x32\x0e.CChatMentions\x12\x0f\n\x07ordinal\x18\x07 \x01(\r\x12&\n\x0eserver_message\x18\x08 \x01(\x0b\x32\x0e.ServerMessage\x12\x19\n\x11message_no_bbcode\x18\t \x01(\t\"\xea\x01\n*CChatRoom_ChatMessageModified_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12I\n\x08messages\x18\x03 \x03(\x0b\x32\x37.CChatRoom_ChatMessageModified_Notification.ChatMessage\x1aI\n\x0b\x43hatMessage\x12\x18\n\x10server_timestamp\x18\x01 \x01(\r\x12\x0f\n\x07ordinal\x18\x02 \x01(\r\x12\x0f\n\x07\x64\x65leted\x18\x03 \x01(\x08\"\xb6\x01\n(CChatRoom_MemberStateChange_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12 \n\x06member\x18\x02 \x01(\x0b\x32\x10.CChatRoomMember\x12Q\n\x06\x63hange\x18\x03 \x01(\x0e\x32\x1b.EChatRoomMemberStateChange:$k_EChatRoomMemberStateChange_Invalid\"^\n*CChatRoom_ChatRoomHeaderState_Notification\x12\x30\n\x0cheader_state\x18\x01 \x01(\x0b\x32\x1a.CChatRoomGroupHeaderState\"\x86\x01\n/CChatRoom_ChatRoomGroupRoomsChange_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x17\n\x0f\x64\x65\x66\x61ult_chat_id\x18\x02 \x01(\x04\x12#\n\nchat_rooms\x18\x03 \x03(\x0b\x32\x0f.CChatRoomState\"d\n:CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x15\n\rchat_group_id\x18\x02 \x01(\x04\"\xa9\x02\n;ChatRoomClient_NotifyChatGroupUserStateChanged_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x37\n\x15user_chat_group_state\x18\x02 \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x42\n\rgroup_summary\x18\x03 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\x12V\n\x0buser_action\x18\x04 \x01(\x0e\x32\x1b.EChatRoomMemberStateChange:$k_EChatRoomMemberStateChange_Invalid\"\xc5\x15\n2CChatUsability_ClientUsabilityMetrics_Notification\x12\x16\n\x0emetrics_run_id\x18\x01 \x01(\r\x12\x14\n\x0c\x63lient_build\x18\x02 \x01(\r\x12\x17\n\x0fmetrics_version\x18\x03 \x01(\r\x12\x0e\n\x06in_web\x18\x04 \x01(\x08\x12N\n\x08settings\x18\n \x01(\x0b\x32<.CChatUsability_ClientUsabilityMetrics_Notification.Settings\x12Y\n\x0evoice_settings\x18\x0b \x01(\x0b\x32\x41.CChatUsability_ClientUsabilityMetrics_Notification.VoiceSettings\x12M\n\x08ui_state\x18\x0c \x01(\x0b\x32;.CChatUsability_ClientUsabilityMetrics_Notification.UIState\x12L\n\x07metrics\x18\r \x01(\x0b\x32;.CChatUsability_ClientUsabilityMetrics_Notification.Metrics\x1a\xbf\x06\n\x08Settings\x12!\n\x19notifications_show_ingame\x18\x01 \x01(\x08\x12!\n\x19notifications_show_online\x18\x02 \x01(\x08\x12\"\n\x1anotifications_show_message\x18\x03 \x01(\x08\x12.\n&notifications_events_and_announcements\x18\x04 \x01(\x08\x12\x1a\n\x12sounds_play_ingame\x18\x05 \x01(\x08\x12\x1a\n\x12sounds_play_online\x18\x06 \x01(\x08\x12\x1b\n\x13sounds_play_message\x18\x07 \x01(\x08\x12\'\n\x1fsounds_events_and_announcements\x18\x08 \x01(\x08\x12\x1e\n\x16\x61lways_new_chat_window\x18\t \x01(\x08\x12\'\n\x1f\x66orce_alphabetic_friend_sorting\x18\n \x01(\x08\x12\x17\n\x0f\x63hat_flash_mode\x18\x0b \x01(\x05\x12\x1b\n\x13remember_open_chats\x18\x0c \x01(\x08\x12\x1c\n\x14\x63ompact_quick_access\x18\r \x01(\x08\x12\x1c\n\x14\x63ompact_friends_list\x18\x0e \x01(\x08\x12\x31\n)notifications_show_chat_room_notification\x18\x0f \x01(\x08\x12*\n\"sounds_play_chat_room_notification\x18\x10 \x01(\x08\x12*\n\"hide_offline_friends_in_tag_groups\x18\x11 \x01(\x08\x12 \n\x18hide_categorized_friends\x18\x12 \x01(\x08\x12*\n\"categorize_in_game_friends_by_game\x18\x13 \x01(\x08\x12\x16\n\x0e\x63hat_font_size\x18\x14 \x01(\x05\x12\x17\n\x0fuse24hour_clock\x18\x15 \x01(\x08\x12\x1b\n\x13\x64o_not_disturb_mode\x18\x16 \x01(\x08\x12\x1e\n\x16\x64isable_embed_inlining\x18\x17 \x01(\x08\x12\x19\n\x11sign_into_friends\x18\x18 \x01(\x08\x1a\xea\x02\n\rVoiceSettings\x12\x18\n\x10voice_input_gain\x18\x01 \x01(\x02\x12\x19\n\x11voice_output_gain\x18\x02 \x01(\x02\x12\x18\n\x10noise_gate_level\x18\x03 \x01(\x05\x12#\n\x1bvoice_use_echo_cancellation\x18\x04 \x01(\x08\x12$\n\x1cvoice_use_noise_cancellation\x18\x05 \x01(\x08\x12#\n\x1bvoice_use_auto_gain_control\x18\x06 \x01(\x08\x12 \n\x18selected_non_default_mic\x18\x07 \x01(\x08\x12#\n\x1bselected_non_default_output\x18\x08 \x01(\x08\x12\x1c\n\x14push_to_talk_enabled\x18\t \x01(\x08\x12\x1c\n\x14push_to_mute_enabled\x18\n \x01(\x08\x12\x17\n\x0fplay_ptt_sounds\x18\x0b \x01(\x08\x1a\xfd\x05\n\x07UIState\x12\x1b\n\x13\x66riends_list_height\x18\x01 \x01(\x05\x12\x1a\n\x12\x66riends_list_width\x18\x02 \x01(\x05\x12\x1b\n\x13\x66riends_list_docked\x18\x03 \x01(\x08\x12\x1e\n\x16\x66riends_list_collapsed\x18\x04 \x01(\x08\x12\'\n\x1f\x66riends_list_group_chats_height\x18\x05 \x01(\x05\x12\x1c\n\x14\x66riends_list_visible\x18\x06 \x01(\x08\x12\x1a\n\x12\x63hat_popups_opened\x18\x07 \x01(\x05\x12\x1e\n\x16group_chat_tabs_opened\x18\x08 \x01(\x05\x12\x1f\n\x17\x66riend_chat_tabs_opened\x18\t \x01(\x05\x12\x19\n\x11\x63hat_window_width\x18\n \x01(\x05\x12\x1a\n\x12\x63hat_window_height\x18\x0b \x01(\x05\x12l\n\x11\x63\x61tegory_collapse\x18\x0c \x01(\x0b\x32Q.CChatUsability_ClientUsabilityMetrics_Notification.UIState.CategoryCollapseState\x12%\n\x1dgroup_chat_left_col_collapsed\x18\r \x01(\x05\x12&\n\x1egroup_chat_right_col_collapsed\x18\x0e \x01(\x05\x12 \n\x18in_one_on_one_voice_chat\x18\x0f \x01(\x08\x12\x1b\n\x13in_group_voice_chat\x18\x10 \x01(\x08\x1a\xa4\x01\n\x15\x43\x61tegoryCollapseState\x12\x19\n\x11in_game_collapsed\x18\x01 \x01(\x08\x12\x18\n\x10online_collapsed\x18\x02 \x01(\x08\x12\x19\n\x11offline_collapsed\x18\x03 \x01(\x08\x12\x1d\n\x15game_groups_collapsed\x18\x04 \x01(\x05\x12\x1c\n\x14\x63\x61tegories_collapsed\x18\x05 \x01(\x05\x1a\xc0\x02\n\x07Metrics\x12\x15\n\rfriends_count\x18\x01 \x01(\x05\x12\x1e\n\x16\x66riends_category_count\x18\x02 \x01(\x05\x12!\n\x19\x66riends_categorized_count\x18\x03 \x01(\x05\x12\x1c\n\x14\x66riends_online_count\x18\x04 \x01(\x05\x12\x1d\n\x15\x66riends_in_game_count\x18\x05 \x01(\x05\x12\'\n\x1f\x66riends_in_game_singleton_count\x18\x06 \x01(\x05\x12\x18\n\x10game_group_count\x18\x07 \x01(\x05\x12\x1e\n\x16\x66riends_favorite_count\x18\x08 \x01(\x05\x12\x18\n\x10group_chat_count\x18\t \x01(\x05\x12!\n\x19group_chat_favorite_count\x18\n \x01(\x05\"S\n9CChatUsability_RequestClientUsabilityMetrics_Notification\x12\x16\n\x0emetrics_run_id\x18\x01 \x01(\r*\x9c\x01\n\x12\x45\x43hatRoomJoinState\x12 \n\x1ck_EChatRoomJoinState_Default\x10\x00\x12\x1d\n\x19k_EChatRoomJoinState_None\x10\x01\x12\x1f\n\x1bk_EChatRoomJoinState_Joined\x10\x02\x12$\n k_EChatRoomJoinState_TestInvalid\x10\x63*\xa4\x02\n\x12\x45\x43hatRoomGroupRank\x12 \n\x1ck_EChatRoomGroupRank_Default\x10\x00\x12\x1f\n\x1bk_EChatRoomGroupRank_Viewer\x10\n\x12\x1e\n\x1ak_EChatRoomGroupRank_Guest\x10\x0f\x12\x1f\n\x1bk_EChatRoomGroupRank_Member\x10\x14\x12\"\n\x1ek_EChatRoomGroupRank_Moderator\x10\x1e\x12 \n\x1ck_EChatRoomGroupRank_Officer\x10(\x12\x1e\n\x1ak_EChatRoomGroupRank_Owner\x10\x32\x12$\n k_EChatRoomGroupRank_TestInvalid\x10\x63*\xf4\x01\n\x1a\x45\x43hatRoomNotificationLevel\x12(\n$k_EChatroomNotificationLevel_Invalid\x10\x00\x12%\n!k_EChatroomNotificationLevel_None\x10\x01\x12*\n&k_EChatroomNotificationLevel_MentionMe\x10\x02\x12+\n\'k_EChatroomNotificationLevel_MentionAll\x10\x03\x12,\n(k_EChatroomNotificationLevel_AllMessages\x10\x04*\x97\x03\n\x16\x45\x43hatRoomServerMessage\x12 \n\x1ck_EChatRoomServerMsg_Invalid\x10\x00\x12\'\n#k_EChatRoomServerMsg_RenameChatRoom\x10\x01\x12\x1f\n\x1bk_EChatRoomServerMsg_Joined\x10\x02\x12\x1f\n\x1bk_EChatRoomServerMsg_Parted\x10\x03\x12\x1f\n\x1bk_EChatRoomServerMsg_Kicked\x10\x04\x12 \n\x1ck_EChatRoomServerMsg_Invited\x10\x05\x12(\n$k_EChatRoomServerMsg_InviteDismissed\x10\x08\x12/\n+k_EChatRoomServerMsg_ChatRoomTaglineChanged\x10\t\x12.\n*k_EChatRoomServerMsg_ChatRoomAvatarChanged\x10\n\x12\"\n\x1ek_EChatRoomServerMsg_AppCustom\x10\x0b*\xcb\x03\n\x1a\x45\x43hatRoomMemberStateChange\x12(\n$k_EChatRoomMemberStateChange_Invalid\x10\x00\x12\'\n#k_EChatRoomMemberStateChange_Joined\x10\x01\x12\'\n#k_EChatRoomMemberStateChange_Parted\x10\x02\x12\'\n#k_EChatRoomMemberStateChange_Kicked\x10\x03\x12(\n$k_EChatRoomMemberStateChange_Invited\x10\x04\x12,\n(k_EChatRoomMemberStateChange_RankChanged\x10\x07\x12\x30\n,k_EChatRoomMemberStateChange_InviteDismissed\x10\x08\x12&\n\"k_EChatRoomMemberStateChange_Muted\x10\t\x12\'\n#k_EChatRoomMemberStateChange_Banned\x10\n\x12-\n)k_EChatRoomMemberStateChange_RolesChanged\x10\x0c\x32\x8b\x02\n\x04\x43hat\x12\xe7\x01\n\x1aRequestFriendPersonaStates\x12).CChat_RequestFriendPersonaStates_Request\x1a*.CChat_RequestFriendPersonaStates_Response\"r\x82\xb5\x18nRequest to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState.\x1a\x19\x82\xb5\x18\x15\x43hat-related services2\xff\x32\n\x08\x43hatRoom\x12\xa3\x01\n\x13\x43reateChatRoomGroup\x12&.CChatRoom_CreateChatRoomGroup_Request\x1a\'.CChatRoom_CreateChatRoomGroup_Response\";\x82\xb5\x18\x37\x43reate\'s a chat group that can contain other chat rooms\x12z\n\x11SaveChatRoomGroup\x12$.CChatRoom_SaveChatRoomGroup_Request\x1a%.CChatRoom_SaveChatRoomGroup_Response\"\x18\x82\xb5\x18\x14Saves\'s a chat group\x12\x84\x01\n\x13RenameChatRoomGroup\x12&.CChatRoom_RenameChatRoomGroup_Request\x1a\'.CChatRoom_RenameChatRoomGroup_Response\"\x1c\x82\xb5\x18\x18Rename a chat room group\x12\x99\x01\n\x17SetChatRoomGroupTagline\x12*.CChatRoom_SetChatRoomGroupTagline_Request\x1a+.CChatRoom_SetChatRoomGroupTagline_Response\"%\x82\xb5\x18!Set tagline for a chat room group\x12\x99\x01\n\x16SetChatRoomGroupAvatar\x12).CChatRoom_SetChatRoomGroupAvatar_Request\x1a*.CChatRoom_SetChatRoomGroupAvatar_Response\"(\x82\xb5\x18$Set avatar SHA for a chat room group\x12\xcb\x01\n!SetChatRoomGroupWatchingBroadcast\x12\x34.CChatRoom_SetChatRoomGroupWatchingBroadcast_Request\x1a\x35.CChatRoom_SetChatRoomGroupWatchingBroadcast_Response\"9\x82\xb5\x18\x35Sets a broadcast that the chat room group is watching\x12\x64\n\x0fMuteUserInGroup\x12\x1b.CChatRoom_MuteUser_Request\x1a\x1c.CChatRoom_MuteUser_Response\"\x16\x82\xb5\x18\x12Mute user in group\x12h\n\x11KickUserFromGroup\x12\x1b.CChatRoom_KickUser_Request\x1a\x1c.CChatRoom_KickUser_Response\"\x18\x82\xb5\x18\x14Kick user from group\x12y\n\x0fSetUserBanState\x12\".CChatRoom_SetUserBanState_Request\x1a#.CChatRoom_SetUserBanState_Response\"\x1d\x82\xb5\x18\x19\x42\x61n/unban user from group\x12\x82\x01\n\x13RevokeInviteToGroup\x12\x1f.CChatRoom_RevokeInvite_Request\x1a .CChatRoom_RevokeInvite_Response\"(\x82\xb5\x18$Revoke a direct invitation of a user\x12\x65\n\nCreateRole\x12\x1d.CChatRoom_CreateRole_Request\x1a\x1e.CChatRoom_CreateRole_Response\"\x18\x82\xb5\x18\x14\x43reate role for goup\x12\x61\n\x08GetRoles\x12\x1b.CChatRoom_GetRoles_Request\x1a\x1c.CChatRoom_GetRoles_Response\"\x1a\x82\xb5\x18\x16Get all roles in group\x12\x65\n\nRenameRole\x12\x1d.CChatRoom_RenameRole_Request\x1a\x1e.CChatRoom_RenameRole_Response\"\x18\x82\xb5\x18\x14Rename role for goup\x12l\n\x0bReorderRole\x12\x1e.CChatRoom_ReorderRole_Request\x1a\x1f.CChatRoom_ReorderRole_Response\"\x1c\x82\xb5\x18\x18Reorder role with a goup\x12g\n\nDeleteRole\x12\x1d.CChatRoom_DeleteRole_Request\x1a\x1e.CChatRoom_DeleteRole_Response\"\x1a\x82\xb5\x18\x16\x44\x65lete role from group\x12\x87\x01\n\x0eGetRoleActions\x12!.CChatRoom_GetRoleActions_Request\x1a\".CChatRoom_GetRoleActions_Response\".\x82\xb5\x18*Get all defined roles and actions in group\x12\x86\x01\n\x12ReplaceRoleActions\x12%.CChatRoom_ReplaceRoleActions_Request\x1a&.CChatRoom_ReplaceRoleActions_Response\"!\x82\xb5\x18\x1dReplace role actions in group\x12s\n\rAddRoleToUser\x12 .CChatRoom_AddRoleToUser_Request\x1a!.CChatRoom_AddRoleToUser_Response\"\x1d\x82\xb5\x18\x19\x41\x64\x64 role to user in group\x12\x87\x01\n\x0fGetRolesForUser\x12\".CChatRoom_GetRolesForUser_Request\x1a#.CChatRoom_GetRolesForUser_Response\"+\x82\xb5\x18\'Get all roles assigned to user in group\x12\x87\x01\n\x12\x44\x65leteRoleFromUser\x12%.CChatRoom_DeleteRoleFromUser_Request\x1a&.CChatRoom_DeleteRoleFromUser_Response\"\"\x82\xb5\x18\x1e\x44\x65lete role from user in group\x12\x81\x01\n\x11JoinChatRoomGroup\x12$.CChatRoom_JoinChatRoomGroup_Request\x1a%.CChatRoom_JoinChatRoomGroup_Response\"\x1f\x82\xb5\x18\x1bJoin a multi-user chat room\x12\xad\x01\n\x1bInviteFriendToChatRoomGroup\x12..CChatRoom_InviteFriendToChatRoomGroup_Request\x1a/.CChatRoom_InviteFriendToChatRoomGroup_Response\"-\x82\xb5\x18)Invite a friend to a multi-user chat room\x12\x97\x01\n\x12LeaveChatRoomGroup\x12%.CChatRoom_LeaveChatRoomGroup_Request\x1a&.CChatRoom_LeaveChatRoomGroup_Response\"2\x82\xb5\x18.Leaves a chat room group and all related chats\x12\x89\x01\n\x0e\x43reateChatRoom\x12!.CChatRoom_CreateChatRoom_Request\x1a\".CChatRoom_CreateChatRoom_Response\"0\x82\xb5\x18,Creates a chat room inside a chat room group\x12\x89\x01\n\x0e\x44\x65leteChatRoom\x12!.CChatRoom_DeleteChatRoom_Request\x1a\".CChatRoom_DeleteChatRoom_Response\"0\x82\xb5\x18,Deletes a chat room inside a chat room group\x12\x89\x01\n\x0eRenameChatRoom\x12!.CChatRoom_RenameChatRoom_Request\x1a\".CChatRoom_RenameChatRoom_Response\"0\x82\xb5\x18,Renames a chat room inside a chat room group\x12\x8d\x01\n\x0fReorderChatRoom\x12\".CChatRoom_ReorderChatRoom_Request\x1a#.CChatRoom_ReorderChatRoom_Response\"1\x82\xb5\x18-Reorders a chat room inside a chat room group\x12\x8d\x01\n\x0fSendChatMessage\x12\".CChatRoom_SendChatMessage_Request\x1a#.CChatRoom_SendChatMessage_Response\"1\x82\xb5\x18-Send a chat message to a multi-user chat room\x12\xa7\x01\n\rJoinVoiceChat\x12 .CChatRoom_JoinVoiceChat_Request\x1a!.CChatRoom_JoinVoiceChat_Response\"Q\x82\xb5\x18MJoin the voice chat in a multi-room chat (should already be in the chat room)\x12\x86\x01\n\x0eLeaveVoiceChat\x12!.CChatRoom_LeaveVoiceChat_Request\x1a\".CChatRoom_LeaveVoiceChat_Response\"-\x82\xb5\x18)Leave the voice chat in a multi-room chat\x12\xc3\x01\n\x11GetMessageHistory\x12$.CChatRoom_GetMessageHistory_Request\x1a%.CChatRoom_GetMessageHistory_Response\"a\x82\xb5\x18]Get the history of messages in a chat room.  You must currently be a member of the chat room.\x12\x88\x01\n\x13GetMyChatRoomGroups\x12&.CChatRoom_GetMyChatRoomGroups_Request\x1a\'.CChatRoom_GetMyChatRoomGroups_Response\" \x82\xb5\x18\x1cGet a list of our chat rooms\x12\x9a\x01\n\x15GetChatRoomGroupState\x12(.CChatRoom_GetChatRoomGroupState_Request\x1a).CChatRoom_GetChatRoomGroupState_Response\",\x82\xb5\x18(Get information about a single chat room\x12\xa5\x01\n\x17GetChatRoomGroupSummary\x12*.CChatRoom_GetChatRoomGroupSummary_Request\x1a+.CChatRoom_GetChatRoomGroupSummary_Response\"1\x82\xb5\x18-Get basic information about a chat room group\x12\x8f\x01\n\x0e\x41\x63kChatMessage\x12&.CChatRoom_AckChatMessage_Notification\x1a\x0b.NoResponse\"H\x82\xb5\x18\x44\x41\x63knowledge that we have seen the most recent chat message in a chat\x12\x81\x01\n\x10\x43reateInviteLink\x12#.CChatRoom_CreateInviteLink_Request\x1a$.CChatRoom_CreateInviteLink_Response\"\"\x82\xb5\x18\x1e\x43reates a chatroom invite link\x12\x90\x01\n\x11GetInviteLinkInfo\x12$.CChatRoom_GetInviteLinkInfo_Request\x1a%.CChatRoom_GetInviteLinkInfo_Response\".\x82\xb5\x18*Returns chat room info about provided link\x12\xaa\x01\n\rGetInviteInfo\x12 .CChatRoom_GetInviteInfo_Request\x1a!.CChatRoom_GetInviteInfo_Response\"T\x82\xb5\x18PReturns chat room info about any invite involving the sender and passed group id\x12\xa5\x01\n\x16GetInviteLinksForGroup\x12).CChatRoom_GetInviteLinksForGroup_Request\x1a*.CChatRoom_GetInviteLinksForGroup_Response\"4\x82\xb5\x18\x30Returns all invite links for the specified group\x12\x8b\x01\n\nGetBanList\x12\x1d.CChatRoom_GetBanList_Request\x1a\x1e.CChatRoom_GetBanList_Response\">\x82\xb5\x18:Gets a list of users who have been banned from a chat room\x12\x93\x01\n\rGetInviteList\x12 .CChatRoom_GetInviteList_Request\x1a!.CChatRoom_GetInviteList_Response\"=\x82\xb5\x18\x39Gets a list of users who have been invited to a chat room\x12\x80\x01\n\x10\x44\x65leteInviteLink\x12#.CChatRoom_DeleteInviteLink_Request\x1a$.CChatRoom_DeleteInviteLink_Response\"!\x82\xb5\x18\x1d\x44\x65letes specified invite link\x12\xc4\x01\n\x1eSetSessionActiveChatRoomGroups\x12\x31.CChatRoom_SetSessionActiveChatRoomGroups_Request\x1a\x32.CChatRoom_SetSessionActiveChatRoomGroups_Response\";\x82\xb5\x18\x37Set which chat rooms we are using in the active session\x12\xb9\x01\n\x1bSetUserChatGroupPreferences\x12..CChatRoom_SetUserChatGroupPreferences_Request\x1a/.CChatRoom_SetUserChatGroupPreferences_Response\"9\x82\xb5\x18\x35Set preferences around chat notifications for a group\x12\x88\x01\n\x12\x44\x65leteChatMessages\x12%.CChatRoom_DeleteChatMessages_Request\x1a&.CChatRoom_DeleteChatMessages_Response\"#\x82\xb5\x18\x1f\x44\x65letes specified chat messages\x1a\x42\x82\xb5\x18>Service for joining, managing, and using multi-user chat rooms2\xae\x03\n\rClanChatRooms\x12\xb8\x01\n\x13GetClanChatRoomInfo\x12+.CClanChatRooms_GetClanChatRoomInfo_Request\x1a,.CClanChatRooms_GetClanChatRoomInfo_Response\"F\x82\xb5\x18\x42Get a list of chat rooms for a clan, optionally creating a new one\x12\xb2\x01\n\x16SetClanChatRoomPrivate\x12..CClanChatRooms_SetClanChatRoomPrivate_Request\x1a/.CClanChatRooms_SetClanChatRoomPrivate_Response\"7\x82\xb5\x18\x33Set a clan chat room to be members only (or public)\x1a-\x82\xb5\x18)Methods for getting clan chat information2\xbe\n\n\x0e\x43hatRoomClient\x12{\n\x19NotifyIncomingChatMessage\x12+.CChatRoom_IncomingChatMessage_Notification\x1a\x0b.NoResponse\"$\x82\xb5\x18 New chat message for a chat room\x12\x94\x01\n\x19NotifyChatMessageModified\x12+.CChatRoom_ChatMessageModified_Notification\x1a\x0b.NoResponse\"=\x82\xb5\x18\x39\x41n existing chat message has been modified on the backend\x12\x95\x01\n\x17NotifyMemberStateChange\x12).CChatRoom_MemberStateChange_Notification\x1a\x0b.NoResponse\"B\x82\xb5\x18>A chat room member\'s state has changed (join/part/permissions)\x12\x88\x01\n\x1fNotifyChatRoomHeaderStateChange\x12+.CChatRoom_ChatRoomHeaderState_Notification\x1a\x0b.NoResponse\"+\x82\xb5\x18\'Chat Room header / metadata has changed\x12\xa6\x01\n\x1eNotifyChatRoomGroupRoomsChange\x12\x30.CChatRoom_ChatRoomGroupRoomsChange_Notification\x1a\x0b.NoResponse\"E\x82\xb5\x18\x41Something about a chatroom group changed (created, deleted, etc.)\x12\xd5\x01\n#NotifyShouldRejoinChatRoomVoiceChat\x12;.CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification\x1a\x0b.NoResponse\"d\x82\xb5\x18`Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat.\x12\xb3\x01\n\x1fNotifyChatGroupUserStateChanged\x12<.ChatRoomClient_NotifyChatGroupUserStateChanged_Notification\x1a\x0b.NoResponse\"E\x82\xb5\x18\x41User chat group state (preferences, ack state, etc) have changed.\x12\x8f\x01\n\x18NotifyAckChatMessageEcho\x12&.CChatRoom_AckChatMessage_Notification\x1a\x0b.NoResponse\">\x82\xb5\x18:A session acked an unread message, echo to other sessions.\x1a,\x82\xb5\x18$Client notifications for chat events\xc0\xb5\x18\x02\x32\xc2\x01\n\rChatUsability\x12\x86\x01\n\x1cNotifyClientUsabilityMetrics\x12\x33.CChatUsability_ClientUsabilityMetrics_Notification\x1a\x0b.NoResponse\"$\x82\xb5\x18 Incoming metrics from the client\x1a(\x82\xb5\x18$Client notifications for chat events2\xe2\x01\n\x13\x43hatUsabilityClient\x12\x99\x01\n#NotifyRequestClientUsabilityMetrics\x12:.CChatUsability_RequestClientUsabilityMetrics_Notification\x1a\x0b.NoResponse\")\x82\xb5\x18%Request client send usability metrics\x1a/\x82\xb5\x18\'Client notifications for chat usability\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x18steammessages_chat.proto\x1a steammessages_unified_base.proto\"*\n(CChat_RequestFriendPersonaStates_Request\"+\n)CChat_RequestFriendPersonaStates_Response\"\xce\x01\n%CChatRoom_CreateChatRoomGroup_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_invited\x18\x02 \x01(\x06\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x18\n\x10steamid_invitees\x18\x04 \x03(\x06\x12$\n\x1cwatching_broadcast_accountid\x18\x06 \x01(\r\x12%\n\x1dwatching_broadcast_channel_id\x18\x07 \x01(\x04\";\n\tCChatRole\x12\x0f\n\x07role_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\"\xd4\x02\n\x10\x43\x43hatRoleActions\x12\x0f\n\x07role_id\x18\x01 \x01(\x04\x12(\n can_create_rename_delete_channel\x18\x02 \x01(\x08\x12\x10\n\x08\x63\x61n_kick\x18\x03 \x01(\x08\x12\x0f\n\x07\x63\x61n_ban\x18\x04 \x01(\x08\x12\x12\n\ncan_invite\x18\x05 \x01(\x08\x12&\n\x1e\x63\x61n_change_tagline_avatar_name\x18\x06 \x01(\x08\x12\x10\n\x08\x63\x61n_chat\x18\x07 \x01(\x08\x12\x18\n\x10\x63\x61n_view_history\x18\x08 \x01(\x08\x12\x1e\n\x16\x63\x61n_change_group_roles\x18\t \x01(\x08\x12\x1d\n\x15\x63\x61n_change_user_roles\x18\n \x01(\x08\x12\x17\n\x0f\x63\x61n_mention_all\x18\x0b \x01(\x08\x12\"\n\x1a\x63\x61n_set_watching_broadcast\x18\x0c \x01(\x08\"c\n\x10\x43\x43hatPartyBeacon\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x15\n\rsteamid_owner\x18\x02 \x01(\x06\x12\x11\n\tbeacon_id\x18\x03 \x01(\x06\x12\x15\n\rgame_metadata\x18\x04 \x01(\t\"\xf6\x02\n\x19\x43\x43hatRoomGroupHeaderState\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x11\n\tchat_name\x18\x02 \x01(\t\x12\x0e\n\x06\x63lanid\x18\r \x01(\r\x12\x17\n\x0f\x61\x63\x63ountid_owner\x18\x0e \x01(\r\x12\r\n\x05\x61ppid\x18\x15 \x01(\r\x12\x0f\n\x07tagline\x18\x0f \x01(\t\x12\x12\n\navatar_sha\x18\x10 \x01(\x0c\x12\x17\n\x0f\x64\x65\x66\x61ult_role_id\x18\x11 \x01(\x04\x12\x19\n\x05roles\x18\x12 \x03(\x0b\x32\n.CChatRole\x12\'\n\x0crole_actions\x18\x13 \x03(\x0b\x32\x11.CChatRoleActions\x12$\n\x1cwatching_broadcast_accountid\x18\x14 \x01(\r\x12(\n\rparty_beacons\x18\x16 \x03(\x0b\x32\x11.CChatPartyBeacon\x12%\n\x1dwatching_broadcast_channel_id\x18\x17 \x01(\x04\"\xd3\x01\n\x0f\x43\x43hatRoomMember\x12\x11\n\taccountid\x18\x01 \x01(\r\x12@\n\x05state\x18\x03 \x01(\x0e\x32\x13.EChatRoomJoinState:\x1ck_EChatRoomJoinState_Default\x12?\n\x04rank\x18\x04 \x01(\x0e\x32\x13.EChatRoomGroupRank:\x1ck_EChatRoomGroupRank_Default\x12\x18\n\x10time_kick_expire\x18\x06 \x01(\r\x12\x10\n\x08role_ids\x18\x07 \x03(\x04\"\x94\x01\n\x0e\x43\x43hatRoomState\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x11\n\tchat_name\x18\x02 \x01(\t\x12\x15\n\rvoice_allowed\x18\x03 \x01(\x08\x12\x18\n\x10members_in_voice\x18\x04 \x03(\r\x12\x19\n\x11time_last_message\x18\x05 \x01(\r\x12\x12\n\nsort_order\x18\x06 \x01(\r\"\xca\x01\n\x13\x43\x43hatRoomGroupState\x12\x30\n\x0cheader_state\x18\x01 \x01(\x0b\x32\x1a.CChatRoomGroupHeaderState\x12!\n\x07members\x18\x02 \x03(\x0b\x32\x10.CChatRoomMember\x12\x17\n\x0f\x64\x65\x66\x61ult_chat_id\x18\x04 \x01(\x04\x12#\n\nchat_rooms\x18\x05 \x03(\x0b\x32\x0f.CChatRoomState\x12 \n\x06kicked\x18\x07 \x03(\x0b\x32\x10.CChatRoomMember\"\xe0\x02\n\x12\x43UserChatRoomState\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x13\n\x0btime_joined\x18\x02 \x01(\r\x12\x15\n\rtime_last_ack\x18\x03 \x01(\r\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x04 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x05 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x19\n\x11time_last_mention\x18\x06 \x01(\r\x12%\n\x16unread_indicator_muted\x18\x07 \x01(\x08:\x05\x66\x61lse\"\x89\x03\n\x17\x43UserChatRoomGroupState\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x13\n\x0btime_joined\x18\x02 \x01(\r\x12\x31\n\x14user_chat_room_state\x18\x03 \x03(\x0b\x32\x13.CUserChatRoomState\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x04 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x05 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x1b\n\x13time_last_group_ack\x18\x06 \x01(\r\x12%\n\x16unread_indicator_muted\x18\x07 \x01(\x08:\x05\x66\x61lse\"\x97\x01\n&CChatRoom_CreateChatRoomGroup_Response\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12#\n\x05state\x18\x02 \x01(\x0b\x32\x14.CChatRoomGroupState\x12\x31\n\x0fuser_chat_state\x18\x03 \x01(\x0b\x32\x18.CUserChatRoomGroupState\"J\n#CChatRoom_SaveChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"&\n$CChatRoom_SaveChatRoomGroup_Response\"L\n%CChatRoom_RenameChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"6\n&CChatRoom_RenameChatRoomGroup_Response\x12\x0c\n\x04name\x18\x01 \x01(\t\"S\n)CChatRoom_SetChatRoomGroupTagline_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07tagline\x18\x02 \x01(\t\",\n*CChatRoom_SetChatRoomGroupTagline_Response\"U\n(CChatRoom_SetChatRoomGroupAvatar_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x12\n\navatar_sha\x18\x02 \x01(\x0c\"+\n)CChatRoom_SetChatRoomGroupAvatar_Response\"\x99\x01\n3CChatRoom_SetChatRoomGroupWatchingBroadcast_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12$\n\x1cwatching_broadcast_accountid\x18\x02 \x01(\r\x12%\n\x1dwatching_broadcast_channel_id\x18\x03 \x01(\x04\"6\n4CChatRoom_SetChatRoomGroupWatchingBroadcast_Response\"X\n\x1a\x43\x43hatRoom_MuteUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x12\n\nexpiration\x18\x03 \x01(\x05\"\x1d\n\x1b\x43\x43hatRoom_MuteUser_Response\"X\n\x1a\x43\x43hatRoom_KickUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x12\n\nexpiration\x18\x03 \x01(\x05\"\x1d\n\x1b\x43\x43hatRoom_KickUser_Response\"^\n!CChatRoom_SetUserBanState_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x11\n\tban_state\x18\x03 \x01(\x08\"$\n\"CChatRoom_SetUserBanState_Response\"H\n\x1e\x43\x43hatRoom_RevokeInvite_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\"!\n\x1f\x43\x43hatRoom_RevokeInvite_Response\"C\n\x1c\x43\x43hatRoom_CreateRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"C\n\x1d\x43\x43hatRoom_CreateRole_Response\x12\"\n\x07\x61\x63tions\x18\x02 \x01(\x0b\x32\x11.CChatRoleActions\"3\n\x1a\x43\x43hatRoom_GetRoles_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"8\n\x1b\x43\x43hatRoom_GetRoles_Response\x12\x19\n\x05roles\x18\x01 \x03(\x0b\x32\n.CChatRole\"T\n\x1c\x43\x43hatRoom_RenameRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\x12\x0c\n\x04name\x18\x03 \x01(\t\"\x1f\n\x1d\x43\x43hatRoom_RenameRole_Response\"X\n\x1d\x43\x43hatRoom_ReorderRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\" \n\x1e\x43\x43hatRoom_ReorderRole_Response\"F\n\x1c\x43\x43hatRoom_DeleteRole_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\"\x1f\n\x1d\x43\x43hatRoom_DeleteRole_Response\"J\n CChatRoom_GetRoleActions_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\"G\n!CChatRoom_GetRoleActions_Response\x12\"\n\x07\x61\x63tions\x18\x01 \x03(\x0b\x32\x11.CChatRoleActions\"r\n$CChatRoom_ReplaceRoleActions_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x02 \x01(\x04\x12\"\n\x07\x61\x63tions\x18\x04 \x01(\x0b\x32\x11.CChatRoleActions\"\'\n%CChatRoom_ReplaceRoleActions_Response\"Z\n\x1f\x43\x43hatRoom_AddRoleToUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x03 \x01(\x04\x12\x0f\n\x07steamid\x18\x04 \x01(\x06\"\"\n CChatRoom_AddRoleToUser_Response\"K\n!CChatRoom_GetRolesForUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\"6\n\"CChatRoom_GetRolesForUser_Response\x12\x10\n\x08role_ids\x18\x01 \x03(\x04\"_\n$CChatRoom_DeleteRoleFromUser_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07role_id\x18\x03 \x01(\x04\x12\x0f\n\x07steamid\x18\x04 \x01(\x06\"\'\n%CChatRoom_DeleteRoleFromUser_Response\"b\n#CChatRoom_JoinChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x13\n\x0binvite_code\x18\x02 \x01(\t\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\"\xa9\x01\n$CChatRoom_JoinChatRoomGroup_Response\x12#\n\x05state\x18\x01 \x01(\x0b\x32\x14.CChatRoomGroupState\x12\x31\n\x0fuser_chat_state\x18\x03 \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x14\n\x0cjoin_chat_id\x18\x04 \x01(\x04\x12\x13\n\x0btime_expire\x18\x05 \x01(\r\"\x86\x01\n-CChatRoom_InviteFriendToChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\x12\x1c\n\x14skip_friendsui_check\x18\x04 \x01(\x08\"0\n.CChatRoom_InviteFriendToChatRoomGroup_Response\"=\n$CChatRoom_LeaveChatRoomGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"\'\n%CChatRoom_LeaveChatRoomGroup_Response\"\\\n CChatRoom_CreateChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x61llow_voice\x18\x03 \x01(\x08\"G\n!CChatRoom_CreateChatRoom_Response\x12\"\n\tchat_room\x18\x01 \x01(\x0b\x32\x0f.CChatRoomState\"J\n CChatRoom_DeleteChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\"#\n!CChatRoom_DeleteChatRoom_Response\"X\n CChatRoom_RenameChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x0c\n\x04name\x18\x03 \x01(\t\"#\n!CChatRoom_RenameChatRoom_Response\"g\n!CChatRoom_ReorderChatRoom_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x1a\n\x12move_after_chat_id\x18\x03 \x01(\x04\"$\n\"CChatRoom_ReorderChatRoom_Response\"\\\n!CChatRoom_SendChatMessage_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x0f\n\x07message\x18\x03 \x01(\t\"i\n\"CChatRoom_SendChatMessage_Response\x12\x18\n\x10modified_message\x18\x01 \x01(\t\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\"I\n\x1f\x43\x43hatRoom_JoinVoiceChat_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\"8\n CChatRoom_JoinVoiceChat_Response\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x04\"J\n CChatRoom_LeaveVoiceChat_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\"#\n!CChatRoom_LeaveVoiceChat_Response\"\xb4\x01\n#CChatRoom_GetMessageHistory_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x11\n\tlast_time\x18\x03 \x01(\r\x12\x14\n\x0clast_ordinal\x18\x04 \x01(\r\x12\x12\n\nstart_time\x18\x05 \x01(\r\x12\x15\n\rstart_ordinal\x18\x06 \x01(\r\x12\x11\n\tmax_count\x18\x07 \x01(\r\"\x86\x01\n\rServerMessage\x12\x46\n\x07message\x18\x01 \x01(\x0e\x32\x17.EChatRoomServerMessage:\x1ck_EChatRoomServerMsg_Invalid\x12\x14\n\x0cstring_param\x18\x02 \x01(\t\x12\x17\n\x0f\x61\x63\x63ountid_param\x18\x03 \x01(\r\"\x98\x02\n$CChatRoom_GetMessageHistory_Response\x12\x43\n\x08messages\x18\x01 \x03(\x0b\x32\x31.CChatRoom_GetMessageHistory_Response.ChatMessage\x12\x16\n\x0emore_available\x18\x04 \x01(\x08\x1a\x92\x01\n\x0b\x43hatMessage\x12\x0e\n\x06sender\x18\x01 \x01(\r\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0f\n\x07ordinal\x18\x04 \x01(\r\x12&\n\x0eserver_message\x18\x05 \x01(\x0b\x32\x0e.ServerMessage\x12\x0f\n\x07\x64\x65leted\x18\x06 \x01(\x08\"\'\n%CChatRoom_GetMyChatRoomGroups_Request\"\xee\x04\n*CChatRoom_GetChatRoomGroupSummary_Response\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x17\n\x0f\x63hat_group_name\x18\x02 \x01(\t\x12\x1b\n\x13\x61\x63tive_member_count\x18\x03 \x01(\r\x12!\n\x19\x61\x63tive_voice_member_count\x18\x04 \x01(\r\x12\x17\n\x0f\x64\x65\x66\x61ult_chat_id\x18\x05 \x01(\x04\x12#\n\nchat_rooms\x18\x06 \x03(\x0b\x32\x0f.CChatRoomState\x12\x0e\n\x06\x63lanid\x18\x07 \x01(\r\x12\x1a\n\x12\x63hat_group_tagline\x18\x08 \x01(\t\x12\x17\n\x0f\x61\x63\x63ountid_owner\x18\t \x01(\r\x12\x13\n\x0btop_members\x18\n \x03(\r\x12\x1d\n\x15\x63hat_group_avatar_sha\x18\x0b \x01(\x0c\x12?\n\x04rank\x18\x0c \x01(\x0e\x32\x13.EChatRoomGroupRank:\x1ck_EChatRoomGroupRank_Default\x12\x17\n\x0f\x64\x65\x66\x61ult_role_id\x18\r \x01(\x04\x12\x10\n\x08role_ids\x18\x0e \x03(\x04\x12\'\n\x0crole_actions\x18\x0f \x03(\x0b\x32\x11.CChatRoleActions\x12$\n\x1cwatching_broadcast_accountid\x18\x10 \x01(\r\x12\r\n\x05\x61ppid\x18\x11 \x01(\r\x12(\n\rparty_beacons\x18\x12 \x03(\x0b\x32\x11.CChatPartyBeacon\x12%\n\x1dwatching_broadcast_channel_id\x18\x13 \x01(\x04\"\x93\x01\n\x14\x43\x43hatRoomSummaryPair\x12\x37\n\x15user_chat_group_state\x18\x01 \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x42\n\rgroup_summary\x18\x02 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\"Y\n&CChatRoom_GetMyChatRoomGroups_Response\x12/\n\x10\x63hat_room_groups\x18\x01 \x03(\x0b\x32\x15.CChatRoomSummaryPair\"@\n\'CChatRoom_GetChatRoomGroupState_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"O\n(CChatRoom_GetChatRoomGroupState_Response\x12#\n\x05state\x18\x01 \x01(\x0b\x32\x14.CChatRoomGroupState\"B\n)CChatRoom_GetChatRoomGroupSummary_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"b\n%CChatRoom_AckChatMessage_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x11\n\ttimestamp\x18\x03 \x01(\r\"c\n\"CChatRoom_CreateInviteLink_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x15\n\rseconds_valid\x18\x02 \x01(\r\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\"Q\n#CChatRoom_CreateInviteLink_Response\x12\x13\n\x0binvite_code\x18\x01 \x01(\t\x12\x15\n\rseconds_valid\x18\x02 \x01(\r\":\n#CChatRoom_GetInviteLinkInfo_Request\x12\x13\n\x0binvite_code\x18\x01 \x01(\t\"\x8c\x02\n$CChatRoom_GetInviteLinkInfo_Response\x12\x16\n\x0esteamid_sender\x18\x03 \x01(\x06\x12\x14\n\x0ctime_expires\x18\x04 \x01(\r\x12\x0f\n\x07\x63hat_id\x18\x06 \x01(\x04\x12\x42\n\rgroup_summary\x18\x08 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\x12\x37\n\x15user_chat_group_state\x18\t \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x18\n\x10time_kick_expire\x18\n \x01(\r\x12\x0e\n\x06\x62\x61nned\x18\x0b \x01(\x08\"w\n\x1f\x43\x43hatRoom_GetInviteInfo_Request\x12\x17\n\x0fsteamid_invitee\x18\x01 \x01(\x06\x12\x15\n\rchat_group_id\x18\x02 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x04\x12\x13\n\x0binvite_code\x18\x04 \x01(\t\"\x90\x01\n CChatRoom_GetInviteInfo_Response\x12\x42\n\rgroup_summary\x18\x01 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\x12\x18\n\x10time_kick_expire\x18\x02 \x01(\r\x12\x0e\n\x06\x62\x61nned\x18\x03 \x01(\x08\"A\n(CChatRoom_GetInviteLinksForGroup_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"\xd7\x01\n)CChatRoom_GetInviteLinksForGroup_Response\x12I\n\x0cinvite_links\x18\x01 \x03(\x0b\x32\x33.CChatRoom_GetInviteLinksForGroup_Response.LinkInfo\x1a_\n\x08LinkInfo\x12\x13\n\x0binvite_code\x18\x01 \x01(\t\x12\x17\n\x0fsteamid_creator\x18\x02 \x01(\x06\x12\x14\n\x0ctime_expires\x18\x03 \x01(\r\x12\x0f\n\x07\x63hat_id\x18\x04 \x01(\x04\"5\n\x1c\x43\x43hatRoom_GetBanList_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"\xb5\x01\n\x1d\x43\x43hatRoom_GetBanList_Response\x12\x34\n\x04\x62\x61ns\x18\x01 \x03(\x0b\x32&.CChatRoom_GetBanList_Response.BanInfo\x1a^\n\x07\x42\x61nInfo\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x17\n\x0f\x61\x63\x63ountid_actor\x18\x02 \x01(\r\x12\x13\n\x0btime_banned\x18\x03 \x01(\r\x12\x12\n\nban_reason\x18\x04 \x01(\t\"8\n\x1f\x43\x43hatRoom_GetInviteList_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\"X\n\x14\x43\x43hatRoomGroupInvite\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x17\n\x0f\x61\x63\x63ountid_actor\x18\x02 \x01(\r\x12\x14\n\x0ctime_invited\x18\x03 \x01(\r\"J\n CChatRoom_GetInviteList_Response\x12&\n\x07invites\x18\x01 \x03(\x0b\x32\x15.CChatRoomGroupInvite\"P\n\"CChatRoom_DeleteInviteLink_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x13\n\x0binvite_code\x18\x02 \x01(\t\"%\n#CChatRoom_DeleteInviteLink_Response\"n\n0CChatRoom_SetSessionActiveChatRoomGroups_Request\x12\x16\n\x0e\x63hat_group_ids\x18\x01 \x03(\x04\x12\"\n\x1a\x63hat_groups_data_requested\x18\x02 \x03(\x04\"^\n1CChatRoom_SetSessionActiveChatRoomGroups_Response\x12)\n\x0b\x63hat_states\x18\x01 \x03(\x0b\x32\x14.CChatRoomGroupState\"\xaa\x06\n-CChatRoom_SetUserChatGroupPreferences_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x63\n\x16\x63hat_group_preferences\x18\x02 \x01(\x0b\x32\x43.CChatRoom_SetUserChatGroupPreferences_Request.ChatGroupPreferences\x12\x61\n\x15\x63hat_room_preferences\x18\x03 \x03(\x0b\x32\x42.CChatRoom_SetUserChatGroupPreferences_Request.ChatRoomPreferences\x1a\x83\x02\n\x14\x43hatGroupPreferences\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x01 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x02 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x1e\n\x16unread_indicator_muted\x18\x03 \x01(\x08\x1a\x93\x02\n\x13\x43hatRoomPreferences\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x65\n\x1a\x64\x65sktop_notification_level\x18\x02 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x64\n\x19mobile_notification_level\x18\x03 \x01(\x0e\x32\x1b.EChatRoomNotificationLevel:$k_EChatroomNotificationLevel_Invalid\x12\x1e\n\x16unread_indicator_muted\x18\x04 \x01(\x08\"0\n.CChatRoom_SetUserChatGroupPreferences_Response\"\xc5\x01\n$CChatRoom_DeleteChatMessages_Request\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12?\n\x08messages\x18\x03 \x03(\x0b\x32-.CChatRoom_DeleteChatMessages_Request.Message\x1a\x34\n\x07Message\x12\x18\n\x10server_timestamp\x18\x01 \x01(\r\x12\x0f\n\x07ordinal\x18\x02 \x01(\r\"\'\n%CChatRoom_DeleteChatMessages_Response\"\x98\x01\n*CClanChatRooms_GetClanChatRoomInfo_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12Y\n\nautocreate\x18\x02 \x01(\x08:\x04trueB?\x82\xb5\x18;Create a default chat room if none has been created before.\"v\n+CClanChatRooms_GetClanChatRoomInfo_Response\x12G\n\x12\x63hat_group_summary\x18\x01 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\"[\n-CClanChatRooms_SetClanChatRoomPrivate_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x19\n\x11\x63hat_room_private\x18\x02 \x01(\x08\"K\n.CClanChatRooms_SetClanChatRoomPrivate_Response\x12\x19\n\x11\x63hat_room_private\x18\x01 \x01(\x08\"V\n\rCChatMentions\x12\x13\n\x0bmention_all\x18\x01 \x01(\x08\x12\x14\n\x0cmention_here\x18\x02 \x01(\x08\x12\x1a\n\x12mention_accountids\x18\x03 \x03(\r\"\xd5\x02\n*CChatRoom_IncomingChatMessage_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12\x16\n\x0esteamid_sender\x18\x03 \x01(\x06\x12\x0f\n\x07message\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\r\x12 \n\x08mentions\x18\x06 \x01(\x0b\x32\x0e.CChatMentions\x12\x0f\n\x07ordinal\x18\x07 \x01(\r\x12&\n\x0eserver_message\x18\x08 \x01(\x0b\x32\x0e.ServerMessage\x12\x19\n\x11message_no_bbcode\x18\t \x01(\t\x12M\n\tchat_name\x18\n \x01(\tB:\x82\xb5\x18\x36\x41 name to use for the chat, intended for notifications\"\xea\x01\n*CChatRoom_ChatMessageModified_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x04\x12I\n\x08messages\x18\x03 \x03(\x0b\x32\x37.CChatRoom_ChatMessageModified_Notification.ChatMessage\x1aI\n\x0b\x43hatMessage\x12\x18\n\x10server_timestamp\x18\x01 \x01(\r\x12\x0f\n\x07ordinal\x18\x02 \x01(\r\x12\x0f\n\x07\x64\x65leted\x18\x03 \x01(\x08\"\xb6\x01\n(CChatRoom_MemberStateChange_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12 \n\x06member\x18\x02 \x01(\x0b\x32\x10.CChatRoomMember\x12Q\n\x06\x63hange\x18\x03 \x01(\x0e\x32\x1b.EChatRoomMemberStateChange:$k_EChatRoomMemberStateChange_Invalid\"^\n*CChatRoom_ChatRoomHeaderState_Notification\x12\x30\n\x0cheader_state\x18\x01 \x01(\x0b\x32\x1a.CChatRoomGroupHeaderState\"\x86\x01\n/CChatRoom_ChatRoomGroupRoomsChange_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x17\n\x0f\x64\x65\x66\x61ult_chat_id\x18\x02 \x01(\x04\x12#\n\nchat_rooms\x18\x03 \x03(\x0b\x32\x0f.CChatRoomState\"d\n:CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x04\x12\x15\n\rchat_group_id\x18\x02 \x01(\x04\"\xa9\x02\n;ChatRoomClient_NotifyChatGroupUserStateChanged_Notification\x12\x15\n\rchat_group_id\x18\x01 \x01(\x04\x12\x37\n\x15user_chat_group_state\x18\x02 \x01(\x0b\x32\x18.CUserChatRoomGroupState\x12\x42\n\rgroup_summary\x18\x03 \x01(\x0b\x32+.CChatRoom_GetChatRoomGroupSummary_Response\x12V\n\x0buser_action\x18\x04 \x01(\x0e\x32\x1b.EChatRoomMemberStateChange:$k_EChatRoomMemberStateChange_Invalid\"\xc5\x15\n2CChatUsability_ClientUsabilityMetrics_Notification\x12\x16\n\x0emetrics_run_id\x18\x01 \x01(\r\x12\x14\n\x0c\x63lient_build\x18\x02 \x01(\r\x12\x17\n\x0fmetrics_version\x18\x03 \x01(\r\x12\x0e\n\x06in_web\x18\x04 \x01(\x08\x12N\n\x08settings\x18\n \x01(\x0b\x32<.CChatUsability_ClientUsabilityMetrics_Notification.Settings\x12Y\n\x0evoice_settings\x18\x0b \x01(\x0b\x32\x41.CChatUsability_ClientUsabilityMetrics_Notification.VoiceSettings\x12M\n\x08ui_state\x18\x0c \x01(\x0b\x32;.CChatUsability_ClientUsabilityMetrics_Notification.UIState\x12L\n\x07metrics\x18\r \x01(\x0b\x32;.CChatUsability_ClientUsabilityMetrics_Notification.Metrics\x1a\xbf\x06\n\x08Settings\x12!\n\x19notifications_show_ingame\x18\x01 \x01(\x08\x12!\n\x19notifications_show_online\x18\x02 \x01(\x08\x12\"\n\x1anotifications_show_message\x18\x03 \x01(\x08\x12.\n&notifications_events_and_announcements\x18\x04 \x01(\x08\x12\x1a\n\x12sounds_play_ingame\x18\x05 \x01(\x08\x12\x1a\n\x12sounds_play_online\x18\x06 \x01(\x08\x12\x1b\n\x13sounds_play_message\x18\x07 \x01(\x08\x12\'\n\x1fsounds_events_and_announcements\x18\x08 \x01(\x08\x12\x1e\n\x16\x61lways_new_chat_window\x18\t \x01(\x08\x12\'\n\x1f\x66orce_alphabetic_friend_sorting\x18\n \x01(\x08\x12\x17\n\x0f\x63hat_flash_mode\x18\x0b \x01(\x05\x12\x1b\n\x13remember_open_chats\x18\x0c \x01(\x08\x12\x1c\n\x14\x63ompact_quick_access\x18\r \x01(\x08\x12\x1c\n\x14\x63ompact_friends_list\x18\x0e \x01(\x08\x12\x31\n)notifications_show_chat_room_notification\x18\x0f \x01(\x08\x12*\n\"sounds_play_chat_room_notification\x18\x10 \x01(\x08\x12*\n\"hide_offline_friends_in_tag_groups\x18\x11 \x01(\x08\x12 \n\x18hide_categorized_friends\x18\x12 \x01(\x08\x12*\n\"categorize_in_game_friends_by_game\x18\x13 \x01(\x08\x12\x16\n\x0e\x63hat_font_size\x18\x14 \x01(\x05\x12\x17\n\x0fuse24hour_clock\x18\x15 \x01(\x08\x12\x1b\n\x13\x64o_not_disturb_mode\x18\x16 \x01(\x08\x12\x1e\n\x16\x64isable_embed_inlining\x18\x17 \x01(\x08\x12\x19\n\x11sign_into_friends\x18\x18 \x01(\x08\x1a\xea\x02\n\rVoiceSettings\x12\x18\n\x10voice_input_gain\x18\x01 \x01(\x02\x12\x19\n\x11voice_output_gain\x18\x02 \x01(\x02\x12\x18\n\x10noise_gate_level\x18\x03 \x01(\x05\x12#\n\x1bvoice_use_echo_cancellation\x18\x04 \x01(\x08\x12$\n\x1cvoice_use_noise_cancellation\x18\x05 \x01(\x08\x12#\n\x1bvoice_use_auto_gain_control\x18\x06 \x01(\x08\x12 \n\x18selected_non_default_mic\x18\x07 \x01(\x08\x12#\n\x1bselected_non_default_output\x18\x08 \x01(\x08\x12\x1c\n\x14push_to_talk_enabled\x18\t \x01(\x08\x12\x1c\n\x14push_to_mute_enabled\x18\n \x01(\x08\x12\x17\n\x0fplay_ptt_sounds\x18\x0b \x01(\x08\x1a\xfd\x05\n\x07UIState\x12\x1b\n\x13\x66riends_list_height\x18\x01 \x01(\x05\x12\x1a\n\x12\x66riends_list_width\x18\x02 \x01(\x05\x12\x1b\n\x13\x66riends_list_docked\x18\x03 \x01(\x08\x12\x1e\n\x16\x66riends_list_collapsed\x18\x04 \x01(\x08\x12\'\n\x1f\x66riends_list_group_chats_height\x18\x05 \x01(\x05\x12\x1c\n\x14\x66riends_list_visible\x18\x06 \x01(\x08\x12\x1a\n\x12\x63hat_popups_opened\x18\x07 \x01(\x05\x12\x1e\n\x16group_chat_tabs_opened\x18\x08 \x01(\x05\x12\x1f\n\x17\x66riend_chat_tabs_opened\x18\t \x01(\x05\x12\x19\n\x11\x63hat_window_width\x18\n \x01(\x05\x12\x1a\n\x12\x63hat_window_height\x18\x0b \x01(\x05\x12l\n\x11\x63\x61tegory_collapse\x18\x0c \x01(\x0b\x32Q.CChatUsability_ClientUsabilityMetrics_Notification.UIState.CategoryCollapseState\x12%\n\x1dgroup_chat_left_col_collapsed\x18\r \x01(\x05\x12&\n\x1egroup_chat_right_col_collapsed\x18\x0e \x01(\x05\x12 \n\x18in_one_on_one_voice_chat\x18\x0f \x01(\x08\x12\x1b\n\x13in_group_voice_chat\x18\x10 \x01(\x08\x1a\xa4\x01\n\x15\x43\x61tegoryCollapseState\x12\x19\n\x11in_game_collapsed\x18\x01 \x01(\x08\x12\x18\n\x10online_collapsed\x18\x02 \x01(\x08\x12\x19\n\x11offline_collapsed\x18\x03 \x01(\x08\x12\x1d\n\x15game_groups_collapsed\x18\x04 \x01(\x05\x12\x1c\n\x14\x63\x61tegories_collapsed\x18\x05 \x01(\x05\x1a\xc0\x02\n\x07Metrics\x12\x15\n\rfriends_count\x18\x01 \x01(\x05\x12\x1e\n\x16\x66riends_category_count\x18\x02 \x01(\x05\x12!\n\x19\x66riends_categorized_count\x18\x03 \x01(\x05\x12\x1c\n\x14\x66riends_online_count\x18\x04 \x01(\x05\x12\x1d\n\x15\x66riends_in_game_count\x18\x05 \x01(\x05\x12\'\n\x1f\x66riends_in_game_singleton_count\x18\x06 \x01(\x05\x12\x18\n\x10game_group_count\x18\x07 \x01(\x05\x12\x1e\n\x16\x66riends_favorite_count\x18\x08 \x01(\x05\x12\x18\n\x10group_chat_count\x18\t \x01(\x05\x12!\n\x19group_chat_favorite_count\x18\n \x01(\x05\"S\n9CChatUsability_RequestClientUsabilityMetrics_Notification\x12\x16\n\x0emetrics_run_id\x18\x01 \x01(\r*\x9c\x01\n\x12\x45\x43hatRoomJoinState\x12 \n\x1ck_EChatRoomJoinState_Default\x10\x00\x12\x1d\n\x19k_EChatRoomJoinState_None\x10\x01\x12\x1f\n\x1bk_EChatRoomJoinState_Joined\x10\x02\x12$\n k_EChatRoomJoinState_TestInvalid\x10\x63*\xa4\x02\n\x12\x45\x43hatRoomGroupRank\x12 \n\x1ck_EChatRoomGroupRank_Default\x10\x00\x12\x1f\n\x1bk_EChatRoomGroupRank_Viewer\x10\n\x12\x1e\n\x1ak_EChatRoomGroupRank_Guest\x10\x0f\x12\x1f\n\x1bk_EChatRoomGroupRank_Member\x10\x14\x12\"\n\x1ek_EChatRoomGroupRank_Moderator\x10\x1e\x12 \n\x1ck_EChatRoomGroupRank_Officer\x10(\x12\x1e\n\x1ak_EChatRoomGroupRank_Owner\x10\x32\x12$\n k_EChatRoomGroupRank_TestInvalid\x10\x63*\xf4\x01\n\x1a\x45\x43hatRoomNotificationLevel\x12(\n$k_EChatroomNotificationLevel_Invalid\x10\x00\x12%\n!k_EChatroomNotificationLevel_None\x10\x01\x12*\n&k_EChatroomNotificationLevel_MentionMe\x10\x02\x12+\n\'k_EChatroomNotificationLevel_MentionAll\x10\x03\x12,\n(k_EChatroomNotificationLevel_AllMessages\x10\x04*\x97\x03\n\x16\x45\x43hatRoomServerMessage\x12 \n\x1ck_EChatRoomServerMsg_Invalid\x10\x00\x12\'\n#k_EChatRoomServerMsg_RenameChatRoom\x10\x01\x12\x1f\n\x1bk_EChatRoomServerMsg_Joined\x10\x02\x12\x1f\n\x1bk_EChatRoomServerMsg_Parted\x10\x03\x12\x1f\n\x1bk_EChatRoomServerMsg_Kicked\x10\x04\x12 \n\x1ck_EChatRoomServerMsg_Invited\x10\x05\x12(\n$k_EChatRoomServerMsg_InviteDismissed\x10\x08\x12/\n+k_EChatRoomServerMsg_ChatRoomTaglineChanged\x10\t\x12.\n*k_EChatRoomServerMsg_ChatRoomAvatarChanged\x10\n\x12\"\n\x1ek_EChatRoomServerMsg_AppCustom\x10\x0b*\xcb\x03\n\x1a\x45\x43hatRoomMemberStateChange\x12(\n$k_EChatRoomMemberStateChange_Invalid\x10\x00\x12\'\n#k_EChatRoomMemberStateChange_Joined\x10\x01\x12\'\n#k_EChatRoomMemberStateChange_Parted\x10\x02\x12\'\n#k_EChatRoomMemberStateChange_Kicked\x10\x03\x12(\n$k_EChatRoomMemberStateChange_Invited\x10\x04\x12,\n(k_EChatRoomMemberStateChange_RankChanged\x10\x07\x12\x30\n,k_EChatRoomMemberStateChange_InviteDismissed\x10\x08\x12&\n\"k_EChatRoomMemberStateChange_Muted\x10\t\x12\'\n#k_EChatRoomMemberStateChange_Banned\x10\n\x12-\n)k_EChatRoomMemberStateChange_RolesChanged\x10\x0c\x32\x8b\x02\n\x04\x43hat\x12\xe7\x01\n\x1aRequestFriendPersonaStates\x12).CChat_RequestFriendPersonaStates_Request\x1a*.CChat_RequestFriendPersonaStates_Response\"r\x82\xb5\x18nRequest to be notified of online friend persona state information.  Responses sent via CMsgClientPersonaState.\x1a\x19\x82\xb5\x18\x15\x43hat-related services2\xff\x32\n\x08\x43hatRoom\x12\xa3\x01\n\x13\x43reateChatRoomGroup\x12&.CChatRoom_CreateChatRoomGroup_Request\x1a\'.CChatRoom_CreateChatRoomGroup_Response\";\x82\xb5\x18\x37\x43reate\'s a chat group that can contain other chat rooms\x12z\n\x11SaveChatRoomGroup\x12$.CChatRoom_SaveChatRoomGroup_Request\x1a%.CChatRoom_SaveChatRoomGroup_Response\"\x18\x82\xb5\x18\x14Saves\'s a chat group\x12\x84\x01\n\x13RenameChatRoomGroup\x12&.CChatRoom_RenameChatRoomGroup_Request\x1a\'.CChatRoom_RenameChatRoomGroup_Response\"\x1c\x82\xb5\x18\x18Rename a chat room group\x12\x99\x01\n\x17SetChatRoomGroupTagline\x12*.CChatRoom_SetChatRoomGroupTagline_Request\x1a+.CChatRoom_SetChatRoomGroupTagline_Response\"%\x82\xb5\x18!Set tagline for a chat room group\x12\x99\x01\n\x16SetChatRoomGroupAvatar\x12).CChatRoom_SetChatRoomGroupAvatar_Request\x1a*.CChatRoom_SetChatRoomGroupAvatar_Response\"(\x82\xb5\x18$Set avatar SHA for a chat room group\x12\xcb\x01\n!SetChatRoomGroupWatchingBroadcast\x12\x34.CChatRoom_SetChatRoomGroupWatchingBroadcast_Request\x1a\x35.CChatRoom_SetChatRoomGroupWatchingBroadcast_Response\"9\x82\xb5\x18\x35Sets a broadcast that the chat room group is watching\x12\x64\n\x0fMuteUserInGroup\x12\x1b.CChatRoom_MuteUser_Request\x1a\x1c.CChatRoom_MuteUser_Response\"\x16\x82\xb5\x18\x12Mute user in group\x12h\n\x11KickUserFromGroup\x12\x1b.CChatRoom_KickUser_Request\x1a\x1c.CChatRoom_KickUser_Response\"\x18\x82\xb5\x18\x14Kick user from group\x12y\n\x0fSetUserBanState\x12\".CChatRoom_SetUserBanState_Request\x1a#.CChatRoom_SetUserBanState_Response\"\x1d\x82\xb5\x18\x19\x42\x61n/unban user from group\x12\x82\x01\n\x13RevokeInviteToGroup\x12\x1f.CChatRoom_RevokeInvite_Request\x1a .CChatRoom_RevokeInvite_Response\"(\x82\xb5\x18$Revoke a direct invitation of a user\x12\x65\n\nCreateRole\x12\x1d.CChatRoom_CreateRole_Request\x1a\x1e.CChatRoom_CreateRole_Response\"\x18\x82\xb5\x18\x14\x43reate role for goup\x12\x61\n\x08GetRoles\x12\x1b.CChatRoom_GetRoles_Request\x1a\x1c.CChatRoom_GetRoles_Response\"\x1a\x82\xb5\x18\x16Get all roles in group\x12\x65\n\nRenameRole\x12\x1d.CChatRoom_RenameRole_Request\x1a\x1e.CChatRoom_RenameRole_Response\"\x18\x82\xb5\x18\x14Rename role for goup\x12l\n\x0bReorderRole\x12\x1e.CChatRoom_ReorderRole_Request\x1a\x1f.CChatRoom_ReorderRole_Response\"\x1c\x82\xb5\x18\x18Reorder role with a goup\x12g\n\nDeleteRole\x12\x1d.CChatRoom_DeleteRole_Request\x1a\x1e.CChatRoom_DeleteRole_Response\"\x1a\x82\xb5\x18\x16\x44\x65lete role from group\x12\x87\x01\n\x0eGetRoleActions\x12!.CChatRoom_GetRoleActions_Request\x1a\".CChatRoom_GetRoleActions_Response\".\x82\xb5\x18*Get all defined roles and actions in group\x12\x86\x01\n\x12ReplaceRoleActions\x12%.CChatRoom_ReplaceRoleActions_Request\x1a&.CChatRoom_ReplaceRoleActions_Response\"!\x82\xb5\x18\x1dReplace role actions in group\x12s\n\rAddRoleToUser\x12 .CChatRoom_AddRoleToUser_Request\x1a!.CChatRoom_AddRoleToUser_Response\"\x1d\x82\xb5\x18\x19\x41\x64\x64 role to user in group\x12\x87\x01\n\x0fGetRolesForUser\x12\".CChatRoom_GetRolesForUser_Request\x1a#.CChatRoom_GetRolesForUser_Response\"+\x82\xb5\x18\'Get all roles assigned to user in group\x12\x87\x01\n\x12\x44\x65leteRoleFromUser\x12%.CChatRoom_DeleteRoleFromUser_Request\x1a&.CChatRoom_DeleteRoleFromUser_Response\"\"\x82\xb5\x18\x1e\x44\x65lete role from user in group\x12\x81\x01\n\x11JoinChatRoomGroup\x12$.CChatRoom_JoinChatRoomGroup_Request\x1a%.CChatRoom_JoinChatRoomGroup_Response\"\x1f\x82\xb5\x18\x1bJoin a multi-user chat room\x12\xad\x01\n\x1bInviteFriendToChatRoomGroup\x12..CChatRoom_InviteFriendToChatRoomGroup_Request\x1a/.CChatRoom_InviteFriendToChatRoomGroup_Response\"-\x82\xb5\x18)Invite a friend to a multi-user chat room\x12\x97\x01\n\x12LeaveChatRoomGroup\x12%.CChatRoom_LeaveChatRoomGroup_Request\x1a&.CChatRoom_LeaveChatRoomGroup_Response\"2\x82\xb5\x18.Leaves a chat room group and all related chats\x12\x89\x01\n\x0e\x43reateChatRoom\x12!.CChatRoom_CreateChatRoom_Request\x1a\".CChatRoom_CreateChatRoom_Response\"0\x82\xb5\x18,Creates a chat room inside a chat room group\x12\x89\x01\n\x0e\x44\x65leteChatRoom\x12!.CChatRoom_DeleteChatRoom_Request\x1a\".CChatRoom_DeleteChatRoom_Response\"0\x82\xb5\x18,Deletes a chat room inside a chat room group\x12\x89\x01\n\x0eRenameChatRoom\x12!.CChatRoom_RenameChatRoom_Request\x1a\".CChatRoom_RenameChatRoom_Response\"0\x82\xb5\x18,Renames a chat room inside a chat room group\x12\x8d\x01\n\x0fReorderChatRoom\x12\".CChatRoom_ReorderChatRoom_Request\x1a#.CChatRoom_ReorderChatRoom_Response\"1\x82\xb5\x18-Reorders a chat room inside a chat room group\x12\x8d\x01\n\x0fSendChatMessage\x12\".CChatRoom_SendChatMessage_Request\x1a#.CChatRoom_SendChatMessage_Response\"1\x82\xb5\x18-Send a chat message to a multi-user chat room\x12\xa7\x01\n\rJoinVoiceChat\x12 .CChatRoom_JoinVoiceChat_Request\x1a!.CChatRoom_JoinVoiceChat_Response\"Q\x82\xb5\x18MJoin the voice chat in a multi-room chat (should already be in the chat room)\x12\x86\x01\n\x0eLeaveVoiceChat\x12!.CChatRoom_LeaveVoiceChat_Request\x1a\".CChatRoom_LeaveVoiceChat_Response\"-\x82\xb5\x18)Leave the voice chat in a multi-room chat\x12\xc3\x01\n\x11GetMessageHistory\x12$.CChatRoom_GetMessageHistory_Request\x1a%.CChatRoom_GetMessageHistory_Response\"a\x82\xb5\x18]Get the history of messages in a chat room.  You must currently be a member of the chat room.\x12\x88\x01\n\x13GetMyChatRoomGroups\x12&.CChatRoom_GetMyChatRoomGroups_Request\x1a\'.CChatRoom_GetMyChatRoomGroups_Response\" \x82\xb5\x18\x1cGet a list of our chat rooms\x12\x9a\x01\n\x15GetChatRoomGroupState\x12(.CChatRoom_GetChatRoomGroupState_Request\x1a).CChatRoom_GetChatRoomGroupState_Response\",\x82\xb5\x18(Get information about a single chat room\x12\xa5\x01\n\x17GetChatRoomGroupSummary\x12*.CChatRoom_GetChatRoomGroupSummary_Request\x1a+.CChatRoom_GetChatRoomGroupSummary_Response\"1\x82\xb5\x18-Get basic information about a chat room group\x12\x8f\x01\n\x0e\x41\x63kChatMessage\x12&.CChatRoom_AckChatMessage_Notification\x1a\x0b.NoResponse\"H\x82\xb5\x18\x44\x41\x63knowledge that we have seen the most recent chat message in a chat\x12\x81\x01\n\x10\x43reateInviteLink\x12#.CChatRoom_CreateInviteLink_Request\x1a$.CChatRoom_CreateInviteLink_Response\"\"\x82\xb5\x18\x1e\x43reates a chatroom invite link\x12\x90\x01\n\x11GetInviteLinkInfo\x12$.CChatRoom_GetInviteLinkInfo_Request\x1a%.CChatRoom_GetInviteLinkInfo_Response\".\x82\xb5\x18*Returns chat room info about provided link\x12\xaa\x01\n\rGetInviteInfo\x12 .CChatRoom_GetInviteInfo_Request\x1a!.CChatRoom_GetInviteInfo_Response\"T\x82\xb5\x18PReturns chat room info about any invite involving the sender and passed group id\x12\xa5\x01\n\x16GetInviteLinksForGroup\x12).CChatRoom_GetInviteLinksForGroup_Request\x1a*.CChatRoom_GetInviteLinksForGroup_Response\"4\x82\xb5\x18\x30Returns all invite links for the specified group\x12\x8b\x01\n\nGetBanList\x12\x1d.CChatRoom_GetBanList_Request\x1a\x1e.CChatRoom_GetBanList_Response\">\x82\xb5\x18:Gets a list of users who have been banned from a chat room\x12\x93\x01\n\rGetInviteList\x12 .CChatRoom_GetInviteList_Request\x1a!.CChatRoom_GetInviteList_Response\"=\x82\xb5\x18\x39Gets a list of users who have been invited to a chat room\x12\x80\x01\n\x10\x44\x65leteInviteLink\x12#.CChatRoom_DeleteInviteLink_Request\x1a$.CChatRoom_DeleteInviteLink_Response\"!\x82\xb5\x18\x1d\x44\x65letes specified invite link\x12\xc4\x01\n\x1eSetSessionActiveChatRoomGroups\x12\x31.CChatRoom_SetSessionActiveChatRoomGroups_Request\x1a\x32.CChatRoom_SetSessionActiveChatRoomGroups_Response\";\x82\xb5\x18\x37Set which chat rooms we are using in the active session\x12\xb9\x01\n\x1bSetUserChatGroupPreferences\x12..CChatRoom_SetUserChatGroupPreferences_Request\x1a/.CChatRoom_SetUserChatGroupPreferences_Response\"9\x82\xb5\x18\x35Set preferences around chat notifications for a group\x12\x88\x01\n\x12\x44\x65leteChatMessages\x12%.CChatRoom_DeleteChatMessages_Request\x1a&.CChatRoom_DeleteChatMessages_Response\"#\x82\xb5\x18\x1f\x44\x65letes specified chat messages\x1a\x42\x82\xb5\x18>Service for joining, managing, and using multi-user chat rooms2\xae\x03\n\rClanChatRooms\x12\xb8\x01\n\x13GetClanChatRoomInfo\x12+.CClanChatRooms_GetClanChatRoomInfo_Request\x1a,.CClanChatRooms_GetClanChatRoomInfo_Response\"F\x82\xb5\x18\x42Get a list of chat rooms for a clan, optionally creating a new one\x12\xb2\x01\n\x16SetClanChatRoomPrivate\x12..CClanChatRooms_SetClanChatRoomPrivate_Request\x1a/.CClanChatRooms_SetClanChatRoomPrivate_Response\"7\x82\xb5\x18\x33Set a clan chat room to be members only (or public)\x1a-\x82\xb5\x18)Methods for getting clan chat information2\xbe\n\n\x0e\x43hatRoomClient\x12{\n\x19NotifyIncomingChatMessage\x12+.CChatRoom_IncomingChatMessage_Notification\x1a\x0b.NoResponse\"$\x82\xb5\x18 New chat message for a chat room\x12\x94\x01\n\x19NotifyChatMessageModified\x12+.CChatRoom_ChatMessageModified_Notification\x1a\x0b.NoResponse\"=\x82\xb5\x18\x39\x41n existing chat message has been modified on the backend\x12\x95\x01\n\x17NotifyMemberStateChange\x12).CChatRoom_MemberStateChange_Notification\x1a\x0b.NoResponse\"B\x82\xb5\x18>A chat room member\'s state has changed (join/part/permissions)\x12\x88\x01\n\x1fNotifyChatRoomHeaderStateChange\x12+.CChatRoom_ChatRoomHeaderState_Notification\x1a\x0b.NoResponse\"+\x82\xb5\x18\'Chat Room header / metadata has changed\x12\xa6\x01\n\x1eNotifyChatRoomGroupRoomsChange\x12\x30.CChatRoom_ChatRoomGroupRoomsChange_Notification\x1a\x0b.NoResponse\"E\x82\xb5\x18\x41Something about a chatroom group changed (created, deleted, etc.)\x12\xd5\x01\n#NotifyShouldRejoinChatRoomVoiceChat\x12;.CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification\x1a\x0b.NoResponse\"d\x82\xb5\x18`Voice chat was recreated or dropped on the backend and client needs to rejoin to remain in chat.\x12\xb3\x01\n\x1fNotifyChatGroupUserStateChanged\x12<.ChatRoomClient_NotifyChatGroupUserStateChanged_Notification\x1a\x0b.NoResponse\"E\x82\xb5\x18\x41User chat group state (preferences, ack state, etc) have changed.\x12\x8f\x01\n\x18NotifyAckChatMessageEcho\x12&.CChatRoom_AckChatMessage_Notification\x1a\x0b.NoResponse\">\x82\xb5\x18:A session acked an unread message, echo to other sessions.\x1a,\x82\xb5\x18$Client notifications for chat events\xc0\xb5\x18\x02\x32\xc2\x01\n\rChatUsability\x12\x86\x01\n\x1cNotifyClientUsabilityMetrics\x12\x33.CChatUsability_ClientUsabilityMetrics_Notification\x1a\x0b.NoResponse\"$\x82\xb5\x18 Incoming metrics from the client\x1a(\x82\xb5\x18$Client notifications for chat events2\xe2\x01\n\x13\x43hatUsabilityClient\x12\x99\x01\n#NotifyRequestClientUsabilityMetrics\x12:.CChatUsability_RequestClientUsabilityMetrics_Notification\x1a\x0b.NoResponse\")\x82\xb5\x18%Request client send usability metrics\x1a/\x82\xb5\x18\'Client notifications for chat usability\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -53,8 +53,8 @@ _ECHATROOMJOINSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=16122,
-  serialized_end=16278,
+  serialized_start=16358,
+  serialized_end=16514,
 )
 _sym_db.RegisterEnumDescriptor(_ECHATROOMJOINSTATE)
 
@@ -100,8 +100,8 @@ _ECHATROOMGROUPRANK = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=16281,
-  serialized_end=16573,
+  serialized_start=16517,
+  serialized_end=16809,
 )
 _sym_db.RegisterEnumDescriptor(_ECHATROOMGROUPRANK)
 
@@ -135,8 +135,8 @@ _ECHATROOMNOTIFICATIONLEVEL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=16576,
-  serialized_end=16820,
+  serialized_start=16812,
+  serialized_end=17056,
 )
 _sym_db.RegisterEnumDescriptor(_ECHATROOMNOTIFICATIONLEVEL)
 
@@ -190,8 +190,8 @@ _ECHATROOMSERVERMESSAGE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=16823,
-  serialized_end=17230,
+  serialized_start=17059,
+  serialized_end=17466,
 )
 _sym_db.RegisterEnumDescriptor(_ECHATROOMSERVERMESSAGE)
 
@@ -245,8 +245,8 @@ _ECHATROOMMEMBERSTATECHANGE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=17233,
-  serialized_end=17692,
+  serialized_start=17469,
+  serialized_end=17928,
 )
 _sym_db.RegisterEnumDescriptor(_ECHATROOMMEMBERSTATECHANGE)
 
@@ -381,6 +381,13 @@ _CCHATROOM_CREATECHATROOMGROUP_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='watching_broadcast_channel_id', full_name='CChatRoom_CreateChatRoomGroup_Request.watching_broadcast_channel_id', index=5,
+      number=7, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -394,7 +401,7 @@ _CCHATROOM_CREATECHATROOMGROUP_REQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=152,
-  serialized_end=319,
+  serialized_end=358,
 )
 
 
@@ -438,8 +445,8 @@ _CCHATROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=321,
-  serialized_end=380,
+  serialized_start=360,
+  serialized_end=419,
 )
 
 
@@ -546,8 +553,8 @@ _CCHATROLEACTIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=383,
-  serialized_end=723,
+  serialized_start=422,
+  serialized_end=762,
 )
 
 
@@ -598,8 +605,8 @@ _CCHATPARTYBEACON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=725,
-  serialized_end=824,
+  serialized_start=764,
+  serialized_end=863,
 )
 
 
@@ -694,6 +701,13 @@ _CCHATROOMGROUPHEADERSTATE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='watching_broadcast_channel_id', full_name='CChatRoomGroupHeaderState.watching_broadcast_channel_id', index=12,
+      number=23, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -706,8 +720,8 @@ _CCHATROOMGROUPHEADERSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=827,
-  serialized_end=1162,
+  serialized_start=866,
+  serialized_end=1240,
 )
 
 
@@ -765,8 +779,8 @@ _CCHATROOMMEMBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1165,
-  serialized_end=1376,
+  serialized_start=1243,
+  serialized_end=1454,
 )
 
 
@@ -831,8 +845,8 @@ _CCHATROOMSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1379,
-  serialized_end=1527,
+  serialized_start=1457,
+  serialized_end=1605,
 )
 
 
@@ -890,8 +904,8 @@ _CCHATROOMGROUPSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1530,
-  serialized_end=1732,
+  serialized_start=1608,
+  serialized_end=1810,
 )
 
 
@@ -963,8 +977,8 @@ _CUSERCHATROOMSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1735,
-  serialized_end=2087,
+  serialized_start=1813,
+  serialized_end=2165,
 )
 
 
@@ -1036,8 +1050,8 @@ _CUSERCHATROOMGROUPSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2090,
-  serialized_end=2483,
+  serialized_start=2168,
+  serialized_end=2561,
 )
 
 
@@ -1081,8 +1095,8 @@ _CCHATROOM_CREATECHATROOMGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2486,
-  serialized_end=2637,
+  serialized_start=2564,
+  serialized_end=2715,
 )
 
 
@@ -1119,8 +1133,8 @@ _CCHATROOM_SAVECHATROOMGROUP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2639,
-  serialized_end=2713,
+  serialized_start=2717,
+  serialized_end=2791,
 )
 
 
@@ -1143,8 +1157,8 @@ _CCHATROOM_SAVECHATROOMGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2715,
-  serialized_end=2753,
+  serialized_start=2793,
+  serialized_end=2831,
 )
 
 
@@ -1181,8 +1195,8 @@ _CCHATROOM_RENAMECHATROOMGROUP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2755,
-  serialized_end=2831,
+  serialized_start=2833,
+  serialized_end=2909,
 )
 
 
@@ -1212,8 +1226,8 @@ _CCHATROOM_RENAMECHATROOMGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2833,
-  serialized_end=2887,
+  serialized_start=2911,
+  serialized_end=2965,
 )
 
 
@@ -1250,8 +1264,8 @@ _CCHATROOM_SETCHATROOMGROUPTAGLINE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2889,
-  serialized_end=2972,
+  serialized_start=2967,
+  serialized_end=3050,
 )
 
 
@@ -1274,8 +1288,8 @@ _CCHATROOM_SETCHATROOMGROUPTAGLINE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2974,
-  serialized_end=3018,
+  serialized_start=3052,
+  serialized_end=3096,
 )
 
 
@@ -1312,8 +1326,8 @@ _CCHATROOM_SETCHATROOMGROUPAVATAR_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3020,
-  serialized_end=3105,
+  serialized_start=3098,
+  serialized_end=3183,
 )
 
 
@@ -1336,8 +1350,8 @@ _CCHATROOM_SETCHATROOMGROUPAVATAR_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3107,
-  serialized_end=3150,
+  serialized_start=3185,
+  serialized_end=3228,
 )
 
 
@@ -1362,6 +1376,13 @@ _CCHATROOM_SETCHATROOMGROUPWATCHINGBROADCAST_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='watching_broadcast_channel_id', full_name='CChatRoom_SetChatRoomGroupWatchingBroadcast_Request.watching_broadcast_channel_id', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -1374,8 +1395,8 @@ _CCHATROOM_SETCHATROOMGROUPWATCHINGBROADCAST_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3152,
-  serialized_end=3266,
+  serialized_start=3231,
+  serialized_end=3384,
 )
 
 
@@ -1398,8 +1419,8 @@ _CCHATROOM_SETCHATROOMGROUPWATCHINGBROADCAST_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3268,
-  serialized_end=3322,
+  serialized_start=3386,
+  serialized_end=3440,
 )
 
 
@@ -1443,8 +1464,8 @@ _CCHATROOM_MUTEUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3324,
-  serialized_end=3412,
+  serialized_start=3442,
+  serialized_end=3530,
 )
 
 
@@ -1467,8 +1488,8 @@ _CCHATROOM_MUTEUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3414,
-  serialized_end=3443,
+  serialized_start=3532,
+  serialized_end=3561,
 )
 
 
@@ -1512,8 +1533,8 @@ _CCHATROOM_KICKUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3445,
-  serialized_end=3533,
+  serialized_start=3563,
+  serialized_end=3651,
 )
 
 
@@ -1536,8 +1557,8 @@ _CCHATROOM_KICKUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3535,
-  serialized_end=3564,
+  serialized_start=3653,
+  serialized_end=3682,
 )
 
 
@@ -1581,8 +1602,8 @@ _CCHATROOM_SETUSERBANSTATE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3566,
-  serialized_end=3660,
+  serialized_start=3684,
+  serialized_end=3778,
 )
 
 
@@ -1605,8 +1626,8 @@ _CCHATROOM_SETUSERBANSTATE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3662,
-  serialized_end=3698,
+  serialized_start=3780,
+  serialized_end=3816,
 )
 
 
@@ -1643,8 +1664,8 @@ _CCHATROOM_REVOKEINVITE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3700,
-  serialized_end=3772,
+  serialized_start=3818,
+  serialized_end=3890,
 )
 
 
@@ -1667,8 +1688,8 @@ _CCHATROOM_REVOKEINVITE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3774,
-  serialized_end=3807,
+  serialized_start=3892,
+  serialized_end=3925,
 )
 
 
@@ -1705,8 +1726,8 @@ _CCHATROOM_CREATEROLE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3809,
-  serialized_end=3876,
+  serialized_start=3927,
+  serialized_end=3994,
 )
 
 
@@ -1736,8 +1757,8 @@ _CCHATROOM_CREATEROLE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3878,
-  serialized_end=3945,
+  serialized_start=3996,
+  serialized_end=4063,
 )
 
 
@@ -1767,8 +1788,8 @@ _CCHATROOM_GETROLES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3947,
-  serialized_end=3998,
+  serialized_start=4065,
+  serialized_end=4116,
 )
 
 
@@ -1798,8 +1819,8 @@ _CCHATROOM_GETROLES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4000,
-  serialized_end=4056,
+  serialized_start=4118,
+  serialized_end=4174,
 )
 
 
@@ -1843,8 +1864,8 @@ _CCHATROOM_RENAMEROLE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4058,
-  serialized_end=4142,
+  serialized_start=4176,
+  serialized_end=4260,
 )
 
 
@@ -1867,8 +1888,8 @@ _CCHATROOM_RENAMEROLE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4144,
-  serialized_end=4175,
+  serialized_start=4262,
+  serialized_end=4293,
 )
 
 
@@ -1912,8 +1933,8 @@ _CCHATROOM_REORDERROLE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4177,
-  serialized_end=4265,
+  serialized_start=4295,
+  serialized_end=4383,
 )
 
 
@@ -1936,8 +1957,8 @@ _CCHATROOM_REORDERROLE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4267,
-  serialized_end=4299,
+  serialized_start=4385,
+  serialized_end=4417,
 )
 
 
@@ -1974,8 +1995,8 @@ _CCHATROOM_DELETEROLE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4301,
-  serialized_end=4371,
+  serialized_start=4419,
+  serialized_end=4489,
 )
 
 
@@ -1998,8 +2019,8 @@ _CCHATROOM_DELETEROLE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4373,
-  serialized_end=4404,
+  serialized_start=4491,
+  serialized_end=4522,
 )
 
 
@@ -2036,8 +2057,8 @@ _CCHATROOM_GETROLEACTIONS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4406,
-  serialized_end=4480,
+  serialized_start=4524,
+  serialized_end=4598,
 )
 
 
@@ -2067,8 +2088,8 @@ _CCHATROOM_GETROLEACTIONS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4482,
-  serialized_end=4553,
+  serialized_start=4600,
+  serialized_end=4671,
 )
 
 
@@ -2112,8 +2133,8 @@ _CCHATROOM_REPLACEROLEACTIONS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4555,
-  serialized_end=4669,
+  serialized_start=4673,
+  serialized_end=4787,
 )
 
 
@@ -2136,8 +2157,8 @@ _CCHATROOM_REPLACEROLEACTIONS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4671,
-  serialized_end=4710,
+  serialized_start=4789,
+  serialized_end=4828,
 )
 
 
@@ -2181,8 +2202,8 @@ _CCHATROOM_ADDROLETOUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4712,
-  serialized_end=4802,
+  serialized_start=4830,
+  serialized_end=4920,
 )
 
 
@@ -2205,8 +2226,8 @@ _CCHATROOM_ADDROLETOUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4804,
-  serialized_end=4838,
+  serialized_start=4922,
+  serialized_end=4956,
 )
 
 
@@ -2243,8 +2264,8 @@ _CCHATROOM_GETROLESFORUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4840,
-  serialized_end=4915,
+  serialized_start=4958,
+  serialized_end=5033,
 )
 
 
@@ -2274,8 +2295,8 @@ _CCHATROOM_GETROLESFORUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4917,
-  serialized_end=4971,
+  serialized_start=5035,
+  serialized_end=5089,
 )
 
 
@@ -2319,8 +2340,8 @@ _CCHATROOM_DELETEROLEFROMUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4973,
-  serialized_end=5068,
+  serialized_start=5091,
+  serialized_end=5186,
 )
 
 
@@ -2343,8 +2364,8 @@ _CCHATROOM_DELETEROLEFROMUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5070,
-  serialized_end=5109,
+  serialized_start=5188,
+  serialized_end=5227,
 )
 
 
@@ -2388,8 +2409,8 @@ _CCHATROOM_JOINCHATROOMGROUP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5111,
-  serialized_end=5209,
+  serialized_start=5229,
+  serialized_end=5327,
 )
 
 
@@ -2440,8 +2461,8 @@ _CCHATROOM_JOINCHATROOMGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5212,
-  serialized_end=5381,
+  serialized_start=5330,
+  serialized_end=5499,
 )
 
 
@@ -2492,8 +2513,8 @@ _CCHATROOM_INVITEFRIENDTOCHATROOMGROUP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5384,
-  serialized_end=5518,
+  serialized_start=5502,
+  serialized_end=5636,
 )
 
 
@@ -2516,8 +2537,8 @@ _CCHATROOM_INVITEFRIENDTOCHATROOMGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5520,
-  serialized_end=5568,
+  serialized_start=5638,
+  serialized_end=5686,
 )
 
 
@@ -2547,8 +2568,8 @@ _CCHATROOM_LEAVECHATROOMGROUP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5570,
-  serialized_end=5631,
+  serialized_start=5688,
+  serialized_end=5749,
 )
 
 
@@ -2571,8 +2592,8 @@ _CCHATROOM_LEAVECHATROOMGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5633,
-  serialized_end=5672,
+  serialized_start=5751,
+  serialized_end=5790,
 )
 
 
@@ -2616,8 +2637,8 @@ _CCHATROOM_CREATECHATROOM_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5674,
-  serialized_end=5766,
+  serialized_start=5792,
+  serialized_end=5884,
 )
 
 
@@ -2647,8 +2668,8 @@ _CCHATROOM_CREATECHATROOM_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5768,
-  serialized_end=5839,
+  serialized_start=5886,
+  serialized_end=5957,
 )
 
 
@@ -2685,8 +2706,8 @@ _CCHATROOM_DELETECHATROOM_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5841,
-  serialized_end=5915,
+  serialized_start=5959,
+  serialized_end=6033,
 )
 
 
@@ -2709,8 +2730,8 @@ _CCHATROOM_DELETECHATROOM_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5917,
-  serialized_end=5952,
+  serialized_start=6035,
+  serialized_end=6070,
 )
 
 
@@ -2754,8 +2775,8 @@ _CCHATROOM_RENAMECHATROOM_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5954,
-  serialized_end=6042,
+  serialized_start=6072,
+  serialized_end=6160,
 )
 
 
@@ -2778,8 +2799,8 @@ _CCHATROOM_RENAMECHATROOM_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6044,
-  serialized_end=6079,
+  serialized_start=6162,
+  serialized_end=6197,
 )
 
 
@@ -2823,8 +2844,8 @@ _CCHATROOM_REORDERCHATROOM_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6081,
-  serialized_end=6184,
+  serialized_start=6199,
+  serialized_end=6302,
 )
 
 
@@ -2847,8 +2868,8 @@ _CCHATROOM_REORDERCHATROOM_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6186,
-  serialized_end=6222,
+  serialized_start=6304,
+  serialized_end=6340,
 )
 
 
@@ -2892,8 +2913,8 @@ _CCHATROOM_SENDCHATMESSAGE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6224,
-  serialized_end=6316,
+  serialized_start=6342,
+  serialized_end=6434,
 )
 
 
@@ -2937,8 +2958,8 @@ _CCHATROOM_SENDCHATMESSAGE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6318,
-  serialized_end=6423,
+  serialized_start=6436,
+  serialized_end=6541,
 )
 
 
@@ -2975,8 +2996,8 @@ _CCHATROOM_JOINVOICECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6425,
-  serialized_end=6498,
+  serialized_start=6543,
+  serialized_end=6616,
 )
 
 
@@ -3006,8 +3027,8 @@ _CCHATROOM_JOINVOICECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6500,
-  serialized_end=6556,
+  serialized_start=6618,
+  serialized_end=6674,
 )
 
 
@@ -3044,8 +3065,8 @@ _CCHATROOM_LEAVEVOICECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6558,
-  serialized_end=6632,
+  serialized_start=6676,
+  serialized_end=6750,
 )
 
 
@@ -3068,8 +3089,8 @@ _CCHATROOM_LEAVEVOICECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6634,
-  serialized_end=6669,
+  serialized_start=6752,
+  serialized_end=6787,
 )
 
 
@@ -3141,8 +3162,8 @@ _CCHATROOM_GETMESSAGEHISTORY_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6672,
-  serialized_end=6852,
+  serialized_start=6790,
+  serialized_end=6970,
 )
 
 
@@ -3186,8 +3207,8 @@ _SERVERMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6855,
-  serialized_end=6989,
+  serialized_start=6973,
+  serialized_end=7107,
 )
 
 
@@ -3252,8 +3273,8 @@ _CCHATROOM_GETMESSAGEHISTORY_RESPONSE_CHATMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7126,
-  serialized_end=7272,
+  serialized_start=7244,
+  serialized_end=7390,
 )
 
 _CCHATROOM_GETMESSAGEHISTORY_RESPONSE = _descriptor.Descriptor(
@@ -3289,8 +3310,8 @@ _CCHATROOM_GETMESSAGEHISTORY_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6992,
-  serialized_end=7272,
+  serialized_start=7110,
+  serialized_end=7390,
 )
 
 
@@ -3313,8 +3334,8 @@ _CCHATROOM_GETMYCHATROOMGROUPS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7274,
-  serialized_end=7313,
+  serialized_start=7392,
+  serialized_end=7431,
 )
 
 
@@ -3451,6 +3472,13 @@ _CCHATROOM_GETCHATROOMGROUPSUMMARY_RESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='watching_broadcast_channel_id', full_name='CChatRoom_GetChatRoomGroupSummary_Response.watching_broadcast_channel_id', index=18,
+      number=19, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -3463,8 +3491,8 @@ _CCHATROOM_GETCHATROOMGROUPSUMMARY_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7316,
-  serialized_end=7899,
+  serialized_start=7434,
+  serialized_end=8056,
 )
 
 
@@ -3501,8 +3529,8 @@ _CCHATROOMSUMMARYPAIR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7902,
-  serialized_end=8049,
+  serialized_start=8059,
+  serialized_end=8206,
 )
 
 
@@ -3532,8 +3560,8 @@ _CCHATROOM_GETMYCHATROOMGROUPS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8051,
-  serialized_end=8140,
+  serialized_start=8208,
+  serialized_end=8297,
 )
 
 
@@ -3563,8 +3591,8 @@ _CCHATROOM_GETCHATROOMGROUPSTATE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8142,
-  serialized_end=8206,
+  serialized_start=8299,
+  serialized_end=8363,
 )
 
 
@@ -3594,8 +3622,8 @@ _CCHATROOM_GETCHATROOMGROUPSTATE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8208,
-  serialized_end=8287,
+  serialized_start=8365,
+  serialized_end=8444,
 )
 
 
@@ -3625,8 +3653,8 @@ _CCHATROOM_GETCHATROOMGROUPSUMMARY_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8289,
-  serialized_end=8355,
+  serialized_start=8446,
+  serialized_end=8512,
 )
 
 
@@ -3670,8 +3698,8 @@ _CCHATROOM_ACKCHATMESSAGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8357,
-  serialized_end=8455,
+  serialized_start=8514,
+  serialized_end=8612,
 )
 
 
@@ -3715,8 +3743,8 @@ _CCHATROOM_CREATEINVITELINK_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8457,
-  serialized_end=8556,
+  serialized_start=8614,
+  serialized_end=8713,
 )
 
 
@@ -3753,8 +3781,8 @@ _CCHATROOM_CREATEINVITELINK_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8558,
-  serialized_end=8639,
+  serialized_start=8715,
+  serialized_end=8796,
 )
 
 
@@ -3784,8 +3812,8 @@ _CCHATROOM_GETINVITELINKINFO_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8641,
-  serialized_end=8699,
+  serialized_start=8798,
+  serialized_end=8856,
 )
 
 
@@ -3857,8 +3885,8 @@ _CCHATROOM_GETINVITELINKINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8702,
-  serialized_end=8970,
+  serialized_start=8859,
+  serialized_end=9127,
 )
 
 
@@ -3909,8 +3937,8 @@ _CCHATROOM_GETINVITEINFO_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8972,
-  serialized_end=9091,
+  serialized_start=9129,
+  serialized_end=9248,
 )
 
 
@@ -3954,8 +3982,8 @@ _CCHATROOM_GETINVITEINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9094,
-  serialized_end=9238,
+  serialized_start=9251,
+  serialized_end=9395,
 )
 
 
@@ -3985,8 +4013,8 @@ _CCHATROOM_GETINVITELINKSFORGROUP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9240,
-  serialized_end=9305,
+  serialized_start=9397,
+  serialized_end=9462,
 )
 
 
@@ -4037,8 +4065,8 @@ _CCHATROOM_GETINVITELINKSFORGROUP_RESPONSE_LINKINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9428,
-  serialized_end=9523,
+  serialized_start=9585,
+  serialized_end=9680,
 )
 
 _CCHATROOM_GETINVITELINKSFORGROUP_RESPONSE = _descriptor.Descriptor(
@@ -4067,8 +4095,8 @@ _CCHATROOM_GETINVITELINKSFORGROUP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9308,
-  serialized_end=9523,
+  serialized_start=9465,
+  serialized_end=9680,
 )
 
 
@@ -4098,8 +4126,8 @@ _CCHATROOM_GETBANLIST_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9525,
-  serialized_end=9578,
+  serialized_start=9682,
+  serialized_end=9735,
 )
 
 
@@ -4150,8 +4178,8 @@ _CCHATROOM_GETBANLIST_RESPONSE_BANINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9668,
-  serialized_end=9762,
+  serialized_start=9825,
+  serialized_end=9919,
 )
 
 _CCHATROOM_GETBANLIST_RESPONSE = _descriptor.Descriptor(
@@ -4180,8 +4208,8 @@ _CCHATROOM_GETBANLIST_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9581,
-  serialized_end=9762,
+  serialized_start=9738,
+  serialized_end=9919,
 )
 
 
@@ -4211,8 +4239,8 @@ _CCHATROOM_GETINVITELIST_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9764,
-  serialized_end=9820,
+  serialized_start=9921,
+  serialized_end=9977,
 )
 
 
@@ -4256,8 +4284,8 @@ _CCHATROOMGROUPINVITE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9822,
-  serialized_end=9910,
+  serialized_start=9979,
+  serialized_end=10067,
 )
 
 
@@ -4287,8 +4315,8 @@ _CCHATROOM_GETINVITELIST_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9912,
-  serialized_end=9986,
+  serialized_start=10069,
+  serialized_end=10143,
 )
 
 
@@ -4325,8 +4353,8 @@ _CCHATROOM_DELETEINVITELINK_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9988,
-  serialized_end=10068,
+  serialized_start=10145,
+  serialized_end=10225,
 )
 
 
@@ -4349,8 +4377,8 @@ _CCHATROOM_DELETEINVITELINK_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10070,
-  serialized_end=10107,
+  serialized_start=10227,
+  serialized_end=10264,
 )
 
 
@@ -4387,8 +4415,8 @@ _CCHATROOM_SETSESSIONACTIVECHATROOMGROUPS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10109,
-  serialized_end=10219,
+  serialized_start=10266,
+  serialized_end=10376,
 )
 
 
@@ -4418,8 +4446,8 @@ _CCHATROOM_SETSESSIONACTIVECHATROOMGROUPS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10221,
-  serialized_end=10315,
+  serialized_start=10378,
+  serialized_end=10472,
 )
 
 
@@ -4463,8 +4491,8 @@ _CCHATROOM_SETUSERCHATGROUPPREFERENCES_REQUEST_CHATGROUPPREFERENCES = _descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10591,
-  serialized_end=10850,
+  serialized_start=10748,
+  serialized_end=11007,
 )
 
 _CCHATROOM_SETUSERCHATGROUPPREFERENCES_REQUEST_CHATROOMPREFERENCES = _descriptor.Descriptor(
@@ -4514,8 +4542,8 @@ _CCHATROOM_SETUSERCHATGROUPPREFERENCES_REQUEST_CHATROOMPREFERENCES = _descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10853,
-  serialized_end=11128,
+  serialized_start=11010,
+  serialized_end=11285,
 )
 
 _CCHATROOM_SETUSERCHATGROUPPREFERENCES_REQUEST = _descriptor.Descriptor(
@@ -4558,8 +4586,8 @@ _CCHATROOM_SETUSERCHATGROUPPREFERENCES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10318,
-  serialized_end=11128,
+  serialized_start=10475,
+  serialized_end=11285,
 )
 
 
@@ -4582,8 +4610,8 @@ _CCHATROOM_SETUSERCHATGROUPPREFERENCES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11130,
-  serialized_end=11178,
+  serialized_start=11287,
+  serialized_end=11335,
 )
 
 
@@ -4620,8 +4648,8 @@ _CCHATROOM_DELETECHATMESSAGES_REQUEST_MESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11326,
-  serialized_end=11378,
+  serialized_start=11483,
+  serialized_end=11535,
 )
 
 _CCHATROOM_DELETECHATMESSAGES_REQUEST = _descriptor.Descriptor(
@@ -4664,8 +4692,8 @@ _CCHATROOM_DELETECHATMESSAGES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11181,
-  serialized_end=11378,
+  serialized_start=11338,
+  serialized_end=11535,
 )
 
 
@@ -4688,8 +4716,8 @@ _CCHATROOM_DELETECHATMESSAGES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11380,
-  serialized_end=11419,
+  serialized_start=11537,
+  serialized_end=11576,
 )
 
 
@@ -4726,8 +4754,8 @@ _CCLANCHATROOMS_GETCLANCHATROOMINFO_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11422,
-  serialized_end=11574,
+  serialized_start=11579,
+  serialized_end=11731,
 )
 
 
@@ -4757,8 +4785,8 @@ _CCLANCHATROOMS_GETCLANCHATROOMINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11576,
-  serialized_end=11694,
+  serialized_start=11733,
+  serialized_end=11851,
 )
 
 
@@ -4795,8 +4823,8 @@ _CCLANCHATROOMS_SETCLANCHATROOMPRIVATE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11696,
-  serialized_end=11787,
+  serialized_start=11853,
+  serialized_end=11944,
 )
 
 
@@ -4826,8 +4854,8 @@ _CCLANCHATROOMS_SETCLANCHATROOMPRIVATE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11789,
-  serialized_end=11864,
+  serialized_start=11946,
+  serialized_end=12021,
 )
 
 
@@ -4871,8 +4899,8 @@ _CCHATMENTIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11866,
-  serialized_end=11952,
+  serialized_start=12023,
+  serialized_end=12109,
 )
 
 
@@ -4946,6 +4974,13 @@ _CCHATROOM_INCOMINGCHATMESSAGE_NOTIFICATION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='chat_name', full_name='CChatRoom_IncomingChatMessage_Notification.chat_name', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0306A name to use for the chat, intended for notifications'))),
   ],
   extensions=[
   ],
@@ -4958,8 +4993,8 @@ _CCHATROOM_INCOMINGCHATMESSAGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11955,
-  serialized_end=12217,
+  serialized_start=12112,
+  serialized_end=12453,
 )
 
 
@@ -5003,8 +5038,8 @@ _CCHATROOM_CHATMESSAGEMODIFIED_NOTIFICATION_CHATMESSAGE = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12381,
-  serialized_end=12454,
+  serialized_start=12617,
+  serialized_end=12690,
 )
 
 _CCHATROOM_CHATMESSAGEMODIFIED_NOTIFICATION = _descriptor.Descriptor(
@@ -5047,8 +5082,8 @@ _CCHATROOM_CHATMESSAGEMODIFIED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12220,
-  serialized_end=12454,
+  serialized_start=12456,
+  serialized_end=12690,
 )
 
 
@@ -5092,8 +5127,8 @@ _CCHATROOM_MEMBERSTATECHANGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12457,
-  serialized_end=12639,
+  serialized_start=12693,
+  serialized_end=12875,
 )
 
 
@@ -5123,8 +5158,8 @@ _CCHATROOM_CHATROOMHEADERSTATE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12641,
-  serialized_end=12735,
+  serialized_start=12877,
+  serialized_end=12971,
 )
 
 
@@ -5168,8 +5203,8 @@ _CCHATROOM_CHATROOMGROUPROOMSCHANGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12738,
-  serialized_end=12872,
+  serialized_start=12974,
+  serialized_end=13108,
 )
 
 
@@ -5206,8 +5241,8 @@ _CCHATROOM_NOTIFYSHOULDREJOINCHATROOMVOICECHAT_NOTIFICATION = _descriptor.Descri
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12874,
-  serialized_end=12974,
+  serialized_start=13110,
+  serialized_end=13210,
 )
 
 
@@ -5258,8 +5293,8 @@ _CHATROOMCLIENT_NOTIFYCHATGROUPUSERSTATECHANGED_NOTIFICATION = _descriptor.Descr
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12977,
-  serialized_end=13274,
+  serialized_start=13213,
+  serialized_end=13510,
 )
 
 
@@ -5450,8 +5485,8 @@ _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_SETTINGS = _descriptor.Descr
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13747,
-  serialized_end=14578,
+  serialized_start=13983,
+  serialized_end=14814,
 )
 
 _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_VOICESETTINGS = _descriptor.Descriptor(
@@ -5550,8 +5585,8 @@ _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_VOICESETTINGS = _descriptor.
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14581,
-  serialized_end=14943,
+  serialized_start=14817,
+  serialized_end=15179,
 )
 
 _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_UISTATE_CATEGORYCOLLAPSESTATE = _descriptor.Descriptor(
@@ -5608,8 +5643,8 @@ _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_UISTATE_CATEGORYCOLLAPSESTAT
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15547,
-  serialized_end=15711,
+  serialized_start=15783,
+  serialized_end=15947,
 )
 
 _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_UISTATE = _descriptor.Descriptor(
@@ -5743,8 +5778,8 @@ _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_UISTATE = _descriptor.Descri
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14946,
-  serialized_end=15711,
+  serialized_start=15182,
+  serialized_end=15947,
 )
 
 _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_METRICS = _descriptor.Descriptor(
@@ -5836,8 +5871,8 @@ _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION_METRICS = _descriptor.Descri
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15714,
-  serialized_end=16034,
+  serialized_start=15950,
+  serialized_end=16270,
 )
 
 _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION = _descriptor.Descriptor(
@@ -5915,8 +5950,8 @@ _CCHATUSABILITY_CLIENTUSABILITYMETRICS_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13277,
-  serialized_end=16034,
+  serialized_start=13513,
+  serialized_end=16270,
 )
 
 
@@ -5946,8 +5981,8 @@ _CCHATUSABILITY_REQUESTCLIENTUSABILITYMETRICS_NOTIFICATION = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16036,
-  serialized_end=16119,
+  serialized_start=16272,
+  serialized_end=16355,
 )
 
 _CCHATROOMGROUPHEADERSTATE.fields_by_name['roles'].message_type = _CCHATROLE
@@ -7069,6 +7104,8 @@ DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
 _CCLANCHATROOMS_GETCLANCHATROOMINFO_REQUEST.fields_by_name['autocreate'].has_options = True
 _CCLANCHATROOMS_GETCLANCHATROOMINFO_REQUEST.fields_by_name['autocreate']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\030;Create a default chat room if none has been created before.'))
+_CCHATROOM_INCOMINGCHATMESSAGE_NOTIFICATION.fields_by_name['chat_name'].has_options = True
+_CCHATROOM_INCOMINGCHATMESSAGE_NOTIFICATION.fields_by_name['chat_name']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\202\265\0306A name to use for the chat, intended for notifications'))
 
 _CHAT = _descriptor.ServiceDescriptor(
   name='Chat',
@@ -7076,8 +7113,8 @@ _CHAT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\025Chat-related services')),
-  serialized_start=17695,
-  serialized_end=17962,
+  serialized_start=17931,
+  serialized_end=18198,
   methods=[
   _descriptor.MethodDescriptor(
     name='RequestFriendPersonaStates',
@@ -7108,8 +7145,8 @@ _CHATROOM = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030>Service for joining, managing, and using multi-user chat rooms')),
-  serialized_start=17965,
-  serialized_end=24492,
+  serialized_start=18201,
+  serialized_end=24728,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateChatRoomGroup',
@@ -7536,8 +7573,8 @@ _CLANCHATROOMS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030)Methods for getting clan chat information')),
-  serialized_start=24495,
-  serialized_end=24925,
+  serialized_start=24731,
+  serialized_end=25161,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetClanChatRoomInfo',
@@ -7577,8 +7614,8 @@ _CHATROOMCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=3,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030$Client notifications for chat events\300\265\030\002')),
-  serialized_start=24928,
-  serialized_end=26270,
+  serialized_start=25164,
+  serialized_end=26506,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyIncomingChatMessage',
@@ -7672,8 +7709,8 @@ _CHATUSABILITY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=4,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030$Client notifications for chat events')),
-  serialized_start=26273,
-  serialized_end=26467,
+  serialized_start=26509,
+  serialized_end=26703,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyClientUsabilityMetrics',
@@ -7704,8 +7741,8 @@ _CHATUSABILITYCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=5,
   options=_descriptor._ParseOptions(descriptor_pb2.ServiceOptions(), _b('\202\265\030\'Client notifications for chat usability\300\265\030\002')),
-  serialized_start=26470,
-  serialized_end=26696,
+  serialized_start=26706,
+  serialized_end=26932,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyRequestClientUsabilityMetrics',

@@ -17,6 +17,7 @@ enum EBroadcastWatchLocation {
 	k_EBroadcastWatchLocation_CuratorPage = 10;
 	k_EBroadcastWatchLocation_DeveloperPage = 11;
 	k_EBroadcastWatchLocation_Chat_Friends = 12;
+	k_EBroadcastWatchLocation_SteamTV_Web = 13;
 }
 
 enum EBroadcastChatPermission {
@@ -32,6 +33,7 @@ message CBroadcast_BeginBroadcastSession_Request {
 	optional uint32 cellid = 5;
 	optional uint64 rtmp_token = 6;
 	optional bool thumbnail_upload = 7;
+	optional string client_beta = 8;
 }
 
 message CBroadcast_BeginBroadcastSession_Response {
@@ -56,6 +58,7 @@ message CBroadcast_StartBroadcastUpload_Request {
 	optional uint32 delay_seconds = 4;
 	optional uint64 rtmp_token = 5 [default = 0, (description) = "Only set during RTMP uploads; secret key from the user."];
 	optional uint32 upload_ip_address = 6;
+	optional bool is_replay = 7;
 }
 
 message CBroadcast_StartBroadcastUpload_Response {
@@ -64,6 +67,7 @@ message CBroadcast_StartBroadcastUpload_Response {
 	optional fixed64 upload_relay_id = 3;
 	optional string thumbnail_upload_address = 4;
 	optional uint32 thumbnail_interval_seconds = 5;
+	optional bool enable_replay = 6;
 }
 
 message CBroadcast_NotifyBroadcastUploadStop_Notification {
@@ -114,6 +118,8 @@ message CBroadcast_WatchBroadcast_Response {
 	optional fixed64 webrtc_session_id = 15;
 	optional string webrtc_offer_sdp = 16;
 	optional string webrtc_turn_server = 17;
+	optional bool is_replay = 18;
+	optional int32 duration = 19;
 }
 
 message CBroadcast_HeartbeatBroadcast_Notification {
@@ -146,6 +152,7 @@ message CBroadcast_GetBroadcastStatus_Response {
 	optional int32 update_interval = 9;
 	optional bool is_uploading = 10;
 	optional uint32 duration = 11;
+	optional bool is_replay = 12;
 }
 
 message CBroadcast_GetBroadcastThumbnail_Request {
@@ -157,6 +164,7 @@ message CBroadcast_GetBroadcastThumbnail_Response {
 	optional string thumbnail_url = 1;
 	optional int32 update_interval = 2;
 	optional int32 num_viewers = 3;
+	optional int32 duration = 4;
 }
 
 message CBroadcast_InviteToBroadcast_Request {
@@ -191,8 +199,8 @@ message CBroadcast_GetBroadcastChatInfo_Request {
 
 message CBroadcast_GetBroadcastChatInfo_Response {
 	optional fixed64 chat_id = 1;
-	optional string view_url = 2;
 	optional string view_url_template = 3;
+	repeated uint32 flair_group_ids = 4;
 }
 
 message CBroadcast_PostChatMessage_Request {
@@ -206,6 +214,17 @@ message CBroadcast_PostChatMessage_Response {
 	optional bool in_game = 2;
 	optional int32 result = 3;
 	optional int32 cooldown_time_seconds = 4;
+}
+
+message CBroadcast_UpdateChatMessageFlair_Request {
+	optional fixed64 chat_id = 1;
+	optional string flair = 2;
+}
+
+message CBroadcast_UpdateChatMessageFlair_Response {
+	optional int32 result = 1;
+	optional fixed64 chat_id = 2;
+	optional string flair = 3;
 }
 
 message CBroadcast_MuteBroadcastChatUser_Request {
@@ -249,6 +268,7 @@ message CBroadcast_SetRTMPInfo_Request {
 	optional int32 broadcast_buffer = 7 [(description) = "Previous seconds we keep of the stream available"];
 	optional fixed64 steamid = 8 [(description) = "broadcaster steamID if not logged-in user"];
 	optional uint32 chat_rate_limit = 9 [(description) = "Seconds required between chat messages"];
+	optional bool enable_replay = 10 [(description) = "Enable replay of last upload"];
 }
 
 message CBroadcast_SetRTMPInfo_Response {
@@ -270,6 +290,7 @@ message CBroadcast_GetRTMPInfo_Response {
 	optional int32 broadcast_buffer = 8 [(description) = "Seconds we keep streams available"];
 	optional fixed64 steamid = 9 [(description) = "broadcaster steamID"];
 	optional uint32 chat_rate_limit = 10 [(description) = "Seconds required between chat messages"];
+	optional bool enable_replay = 11 [(description) = "Enable replay of last upload"];
 }
 
 message CBroadcast_WebRTCHaveTURNServer_Notification {
@@ -347,6 +368,57 @@ message CBroadcast_WebRTCGetHostCandidates_Response {
 	repeated .CBroadcast_WebRTC_Candidate candidates = 2;
 }
 
+message CBroadcast_GetBroadcastUploadStats_Request {
+	optional uint32 row_limit = 1 [default = 100, (description) = "How many at maximum to return."];
+	optional uint32 start_time = 2 [default = 0, (description) = "Start time"];
+	optional uint64 upload_id = 3 [(description) = "Optional relay upload ID"];
+}
+
+message CBroadcast_GetBroadcastUploadStats_Response {
+	message UploadStats {
+		optional uint32 upload_result = 1;
+		optional uint32 time_stopped = 2 [(description) = "time broadcast upload stopped"];
+		optional uint32 seconds_uploaded = 3 [(description) = "seconds of vido uploaded"];
+		optional uint32 max_viewers = 4 [(description) = "max concurrent viewers"];
+		optional uint32 resolution_x = 5 [(description) = "horizontal resultion"];
+		optional uint32 resolution_y = 6 [(description) = "vertical resultion"];
+		optional uint32 avg_bandwidth = 7;
+		optional uint64 total_bytes = 8 [(description) = "total byte uploaded by broadcaster"];
+		optional uint32 app_id = 9 [(description) = "game broadcasted"];
+		optional uint32 total_unique_viewers = 10 [(description) = "total unique viewers seen"];
+		optional uint64 total_seconds_watched = 11 [(description) = "total number of seconds watched by all viewers"];
+		optional uint32 time_started = 12 [(description) = "time broadcast upload started"];
+		optional uint64 upload_id = 13 [(description) = "broadcast relay upload id"];
+		optional string local_address = 14 [(description) = "upload to server address"];
+		optional string remote_address = 15 [(description) = "upload from client address"];
+		optional uint32 frames_per_second = 16 [(description) = "frames per second"];
+		optional uint32 num_representations = 17 [(description) = "number of video represetations"];
+		optional string app_name = 18 [(description) = "game name"];
+		optional bool is_replay = 19 [(description) = "replay of previous recording"];
+	}
+
+	repeated .CBroadcast_GetBroadcastUploadStats_Response.UploadStats upload_stats = 1;
+}
+
+message CBroadcast_GetBroadcastViewerStats_Request {
+	optional uint64 upload_id = 1 [(description) = "Get stats for this stream"];
+}
+
+message CBroadcast_GetBroadcastViewerStats_Response {
+	message ViewerStats {
+		optional uint32 time = 1 [(description) = "time of record"];
+		optional uint32 num_viewers = 2 [(description) = "current number of viewers"];
+	}
+
+	message CountryStats {
+		optional string country_code = 1 [(description) = "country code"];
+		optional uint32 num_viewers = 2 [(description) = "number of viewers"];
+	}
+
+	repeated .CBroadcast_GetBroadcastViewerStats_Response.ViewerStats viewer_stats = 1;
+	repeated .CBroadcast_GetBroadcastViewerStats_Response.CountryStats country_stats = 2;
+}
+
 message CBroadcast_BroadcastViewerState_Notification {
 	enum EViewerState {
 		k_EViewerNeedsApproval = 1;
@@ -380,6 +452,11 @@ message CBroadcast_ViewerBroadcastInvite_Notification {
 message CBroadcast_BroadcastStatus_Notification {
 	optional fixed64 broadcast_id = 1;
 	optional int32 num_viewers = 2;
+}
+
+message CBroadcast_BroadcastChannelLive_Notification {
+	optional fixed64 broadcast_channel_id = 1;
+	optional string broadcast_channel_name = 2;
 }
 
 message CBroadcast_SendThumbnailToRelay_Notification {
@@ -457,6 +534,9 @@ service Broadcast {
 	rpc PostChatMessage (.CBroadcast_PostChatMessage_Request) returns (.CBroadcast_PostChatMessage_Response) {
 		option (method_description) = "Post chat message to specified chat room";
 	}
+	rpc UpdateChatMessageFlair (.CBroadcast_UpdateChatMessageFlair_Request) returns (.CBroadcast_UpdateChatMessageFlair_Response) {
+		option (method_description) = "Update chat message flair in the specified chat room";
+	}
 	rpc MuteBroadcastChatUser (.CBroadcast_MuteBroadcastChatUser_Request) returns (.CBroadcast_MuteBroadcastChatUser_Response) {
 		option (method_description) = "Mute a user in your broadcast chat";
 	}
@@ -496,6 +576,12 @@ service Broadcast {
 	rpc WebRTCGetHostCandidates (.CBroadcast_WebRTCGetHostCandidates_Request) returns (.CBroadcast_WebRTCGetHostCandidates_Response) {
 		option (method_description) = "Get the ICE candidates for the host side of a WebRTC session";
 	}
+	rpc GetBroadcastUploadStats (.CBroadcast_GetBroadcastUploadStats_Request) returns (.CBroadcast_GetBroadcastUploadStats_Response) {
+		option (method_description) = "Gets broadcast upload stats for user";
+	}
+	rpc GetBroadcastViewerStats (.CBroadcast_GetBroadcastViewerStats_Request) returns (.CBroadcast_GetBroadcastViewerStats_Response) {
+		option (method_description) = "Gets viewer stats for given broadcast";
+	}
 }
 service BroadcastClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
@@ -515,6 +601,9 @@ service BroadcastClient {
 		option (method_description) = "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast";
 	}
 	rpc NotifyBroadcastStatus (.CBroadcast_BroadcastStatus_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client about current broadcast status";
+	}
+	rpc NotifyBroadcastChannelLive (.CBroadcast_BroadcastChannelLive_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client about current broadcast status";
 	}
 	rpc SendThumbnailToRelay (.CBroadcast_SendThumbnailToRelay_Notification) returns (.NoResponse) {

@@ -103,6 +103,7 @@ message CMsgClientChangeStatus {
 	optional bool persona_set_by_user = 5;
 	optional uint32 persona_state_flags = 6 [default = 0];
 	optional bool need_persona_response = 7;
+	optional bool is_client_idle = 8;
 }
 
 message CMsgPersonaChangeResponse {

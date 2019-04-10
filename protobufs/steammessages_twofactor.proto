@@ -84,6 +84,7 @@ message CTwoFactor_RemoveAuthenticator_Response {
 }
 
 message CTwoFactor_CreateEmergencyCodes_Request {
+	optional string code = 1;
 }
 
 message CTwoFactor_CreateEmergencyCodes_Response {
