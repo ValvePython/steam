@@ -231,14 +231,29 @@ class SteamAuthenticator(object):
         """
         return self._send_request('QueryStatus', {'steamid': self.medium.steam_id})
 
-    def create_emergency_codes(self):
+    def create_emergency_codes(self, code=None):
         """Generate emergency codes
 
+        :param code: SMS code
+        :type code: str
         :raises: :class:`SteamAuthenticatorError`
         :return: list of codes
         :rtype: list
+
+        .. note::
+            A confirmation code is required to generate emergency codes and this method needs
+            to be called twice as shown below.
+
+        .. code:: python
+
+            sa.create_emergency_codes()              # request a SMS code
+            sa.create_emergency_codes(code='12345')  # creates emergency codes
         """
-        return self._send_request('CreateEmergencyCodes', {}).get('codes', [])
+        if code:
+            return self._send_request('createemergencycodes', {'code': code}).get('codes', [])
+        else:
+            self._send_request('createemergencycodes', {})
+            return None
 
     def destroy_emergency_codes(self):
         """Destroy all emergency codes
