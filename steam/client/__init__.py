@@ -66,7 +66,6 @@ class SteamClient(CMClient, BuiltinBase):
         self.on(self.EVENT_RECONNECT, self._handle_disconnect)
         self.on(EMsg.ClientNewLoginKey, self._handle_login_key)
         self.on(EMsg.ClientUpdateMachineAuth, self._handle_update_machine_auth)
-        self.on(EMsg.ClientServerList, self._handle_server_list)
 
         #: indicates logged on status. Listen to ``logged_on`` when change to ``True``
         self.logged_on = False
@@ -116,14 +115,6 @@ class SteamClient(CMClient, BuiltinBase):
             self.cm_servers.clear()
             self.cm_servers.merge_list(data['servers'])
             self._cm_servers_timestamp = int(data['timestamp'])
-
-    def _handle_server_list(self, msg):
-        self.servers = {}
-        for server in msg.body.servers:
-            if server.server_type not in self.servers:
-                self.servers[server.server_type] = []
-                
-            self.servers[server.server_type].append((ip_from_int(server.server_ip), server.server_port))
 
     def _handle_cm_list(self, msg):
         if self._cm_servers_timestamp is None:
