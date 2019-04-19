@@ -10,7 +10,6 @@ client
 
 .. toctree::
     steam.client.builtins
-    steam.client.mixins
     steam.client.gc
     steam.client.user
 
