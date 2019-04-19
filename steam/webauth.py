@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 This module simplifies the process of obtaining an authenticated session for steam websites.
-After authentication is complete, a :class:`requests.Session` is created containing the auth cookies.
+After authentication is completed, a :class:`requests.Session` is created containing the auth cookies.
 The session can be used to access ``steamcommunity.com``, ``store.steampowered.com``, and ``help.steampowered.com``.
 
 .. warning::
@@ -26,57 +26,61 @@ Example usage:
 
     user = wa.WebAuth('username')
 
+    # At a console, cli_login can be used to easily perform all login steps
+    session = user.cli_login('password')
+    session.get('https://store.steampowered.com/account/history')
+
+    # Or the login steps be implemented for other situation like so
     try:
         user.login('password')
-    except wa.CaptchaRequired:
-        print user.captcha_url
-        # ask a human to solve captcha
-        user.login(captcha='ABC123')
+    except (wa.CaptchaRequired, wa.LoginIncorrect) as exp:
+        if isinstance(exp, LoginIncorrect):
+            # ask for new password
+        else:
+            password = self.password
+
+        if isinstance(exp, wa.CaptchaRequired):
+            print user.captcha_url
+            # ask a human to solve captcha
+        else:
+            captcha = None
+
+        user.login(password=password, captcha=captcha)
     except wa.EmailCodeRequired:
         user.login(email_code='ZXC123')
     except wa.TwoFactorCodeRequired:
         user.login(twofactor_code='ZXC123')
 
     user.session.get('https://store.steampowered.com/account/history/')
-    # OR
-    session = user.login('password')
-    session.get('https://store.steampowered.com/account/history')
 
-Alternatively, if Steam Guard is not enabled on the account:
-
-.. code:: python
-
-    try:
-        session = wa.WebAuth('username').login('password')
-    except wa.HTTPError:
-        pass
-
-The :class:`WebAuth` instance should be discarded once a session is obtained
-as it is not reusable.
 """
-import sys
 import json
 from time import time
 from base64 import b64encode
+from getpass import getpass
+import six
 import requests
 
 from steam import SteamID, webapi
 from steam.util.web import make_requests_session, generate_session_id
 from steam.core.crypto import rsa_publickey, pkcs1v15_encrypt
 
-if sys.version_info < (3,):
+if six.PY2:
     intBase = long
+    _cli_input = raw_input
 else:
     intBase = int
+    _cli_input = input
 
 
 class WebAuth(object):
     key = None
-    complete = False    #: whether authentication has been completed successfully
-    session = None      #: :class:`requests.Session` (with auth cookies after auth is complete)
+    logged_on = False    #: whether authentication has been completed successfully
+    session = None      #: :class:`requests.Session` (with auth cookies after auth is completed)
     session_id = None   #: :class:`str`, session id string
     captcha_gid = -1
-    steam_id = None     #: :class:`.SteamID` (after auth is complete)
+    captcha_code = ''
+    steam_id = None     #: :class:`.SteamID` (after auth is completed)
 
     def __init__(self, username, password=''):
         self.__dict__.update(locals())
@@ -163,14 +167,14 @@ class WebAuth(object):
         :type  language: :class:`str`
         :return: a session on success and :class:`None` otherwise
         :rtype: :class:`requests.Session`, :class:`None`
-        :raises ValueError: when a required param is missing
         :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
+        :raises LoginIncorrect: wrong username or password
         :raises CaptchaRequired: when captcha is needed
+        :raises CaptchaRequiredLoginIncorrect: when captcha is needed and login is incorrect
         :raises EmailCodeRequired: when email is needed
         :raises TwoFactorCodeRequired: when 2FA is needed
-        :raises LoginIncorrect: wrong username or password
         """
-        if self.complete:
+        if self.logged_on:
             return self.session
 
         if password:
@@ -179,16 +183,18 @@ class WebAuth(object):
             if self.password:
                 password = self.password
             else:
-                raise ValueError("password is not specified")
+                raise LoginIncorrect("password is not specified")
+
+        if not captcha and self.captcha_code:
+            captcha = self.captcha_code
 
         self._load_key()
         resp = self._send_login(password=password, captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
 
-        self.captcha_gid = -1
-
         if resp['success'] and resp['login_complete']:
-            self.complete = True
-            self.password = None
+            self.logged_on = True
+            self.password = self.captcha_code = ''
+            self.captcha_gid = -1
 
             for cookie in list(self.session.cookies):
                 for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
@@ -207,17 +213,78 @@ class WebAuth(object):
         else:
             if resp.get('captcha_needed', False):
                 self.captcha_gid = resp['captcha_gid']
+                self.captcha_code = ''
 
-                raise CaptchaRequired(resp['message'])
+                if resp.get('clear_password_field', False):
+                    self.password = ''
+                    raise CaptchaRequiredLoginIncorrect(resp['message'])
+                else:
+                    raise CaptchaRequired(resp['message'])
             elif resp.get('emailauth_needed', False):
                 self.steam_id = SteamID(resp['emailsteamid'])
                 raise EmailCodeRequired(resp['message'])
             elif resp.get('requires_twofactor', False):
                 raise TwoFactorCodeRequired(resp['message'])
             else:
+                self.password = ''
                 raise LoginIncorrect(resp['message'])
 
         return None
+
+    def cli_login(self, password='', captcha='', email_code='', twofactor_code='', language='english'):
+        """Generates CLI prompts to perform the entire login process
+
+        :param password: password, if it wasn't provided on instance init
+        :type  password: :class:`str`
+        :param captcha: text reponse for captcha challenge
+        :type  captcha: :class:`str`
+        :param email_code: email code for steam guard
+        :type  email_code: :class:`str`
+        :param twofactor_code: 2FA code for steam guard
+        :type  twofactor_code: :class:`str`
+        :param language: select language for steam web pages (sets language cookie)
+        :type  language: :class:`str`
+        :return: a session on success and :class:`None` otherwise
+        :rtype: :class:`requests.Session`, :class:`None`
+
+        .. code:: python
+
+            In [3]: user.cli_login()
+            Enter password for 'steamuser':
+            Solve CAPTCHA at https://steamcommunity.com/login/rendercaptcha/?gid=1111111111111111111
+            CAPTCHA code: 123456
+            Invalid password for 'steamuser'. Enter password:
+            Solve CAPTCHA at https://steamcommunity.com/login/rendercaptcha/?gid=2222222222222222222
+            CAPTCHA code: abcdef
+            Enter 2FA code: AB123
+            Out[3]: <requests.sessions.Session at 0x6fffe56bef0>
+
+        """
+
+        # loop until successful login
+        while True:
+            try:
+                return self.login(password, captcha, email_code, twofactor_code, language)
+            except (LoginIncorrect, CaptchaRequired) as exp:
+                email_code = twofactor_code = ''
+
+                if isinstance(exp, LoginIncorrect):
+                    prompt = ("Enter password for %s: " if not password else
+                              "Invalid password for %s. Enter password: ")
+                    password = getpass(prompt % repr(self.username))
+                if isinstance(exp, CaptchaRequired):
+                    prompt = "Solve CAPTCHA at %s\nCAPTCHA code: " % self.captcha_url
+                    captcha = _cli_input(prompt)
+                else:
+                    captcha = ''
+            except EmailCodeRequired:
+                prompt = ("Enter email code: " if not email_code else
+                          "Incorrect code. Enter email code: ")
+                email_code, twofactor_code = _cli_input(prompt), ''
+            except TwoFactorCodeRequired:
+                prompt = ("Enter 2FA code: " if not twofactor_code else
+                          "Incorrect code. Enter 2FA code: ")
+                email_code, twofactor_code = '', _cli_input(prompt)
 
 
 class MobileWebAuth(WebAuth):
@@ -268,6 +335,9 @@ class LoginIncorrect(WebAuthException):
     pass
 
 class CaptchaRequired(WebAuthException):
+    pass
+
+class CaptchaRequiredLoginIncorrect(CaptchaRequired, LoginIncorrect):
     pass
 
 class EmailCodeRequired(WebAuthException):

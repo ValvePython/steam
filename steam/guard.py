@@ -116,7 +116,7 @@ class SteamAuthenticator(object):
         medium = self.medium
 
         if isinstance(medium, MobileWebAuth):
-            if not medium.complete:
+            if not medium.logged_on:
                 raise SteamAuthenticatorError("MobileWebAuth instance not logged in")
 
             params['access_token'] = medium.oauth_token
