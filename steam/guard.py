@@ -9,15 +9,22 @@ on an account require an instance of either :class:`.MobileWebAuth` or
 Adding an authenticator
 
 .. code:: python
+    wa = MobileWebAuth('steamuser')
+    wa.cli_login()
 
-    sa = SteamAuthenticator(medium=medium)
-    sa.add()    # SMS code will be send to account's phone number
-    sa.secrets  # dict with authenticator secrets, make sure you save them
+    sa = SteamAuthenticator(backend=wa)
+    sa.add()    # SMS code will be send to the account's phone number
+    sa.secrets  # dict with authenticator secrets (SAVE THEM!!)
+
+    # save the secrets, for example to a file
+    json.dump(sa.secrets, open('./mysecrets.json', 'w'))
+
+    # HINT: You can stop here and add authenticator on your phone.
+    #       The secrets will be the same, and you will be able to
+    #       both use your phone and SteamAuthenticator.
 
     sa.finalize('SMS CODE')  # activate the authenticator
-
     sa.get_code()  # generate 2FA code for login
-
     sa.remove()  # removes the authenticator from the account
 
 .. warning::
@@ -27,6 +34,7 @@ Adding an authenticator
 Once authenticator is enabled all you need is the secrets to generate codes.
 
 .. code:: python
+    secrets = json.load(open('./mysecrets.json'))
 
     sa = SteamAuthenticator(secrets)
     sa.get_code()
@@ -54,21 +62,21 @@ from steam.util import proto_to_dict
 class SteamAuthenticator(object):
     """Add/Remove authenticator from an account. Generate 2FA and confirmation codes."""
     _finalize_attempts = 5
-    medium =  None               #: instance of :class:`.MobileWebAuth` or :class:`.SteamClient`
+    backend = None               #: instance of :class:`.MobileWebAuth` or :class:`.SteamClient`
     steam_time_offset = None     #: offset from steam server time
     align_time_every = 0         #: how often to align time with Steam (``0`` never, otherwise interval in seconds)
     _offset_last_check = 0
     secrets = None               #: :class:`dict` with authenticator secrets
 
-    def __init__(self, secrets=None, medium=None):
+    def __init__(self, secrets=None, backend=None):
         """
         :param secret: a dict of authenticator secrets
-        :type secret: dict
-        :param medium: logged on session for steam user
-        :type mediumm: :class:`.MobileWebAuth`, :class:`.SteamClient`
+        :type  secret: dict
+        :param backend: logged on session for steam user
+        :type  backend: :class:`.MobileWebAuth`, :class:`.SteamClient`
         """
         self.secrets = secrets or {}
-        self.medium = medium
+        self.backend = backend
 
     def __getattr__(self, key):
         if key not in self.secrets:
@@ -113,13 +121,13 @@ class SteamAuthenticator(object):
                                          self.get_time() if timestamp is None else timestamp)
 
     def _send_request(self, action, params):
-        medium = self.medium
+        backend = self.backend
 
-        if isinstance(medium, MobileWebAuth):
-            if not medium.logged_on:
+        if isinstance(backend, MobileWebAuth):
+            if not backend.logged_on:
                 raise SteamAuthenticatorError("MobileWebAuth instance not logged in")
 
-            params['access_token'] = medium.oauth_token
+            params['access_token'] = backend.oauth_token
             params['http_timeout'] = 10
 
             try:
@@ -129,11 +137,11 @@ class SteamAuthenticator(object):
 
             resp = resp['response']
         else:
-            if not medium.logged_on:
+            if not backend.logged_on:
                 raise SteamAuthenticatorError("SteamClient instance not logged in")
 
-            resp, error = medium.unified_messages.send_and_wait("TwoFactor.%s#1" % action,
-                                                                params, timeout=10)
+            resp, error = backend.unified_messages.send_and_wait("TwoFactor.%s#1" % action,
+                                                                 params, timeout=10)
 
             if error:
                 raise SteamAuthenticatorError("Failed: %s" % str(error))
@@ -158,10 +166,10 @@ class SteamAuthenticator(object):
             raise SteamAuthenticatorError("Account doesn't have a verified phone number")
 
         resp = self._send_request('AddAuthenticator', {
-            'steamid': self.medium.steam_id,
+            'steamid': self.backend.steam_id,
             'authenticator_time': int(time()),
             'authenticator_type': int(ETwoFactorTokenType.ValveMobileApp),
-            'device_identifier': generate_device_id(self.medium.steam_id),
+            'device_identifier': generate_device_id(self.backend.steam_id),
             'sms_phone_id': '1',
         })
 
@@ -179,7 +187,7 @@ class SteamAuthenticator(object):
         :raises: :class:`SteamAuthenticatorError`
         """
         resp = self._send_request('FinalizeAddAuthenticator', {
-            'steamid': self.medium.steam_id,
+            'steamid': self.backend.steam_id,
             'authenticator_time': int(time()),
             'authenticator_code': self.get_code(),
             'activation_code': activation_code,
@@ -209,11 +217,11 @@ class SteamAuthenticator(object):
         """
         if not self.secrets:
             raise SteamAuthenticatorError("No authenticator secrets available?")
-        if not isinstance(self.medium, MobileWebAuth):
+        if not isinstance(self.backend, MobileWebAuth):
             raise SteamAuthenticatorError("Only available via MobileWebAuth")
 
         resp = self._send_request('RemoveAuthenticator', {
-            'steamid': self.medium.steam_id,
+            'steamid': self.backend.steam_id,
             'revocation_code': self.revocation_code,
             'steamguard_scheme': 1,
         })
@@ -225,14 +233,14 @@ class SteamAuthenticator(object):
 
         self.secrets.clear()
 
-    def status(self, medium=None):
+    def status(self):
         """Fetch authenticator status for the account
 
         :raises: :class:`SteamAuthenticatorError`
         :return: dict with status parameters
         :rtype: dict
         """
-        return self._send_request('QueryStatus', {'steamid': self.medium.steam_id})
+        return self._send_request('QueryStatus', {'steamid': self.backend.steam_id})
 
     def create_emergency_codes(self, code=None):
         """Generate emergency codes
@@ -263,7 +271,7 @@ class SteamAuthenticator(object):
 
         :raises: :class:`SteamAuthenticatorError`
         """
-        self._send_request('DestroyEmergencyCodes', {'steamid': self.medium.steam_id})
+        self._send_request('DestroyEmergencyCodes', {'steamid': self.backend.steam_id})
 
     def _get_web_session(self):
         """
@@ -271,11 +279,11 @@ class SteamAuthenticator(object):
         :rtype: :class:`requests.Session`
         :raises: :class:`RuntimeError` when session is unavailable
         """
-        if isinstance(self.medium, MobileWebAuth):
-            return self.medium.session
+        if isinstance(self.backend, MobileWebAuth):
+            return self.backend.session
         else:
-            if self.medium.logged_on:
-                sess = self.medium.get_web_session()
+            if self.backend.logged_on:
+                sess = self.backend.get_web_session()
 
                 if sess is None:
                     raise RuntimeError("Failed to get a web session. Try again in a few minutes")
