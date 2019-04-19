@@ -1,12 +1,20 @@
 import vdf
-from steam.enums import EResult
+from steam.enums import EResult, EServerType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
+from steam.util import ip_from_int
 
 
 class Apps(object):
     def __init__(self, *args, **kwargs):
         super(Apps, self).__init__(*args, **kwargs)
+        self.on(EMsg.ClientServerList, self._handle_server_list)
+        self.servers = {}
+
+    def _handle_server_list(self, message):
+        for entry in message.body.servers:
+            self.servers.setdefault(EServerType(entry.server_type), [])\
+                        .append((ip_from_int(entry.server_ip), entry.server_port))
 
     def get_player_count(self, app_id, timeout=5):
         """Get numbers of players for app id
