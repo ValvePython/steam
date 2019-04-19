@@ -32,7 +32,7 @@ class WACase(unittest.TestCase):
         user = wa.WebAuth('testuser', 'testpass')
         s = user.login()
 
-        self.assertTrue(user.complete)
+        self.assertTrue(user.logged_on)
         self.assertIsInstance(s, requests.Session)
 
         for domain in s.cookies.list_domains():
@@ -46,3 +46,4 @@ class WACase(unittest.TestCase):
     def test_login_user_and_pass_only_fail(self):
         with self.assertRaises(wa.LoginIncorrect):
             wa.WebAuth('testuser', 'testpass').login()
+            wa.WebAuth('testuser').login('testpass')
