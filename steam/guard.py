@@ -9,6 +9,7 @@ on an account require an instance of either :class:`.MobileWebAuth` or
 Adding an authenticator
 
 .. code:: python
+
     wa = MobileWebAuth('steamuser')
     wa.cli_login()
 
