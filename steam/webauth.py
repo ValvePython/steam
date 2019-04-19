@@ -24,10 +24,10 @@ Example usage:
 
     import steam.webauth as wa
 
-    user = wa.WebAuth('username', 'password')
+    user = wa.WebAuth('username')
 
     try:
-        user.login()
+        user.login('password')
     except wa.CaptchaRequired:
         print user.captcha_url
         # ask a human to solve captcha
@@ -39,7 +39,7 @@ Example usage:
 
     user.session.get('https://store.steampowered.com/account/history/')
     # OR
-    session = user.login()
+    session = user.login('password')
     session.get('https://store.steampowered.com/account/history')
 
 Alternatively, if Steam Guard is not enabled on the account:
@@ -47,7 +47,7 @@ Alternatively, if Steam Guard is not enabled on the account:
 .. code:: python
 
     try:
-        session = wa.WebAuth('username', 'password').login()
+        session = wa.WebAuth('username').login('password')
     except wa.HTTPError:
         pass
 
@@ -78,7 +78,7 @@ class WebAuth(object):
     captcha_gid = -1
     steam_id = None     #: :class:`.SteamID` (after auth is complete)
 
-    def __init__(self, username, password):
+    def __init__(self, username, password=''):
         self.__dict__.update(locals())
         self.session = make_requests_session()
         self._session_setup()
@@ -98,7 +98,7 @@ class WebAuth(object):
         """Get rsa key for a given username
 
         :param username: username
-        :type username: :class:`str`
+        :type  username: :class:`str`
         :return: json response
         :rtype: :class:`dict`
         :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
@@ -125,10 +125,10 @@ class WebAuth(object):
                                      )
             self.timestamp = resp['timestamp']
 
-    def _send_login(self, captcha='', email_code='', twofactor_code=''):
+    def _send_login(self, password='', captcha='', email_code='', twofactor_code=''):
         data = {
             'username': self.username,
-            "password": b64encode(pkcs1v15_encrypt(self.key, self.password.encode('ascii'))),
+            "password": b64encode(pkcs1v15_encrypt(self.key, password.encode('ascii'))),
             "emailauth": email_code,
             "emailsteamid": str(self.steam_id) if email_code else '',
             "twofactorcode": twofactor_code,
@@ -148,19 +148,22 @@ class WebAuth(object):
     def _finalize_login(self, login_response):
         self.steam_id = SteamID(login_response['transfer_parameters']['steamid'])
 
-    def login(self, captcha='', email_code='', twofactor_code='', language='english'):
+    def login(self, password='', captcha='', email_code='', twofactor_code='', language='english'):
         """Attempts web login and returns on a session with cookies set
 
+        :param password: password, if it wasn't provided on instance init
+        :type  password: :class:`str`
         :param captcha: text reponse for captcha challenge
-        :type captcha: :class:`str`
+        :type  captcha: :class:`str`
         :param email_code: email code for steam guard
-        :type email_code: :class:`str`
+        :type  email_code: :class:`str`
         :param twofactor_code: 2FA code for steam guard
-        :type twofactor_code: :class:`str`
+        :type  twofactor_code: :class:`str`
         :param language: select language for steam web pages (sets language cookie)
-        :type language: :class:`str`
+        :type  language: :class:`str`
         :return: a session on success and :class:`None` otherwise
         :rtype: :class:`requests.Session`, :class:`None`
+        :raises ValueError: when a required param is missing
         :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
         :raises CaptchaRequired: when captcha is needed
         :raises EmailCodeRequired: when email is needed
@@ -170,8 +173,16 @@ class WebAuth(object):
         if self.complete:
             return self.session
 
+        if password:
+            self.password = password
+        else:
+            if self.password:
+                password = self.password
+            else:
+                raise ValueError("password is not specified")
+
         self._load_key()
-        resp = self._send_login(captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
+        resp = self._send_login(password=password, captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
 
         self.captcha_gid = -1
 
@@ -213,10 +224,10 @@ class MobileWebAuth(WebAuth):
     """Identical to :class:`WebAuth`, except it authenticates as a mobile device."""
     oauth_token = None  #: holds oauth_token after successful login
 
-    def _send_login(self, captcha='', email_code='', twofactor_code=''):
+    def _send_login(self, password='', captcha='', email_code='', twofactor_code=''):
         data = {
-            'username' : self.username,
-            "password": b64encode(pkcs1v15_encrypt(self.key, self.password.encode('ascii'))),
+            'username': self.username,
+            "password": b64encode(pkcs1v15_encrypt(self.key, password.encode('ascii'))),
             "emailauth": email_code,
             "emailsteamid": str(self.steam_id) if email_code else '',
             "twofactorcode": twofactor_code,
