@@ -2,9 +2,11 @@
 from collections import OrderedDict, deque
 from six import itervalues
 import vdf
+
 from steam import webapi
-from steam.enums import EServerType
+from steam.enums import EResult, EServerType
 from steam.util.web import make_requests_session
+from stema.core.crypto symmetric_decrypt
 from steam.core.manifest import DepotManifest
 
 
@@ -67,12 +69,14 @@ class CDNClient(object):
         self.app_id = app_id
         self.web = make_requests_session()
         self.servers = deque()
+        self.cdn_auth_tokens = {}
+        self.depot_keys = {}
 
     @property
     def cell_id(self):
         return self.steam.cell_id
 
-    def init_servers(self, num_servers=10):
+    def init_servers(self, num_servers=20):
         self.servers.clear()
 
         for ip, port in self.steam.servers[EServerType.CS]:
@@ -85,32 +89,85 @@ class CDNClient(object):
         if not self.servers:
             raise RuntimeError("No content servers on SteamClient instance. Is it logged in?")
 
-    def get_content_server(self):
-        server = self.servers[0]
-        self.servers.rotate(-1)
-        return server
+    def get_content_server(self, rotate=True):
+        if rotate:
+            self.servers.rotate(-1)
+        return self.servers[0]
+
+    def get_cdn_auth_token(self, depot_id):
+        if depot_id not in self.cdn_auth_tokens:
+            msg = self.steam.get_cdn_auth_token(depot_id, 'steampipe.steamcontent.com')
+
+            if msg.eresult == EResult.OK:
+                self.cdn_auth_tokens[depot_id] = msg.token
+            elif msg is None:
+                raise Exception("Failed getting depot key: %s" % repr(EResult.Timeout))
+            else:
+                raise Exception("Failed getting depot key: %s" % repr(EResult(msg.eresult)))
+
+        return self.cdn_auth_tokens[depot_id]
+
+    def get_depot_key(self, depot_id):
+        if depot_id not in self.depot_keys:
+            msg = self.steam.get_depot_key(self.app_id, depot_id)
+            if msg.eresult == EResult.OK:
+                self.depot_keys[depot_id] = msg.depot_encryption_key
+            elif msg is None:
+                raise Exception("Failed getting depot key: %s" % repr(EResult.Timeout))
+            else:
+                raise Exception("Failed getting depot key: %s" % repr(EResult(msg.eresult)))
+
+        return self.depot_keys[depot_id]
 
     def get(self, command, args, auth_token=''):
         server = self.get_content_server()
 
-        url = "%s://%s:%s/%s/%s%s" % (
-            'https' if server.https else 'http',
-            server.host,
-            server.port,
-            command,
-            args,
-            auth_token,
-            )
+        while True:
+            url = "%s://%s:%s/%s/%s%s" % (
+                'https' if server.https else 'http',
+                server.host,
+                server.port,
+                command,
+                args,
+                auth_token,
+                )
+            resp = self.web.get(url)
 
-        return self.web.get(url)
+            if resp.ok:
+                return resp
+            elif resp.status_code in (401, 403, 404):
+                resp.raise_for_status()
 
-    def get_manifest(self, depot_id, manifest_id, auth_token):
-        resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_id), auth_token)
+            server = self.get_content_server(rotate=True)
 
-        resp.raise_for_status()
+    def get_manifest(self, depot_id, manifest_id, cdn_auth_token=None, decrypt=True):
+        if cdn_auth_token is None:
+            cdn_auth_token = self.get_cdn_auth_token(depot_id)
+
+        resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_id), cdn_auth_token)
 
         if resp.ok:
-            return DepotManifest(resp.content)
+            manifest = DepotManifest(resp.content)
+            if decrypt:
+                manifest.decrypt_filenames(self.get_depot_key(depot_id))
+            return manifest
+
+    def get_chunk(self, depot_id, chunk_id, cdn_auth_token=None):
+        if cdn_auth_token is None:
+            cdn_auth_token = self.get_cdn_auth_token(depot_id)
+
+        resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id), cdn_auth_token)
+
+        if resp.ok:
+            data = symmetric_decrypt(resp.content, self.get_depot_key(depot_id))
+
+            if data[:2] == b'VZ':
+                raise Exception("Implement LZMA lol")
+            else:
+                with ZipFile(BytesIO(data)) as zf:
+                    data = zf.read(zf.filelist[0])
+
+            return data
 
 
 class ContentServer(object):

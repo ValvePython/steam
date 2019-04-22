@@ -142,20 +142,20 @@ class Apps(object):
                                       timeout=10
                                       )
 
-    def get_depot_key(self, depot_id, app_id=0):
+    def get_depot_key(self, app_id, depot_id):
         """Get depot decryption key
 
-        :param depot_id: depot id
-        :type depot_id: :class:`int`
         :param app_id: app id
-        :type app_id: :class:`int`
+        :type  app_id: :class:`int`
+        :param depot_id: depot id
+        :type  depot_id: :class:`int`
         :return: `CMsgClientGetDepotDecryptionKeyResponse <https://github.com/ValvePython/steam/blob/39627fe883feeed2206016bacd92cf0e4580ead6/protobufs/steammessages_clientserver_2.proto#L533-L537>`_
         :rtype: proto message
         """
         return self.send_job_and_wait(MsgProto(EMsg.ClientGetDepotDecryptionKey),
                                       {
-                                       'depot_id': depot_id,
                                        'app_id': app_id,
+                                       'depot_id': depot_id,
                                       },
                                       timeout=10
                                       )
@@ -182,9 +182,9 @@ class Apps(object):
         """Get access tokens
 
         :param app_ids: list of app ids
-        :type app_ids: :class:`list`
+        :type  app_ids: :class:`list`
         :param package_ids: list of package ids
-        :type package_ids: :class:`list`
+        :type  package_ids: :class:`list`
         :return: dict with ``apps`` and ``packages`` containing their access tokens, see example below
         :rtype: :class:`dict`, :class:`None`
 
