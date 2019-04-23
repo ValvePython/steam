@@ -1,4 +1,6 @@
 
+from zipfile import ZipFile
+from io import BytesIO
 from collections import OrderedDict, deque
 from six import itervalues
 import vdf
@@ -6,8 +8,13 @@ import vdf
 from steam import webapi
 from steam.enums import EResult, EServerType
 from steam.util.web import make_requests_session
-from stema.core.crypto symmetric_decrypt
+from steam.core.crypto import symmetric_decrypt
 from steam.core.manifest import DepotManifest
+
+try:
+    import lzma
+except ImportError:
+    from backports import lzma
 
 
 def get_content_servers_from_cs(host, port, cell_id, num_servers=20, session=None):
@@ -161,13 +168,12 @@ class CDNClient(object):
         if resp.ok:
             data = symmetric_decrypt(resp.content, self.get_depot_key(depot_id))
 
-            if data[:2] == b'VZ':
-                raise Exception("Implement LZMA lol")
+            if data[:3] == b'VZa':
+                f = lzma._decode_filter_properties(lzma.FILTER_LZMA1, data[7:12])
+                return lzma.LZMADecompressor(lzma.FORMAT_RAW, filters=[f]).decompress(data[12:-10])
             else:
                 with ZipFile(BytesIO(data)) as zf:
-                    data = zf.read(zf.filelist[0])
-
-            return data
+                    return zf.read(zf.filelist[0])
 
 
 class ContentServer(object):
@@ -189,6 +195,3 @@ class ContentServer(object):
             repr(self.type),
             repr(self.cell_id),
             )
-
-
-
