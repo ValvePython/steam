@@ -92,10 +92,8 @@ class Apps(object):
         data = dict(apps={}, packages={})
 
         while True:
-            chunk = self.wait_event(job_id, timeout=timeout)
+            chunk = self.wait_event(job_id, timeout=timeout, raises=True)
 
-            if chunk is None:
-                return
             chunk = chunk[0].body
 
             for app in chunk.apps:

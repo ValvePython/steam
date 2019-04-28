@@ -5,6 +5,7 @@ from zipfile import ZipFile, ZIP_DEFLATED, BadZipFile
 from struct import pack
 from datetime import datetime
 from fnmatch import fnmatch
+import os.path
 
 from steam.enums import EDepotFileFlag
 from steam.core.crypto import symmetric_decrypt
@@ -21,7 +22,7 @@ class DepotManifest(object):
     PROTOBUF_ENDOFMANIFEST_MAGIC = 0x32C415AB
 
     def __init__(self, data=None):
-        """Manage depot manifest
+        """Represents depot manifest
 
         :param data: manifest data
         :type  data: bytes
@@ -35,9 +36,11 @@ class DepotManifest(object):
 
     def __repr__(self):
         params = ', '.join([
-                    str(self.depot_id),
-                    str(self.gid),
-                    repr(datetime.utcfromtimestamp(self.metadata.creation_time).isoformat().replace('T', ' ')),
+                    "depot_id=" + str(self.depot_id),
+                    "gid=" + str(self.gid),
+                    "creation_time=" + repr(
+                        datetime.utcfromtimestamp(self.metadata.creation_time).isoformat().replace('T', ' ')
+                        ),
                     ])
 
         if self.metadata.filenames_encrypted:
@@ -164,9 +167,12 @@ class DepotManifest(object):
         else:
             return data.getvalue()
 
+    def _make_depot_file(self, file_mapping):
+        return DepotFile(self, file_mapping)
+
     def __iter__(self):
         for mapping in self.payload.mappings:
-            yield DepotFile(self, mapping)
+            yield self._make_depot_file(mapping)
 
     def iter_files(self, pattern=None):
         """
@@ -177,7 +183,7 @@ class DepotManifest(object):
             if (pattern is not None
                and not fnmatch(mapping.filename.rstrip('\x00 \n\t'), pattern)):
                 continue
-            yield DepotFile(self, mapping)
+            yield self._make_depot_file(mapping)
 
     def __len__(self):
         return len(self.payload.mappings)
@@ -192,9 +198,9 @@ class DepotFile(object):
         :type  file_mapping: ContentManifestPayload.FileMapping
         """
         if not isinstance(manifest, DepotManifest):
-            raise ValueError("Expected 'manifest' to be of type DepotManifest")
+            raise TypeError("Expected 'manifest' to be of type DepotManifest")
         if not isinstance(file_mapping, ContentManifestPayload.FileMapping):
-            raise ValueError("Expected 'file_mapping' to be of type ContentManifestPayload.FileMapping")
+            raise TypeError("Expected 'file_mapping' to be of type ContentManifestPayload.FileMapping")
 
         self.manifest = manifest
         self.file_mapping = file_mapping
@@ -210,18 +216,42 @@ class DepotFile(object):
 
     @property
     def filename(self):
+        """
+        :returns: Filename with null terminator and whitespaces removed
+        :rtype: str
+        """
         return self.file_mapping.filename.rstrip('\x00 \n\t')
 
     @property
+    def filename_norm(self):
+        """
+        :return: Return current OS compatible path
+        :rtype: str
+        """
+        return os.path.join(*self.filename.split('\\'))
+
+    @property
     def size(self):
+        """
+        :return: file size in bytes
+        :rtype: int
+        """
         return self.file_mapping.size
 
     @property
     def chunks(self):
+        """
+        :return: file size in bytes
+        :rtype: int
+        """
         return self.file_mapping.chunks
 
     @property
     def flags(self):
+        """
+        :returns: file flags
+        :rtype: :class:`.EDepotFileFlag`
+        """
         return self.file_mapping.flags
 
     @property
@@ -229,5 +259,9 @@ class DepotFile(object):
         return self.flags & EDepotFileFlag.Directory > 0
 
     @property
+    def is_symlink(self):
+        return not not self.file_mapping.linktarget
+
+    @property
     def is_file(self):
-        return not self.is_directory
+        return not self.is_directory and not self.is_symlink
