@@ -9,6 +9,7 @@ import logging
 import struct
 
 import vdf
+from cachetools import LRUCache
 from steam import webapi
 from steam.enums import EResult, EServerType
 from steam.util.web import make_requests_session
@@ -99,13 +100,13 @@ class ContentServer(object):
 class CDNClient(object):
     _LOG = logging.getLogger("CDNClient")
     servers = deque()
+    _chunk_cache = LRUCache(20)
 
     def __init__(self, client):
         self.steam = client
         self.web = make_requests_session()
         self.cdn_auth_tokens = {}
         self.depot_keys = {}
-        self.workshop_depots = {}
         self.manifests = {}
         self.app_depots = {}
 
@@ -193,12 +194,12 @@ class CDNClient(object):
             server = self.get_content_server(rotate=True)
 
     def get_chunk(self, app_id, depot_id, chunk_id, cdn_auth_token=None):
-        if cdn_auth_token is None:
-            cdn_auth_token = self.get_cdn_auth_token(depot_id)
+        if (depot_id, chunk_id) not in self._chunk_cache:
+            if cdn_auth_token is None:
+                cdn_auth_token = self.get_cdn_auth_token(depot_id)
 
-        resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id), cdn_auth_token)
+            resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id), cdn_auth_token)
 
-        if resp.ok:
             data = symmetric_decrypt(resp.content, self.get_depot_key(app_id, depot_id))
 
             if data[:2] == b'VZ':
@@ -216,11 +217,15 @@ class CDNClient(object):
                 if crc32(udata) != checksum:
                     raise ValueError("CRC checksum doesn't match for decompressed data")
 
-                return udata[:decompressed_size]
+                data = udata[:decompressed_size]
 
             else:
                 with ZipFile(BytesIO(data)) as zf:
-                    return zf.read(zf.filelist[0])
+                    data = zf.read(zf.filelist[0])
+
+            self._chunk_cache[(depot_id, chunk_id)] = data
+
+        return self._chunk_cache[(depot_id, chunk_id)]
 
     def get_manifest(self, app_id, depot_id, manifest_id, cdn_auth_token=None, decrypt=True):
         if (app_id, depot_id, manifest_id) not in self.manifests:
@@ -301,14 +306,7 @@ class CDNClient(object):
         elif not wf.hcontent_file:
             raise ValueError("Workshop file is not on steampipe")
 
-        app_id = wf.consumer_appid
-
-        ws_app_id = self.workshop_depots.get(app_id)
-
-        if ws_app_id is None:
-            ws_app_id = int(self.steam.get_product_info([app_id])['apps'][app_id]['depots'].get(
-                'workshopdepot', app_id))
-            self.workshop_depots[app_id] = ws_app_id
+        app_id = ws_app_id = wf.consumer_appid
 
         manifest = self.get_manifest(app_id, ws_app_id, wf.hcontent_file)
         manifest.name = wf.title
@@ -378,6 +376,10 @@ class CDNDepotFile(DepotFile):
             repr(self.filename),
             'is_directory=True' if self.is_directory else self.size,
             )
+
+    @property
+    def name(self):
+        return self.filename
 
     @property
     def seekable(self):
