@@ -109,9 +109,29 @@ class CDNClient(object):
         self.depot_keys = {}
         self.manifests = {}
         self.app_depots = {}
+        self.licensed_app_ids = set()
+        self.licensed_depot_ids = set()
 
         if not self.servers:
             self.fetch_content_servers()
+
+        self.load_licenses()
+
+    def load_licenses(self):
+        self.licensed_app_ids.clear()
+        self.licensed_depot_ids.clear()
+
+        if not self.steam.licenses:
+            self._LOG.debug("No steam licenses available. Is SteamClient instances connected?")
+            return
+
+        packages = list(self.steam.licenses.keys())
+
+        print(packages)
+
+        for package_id, info in iteritems(self.steam.get_product_info(packages=packages)['packages']):
+            self.licensed_app_ids.update(info['appids'].values())
+            self.licensed_depot_ids.update(info['depotids'].values())
 
     @property
     def cell_id(self):
@@ -151,7 +171,7 @@ class CDNClient(object):
             if msg and msg.eresult == EResult.OK:
                 self.cdn_auth_tokens[depot_id] = msg.token
             else:
-                raise ValueError("Failed getting depot key: %s" % repr(
+                raise ValueError("Failed getting CDN auth token: %s" % repr(
                     EResult.Timeout if msg is None else EResult(msg.eresult)))
 
         return self.cdn_auth_tokens[depot_id]
@@ -242,7 +262,7 @@ class CDNClient(object):
 
         return self.manifests[(app_id, depot_id, manifest_id)]
 
-    def get_manifests(self, app_id, branch='public'):
+    def get_manifests(self, app_id, branch='public', filter_func=None):
         if app_id not in self.app_depots:
             self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
         depots = self.app_depots[app_id]
@@ -254,30 +274,50 @@ class CDNClient(object):
 
         manifests = []
 
-        for depot_id, depot_config in iteritems(depots):
+        for depot_id, depot_info in iteritems(depots):
             if not depot_id.isdigit():
                 continue
 
             depot_id = int(depot_id)
 
-            if branch in depot_config.get('manifests', {}):
+            # if we have no license for the depot, no point trying as we won't get depot_key
+            if depot_id not in self.licensed_depot_ids:
+                self._LOG.debug("No license for depot %s (%s). Skipping...",
+                                repr(depot_info['name']),
+                                depot_id,
+                                )
+                continue
+
+            # if filter_func set, use it to filter the list the depots
+            if filter_func and not filter_func(depot_id, depot_info):
+                continue
+
+            # get manifests for the sharedinstalls
+            if depot_info.get('sharedinstall') == '1':
+                manifests += self.get_manifests(int(depot_info['depotfromapp']),
+                                                filter_func=(lambda a, b: int(a) == depot_id),
+                                                )
+                continue
+
+            # process depot, and get manifest for branch
+            if branch in depot_info.get('manifests', {}):
                 try:
-                    manifest = self.get_manifest(app_id, depot_id, depot_config['manifests'][branch])
+                    manifest = self.get_manifest(app_id, depot_id, depot_info['manifests'][branch])
                 except ValueError as exp:
                     self._LOG.error("Depot %s (%s): %s",
-                                    repr(depot_config['name']),
+                                    repr(depot_info['name']),
                                     depot_id,
                                     str(exp),
                                     )
                     continue
 
-                manifest.name = depot_config['name']
+                manifest.name = depot_info['name']
                 manifests.append(manifest)
 
         return manifests
 
-    def iter_files(self, app_id, filename_filter=None, branch='public'):
-        for manifest in self.get_manifests(app_id, branch):
+    def iter_files(self, app_id, filename_filter=None, branch='public', filter_func=None):
+        for manifest in self.get_manifests(app_id, branch, filter_func):
             for fp in manifest.iter_files(filename_filter):
                 yield fp
 
