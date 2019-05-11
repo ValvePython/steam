@@ -223,22 +223,18 @@ class CDNClient(object):
             data = symmetric_decrypt(resp.content, self.get_depot_key(app_id, depot_id))
 
             if data[:2] == b'VZ':
+                if data[-2:] != b'zv':
+                    raise ValueError("VZ: Invalid footer: %s" % repr(data[-2:]))
                 if data[2:3] != b'a':
-                    raise ValueError("Invalid VZ version: %s" % repr(data[2:3]))
+                    raise ValueError("VZ: Invalid version: %s" % repr(data[2:3]))
 
                 vzfilter = lzma._decode_filter_properties(lzma.FILTER_LZMA1, data[7:12])
                 vzdec = lzma.LZMADecompressor(lzma.FORMAT_RAW, filters=[vzfilter])
-                checksum, decompressed_size, vz_footer = struct.unpack('<II2s', data[-10:])
+                checksum, decompressed_size = struct.unpack('<II', data[-10:-2])
                 # i have no idea why, but some chunks will decompress with 1 extra byte at the end
-                udata = vzdec.decompress(data[12:-10])[:decompressed_size]
-
-                if vz_footer != b'zv':
-                    raise ValueError("Invalid VZ footer: %s" % repr(vz_footer))
-                if crc32(udata) != checksum:
-                    raise ValueError("CRC checksum doesn't match for decompressed data")
-
-                data = udata[:decompressed_size]
-
+                data = vzdec.decompress(data[12:-10])[:decompressed_size]
+                if crc32(data) != checksum:
+                    raise ValueError("VZ: CRC32 checksum doesn't match for decompressed data")
             else:
                 with ZipFile(BytesIO(data)) as zf:
                     data = zf.read(zf.filelist[0])
