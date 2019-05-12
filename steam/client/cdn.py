@@ -9,6 +9,7 @@ import logging
 import struct
 
 import vdf
+from gevent.pool import Pool as GPool
 from cachetools import LRUCache
 from steam import webapi
 from steam.enums import EResult, EServerType
@@ -127,8 +128,8 @@ class CDNClient(object):
 
         packages = list(self.steam.licenses.keys())
 
-        print(packages)
-
+        # TODO: don't fetch all packages info at the same time (for accounts with many licences)
+        # TODO: add support for anonymous account
         for package_id, info in iteritems(self.steam.get_product_info(packages=packages)['packages']):
             self.licensed_app_ids.update(info['appids'].values())
             self.licensed_depot_ids.update(info['depotids'].values())
@@ -268,7 +269,13 @@ class CDNClient(object):
         elif int(depots['branches'][branch].get('pwdrequired', 0)) > 0:
             raise NotImplementedError("Password protected branches are not supported yet")
 
-        manifests = []
+        def async_fetch_manifest(app_id, depot_id, manifest_id, name):
+            manifest = self.get_manifest(app_id, depot_id, manifest_id)
+            manifest.name = name
+            return manifest
+
+        tasks = []
+        gpool = GPool(8)
 
         for depot_id, depot_info in iteritems(depots):
             if not depot_id.isdigit():
@@ -290,25 +297,37 @@ class CDNClient(object):
 
             # get manifests for the sharedinstalls
             if depot_info.get('sharedinstall') == '1':
-                manifests += self.get_manifests(int(depot_info['depotfromapp']),
-                                                filter_func=(lambda a, b: int(a) == depot_id),
-                                                )
+                tasks.append(gpool.spawn(self.get_manifests,
+                                         int(depot_info['depotfromapp']),
+                                         filter_func=(lambda a, b: int(a) == depot_id),
+                                         ))
                 continue
 
             # process depot, and get manifest for branch
             if branch in depot_info.get('manifests', {}):
-                try:
-                    manifest = self.get_manifest(app_id, depot_id, depot_info['manifests'][branch])
-                except ValueError as exp:
-                    self._LOG.error("Depot %s (%s): %s",
-                                    repr(depot_info['name']),
-                                    depot_id,
-                                    str(exp),
-                                    )
-                    continue
+                tasks.append(gpool.spawn(async_fetch_manifest,
+                                         app_id,
+                                         depot_id,
+                                         depot_info['manifests'][branch],
+                                         depot_info['name'],
+                                         ))
 
-                manifest.name = depot_info['name']
-                manifests.append(manifest)
+        manifests = []
+
+        for task in tasks:
+            try:
+                result = task.get()
+            except ValueError as exp:
+                self._LOG.error("Depot %s (%s): %s",
+                                repr(depot_info['name']),
+                                depot_id,
+                                str(exp),
+                                )
+            else:
+                if isinstance(result, list):
+                    manifests.extend(result)
+                else:
+                    manifests.append(result)
 
         return manifests
 
