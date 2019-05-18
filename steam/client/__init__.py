@@ -128,18 +128,31 @@ class SteamClient(CMClient, BuiltinBase):
         if self.credential_location:
             filepath = os.path.join(self.credential_location, 'cm_servers.json')
 
-            if not os.path.exists(filepath):
-                data = {
-                    'cell_id': self.cm_servers.cell_id,
-                    'last_updated': self.cm_servers.last_updated,
-                    'servers': list(zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
-                }
+            if os.path.exists(filepath):
                 try:
-                    with open(filepath, 'wb') as f:
-                        f.write(json.dumps(data, indent=True).encode('ascii'))
-                    self._LOG.debug("Saved CM servers to %s" % repr(filepath))
+                    with open(filepath, 'r') as f:
+                        data = json.load(f)
+                except ValueError:
+                    self._LOG.error("Failed parsing %s", repr(filepath))
                 except IOError as e:
-                    self._LOG.error("saving %s: %s" % (filepath, str(e)))
+                    self._LOG.error("Failed reading %s (%s)", repr(filepath), str(e))
+                else:
+                    if data.get('last_updated', 0) + 3600*24 > time():
+                        return
+
+                self._LOG.debug("Persisted CM server list is stale")
+
+            data = {
+                'cell_id': self.cm_servers.cell_id,
+                'last_updated': self.cm_servers.last_updated,
+                'servers': list(zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
+            }
+            try:
+                with open(filepath, 'wb') as f:
+                    f.write(json.dumps(data, indent=True).encode('ascii'))
+                self._LOG.debug("Saved CM servers to %s" % repr(filepath))
+            except IOError as e:
+                self._LOG.error("saving %s: %s" % (filepath, str(e)))
 
     def _handle_jobs(self, event, *args):
         if isinstance(event, EMsg):
