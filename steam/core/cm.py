@@ -4,11 +4,12 @@ import logging
 from gzip import GzipFile
 from time import time
 from collections import defaultdict
+from itertools import cycle, count
 
 from io import BytesIO
 
-import socket
 import gevent
+import gevent.socket as socket
 from random import shuffle
 
 from steam.steamid import SteamID
@@ -59,6 +60,7 @@ class CMClient(EventEmitter):
     PROTOCOL_UDP = 1                        #: UDP protocol enum
     verbose_debug = False                   #: print message connects in debug
 
+    auto_discovery = True                   #: enables automatic CM discovery
     cm_servers = None                       #: a instance of :class:`.CMServerList`
     current_server_addr = None              #: (ip, port) tuple
     _seen_logon = False
@@ -71,6 +73,7 @@ class CMClient(EventEmitter):
 
     steam_id = SteamID()                    #: :class:`.SteamID` of the current user
     session_id = None                       #: session id when logged in
+    cell_id = 0                             #: cell id provided by CM
 
     _recv_loop = None
     _heartbeat_loop = None
@@ -120,12 +123,20 @@ class CMClient(EventEmitter):
 
         self._LOG.debug("Connect initiated.")
 
-        if len(self.cm_servers) == 0 and not self.cm_servers.auto_discovery:
-            self._LOG.error("CM server list is empty.")
-            self._connecting = False
-            return False
+        i = count()
 
-        for i, server_addr in enumerate(self.cm_servers):
+        while len(self.cm_servers) == 0:
+            if self.auto_discovery:
+                if not self.cm_servers.bootstrap_from_webapi():
+                    self.cm_servers.bootstrap_from_dns()
+            else:
+                self._LOG.error("CM server list is empty. Auto discovery is off.")
+
+            if not self.auto_discovery or (retry and next(i) > retry):
+                self._connecting = False
+                return False
+
+        for i, server_addr in enumerate(cycle(self.cm_servers)):
             if retry and i > retry:
                 self._connecting = False
                 return False
@@ -361,6 +372,7 @@ class CMClient(EventEmitter):
 
             self.steam_id = SteamID(msg.header.steamid)
             self.session_id = msg.header.client_sessionid
+            self.cell_id = msg.body.cell_id
 
             if self._heartbeat_loop:
                 self._heartbeat_loop.kill()
@@ -377,7 +389,9 @@ class CMClient(EventEmitter):
         self._LOG.debug("Updating CM list")
 
         new_servers = zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)
+        self.cm_servers.clear()
         self.cm_servers.merge_list(new_servers)
+        self.cm_servers.cell_id = self.cell_id
 
     def sleep(self, seconds):
         """Yeild and sleep N seconds. Allows other greenlets to run"""
@@ -409,12 +423,12 @@ class CMServerList(object):
 
     Good = 1
     Bad = 2
-    auto_discovery = True  #: whether to automatically try to bootstrap CM server list
+    last_updated = 0       #: timestamp of when the list was last updated
+    cell_id = 0            #: cell id of the server list
+    bad_timestamp = 300    #: how long bad mark lasts in seconds
 
-    def __init__(self, bad_timespan=300):
+    def __init__(self):
         self._LOG = logging.getLogger("CMServerList")
-
-        self.bad_timespan = bad_timespan
         self.list = defaultdict(dict)
 
     def __len__(self):
@@ -454,7 +468,7 @@ class CMServerList(object):
             self._LOG.error("DNS boostrap: cm0.steampowered.com resolved no A records")
             return False
 
-    def bootstrap_from_webapi(self, cellid=0):
+    def bootstrap_from_webapi(self, cell_id=0):
         """
         Fetches CM server list from WebAPI and replaces the current one
 
@@ -467,7 +481,7 @@ class CMServerList(object):
 
         from steam import webapi
         try:
-            resp = webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cellid,
+            resp = webapi.get('ISteamDirectory', 'GetCMList', 1, params={'cellid': cell_id,
                                                                          'http_timeout': 3})
         except Exception as exp:
             self._LOG.error("WebAPI boostrap failed: %s" % str(exp))
@@ -487,36 +501,30 @@ class CMServerList(object):
             return str(ip), int(port)
 
         self.clear()
+        self.cell_id = cell_id
         self.merge_list(map(str_to_tuple, serverlist))
 
         return True
 
     def __iter__(self):
         def cm_server_iter():
-            while True:
-                if self.auto_discovery:
-                    if not self.list:
-                        self.bootstrap_from_webapi()
-                    if not self.list:
-                        self.bootstrap_from_dns()
-                    if not self.list:
-                        yield None
-                elif not self.list:
-                    self._LOG.error("Server list is empty.")
-                    return
+            if not self.list:
+                self._LOG.error("Server list is empty.")
+                return
 
-                good_servers = list(filter(lambda x: x[1]['quality'] == CMServerList.Good,
-                                           self.list.items()
-                                           ))
+            good_servers = list(filter(lambda x: x[1]['quality'] == CMServerList.Good,
+                                       self.list.items()
+                                       ))
 
-                if len(good_servers) == 0:
-                    self.reset_all()
-                    continue
+            if len(good_servers) == 0:
+                self._LOG.debug("No good servers left. Reseting...")
+                self.reset_all()
+                return
 
-                shuffle(good_servers)
+            shuffle(good_servers)
 
-                for server_addr, meta in good_servers:
-                    yield server_addr
+            for server_addr, meta in good_servers:
+                yield server_addr
 
         return cm_server_iter()
 
@@ -559,3 +567,5 @@ class CMServerList(object):
 
         if len(self.list) > total:
             self._LOG.debug("Added %d new CM addresses." % (len(self.list) - total))
+
+        self.last_updated = int(time())
