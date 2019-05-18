@@ -53,7 +53,6 @@ class SteamClient(CMClient, BuiltinBase):
     credential_location = None         #: location for sentry
     username = None                    #: username when logged on
     login_key = None                   #: can be used for subsequent logins (no 2FA code will be required)
-    cell_id = 0                        #: cell id provided by CM
 
     def __init__(self):
         CMClient.__init__(self)
@@ -170,7 +169,6 @@ class SteamClient(CMClient, BuiltinBase):
     def _handle_disconnect(self, *args):
         self.logged_on = False
         self.current_jobid = 0
-        self.cell_id = 0
 
     def _handle_logon(self, msg):
         CMClient._handle_logon(self, msg)
@@ -180,7 +178,6 @@ class SteamClient(CMClient, BuiltinBase):
         if result == EResult.OK:
             self._reconnect_backoff_c = 0
             self.logged_on = True
-            self.cell_id = msg.body.cell_id
             self.emit(self.EVENT_LOGGED_ON)
             return
 
