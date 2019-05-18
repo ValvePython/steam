@@ -48,7 +48,6 @@ class SteamClient(CMClient, BuiltinBase):
     """After a new login key is accepted
     """
 
-    _cm_servers_timestamp = None       # used to decide when to update CM list on disk
     _reconnect_backoff_c = 0
     current_jobid = 0
     credential_location = None         #: location for sentry
@@ -88,7 +87,7 @@ class SteamClient(CMClient, BuiltinBase):
     def connect(self, *args, **kwargs):
         """Attempt to establish connection, see :meth:`.CMClient.connect`"""
         self._bootstrap_cm_list_from_file()
-        CMClient.connect(self, *args, **kwargs)
+        return CMClient.connect(self, *args, **kwargs)
 
     def disconnect(self, *args, **kwargs):
         """Close connection, see :meth:`.CMClient.disconnect`"""
@@ -96,10 +95,13 @@ class SteamClient(CMClient, BuiltinBase):
         CMClient.disconnect(self, *args, **kwargs)
 
     def _bootstrap_cm_list_from_file(self):
-        if not self.credential_location or self._cm_servers_timestamp is not None: return
+        if not self.credential_location or self.cm_servers.last_updated > 0:
+            return
 
         filepath = os.path.join(self.credential_location, 'cm_servers.json')
-        if not os.path.isfile(filepath): return
+
+        if not os.path.isfile(filepath):
+            return
 
         self._LOG.debug("Reading CM servers from %s" % repr(filepath))
 
@@ -113,29 +115,44 @@ class SteamClient(CMClient, BuiltinBase):
         else:
             self.cm_servers.clear()
             self.cm_servers.merge_list(data['servers'])
-            self._cm_servers_timestamp = int(data['timestamp'])
+            self.cm_servers.last_updated = data.get('last_updated', 0)
+            self.cm_servers.cell_id = data.get('cell_id', 0)
 
     def _handle_cm_list(self, msg):
-        if self._cm_servers_timestamp is None:
-            self._cm_servers_timestamp = int(time())
+        if (self.cm_servers.last_updated + 3600*24 > time()
+           and self.cm_servers.cell_id != 0):
+            return
 
-        self.cm_servers.clear()
-        CMClient._handle_cm_list(self, msg)  # just merges the list
+        CMClient._handle_cm_list(self, msg)  # clear and merge
 
         if self.credential_location:
             filepath = os.path.join(self.credential_location, 'cm_servers.json')
 
-            if not os.path.exists(filepath) or time() - (3600*24) > self._cm_servers_timestamp:
-                data = {
-                    'timestamp': self._cm_servers_timestamp,
-                    'servers': list(zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
-                }
+            if os.path.exists(filepath):
                 try:
-                    with open(filepath, 'wb') as f:
-                        f.write(json.dumps(data, indent=True).encode('ascii'))
-                    self._LOG.debug("Saved CM servers to %s" % repr(filepath))
+                    with open(filepath, 'r') as f:
+                        data = json.load(f)
+                except ValueError:
+                    self._LOG.error("Failed parsing %s", repr(filepath))
                 except IOError as e:
-                    self._LOG.error("saving %s: %s" % (filepath, str(e)))
+                    self._LOG.error("Failed reading %s (%s)", repr(filepath), str(e))
+                else:
+                    if data.get('last_updated', 0) + 3600*24 > time():
+                        return
+
+                self._LOG.debug("Persisted CM server list is stale")
+
+            data = {
+                'cell_id': self.cm_servers.cell_id,
+                'last_updated': self.cm_servers.last_updated,
+                'servers': list(zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
+            }
+            try:
+                with open(filepath, 'wb') as f:
+                    f.write(json.dumps(data, indent=True).encode('ascii'))
+                self._LOG.debug("Saved CM servers to %s" % repr(filepath))
+            except IOError as e:
+                self._LOG.error("saving %s: %s" % (filepath, str(e)))
 
     def _handle_jobs(self, event, *args):
         if isinstance(event, EMsg):
@@ -409,7 +426,8 @@ class SteamClient(CMClient, BuiltinBase):
             raise RuntimeError("Already logged on")
 
         if not self.connected and not self._connecting:
-            self.connect()
+            if not self.connect():
+                return EResult.Fail
 
         if not self.channel_secured:
             resp = self.wait_event(self.EVENT_CHANNEL_SECURED, timeout=10)
@@ -418,9 +436,9 @@ class SteamClient(CMClient, BuiltinBase):
             if resp is None:
                 if self.connected:
                     self.wait_event(self.EVENT_DISCONNECTED)
-                return False
+                return EResult.TryAnotherCM
 
-        return True
+        return EResult.OK
 
     @property
     def relogin_available(self):
@@ -485,8 +503,10 @@ class SteamClient(CMClient, BuiltinBase):
         """
         self._LOG.debug("Attempting login")
 
-        if not self._pre_login():
-            return EResult.TryAnotherCM
+        eresult = self._pre_login()
+
+        if eresult != EResult.OK:
+            return eresult
 
         self.username = username
 
@@ -540,7 +560,10 @@ class SteamClient(CMClient, BuiltinBase):
         """
         self._LOG.debug("Attempting Anonymous login")
 
-        self._pre_login()
+        eresult = self._pre_login()
+
+        if eresult != EResult.OK:
+            return eresult
 
         self.username = None
         self.login_key = None
