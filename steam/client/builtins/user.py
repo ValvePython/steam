@@ -1,6 +1,6 @@
 from weakref import WeakValueDictionary
 from steam.client.user import SteamUser
-from steam.enums import EPersonaState, EChatEntryType
+from steam.enums import EPersonaState, EChatEntryType, EType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
 from steam.util import proto_fill_from_dict
@@ -41,7 +41,7 @@ class User(object):
     def __handle_set_persona(self):
         self.user = self.get_user(self.steam_id, False)
 
-        if self.persona_state != EPersonaState.Offline:
+        if self.steam_id.type == EType.Individual and self.persona_state != EPersonaState.Offline:
             self.change_status(persona_state=self.persona_state)
 
     def __handle_persona_state(self, message):
