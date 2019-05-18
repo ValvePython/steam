@@ -123,32 +123,28 @@ class CMClient(EventEmitter):
 
         self._LOG.debug("Connect initiated.")
 
-        i = count()
+        i = count(0)
 
         while len(self.cm_servers) == 0:
-            if self.auto_discovery:
-                if not self.cm_servers.bootstrap_from_webapi():
-                    self.cm_servers.bootstrap_from_dns()
-            else:
-                self._LOG.error("CM server list is empty. Auto discovery is off.")
-
-            if not self.auto_discovery or (retry and next(i) > retry):
+            if not self.auto_discovery or (retry and next(i) >= retry):
+                if not self.auto_discovery:
+                    self._LOG.error("CM server list is empty. Auto discovery is off.")
                 self._connecting = False
                 return False
 
-        for i, server_addr in enumerate(cycle(self.cm_servers)):
-            if retry and i > retry:
+            if not self.cm_servers.bootstrap_from_webapi():
+                self.cm_servers.bootstrap_from_dns()
+
+        for i, server_addr in enumerate(cycle(self.cm_servers), start=next(i)-1):
+            if retry and i >= retry:
                 self._connecting = False
                 return False
 
             start = time()
 
-            if server_addr:
-                if self.connection.connect(server_addr):
-                    break
-                self._LOG.debug("Failed to connect. Retrying...")
-            else:
-                self._LOG.debug("No servers available. Retrying...")
+            if self.connection.connect(server_addr):
+                break
+            self._LOG.debug("Failed to connect. Retrying...")
 
             diff = time() - start
 

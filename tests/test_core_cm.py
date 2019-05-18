@@ -45,28 +45,77 @@ class CMClient_Scenarios(unittest.TestCase):
         patcher = patch('steam.core.cm.CMServerList', autospec=True)
         self.addCleanup(patcher.stop)
         self.server_list = patcher.start().return_value
-
-        self.server_list.__iter__.return_value = [(127001, i+1) for i in range(10)]
+        self.server_list.__iter__.return_value = [(127001, 20000+i) for i in range(10)]
+        self.server_list.bootstrap_from_webapi.return_value = False
+        self.server_list.bootstrap_from_dns.return_value = False
 
     @patch.object(CMClient, 'emit')
     @patch.object(CMClient, '_recv_messages')
     def test_connect(self, mock_recv, mock_emit):
         # setup
         self.conn.connect.return_value = True
+        self.server_list.__len__.return_value = 10
 
         # run
         cm = CMClient()
 
         with gevent.Timeout(2, False):
-            cm.connect()
+            cm.connect(retry=1)
 
         gevent.idle()
 
         # verify
-        self.conn.connect.assert_called_once_with((127001, 1))
+        self.conn.connect.assert_called_once_with((127001, 20000))
         mock_emit.assert_called_once_with('connected')
         mock_recv.assert_called_once_with()
 
+    @patch.object(CMClient, 'emit')
+    @patch.object(CMClient, '_recv_messages')
+    def test_connect_auto_discovery_failing(self, mock_recv, mock_emit):
+        # setup
+        self.conn.connect.return_value = True
+        self.server_list.__len__.return_value = 0
+
+        # run
+        cm = CMClient()
+
+        with gevent.Timeout(3, False):
+            cm.connect(retry=1)
+
+        gevent.idle()
+
+        # verify
+        self.server_list.bootstrap_from_webapi.assert_called_once_with()
+        self.server_list.bootstrap_from_dns.assert_called_once_with()
+        self.conn.connect.assert_not_called()
+
+    @patch.object(CMClient, 'emit')
+    @patch.object(CMClient, '_recv_messages')
+    def test_connect_auto_discovery_success(self, mock_recv, mock_emit):
+        # setup
+        self.conn.connect.return_value = True
+        self.server_list.__len__.return_value = 0
+
+        def fake_servers(*args, **kwargs):
+            self.server_list.__len__.return_value = 10
+            return True
+
+        self.server_list.bootstrap_from_webapi.side_effect = fake_servers
+
+        # run
+        cm = CMClient()
+
+        with gevent.Timeout(3, False):
+            cm.connect(retry=1)
+
+        gevent.idle()
+
+        # verify
+        self.server_list.bootstrap_from_webapi.assert_called_once_with()
+        self.server_list.bootstrap_from_dns.assert_not_called()
+        self.conn.connect.assert_called_once_with((127001, 20000))
+        mock_emit.assert_called_once_with('connected')
+        mock_recv.assert_called_once_with()
 
     def test_channel_encrypt_sequence(self):
         # setup
