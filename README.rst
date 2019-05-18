@@ -9,11 +9,12 @@ Documentation: http://steam.readthedocs.io/en/latest/
 Key features
 ------------
 
-* `SteamAuthenticator <http://steam.readthedocs.io/en/latest/api/steam.guard.html>`_ - enable/disable/manage 2FA on account and generate codes
 * `SteamClient <http://steam.readthedocs.io/en/latest/api/steam.client.html>`_ - communication with the steam network based on ``gevent``.
-* `SteamID <http://steam.readthedocs.io/en/latest/api/steam.steamid.html>`_  - convert between the various ID representations with ease
-* `WebAPI <http://steam.readthedocs.io/en/latest/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
 * `WebAuth <http://steam.readthedocs.io/en/latest/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
+* `WebAPI <http://steam.readthedocs.io/en/latest/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
+* `SteamAuthenticator <http://steam.readthedocs.io/en/latest/api/steam.guard.html>`_ - enable/disable/manage 2FA on account and generate codes
+* `SteamID <http://steam.readthedocs.io/en/latest/api/steam.steamid.html>`_  - convert between the various ID representations with ease
+* `Master Server Query Protocol <https://steam.readthedocs.io/en/latest/api/steam.game_servers.html>`_ - query masters servers directly or via ``SteamClient``
 
 Checkout the `User guide <http://steam.readthedocs.io/en/latest/user_guide.html>`_ for examples,
 or the `API Reference <http://steam.readthedocs.io/en/latest/api/steam.html>`_ for details.
