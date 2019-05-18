@@ -12,7 +12,7 @@ import vdf
 from gevent.pool import Pool as GPool
 from cachetools import LRUCache
 from steam import webapi
-from steam.enums import EResult, EServerType
+from steam.enums import EResult, EServerType, EType
 from steam.util.web import make_requests_session
 from steam.core.crypto import symmetric_decrypt
 from steam.core.manifest import DepotManifest, DepotFile
@@ -122,14 +122,16 @@ class CDNClient(object):
         self.licensed_app_ids.clear()
         self.licensed_depot_ids.clear()
 
-        if not self.steam.licenses:
-            self._LOG.debug("No steam licenses available. Is SteamClient instances connected?")
-            return
+        if self.steam.steam_id.type == EType.AnonUser:
+            packages = [17906]
+        else:
+            if not self.steam.licenses:
+                self._LOG.debug("No steam licenses available. Is SteamClient instances connected?")
+                return
 
-        packages = list(self.steam.licenses.keys())
+            packages = list(self.steam.licenses.keys())
 
         # TODO: don't fetch all packages info at the same time (for accounts with many licences)
-        # TODO: add support for anonymous account
         for package_id, info in iteritems(self.steam.get_product_info(packages=packages)['packages']):
             self.licensed_app_ids.update(info['appids'].values())
             self.licensed_depot_ids.update(info['depotids'].values())
