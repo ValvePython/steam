@@ -35,6 +35,7 @@ Adding an authenticator
 Once authenticator is enabled all you need is the secrets to generate codes.
 
 .. code:: python
+
     secrets = json.load(open('./mysecrets.json'))
 
     sa = SteamAuthenticator(secrets)
