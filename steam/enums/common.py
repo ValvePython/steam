@@ -540,11 +540,10 @@ class ECurrencyCode(SteamIntEnum):
 
 
 # Do not remove
-from sys import modules
 from enum import EnumMeta
 
 __all__ = list(map(lambda y: y.__name__,
-              filter(lambda x: x.__class__ is EnumMeta, modules[__name__].__dict__.values()),
-              ))
+                   filter(lambda x: x.__class__ is EnumMeta, globals().values()),
+                   ))
 
-del modules, EnumMeta
+del EnumMeta
