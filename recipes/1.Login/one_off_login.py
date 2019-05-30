@@ -1,5 +1,5 @@
 from __future__ import print_function
-from steam import SteamClient
+from steam.client import SteamClient
 from steam.enums import EResult
 
 client = SteamClient()

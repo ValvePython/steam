@@ -61,7 +61,8 @@ from getpass import getpass
 import six
 import requests
 
-from steam import SteamID, webapi
+from steam import webapi
+from steam.steamid import SteamID
 from steam.util.web import make_requests_session, generate_session_id
 from steam.core.crypto import rsa_publickey, pkcs1v15_encrypt
 

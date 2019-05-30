@@ -1,7 +1,7 @@
 import logging
 import gevent
 from binascii import hexlify
-from steam import SteamClient
+from steam.client import SteamClient
 from steam.core.msg import MsgProto
 from steam.enums.emsg import EMsg
 from steam.util import proto_to_dict

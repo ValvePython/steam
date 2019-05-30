@@ -8,7 +8,7 @@ Example implementation of Dota 2 GC client with inheritance.
 .. code:: python
 
     import myDotaModule
-    from steam import SteamClient
+    from steam.client import SteamClient
     from steam.core.msg import GCMsgHdrProto
     from steam.client.gc import GameCoordinator
 

@@ -1,6 +1,6 @@
 from __future__ import print_function
 from getpass import getpass
-from steam import SteamClient
+from steam.client import SteamClient
 
 
 print("One-off login recipe")

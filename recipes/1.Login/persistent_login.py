@@ -1,5 +1,5 @@
 import logging
-from steam import SteamClient
+from steam.client import SteamClient
 from steam.enums import EResult
 
 # setup logging

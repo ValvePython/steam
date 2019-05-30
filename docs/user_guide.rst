@@ -21,7 +21,7 @@ Converting between representations
 
 .. code:: python
 
-    >>> from steam import SteamID
+    >>> from steam.steamid import SteamID
 
     >>> SteamID()
     SteamID(id=0, type='Invalid', universe='Invalid', instance=0)
@@ -92,7 +92,7 @@ Calling an endpoint
 
 .. code:: python
 
-    >>> from steam import WebAPI
+    >>> from steam.steamid import WebAPI
     >>> api = WebAPI(key="<your api key>")
 
     # instance.<interface>.<method>
@@ -161,7 +161,7 @@ After that we logout.
 
 .. code:: python
 
-    from steam import SteamClient
+    from steam.steamid import SteamClient
     from steam.enums.emsg import EMsg
 
     client = SteamClient()

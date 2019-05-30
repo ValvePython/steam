@@ -4,6 +4,7 @@
 
 This release brings some breaking changes
 
+- Removed imports from 'steam' namespace
 - Replaced builtin CM server list with automatic discovery via WebAPI or DNS
 - Removed `steam.client.mixins` package
 - Renamed `medium` param to `backend` on `SteamAuthenticator`

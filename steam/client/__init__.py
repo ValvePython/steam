@@ -27,7 +27,7 @@ from steam.enums.emsg import EMsg
 from steam.enums import EResult, EOSType, EPersonaState
 from steam.core.msg import MsgProto
 from steam.core.cm import CMClient
-from steam import SteamID
+from steam.steamid import SteamID
 from steam.client.builtins import BuiltinBase
 from steam.util import ip_from_int, ip_to_int, proto_fill_from_dict
 
