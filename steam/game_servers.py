@@ -11,7 +11,7 @@ Filters
 -------
 
 .. note::
-    Multiple filters can be joined to together (Eg. ``\app\730\white\1\empty\1``)
+    Multiple filters can be joined to together (Eg. ``\appid\730\white\1\empty\1``)
 
 =========================== =========================================================================================================================
 Filter code                 What it does
@@ -164,7 +164,7 @@ class MSServer:
     Source_27015 = ('208.64.200.65', 27015)          #: ``hl2master`` but on different port
 
 
-def query_master(filter_text=r'\napp\500', max_servers=20, region=MSRegion.World, master=MSServer.Source, timeout=2):
+def query_master(filter_text=r'\nappid\500', max_servers=20, region=MSRegion.World, master=MSServer.Source, timeout=2):
     r"""Generator that returns (IP,port) pairs of servers
 
     .. warning::
@@ -523,7 +523,7 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     :param challenge: (optional) challenge number
     :type  challenge: int
     :raises: :class:`RuntimeError`, :class:`socket.timeout`
-    :returns: a list of players
+    :returns: a list of rules
     :rtype: :class:`list`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
