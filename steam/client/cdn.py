@@ -106,7 +106,6 @@ class CDNClient(object):
     def __init__(self, client):
         self.steam = client
         self.web = make_requests_session()
-        self.cdn_auth_tokens = {}
         self.depot_keys = {}
         self.manifests = {}
         self.app_depots = {}
@@ -167,18 +166,6 @@ class CDNClient(object):
             self.servers.rotate(-1)
         return self.servers[0]
 
-    def get_cdn_auth_token(self, depot_id):
-        if depot_id not in self.cdn_auth_tokens:
-            msg = self.steam.get_cdn_auth_token(depot_id, 'steampipe.steamcontent.com')
-
-            if msg and msg.eresult == EResult.OK:
-                self.cdn_auth_tokens[depot_id] = msg.token
-            else:
-                raise ValueError("Failed getting CDN auth token: %s" % repr(
-                    EResult.Timeout if msg is None else EResult(msg.eresult)))
-
-        return self.cdn_auth_tokens[depot_id]
-
     def get_depot_key(self, app_id, depot_id):
         if (app_id, depot_id) not in self.depot_keys:
             msg = self.steam.get_depot_key(app_id, depot_id)
@@ -191,17 +178,16 @@ class CDNClient(object):
 
         return self.depot_keys[(app_id, depot_id)]
 
-    def get(self, command, args, auth_token=''):
+    def get(self, command, args):
         server = self.get_content_server()
 
         while True:
-            url = "%s://%s:%s/%s/%s%s" % (
+            url = "%s://%s:%s/%s/%s" % (
                 'https' if server.https else 'http',
                 server.host,
                 server.port,
                 command,
                 args,
-                auth_token,
                 )
 
             try:
@@ -216,12 +202,9 @@ class CDNClient(object):
 
             server = self.get_content_server(rotate=True)
 
-    def get_chunk(self, app_id, depot_id, chunk_id, cdn_auth_token=None):
+    def get_chunk(self, app_id, depot_id, chunk_id):
         if (depot_id, chunk_id) not in self._chunk_cache:
-            if cdn_auth_token is None:
-                cdn_auth_token = self.get_cdn_auth_token(depot_id)
-
-            resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id), cdn_auth_token)
+            resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id))
 
             data = symmetric_decrypt(resp.content, self.get_depot_key(app_id, depot_id))
 
@@ -246,12 +229,9 @@ class CDNClient(object):
 
         return self._chunk_cache[(depot_id, chunk_id)]
 
-    def get_manifest(self, app_id, depot_id, manifest_id, cdn_auth_token=None, decrypt=True):
+    def get_manifest(self, app_id, depot_id, manifest_id, decrypt=True):
         if (app_id, depot_id, manifest_id) not in self.manifests:
-            if cdn_auth_token is None:
-                cdn_auth_token = self.get_cdn_auth_token(depot_id)
-
-            resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_id), cdn_auth_token)
+            resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_id))
 
             if resp.ok:
                 manifest = CDNDepotManifest(self, app_id, resp.content)

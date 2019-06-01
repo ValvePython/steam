@@ -161,6 +161,9 @@ class Apps(object):
     def get_cdn_auth_token(self, depot_id, hostname):
         """Get CDN authentication token
 
+        .. note::
+            This token is no longer needed for access to CDN files
+
         :param depot_id: depot id
         :type  depot_id: :class:`int`
         :param hostname: cdn hostname
