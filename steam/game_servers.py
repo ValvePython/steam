@@ -203,7 +203,7 @@ def query_master(filter_text=r'\nappid\500', max_servers=20, region=MSRegion.Wor
     while True:
         ms.send(req_prefix + next_ip + req_suffix)
 
-        data = StructReader(ms.recv(2048))
+        data = StructReader(ms.recv(8196))  # chunk size needs to be multiple of 6
 
         # verify response header
         if data.read(6) != b'\xFF\xFF\xFF\xFF\x66\x0A':
