@@ -542,8 +542,9 @@ class ECurrencyCode(SteamIntEnum):
 # Do not remove
 from enum import EnumMeta
 
-__all__ = list(map(lambda y: y.__name__,
-                   filter(lambda x: x.__class__ is EnumMeta, globals().values()),
-                   ))
+__all__ = [obj.__name__
+           for obj in globals().values()
+           if obj.__class__ is EnumMeta and obj.__name__ != 'SteamIntEnum'
+           ]
 
 del EnumMeta
