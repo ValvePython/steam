@@ -21,6 +21,8 @@ or the `API Reference <http://steam.readthedocs.io/en/latest/api/steam.html>`_ f
 
 For questions, issues or general curiosity visit the repo at `https://github.com/ValvePython/steam <https://github.com/ValvePython/steam>`_.
 
+Like using the command line? Try `steamctl <https://github.com/ValvePython/steamctl>`_ tool
+
 Quick install
 -------------
 
