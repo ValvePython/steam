@@ -6,25 +6,16 @@ from steam.util import ip_from_int, proto_fill_from_dict
 
 
 class Apps(object):
-    servers = None   #: :class:`dict: Servers by type
     licenses = None  #: :class:`dict` Account licenses
 
     def __init__(self, *args, **kwargs):
         super(Apps, self).__init__(*args, **kwargs)
-        self.servers = {}
         self.licenses = {}
         self.on(self.EVENT_DISCONNECTED, self.__handle_disconnect)
-        self.on(EMsg.ClientServerList, self._handle_server_list)
         self.on(EMsg.ClientLicenseList, self._handle_licenses)
 
     def __handle_disconnect(self):
-        self.servers = {}
         self.licenses = {}
-
-    def _handle_server_list(self, message):
-        for entry in message.body.servers:
-            self.servers.setdefault(EServerType(entry.server_type), [])\
-                        .append((ip_from_int(entry.server_ip), entry.server_port))
 
     def _handle_licenses(self, message):
         for entry in message.body.licenses:

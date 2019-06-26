@@ -102,9 +102,13 @@ class CDNClient(object):
     _LOG = logging.getLogger("CDNClient")
     servers = deque()
     _chunk_cache = LRUCache(20)
+    cell_id = 0
 
     def __init__(self, client):
         self.steam = client
+        if self.steam:
+            self.cell_id = self.steam.cell_id
+
         self.web = make_requests_session()
         self.depot_keys = {}
         self.manifests = {}
@@ -135,28 +139,13 @@ class CDNClient(object):
             self.licensed_app_ids.update(info['appids'].values())
             self.licensed_depot_ids.update(info['depotids'].values())
 
-    @property
-    def cell_id(self):
-        return self.steam.cell_id
-
     def fetch_content_servers(self, num_servers=20):
         self.servers.clear()
 
-        if self.steam:
-            for ip, port in self.steam.servers.get(EServerType.CS, []):
-                servers = get_content_servers_from_cs(self.cell_id, ip, port, num_servers, self.web)
+        self._LOG.debug("Trying to fetch content servers from Steam API")
 
-                if servers:
-                    self.servers.extend(servers)
-                    break
-            else:
-                self._LOG.debug("No content servers available on SteamClient instance")
-
-        if not self.servers:
-            self._LOG.debug("Trying to fetch content servers from Steam API")
-
-            servers = get_content_servers_from_webapi(self.cell_id)
-            self.servers.extend(servers)
+        servers = get_content_servers_from_webapi(self.cell_id)
+        self.servers.extend(servers)
 
         if not self.servers:
             raise ValueError("Failed to fetch content servers")
