@@ -48,6 +48,9 @@ def symmetric_encrypt(message, key):
     iv = random_bytes(BS)
     return symmetric_encrypt_with_iv(message, key, iv)
 
+def symmetric_encrypt_ecb(message, key):
+    return AES.new(key, AES.MODE_ECB).encrypt(pad(message))
+
 def symmetric_encrypt_HMAC(message, key, hmac_secret):
     prefix = random_bytes(3)
     hmac = hmac_sha1(hmac_secret, prefix + message)
@@ -65,6 +68,9 @@ def symmetric_encrypt_with_iv(message, key, iv):
 def symmetric_decrypt(cyphertext, key):
     iv = symmetric_decrypt_iv(cyphertext, key)
     return symmetric_decrypt_with_iv(cyphertext, key, iv)
+
+def symmetric_decrypt_ecb(cyphertext, key):
+    return unpad(AES.new(key, AES.MODE_ECB).decrypt(cyphertext))
 
 def symmetric_decrypt_HMAC(cyphertext, key, hmac_secret):
     """:raises: :class:`RuntimeError` when HMAC verification fails"""
