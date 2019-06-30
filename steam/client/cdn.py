@@ -1,11 +1,12 @@
 """
+The :class:`.CDNClient` class provides a simple API for downloading Steam content from SteamPipe
+
 Initializing :class:`.CDNClient` requires a logged in :class:`.SteamClient` instance
 
 .. code:: python
 
     mysteam = SteamClient()
     ...
-
     mycdn = CDNClient(mysteam)
 
 
@@ -261,7 +262,6 @@ class CDNClient(object):
 
             packages = list(self.steam.licenses.keys())
 
-        # TODO: don't fetch all packages info at the same time (for accounts with many licences)
         for package_id, info in iteritems(self.steam.get_product_info(packages=packages)['packages']):
             self.licensed_app_ids.update(info['appids'].values())
             self.licensed_depot_ids.update(info['depotids'].values())
