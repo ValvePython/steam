@@ -1,3 +1,85 @@
+"""
+Initializing :class:`.CDNClient` requires a logged in :class:`.SteamClient` instance
+
+.. code:: python
+
+    mysteam = SteamClient()
+    ...
+
+    mycdn = CDNClient(mysteam)
+
+
+Getting depot manifests for an app
+
+.. code:: python
+
+    >>> mycdn.get_manifests(570)
+    [<CDNDepotManifest('Dota 2 Content', app_id=570, depot_id=373301, gid=6397590570861788404, creation_time='2019-06-29 16:03:11')>,
+     <CDNDepotManifest('Dota 2 Content 2', app_id=570, depot_id=381451, gid=5769691971272474272, creation_time='2019-06-29 00:19:02')>,
+     <CDNDepotManifest('Dota 2 Content 3', app_id=570, depot_id=381452, gid=3194393866044592918, creation_time='2019-06-27 00:05:38')>,
+     <CDNDepotManifest('Dota 2 Content 4', app_id=570, depot_id=381453, gid=8005824150061180163, creation_time='2019-06-08 07:49:57')>,
+     <CDNDepotManifest('Dota 2 Content 5', app_id=570, depot_id=381454, gid=9003299908441378336, creation_time='2019-06-26 18:56:19')>,
+     <CDNDepotManifest('Dota 2 Content 6', app_id=570, depot_id=381455, gid=8000458746487720619, creation_time='2019-06-29 00:19:43')>,
+     <CDNDepotManifest('Dota 2 Win32', app_id=570, depot_id=373302, gid=3561463682334619841, creation_time='2019-06-29 00:16:28')>,
+     <CDNDepotManifest('Dota 2 Win64', app_id=570, depot_id=373303, gid=6464064782313084040, creation_time='2019-06-29 00:16:43')>,
+     <CDNDepotManifest('Dota 2 Mac', app_id=570, depot_id=373304, gid=5979018571482579541, creation_time='2019-06-29 00:16:59')>,
+     <CDNDepotManifest('Dota 2 English', app_id=570, depot_id=373305, gid=4435851250675935801, creation_time='2015-06-01 20:15:37')>,
+     <CDNDepotManifest('Dota 2 Linux', app_id=570, depot_id=373306, gid=4859464855297921815, creation_time='2019-06-29 00:17:25')>,
+     <CDNDepotManifest('Dota 2 Korean', app_id=570, depot_id=373308, gid=8598853793233320583, creation_time='2019-03-05 17:16:49')>,
+     <CDNDepotManifest('Dota 2 Simplified Chinese', app_id=570, depot_id=373309, gid=6975893321745168138, creation_time='2019-06-25 21:40:37')>,
+     <CDNDepotManifest('Dota 2 Russian', app_id=570, depot_id=381456, gid=5425063725991897591, creation_time='2019-03-05 17:19:53')>,
+     <CDNDepotManifest('Dota 2 Workshop tools', app_id=570, depot_id=381450, gid=8629205096668418087, creation_time='2019-06-29 16:04:18')>,
+     <CDNDepotManifest('Dota 2 OpenGL Windows', app_id=570, depot_id=401531, gid=6502316736107281444, creation_time='2019-06-07 19:04:08')>,
+     <CDNDepotManifest('Dota 2 Vulkan Common', app_id=570, depot_id=401535, gid=6405492872419215600, creation_time='2019-06-07 19:04:11')>,
+     <CDNDepotManifest('Dota 2 Vulkan Win64', app_id=570, depot_id=401536, gid=3821288251412129608, creation_time='2019-06-25 21:42:29')>,
+     <CDNDepotManifest('Dota 2 Vulkan Linux64', app_id=570, depot_id=401537, gid=3144805829218032316, creation_time='2019-06-17 16:54:43')>,
+     <CDNDepotManifest('Dota 2 VR', app_id=570, depot_id=313255, gid=706332602567268673, creation_time='2017-10-04 18:52:14')>,
+     <CDNDepotManifest('Dota 2 Vulkan Mac', app_id=570, depot_id=401538, gid=2223235822414824351, creation_time='2019-06-11 19:37:19')>]
+
+    >>> mycdn.get_manifests(570, filter_func=lambda depot_id, info: 'Dota 2 Content' in info['name'])
+    [<CDNDepotManifest('Dota 2 Content', app_id=570, depot_id=373301, gid=6397590570861788404, creation_time='2019-06-29 16:03:11')>,
+     <CDNDepotManifest('Dota 2 Content 2', app_id=570, depot_id=381451, gid=5769691971272474272, creation_time='2019-06-29 00:19:02')>,
+     <CDNDepotManifest('Dota 2 Content 3', app_id=570, depot_id=381452, gid=3194393866044592918, creation_time='2019-06-27 00:05:38')>,
+     <CDNDepotManifest('Dota 2 Content 4', app_id=570, depot_id=381453, gid=8005824150061180163, creation_time='2019-06-08 07:49:57')>,
+     <CDNDepotManifest('Dota 2 Content 5', app_id=570, depot_id=381454, gid=9003299908441378336, creation_time='2019-06-26 18:56:19')>,
+     <CDNDepotManifest('Dota 2 Content 6', app_id=570, depot_id=381455, gid=8000458746487720619, creation_time='2019-06-29 00:19:43')>]
+
+
+Listing files
+
+.. code:: python
+
+    >>> file_list = mycdn.iter_files(570)
+    >>> list(file_list)[:10]
+    [<CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\dungeon\\particles\\test_particle\\generic_attack_crit_blur_rope.vpcf_c', 2134)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\dungeon\\materials\\blends\\mud_brick_normal_psd_5cc4fe8b.vtex_c', 351444)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\hero_demo\\scripts\\vscripts\\la_spawn_enemy_at_target.lua', 1230)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\winter_2018\\particles\\dark_moon\\darkmoon_last_hit_effect_damage_flash_b.vpcf_c', 1386)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\dungeon\\scripts\\vscripts\\abilities\\siltbreaker_line_wave.lua', 3305)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\dungeon\\materials\\models\\heroes\\broodmother\\broodmother_body_poison.vmat_c', 10888)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota\\resource\\cursor\\workshop\\sltv_shaker_cursor_pack\\cursor_spell_default.ani', 4362)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\overthrow\\panorama\\images\\custom_game\\team_icons\\team_icon_tiger_01_png.vtex_c', 18340)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota\\resource\\cursor\\valve\\ti7\\cursor_attack_illegal.bmp', 4152)>,
+     <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota_addons\\winter_2018\\models\\creeps\\ice_biome\\undeadtusk\\undead_tuskskeleton01.vmdl_c', 13516)>
+
+Reading a file directly from SteamPipe
+
+.. code:: python
+
+    >>> file_list = mycdn.iter_files(570, r'game\dota\gameinfo.gi')
+    >>> myfile = next(file_list)
+    <CDNDepotFile(570, 373301, 6397590570861788404, 'game\\dota\\gameinfo.gi', 6808)>
+    >>> print(myfile.read(80).decode('utf-8'))
+    "GameInfo"
+    {
+            game            "Dota 2"
+            title           "Dota 2"
+
+            gamelogo 1
+            type            multiplayer_only
+    ...
+
+"""
 
 from zipfile import ZipFile
 from io import BytesIO
@@ -26,9 +108,33 @@ except ImportError:
     from backports import lzma
 
 def decrypt_manifest_gid_2(encrypted_gid, password):
+    """Decrypt manifest gid v2 bytes
+
+    :param encrypted_gid: encrypted gid v2 bytes
+    :type  encrypted_gid: bytes
+    :param password: encryption password
+    :type  password: byt
+    :return: manifest gid
+    :rtype: int
+    """
     return struct.unpack('<Q', symmetric_decrypt_ecb(encrypted_gid, password))[0]
 
 def get_content_servers_from_cs(cell_id, host='cs.steamcontent.com', port=80, num_servers=20, session=None):
+    """Get a list of CS servers from a single CS server
+
+    :param cell_id: location cell id
+    :type  cell_id: bytes
+    :param host: CS server host
+    :type  host: str
+    :param port: server port number
+    :type  port: int
+    :param num_servers: number of servers to return
+    :type  num_servers: int
+    :param session: requests Session instance
+    :type  session: :class:`requests.Session`
+    :return: list of CS servers
+    :rtype: :class:`list` [:class:`.ContentServer`]
+    """
     proto = 'https' if port == 443 else 'http'
 
     url = '%s://%s:%s/serverlist/%s/%s/' % (proto, host, port, cell_id, num_servers)
@@ -61,6 +167,15 @@ def get_content_servers_from_cs(cell_id, host='cs.steamcontent.com', port=80, nu
 
 
 def get_content_servers_from_webapi(cell_id, num_servers=20):
+    """Get a list of CS servers from Steam WebAPI
+
+    :param cell_id: location cell id
+    :type  cell_id: bytes
+    :param num_servers: number of servers to return
+    :type  num_servers: int
+    :return: list of CS servers
+    :rtype: class:`list` [:class:`.ContentServer`]
+    """
     params = {'cellid': cell_id, 'max_servers': num_servers}
     resp = webapi.get('IContentServerDirectoryService', 'GetServersForSteamPipe', params=params)
 
@@ -104,22 +219,28 @@ class ContentServer(object):
 
 class CDNClient(object):
     _LOG = logging.getLogger("CDNClient")
-    servers = deque()
+    servers = deque()  #: CS Server list
     _chunk_cache = LRUCache(20)
-    cell_id = 0
+    cell_id = 0  #: Cell ID to use, initialized from SteamClient instance
 
     def __init__(self, client):
-        self.steam = client
+        """CDNClient allows loading and reading of manifests for Steam apps are used
+        to list and download content
+
+        :param client: logged in SteamClient instance
+        :type  client: :class:`.SteamClient`
+        """
+        self.steam = client              #: SteamClient instance
         if self.steam:
             self.cell_id = self.steam.cell_id
 
         self.web = make_requests_session()
-        self.depot_keys = {}
-        self.manifests = {}
-        self.app_depots = {}
-        self.beta_passwords = {}
-        self.licensed_app_ids = set()
-        self.licensed_depot_ids = set()
+        self.depot_keys = {}             #: depot decryption keys
+        self.manifests = {}              #: CDNDepotManifest instances
+        self.app_depots = {}             #: app depot info
+        self.beta_passwords = {}         #: beta branch decryption keys
+        self.licensed_app_ids = set()    #: app_ids that the SteamClient instance has access to
+        self.licensed_depot_ids = set()  #: depot_ids that the SteamClient instance has access to
 
         if not self.servers:
             self.fetch_content_servers()
@@ -127,6 +248,7 @@ class CDNClient(object):
         self.load_licenses()
 
     def load_licenses(self):
+        """Read licenses from SteamClient instance, required for determining accessible content"""
         self.licensed_app_ids.clear()
         self.licensed_depot_ids.clear()
 
@@ -145,6 +267,11 @@ class CDNClient(object):
             self.licensed_depot_ids.update(info['depotids'].values())
 
     def fetch_content_servers(self, num_servers=20):
+        """Update CS server list
+
+        :param num_servers: numbers of CS server to fetch
+        :type  num_servers: int
+        """
         self.servers.clear()
 
         self._LOG.debug("Trying to fetch content servers from Steam API")
@@ -156,11 +283,25 @@ class CDNClient(object):
             raise ValueError("Failed to fetch content servers")
 
     def get_content_server(self, rotate=False):
+        """Get a CS server for content download
+
+        :param rotate: forcefully rotate server list and get a new server
+        :type  rotate: bool
+        """
         if rotate:
             self.servers.rotate(-1)
         return self.servers[0]
 
     def get_depot_key(self, app_id, depot_id):
+        """Get depot key, which is needed to decrypt files
+
+        :param app_id: app id
+        :type  app_id: int
+        :param depot_id: depot id
+        :type  depot_id: int
+        :return: returns decryption key
+        :rtype: bytes
+        """
         if (app_id, depot_id) not in self.depot_keys:
             msg = self.steam.get_depot_key(app_id, depot_id)
 
@@ -197,6 +338,17 @@ class CDNClient(object):
             server = self.get_content_server(rotate=True)
 
     def get_chunk(self, app_id, depot_id, chunk_id):
+        """Download a single content chunk
+
+        :param app_id: App ID
+        :type  app_id: int
+        :param depot_id: Depot ID
+        :type  depot_id: int
+        :param chunk_id: Chunk ID
+        :type  chunk_id: int
+        :returns: chunk data
+        :rtype: bytes
+        """
         if (depot_id, chunk_id) not in self._chunk_cache:
             resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id))
 
@@ -223,29 +375,68 @@ class CDNClient(object):
 
         return self._chunk_cache[(depot_id, chunk_id)]
 
-    def get_manifest(self, app_id, depot_id, manifest_id, decrypt=True):
-        if (app_id, depot_id, manifest_id) not in self.manifests:
-            resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_id))
+    def get_manifest(self, app_id, depot_id, manifest_gid, decrypt=True):
+        """Download a manifest file
+
+        :param app_id: App ID
+        :type  app_id: int
+        :param depot_id: Depot ID
+        :type  depot_id: int
+        :param manifest_gid: Manifest gid
+        :type  manifest_gid: int
+        :param decrypt: Decrypt manifest filenames
+        :type  decrypt: bool
+        :returns: manifest instance
+        :rtype: :class:`.CDNDepotManifest`
+        """
+        if (app_id, depot_id, manifest_gid) not in self.manifests:
+            resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
 
             if resp.ok:
                 manifest = CDNDepotManifest(self, app_id, resp.content)
                 if decrypt:
                     manifest.decrypt_filenames(self.get_depot_key(app_id, depot_id))
-                self.manifests[(app_id, depot_id, manifest_id)] = manifest
+                self.manifests[(app_id, depot_id, manifest_gid)] = manifest
 
-        return self.manifests[(app_id, depot_id, manifest_id)]
+        return self.manifests[(app_id, depot_id, manifest_gid)]
 
     def check_beta_password(self, app_id, password):
+        """Check branch beta password to unlock encrypted branches
+
+        :param app_id: App ID
+        :type  app_id: int
+        :param password: beta password
+        :type  password: str
+        :returns: result
+        :rtype: :class:`.EResult`
+        """
         resp = self.steam.send_job_and_wait(MsgProto(EMsg.ClientCheckAppBetaPassword),
                                             {'app_id': app_id, 'betapassword': password})
 
-        if resp.eresult != EResult.OK:
-            raise ValueError("Failed password check. %r" % EResult(resp.eresult))
+        if resp.eresult == EResult.OK:
+            self._LOG.debug("Unlocked following beta branches: %s",
+                            ', '.join(map(lambda x: x.betaname.lower(), resp.betapasswords)))
+            for entry in resp.betapasswords:
+                self.beta_passwords[(app_id, entry.betaname.lower())] = unhexlify(entry.betapassword)
+        else:
+            self._LOG.debug("App beta password check failed. %r" % EResult(resp.eresult))
 
-        for entry in resp.betapasswords:
-            self.beta_passwords[(app_id, entry.betaname.lower())] = unhexlify(entry.betapassword)
+        return EResult(resp.eresult)
 
     def get_manifests(self, app_id, branch='public', password=None, filter_func=None):
+        """Get a list of CDNDepotManifest for app
+
+        :param app_id: App ID
+        :type  app_id: int
+        :param branch: branch name
+        :type  branch: str
+        :param password: branch password for locked branches
+        :type  password: str
+        :param filter_func:
+            Function to filter depots. ``func(depot_id, depot_info)``
+        :returns: list of :class:`.CDNDepotManifest`
+        :rtype: :class:`list` [:class:`.CDNDepotManifest`]
+        """
         if app_id not in self.app_depots:
             self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
         depots = self.app_depots[app_id]
@@ -260,10 +451,17 @@ class CDNClient(object):
             if (app_id, branch) not in self.beta_passwords:
                 if not password:
                     raise ValueError("Branch %r requires a password" % branch)
-                self.check_beta_password(app_id, password)
 
-        def async_fetch_manifest(app_id, depot_id, manifest_id, name):
-            manifest = self.get_manifest(app_id, depot_id, manifest_id)
+                result = self.check_beta_password(app_id, password)
+
+                if result != EResult.OK:
+                    raise ValueError("Branch password is not valid. %r" % result)
+
+                if (app_id, branch) not in self.beta_passwords:
+                    raise ValueError("Incorrect password for branch %r" % branch)
+
+        def async_fetch_manifest(app_id, depot_id, manifest_gid, name):
+            manifest = self.get_manifest(app_id, depot_id, manifest_gid)
             manifest.name = name
             return manifest
 
@@ -337,11 +535,34 @@ class CDNClient(object):
         return manifests
 
     def iter_files(self, app_id, filename_filter=None, branch='public', password=None, filter_func=None):
+        """Like :meth:`.get_manifests` but returns a iterator that goes through all the files
+        in all the manifest.
+
+        :param app_id: App ID
+        :type  app_id: int
+        :param filename_filter: wildcard filter for file paths
+        :type  branch: str
+        :param branch: branch name
+        :type  branch: str
+        :param password: branch password for locked branches
+        :type  password: str
+        :param filter_func:
+            Function to filter depots. ``func(depot_id, depot_info)``
+        :returns: generator of of CDN files
+        :rtype: :class:`.CDNDepotFile`
+        """
         for manifest in self.get_manifests(app_id, branch, password, filter_func):
             for fp in manifest.iter_files(filename_filter):
                 yield fp
 
     def get_manifest_for_workshop_item(self, item_id):
+        """Get the manifest file for a worshop item that is hosted on SteamPipe
+
+        :param item_id: Workshop ID
+        :type  item_id: int
+        :returns: manifest instance
+        :rtype: :class:`.CDNDepotManifest`
+        """
         resp, error = self.steam.unified_messages.send_and_wait('PublishedFile.GetDetails#1', {
             'publishedfileids': [item_id],
             'includetags': False,
@@ -364,7 +585,7 @@ class CDNClient(object):
             raise ValueError("Failed getting workshop file info: %s" % repr(
                 EResult.Timeout if resp is None else EResult(wf.result)))
         elif not wf.hcontent_file:
-            raise ValueError("Workshop file is not on steampipe")
+            raise ValueError("Workshop file is not on SteamPipe")
 
         app_id = ws_app_id = wf.consumer_appid
 
@@ -377,6 +598,15 @@ class CDNDepotManifest(DepotManifest):
     name = None  #: set only by :meth:`CDNClient.get_manifests`
 
     def __init__(self, cdn_client, app_id, data):
+        """Holds manifest metadata and file list.
+
+        :param cdn_client: CDNClient instance
+        :type  cdn_client: :class:`.CDNClient`
+        :param app_id: App ID
+        :type  app_id: int
+        :param data: serialized manifest data
+        :type  data: bytes
+        """
         self.cdn_client = cdn_client
         self.app_id = app_id
         DepotManifest.__init__(self, data)
@@ -416,6 +646,13 @@ class CDNDepotManifest(DepotManifest):
 
 class CDNDepotFile(DepotFile):
     def __init__(self, manifest, file_mapping):
+        """File-like object proxy for content files located on SteamPipe
+
+        :param manifest: parrent manifest instance
+        :type  manifest: :class:`.CDNDepotManifest`
+        :param file_mapping: file mapping instance from manifest
+        :type  file_mapping: ContentManifestPayload.FileMapping
+        """
         if not isinstance(manifest, CDNDepotManifest):
             raise TypeError("Expected 'manifest' to be of type CDNDepotFile")
         if not isinstance(file_mapping, ContentManifestPayload.FileMapping):
@@ -433,24 +670,29 @@ class CDNDepotFile(DepotFile):
             self.manifest.app_id,
             self.manifest.depot_id,
             self.manifest.gid,
-            repr(self.filename),
+            repr(self.filename_raw),
             'is_directory=True' if self.is_directory else self.size,
             )
 
     @property
-    def name(self):
-        return self.filename
-
-    @property
     def seekable(self):
+        """:type: bool"""
         return self.is_file
 
     def tell(self):
+        """:type: int"""
         if not self.seekable:
             raise ValueError("This file is not seekable, probably because its directory or symlink")
         return self.offset
 
     def seek(self, offset, whence=0):
+        """Seen file
+
+        :param offset: file offset
+        :type  offset: int
+        :param whence: offset mode, see :meth:`io.IOBase.seek`
+        :type  whence: int
+        """
         if not self.seekable:
             raise ValueError("This file is not seekable, probably because its directory or symlink")
 
@@ -495,6 +737,13 @@ class CDNDepotFile(DepotFile):
         return line
 
     def read(self, length=-1):
+        """Read bytes from the file
+
+        :param length: number of bytes to read. Read the whole if not set
+        :type  length: int
+        :returns: file data
+        :rtype: bytes
+        """
         if length == -1:
             length = self.size - self.offset
         if length == 0 or self.offset >= self.size or self.size == 0:
@@ -530,6 +779,11 @@ class CDNDepotFile(DepotFile):
         return data
 
     def readline(self):
+        """Read a single line
+
+        :return: single file line
+        :rtype: bytes
+        """
         buf = b''
 
         for chunk in iter(lambda: self.read(256), b''):
@@ -545,4 +799,9 @@ class CDNDepotFile(DepotFile):
         return buf
 
     def readlines(self):
+        """Get file contents as list of lines
+
+        :return: list of lines
+        :rtype: :class:`list` [:class:`bytes`]
+        """
         return [line for line in self]

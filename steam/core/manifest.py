@@ -53,22 +53,27 @@ class DepotManifest(object):
 
     @property
     def depot_id(self):
+        """:type: int"""
         return self.metadata.depot_id
 
     @property
     def gid(self):
+        """:type: int"""
         return self.metadata.gid_manifest
 
     @property
     def creation_time(self):
+        """:type: int"""
         return self.metadata.creation_time
 
     @property
     def size_original(self):
+        """:type: int"""
         return self.metadata.cb_disk_original
 
     @property
     def size_compressed(self):
+        """:type: int"""
         return self.metadata.cb_disk_compressed
 
     def decrypt_filenames(self, depot_key):
@@ -176,7 +181,7 @@ class DepotManifest(object):
 
     def iter_files(self, pattern=None):
         """
-        :param pattern: unix shell wildcard pattern, see :module:`.fnmatch`
+        :param pattern: unix shell wildcard pattern, see :func:`.fnmatch`
         :type  pattern: str
         """
         for mapping in self.payload.mappings:
@@ -192,6 +197,7 @@ class DepotManifest(object):
 class DepotFile(object):
     def __init__(self, manifest, file_mapping):
         """Depot file
+
         :param manifest: depot manifest
         :type  manifest: :class:`.DepotManifest`
         :param file_mapping: depot file mapping instance
@@ -215,53 +221,56 @@ class DepotFile(object):
             )
 
     @property
-    def filename(self):
-        """
-        :returns: Filename with null terminator and whitespaces removed
-        :rtype: str
+    def filename_raw(self):
+        """Filename with null terminator and whitespaces removed
+
+        :type: str
         """
         return self.file_mapping.filename.rstrip('\x00 \n\t')
 
     @property
-    def filename_norm(self):
+    def filename(self):
+        """Filename matching the OS
+
+        :type: str
         """
-        :return: Return current OS compatible path
-        :rtype: str
-        """
-        return os.path.join(*self.filename.split('\\'))
+        return os.path.join(*self.filename_raw.split('\\'))
 
     @property
     def size(self):
-        """
-        :return: file size in bytes
-        :rtype: int
+        """File size in bytes
+
+        :type: int
         """
         return self.file_mapping.size
 
     @property
     def chunks(self):
-        """
-        :return: file size in bytes
-        :rtype: int
+        """File chunks instances
+
+        :type: :class:`list` [ContentManifestPayload.FileMapping.ChunkData]
         """
         return self.file_mapping.chunks
 
     @property
     def flags(self):
-        """
-        :returns: file flags
-        :rtype: :class:`.EDepotFileFlag`
+        """File flags
+
+        :type: :class:`.EDepotFileFlag`
         """
         return self.file_mapping.flags
 
     @property
     def is_directory(self):
+        """:type: bool"""
         return self.flags & EDepotFileFlag.Directory > 0
 
     @property
     def is_symlink(self):
+        """:type: bool"""
         return not not self.file_mapping.linktarget
 
     @property
     def is_file(self):
+        """:type: bool"""
         return not self.is_directory and not self.is_symlink
