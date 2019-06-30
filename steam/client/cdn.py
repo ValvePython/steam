@@ -175,7 +175,7 @@ def get_content_servers_from_webapi(cell_id, num_servers=20):
     :param num_servers: number of servers to return
     :type  num_servers: int
     :return: list of CS servers
-    :rtype: class:`list` [:class:`.ContentServer`]
+    :rtype: :class:`list` [:class:`.ContentServer`]
     """
     params = {'cellid': cell_id, 'max_servers': num_servers}
     resp = webapi.get('IContentServerDirectoryService', 'GetServersForSteamPipe', params=params)

@@ -11,13 +11,14 @@ A python module for interacting with various parts of Steam_.
 
 Supports Python ``2.7+`` and ``3.4+``.
 
-Key features
-============
+Features
+========
 
 * :doc:`SteamClient <api/steam.client>` - communication with the steam network based on ``gevent``
+* :doc:`CDNClient <api/steam.client.cdn>` - access to Steam content depots
 * :doc:`WebAuth <api/steam.webauth>` - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
 * :doc:`WebAPI <api/steam.webapi>` - simple API for Steam's Web API with automatic population of interfaces
-* :doc:`SteamAuthenticator <api/steam.guard>` - enable/disable/manage 2FA on account and generate codes
+* :doc:`SteamAuthenticator <api/steam.guard>` - enable/disable/manage two factor authentication for Steam accounts
 * :doc:`SteamID <api/steam.steamid>` - convert between the various ID representations with ease
 * :doc:`Master Server Query Protocol <api/steam.game_servers>` - query masters servers directly or via ``SteamClient``
 
@@ -38,4 +39,4 @@ Install latest version from PYPI::
 
 Install the current dev version from ``github``::
 
-    pip install git+https://github.com/ValvePython/steam
+    pip install git+https://github.com/ValvePython/steam#egg=steam

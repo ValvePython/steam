@@ -6,13 +6,14 @@ Supports Python ``2.7+`` and ``3.4+``.
 
 Documentation: http://steam.readthedocs.io/en/latest/
 
-Key features
-------------
+Features
+--------
 
 * `SteamClient <http://steam.readthedocs.io/en/latest/api/steam.client.html>`_ - communication with the steam network based on ``gevent``.
+* `CDNClient <http://steam.readthedocs.io/en/latest/api/steam.client.cdn.html>`_ - access to Steam content depots
 * `WebAuth <http://steam.readthedocs.io/en/latest/api/steam.webauth.html>`_ - authentication for access to ``store.steampowered.com`` and ``steamcommunity.com``
 * `WebAPI <http://steam.readthedocs.io/en/latest/api/steam.webapi.html>`_ - simple API for Steam's Web API with automatic population of interfaces
-* `SteamAuthenticator <http://steam.readthedocs.io/en/latest/api/steam.guard.html>`_ - enable/disable/manage 2FA on account and generate codes
+* `SteamAuthenticator <http://steam.readthedocs.io/en/latest/api/steam.guard.html>`_ - enable/disable/manage two factor authentication for Steam accounts
 * `SteamID <http://steam.readthedocs.io/en/latest/api/steam.steamid.html>`_  - convert between the various ID representations with ease
 * `Master Server Query Protocol <https://steam.readthedocs.io/en/latest/api/steam.game_servers.html>`_ - query masters servers directly or via ``SteamClient``
 
@@ -23,8 +24,8 @@ For questions, issues or general curiosity visit the repo at `https://github.com
 
 Like using the command line? Try `steamctl <https://github.com/ValvePython/steamctl>`_ tool
 
-Quick install
--------------
+Install
+-------
 
 For system specific details, see `Installation Details <http://steam.readthedocs.io/en/latest/install.html>`_.
 
@@ -38,7 +39,7 @@ Install the current dev version from ``github``
 
 .. code:: bash
 
-    pip install git+https://github.com/ValvePython/steam
+    pip install git+https://github.com/ValvePython/steam#egg=steam
 
 Vagrant
 -------
