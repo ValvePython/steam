@@ -83,7 +83,7 @@ class ExtendedMsgHdr:
 
 
 class MsgHdrProtoBuf:
-    _size = struct.calcsize("<II")
+    _size = _fullsize = struct.calcsize("<II")
     msg = EMsg.Invalid
 
     def __init__(self, data=None):

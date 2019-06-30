@@ -42,7 +42,7 @@ def get_cmsg(emsg):
     """Get protobuf for a given EMsg
 
     :param emsg: EMsg
-    :type emsg: :class:`steam.enums.emsg.EMsg`, :class:`int`
+    :type  emsg: :class:`steam.enums.emsg.EMsg`, :class:`int`
     :return: protobuf message
     """
     if not isinstance(emsg, EMsg):
@@ -60,7 +60,8 @@ def get_cmsg(emsg):
 
 class Msg(object):
     proto = False
-    body = '!!! NO BODY !!!'
+    body = '!!! Unknown message body !!!'  #: message instance
+    payload = None  #: Will contain body payload, if we fail to find correct message class
 
     def __init__(self, msg, data=None, extended=False):
         self.extended = extended
@@ -74,6 +75,8 @@ class Msg(object):
 
         if deserializer:
             self.body = deserializer(data)
+        else:
+            self.payload = data
 
     @property
     def msg(self):
@@ -124,12 +127,17 @@ class Msg(object):
         rows.append("---------------- body --")
         rows.append(body if body else "(empty)")
 
+        if self.payload:
+            rows.append("------------- payload --")
+            rows.append(repr(self.payload))
+
         return '\n'.join(rows)
 
 
 class MsgProto(object):
     proto = True
-    body = "!!! NO BODY !!!"
+    body = '!!! Unknown message body !!!'  #: protobuf message instance
+    payload = None  #: Will contain body payload, if we fail to find correct proto message
 
     def __init__(self, msg, data=None):
         self._header = MsgHdrProtoBuf(data)
@@ -141,16 +149,19 @@ class MsgProto(object):
             if proto:
                 self.body = proto()
             else:
-                self.body = '!! Can\'t resolve ServiceMethod: %s !!' % repr(self.header.target_job_name)
+                self.body = '!! Failed to resolve UM for: %s !!' % repr(self.header.target_job_name)
         else:
             proto = get_cmsg(msg)
 
         if proto:
             self.body = proto()
 
-            if data:
-                data = data[self._header._fullsize:]
+        if data:
+            data = data[self._header._fullsize:]
+            if proto:
                 self.body.ParseFromString(data)
+            else:
+                self.payload = data
 
     @property
     def msg(self):
@@ -192,6 +203,10 @@ class MsgProto(object):
         body = str(self.body).rstrip()
         rows.append("---------------- body --")
         rows.append(body if body else "(empty)")
+
+        if self.payload:
+            rows.append("------------- payload --")
+            rows.append(repr(self.payload))
 
         return '\n'.join(rows)
 
