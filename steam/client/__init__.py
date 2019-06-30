@@ -253,11 +253,12 @@ class SteamClient(CMClient, BuiltinBase):
     def wait_msg(self, event, timeout=None, raises=None):
         """Wait for a message, similiar to :meth:`.wait_event`
 
-        :param event: :class:`.EMsg' or job id
+        :param event: :class:`.EMsg` or job id
+        :type  event: :class:`.EMsg` or :class:`str`
         :param timeout: seconds to wait before timeout
-        :type timeout: :class:`int`
-        :param raises: On timeout when ``False` returns :class:`None`, else raise :class:`gevent.Timeout`
-        :type raises: :class:`bool`
+        :type  timeout: :class:`int`
+        :param raises: On timeout when ``False`` returns :class:`None`, else raise :class:`gevent.Timeout`
+        :type  raises: :class:`bool`
         :return: returns a message or :class:`None`
         :rtype: :class:`None`, or `proto message`
         :raises: ``gevent.Timeout``
@@ -268,7 +269,7 @@ class SteamClient(CMClient, BuiltinBase):
             return resp[0]
 
     def send(self, message, body_params=None):
-        """.. versionchanged:: 0.8.4
+        """
         Send a message to CM
 
         :param message: a message instance
@@ -285,7 +286,7 @@ class SteamClient(CMClient, BuiltinBase):
             CMClient.send(self, message)
 
     def send_job(self, message, body_params=None):
-        """.. versionchanged:: 0.8.4
+        """
         Send a message as a job
 
         .. note::
@@ -322,7 +323,7 @@ class SteamClient(CMClient, BuiltinBase):
         return "job_%d" % jobid
 
     def send_job_and_wait(self, message, body_params=None, timeout=None, raises=False):
-        """.. versionchanged:: 0.8.4
+        """
         Send a message as a job and wait for the response.
 
         .. note::
@@ -347,7 +348,7 @@ class SteamClient(CMClient, BuiltinBase):
         return response[0].body
 
     def send_message_and_wait(self, message, response_emsg, body_params=None, timeout=None, raises=False):
-        """.. versionchanged:: 0.8.4
+        """
         Send a message to CM and wait for a defined answer.
 
         :param message: a message instance

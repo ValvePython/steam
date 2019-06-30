@@ -108,7 +108,7 @@ class SteamLeaderboard(object):
         :type end: :class:`int`
         :param data_request: data being requested
         :type data_request: :class:`steam.enums.common.ELeaderboardDataRequest`
-        :param steam_ids: list of steam ids when using :prop:`.ELeaderboardDataRequest.Users`
+        :param steam_ids: list of steam ids when using :attr:`.ELeaderboardDataRequest.Users`
         :type steamids: :class:`list`
         :return: a list of entries, see ``CMsgClientLBSGetLBEntriesResponse``
         :rtype: :class:`list`
