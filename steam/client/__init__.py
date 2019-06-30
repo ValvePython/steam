@@ -513,7 +513,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='Individual', universe='Public')
-        message.body.protocol_version = 65579
+        message.body.protocol_version = 65580
         message.body.client_package_version = 1771
         message.body.client_os_type = EOSType.Windows10
         message.body.client_language = "english"
@@ -571,7 +571,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='AnonUser', universe='Public')
-        message.body.protocol_version = 65579
+        message.body.protocol_version = 65580
         self.send(message)
 
         resp = self.wait_msg(EMsg.ClientLogOnResponse, timeout=30)
