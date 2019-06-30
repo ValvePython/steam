@@ -11,4 +11,5 @@ core
     steam.core.cm
     steam.core.connection
     steam.core.crypto
+    steam.core.manifest
     steam.core.msg

@@ -22,6 +22,7 @@ install_requires = [
     'gevent>=1.2.0',
     'protobuf>=3.0.0',
     'gevent-eventemitter>=2.0',
+    'cachetools>=3.0.0',
 ]
 
 install_extras = {

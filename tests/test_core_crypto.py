@@ -54,6 +54,15 @@ class crypto_testcase(unittest.TestCase):
 
         self.assertEqual(message, dmessage)
 
+    def test_encryption_ecb(self):
+        message = b'My secret message'
+        key = b'9' * 32
+
+        cyphertext = crypto.symmetric_encrypt_ecb(message, key)
+        dmessage = crypto.symmetric_decrypt_ecb(cyphertext, key)
+
+        self.assertEqual(message, dmessage)
+
     def test_encryption_hmac(self):
         message = b'My secret message'
         key = b'9' * 32
