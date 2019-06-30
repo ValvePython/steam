@@ -1,4 +1,4 @@
-__version__ = "0.9.0"
+__version__ = "1.0.0-alpha1"
 __author__ = "Rossen Georgiev"
 
-version_info = tuple(map(int, __version__.split('.')))
+version_info = (1, 0, 0, 'alpha', 1)
