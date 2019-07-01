@@ -62,23 +62,30 @@ def get_cmsg(emsg):
 
 class Msg(object):
     proto = False
-    body = '!!! Unknown message body !!!'  #: message instance
+    body = None     #: message instance
     payload = None  #: Will contain body payload, if we fail to find correct message class
 
-    def __init__(self, msg, data=None, extended=False):
+    def __init__(self, msg, data=None, extended=False, parse=True):
         self.extended = extended
         self.header = ExtendedMsgHdr(data) if extended else MsgHdr(data)
         self.msg = msg
 
         if data:
-            data = data[self.header._size:]
+            self.payload = data[self.header._size:]
 
-        deserializer = get_struct(msg)
+        if parse:
+            self.parse()
 
-        if deserializer:
-            self.body = deserializer(data)
-        else:
-            self.payload = data
+    def parse(self):
+        """Parses :attr:`payload` into :attr:`body` instance"""
+        if self.body is None:
+            deserializer = get_struct(self.msg)
+
+            if deserializer:
+                self.body = deserializer(self.payload)
+                self.payload = None
+            else:
+                self.body = '!!! Failed to resolve message !!!'
 
     @property
     def msg(self):
@@ -116,7 +123,10 @@ class Msg(object):
             self.header.sessionID = value
 
     def __repr__(self):
-        return "<Msg %s>" % repr(self.msg)
+        return "<Msg %s%s>" % (
+                    repr(self.msg),
+                    ' (No Body)' if isinstance(self.body, str) else '',
+                    )
 
     def __str__(self):
         rows = ["Msg"]
@@ -138,32 +148,36 @@ class Msg(object):
 
 class MsgProto(object):
     proto = True
-    body = '!!! Unknown message body !!!'  #: protobuf message instance
+    body = None     #: protobuf message instance
     payload = None  #: Will contain body payload, if we fail to find correct proto message
 
-    def __init__(self, msg, data=None):
+    def __init__(self, msg, data=None, parse=True):
         self._header = MsgHdrProtoBuf(data)
         self.header = self._header.proto
         self.msg = msg
 
-        if msg in (EMsg.ServiceMethodResponse, EMsg.ServiceMethodSendToClient):
-            proto = get_um(self.header.target_job_name, response=True)
+        if data:
+            self.payload = data[self._header._fullsize:]
+
+        if parse:
+            self.parse()
+
+    def parse(self):
+        """Parses :attr:`payload` into :attr:`body` instance"""
+        if self.body is None:
+            if self.msg in (EMsg.ServiceMethod, EMsg.ServiceMethodResponse, EMsg.ServiceMethodSendToClient):
+                is_resp = False if self.msg == EMsg.ServiceMethod else True
+                proto = get_um(self.header.target_job_name, response=is_resp)
+            else:
+                proto = get_cmsg(self.msg)
+
             if proto:
                 self.body = proto()
+                if self.payload:
+                    self.body.ParseFromString(self.payload)
+                    self.payload = None
             else:
-                self.body = '!! Failed to resolve UM: %s !!' % repr(self.header.target_job_name)
-        else:
-            proto = get_cmsg(msg)
-
-        if proto:
-            self.body = proto()
-
-        if data:
-            data = data[self._header._fullsize:]
-            if proto:
-                self.body.ParseFromString(data)
-            else:
-                self.payload = data
+                self.body = '!!! Failed to resolve message !!!'
 
     @property
     def msg(self):
@@ -193,7 +207,10 @@ class MsgProto(object):
         self.header.client_sessionid = value
 
     def __repr__(self):
-        return "<MsgProto %s>" % repr(self.msg)
+        return "<MsgProto %s%s>" % (
+                    repr(self.msg),
+                    ' (No Body)' if isinstance(self.body, str) else '',
+                    )
 
     def __str__(self):
         rows = ["MsgProto %s" % repr(self.msg)]

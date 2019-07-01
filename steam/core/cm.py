@@ -247,6 +247,10 @@ class CMClient(EventEmitter):
         emsg = EMsg(clear_proto_bit(emsg_id))
 
         if not self.connected and emsg != EMsg.ClientLogOnResponse:
+            self._LOG.debug("Dropped unexpected message: %s (is_proto: %s)",
+                            repr(emsg),
+                            is_proto(emsg_id),
+                            )
             return
 
         if emsg in (EMsg.ChannelEncryptRequest,
@@ -254,13 +258,13 @@ class CMClient(EventEmitter):
                     EMsg.ChannelEncryptResult,
                     ):
 
-            msg = Msg(emsg, message)
+            msg = Msg(emsg, message, parse=False)
         else:
             try:
                 if is_proto(emsg_id):
-                    msg = MsgProto(emsg, message)
+                    msg = MsgProto(emsg, message, parse=False)
                 else:
-                    msg = Msg(emsg, message, extended=True)
+                    msg = Msg(emsg, message, extended=True, parse=False)
             except Exception as e:
                 self._LOG.fatal("Failed to deserialize message: %s (is_proto: %s)",
                                 repr(emsg),
@@ -268,6 +272,9 @@ class CMClient(EventEmitter):
                                 )
                 self._LOG.exception(e)
                 return
+
+        if self.count_listeners(emsg) or self.verbose_debug:
+            msg.parse()
 
         if self.verbose_debug:
             self._LOG.debug("Incoming: %s\n%s" % (repr(msg), str(msg)))

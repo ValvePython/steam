@@ -109,10 +109,15 @@ class SteamClient(CMClient, BuiltinBase):
             jobid = msg.header.targetJobID
 
         if jobid not in (-1, 18446744073709551615):
-            self.emit("job_%d" % jobid, msg)
+            jobid = "job_%d" % jobid
+            if msg.body is None and self.count_listeners(jobid):
+                msg.parse()
+            self.emit(jobid, msg)
 
         # emit UMs
-        if emsg in (EMsg.ServiceMethodResponse, EMsg.ServiceMethodSendToClient):
+        if emsg in (EMsg.ServiceMethod, EMsg.ServiceMethodResponse, EMsg.ServiceMethodSendToClient):
+            if msg.body is None and self.count_listeners(msg.header.target_job_name):
+                msg.parse()
             self.emit(msg.header.target_job_name, msg)
 
     def _bootstrap_cm_list_from_file(self):
