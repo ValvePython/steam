@@ -21,13 +21,14 @@ from getpass import getpass
 import logging
 import six
 
-from steam.core.crypto import sha1_hash
 from eventemitter import EventEmitter
-from steam.enums.emsg import EMsg
 from steam.enums import EResult, EOSType, EPersonaState
-from steam.core.msg import MsgProto
+from steam.enums.emsg import EMsg
 from steam.core.cm import CMClient
+from steam.core.msg import MsgProto
+from steam.core.crypto import sha1_hash
 from steam.steamid import SteamID
+from steam.exceptions import SteamError
 from steam.client.builtins import BuiltinBase
 from steam.util import ip_from_int, ip_to_int, proto_fill_from_dict
 
@@ -59,7 +60,6 @@ class SteamClient(CMClient, BuiltinBase):
 
         self._LOG = logging.getLogger("SteamClient")
         # register listners
-        self.on(None, self._handle_jobs)
         self.on(self.EVENT_DISCONNECTED, self._handle_disconnect)
         self.on(self.EVENT_RECONNECT, self._handle_disconnect)
         self.on(EMsg.ClientNewLoginKey, self._handle_login_key)
@@ -93,6 +93,27 @@ class SteamClient(CMClient, BuiltinBase):
         """Close connection, see :meth:`.CMClient.disconnect`"""
         self.logged_on = False
         CMClient.disconnect(self, *args, **kwargs)
+
+    def _parse_message(self, message):
+        result = CMClient._parse_message(self, message)
+
+        if result is None:
+            return
+
+        emsg, msg = result
+
+        # emit job events
+        if msg.proto:
+            jobid = msg.header.jobid_target
+        else:
+            jobid = msg.header.targetJobID
+
+        if jobid not in (-1, 18446744073709551615):
+            self.emit("job_%d" % jobid, msg)
+
+        # emit UMs
+        if emsg in (EMsg.ServiceMethodResponse, EMsg.ServiceMethodSendToClient):
+            self.emit(msg.header.target_job_name, msg)
 
     def _bootstrap_cm_list_from_file(self):
         if not self.credential_location or self.cm_servers.last_updated > 0:
@@ -153,18 +174,6 @@ class SteamClient(CMClient, BuiltinBase):
                 self._LOG.debug("Saved CM servers to %s" % repr(filepath))
             except IOError as e:
                 self._LOG.error("saving %s: %s" % (filepath, str(e)))
-
-    def _handle_jobs(self, event, *args):
-        if isinstance(event, EMsg):
-            message = args[0]
-
-            if message.proto:
-                jobid = message.header.jobid_target
-            else:
-                jobid = message.header.targetJobID
-
-            if jobid not in (-1, 18446744073709551615):
-                self.emit("job_%d" % jobid, *args)
 
     def _handle_disconnect(self, *args):
         self.logged_on = False
@@ -514,7 +523,7 @@ class SteamClient(CMClient, BuiltinBase):
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='Individual', universe='Public')
         message.body.protocol_version = 65580
-        message.body.client_package_version = 1771
+        message.body.client_package_version = 1561159470
         message.body.client_os_type = EOSType.Windows10
         message.body.client_language = "english"
         message.body.should_remember_password = True
@@ -571,6 +580,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         message = MsgProto(EMsg.ClientLogon)
         message.header.steamid = SteamID(type='AnonUser', universe='Public')
+        message.body.client_package_version = 1561159470
         message.body.protocol_version = 65580
         self.send(message)
 
@@ -669,4 +679,3 @@ class SteamClient(CMClient, BuiltinBase):
             result = self.login(username, password, None, auth_code, two_factor_code)
 
         return result
-

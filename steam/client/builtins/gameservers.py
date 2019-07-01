@@ -36,6 +36,7 @@ Filter code                 What it does
 """
 from steam.steamid import SteamID
 from steam.core.msg import MsgProto
+from steam.enums import EResult
 from steam.enums.emsg import EMsg
 from steam.util import ip_to_int, ip_from_int, proto_to_dict
 
@@ -50,7 +51,6 @@ class GameServers(object):
 class SteamGameServers(object):
     def __init__(self, steam):
         self._s = steam
-        self._um = steam.unified_messages
 
     def query(self, filter_text, max_servers=10, timeout=30, **kw):
         r"""
@@ -117,7 +117,7 @@ class SteamGameServers(object):
         :type  timeout: int
         :returns: list of servers, see below. (``None`` is returned steam doesn't respond)
         :rtype: :class:`list`, :class:`None`
-        :raises: :class:`.UnifiedMessageError`
+        :raises: :class:`.SteamError`
 
 
         Sample response:
@@ -143,20 +143,20 @@ class SteamGameServers(object):
               'version': '1.35.4.0'}
             ]
         """
-        resp, error = self._um.send_and_wait("GameServers.GetServerList#1",
-                                             {
-                                              "filter": filter_text,
-                                              "limit": max_servers,
-                                             },
-                                             timeout=20,
-                                             )
+        resp = self._s.send_um_and_wait("GameServers.GetServerList#1",
+                                        {
+                                         "filter": filter_text,
+                                         "limit": max_servers,
+                                        },
+                                        timeout=20,
+                                        )
 
-        if error:
-            raise error
         if resp is None:
             return None
+        if resp.header.eresult != EResult.OK:
+            raise SteamError(resp.header.error_message, resp.header.eresult)
 
-        resp = proto_to_dict(resp)
+        resp = proto_to_dict(resp.body)
 
         if not resp:
             return []
@@ -175,7 +175,7 @@ class SteamGameServers(object):
         :type  timeout: int
         :return: map of ips to steamids
         :rtype: dict
-        :raises: :class:`.UnifiedMessageError`
+        :raises: :class:`.SteamError`
 
         Sample response:
 
@@ -183,16 +183,16 @@ class SteamGameServers(object):
 
             {SteamID(id=123456, type='AnonGameServer', universe='Public', instance=1234): '1.2.3.4:27060'}
         """
-        resp, error = self._um.send_and_wait("GameServers.GetServerIPsBySteamID#1",
-                                             {"server_steamids": server_steam_ids},
-                                             timeout=timeout,
-                                             )
-        if error:
-            raise error
+        resp = self._s.send_um_and_wait("GameServers.GetServerIPsBySteamID#1",
+                                        {"server_steamids": server_steam_ids},
+                                        timeout=timeout,
+                                        )
         if resp is None:
             return None
+        if resp.header.eresult != EResult.OK:
+            raise SteamError(resp.header.error_message, resp.header.eresult)
 
-        return {SteamID(server.steamid): server.addr for server in resp.servers}
+        return {SteamID(server.steamid): server.addr for server in resp.body.servers}
 
     def get_steamids_from_ips(self, server_ips, timeout=30):
         """Resolve SteamIDs from IPs
@@ -203,7 +203,7 @@ class SteamGameServers(object):
         :type  timeout: int
         :return: map of steamids to ips
         :rtype: dict
-        :raises: :class:`.UnifiedMessageError`
+        :raises: :class:`.SteamError`
 
         Sample response:
 
@@ -211,14 +211,13 @@ class SteamGameServers(object):
 
             {'1.2.3.4:27060': SteamID(id=123456, type='AnonGameServer', universe='Public', instance=1234)}
         """
-        resp, error = self._um.send_and_wait("GameServers.GetServerSteamIDsByIP#1",
-                                             {"server_ips": server_ips},
-                                             timeout=timeout,
-                                             )
-
-        if error:
-            raise error
+        resp = self._s.send_um_and_wait("GameServers.GetServerSteamIDsByIP#1",
+                                        {"server_ips": server_ips},
+                                        timeout=timeout,
+                                        )
         if resp is None:
             return None
+        if resp.header.eresult != EResult.OK:
+            raise SteamError(resp.header.error_message, resp.header.eresult)
 
-        return {server.addr: SteamID(server.steamid) for server in resp.servers}
+        return {server.addr: SteamID(server.steamid) for server in resp.body.servers}

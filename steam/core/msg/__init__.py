@@ -2,7 +2,9 @@ import fnmatch
 from steam.core.msg.unified import get_um
 from steam.core.msg.structs import get_struct
 from steam.core.msg.headers import MsgHdr, ExtendedMsgHdr, MsgHdrProtoBuf, GCMsgHdr, GCMsgHdrProto
+from steam.enums import EResult
 from steam.enums.emsg import EMsg
+from steam.exceptions import SteamError
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2
@@ -144,12 +146,12 @@ class MsgProto(object):
         self.header = self._header.proto
         self.msg = msg
 
-        if msg == EMsg.ServiceMethod:
-            proto = get_um(self.header.target_job_name)
+        if msg in (EMsg.ServiceMethodResponse, EMsg.ServiceMethodSendToClient):
+            proto = get_um(self.header.target_job_name, response=True)
             if proto:
                 self.body = proto()
             else:
-                self.body = '!! Failed to resolve UM for: %s !!' % repr(self.header.target_job_name)
+                self.body = '!! Failed to resolve UM: %s !!' % repr(self.header.target_job_name)
         else:
             proto = get_cmsg(msg)
 

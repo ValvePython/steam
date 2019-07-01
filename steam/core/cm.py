@@ -263,7 +263,7 @@ class CMClient(EventEmitter):
                     msg = Msg(emsg, message, extended=True)
             except Exception as e:
                 self._LOG.fatal("Failed to deserialize message: %s (is_proto: %s)",
-                                str(emsg),
+                                repr(emsg),
                                 is_proto(emsg_id)
                                 )
                 self._LOG.exception(e)
@@ -275,6 +275,7 @@ class CMClient(EventEmitter):
             self._LOG.debug("Incoming: %s", repr(msg))
 
         self.emit(emsg, msg)
+        return emsg, msg
 
     def __handle_encrypt_request(self, req):
         self._LOG.debug("Securing channel")

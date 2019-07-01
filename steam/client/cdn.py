@@ -562,8 +562,10 @@ class CDNClient(object):
         :type  item_id: int
         :returns: manifest instance
         :rtype: :class:`.CDNDepotManifest`
+        :raises: steam error
+        :rtype: :class:`.SteamError`
         """
-        resp, error = self.steam.unified_messages.send_and_wait('PublishedFile.GetDetails#1', {
+        resp = self.steam.send_um_and_wait('PublishedFile.GetDetails#1', {
             'publishedfileids': [item_id],
             'includetags': False,
             'includeadditionalpreviews': False,
@@ -576,10 +578,10 @@ class CDNClient(object):
             'language': 0
         }, timeout=7)
 
-        if error:
-            raise error
+        if resp.header.eresult != EResult.OK:
+            raise SteamError(resp.header.error_message, resp.header.eresult)
 
-        wf = None if resp is None else resp.publishedfiledetails[0]
+        wf = None if resp is None else resp.body.publishedfiledetails[0]
 
         if wf is None or wf.result != EResult.OK:
             raise ValueError("Failed getting workshop file info: %s" % repr(

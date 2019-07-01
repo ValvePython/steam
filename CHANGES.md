@@ -6,6 +6,8 @@ This release brings some breaking changes
 
 - Removed imports from 'steam' namespace
 - Replaced builtin CM server list with automatic discovery via WebAPI or DNS
+- Removed `SteamClient.unifed_messages`
+- UM/ServiceMethods are now handled in the `SteamClient` instance. See `SteamClient.send_um()`
 - Removed `steam.client.mixins` package
 - Renamed `medium` param to `backend` on `SteamAuthenticator`
 - Added `WebAuth.cli_login()`, handles all steps of the login process
@@ -14,11 +16,9 @@ This release brings some breaking changes
 - Added `rich_presence` property to `SteamUser`
 - Fixed `create_emergency_codes()` not returning codes
 - Fixed `validate_phone_number()` returning no data
-- Added protos for new chat via unified messages
 - Updated protobufs
 - Removed `SteamClient.change_email()`
 - Removed `SteamClient.create_account()`
-- `SteanClient.unified_messages` now expose errors by returning a tuple `(result, error)`
 - `get_product_info()` now replaces invalid unicode chars
 - Updated `SteamID.is_valid`
 - Updated various Enums

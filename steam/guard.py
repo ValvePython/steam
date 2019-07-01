@@ -142,15 +142,16 @@ class SteamAuthenticator(object):
             if not backend.logged_on:
                 raise SteamAuthenticatorError("SteamClient instance not logged in")
 
-            resp, error = backend.unified_messages.send_and_wait("TwoFactor.%s#1" % action,
-                                                                 params, timeout=10)
+            resp = backend.send_um_and_wait("TwoFactor.%s#1" % action,
+                                            params, timeout=10)
 
-            if error:
-                raise SteamAuthenticatorError("Failed: %s" % str(error))
             if resp is None:
                 raise SteamAuthenticatorError("Failed. Request timeout")
+            if resp.header.eresult != EResult.OK:
+                raise SteamAuthenticatorError("Failed: %s (%s)" % str(resp.header.error_message,
+                                                                      repr(resp.header.eresult)))
 
-            resp = proto_to_dict(resp)
+            resp = proto_to_dict(resp.body)
 
             if action == 'AddAuthenticator':
                 for key in ['shared_secret', 'identity_secret', 'secret_1']:
