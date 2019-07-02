@@ -26,3 +26,4 @@ This release brings some breaking changes
 - Messages now have a payload property set when the body cannot be parsed
 - Updated protocol version to 65580
 - Added `CDNClient`
+- Update `SteamClient` to use new chat mode

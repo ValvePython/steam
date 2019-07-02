@@ -112,8 +112,17 @@ class SteamUser(object):
         :param message: message to send
         :type message: str
         """
-        self._steam.send(MsgProto(EMsg.ClientFriendMsg), {
-            'steamid': self.steam_id,
-            'chat_entry_type': EChatEntryType.ChatMsg,
-            'message': message.encode('utf8'),
-            })
+        # new chat
+        if self._steam.chat_mode == 2:
+            self._steam.send_um("FriendMessages.SendMessage#1", {
+                'steamid': self.steam_id,
+                'message': message,
+                'chat_entry_type': EChatEntryType.ChatMsg,
+                })
+        # old chat
+        else:
+            self._steam.send(MsgProto(EMsg.ClientFriendMsg), {
+                'steamid': self.steam_id,
+                'chat_entry_type': EChatEntryType.ChatMsg,
+                'message': message.encode('utf8'),
+                })

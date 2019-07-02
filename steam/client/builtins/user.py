@@ -28,11 +28,19 @@ class User(object):
         self.on(self.EVENT_LOGGED_ON, self.__handle_set_persona)
         self.on(EMsg.ClientPersonaState, self.__handle_persona_state)
         self.on(EMsg.ClientFriendMsgIncoming, self.__handle_message_incoming)
+        self.on("FriendMessagesClient.IncomingMessage#1", self.__handle_message_incoming2)
 
     def __handle_message_incoming(self, msg):
+        # old chat
         if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
             user = self.get_user(msg.body.steamid_from)
             self.emit("chat_message", user, msg.body.message.decode('utf-8'))
+
+    def __handle_message_incoming2(self, msg):
+        # new chat
+        if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
+            user = self.get_user(msg.body.steamid_friend)
+            self.emit("chat_message", user, msg.body.message)
 
     def __handle_disconnect(self):
         self.user = None
