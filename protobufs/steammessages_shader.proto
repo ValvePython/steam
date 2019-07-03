@@ -41,6 +41,7 @@ message CShader_GetBucketManifest_Request {
 message CShader_GetBucketManifest_Response {
 	optional uint64 manifestid = 1;
 	optional uint32 depotsize = 2;
+	optional uint64 bucketid = 3;
 }
 
 service Shader {

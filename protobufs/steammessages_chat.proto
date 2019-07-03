@@ -129,6 +129,8 @@ message CChatRoomState {
 	repeated uint32 members_in_voice = 4;
 	optional uint32 time_last_message = 5;
 	optional uint32 sort_order = 6;
+	optional string last_message = 7;
+	optional uint32 accountid_last_message = 8;
 }
 
 message CChatRoomGroupState {
@@ -147,6 +149,7 @@ message CUserChatRoomState {
 	optional .EChatRoomNotificationLevel mobile_notification_level = 5 [default = k_EChatroomNotificationLevel_Invalid];
 	optional uint32 time_last_mention = 6;
 	optional bool unread_indicator_muted = 7 [default = false];
+	optional uint32 time_first_unread = 8;
 }
 
 message CUserChatRoomGroupState {

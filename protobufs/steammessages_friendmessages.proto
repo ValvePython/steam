@@ -29,6 +29,7 @@ message CFriendMessages_GetRecentMessages_Response {
 
 message CFriendsMessages_GetActiveMessageSessions_Request {
 	optional uint32 lastmessage_since = 1 [(description) = "return only session information where a chat message has been sent since this time (for polling)"];
+	optional bool only_sessions_with_messages = 2 [(description) = "If non-zero, return only message sessions that have messages since our message cutoff. If zero, we return all active sessions."];
 }
 
 message CFriendsMessages_GetActiveMessageSessions_Response {

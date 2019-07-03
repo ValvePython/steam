@@ -537,9 +537,9 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.chat_mode = self.chat_mode
 
         if login_id is None:
-            message.body.obfustucated_private_ip = ip_to_int(self.connection.local_address) ^ 0xF00DBAAD
+            message.body.obfuscated_private_ip.v4 = ip_to_int(self.connection.local_address) ^ 0xF00DBAAD
         else:
-            message.body.obfustucated_private_ip = login_id
+            message.body.obfuscated_private_ip.v4 = login_id
 
         message.body.account_name = username
 

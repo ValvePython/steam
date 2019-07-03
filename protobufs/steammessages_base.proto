@@ -2,7 +2,7 @@ syntax = "proto2";
 import "google/protobuf/descriptor.proto";
 
 option optimize_for = SPEED;
-option py_generic_services = false;
+option py_generic_services = true;
 
 extend .google.protobuf.MessageOptions {
 	optional int32 msgpool_soft_limit = 50000 [default = 32];
@@ -15,6 +15,42 @@ extend .google.protobuf.FileOptions {
 
 extend .google.protobuf.FieldOptions {
 	optional bool php_output_always_number = 50020 [default = false];
+}
+
+enum EProtoClanEventType {
+	k_EClanOtherEvent = 1;
+	k_EClanGameEvent = 2;
+	k_EClanPartyEvent = 3;
+	k_EClanMeetingEvent = 4;
+	k_EClanSpecialCauseEvent = 5;
+	k_EClanMusicAndArtsEvent = 6;
+	k_EClanSportsEvent = 7;
+	k_EClanTripEvent = 8;
+	k_EClanChatEvent = 9;
+	k_EClanGameReleaseEvent = 10;
+	k_EClanBroadcastEvent = 11;
+	k_EClanSmallUpdateEvent = 12;
+	k_EClanPreAnnounceMajorUpdateEvent = 13;
+	k_EClanMajorUpdateEvent = 14;
+	k_EClanDLCReleaseEvent = 15;
+	k_EClanFutureReleaseEvent = 16;
+	k_EClanESportTournamentStreamEvent = 17;
+	k_EClanDevStreamEvent = 18;
+	k_EClanFamousStreamEvent = 19;
+	k_EClanGameSalesEvent = 20;
+	k_EClanGameItemSalesEvent = 21;
+	k_EClanInGameBonusXPEvent = 22;
+	k_EClanInGameLootEvent = 23;
+	k_EClanInGamePerksEvent = 24;
+	k_EClanInGameChallengeEvent = 25;
+	k_EClanInGameContestEvent = 26;
+	k_EClanIRLEvent = 27;
+	k_EClanNewsEvent = 28;
+	k_EClanBetaReleaseEvent = 29;
+	k_EClanInGameContentReleaseEvent = 30;
+	k_EClanFreeTrial = 31;
+	k_EClanSeasonRelease = 32;
+	k_EClanSeasonUpdate = 33;
 }
 
 message CMsgIPAddress {
@@ -137,6 +173,7 @@ message CClanEventUserNewsTuple {
 	optional uint32 type = 7;
 	optional uint32 clamp_range_slot = 8;
 	optional uint32 appid = 9;
+	optional uint32 rtime32_last_modified = 10;
 }
 
 message CClanMatchEventByRange {
@@ -144,5 +181,47 @@ message CClanMatchEventByRange {
 	optional uint32 rtime_after = 2;
 	optional uint32 qualified = 3;
 	repeated .CClanEventUserNewsTuple events = 4;
+}
+
+message CCommunity_ClanAnnouncementInfo {
+	optional uint64 gid = 1;
+	optional uint64 clanid = 2;
+	optional uint64 posterid = 3;
+	optional string headline = 4;
+	optional uint32 posttime = 5;
+	optional uint32 updatetime = 6;
+	optional string body = 7;
+	optional int32 commentcount = 8;
+	repeated string tags = 9;
+	optional int32 language = 10;
+	optional bool hidden = 11;
+	optional fixed64 forum_topic_id = 12;
+}
+
+message CClanEventData {
+	optional fixed64 gid = 1;
+	optional fixed64 clan_steamid = 2;
+	optional string event_name = 3;
+	optional .EProtoClanEventType event_type = 4 [default = k_EClanOtherEvent];
+	optional uint32 appid = 5;
+	optional string server_address = 6;
+	optional string server_password = 7;
+	optional uint32 rtime32_start_time = 8;
+	optional uint32 rtime32_end_time = 9;
+	optional int32 comment_count = 10;
+	optional fixed64 creator_steamid = 11;
+	optional fixed64 last_update_steamid = 12;
+	optional string event_notes = 13;
+	optional string jsondata = 14;
+	optional .CCommunity_ClanAnnouncementInfo announcement_body = 15;
+	optional bool published = 16;
+	optional bool hidden = 17;
+	optional uint32 rtime32_visibility_start = 18;
+	optional uint32 rtime32_visibility_end = 19;
+	optional uint32 broadcaster_accountid = 20;
+	optional uint32 follower_count = 21;
+	optional uint32 ignore_count = 22;
+	optional fixed64 forum_topic_id = 23;
+	optional uint32 rtime32_last_modified = 24;
 }
 

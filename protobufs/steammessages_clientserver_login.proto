@@ -16,9 +16,17 @@ message CMsgClientServerTimestampResponse {
 	optional uint64 server_timestamp_ms = 2;
 }
 
+message CMsgClientSecret {
+	optional uint32 version = 1;
+	optional uint32 appid = 2;
+	optional uint32 deviceid = 3;
+	optional fixed64 nonce = 4;
+	optional bytes hmac = 5;
+}
+
 message CMsgClientLogon {
 	optional uint32 protocol_version = 1;
-	optional uint32 obfustucated_private_ip = 2;
+	optional uint32 deprecated_obfustucated_private_ip = 2;
 	optional uint32 cell_id = 3;
 	optional uint32 last_session_id = 4;
 	optional uint32 client_package_version = 5;
@@ -27,9 +35,11 @@ message CMsgClientLogon {
 	optional bool should_remember_password = 8 [default = false];
 	optional string wine_version = 9;
 	optional uint32 ping_ms_from_cell_search = 10;
-	optional uint32 public_ip = 20;
+	optional .CMsgIPAddress obfuscated_private_ip = 11;
+	optional uint32 deprecated_public_ip = 20;
 	optional uint32 qos_level = 21;
 	optional fixed64 client_supplied_steam_id = 22;
+	optional .CMsgIPAddress public_ip = 23;
 	optional bytes machine_id = 30;
 	optional uint32 launcher_type = 31 [default = 0];
 	optional uint32 ui_mode = 32 [default = 0];
@@ -66,13 +76,14 @@ message CMsgClientLogon {
 	optional bool supports_rate_limit_response = 102;
 	optional string web_logon_nonce = 103;
 	optional int32 priority_reason = 104;
+	optional .CMsgClientSecret embedded_client_secret = 105;
 }
 
 message CMsgClientLogonResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional int32 out_of_game_heartbeat_seconds = 2;
 	optional int32 in_game_heartbeat_seconds = 3;
-	optional uint32 public_ip = 4;
+	optional uint32 deprecated_public_ip = 4;
 	optional fixed32 rtime32_server_time = 5;
 	optional uint32 account_flags = 6;
 	optional uint32 cell_id = 7;
@@ -83,6 +94,7 @@ message CMsgClientLogonResponse {
 	optional uint32 cell_id_ping_threshold = 12;
 	optional bool use_pics = 13;
 	optional string vanity_url = 14;
+	optional .CMsgIPAddress public_ip = 15;
 	optional fixed64 client_supplied_steamid = 20;
 	optional string ip_country_code = 21;
 	optional bytes parental_settings = 22;
@@ -133,5 +145,13 @@ message CMsgClientAccountInfo {
 	optional uint32 two_factor_state = 17;
 	optional bool is_phone_identifying = 18;
 	optional bool is_phone_needing_reverify = 19;
+}
+
+message CMsgClientChallengeRequest {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgClientChallengeResponse {
+	optional fixed64 challenge = 1;
 }
 

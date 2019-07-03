@@ -5,6 +5,13 @@ import "encrypted_app_ticket.proto";
 option optimize_for = SPEED;
 option py_generic_services = false;
 
+enum EMMSLobbyStatus {
+	k_EMMSLobbyStatusInvalid = 0;
+	k_EMMSLobbyStatusExists = 1;
+	k_EMMSLobbyStatusDoesNotExist = 2;
+	k_EMMSLobbyStatusNotAMember = 3;
+}
+
 message CMsgClientUDSP2PSessionStarted {
 	optional fixed64 steamid_remote = 1;
 	optional int32 appid = 2;
@@ -153,6 +160,7 @@ message CMsgClientGamesPlayed {
 		optional uint32 total_non_steam_controller_count = 19 [default = 0];
 		optional uint64 controller_workshop_file_id = 20 [default = 0];
 		optional uint32 launch_source = 21 [default = 0];
+		optional uint32 vr_hmd_runtime = 22;
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
@@ -297,16 +305,6 @@ message CMsgClientIsLimitedAccount {
 	optional bool bis_limited_account_allowed_to_invite_friends = 4;
 }
 
-message CMsgClientServerList {
-	message Server {
-		optional uint32 server_type = 1;
-		optional uint32 server_ip = 2;
-		optional uint32 server_port = 3;
-	}
-
-	repeated .CMsgClientServerList.Server servers = 1;
-}
-
 message CMsgClientRequestedClientStats {
 	message StatsToSend {
 		optional uint32 client_stat = 1;
@@ -327,6 +325,13 @@ message CMsgClientStat2 {
 	}
 
 	repeated .CMsgClientStat2.StatDetail stat_detail = 1;
+}
+
+message CMsgClientMMSSetRatelimitPolicyOnClient {
+	optional uint32 app_id = 1;
+	optional bool enable_rate_limits = 2;
+	optional int32 seconds_per_message = 3;
+	optional int32 milliseconds_per_data_update = 4;
 }
 
 message CMsgClientMMSCreateLobby {
@@ -451,6 +456,7 @@ message CMsgClientMMSLobbyData {
 	optional bytes metadata = 8;
 	repeated .CMsgClientMMSLobbyData.Member members = 9;
 	optional uint32 lobby_cellid = 10;
+	optional bool owner_should_accept_changes = 11;
 }
 
 message CMsgClientMMSSendLobbyChatMsg {
@@ -521,10 +527,24 @@ message CMsgClientMMSInviteToLobby {
 	optional fixed64 steam_id_user_invited = 3;
 }
 
+message CMsgClientMMSGetLobbyStatus {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional bool claim_membership = 3;
+	optional bool claim_ownership = 4;
+}
+
+message CMsgClientMMSGetLobbyStatusResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional .EMMSLobbyStatus lobby_status = 3 [default = k_EMMSLobbyStatusInvalid];
+}
+
 message CMsgClientInviteToGame {
 	optional fixed64 steam_id_dest = 1;
 	optional fixed64 steam_id_src = 2;
 	optional string connect_string = 3;
+	optional string remote_play = 4;
 }
 
 message CMsgClientChatInvite {

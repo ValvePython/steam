@@ -104,6 +104,7 @@ message CMsgClientUCMUpdatePublishedFile {
 	repeated .CMsgClientUCMUpdatePublishedFile.AdditionalPreview previews = 25;
 	repeated int32 previews_to_remove = 26;
 	optional bool clear_in_progress = 27;
+	optional bool remove_all_kvtags = 28;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {
@@ -512,6 +513,7 @@ message CMsgClientUpdateAppJobReport {
 	optional uint64 total_bytes_legacy = 19;
 	optional uint64 total_bytes_patched = 20;
 	optional uint64 total_bytes_saved = 21;
+	optional uint32 cell_id = 22;
 }
 
 message CMsgClientDPContentStatsReport {
@@ -989,13 +991,13 @@ message CMsgClientFriendUserStatusPublished {
 	optional string status_text = 3;
 }
 
-message CMsgClientServiceMethod {
+message CMsgClientServiceMethodLegacy {
 	optional string method_name = 1;
 	optional bytes serialized_method = 2;
 	optional bool is_notification = 3;
 }
 
-message CMsgClientServiceMethodResponse {
+message CMsgClientServiceMethodLegacyResponse {
 	optional string method_name = 1;
 	optional bytes serialized_method_response = 2;
 }
