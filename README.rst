@@ -1,4 +1,4 @@
-|pypi| |license| |coverage| |scru| |master_build| |docs|
+|pypi| |latest| |pypipy| |license| |coverage| |scru| |master_build| |docs|
 
 A python module for interacting with various parts of Steam_.
 
@@ -86,9 +86,16 @@ IRC: irc.gamesurge.net / #opensteamworks
 
 .. _Steam: https://store.steampowered.com/
 
-.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?style=flat&label=stable
+.. |pypi| image:: https://img.shields.io/github/tag/valvepython/steam.svg?label=release&color=green&logo=steam
     :target: https://pypi.python.org/pypi/steam
     :alt: Latest version released on PyPi
+
+.. |latest| image:: https://img.shields.io/github/tag-pre/valvepython/steam.svg?label=latest&logo=steam 
+   :target: https://github.com/ValvePython/steam/releases
+   :alt: GitHub Releases
+    
+.. |pypipy| image:: https://img.shields.io/pypi/pyversions/steam.svg?label=%20&logo=python&logoColor=white 
+    :alt: PyPI - Python Version
 
 .. |license| image:: https://img.shields.io/pypi/l/steam.svg?style=flat&label=license
     :target: https://pypi.python.org/pypi/steam
