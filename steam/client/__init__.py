@@ -475,9 +475,13 @@ class SteamClient(CMClient, BuiltinBase):
             if client.relogin_available: client.relogin()
             else:
                 client.login(user, pass)
+
+        :returns: login result
+        :rtype: :class:`.EResult`
         """
         if self.relogin_available:
-            self.login(self.username, '', self.login_key)
+            return self.login(self.username, '', self.login_key)
+        return EResult.Fail
 
     def login(self, username, password='', login_key=None, auth_code=None, two_factor_code=None, login_id=None):
         """Login as a specific user
