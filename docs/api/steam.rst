@@ -7,6 +7,7 @@ API Reference
     steam.client
     steam.core
     steam.enums
+    steam.exceptions
     steam.game_servers
     steam.globalid
     steam.guard

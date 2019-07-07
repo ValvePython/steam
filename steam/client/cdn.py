@@ -95,8 +95,9 @@ import vdf
 from gevent.pool import Pool as GPool
 from cachetools import LRUCache
 from steam import webapi
+from steam.exceptions import SteamError
 from steam.core.msg import MsgProto
-from steam.enums import EResult, EServerType, EType
+from steam.enums import EResult, EType
 from steam.enums.emsg import EMsg
 from steam.util.web import make_requests_session
 from steam.core.crypto import symmetric_decrypt, symmetric_decrypt_ecb
@@ -280,7 +281,7 @@ class CDNClient(object):
         self.servers.extend(servers)
 
         if not self.servers:
-            raise ValueError("Failed to fetch content servers")
+            raise SteamError("Failed to fetch content servers")
 
     def get_content_server(self, rotate=False):
         """Get a CS server for content download
@@ -301,6 +302,7 @@ class CDNClient(object):
         :type  depot_id: int
         :return: returns decryption key
         :rtype: bytes
+        :raises SteamError: error message
         """
         if (app_id, depot_id) not in self.depot_keys:
             msg = self.steam.get_depot_key(app_id, depot_id)
@@ -308,12 +310,22 @@ class CDNClient(object):
             if msg and msg.eresult == EResult.OK:
                 self.depot_keys[(app_id, depot_id)] = msg.depot_encryption_key
             else:
-                raise ValueError("Failed getting depot key: %s" % repr(
-                    EResult.Timeout if msg is None else EResult(msg.eresult)))
+                raise SteamError("Failed getting depot key",
+                                 EResult.Timeout if msg is None else EResult(msg.eresult))
 
         return self.depot_keys[(app_id, depot_id)]
 
-    def get(self, command, args):
+    def cdn_cmd(self, command, args):
+        """Run CDN command request
+
+        :param command: command name
+        :type  command: str
+        :param args: args
+        :type  args: str
+        :returns: requests response
+        :rtype: :class:`requests.Response`
+        :raises SteamError: on error
+        """
         server = self.get_content_server()
 
         while True:
@@ -332,8 +344,8 @@ class CDNClient(object):
             else:
                 if resp.ok:
                     return resp
-                elif resp.status_code in (401, 403, 404):
-                    resp.raise_for_status()
+                elif resp.status_code >= 400:
+                    raise SteamError("HTTP Error %s" % resp.status_code)
 
             server = self.get_content_server(rotate=True)
 
@@ -348,17 +360,18 @@ class CDNClient(object):
         :type  chunk_id: int
         :returns: chunk data
         :rtype: bytes
+        :raises SteamError: error message
         """
         if (depot_id, chunk_id) not in self._chunk_cache:
-            resp = self.get('depot', '%s/chunk/%s' % (depot_id, chunk_id))
+            resp = self.cdn_cmd('depot', '%s/chunk/%s' % (depot_id, chunk_id))
 
             data = symmetric_decrypt(resp.content, self.get_depot_key(app_id, depot_id))
 
             if data[:2] == b'VZ':
                 if data[-2:] != b'zv':
-                    raise ValueError("VZ: Invalid footer: %s" % repr(data[-2:]))
+                    raise SteamError("VZ: Invalid footer: %s" % repr(data[-2:]))
                 if data[2:3] != b'a':
-                    raise ValueError("VZ: Invalid version: %s" % repr(data[2:3]))
+                    raise SteamError("VZ: Invalid version: %s" % repr(data[2:3]))
 
                 vzfilter = lzma._decode_filter_properties(lzma.FILTER_LZMA1, data[7:12])
                 vzdec = lzma.LZMADecompressor(lzma.FORMAT_RAW, filters=[vzfilter])
@@ -366,7 +379,7 @@ class CDNClient(object):
                 # i have no idea why, but some chunks will decompress with 1 extra byte at the end
                 data = vzdec.decompress(data[12:-10])[:decompressed_size]
                 if crc32(data) != checksum:
-                    raise ValueError("VZ: CRC32 checksum doesn't match for decompressed data")
+                    raise SteamError("VZ: CRC32 checksum doesn't match for decompressed data")
             else:
                 with ZipFile(BytesIO(data)) as zf:
                     data = zf.read(zf.filelist[0])
@@ -390,7 +403,7 @@ class CDNClient(object):
         :rtype: :class:`.CDNDepotManifest`
         """
         if (app_id, depot_id, manifest_gid) not in self.manifests:
-            resp = self.get('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
+            resp = self.cdn_cmd('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
 
             if resp.ok:
                 manifest = CDNDepotManifest(self, app_id, resp.content)
@@ -436,6 +449,7 @@ class CDNClient(object):
             Function to filter depots. ``func(depot_id, depot_info)``
         :returns: list of :class:`.CDNDepotManifest`
         :rtype: :class:`list` [:class:`.CDNDepotManifest`]
+        :raises SteamError: error message
         """
         if app_id not in self.app_depots:
             self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
@@ -444,21 +458,21 @@ class CDNClient(object):
         is_enc_branch = False
 
         if branch not in depots['branches']:
-            raise ValueError("No branch named %s for app_id %s" % (repr(branch), app_id))
+            raise SteamError("No branch named %s for app_id %s" % (repr(branch), app_id))
         elif int(depots['branches'][branch].get('pwdrequired', 0)) > 0:
             is_enc_branch = True
 
             if (app_id, branch) not in self.beta_passwords:
                 if not password:
-                    raise ValueError("Branch %r requires a password" % branch)
+                    raise SteamError("Branch %r requires a password" % branch)
 
                 result = self.check_beta_password(app_id, password)
 
                 if result != EResult.OK:
-                    raise ValueError("Branch password is not valid. %r" % result)
+                    raise SteamError("Branch password is not valid. %r" % result)
 
                 if (app_id, branch) not in self.beta_passwords:
-                    raise ValueError("Incorrect password for branch %r" % branch)
+                    raise SteamError("Incorrect password for branch %r" % branch)
 
         def async_fetch_manifest(app_id, depot_id, manifest_gid, name):
             manifest = self.get_manifest(app_id, depot_id, manifest_gid)
@@ -520,7 +534,7 @@ class CDNClient(object):
         for task in tasks:
             try:
                 result = task.get()
-            except ValueError as exp:
+            except SteamError as exp:
                 self._LOG.error("Depot %s (%s): %s",
                                 repr(depot_info['name']),
                                 depot_id,
@@ -549,7 +563,7 @@ class CDNClient(object):
         :param filter_func:
             Function to filter depots. ``func(depot_id, depot_info)``
         :returns: generator of of CDN files
-        :rtype: :class:`.CDNDepotFile`
+        :rtype: [:class:`.CDNDepotFile`]
         """
         for manifest in self.get_manifests(app_id, branch, password, filter_func):
             for fp in manifest.iter_files(filename_filter):
@@ -562,8 +576,7 @@ class CDNClient(object):
         :type  item_id: int
         :returns: manifest instance
         :rtype: :class:`.CDNDepotManifest`
-        :raises: steam error
-        :rtype: :class:`.SteamError`
+        :raises SteamError: error message
         """
         resp = self.steam.send_um_and_wait('PublishedFile.GetDetails#1', {
             'publishedfileids': [item_id],
@@ -579,15 +592,15 @@ class CDNClient(object):
         }, timeout=7)
 
         if resp.header.eresult != EResult.OK:
-            raise SteamError(resp.header.error_message, resp.header.eresult)
+            raise SteamError(resp.header.error_message or 'No message', resp.header.eresult)
 
         wf = None if resp is None else resp.body.publishedfiledetails[0]
 
         if wf is None or wf.result != EResult.OK:
-            raise ValueError("Failed getting workshop file info: %s" % repr(
-                EResult.Timeout if resp is None else EResult(wf.result)))
+            raise SteamError("Failed getting workshop file info",
+                              EResult.Timeout if resp is None else EResult(wf.result))
         elif not wf.hcontent_file:
-            raise ValueError("Workshop file is not on SteamPipe")
+            raise SteamError("Workshop file is not on SteamPipe", EResult.FileNotFound)
 
         app_id = ws_app_id = wf.consumer_appid
 
