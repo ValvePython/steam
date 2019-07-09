@@ -49,6 +49,7 @@ class SteamClient(CMClient, BuiltinBase):
     """After a new login key is accepted
     """
 
+    _LOG = logging.getLogger("SteamClient")
     _reconnect_backoff_c = 0
     current_jobid = 0
     credential_location = None         #: location for sentry
@@ -59,7 +60,6 @@ class SteamClient(CMClient, BuiltinBase):
     def __init__(self):
         CMClient.__init__(self)
 
-        self._LOG = logging.getLogger("SteamClient")
         # register listners
         self.on(self.EVENT_DISCONNECTED, self._handle_disconnect)
         self.on(self.EVENT_RECONNECT, self._handle_disconnect)
@@ -143,7 +143,7 @@ class SteamClient(CMClient, BuiltinBase):
             self.cm_servers.clear()
             self.cm_servers.merge_list(data['servers'])
             self.cm_servers.last_updated = data.get('last_updated', 0)
-            self.cm_servers.cell_id = data.get('cell_id', 0)
+            self.cell_id = self.cm_servers.cell_id = data.get('cell_id', 0)
 
     def _handle_cm_list(self, msg):
         if (self.cm_servers.last_updated + 3600*24 > time()

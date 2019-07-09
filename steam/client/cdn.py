@@ -178,7 +178,7 @@ def get_content_servers_from_webapi(cell_id, num_servers=20):
     :return: list of CS servers
     :rtype: :class:`list` [:class:`.ContentServer`]
     """
-    params = {'cellid': cell_id, 'max_servers': num_servers}
+    params = {'cell_id': cell_id, 'max_servers': num_servers}
     resp = webapi.get('IContentServerDirectoryService', 'GetServersForSteamPipe', params=params)
 
     servers = []
@@ -338,14 +338,16 @@ class CDNClient(object):
                 )
 
             try:
-                resp = self.web.get(url)
-            except:
-                pass
+                resp = self.web.get(url, timeout=10)
+            except Exception as exp:
+                self._LOG.debug("Request error: %s", exp)
             else:
                 if resp.ok:
                     return resp
-                elif resp.status_code >= 400:
+                elif 400 <= resp.status_code < 500:
+                    self._LOG.debug("Got HTTP %s", resp.status_code)
                     raise SteamError("HTTP Error %s" % resp.status_code)
+                self.steam.sleep(0.5)
 
             server = self.get_content_server(rotate=True)
 
