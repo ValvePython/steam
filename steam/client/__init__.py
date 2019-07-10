@@ -268,7 +268,7 @@ class SteamClient(CMClient, BuiltinBase):
     def wait_msg(self, event, timeout=None, raises=None):
         """Wait for a message, similiar to :meth:`.wait_event`
 
-        :param event: :class:`.EMsg` or job id
+        :param event: event id
         :type  event: :class:`.EMsg` or :class:`str`
         :param timeout: seconds to wait before timeout
         :type  timeout: :class:`int`
@@ -276,7 +276,7 @@ class SteamClient(CMClient, BuiltinBase):
         :type  raises: :class:`bool`
         :return: returns a message or :class:`None`
         :rtype: :class:`None`, or `proto message`
-        :raises: ``gevent.Timeout``
+        :raises: :class:`gevent.Timeout`
         """
         resp = self.wait_event(event, timeout, raises)
 
@@ -284,8 +284,7 @@ class SteamClient(CMClient, BuiltinBase):
             return resp[0]
 
     def send(self, message, body_params=None):
-        """
-        Send a message to CM
+        """Send a message to CM
 
         :param message: a message instance
         :type message: :class:`.Msg`, :class:`.MsgProto`
@@ -301,8 +300,7 @@ class SteamClient(CMClient, BuiltinBase):
             CMClient.send(self, message)
 
     def send_job(self, message, body_params=None):
-        """
-        Send a message as a job
+        """Send a message as a job
 
         .. note::
             Not all messages are jobs, you'll have to find out which are which
@@ -338,23 +336,22 @@ class SteamClient(CMClient, BuiltinBase):
         return "job_%d" % jobid
 
     def send_job_and_wait(self, message, body_params=None, timeout=None, raises=False):
-        """
-        Send a message as a job and wait for the response.
+        """Send a message as a job and wait for the response.
 
         .. note::
             Not all messages are jobs, you'll have to find out which are which
 
         :param message: a message instance
-        :type message: :class:`.Msg`, :class:`.MsgProto`
+        :type  message: :class:`.Msg`, :class:`.MsgProto`
         :param body_params: a dict with params to the body (only :class:`.MsgProto`)
-        :type body_params: dict
+        :type  body_params: dict
         :param timeout: (optional) seconds to wait
-        :type timeout: :class:`int`
-        :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
-        :type raises: :class:`bool`
+        :type  timeout: :class:`int`
+        :param raises: (optional) On timeout if ``False`` return ``None``, else raise :class:`gevent.Timeout`
+        :type  raises: :class:`bool`
         :return: response proto message
         :rtype: :class:`.Msg`, :class:`.MsgProto`
-        :raises: ``gevent.Timeout``
+        :raises: :class:`gevent.Timeout`
         """
         job_id = self.send_job(message, body_params)
         response = self.wait_event(job_id, timeout, raises=raises)
@@ -363,22 +360,21 @@ class SteamClient(CMClient, BuiltinBase):
         return response[0].body
 
     def send_message_and_wait(self, message, response_emsg, body_params=None, timeout=None, raises=False):
-        """
-        Send a message to CM and wait for a defined answer.
+        """Send a message to CM and wait for a defined answer.
 
         :param message: a message instance
-        :type message: :class:`.Msg`, :class:`.MsgProto`
+        :type  message: :class:`.Msg`, :class:`.MsgProto`
         :param response_emsg: emsg to wait for
-        :type response_emsg: :class:`.EMsg`,:class:`int`
+        :type  response_emsg: :class:`.EMsg`,:class:`int`
         :param body_params: a dict with params to the body (only :class:`.MsgProto`)
-        :type body_params: dict
+        :type  body_params: dict
         :param timeout: (optional) seconds to wait
-        :type timeout: :class:`int`
-        :param raises: (optional) On timeout if ``False`` return ``None``, else raise ``gevent.Timeout``
-        :type raises: :class:`bool`
+        :type  timeout: :class:`int`
+        :param raises: (optional) On timeout if ``False`` return ``None``, else raise :class:`gevent.Timeout`
+        :type  raises: :class:`bool`
         :return: response proto message
         :rtype: :class:`.Msg`, :class:`.MsgProto`
-        :raises: ``gevent.Timeout``
+        :raises: :class:`gevent.Timeout`
         """
         self.send(message, body_params)
         response = self.wait_event(response_emsg, timeout, raises=raises)
@@ -394,14 +390,13 @@ class SteamClient(CMClient, BuiltinBase):
         return None
 
     def get_sentry(self, username):
-        """
-        Returns contents of sentry file for the given username
+        """Returns contents of sentry file for the given username
 
         .. note::
             returns ``None`` if :attr:`credential_location` is not set, or file is not found/inaccessible
 
         :param username: username
-        :type username: :class:`str`
+        :type  username: str
         :return: sentry file contents, or ``None``
         :rtype: :class:`bytes`, :class:`None`
         """
@@ -417,11 +412,10 @@ class SteamClient(CMClient, BuiltinBase):
         return None
 
     def store_sentry(self, username, sentry_bytes):
-        """
-        Store sentry bytes under a username
+        """Store sentry bytes under a username
 
         :param username: username
-        :type username: :class:`str`
+        :type  username: str
         :return: Whenver the operation succeed
         :rtype: :class:`bool`
         """
@@ -487,17 +481,17 @@ class SteamClient(CMClient, BuiltinBase):
         """Login as a specific user
 
         :param username: username
-        :type username: :class:`str`
+        :type  username: :class:`str`
         :param password: password
-        :type password: :class:`str`
+        :type  password: :class:`str`
         :param login_key: login key, instead of password
-        :type login_key: :class:`str`
+        :type  login_key: :class:`str`
         :param auth_code: email authentication code
-        :type auth_code: :class:`str`
+        :type  auth_code: :class:`str`
         :param two_factor_code: 2FA authentication code
-        :type two_factor_code: :class:`str`
+        :type  two_factor_code: :class:`str`
         :param login_id: number used for identifying logon session
-        :type login_id: :class:`int`
+        :type  login_id: :class:`int`
         :return: logon result, see `CMsgClientLogonResponse.eresult <https://github.com/ValvePython/steam/blob/513c68ca081dc9409df932ad86c66100164380a6/protobufs/steammessages_clientserver.proto#L95-L118>`_
         :rtype: :class:`.EResult`
 
