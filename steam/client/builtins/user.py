@@ -68,7 +68,7 @@ class User(object):
         .. note::
             Changing persona state will also change :attr:`persona_state`
 
-        :param persona_state: persona state (Online/Offlane/Away/etc)
+        :param persona_state: persona state (Online/Offline/Away/etc)
         :type persona_state: :class:`.EPersonaState`
         :param player_name: profile name
         :type player_name: :class:`str`
