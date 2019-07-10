@@ -10,7 +10,7 @@ The session can be used to access ``steamcommunity.com``, ``store.steampowered.c
     Keep in mind if you are trying to write robust code.
 
 .. note::
-    If you are using :class:`.SteamClient` take a look at :meth:`.get_web_session()`
+    If you are using :class:`.SteamClient` take a look at :meth:`.SteamClient.get_web_session()`
 
 .. note::
     If you need to authenticate as a mobile device for things like trading confirmations

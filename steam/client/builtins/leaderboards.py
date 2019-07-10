@@ -19,11 +19,11 @@ class Leaderboards(object):
         Find a leaderboard
 
         :param app_id: application id
-        :type app_id: :class:`int`
+        :type  app_id: :class:`int`
         :param name: leaderboard name
-        :type name: :class:`str`
+        :type  name: :class:`str`
         :return: leaderboard instance
-        :rtype: :class:`SteamLeaderboard`
+        :rtype: :class:`.SteamLeaderboard`
         :raises: :class:`LookupError` on message timeout or error
         """
         message = MsgProto(EMsg.ClientLBSFindOrCreateLB)
@@ -103,13 +103,13 @@ class SteamLeaderboard(object):
         """Get leaderboard entries.
 
         :param start: start entry, not index (e.g. rank 1 is ``start=1``)
-        :type start: :class:`int`
+        :type  start: :class:`int`
         :param end: end entry, not index (e.g. only one entry then ``start=1,end=1``)
-        :type end: :class:`int`
+        :type  end: :class:`int`
         :param data_request: data being requested
-        :type data_request: :class:`steam.enums.common.ELeaderboardDataRequest`
-        :param steam_ids: list of steam ids when using :prop:`.ELeaderboardDataRequest.Users`
-        :type steamids: :class:`list`
+        :type  data_request: :class:`steam.enums.common.ELeaderboardDataRequest`
+        :param steam_ids: list of steam ids when using :attr:`.ELeaderboardDataRequest.Users`
+        :type  steamids: :class:`list`
         :return: a list of entries, see ``CMsgClientLBSGetLBEntriesResponse``
         :rtype: :class:`list`
         :raises: :class:`LookupError` on message timeout or error
@@ -167,7 +167,7 @@ class SteamLeaderboard(object):
         See :class:`steam.util.throttle.ConstantRateLimit` for ``times`` and ``seconds`` parameters.
 
         :param chunk_size: number of entries per request
-        :type chunk_size: :class:`int`
+        :type  chunk_size: :class:`int`
         :returns: generator object
         :rtype: :class:`generator`
 
