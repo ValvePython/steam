@@ -304,16 +304,16 @@ class CDNClient(object):
         :rtype: bytes
         :raises SteamError: error message
         """
-        if (app_id, depot_id) not in self.depot_keys:
+        if depot_id not in self.depot_keys:
             msg = self.steam.get_depot_key(app_id, depot_id)
 
             if msg and msg.eresult == EResult.OK:
-                self.depot_keys[(app_id, depot_id)] = msg.depot_encryption_key
+                self.depot_keys[depot_id] = msg.depot_encryption_key
             else:
                 raise SteamError("Failed getting depot key",
                                  EResult.Timeout if msg is None else EResult(msg.eresult))
 
-        return self.depot_keys[(app_id, depot_id)]
+        return self.depot_keys[depot_id]
 
     def cdn_cmd(self, command, args):
         """Run CDN command request
