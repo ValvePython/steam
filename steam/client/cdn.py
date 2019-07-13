@@ -219,7 +219,219 @@ class ContentServer(object):
             )
 
 
+class CDNDepotFile(DepotFile):
+    def __init__(self, manifest, file_mapping):
+        """File-like object proxy for content files located on SteamPipe
+
+        :param manifest: parrent manifest instance
+        :type  manifest: :class:`.CDNDepotManifest`
+        :param file_mapping: file mapping instance from manifest
+        :type  file_mapping: ContentManifestPayload.FileMapping
+        """
+        if not isinstance(manifest, CDNDepotManifest):
+            raise TypeError("Expected 'manifest' to be of type CDNDepotFile")
+        if not isinstance(file_mapping, ContentManifestPayload.FileMapping):
+            raise TypeError("Expected 'file_mapping' to be of type ContentManifestPayload.FileMapping")
+
+        DepotFile.__init__(self, manifest, file_mapping)
+
+        self.offset = 0
+        self._lc = None
+        self._lcbuff = b''
+
+    def __repr__(self):
+        return "<%s(%s, %s, %s, %s, %s)>" % (
+            self.__class__.__name__,
+            self.manifest.app_id,
+            self.manifest.depot_id,
+            self.manifest.gid,
+            repr(self.filename_raw),
+            'is_directory=True' if self.is_directory else self.size,
+            )
+
+    @property
+    def seekable(self):
+        """:type: bool"""
+        return self.is_file
+
+    def tell(self):
+        """:type: int"""
+        if not self.seekable:
+            raise ValueError("This file is not seekable, probably because its directory or symlink")
+        return self.offset
+
+    def seek(self, offset, whence=0):
+        """Seen file
+
+        :param offset: file offset
+        :type  offset: int
+        :param whence: offset mode, see :meth:`io.IOBase.seek`
+        :type  whence: int
+        """
+        if not self.seekable:
+            raise ValueError("This file is not seekable, probably because its directory or symlink")
+
+        if whence == 0:
+            if offset < 0:
+                raise IOError("Invalid argument")
+        elif whence == 1:
+            offset = self.offset + offset
+        elif whence == 2:
+            offset = self.size + offset
+        else:
+            raise ValueError("Invalid value for whence")
+
+        self.offset = max(0, min(self.size, offset))
+
+    def _get_chunk(self, chunk):
+        if not self._lc or self._lc.sha != chunk.sha:
+            self._lcbuff = self.manifest.cdn_client.get_chunk(
+                self.manifest.app_id,
+                self.manifest.depot_id,
+                chunk.sha.hex(),
+                )
+            self._lc = chunk
+        return self._lcbuff
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return self.next()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        pass
+
+    def next(self):
+        line = self.readline()
+        if line == b'':
+            raise StopIteration
+        return line
+
+    def read(self, length=-1):
+        """Read bytes from the file
+
+        :param length: number of bytes to read. Read the whole if not set
+        :type  length: int
+        :returns: file data
+        :rtype: bytes
+        """
+        if length == -1:
+            length = self.size - self.offset
+        if length == 0 or self.offset >= self.size or self.size == 0:
+            return b''
+
+        end_offset = self.offset + length
+
+        # we cache last chunk to allow small length reads and local seek
+        if (self._lc
+           and self.offset >= self._lc.offset
+           and end_offset <= self._lc.offset + self._lc.cb_original):
+            data = self._lcbuff[self.offset - self._lc.offset:self.offset - self._lc.offset + length]
+        # if we need to read outside the bounds of the cached chunk
+        # we go to loop over chunks to determine which to download
+        else:
+            data = BytesIO()
+            start_offset = None
+
+            # Manifest orders the chunks in ascending order by offset
+            for chunk in self.chunks:
+                if chunk.offset >= end_offset:
+                    break
+                elif (chunk.offset <= self.offset < chunk.offset + chunk.cb_original
+                      or chunk.offset < end_offset <= chunk.offset + chunk.cb_original):
+                    if start_offset is None:
+                        start_offset = chunk.offset
+                    data.write(self._get_chunk(chunk))
+
+            data.seek(self.offset - start_offset)
+            data = data.read(length)
+
+        self.offset = min(self.size, end_offset)
+        return data
+
+    def readline(self):
+        """Read a single line
+
+        :return: single file line
+        :rtype: bytes
+        """
+        buf = b''
+
+        for chunk in iter(lambda: self.read(256), b''):
+            pos = chunk.find(b'\n')
+            if pos > -1:
+                pos += 1  # include \n
+                buf += chunk[:pos]
+                self.seek(self.offset - (len(chunk) - pos))
+                break
+
+            buf += chunk
+
+        return buf
+
+    def readlines(self):
+        """Get file contents as list of lines
+
+        :return: list of lines
+        :rtype: :class:`list` [:class:`bytes`]
+        """
+        return [line for line in self]
+
+
+class CDNDepotManifest(DepotManifest):
+    DepotFileClass = CDNDepotFile
+    name = None  #: set only by :meth:`CDNClient.get_manifests`
+
+    def __init__(self, cdn_client, app_id, data):
+        """Holds manifest metadata and file list.
+
+        :param cdn_client: CDNClient instance
+        :type  cdn_client: :class:`.CDNClient`
+        :param app_id: App ID
+        :type  app_id: int
+        :param data: serialized manifest data
+        :type  data: bytes
+        """
+        self.cdn_client = cdn_client
+        self.app_id = app_id
+        DepotManifest.__init__(self, data)
+
+    def __repr__(self):
+        params = ', '.join([
+                    "app_id=" + str(self.app_id),
+                    "depot_id=" + str(self.depot_id),
+                    "gid=" + str(self.gid),
+                    "creation_time=" + repr(
+                        datetime.utcfromtimestamp(self.metadata.creation_time).isoformat().replace('T', ' ')
+                        ),
+                    ])
+
+        if self.name:
+            params = repr(self.name) + ', ' + params
+
+        if self.metadata.filenames_encrypted:
+            params += ', filenames_encrypted=True'
+
+        return "<%s(%s)>" % (
+            self.__class__.__name__,
+            params,
+            )
+
+    def deserialize(self, data):
+        DepotManifest.deserialize(self, data)
+
+        # order chunks in ascending order by their offset
+        # required for CDNDepotFile
+        for mapping in self.payload.mappings:
+            mapping.chunks.sort(key=lambda x: x.offset)
+
+
 class CDNClient(object):
+    DepotManifestClass = CDNDepotManifest
     _LOG = logging.getLogger("CDNClient")
     servers = deque()  #: CS Server list
     _chunk_cache = LRUCache(20)
@@ -408,7 +620,7 @@ class CDNClient(object):
             resp = self.cdn_cmd('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
 
             if resp.ok:
-                manifest = CDNDepotManifest(self, app_id, resp.content)
+                manifest = self.DepotManifestClass(self, app_id, resp.content)
                 if decrypt:
                     manifest.decrypt_filenames(self.get_depot_key(app_id, depot_id))
                 self.manifests[(app_id, depot_id, manifest_gid)] = manifest
@@ -611,214 +823,3 @@ class CDNClient(object):
         return manifest
 
 
-class CDNDepotManifest(DepotManifest):
-    name = None  #: set only by :meth:`CDNClient.get_manifests`
-
-    def __init__(self, cdn_client, app_id, data):
-        """Holds manifest metadata and file list.
-
-        :param cdn_client: CDNClient instance
-        :type  cdn_client: :class:`.CDNClient`
-        :param app_id: App ID
-        :type  app_id: int
-        :param data: serialized manifest data
-        :type  data: bytes
-        """
-        self.cdn_client = cdn_client
-        self.app_id = app_id
-        DepotManifest.__init__(self, data)
-
-    def __repr__(self):
-        params = ', '.join([
-                    "app_id=" + str(self.app_id),
-                    "depot_id=" + str(self.depot_id),
-                    "gid=" + str(self.gid),
-                    "creation_time=" + repr(
-                        datetime.utcfromtimestamp(self.metadata.creation_time).isoformat().replace('T', ' ')
-                        ),
-                    ])
-
-        if self.name:
-            params = repr(self.name) + ', ' + params
-
-        if self.metadata.filenames_encrypted:
-            params += ', filenames_encrypted=True'
-
-        return "<%s(%s)>" % (
-            self.__class__.__name__,
-            params,
-            )
-
-    def deserialize(self, data):
-        DepotManifest.deserialize(self, data)
-
-        # order chunks in ascending order by their offset
-        # required for CDNDepotFile
-        for mapping in self.payload.mappings:
-            mapping.chunks.sort(key=lambda x: x.offset)
-
-    def _make_depot_file(self, file_mapping):
-        return CDNDepotFile(self, file_mapping)
-
-
-class CDNDepotFile(DepotFile):
-    def __init__(self, manifest, file_mapping):
-        """File-like object proxy for content files located on SteamPipe
-
-        :param manifest: parrent manifest instance
-        :type  manifest: :class:`.CDNDepotManifest`
-        :param file_mapping: file mapping instance from manifest
-        :type  file_mapping: ContentManifestPayload.FileMapping
-        """
-        if not isinstance(manifest, CDNDepotManifest):
-            raise TypeError("Expected 'manifest' to be of type CDNDepotFile")
-        if not isinstance(file_mapping, ContentManifestPayload.FileMapping):
-            raise TypeError("Expected 'file_mapping' to be of type ContentManifestPayload.FileMapping")
-
-        DepotFile.__init__(self, manifest, file_mapping)
-
-        self.offset = 0
-        self._lc = None
-        self._lcbuff = b''
-
-    def __repr__(self):
-        return "<%s(%s, %s, %s, %s, %s)>" % (
-            self.__class__.__name__,
-            self.manifest.app_id,
-            self.manifest.depot_id,
-            self.manifest.gid,
-            repr(self.filename_raw),
-            'is_directory=True' if self.is_directory else self.size,
-            )
-
-    @property
-    def seekable(self):
-        """:type: bool"""
-        return self.is_file
-
-    def tell(self):
-        """:type: int"""
-        if not self.seekable:
-            raise ValueError("This file is not seekable, probably because its directory or symlink")
-        return self.offset
-
-    def seek(self, offset, whence=0):
-        """Seen file
-
-        :param offset: file offset
-        :type  offset: int
-        :param whence: offset mode, see :meth:`io.IOBase.seek`
-        :type  whence: int
-        """
-        if not self.seekable:
-            raise ValueError("This file is not seekable, probably because its directory or symlink")
-
-        if whence == 0:
-            if offset < 0:
-                raise IOError("Invalid argument")
-        elif whence == 1:
-            offset = self.offset + offset
-        elif whence == 2:
-            offset = self.size + offset
-        else:
-            raise ValueError("Invalid value for whence")
-
-        self.offset = max(0, min(self.size, offset))
-
-    def _get_chunk(self, chunk):
-        if not self._lc or self._lc.sha != chunk.sha:
-            self._lcbuff = self.manifest.cdn_client.get_chunk(
-                self.manifest.app_id,
-                self.manifest.depot_id,
-                chunk.sha.hex(),
-                )
-            self._lc = chunk
-        return self._lcbuff
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        return self.next()
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, type, value, traceback):
-        pass
-
-    def next(self):
-        line = self.readline()
-        if line == b'':
-            raise StopIteration
-        return line
-
-    def read(self, length=-1):
-        """Read bytes from the file
-
-        :param length: number of bytes to read. Read the whole if not set
-        :type  length: int
-        :returns: file data
-        :rtype: bytes
-        """
-        if length == -1:
-            length = self.size - self.offset
-        if length == 0 or self.offset >= self.size or self.size == 0:
-            return b''
-
-        end_offset = self.offset + length
-
-        # we cache last chunk to allow small length reads and local seek
-        if (self._lc
-           and self.offset >= self._lc.offset
-           and end_offset <= self._lc.offset + self._lc.cb_original):
-            data = self._lcbuff[self.offset - self._lc.offset:self.offset - self._lc.offset + length]
-        # if we need to read outside the bounds of the cached chunk
-        # we go to loop over chunks to determine which to download
-        else:
-            data = BytesIO()
-            start_offset = None
-
-            # Manifest orders the chunks in ascending order by offset
-            for chunk in self.chunks:
-                if chunk.offset >= end_offset:
-                    break
-                elif (chunk.offset <= self.offset < chunk.offset + chunk.cb_original
-                      or chunk.offset < end_offset <= chunk.offset + chunk.cb_original):
-                    if start_offset is None:
-                        start_offset = chunk.offset
-                    data.write(self._get_chunk(chunk))
-
-            data.seek(self.offset - start_offset)
-            data = data.read(length)
-
-        self.offset = min(self.size, end_offset)
-        return data
-
-    def readline(self):
-        """Read a single line
-
-        :return: single file line
-        :rtype: bytes
-        """
-        buf = b''
-
-        for chunk in iter(lambda: self.read(256), b''):
-            pos = chunk.find(b'\n')
-            if pos > -1:
-                pos += 1  # include \n
-                buf += chunk[:pos]
-                self.seek(self.offset - (len(chunk) - pos))
-                break
-
-            buf += chunk
-
-        return buf
-
-    def readlines(self):
-        """Get file contents as list of lines
-
-        :return: list of lines
-        :rtype: :class:`list` [:class:`bytes`]
-        """
-        return [line for line in self]

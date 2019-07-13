@@ -15,7 +15,90 @@ from steam.protobufs.content_manifest_pb2 import (ContentManifestMetadata,
                                                   ContentManifestSignature)
 
 
+class DepotFile(object):
+    def __init__(self, manifest, file_mapping):
+        """Depot file
+
+        :param manifest: depot manifest
+        :type  manifest: :class:`.DepotManifest`
+        :param file_mapping: depot file mapping instance
+        :type  file_mapping: ContentManifestPayload.FileMapping
+        """
+        if not isinstance(manifest, DepotManifest):
+            raise TypeError("Expected 'manifest' to be of type DepotManifest")
+        if not isinstance(file_mapping, ContentManifestPayload.FileMapping):
+            raise TypeError("Expected 'file_mapping' to be of type ContentManifestPayload.FileMapping")
+
+        self.manifest = manifest
+        self.file_mapping = file_mapping
+
+    def __repr__(self):
+        return "<%s(%s, %s, %s, %s)>" % (
+            self.__class__.__name__,
+            self.manifest.depot_id,
+            self.manifest.gid,
+            repr(self.filename),
+            'is_directory=True' if self.is_directory else self.size,
+            )
+
+    @property
+    def filename_raw(self):
+        """Filename with null terminator and whitespaces removed
+
+        :type: str
+        """
+        return self.file_mapping.filename.rstrip('\x00 \n\t')
+
+    @property
+    def filename(self):
+        """Filename matching the OS
+
+        :type: str
+        """
+        return os.path.join(*self.filename_raw.split('\\'))
+
+    @property
+    def size(self):
+        """File size in bytes
+
+        :type: int
+        """
+        return self.file_mapping.size
+
+    @property
+    def chunks(self):
+        """File chunks instances
+
+        :type: :class:`list` [ContentManifestPayload.FileMapping.ChunkData]
+        """
+        return self.file_mapping.chunks
+
+    @property
+    def flags(self):
+        """File flags
+
+        :type: :class:`.EDepotFileFlag`
+        """
+        return self.file_mapping.flags
+
+    @property
+    def is_directory(self):
+        """:type: bool"""
+        return self.flags & EDepotFileFlag.Directory > 0
+
+    @property
+    def is_symlink(self):
+        """:type: bool"""
+        return not not self.file_mapping.linktarget
+
+    @property
+    def is_file(self):
+        """:type: bool"""
+        return not self.is_directory and not self.is_symlink
+
+
 class DepotManifest(object):
+    DepotFileClass = DepotFile
     PROTOBUF_PAYLOAD_MAGIC = 0x71F617D0
     PROTOBUF_METADATA_MAGIC = 0x1F4812BE
     PROTOBUF_SIGNATURE_MAGIC = 0x1B81B817
@@ -172,12 +255,9 @@ class DepotManifest(object):
         else:
             return data.getvalue()
 
-    def _make_depot_file(self, file_mapping):
-        return DepotFile(self, file_mapping)
-
     def __iter__(self):
         for mapping in self.payload.mappings:
-            yield self._make_depot_file(mapping)
+            yield self.DepotFileClass(self, mapping)
 
     def iter_files(self, pattern=None):
         """
@@ -188,89 +268,9 @@ class DepotManifest(object):
             if (pattern is not None
                and not fnmatch(mapping.filename.rstrip('\x00 \n\t'), pattern)):
                 continue
-            yield self._make_depot_file(mapping)
+            yield self.DepotFileClass(self, mapping)
 
     def __len__(self):
         return len(self.payload.mappings)
 
 
-class DepotFile(object):
-    def __init__(self, manifest, file_mapping):
-        """Depot file
-
-        :param manifest: depot manifest
-        :type  manifest: :class:`.DepotManifest`
-        :param file_mapping: depot file mapping instance
-        :type  file_mapping: ContentManifestPayload.FileMapping
-        """
-        if not isinstance(manifest, DepotManifest):
-            raise TypeError("Expected 'manifest' to be of type DepotManifest")
-        if not isinstance(file_mapping, ContentManifestPayload.FileMapping):
-            raise TypeError("Expected 'file_mapping' to be of type ContentManifestPayload.FileMapping")
-
-        self.manifest = manifest
-        self.file_mapping = file_mapping
-
-    def __repr__(self):
-        return "<%s(%s, %s, %s, %s)>" % (
-            self.__class__.__name__,
-            self.manifest.depot_id,
-            self.manifest.gid,
-            repr(self.filename),
-            'is_directory=True' if self.is_directory else self.size,
-            )
-
-    @property
-    def filename_raw(self):
-        """Filename with null terminator and whitespaces removed
-
-        :type: str
-        """
-        return self.file_mapping.filename.rstrip('\x00 \n\t')
-
-    @property
-    def filename(self):
-        """Filename matching the OS
-
-        :type: str
-        """
-        return os.path.join(*self.filename_raw.split('\\'))
-
-    @property
-    def size(self):
-        """File size in bytes
-
-        :type: int
-        """
-        return self.file_mapping.size
-
-    @property
-    def chunks(self):
-        """File chunks instances
-
-        :type: :class:`list` [ContentManifestPayload.FileMapping.ChunkData]
-        """
-        return self.file_mapping.chunks
-
-    @property
-    def flags(self):
-        """File flags
-
-        :type: :class:`.EDepotFileFlag`
-        """
-        return self.file_mapping.flags
-
-    @property
-    def is_directory(self):
-        """:type: bool"""
-        return self.flags & EDepotFileFlag.Directory > 0
-
-    @property
-    def is_symlink(self):
-        """:type: bool"""
-        return not not self.file_mapping.linktarget
-
-    @property
-    def is_file(self):
-        """:type: bool"""
-        return not self.is_directory and not self.is_symlink
