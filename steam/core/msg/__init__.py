@@ -5,6 +5,8 @@ from steam.core.msg.headers import MsgHdr, ExtendedMsgHdr, MsgHdrProtoBuf, GCMsg
 from steam.enums import EResult
 from steam.enums.emsg import EMsg
 from steam.exceptions import SteamError
+from steam.core.msg.structs import StructMessage as _StructMessage
+from google.protobuf.message import Message as _ProtoMessageType
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2
@@ -125,13 +127,17 @@ class Msg(object):
             self.header.sessionID = value
 
     def __repr__(self):
-        return "<Msg %s%s>" % (
-                    repr(self.msg),
-                    ' (No Body)' if isinstance(self.body, str) else '',
-                    )
+        if isinstance(self.body, _StructMessage):
+            suffix = self.body.__class__.__name__
+        elif self.payload:
+            suffix = 'not parsed'
+        else:
+            suffix = 'n/a'
+
+        return "<Msg(%r | %s)>" % (self.msg, suffix)
 
     def __str__(self):
-        rows = ["Msg"]
+        rows = [repr(self)]
 
         header = str(self.header)
         rows.append("-------------- header --")
@@ -209,13 +215,17 @@ class MsgProto(object):
         self.header.client_sessionid = value
 
     def __repr__(self):
-        return "<MsgProto %s%s>" % (
-                    repr(self.msg),
-                    ' (No Body)' if isinstance(self.body, str) else '',
-                    )
+        if isinstance(self.body, _ProtoMessageType):
+            suffix = self.body.__class__.__name__
+        elif self.payload:
+            suffix = 'not parsed'
+        else:
+            suffix = 'n/a'
+
+        return "<MsgProto(%r | %s)>" % (self.msg, suffix)
 
     def __str__(self):
-        rows = ["MsgProto %s" % repr(self.msg)]
+        rows = [repr(self)]
 
         header = str(self.header).rstrip()
         rows.append("-------------- header --")
