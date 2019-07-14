@@ -470,7 +470,7 @@ class CDNClient(object):
             packages = [17906]
         else:
             if not self.steam.licenses:
-                self._LOG.debug("No steam licenses available. Is SteamClient instances connected?")
+                self._LOG.debug("No steam licenses found on SteamClient instance")
                 return
 
             packages = list(self.steam.licenses.keys())
@@ -590,8 +590,10 @@ class CDNClient(object):
                 vzfilter = lzma._decode_filter_properties(lzma.FILTER_LZMA1, data[7:12])
                 vzdec = lzma.LZMADecompressor(lzma.FORMAT_RAW, filters=[vzfilter])
                 checksum, decompressed_size = struct.unpack('<II', data[-10:-2])
-                # i have no idea why, but some chunks will decompress with 1 extra byte at the end
-                data = vzdec.decompress(data[12:-10])[:decompressed_size]
+                # decompress_size is needed since lzma will sometime produce longer output
+                # [12:-9] is need as sometimes lzma will produce shorter output
+                # together they get us the right data
+                data = vzdec.decompress(data[12:-9])[:decompressed_size]
                 if crc32(data) != checksum:
                     raise SteamError("VZ: CRC32 checksum doesn't match for decompressed data")
             else:
