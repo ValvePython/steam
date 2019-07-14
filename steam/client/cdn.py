@@ -314,7 +314,7 @@ class CDNDepotFile(DepotFile):
     def read(self, length=-1):
         """Read bytes from the file
 
-        :param length: number of bytes to read. Read the whole if not set
+        :param length: number of bytes to read. Read the whole file if not set
         :type  length: int
         :returns: file data
         :rtype: bytes
@@ -337,12 +337,12 @@ class CDNDepotFile(DepotFile):
             data = BytesIO()
             start_offset = None
 
-            # Manifest orders the chunks in ascending order by offset
+            # Manifest orders the chunks by offset in ascending order
             for chunk in self.chunks:
                 if chunk.offset >= end_offset:
                     break
-                elif (chunk.offset <= self.offset < chunk.offset + chunk.cb_original
-                      or chunk.offset < end_offset <= chunk.offset + chunk.cb_original):
+                elif (self.offset <= chunk.offset < end_offset
+                      or self.offset < (chunk.offset + chunk.cb_original) <= end_offset):
                     if start_offset is None:
                         start_offset = chunk.offset
                     data.write(self._get_chunk(chunk))
@@ -427,7 +427,7 @@ class CDNDepotManifest(DepotManifest):
         # order chunks in ascending order by their offset
         # required for CDNDepotFile
         for mapping in self.payload.mappings:
-            mapping.chunks.sort(key=lambda x: x.offset)
+            mapping.chunks.sort(key=lambda x: x.offset, reverse=False)
 
 
 class CDNClient(object):
