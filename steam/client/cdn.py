@@ -444,6 +444,7 @@ class CDNClient(object):
         :param client: logged in SteamClient instance
         :type  client: :class:`.SteamClient`
         """
+        self.gpool = GPool(8)            #: task pool
         self.steam = client              #: SteamClient instance
         if self.steam:
             self.cell_id = self.steam.cell_id
@@ -696,13 +697,17 @@ class CDNClient(object):
             return manifest
 
         tasks = []
-        gpool = GPool(8)
+        shared_depots = {}
 
         for depot_id, depot_info in iteritems(depots):
             if not depot_id.isdigit():
                 continue
 
             depot_id = int(depot_id)
+
+            # if filter_func set, use it to filter the list the depots
+            if filter_func and not filter_func(depot_id, depot_info):
+                continue
 
             # if we have no license for the depot, no point trying as we won't get depot_key
             if depot_id not in self.licensed_depot_ids:
@@ -712,16 +717,9 @@ class CDNClient(object):
                                 )
                 continue
 
-            # if filter_func set, use it to filter the list the depots
-            if filter_func and not filter_func(depot_id, depot_info):
-                continue
-
-            # get manifests for the sharedinstalls
-            if depot_info.get('sharedinstall') == '1':
-                tasks.append(gpool.spawn(self.get_manifests,
-                                         int(depot_info['depotfromapp']),
-                                         filter_func=(lambda a, b: int(a) == depot_id),
-                                         ))
+            # accumulate the shared depots
+            if 'depotfromapp' in depot_info:
+                shared_depots.setdefault(int(depot_info['depotfromapp']), set()).add(depot_id)
                 continue
 
 
@@ -738,29 +736,36 @@ class CDNClient(object):
                 manifest_gid = depot_info.get('manifests', {}).get(branch)
 
             if manifest_gid is not None:
-                tasks.append(gpool.spawn(async_fetch_manifest,
-                                         app_id,
-                                         depot_id,
-                                         manifest_gid,
-                                         depot_info['name'],
-                                         ))
+                tasks.append(self.gpool.spawn(async_fetch_manifest,
+                                              app_id,
+                                              depot_id,
+                                              manifest_gid,
+                                              depot_info['name'],
+                                              ))
 
+        # collect results
         manifests = []
 
         for task in tasks:
-            try:
-                result = task.get()
-            except SteamError as exp:
-                self._LOG.error("Depot %s (%s): %s",
-                                repr(depot_info['name']),
-                                depot_id,
-                                str(exp),
-                                )
-            else:
-                if isinstance(result, list):
-                    manifests.extend(result)
-                else:
-                    manifests.append(result)
+            manifests.append(task.get())
+#           try:
+#               result = task.get()
+#           except SteamError as exp:
+#               self._LOG.error("Error: %s", exp)
+#               raise
+#           else:
+#               if isinstance(result, list):
+#                   manifests.extend(result)
+#               else:
+#                   manifests.append(result)
+
+        # load shared depot manifests
+        for app_id, depot_ids in iteritems(shared_depots):
+            def nested_ffunc(depot_id, depot_info, depot_ids=depot_ids, ffunc=filter_func):
+                return (int(depot_id) in depot_ids
+                        and (ffunc is None or ffunc(depot_id,  depot_info)))
+
+            manifests += self.get_manifests(app_id, filter_func=nested_ffunc)
 
         return manifests
 
