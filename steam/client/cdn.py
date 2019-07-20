@@ -653,6 +653,11 @@ class CDNClient(object):
 
         return EResult(resp.eresult)
 
+    def get_app_depot_info(self, app_id):
+        if app_id not in self.app_depots:
+            self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
+        return self.app_depots[app_id]
+
     def get_manifests(self, app_id, branch='public', password=None, filter_func=None):
         """Get a list of CDNDepotManifest for app
 
@@ -668,9 +673,7 @@ class CDNClient(object):
         :rtype: :class:`list` [:class:`.CDNDepotManifest`]
         :raises SteamError: error message
         """
-        if app_id not in self.app_depots:
-            self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
-        depots = self.app_depots[app_id]
+        depots = self.get_app_depot_info(app_id)
 
         is_enc_branch = False
 
