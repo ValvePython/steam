@@ -713,7 +713,7 @@ class CDNClient(object):
                 continue
 
             # if we have no license for the depot, no point trying as we won't get depot_key
-            if depot_id not in self.licensed_depot_ids:
+            if decrypt and depot_id not in self.licensed_depot_ids:
                 self._LOG.debug("No license for depot %s (%s). Skipping...",
                                 repr(depot_info['name']),
                                 depot_id,
