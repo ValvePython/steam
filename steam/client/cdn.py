@@ -413,7 +413,7 @@ class CDNDepotManifest(DepotManifest):
         if self.name:
             params = repr(self.name) + ', ' + params
 
-        if self.metadata.filenames_encrypted:
+        if self.filenames_encrypted:
             params += ', filenames_encrypted=True'
 
         return "<%s(%s)>" % (
@@ -658,7 +658,7 @@ class CDNClient(object):
             self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
         return self.app_depots[app_id]
 
-    def get_manifests(self, app_id, branch='public', password=None, filter_func=None):
+    def get_manifests(self, app_id, branch='public', password=None, filter_func=None, decrypt=True):
         """Get a list of CDNDepotManifest for app
 
         :param app_id: App ID
@@ -694,8 +694,8 @@ class CDNClient(object):
                 if (app_id, branch) not in self.beta_passwords:
                     raise SteamError("Incorrect password for branch %r" % branch)
 
-        def async_fetch_manifest(app_id, depot_id, manifest_gid, name):
-            manifest = self.get_manifest(app_id, depot_id, manifest_gid)
+        def async_fetch_manifest(app_id, depot_id, manifest_gid, decrypt, name):
+            manifest = self.get_manifest(app_id, depot_id, manifest_gid, decrypt)
             manifest.name = name
             return manifest
 
@@ -743,6 +743,7 @@ class CDNClient(object):
                                               app_id,
                                               depot_id,
                                               manifest_gid,
+                                              decrypt,
                                               depot_info['name'],
                                               ))
 

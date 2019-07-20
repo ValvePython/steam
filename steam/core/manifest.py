@@ -159,6 +159,11 @@ class DepotManifest(object):
         """:type: int"""
         return self.metadata.cb_disk_compressed
 
+    @property
+    def filenames_encrypted(self):
+        """:type: bool"""
+        return self.metadata.filenames_encrypted
+
     def decrypt_filenames(self, depot_key):
         """Decrypt all filenames in the manifest
 
@@ -256,19 +261,21 @@ class DepotManifest(object):
             return data.getvalue()
 
     def __iter__(self):
-        for mapping in self.payload.mappings:
-            yield self.DepotFileClass(self, mapping)
+        if not self.filenames_encrypted:
+            for mapping in self.payload.mappings:
+                yield self.DepotFileClass(self, mapping)
 
     def iter_files(self, pattern=None):
         """
         :param pattern: unix shell wildcard pattern, see :func:`.fnmatch`
         :type  pattern: str
         """
-        for mapping in self.payload.mappings:
-            if (pattern is not None
-               and not fnmatch(mapping.filename.rstrip('\x00 \n\t'), pattern)):
-                continue
-            yield self.DepotFileClass(self, mapping)
+        if not self.filenames_encrypted:
+            for mapping in self.payload.mappings:
+                if (pattern is not None
+                   and not fnmatch(mapping.filename.rstrip('\x00 \n\t'), pattern)):
+                    continue
+                yield self.DepotFileClass(self, mapping)
 
     def __len__(self):
         return len(self.payload.mappings)
