@@ -55,6 +55,7 @@ class CMClient(EventEmitter):
     EVENT_EMSG = 0
     """All incoming messages are emitted with their :class:`.EMsg` number.
     """
+    _LOG = logging.getLogger("CMClient")
 
     PROTOCOL_TCP = 0                        #: TCP protocol enum
     PROTOCOL_UDP = 1                        #: UDP protocol enum
@@ -80,7 +81,6 @@ class CMClient(EventEmitter):
     _LOG = None
 
     def __init__(self, protocol=PROTOCOL_TCP):
-        self._LOG = logging.getLogger("CMClient")
         self.cm_servers = CMServerList()
 
         if protocol == CMClient.PROTOCOL_TCP:
