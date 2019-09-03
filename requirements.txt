@@ -4,7 +4,7 @@ requests>=2.9.1,<2.22.0
 vdf>=2.0
 gevent>=1.2.0
 protobuf>=3.0.0
-gevent-eventemitter>=2.0
+gevent-eventemitter>=2.1
 enum34==1.1.2; python_version < '3.4'
 coverage==4.0.3
 pytest==3.2.1
