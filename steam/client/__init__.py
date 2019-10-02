@@ -230,7 +230,7 @@ class SteamClient(CMClient, BuiltinBase):
             self.emit(self.EVENT_NEW_LOGIN_KEY)
 
     def _handle_update_machine_auth(self, message):
-        ok = self.store_sentry(self.username, message.body.bytes)
+        ok = self.store_sentry(self.username, message.body.bytes, message.body.offset)
 
         if ok:
             resp = MsgProto(EMsg.ClientUpdateMachineAuthResponse)
@@ -411,7 +411,7 @@ class SteamClient(CMClient, BuiltinBase):
 
         return None
 
-    def store_sentry(self, username, sentry_bytes):
+    def store_sentry(self, username, sentry_bytes, offset=0):
         """Store sentry bytes under a username
 
         :param username: username
@@ -422,7 +422,8 @@ class SteamClient(CMClient, BuiltinBase):
         filepath = self._get_sentry_path(username)
         if filepath:
             try:
-                with open(filepath, 'wb') as f:
+                with open(filepath, 'r+b' if os.path.exists(filepath) else 'wb') as f:
+                    f.seek(offset)
                     f.write(sentry_bytes)
                 return True
             except IOError as e:
