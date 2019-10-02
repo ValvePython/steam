@@ -55,6 +55,20 @@ class Apps(object):
             {'apps':     {570: {...}, ...},
              'packages': {123: {...}, ...}
             }
+
+        When a token is needed to access the full info (e.g. branches and depots) the ``_missing_token``
+        will be set to ``True``. The token can be obtained by calling :meth:`get_access_tokens` if
+        the account has a license.
+
+        .. code:: python
+            result = client.get_product_info(apps=[123])
+
+            if result['apps'][123]['_missing_token']:
+                tokens = client.get_access_token(apps=[123])
+
+                result = client.get_product_info(apps={'appid': 123,
+                                                       'access_token': tokens['apps'][123]
+                                                       })
         """
         if not apps and not packages:
             return
@@ -89,8 +103,10 @@ class Apps(object):
 
             for app in chunk.apps:
                 data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
+                data['apps'][app.appid]['_missing_token'] = app.missing_token
             for pkg in chunk.packages:
                 data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:])[str(pkg.packageid)]
+                data['packages'][pkg.packageid]['_missing_token'] = pkg.missing_token
 
             if not chunk.response_pending:
                 break
@@ -182,8 +198,8 @@ class Apps(object):
 
         .. code:: python
 
-            {'apps':     {123: 'token', ...},
-             'packages': {456: 'token', ...}
+            {'apps':     {123: 8888888886, ...},
+             'packages': {456: 6666666666, ...}
             }
         """
         if not app_ids and not package_ids:
