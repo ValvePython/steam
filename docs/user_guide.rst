@@ -144,7 +144,7 @@ WebAPI documentation
 
 
 For a more complete list of all available interfaces and methods visit:
-https://lab.xpaw.me/steam_api_documentation.html
+https://steamapi.xpaw.me/
 
 
 SteamClient

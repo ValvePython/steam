@@ -77,10 +77,9 @@ class CMClient(EventEmitter):
 
     _recv_loop = None
     _heartbeat_loop = None
-    _LOG = None
+    _LOG = logging.getLogger("CMClient")
 
     def __init__(self, protocol=PROTOCOL_TCP):
-        self._LOG = logging.getLogger("CMClient")
         self.cm_servers = CMServerList()
 
         if protocol == CMClient.PROTOCOL_TCP:
