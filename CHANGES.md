@@ -20,10 +20,11 @@ This release brings some breaking changes
 - Removed `SteamClient.change_email()`
 - Removed `SteamClient.create_account()`
 - `get_product_info()` now replaces invalid unicode chars
+- `get_product_info()` includes `_missing_token` key with every result
 - Updated `SteamID.is_valid`
 - Updated various Enums
 - Updated EMsg Enum
-- Messages now have a payload property set when the body cannot be parsed
+- Messages now have a `payload` property set when the body cannot be parsed
 - Updated protocol version to 65580
-- Added `CDNClient`
-- Update `SteamClient` to use new chat mode
+- Added `CDNClient` for downloading connect from SteamPipe
+- Update `SteamClient` to use new chat mode, with option to fallback
