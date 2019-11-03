@@ -92,7 +92,7 @@ Calling an endpoint
 
 .. code:: python
 
-    >>> from steam.steamid import WebAPI
+    >>> from steam.webapi import WebAPI
     >>> api = WebAPI(key="<your api key>")
 
     # instance.<interface>.<method>
