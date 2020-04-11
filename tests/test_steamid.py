@@ -121,6 +121,12 @@ class SteamID_initialization(unittest.TestCase):
         self.compare(SteamID("invalid_format"),
                      [0, EType.Invalid, EUniverse.Invalid, 0])
 
+    def test_arg_too_large_invalid(self):
+        self.compare(SteamID(111111111111111111111111111111111111111),
+                     [0, EType.Invalid, EUniverse.Invalid, 0])
+        self.compare(SteamID("1111111111111111111111111111111111111"),
+                     [0, EType.Invalid, EUniverse.Invalid, 0])
+
     ######################################################
     # KWARGS
     ######################################################
