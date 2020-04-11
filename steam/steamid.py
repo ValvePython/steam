@@ -253,6 +253,9 @@ def make_steam64(id=0, *args, **kwargs):
             # 64 bit
             elif value < 2**64:
                 return value
+            # invalid account id
+            else:
+                accountid = 0
 
         # textual input e.g. [g:1:4]
         else:
