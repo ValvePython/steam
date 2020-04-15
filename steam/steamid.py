@@ -57,6 +57,9 @@ class SteamID(intBase):
     def __init__(self, *args, **kwargs):
         pass
 
+    def __str__(self):
+        return str(int(self))
+
     def __repr__(self):
         return "%s(id=%s, type=%s, universe=%s, instance=%s)" % (
             self.__class__.__name__,
