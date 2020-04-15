@@ -252,21 +252,80 @@ class EServerType(SteamIntEnum):
     Auth = 94
     StoreCatalog = 95
     HLTVRelay = 96
-
-    Max = 97
+    IDLS = 97
+    Perf = 98
+    ItemInventory = 99
+    Watchdog = 100
+    AccountHistory = 101
+    Chat = 102
+    Shader = 103
+    AccountHardware = 104
+    WebRTC = 105
+    Giveaway = 106
+    ChatRoom = 107
+    VoiceChat = 108
+    QMS = 109
+    Trust = 110
+    TimeMachine = 111
+    VACDBMaster = 112
+    ContentServerConfig = 113
+    Max = 114
+    Minigame = 114
+    MLTrain = 115
+    VACTest = 116
+    TaxService = 117
+    MLInference = 118
+    UGSAggregate = 119
+    TURN = 120
+    RemoteClient = 121
+    BroadcastOrigin = 122
+    BroadcastChannel = 123
+    SteamAR = 124
+    China = 125
+    CrashDump = 126
+    Max = 127
 
 
 class EOSType(SteamIntEnum):
     Unknown = -1
-
+    Web = -700
     IOSUnknown = -600
-
+    IOS1 = -599
+    IOS2 = -598
+    IOS3 = -597
+    IOS4 = -596
+    IOS5 = -595
+    IOS6 = -594
+    IOS6_1 = -593
+    IOS7 = -592
+    IOS7_1 = -591
+    IOS8 = -590
+    IOS8_1 = -589
+    IOS8_2 = -588
+    IOS8_3 = -587
+    IOS8_4 = -586
+    IOS9 = -585
+    IOS9_1 = -584
+    IOS9_2 = -583
+    IOS9_3 = -582
+    IOS10 = -581
+    IOS10_1 = -580
+    IOS10_2 = -579
+    IOS10_3 = -578
+    IOS11 = -577
+    IOS11_1 = -576
+    IOS11_2 = -575
+    IOS11_3 = -574
+    IOS11_4 = -573
+    IOS12 = -572
+    IOS12_1 = -571
     AndroidUnknown = -500
-
+    Android6 = -499
+    Android7 = -498
+    Android8 = -497
+    Android9 = -496
     UMQ = -400
-
     PS3 = -300
-
     MacOSUnknown = -102
     MacOS104 = -101
     MacOS105 = -100
@@ -281,8 +340,10 @@ class EOSType(SteamIntEnum):
     MacOS1010 = -87
     MacOS1011 = -86
     MacOS1012 = -85
+    Macos1013 = -84
+    Macos1014 = -83
+    Macos1015 = -82
     MacOSMax = -1
-
     LinuxUnknown = -203
     Linux22 = -202
     Linux24 = -201
@@ -291,33 +352,36 @@ class EOSType(SteamIntEnum):
     Linux35 = -198
     Linux36 = -197
     Linux310 = -196
-    LinuxMax = -103
-
+    Linux316 = -195
+    Linux318 = -194
+    Linux3x = -193
+    Linux4x = -192
+    Linux41 = -191
+    Linux44 = -190
+    Linux49 = -189
+    Linux414 = -188
+    Linux419 = -187
+    Linux5x = -186
+    LinuxMax = -101
     WinUnknown = 0
     Win311 = 1
     Win95 = 2
     Win98 = 3
     WinME = 4
     WinNT = 5
-#   Win200 = 6 # obsolete
     Win2000 = 6
     WinXP = 7
     Win2003 = 8
     WinVista = 9
-#   Win7 = 10 # obsolete
     Windows7 = 10
     Win2008 = 11
     Win2012 = 12
-#   Win8 = 13 # obsolete "renamed to Windows8"
     Windows8 = 13
-#   Win81 = 14 # obsolete "renamed to Windows81"
     Windows81 = 14
     Win2012R2 = 15
-#   Win10 = 16 # obsolete "renamed to Windows10"
     Windows10 = 16
-
-    WinMAX = 15
-
+    Win2016 = 17
+    WinMAX = 18
     Max = 26
 
 
@@ -399,6 +463,7 @@ class EPersonaStateFlag(SteamIntEnum):
     HasRichPresence = 1
     InJoinableGame = 2
     HasGoldenProfile = 4
+    RemotePlayTogether = 8
 #   OnlineUsingWeb = 256 obsolete "renamed to ClientTypeWeb"
     ClientTypeWeb = 256
 #   OnlineUsingMobile = 512 obsolete "renamed to ClientTypeMobile"
@@ -408,6 +473,7 @@ class EPersonaStateFlag(SteamIntEnum):
 #   OnlineUsingVR = 2048 obsolete "renamed to ClientTypeVR"
     ClientTypeVR = 2048
     LaunchTypeGamepad = 4096
+    LaunchTypeCompatTool = 8192
 
 
 class EClientPersonaStateFlag(SteamIntEnum):
