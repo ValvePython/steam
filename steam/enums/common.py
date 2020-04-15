@@ -269,7 +269,6 @@ class EServerType(SteamIntEnum):
     TimeMachine = 111
     VACDBMaster = 112
     ContentServerConfig = 113
-    Max = 114
     Minigame = 114
     MLTrain = 115
     VACTest = 116
