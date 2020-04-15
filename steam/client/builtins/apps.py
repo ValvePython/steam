@@ -260,3 +260,26 @@ class Apps(object):
             return EResult(resp.eresult), resp.purchase_result_details, details
         else:
             return EResult.Timeout, None, None
+
+    def request_free_license(self, app_ids):
+        """ Request license for free app(s)
+        
+        :param app_ids: list of app ids
+        :type  app_ids: :class:`list`
+        :return: format ``(eresult, result_details, receipt_info)``
+        :rtype: :class:`tuple`
+        
+        .. code:: python
+          [730] []
+        
+        """
+        resp = self.send_job_and_wait(MsgProto(EMsg.ClientRequestFreeLicense),
+                                      {'appids': map(int, app_ids)},
+                                      timeout=10,
+                                      )
+        
+        if resp:
+            return EResult(resp.eresult), resp.granted_appids, resp.granted_packageids
+        
+        else:
+            return EResult.Timeout, None, None 
