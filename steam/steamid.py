@@ -30,9 +30,11 @@ class ETypeChar(SteamIntEnum):
 
 ETypeChars = ''.join(ETypeChar.__members__.keys())
 
-_steam_invite_hex = "0123456789abcdef"
-_steam_invite_valid_chrs = "0123456789abcdefghjkmnpqrtvw"
-steam_invite_dictionary = dict(zip(_steam_invite_hex, "bcdfghjkmnpqrtvw"))
+_icode_hex       = "0123456789abcdef"
+_icode_custom    = "bcdfghjkmnpqrtvw"
+_icode_all_valid = _icode_hex + _icode_custom
+_icode_map       = dict(zip(_icode_hex,    _icode_custom))
+_icode_map_inv   = dict(zip(_icode_custom, _icode_hex   ))
 
 
 class SteamID(intBase):
@@ -180,27 +182,30 @@ class SteamID(intBase):
     @property
     def as_invite_code(self):
         """
-        :return: s.team invite code format (e.g. ``ABCD-1234``)
+        :return: s.team invite code format (e.g. ``cv-dgb``)
         :rtype: :class:`str`
         """
-        def repl_mapper(x):
-            return steam_invite_dictionary[x.group()]
+        if self.type == EType.Individual and self.is_valid():
+            def repl_mapper(x):
+                return _icode_map[x.group()]
 
-        invite_code = re.sub("["+_steam_invite_hex+"]", repl_mapper, "%x" % self.id)
-        split_idx = len(invite_code) // 2
+            invite_code = re.sub("["+_icode_hex+"]", repl_mapper, "%x" % self.id)
+            split_idx = len(invite_code) // 2
 
-        if split_idx:
-            invite_code = invite_code[:split_idx] + '-' + invite_code[split_idx:]
+            if split_idx:
+                invite_code = invite_code[:split_idx] + '-' + invite_code[split_idx:]
 
-        return invite_code
+            return invite_code
 
     @property
-    def steam_invite_url(self):
+    def invite_url(self):
         """
-        :return: e.g https://s.team/p/abcd-1234
+        :return: e.g ``https://s.team/p/cv-dgb``
         :rtype: :class:`str`
         """
-        return "https://s.team/p/" + self.as_invite_code
+        code = self.as_invite_code
+        if code:
+            return "https://s.team/p/" + code
 
     @property
     def community_url(self):
@@ -405,11 +410,41 @@ def steam3_to_tuple(value):
 
     return (steam32, etype, universe, instance)
 
+def invite_code_to_tuple(code, universe=EUniverse.Public):
+    """
+    Invites urls can be generated at https://steamcommunity.com/my/friends/add
+
+    :param code: invite code (e.g. ``https://s.team/p/cv-dgb``, ``cv-dgb``)
+    :type  code: :class:`str`
+    :param universe: Steam universe (default: ``Public``)
+    :type  universe: :class:`EType`
+    :return: (accountid, type, universe, instance)
+    :rtype: :class:`tuple` or :class:`None`
+    """
+    if not code:
+        return None
+
+    m = re.match(r'(https?://s\.team/p/(?P<code1>[\-'+_icode_all_valid+']+))'
+                 r'|(?P<code2>[\-'+_icode_all_valid+']+$)'
+                 , code)
+    if not m:
+        return None
+
+    code = (m.group('code1') or m.group('code2')).replace('-', '')
+
+    def repl_mapper(x):
+        return _icode_map_inv[x.group()]
+
+    accountid = int(re.sub("["+_icode_custom+"]", repl_mapper, code), 16)
+
+    if 0 < accountid < 2**32:
+        return (accountid, EType(1), EUniverse(universe), 1)
+
 def steam64_from_url(url, http_timeout=30):
     """
     Takes a Steam Community url and returns steam64 or None
 
-    .. note::
+    .. warning::
         Each call makes a http request to ``steamcommunity.com``
 
     .. note::
@@ -430,10 +465,11 @@ def steam64_from_url(url, http_timeout=30):
         https://steamcommunity.com/profiles/[U:1:12]
         https://steamcommunity.com/profiles/76561197960265740
         https://steamcommunity.com/id/johnc
+        https://steamcommunity.com/user/cv-dgb/
     """
 
     match = re.match(r'^(?P<clean_url>https?://steamcommunity.com/'
-                     r'(?P<type>profiles|id|gid|groups)/(?P<value>.*?))(?:/(?:.*)?)?$', url)
+                     r'(?P<type>profiles|id|gid|groups|user)/(?P<value>.*?))(?:/(?:.*)?)?$', url)
 
     if not match:
         return None
@@ -442,7 +478,7 @@ def steam64_from_url(url, http_timeout=30):
 
     try:
         # user profiles
-        if match.group('type') in ('id', 'profiles'):
+        if match.group('type') in ('id', 'profiles', 'user'):
             text = web.get(match.group('clean_url'), timeout=http_timeout).text
             data_match = re.search("g_rgProfileData = (?P<json>{.*?});[ \t\r]*\n", text)
 
