@@ -2,6 +2,7 @@ from steam.enums.base import SteamIntEnum
 
 
 class EResult(SteamIntEnum):
+    """Doc: https://partner.steamgames.com/doc/api/steam_api#EResult"""
     Invalid = 0
     OK = 1                              #: success
     Fail = 2                            #: generic failure
@@ -113,9 +114,15 @@ class EResult(SteamIntEnum):
     TooManyPending = 108                      #: There are too many of this thing pending already
     NoSiteLicensesFound = 109                 #: No site licenses found
     WGNetworkSendExceeded = 110               #: the WG couldn't send a response because we exceeded max network send size
+    AccountNotFriends = 111
+    LimitedUserAccount = 112
+    CantRemoveItem = 113
+    AccountHasBeenDeleted = 114
+    AccountHasAnExistingUserCancelledLicense = 115
 
 
 class EUniverse(SteamIntEnum):
+    """Doc: https://partner.steamgames.com/doc/api/steam_api#EUniverse"""
     Invalid = 0
     Public = 1
     Beta = 2
@@ -126,17 +133,18 @@ class EUniverse(SteamIntEnum):
 
 
 class EType(SteamIntEnum):
-    Invalid = 0
+    """Doc: https://partner.steamgames.com/doc/api/steam_api#EAccountType"""
+    Invalid = 0         #: Used for invalid Steam IDs
     Individual = 1      #: single user account
     Multiseat = 2       #: multiseat (e.g. cybercafe) account
     GameServer = 3      #: game server account
     AnonGameServer = 4  #: anonymous game server account
     Pending = 5         #: pending
     ContentServer = 6   #: content server
-    Clan = 7
-    Chat = 8
-    ConsoleUser = 9     #: Fake SteamID for local PSN account on PS3 or Live account on 360, etc.
-    AnonUser = 10
+    Clan = 7            #: Steam Group (clan)
+    Chat = 8            #: Steam group chat or lobby
+    ConsoleUser = 9     #: Fake SteamID for local PSN account on PS3 or Live account on 360, etc
+    AnonUser = 10       #: Anonymous user account. (Used to create an account or reset a password)
     Max = 11
 
 
@@ -153,8 +161,12 @@ class EVanityUrlType(SteamIntEnum):
 
 
 class EServerType(SteamIntEnum):
+    Other_Util = -2
+    Other_Client = -3
+    Other_CServer = -4
+    Other_CEconBase = -5
     Invalid = -1
-    First = 0
+    Shell = 0
     GM = 1
     BUM = 2  # obsolete
     AM = 3
@@ -170,7 +182,7 @@ class EServerType(SteamIntEnum):
     Console = 13
     PICS = 14
     Client = 15
-    BootstrapOBSOLETE = 16
+    contentstats = 16
     DP = 17
     WG = 18
     SM = 19
@@ -183,7 +195,7 @@ class EServerType(SteamIntEnum):
     AppInformation = 26
     Spare = 27
     FTS = 28
-    EPM = 29  # obsolete
+    SiteLicense = 29
     PS = 30
     IS = 31
     CCS = 32
@@ -205,7 +217,6 @@ class EServerType(SteamIntEnum):
     Econ = 48
     Backpack = 49
     UGS = 50
-#   Store = 51 # obsolete
     StoreFeature = 51
     MoneyStats = 52
     CRE = 53
@@ -237,7 +248,7 @@ class EServerType(SteamIntEnum):
     Steam2Emulator = 79
     PublicTest = 80
     SolrMgr = 81
-    BroadcastRelay = 82
+    BroadcastIngester = 82
     BroadcastDirectory = 83
     VideoManager = 84
     TradeOffer = 85
@@ -392,7 +403,7 @@ class EFriendRelationship(SteamIntEnum):
     RequestInitiator = 4
     Ignored = 5
     IgnoredFriend = 6
-    SuggestedFriend = 7
+    SuggestedFriend_DEPRECATED = 7
     Max = 8
 
 
@@ -455,13 +466,14 @@ class EPersonaState(SteamIntEnum):
     Snooze = 4
     LookingToTrade = 5
     LookingToPlay = 6
-    Max = 7
+    Invisible = 7
+    Max = 8
 
 
 class EPersonaStateFlag(SteamIntEnum):
     HasRichPresence = 1
     InJoinableGame = 2
-    HasGoldenProfile = 4
+    Golden = 4
     RemotePlayTogether = 8
 #   OnlineUsingWeb = 256 obsolete "renamed to ClientTypeWeb"
     ClientTypeWeb = 256
@@ -488,6 +500,9 @@ class EClientPersonaStateFlag(SteamIntEnum):
     GameDataBlob = 512
     ClanTag = 1024
     Facebook = 2048
+    RichPresence = 4096
+    Broadcast = 8192
+    Watching = 16384
 
 
 class ELeaderboardDataRequest(SteamIntEnum):
@@ -523,6 +538,7 @@ class ETwoFactorTokenType(SteamIntEnum):
 
 
 class EChatEntryType(SteamIntEnum):
+    """Doc: https://partner.steamgames.com/doc/api/steam_api#EChatEntryType"""
     Invalid = 0
     ChatMsg = 1             #: Normal text message from another user
     Typing = 2              #: Another user is typing (not used in multi-user chat)
@@ -541,6 +557,7 @@ class EChatEntryType(SteamIntEnum):
 
 
 class EChatRoomEnterResponse(SteamIntEnum):
+    """Doc: https://partner.steamgames.com/doc/api/steam_api#EChatRoomEnterResponse"""
     Success = 1              #: Success
     DoesntExist = 2          #: Chat doesn't exist (probably closed)
     NotAllowed = 3           #: General Denied - You don't have the permissions needed to join the chat
@@ -615,6 +632,175 @@ class EDepotFileFlag(SteamIntEnum):
     CustomExecutable = 128
     InstallScript = 256
     Symlink = 512
+
+
+class EProtoAppType(SteamIntEnum):
+    Invalid = 0
+    Game = 1
+    Application = 2
+    Tool = 4
+    Demo = 8
+    Deprected = 16
+    DLC = 32
+    Guide = 64
+    Driver = 128
+    Config = 256
+    Hardware = 512
+    Franchise = 1024
+    Video = 2048
+    Plugin = 4096
+    MusicAlbum = 8192
+    Series = 16384
+    Comic = 32768
+    Beta = 65536
+    Shortcut = 1073741824
+    DepotOnly = -2147483648
+
+
+class EPublishedFileInappropriateProvider(SteamIntEnum):
+    Invalid = 0
+    Google = 1
+    Amazon = 2
+
+
+class EPublishedFileInappropriateResult(SteamIntEnum):
+    NotScanned = 0
+    VeryUnlikely = 1
+    Unlikely = 30
+    Possible = 50
+    Likely = 75
+    VeryLikely = 100
+
+
+class EPublishedFileQueryType(SteamIntEnum):
+    RankedByVote = 0
+    RankedByPublicationDate = 1
+    AcceptedForGameRankedByAcceptanceDate = 2
+    RankedByTrend = 3
+    FavoritedByFriendsRankedByPublicationDate = 4
+    CreatedByFriendsRankedByPublicationDate = 5
+    RankedByNumTimesReported = 6
+    CreatedByFollowedUsersRankedByPublicationDate = 7
+    NotYetRated = 8
+    RankedByTotalUniqueSubscriptions = 9
+    RankedByTotalVotesAsc = 10
+    RankedByVotesUp = 11
+    RankedByTextSearch = 12
+    RankedByPlaytimeTrend = 13
+    RankedByTotalPlaytime = 14
+    RankedByAveragePlaytimeTrend = 15
+    RankedByLifetimeAveragePlaytime = 16
+    RankedByPlaytimeSessionsTrend = 17
+    RankedByLifetimePlaytimeSessions = 18
+    RankedByInappropriateContentRating = 19
+
+
+class EUserBadge(SteamIntEnum):
+    Invalid = 0
+    YearsOfService = 1
+    Community = 2
+    Portal2PotatoARG = 3
+    TreasureHunt = 4
+    SummerSale2011 = 5
+    WinterSale2011 = 6
+    SummerSale2012 = 7
+    WinterSale2012 = 8
+    CommunityTranslator = 9
+    CommunityModerator = 10
+    ValveEmployee = 11
+    GameDeveloper = 12
+    GameCollector = 13
+    TradingCardBetaParticipant = 14
+    SteamBoxBeta = 15
+    Summer2014RedTeam = 16
+    Summer2014BlueTeam = 17
+    Summer2014PinkTeam = 18
+    Summer2014GreenTeam = 19
+    Summer2014PurpleTeam = 20
+    Auction2014 = 21
+    GoldenProfile2014 = 22
+    TowerAttackMiniGame = 23
+    Winter2015ARG_RedHerring = 24
+    SteamAwards2016Nominations = 25
+    StickerCompletionist2017 = 26
+    SteamAwards2017Nominations = 27
+    SpringCleaning2018 = 28
+    Salien = 29
+    RetiredModerator = 30
+    SteamAwards2018Nominations = 31
+    ValveModerator = 32
+    WinterSale2018 = 33
+    LunarNewYearSale2019 = 34
+    LunarNewYearSale2019GoldenProfile = 35
+    SpringCleaning2019 = 36
+    SummerSale2019 = 37
+    SummerSale2019_TeamHare = 38
+    SummerSale2019_TeamTortoise = 39
+    SummerSale2019_TeamCorgi = 40
+    SummerSale2019_TeamCockatiel = 41
+    SummerSale2019_TeamPig = 42
+    SteamAwards2019Nominations = 43
+    WinterSaleEvent2019 = 44
+
+
+class WorkshopEnumerationType(SteamIntEnum):
+    RankedByVote = 0
+    Recent = 1
+    Trending = 2
+    FavoriteOfFriends = 3
+    VotedByFriends = 4
+    ContentByFriends = 5
+    RecentFromFollowedUsers = 6
+
+
+class EPublishedFileVisibility(SteamIntEnum):
+    Public = 0
+    FriendsOnly = 1
+    Private = 2
+
+
+class EWorkshopFileType(SteamIntEnum):
+    First = 0
+    Community	= 0
+    Microtransaction	= 1
+    Collection	= 2
+    Art	= 3
+    Video	= 4
+    Screenshot	= 5
+    Game	= 6
+    Software	= 7
+    Concept	= 8
+    WebGuide	= 9
+    IntegratedGuide	= 10
+    Merch	= 11
+    ControllerBinding	= 12
+    SteamworksAccessInvite = 13
+    SteamVideo = 14
+    GameManagedItem = 15
+    Max = 16
+
+class EAppType(SteamIntEnum):
+    Invalid = 0
+    Game = 1
+    Application = 2
+    Tool = 4
+    Demo = 8
+    Deprected = 16
+    DLC = 32
+    Guide = 64
+    Driver = 128
+    Config = 256
+    Hardware = 512
+    Franchise = 1024
+    Video = 2048
+    Plugin = 4096
+    Music = 8192
+    Series = 16384
+    Comic = 32768
+    Beta = 65536
+
+    Shortcut = 1073741824
+    DepotOnly = -2147483648
 
 
 # Do not remove
