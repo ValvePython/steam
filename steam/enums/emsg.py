@@ -19,9 +19,9 @@ class EMsg(SteamIntEnum):
     JobHeartbeat = 123
     HubConnect = 124
     Subscribe = 126
-    RouteMessage = 127 #: removed
+    RouteMessage = 127
     RemoteSysID = 128 #: removed
-    AMCreateAccountResponse = 129
+    AMCreateAccountResponse = 129 #: removed
     WGRequest = 130
     WGResponse = 131
     KeepAlive = 132
@@ -31,7 +31,7 @@ class EMsg(SteamIntEnum):
     ClientSessionEnd = 136
 #   ClientSessionUpdateAuthTicket = 137 #: removed
     ClientSessionUpdate = 137
-    StatsDeprecated = 138  #: removed
+    StatsDeprecated = 138
     Ping = 139
     PingResponse = 140
     Stats = 141
@@ -69,14 +69,19 @@ class EMsg(SteamIntEnum):
     ShellCheckWindowsUpdates = 237
     ShellCheckWindowsUpdatesResponse = 238
     ShellFlushUserLicenseCache = 239 #: removed
-
+    TestFlushDelayedSQL = 240
+    TestFlushDelayedSQLResponse = 241
+    EnsureExecuteScheduledTask_TEST = 242
+    EnsureExecuteScheduledTaskResponse_TEST = 243
+    UpdateScheduledTaskEnableState_TEST = 244
+    UpdateScheduledTaskEnableStateResponse_TEST = 245
+    ContentDescriptionDeltaUpdate = 246
     BaseGM = 300
     Heartbeat = 300
     ShellFailed = 301
     ExitShells = 307
     ExitShell = 308
     GracefulExitShell = 309
-    NotifyWatchdog = 314
     LicenseProcessingComplete = 316
     SetTestFlag = 317
     QueuedEmailsComplete = 318
@@ -94,26 +99,30 @@ class EMsg(SteamIntEnum):
     GMWriteStatsToSOS = 330
     GMGetServiceMethodRouting = 331
     GMGetServiceMethodRoutingResponse = 332
-    GMConvertUserWallets = 333
+    GMConvertUserWallets = 333 #: removed
 
+    GMTestNextBuildSchemaConversion = 334
+    GMTestNextBuildSchemaConversionResponse = 335
+    ExpectShellRestart = 336
+    HotFixProgress = 337
     BaseAIS = 400
     AISRefreshContentDescription = 401 #: removed
     AISRequestContentDescription = 402
     AISUpdateAppInfo = 403
 #   AISUpdatePackageInfo = 404 #: removed
-    AISUpdatePackageCosts = 404
+    AISUpdatePackageCosts = 404 #: removed
     AISGetPackageChangeNumber = 405
     AISGetPackageChangeNumberResponse = 406
     AISAppInfoTableChanged = 407 #: removed
-    AISUpdatePackageCostsResponse = 408
-    AISCreateMarketingMessage = 409
-    AISCreateMarketingMessageResponse = 410
-    AISGetMarketingMessage = 411
-    AISGetMarketingMessageResponse = 412
-    AISUpdateMarketingMessage = 413
-    AISUpdateMarketingMessageResponse = 414
-    AISRequestMarketingMessageUpdate = 415
-    AISDeleteMarketingMessage = 416
+    AISUpdatePackageCostsResponse = 408 #: removed
+    AISCreateMarketingMessage = 409 #: removed
+    AISCreateMarketingMessageResponse = 410 #: removed
+    AISGetMarketingMessage = 411 #: removed
+    AISGetMarketingMessageResponse = 412 #: removed
+    AISUpdateMarketingMessage = 413 #: removed
+    AISUpdateMarketingMessageResponse = 414 #: removed
+    AISRequestMarketingMessageUpdate = 415 #: removed
+    AISDeleteMarketingMessage = 416 #: removed
     AISGetMarketingTreatments = 419 #: removed
     AISGetMarketingTreatmentsResponse = 420 #: removed
     AISRequestMarketingTreatmentUpdate = 421 #: removed
@@ -146,7 +155,7 @@ class EMsg(SteamIntEnum):
     AMGetLegacyGameKeyResponse = 517
     AMFindHungTransactions = 518
     AMSetAccountTrustedRequest = 519
-    AMCompletePurchase = 521
+    AMCompletePurchase = 521 #: removed
     AMCancelPurchase = 522
     AMNewChallenge = 523
     AMLoadOEMTickets = 524
@@ -166,11 +175,13 @@ class EMsg(SteamIntEnum):
     AMClanCleanupList = 538
     AMGetLicenses = 539
     AMGetLicensesResponse = 540
+    AMSendCartRepurchase = 541
+    AMSendCartRepurchaseResponse = 542
     AllowUserToPlayQuery = 550
     AllowUserToPlayResponse = 551
     AMVerfiyUser = 552
     AMClientNotPlaying = 553
-    ClientRequestFriendship = 554
+    AMClientRequestFriendship = 554
     AMRelayPublishStatus = 555
     AMResetCommunityContent = 556 #: removed
     AMPrimePersonaStateCache = 557 #: removed
@@ -180,8 +191,8 @@ class EMsg(SteamIntEnum):
     AMRevokePurchaseResponse = 561
     AMLockProfile = 562 #: removed
     AMRefreshGuestPasses = 563
-    AMInviteUserToClan = 564
-    AMAcknowledgeClanInvite = 565
+    AMInviteUserToClan = 564 #: removed
+    AMAcknowledgeClanInvite = 565 #: removed
     AMGrantGuestPasses = 566
     AMClanDataUpdated = 567
     AMReloadAccount = 568
@@ -259,8 +270,8 @@ class EMsg(SteamIntEnum):
     ClientGamesPlayed_obsolete = 705  #: removed
     ClientLogOff = 706
     ClientNoUDPConnectivity = 707
-    ClientInformOfCreateAccount = 708
-    ClientAckVACBan = 709
+    ClientInformOfCreateAccount = 708 #: removed
+    ClientAckVACBan = 709 #: removed
     ClientConnectionStats = 710
     ClientInitPurchase = 711 #: removed
     ClientPingResponse = 712
@@ -296,7 +307,7 @@ class EMsg(SteamIntEnum):
     ClientGetGiftTargetList = 748  #: removed
     ClientGetGiftTargetListResponse = 749  #: removed
     ClientLogOnResponse = 751
-    ClientVACChallenge = 753
+    ClientVACChallenge = 753 #: removed
     ClientSetHeartbeatRate = 755
     ClientNotLoggedOnDeprecated = 756  #: removed
     ClientLoggedOff = 757
@@ -310,7 +321,7 @@ class EMsg(SteamIntEnum):
     ClientPersonaState = 766
     ClientFriendsList = 767
     ClientAccountInfo = 768
-    ClientVacStatusQuery = 770
+    ClientVacStatusQuery = 770 #: removed
     ClientNewsUpdate = 771
     ClientGameConnectDeny = 773
     GSStatusReply = 774
@@ -356,11 +367,11 @@ class EMsg(SteamIntEnum):
     ClientServiceModule = 830
     ClientServiceCall = 831
     ClientServiceCallResponse = 832
-    ClientPackageInfoRequest = 833
-    ClientPackageInfoResponse = 834
+    ClientPackageInfoRequest = 833 #: removed
+    ClientPackageInfoResponse = 834 #: removed
     ClientNatTraversalStatEvent = 839
-    ClientAppInfoRequest = 840
-    ClientAppInfoResponse = 841
+    ClientAppInfoRequest = 840 #: removed
+    ClientAppInfoResponse = 841 #: removed
     ClientSteamUsageEvent = 842
     ClientCheckPassword = 845
     ClientResetPassword = 846
@@ -375,12 +386,12 @@ class EMsg(SteamIntEnum):
     ClientGetLobbyListResponse = 860
     ClientGetLobbyMetadata = 861 #: removed
     ClientGetLobbyMetadataResponse = 862 #: removed
-    ClientVTTCert = 863
-    ClientAppInfoUpdate = 866
-    ClientAppInfoChanges = 867
+    ClientVTTCert = 863 #: removed
+    ClientAppInfoUpdate = 866 #: removed
+    ClientAppInfoChanges = 867 #: removed
     ClientServerList = 880
-    ClientEmailChangeResponse = 891
-    ClientSecretQAChangeResponse = 892
+    ClientEmailChangeResponse = 891 #: removed
+    ClientSecretQAChangeResponse = 892 #: removed
     ClientDRMBlobRequest = 896
     ClientDRMBlobResponse = 897
     ClientLookupKey = 898 #: removed
@@ -466,7 +477,7 @@ class EMsg(SteamIntEnum):
     FBSBootstrapperGetPackageChunkResponse = 1131
     FBSBootstrapperPackageTransferProgress = 1132
     FBSRestartBootstrapper = 1133
-
+    FBSPauseFrozenDumps = 1134
     BaseFileXfer = 1200
     FileXferRequest = 1200
     FileXferResponse = 1201
@@ -484,8 +495,9 @@ class EMsg(SteamIntEnum):
 
     BaseBS = 1400
     BSPurchaseStart = 1401
-    BSPurchaseResponse = 1402 #: removed
-    BSSettleNOVA = 1404 #: removed
+    BSPurchaseResponse = 1402
+    BSAuthenticateCCTrans = 1403
+    BSAuthenticateCCTransResponse = 1404
     BSSettleComplete = 1406
     BSBannedRequest = 1407 #: removed
     BSInitPayPalTxn = 1408
@@ -561,18 +573,18 @@ class EMsg(SteamIntEnum):
     BSQueryFindCreditCardResponse = 1485
     BSStatusInquiryPOSAKey = 1486
     BSStatusInquiryPOSAKeyResponse = 1487
-    BSValidateMoPaySignature = 1488
-    BSValidateMoPaySignatureResponse = 1489
-    BSMoPayConfirmProductDelivery = 1490
-    BSMoPayConfirmProductDeliveryResponse = 1491
-    BSGenerateMoPayMD5 = 1492
-    BSGenerateMoPayMD5Response = 1493
+    BSValidateMoPaySignature = 1488 #: removed
+    BSValidateMoPaySignatureResponse = 1489 #: removed
+    BSMoPayConfirmProductDelivery = 1490 #: removed
+    BSMoPayConfirmProductDeliveryResponse = 1491 #: removed
+    BSGenerateMoPayMD5 = 1492 #: removed
+    BSGenerateMoPayMD5Response = 1493 #: removed
     BSBoaCompraConfirmProductDelivery = 1494
     BSBoaCompraConfirmProductDeliveryResponse = 1495
     BSGenerateBoaCompraMD5 = 1496
     BSGenerateBoaCompraMD5Response = 1497
     BSCommitWPTxn = 1498
-
+    BSCommitAdyenTxn = 1499
     BaseATS = 1500
     ATSStartStressTest = 1501
     ATSStopStressTest = 1502
@@ -599,21 +611,21 @@ class EMsg(SteamIntEnum):
     DPGamePlayedStats = 1602 #: removed
     DPUniquePlayersStat = 1603
     DPStreamingUniquePlayersStat = 1604
-    DPVacInfractionStats = 1605
-    DPVacBanStats = 1606
+    DPVacInfractionStats = 1605 #: removed
+    DPVacBanStats = 1606 #: removed
     DPBlockingStats = 1607
     DPNatTraversalStats = 1608
     DPSteamUsageEvent = 1609 #: removed
-    DPVacCertBanStats = 1610
-    DPVacCafeBanStats = 1611
+    DPVacCertBanStats = 1610 #: removed
+    DPVacCafeBanStats = 1611 #: removed
     DPCloudStats = 1612
     DPAchievementStats = 1613
-    DPAccountCreationStats = 1614
+    DPAccountCreationStats = 1614 #: removed
     DPGetPlayerCount = 1615
     DPGetPlayerCountResponse = 1616
     DPGameServersPlayersStats = 1617
     DPDownloadRateStatistics = 1618 #: removed
-    DPFacebookStatistics = 1619
+    DPFacebookStatistics = 1619 #: removed
     ClientDPCheckSpecialSurvey = 1620
     ClientDPCheckSpecialSurveyResponse = 1621
     ClientDPSendSpecialSurveyResponse = 1622
@@ -622,6 +634,7 @@ class EMsg(SteamIntEnum):
     ClientDPUpdateAppJobReport = 1625
     ClientDPSteam2AppStarted = 1627  #: removed
     DPUpdateContentEvent = 1626
+    ClientDPUnsignedInstallScript = 1627
     DPPartnerMicroTxns = 1628
     DPPartnerMicroTxnsResponse = 1629
     ClientDPContentStatsReport = 1630
@@ -630,7 +643,9 @@ class EMsg(SteamIntEnum):
     BaseCM = 1700
     CMSetAllowState = 1701
     CMSpewAllowState = 1702
-    CMAppInfoResponseDeprecated = 1703  #: removed
+    CMSessionRejected = 1703
+    CMSetSecrets = 1704
+    CMGetSecrets = 1705
 
     BaseDSS = 1800 #: removed
     DSSNewFile = 1801 #: removed
@@ -663,16 +678,12 @@ class EMsg(SteamIntEnum):
     GCValidateSession = 2214 #: removed
     GCValidateSessionResponse = 2215 #: removed
     GCCmdStatus = 2216
-    GCRegisterWebInterfaces = 2217  #: removed
-#     GCRegisterWebInterfaces_Deprecated = 2217  #: removed
-    GCGetAccountDetails = 2218  #: removed
-#     GCGetAccountDetails_DEPRECATED = 2218  #: removed
+    GCRegisterWebInterfaces_Deprecated = 2217  #: removed
+    GCGetAccountDetails_DEPRECATED = 2218  #: removed
     GCInterAppMessage = 2219
     GCGetEmailTemplate = 2220
     GCGetEmailTemplateResponse = 2221
-#   ISRelayToGCH = 2222 #: removed
     GCHRelay = 2222
-#   GCHRelayClientToIS = 2223 #: removed
     GCHRelayToClient = 2223
     GCHUpdateSession = 2224
     GCHRequestUpdateSession = 2225
@@ -688,18 +699,18 @@ class EMsg(SteamIntEnum):
     GCHVacVerificationChange = 2235
     GCHAccountPhoneNumberChange = 2236
     GCHAccountTwoFactorChange = 2237
-
+    GCHInviteUserToLobby = 2238
     BaseP2P = 2500
     P2PIntroducerMessage = 2502
 
     BaseSM = 2900
     SMExpensiveReport = 2902
     SMHourlyReport = 2903
-    SMFishingReport = 2904
+    SMFishingReport = 2904 #: removed
     SMPartitionRenames = 2905
     SMMonitorSpace = 2906
-    SMGetSchemaConversionResults = 2907 #: removed
-    SMGetSchemaConversionResultsResponse = 2908 #: removed
+    SMTestNextBuildSchemaConversion = 2907
+    SMTestNextBuildSchemaConversionResponse = 2908
 
     BaseTest = 3000
     FailServer = 3000
@@ -809,7 +820,8 @@ class EMsg(SteamIntEnum):
     AMLeaveClan = 4010
     AMClanPermissions = 4011
     AMClanPermissionsResponse = 4012
-    AMCreateClanEvent = 4013
+    AMCreateClanEventDummyForRateLimiting = 4013
+    AMUpdateClanEventDummyForRateLimiting = 4015
     AMCreateClanEventResponse = 4014
     AMUpdateClanEvent = 4015
     AMUpdateClanEventResponse = 4016
@@ -869,8 +881,8 @@ class EMsg(SteamIntEnum):
     AMGetAccountLinksResponse = 4070
     AMSetAccountLinks = 4071
     AMSetAccountLinksResponse = 4072
-    AMGetUserGameStats = 4073
-    AMGetUserGameStatsResponse = 4074
+    UGSGetUserGameStats = 4073
+    UGSGetUserGameStatsResponse = 4074
     AMCheckClanMembership = 4075
     AMGetClanMembers = 4076
     AMGetClanMembersResponse = 4077
@@ -915,7 +927,7 @@ class EMsg(SteamIntEnum):
     AMGetCommunityPrivacyState = 4116
     AMGetCommunityPrivacyStateResponse = 4117
     AMCheckClanInviteRateLimiting = 4118
-    AMGetUserAchievementStatus = 4119
+    UGSGetUserAchievementStatus = 4119
     AMGetIgnored = 4120
     AMGetIgnoredResponse = 4121
     AMSetIgnoredResponse = 4122
@@ -960,6 +972,7 @@ class EMsg(SteamIntEnum):
     AMCheckClanMembershipResponse = 4161
     AMProbeClanMembershipList = 4162
     AMProbeClanMembershipListResponse = 4163
+    UGSGetUserAchievementStatusResponse = 4164
     AMGetFriendsLobbies = 4165
     AMGetFriendsLobbiesResponse = 4166
     AMGetUserFriendNewsResponse = 4172
@@ -997,11 +1010,11 @@ class EMsg(SteamIntEnum):
     AMGetPurchaseStatus = 4206
     AMSupportIsAccountEnabled = 4209
     AMSupportIsAccountEnabledResponse = 4210
-    AMGetUserStats = 4211
+    UGSGetUserStats = 4211
     AMSupportKickSession = 4212
     AMGSSearch = 4213
     MarketingMessageUpdate = 4216
-    AMRouteFriendMsg = 4219
+    ChatServerRouteFriendMsg = 4219
     AMTicketAuthRequestOrResponse = 4220
     AMVerifyDepotManagementRights = 4222
     AMVerifyDepotManagementRightsResponse = 4223
@@ -1013,7 +1026,7 @@ class EMsg(SteamIntEnum):
     AMValidateEmailLink = 4231
     AMValidateEmailLinkResponse = 4232
     AMAddUsersToMarketingTreatment = 4234 #: removed
-    AMStoreUserStats = 4236
+    UGSStoreUserStats = 4236
     AMGetUserGameplayInfo = 4237 #: removed
     AMGetUserGameplayInfoResponse = 4238 #: removed
     AMGetCardList = 4239 #: removed
@@ -1041,7 +1054,7 @@ class EMsg(SteamIntEnum):
     AMCreateDispute = 4262
     AMCreateDisputeResponse = 4263
     AMClearDispute = 4264
-    AMClearDisputeResponse = 4265
+    AMCreateFinancialAdjustment = 4265
     AMPlayerNicknameList = 4266
     AMPlayerNicknameListResponse = 4267
     AMSetDRMTestConfig = 4268
@@ -1054,7 +1067,7 @@ class EMsg(SteamIntEnum):
     AMGetGameMembersResponse = 4277
     AMGetSteamIDForMicroTxn = 4278
     AMGetSteamIDForMicroTxnResponse = 4279
-    AMAddPublisherUser = 4280
+    AMSetPartnerMember = 4280
     AMRemovePublisherUser = 4281
     AMGetUserLicenseList = 4282
     AMGetUserLicenseListResponse = 4283
@@ -1084,7 +1097,7 @@ class EMsg(SteamIntEnum):
     AMIsAccountInCaptchaGracePeriodResponse = 4309
     AMAccountPS3Unlink = 4310
     AMAccountPS3UnlinkResponse = 4311
-    AMStoreUserStatsResponse = 4312
+    UGSStoreUserStatsResponse = 4312
     AMGetAccountPSNInfo = 4313
     AMGetAccountPSNInfoResponse = 4314
     AMAuthenticatedPlayerList = 4315
@@ -1180,6 +1193,16 @@ class EMsg(SteamIntEnum):
     AMBitPayPayment = 4410
     AMBitPayPaymentResponse = 4411
     AMSendAccountInfoUpdate = 4412
+    AMSendScheduledGift = 4413
+    AMNodwinPayment = 4414
+    AMNodwinPaymentResponse = 4415
+    AMResolveWalletRevoke = 4416
+    AMResolveWalletReverseRevoke = 4417
+    AMFundedPayment = 4418
+    AMFundedPaymentResponse = 4419
+    AMRequestPersonaUpdateForChatServer = 4420
+    AMPerfectWorldPayment = 4421
+    AMPerfectWorldPaymentResponse = 4422
 
     BasePSRange = 5000
     PSCreateShoppingCart = 5001
@@ -1202,9 +1225,9 @@ class EMsg(SteamIntEnum):
     ClientUFSUploadFileFinished = 5205
     ClientUFSGetFileListForApp = 5206
     ClientUFSGetFileListForAppResponse = 5207
-    ClientUFSDownloadRequest = 5210 #: removed
-    ClientUFSDownloadResponse = 5211 #: removed
-    ClientUFSDownloadChunk = 5212 #: removed
+    ClientUFSDownloadRequest = 5210
+    ClientUFSDownloadResponse = 5211
+    ClientUFSDownloadChunk = 5212
     ClientUFSLoginRequest = 5213
     ClientUFSLoginResponse = 5214
     UFSReloadPartitionInfo = 5215
@@ -1241,8 +1264,8 @@ class EMsg(SteamIntEnum):
     UFSDownloadFinishRequest = 5248
     UFSDownloadFinishResponse = 5249
     UFSFlushURLCache = 5250
-    UFSUploadCommit = 5251
-    UFSUploadCommitResponse = 5252
+    ClientUFSUploadCommit = 5251
+    ClientUFSUploadCommitResponse = 5252
     UFSMigrateFileAppID = 5253
     UFSMigrateFileAppIDResponse = 5254
 
@@ -1391,8 +1414,8 @@ class EMsg(SteamIntEnum):
     AMClientCreateFriendsGroupResponse = 5561
     AMClientDeleteFriendsGroup = 5562
     AMClientDeleteFriendsGroupResponse = 5563
-    AMClientRenameFriendsGroup = 5564
-    AMClientRenameFriendsGroupResponse = 5565
+    AMClientManageFriendsGroup = 5564
+    AMClientManageFriendsGroupResponse = 5565
     AMClientAddFriendToGroup = 5566
     AMClientAddFriendToGroupResponse = 5567
     AMClientRemoveFriendFromGroup = 5568
@@ -1423,8 +1446,8 @@ class EMsg(SteamIntEnum):
     ClientCreateAccountProtoResponse = 5591
     ClientGetNumberOfCurrentPlayersDP = 5592
     ClientGetNumberOfCurrentPlayersDPResponse = 5593
-    ClientServiceMethod = 5594
-    ClientServiceMethodResponse = 5595
+    ClientServiceMethodLegacy = 5594
+    ClientServiceMethodLegacyResponse = 5595
     ClientFriendUserStatusPublished = 5596
     ClientCurrentUIMode = 5597
     ClientVanityURLChangedNotification = 5598
@@ -1453,7 +1476,11 @@ class EMsg(SteamIntEnum):
     DFSRouteFileResponse = 5620
     ClientNetworkingCertRequest = 5621
     ClientNetworkingCertRequestResponse = 5622
-
+    ClientChallengeRequest = 5623
+    ClientChallengeResponse = 5624
+    BadgeCraftedNotification = 5625
+    ClientNetworkingMobileCertRequest = 5626
+    ClientNetworkingMobileCertRequestResponse = 5627
     BaseMDS = 5800
     ClientMDSLoginRequest = 5801  #: removed
     ClientMDSLoginResponse = 5802  #: removed
@@ -1502,7 +1529,7 @@ class EMsg(SteamIntEnum):
     ClientMDSSignInstallScriptResponse = 5846  #: removed
     MDSMigrateChunk = 5847
     MDSMigrateChunkResponse = 5848
-
+    MDSToCSFlushManifest = 5849
     CSBase = 6200
     CSPing = 6201
     CSPingResponse = 6202
@@ -1552,7 +1579,11 @@ class EMsg(SteamIntEnum):
     ClientMMSFlushFrenemyListCache = 6622
     ClientMMSFlushFrenemyListCacheResponse = 6623
     ClientMMSSetLobbyLinked = 6624
-
+    ClientMMSSetRatelimitPolicyOnClient = 6625
+    ClientMMSGetLobbyStatus = 6626
+    ClientMMSGetLobbyStatusResponse = 6627
+    MMSGetLobbyList = 6628
+    MMSGetLobbyListResponse = 6629
     NonStdMsgBase = 6800
     NonStdMsgMemcached = 6801
     NonStdMsgHTTPServer = 6802
@@ -1563,17 +1594,18 @@ class EMsg(SteamIntEnum):
     NonStdMsgDFSTransfer = 6807
     NonStdMsgTests = 6808
     NonStdMsgUMQpipeAAPL = 6809
-    NonStdMsgSyslog = 6810 #: removed
+    NonStdMsgSyslog = 6810
     NonStdMsgLogsink = 6811
     NonStdMsgSteam2Emulator = 6812
     NonStdMsgRTMPServer = 6813
-
+    NonStdMsgWebSocket = 6814
+    NonStdMsgRedis = 6815
     UDSBase = 7000
     ClientUDSP2PSessionStarted = 7001
     ClientUDSP2PSessionEnded = 7002
     UDSRenderUserAuth = 7003
     UDSRenderUserAuthResponse = 7004
-    ClientUDSInviteToGame = 7005
+    ClientInviteToGame = 7005
 #   UDSFindSession = 7006 #: removed
     UDSHasSession = 7006
 #   UDSFindSessionResponse = 7007 #: removed
@@ -1630,7 +1662,7 @@ class EMsg(SteamIntEnum):
     UCMReloadPublishedFile = 7337
     UCMReloadUserFileListCaches = 7338
     UCMPublishedFileReported = 7339
-    UCMUpdatePublishedFileIncompatibleStatus = 7340
+    UCMUpdatePublishedFileIncompatibleStatus = 7340 #: removed
     UCMPublishedFilePreviewAdd = 7341
     UCMPublishedFilePreviewAddResponse = 7342
     UCMPublishedFilePreviewRemove = 7343
@@ -1650,10 +1682,10 @@ class EMsg(SteamIntEnum):
     UCMPublishedFileChildChangeSortOrder = 7357 #: removed
     UCMPublishedFileChildChangeSortOrderResponse = 7358 #: removed
     UCMPublishedFileParentChanged = 7359
-    ClientUCMGetPublishedFilesForUser = 7360 #: removed
-    ClientUCMGetPublishedFilesForUserResponse = 7361 #: removed
-    UCMGetPublishedFilesForUser = 7362
-    UCMGetPublishedFilesForUserResponse = 7363
+    ClientUCMGetPublishedFilesForUser = 7360
+    ClientUCMGetPublishedFilesForUserResponse = 7361
+    UCMGetPublishedFilesForUser = 7362 #: removed
+    UCMGetPublishedFilesForUserResponse = 7363 #: removed
     ClientUCMSetUserPublishedFileAction = 7364
     ClientUCMSetUserPublishedFileActionResponse = 7365
     ClientUCMEnumeratePublishedFilesByUserAction = 7366
@@ -1671,7 +1703,7 @@ class EMsg(SteamIntEnum):
     ClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378
     ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379
     UCMPublishedFileContentUpdated = 7380
-    UCMPublishedFileUpdated = 7381
+    ClientUCMPublishedFileUpdated = 7381
     ClientWorkshopItemChangesRequest = 7382
     ClientWorkshopItemChangesResponse = 7383
     ClientWorkshopItemInfoRequest = 7384
@@ -1686,7 +1718,7 @@ class EMsg(SteamIntEnum):
     FSComputeFrenematrix = 7506
     FSComputeFrenematrixResponse = 7507
     FSPlayStatusNotification = 7508
-    FSPublishPersonaStatus = 7509
+    FSPublishPersonaStatus = 7509 #: removed
     FSAddOrRemoveFollower = 7510
     FSAddOrRemoveFollowerResponse = 7511
     FSUpdateFollowingList = 7512
@@ -1712,7 +1744,7 @@ class EMsg(SteamIntEnum):
     ClientChatGetFriendMessageHistoryForOfflineMessages = 7527
     ClientFSGetFriendsSteamLevels = 7528
     ClientFSGetFriendsSteamLevelsResponse = 7529
-    FSRequestFriendData = 7530
+    AMRequestFriendData = 7530
 
     DRMRange2 = 7600
     CEGVersionSetEnableDisableRequest = 7600
@@ -1770,8 +1802,8 @@ class EMsg(SteamIntEnum):
     UMQEnqueueMobileAnnouncements = 8110 #: removed
 
     WorkshopBase = 8200
-    WorkshopAcceptTOSRequest = 8200
-    WorkshopAcceptTOSResponse = 8201
+    WorkshopAcceptTOSRequest = 8200 #: removed
+    WorkshopAcceptTOSResponse = 8201 #: removed
 
     WebAPIBase = 8300
     WebAPIValidateOAuth2Token = 8300
@@ -1888,8 +1920,8 @@ class EMsg(SteamIntEnum):
     SLCSharedLibraryChanged = 9408
 
     RemoteClientBase = 9500
-    RemoteClientAuth = 9500
-    RemoteClientAuthResponse = 9501
+    RemoteClientAuth_OBSOLETE = 9500
+    RemoteClientAuthResponse_OBSOLETE = 9501
     RemoteClientAppStatus = 9502
     RemoteClientStartStream = 9503
     RemoteClientStartStreamResponse = 9504
@@ -1899,13 +1931,14 @@ class EMsg(SteamIntEnum):
     ClientUnlockStreamingResponse = 9508
     RemoteClientAcceptEULA = 9509
     RemoteClientGetControllerConfig = 9510
-    RemoteClientGetControllerConfigResposne = 9511
+    RemoteClientGetControllerConfigResponse = 9511
     RemoteClientStreamingEnabled = 9512
     ClientUnlockHEVC = 9513
     ClientUnlockHEVCResponse = 9514
-
+    RemoteClientStatusRequest = 9515
+    RemoteClientStatusResponse = 9516
     ClientConcurrentSessionsBase = 9600
-#   ClientPlayingSessionState = 9600 #: removed
+    ClientPlayingSessionState = 9600
     ClientKickPlayingSession = 9601
 
     ClientBroadcastBase = 9700
@@ -1919,3 +1952,27 @@ class EMsg(SteamIntEnum):
 #   ClientVoiceCallPreAuthorize = 9800 #: removed
     ClientVoiceCallPreAuthorizeResponse = 9801
     ClientServerTimestampRequest = 9802
+    ClientServerTimestampResponse = 9803
+    ClientLANP2PBase = 9900
+    ClientLANP2PRequestChunk = 9900
+    ClientLANP2PRequestChunkResponse = 9901
+    ClientLANP2PMax = 9999
+
+#   BaseWatchdogServer = 10000
+    NotifyWatchdog = 10000
+
+#   ClientSiteLicenseBase = 10100
+    ClientSiteLicenseSiteInfoNotification = 10100
+    ClientSiteLicenseCheckout = 10101
+    ClientSiteLicenseCheckoutResponse = 10102
+    ClientSiteLicenseGetAvailableSeats = 10103
+    ClientSiteLicenseGetAvailableSeatsResponse = 10104
+    ClientSiteLicenseGetContentCacheInfo = 10105
+    ClientSiteLicenseGetContentCacheInfoResponse = 10106
+
+#   BaseChatServer = 12000
+    ChatServerGetPendingNotificationCount = 12000
+    ChatServerGetPendingNotificationCountResponse = 12001
+
+#   BaseSecretServer = 12100
+    ServerSecretChanged = 12100
