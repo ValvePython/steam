@@ -15,6 +15,7 @@ gevent.monkey.patch_ssl()
 
 import os
 import json
+from random import random
 from time import time
 from io import open
 from getpass import getpass
@@ -262,6 +263,8 @@ class SteamClient(CMClient, BuiltinBase):
 
         if delay_seconds < maxdelay:
             self._reconnect_backoff_c = min(7, self._reconnect_backoff_c + 1)
+
+        delay_seconds = int(delay_seconds * 0.5 + delay_seconds * 0.5 * random())
 
         return self.connect(delay=delay_seconds, retry=retry)
 
