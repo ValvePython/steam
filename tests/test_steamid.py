@@ -277,6 +277,20 @@ class SteamID_properties(unittest.TestCase):
                          None
                          )
 
+    def test_as_invite_code(self):
+        self.assertEqual(SteamID(0     , EType.Individual, EUniverse.Public, instance=1).as_invite_code, None)
+        self.assertEqual(SteamID(123456, EType.Individual, EUniverse.Public, instance=1).as_invite_code, 'cv-dgb')
+        self.assertEqual(SteamID(123456, EType.Individual, EUniverse.Beta  , instance=1).as_invite_code, 'cv-dgb')
+        self.assertEqual(SteamID(123456, EType.Invalid   , EUniverse.Public, instance=1).as_invite_code, None)
+        self.assertEqual(SteamID(123456, EType.Clan      , EUniverse.Public, instance=1).as_invite_code, None)
+
+    def test_as_invite_url(self):
+        self.assertEqual(SteamID(0     , EType.Individual, EUniverse.Public, instance=1).invite_url, None)
+        self.assertEqual(SteamID(123456, EType.Individual, EUniverse.Public, instance=1).invite_url, 'https://s.team/p/cv-dgb')
+        self.assertEqual(SteamID(123456, EType.Individual, EUniverse.Beta  , instance=1).invite_url, 'https://s.team/p/cv-dgb')
+        self.assertEqual(SteamID(123456, EType.Invalid   , EUniverse.Public, instance=1).invite_url, None)
+        self.assertEqual(SteamID(123456, EType.Clan      , EUniverse.Public, instance=1).invite_url, None)
+
 
 class steamid_functions(unittest.TestCase):
     @mock.patch('steam.steamid.steam64_from_url')
@@ -317,6 +331,8 @@ class steamid_functions(unittest.TestCase):
         sid = steamid.steam64_from_url('https://steamcommunity.com/id/johnc')
         self.assertEqual(sid, 76561197960265740)
 
+        sid = steamid.steam64_from_url('https://steamcommunity.com/user/r')
+        self.assertEqual(sid, 76561197960265740)
 
         # try group urls
         sid = steamid.steam64_from_url('https://steamcommunity.com/gid/[g:1:4]')
@@ -392,3 +408,17 @@ class steamid_functions(unittest.TestCase):
                          (1234, EType.Chat, EUniverse.Public, EInstanceFlag.Clan)
                          )
 
+    def test_arg_invite_code(self):
+        self.assertIsNone(steamid.invite_code_to_tuple('invalid_format'))
+        self.assertIsNone(steamid.invite_code_to_tuple('https://steamcommunity.com/p/cv-dgb'))
+        self.assertIsNone(steamid.invite_code_to_tuple('b'))
+        self.assertIsNone(steamid.invite_code_to_tuple('aaaaaaaaaaaaaaaaaaaaaaaaa'))
+
+        self.assertEqual(steamid.invite_code_to_tuple('cv-dgb'),
+                         (123456, EType.Individual, EUniverse.Public, 1))
+        self.assertEqual(steamid.invite_code_to_tuple('http://s.team/p/cv-dgb'),
+                         (123456, EType.Individual, EUniverse.Public, 1))
+        self.assertEqual(steamid.invite_code_to_tuple('https://s.team/p/cv-dgb'),
+                         (123456, EType.Individual, EUniverse.Public, 1))
+        self.assertEqual(steamid.invite_code_to_tuple('https://s.team/p/cv-dgb/ABCDE12354'),
+                         (123456, EType.Individual, EUniverse.Public, 1))

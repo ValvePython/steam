@@ -541,6 +541,156 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-steam/0.8.17 python-requests/2.13.0]
     method: GET
+    uri: https://steamcommunity.com/user/r
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-length: ['0']
+      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
+          https://www.google.com https://www.gstatic.com https://apis.google.com;
+          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
+          https://api.steampowered.com/ http://localhost:27060 http://store.steampowered.com/
+          https://store.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
+          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
+          https://www.google.com https://sketchfab.com;']
+      content-type: [text/html; charset=UTF-8]
+      date: ['Wed, 26 Apr 2017 18:18:52 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      location: ['https://steamcommunity.com/id/johnc/']
+      server: [Apache]
+      set-cookie: [sessionid=a5c4bbf498df5acca27d4dd0; path=/, steamCountry=GB%7C4543583e63b8840f869da8c650d21fb3;
+          path=/]
+    status: {code: 302, message: Moved Temporarily}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [sessionid=a5c4bbf498df5acca27d4dd0; steamCountry=GB%7C4543583e63b8840f869da8c650d21fb3]
+      User-Agent: [python-steam/0.8.17 python-requests/2.13.0]
+    method: GET
+    uri: https://steamcommunity.com/id/johnc/
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-length: ['4950']
+      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
+          https://www.google.com https://www.gstatic.com https://apis.google.com;
+          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
+          https://api.steampowered.com/ http://localhost:27060 http://store.steampowered.com/
+          https://store.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
+          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
+          https://www.google.com https://sketchfab.com;']
+      content-type: [text/html; charset=UTF-8]
+      date: ['Wed, 26 Apr 2017 18:18:52 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      server: [Apache]
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-steam/0.8.17 python-requests/2.13.0]
+    method: GET
     uri: https://steamcommunity.com/gid/[g:1:4]
   response:
     body: {string: !!python/unicode ''}
