@@ -126,3 +126,11 @@ class SteamUser(object):
                 'chat_entry_type': EChatEntryType.ChatMsg,
                 'message': message.encode('utf8'),
                 })
+
+    def block(self):
+        """Block user"""
+        self._steam.friends.block(self)
+
+    def unblock(self):
+        """Unblock user"""
+        self._steam.friends.unblock(self)
