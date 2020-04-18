@@ -11,14 +11,6 @@ Apps
     :undoc-members:
     :show-inheritance:
 
-Account
--------
-
-.. automodule:: steam.client.builtins.account
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 User
 ----
 
