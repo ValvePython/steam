@@ -803,6 +803,13 @@ class EAppType(SteamIntEnum):
     DepotOnly = -2147483648
 
 
+class EClientUIMode(SteamIntEnum):
+    Desktop = 0
+    BigPicture = 1
+    Mobile = 2
+    Web = 3
+
+
 # Do not remove
 from enum import EnumMeta
 

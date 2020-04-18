@@ -135,3 +135,14 @@ class User(object):
         self.send(MsgProto(EMsg.ClientGamesPlayed),
                   {'games_played': [{'game_id': app_id} for app_id in app_ids]}
                   )
+
+    def set_ui_mode(self, uimode):
+        """
+        Set UI mode. Show little icon next to name in friend list. (e.g phone, controller, other)
+
+        :param uimode: UI mode integer
+        :type  uimode: :class:`EClientUIMode`
+
+        These app ids will be recorded in :attr:`current_games_played`.
+        """
+        self.send(MsgProto(EMsg.ClientCurrentUIMode), {'uimode': EClientUIMode(uimode)})
