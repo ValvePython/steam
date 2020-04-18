@@ -93,7 +93,7 @@ class SteamFriendlist(EventEmitter):
             suser = self._steam.get_user(steamid, False)
             rel = EFriendRelationship(friend.efriendrelationship)
 
-            if steamid not in self._fr:
+            if steamid not in self._fr and rel != EFriendRelationship.NONE: # 0
                 self._fr[steamid] = suser
                 suser.relationship = rel
                 steamids_to_check.add(steamid)
@@ -105,7 +105,9 @@ class SteamFriendlist(EventEmitter):
                 oldrel, suser.relationship = suser.relationship, rel
 
                 if rel == EFriendRelationship.NONE:
-                    self.emit(self.EVENT_FRIEND_REMOVED, self._fr.pop(steamid))
+                    suser = self._fr.pop(steamid, None)
+                    if suser and oldrel not in (EFriendRelationship.Ignored, 0):
+                        self.emit(self.EVENT_FRIEND_REMOVED, suser)
                 elif oldrel in (2,4) and rel == EFriendRelationship.Friend:
                     self.emit(self.EVENT_FRIEND_NEW, suser)
 
@@ -182,9 +184,13 @@ class SteamFriendlist(EventEmitter):
 
         :param steamid: their steamid
         :type  steamid: :class:`int`, :class:`.SteamID`, :class:`.SteamUser`
+        :return: result
+        :rtype: :class:`EResult`
         """
         if isinstance(steamid, SteamUser):
             steamid = steamid.steam_id
+        elif not isinstance(steamid, SteamID):
+            steamid = SteamID(steamid)
 
         resp = self._steam.send_um_and_wait("Player.IgnoreFriend#1",
                                             {"steamid": steamid},
@@ -192,10 +198,12 @@ class SteamFriendlist(EventEmitter):
 
         if not resp:
             return EResult.Timeout
-        else:
-            if steamid in self:
-                self[steamid].relationship = EFriendRelationship(resp.body.friend_relationship)
-            return resp.header.eresult
+        elif resp.header.eresult == EResult.OK:
+            if steamid not in self._fr:
+                self._fr[steamid] = self._steam.get_user(steamid, False)
+            self._fr[steamid].relationship = EFriendRelationship(resp.body.friend_relationship)
+
+        return resp.header.eresult
 
     def unblock(self, steamid):
         """
@@ -203,16 +211,22 @@ class SteamFriendlist(EventEmitter):
 
         :param steamid: their steamid
         :type  steamid: :class:`int`, :class:`.SteamID`, :class:`.SteamUser`
+        :return: result
+        :rtype: :class:`EResult`
         """
         if isinstance(steamid, SteamUser):
             steamid = steamid.steam_id
+        elif not isinstance(steamid, SteamID):
+            steamid = SteamID(steamid)
 
         resp = self._steam.send_um_and_wait("Player.IgnoreFriend#1",
                                             {"steamid": steamid, "unignore": True},
                                             timeout=10)
+
         if not resp:
             return EResult.Timeout
-        else:
-            if steamid in self:
-                self[steamid].relationship = EFriendRelationship(resp.body.friend_relationship)
-            return resp.header.eresult
+        elif resp.header.eresult == EResult.OK:
+            if steamid in self._fr:
+                self._fr[steamid].relationship = EFriendRelationship(resp.body.friend_relationship)
+
+        return resp.header.eresult
