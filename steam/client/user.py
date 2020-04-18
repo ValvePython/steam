@@ -7,7 +7,11 @@ from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
 
 class SteamUser(object):
-    """Holds various functionality and data related to a steam user
+    """
+    A data model for a Steam user. Holds user persona state, and related actions
+
+    .. note::
+        This is an internal object that can be obtained by :meth:`SteamClient.get_user`
     """
     _pstate = None
     steam_id = SteamID()  #: steam id
@@ -19,9 +23,10 @@ class SteamUser(object):
         self.steam_id = SteamID(steam_id)
 
     def __repr__(self):
-        return "<%s(%s, %s)>" % (
+        return "<%s(%s, %s, %s)>" % (
             self.__class__.__name__,
             str(self.steam_id),
+            self.relationship,
             self.state,
             )
 
