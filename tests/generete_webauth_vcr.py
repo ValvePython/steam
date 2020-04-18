@@ -1,4 +1,5 @@
 from __future__ import print_function
+import re
 import os
 import sys
 
@@ -15,29 +16,42 @@ import requests
 
 from steam import webauth as wa
 
+try:
+    _input = raw_input
+except:
+    _input = input
+
 # personal info scrubbers
 # -----------------------
 # The recorded vcr is anonymized and should not contain
 # any personal info. MAKE SURE TO CHECK THE VCR BEFORE COMMIT TO REPO
 
 def request_scrubber(r):
-    r['headers'].pop('set-cokie', None)
+    r.headers.pop('Cookie', None)
+    r.headers['Accept-Encoding'] = 'identity'
     r.body = ''
     return r
 
 def response_scrubber(r):
+    r['headers'].pop('date', None)
+    r['headers'].pop('expires', None)
+
     if 'set-cookie' in r['headers'] and 'steamLogin' in ''.join(r['headers']['set-cookie']):
         r['headers']['set-cookie'] = [
             'steamLogin=0%7C%7C{}; path=/; httponly'.format('A'*16),
             'steamLoginSecure=0%7C%7C{}; path=/; httponly; secure'.format('B'*16),
             'steamMachineAuth0={}; path=/; httponly'.format('C'*16),
             ]
+    else:
+        r['headers'].pop('set-cookie', None)
 
     if r.get('body', ''):
         data = json.loads(r['body']['string'])
 
         if 'token_gid' in data:
             data['token_gid'] = 0
+        if 'timestamp' in data:
+            data['timestamp'] = 12345678
         if 'transfer_parameters' in data:
             data['transfer_parameters']['steamid'] = '0'
             data['transfer_parameters']['token'] = 'A'*16
@@ -66,7 +80,7 @@ anon_vcr = vcr.VCR(
 
 def user_pass_only():
     print("Please enter a user that can login with just password.")
-    u = raw_input("Username: ")
+    u = _input("Username: ")
     p = getpass("Password (no echo): ")
 
     user_pass_only_success(u, p)

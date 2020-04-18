@@ -488,7 +488,7 @@ def steam64_from_url(url, http_timeout=30):
         # group profiles
         else:
             text = web.get(match.group('clean_url'), timeout=http_timeout).text
-            data_match = re.search("'steam://friends/joinchat/(?P<steamid>\d+)'", text)
+            data_match = re.search("OpenGroupChat\( *'(?P<steamid>\d+)'", text)
 
             if data_match:
                 return int(data_match.group('steamid'))

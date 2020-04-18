@@ -16,7 +16,8 @@ Vagrant.configure("2") do |config|
 
     box.vm.provision "shell", inline: <<-SHELL
       set -x
-      apt-get update
+      export DEBIAN_FRONTEND='noninteractive'
+      apt-get -y update
       apt-get -y install python-pip python-virtualenv
     SHELL
 

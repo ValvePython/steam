@@ -315,34 +315,50 @@ class steamid_functions(unittest.TestCase):
         mm.get.side_effect = requests.exceptions.ReadTimeout('test')
         self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/id/timeout_me"))
 
-    @vcr.use_cassette('vcr/steamid_community_urls.yaml', mode='once', serializer='yaml', filter_query_parameters=['nocache'])
     def test_steam64_from_url(self):
-        # invalid urls return None
-        self.assertIsNone(steamid.steam64_from_url("asdasd"))
-        self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/gid/0"))
+        def scrub_req(r):
+            r.headers.pop('Cookie', None)
+            r.headers.pop('date', None)
+            return r
+        def scrub_resp(r):
+            r['headers'].pop('set-cookie', None)
+            r['headers'].pop('date', None)
+            return r
 
-        # try profile urls
-        sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/[U:1:12]')
-        self.assertEqual(sid, 76561197960265740)
+        with vcr.use_cassette('vcr/steamid_community_urls.yaml',
+                              mode='once',
+                              serializer='yaml',
+                              filter_query_parameters=['nocache'],
+                              decode_compressed_response=False,
+                              before_record_request=scrub_req,
+                              before_record_response=scrub_resp,
+                              ):
+            # invalid urls return None
+            self.assertIsNone(steamid.steam64_from_url("asdasd"))
+            self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/gid/0"))
 
-        sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/76561197960265740')
-        self.assertEqual(sid, 76561197960265740)
+            # try profile urls
+            sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/[U:1:12]')
+            self.assertEqual(sid, 76561197960265740)
 
-        sid = steamid.steam64_from_url('https://steamcommunity.com/id/johnc')
-        self.assertEqual(sid, 76561197960265740)
+            sid = steamid.steam64_from_url('https://steamcommunity.com/profiles/76561197960265740')
+            self.assertEqual(sid, 76561197960265740)
 
-        sid = steamid.steam64_from_url('https://steamcommunity.com/user/r')
-        self.assertEqual(sid, 76561197960265740)
+            sid = steamid.steam64_from_url('https://steamcommunity.com/id/johnc')
+            self.assertEqual(sid, 76561197960265740)
 
-        # try group urls
-        sid = steamid.steam64_from_url('https://steamcommunity.com/gid/[g:1:4]')
-        self.assertEqual(sid, 103582791429521412)
+            sid = steamid.steam64_from_url('https://steamcommunity.com/user/r')
+            self.assertEqual(sid, 76561197960265740)
 
-        sid = steamid.steam64_from_url('https://steamcommunity.com/gid/103582791429521412')
-        self.assertEqual(sid, 103582791429521412)
+            # try group urls
+            sid = steamid.steam64_from_url('https://steamcommunity.com/gid/[g:1:4]')
+            self.assertEqual(sid, 103582791429521412)
 
-        sid = steamid.steam64_from_url('https://steamcommunity.com/groups/Valve')
-        self.assertEqual(sid, 103582791429521412)
+            sid = steamid.steam64_from_url('https://steamcommunity.com/gid/103582791429521412')
+            self.assertEqual(sid, 103582791429521412)
+
+            sid = steamid.steam64_from_url('https://steamcommunity.com/groups/Valve')
+            self.assertEqual(sid, 103582791429521412)
 
     def test_arg_steam2(self):
         self.assertIsNone(steamid.steam2_to_tuple('invalid_format'))

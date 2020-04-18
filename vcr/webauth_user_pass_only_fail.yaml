@@ -1,66 +1,82 @@
 interactions:
 - request:
-    body: ''
+    body: !!python/unicode ''
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['46']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-steam/0.8.3 python-requests/2.9.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - identity
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '46'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-steam/1.0.0-alpha6 python-requests/2.21.0
     method: POST
     uri: https://steamcommunity.com/login/getrsakey/
   response:
-    body: {string: !!python/unicode '{"timestamp": "259640400000", "token_gid": 0,
-        "publickey_mod": "CA419D47649D81ACB6A748C80BEF0F8CBB87B4B64ED810EE1A60A47A18A511EFEB52936FBC0986714BB0D725643FE255E39FC3426E9BA8B331C3598B96E9BC18E6E2B86AE1ED7E8E96E8FF1CB7705D3C138C56FF6F07B5F62F1F3199116CB4058E23CD62C79BC840C630BD0FECF59F3D368007A7F12E5A7306DB70E5EEF3430D11FD60745495CB4E0F4167637D1DED0A02DADC28C06E4B97456FCB316163D5C97BE2ECF3A0C1E6BC53C59BF703F1C7187B5D165497AB4337D46A2B15D1811F65F5C46E58D7A85685409C6C2CBB81B397CE341CD33468ED62289C356A82C270258E361C629396012FACD282BDBC7440D6AD7AEDF9C94AF1596FDEA572EA873273",
-        "publickey_exp": "010001", "success": true}'}
+    body:
+      string: !!python/unicode '{"timestamp": 12345678, "token_gid": 0, "publickey_mod":
+        "ddb3f29bd33f38db5947d85dc2e46bf033916d9caa95948a9af1146bf246915b93e66124e025f21588c05549614fe4c1ffa2ec92ea76bf1c580422bc1fc85700cce8dd14ec232e47a03581dc670ecb3a125bc597569384e3ec2707674458c666c563b7a0972deddd855b23884ca76032c2c5a99af6e8debe47aace8d0bdb8fc42bb9758ce8db0765649f78cd4fa4b3d123ed7cbce0c05b57dbb1a8cbb82923c7c9ca8fecab923db2f3a85a05d8c8bf5a1aeed479d3f533b009cce7d9f9ca196397206bdda46fb850a4c4ea7eb3383e419121fac575629e893959175aedc936cb71527958eb308bd555cf0386939b5a3c097fa6156aeef5eb805168b7bdb511fd",
+        "publickey_exp": "010001", "success": true}'
     headers:
-      cache-control: [no-cache]
-      connection: [keep-alive]
-      content-length: ['622']
-      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
-          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
-          https://www.google.com https://www.gstatic.com https://apis.google.com;
-          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
-          https://api.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
-          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
-          https://www.google.com https://sketchfab.com https://help.steampowered.com/;']
-      content-type: [application/json; charset=utf-8]
-      date: ['Sat, 04 Jun 2016 00:05:21 GMT']
-      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
-      server: [Apache]
-      x-frame-options: [DENY]
-    status: {code: 200, message: OK}
+      cache-control:
+      - no-cache
+      connection:
+      - keep-alive
+      content-length:
+      - '616'
+      content-type:
+      - application/json; charset=utf-8
+      server:
+      - nginx
+      vary:
+      - Accept-Encoding
+      x-frame-options:
+      - DENY
+    status:
+      code: 200
+      message: OK
 - request:
-    body: ''
+    body: !!python/unicode ''
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['586']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-steam/0.8.3 python-requests/2.9.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - identity
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '570'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-steam/1.0.0-alpha6 python-requests/2.21.0
     method: POST
     uri: https://steamcommunity.com/login/dologin/
   response:
-    body: {string: !!python/unicode '{"captcha_gid": -1, "success": false, "requires_twofactor":
-        false, "captcha_needed": false, "clear_password_field": true, "message": "Incorrect
-        login."}'}
+    body:
+      string: !!python/unicode '{"captcha_gid": -1, "success": false, "requires_twofactor":
+        false, "captcha_needed": false, "clear_password_field": true, "message": "The
+        account name or password that you have entered is incorrect."}'
     headers:
-      cache-control: [no-cache]
-      connection: [keep-alive]
-      content-length: ['152']
-      content-security-policy: ['script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
-          https://steamcommunity-a.akamaihd.net/ https://api.steampowered.com/ *.google-analytics.com
-          https://www.google.com https://www.gstatic.com https://apis.google.com;
-          object-src ''none''; connect-src ''self'' http://steamcommunity.com https://steamcommunity.com
-          https://api.steampowered.com/; frame-src ''self'' http://store.steampowered.com/
-          https://store.steampowered.com/ http://www.youtube.com https://www.youtube.com
-          https://www.google.com https://sketchfab.com https://help.steampowered.com/;']
-      content-type: [application/json; charset=utf-8]
-      date: ['Sat, 04 Jun 2016 00:05:22 GMT']
-      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
-      server: [Apache]
-      x-frame-options: [DENY]
-    status: {code: 200, message: OK}
+      cache-control:
+      - no-cache
+      connection:
+      - keep-alive
+      content-length:
+      - '200'
+      content-type:
+      - application/json; charset=utf-8
+      server:
+      - nginx
+      vary:
+      - Accept-Encoding
+      x-frame-options:
+      - DENY
+    status:
+      code: 200
+      message: OK
 version: 1
