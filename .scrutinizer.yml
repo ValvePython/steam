@@ -6,7 +6,7 @@ filter:
 tools:
     external_code_coverage:
         timeout: 300
-        runs: 4
+        runs: 6
 
 build:
   nodes:
