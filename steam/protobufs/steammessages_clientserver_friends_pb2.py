@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('H\001\220\001\000'),
-  serialized_pb=_b('\n(steammessages_clientserver_friends.proto\x1a\x18steammessages_base.proto\"\x8a\x01\n\x13\x43MsgClientFriendMsg\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\x0c\x12 \n\x18rtime32_server_timestamp\x18\x04 \x01(\x07\x12\x16\n\x0e\x65\x63ho_to_sender\x18\x05 \x01(\x08\"\x9d\x01\n\x1b\x43MsgClientFriendMsgIncoming\x12\x14\n\x0csteamid_from\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x1c\n\x14\x66rom_limited_account\x18\x03 \x01(\x08\x12\x0f\n\x07message\x18\x04 \x01(\x0c\x12 \n\x18rtime32_server_timestamp\x18\x05 \x01(\x07\"R\n\x13\x43MsgClientAddFriend\x12\x16\n\x0esteamid_to_add\x18\x01 \x01(\x06\x12#\n\x1b\x61\x63\x63ountname_or_email_to_add\x18\x02 \x01(\t\"e\n\x1b\x43MsgClientAddFriendResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x16\n\x0esteam_id_added\x18\x02 \x01(\x06\x12\x1a\n\x12persona_name_added\x18\x03 \x01(\t\"*\n\x16\x43MsgClientRemoveFriend\x12\x10\n\x08\x66riendid\x18\x01 \x01(\x06\"6\n\x14\x43MsgClientHideFriend\x12\x10\n\x08\x66riendid\x18\x01 \x01(\x06\x12\x0c\n\x04hide\x18\x02 \x01(\x08\"\xea\x01\n\x15\x43MsgClientFriendsList\x12\x14\n\x0c\x62incremental\x18\x01 \x01(\x08\x12.\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1d.CMsgClientFriendsList.Friend\x12\x18\n\x10max_friend_count\x18\x03 \x01(\r\x12\x1b\n\x13\x61\x63tive_friend_count\x18\x04 \x01(\r\x12\x19\n\x11\x66riends_limit_hit\x18\x05 \x01(\x08\x1a\x39\n\x06\x46riend\x12\x12\n\nulfriendid\x18\x01 \x01(\x06\x12\x1b\n\x13\x65\x66riendrelationship\x18\x02 \x01(\r\"\xc5\x02\n\x1b\x43MsgClientFriendsGroupsList\x12\x10\n\x08\x62removal\x18\x01 \x01(\x08\x12\x14\n\x0c\x62incremental\x18\x02 \x01(\x08\x12>\n\x0c\x66riendGroups\x18\x03 \x03(\x0b\x32(.CMsgClientFriendsGroupsList.FriendGroup\x12H\n\x0bmemberships\x18\x04 \x03(\x0b\x32\x33.CMsgClientFriendsGroupsList.FriendGroupsMembership\x1a\x35\n\x0b\x46riendGroup\x12\x10\n\x08nGroupID\x18\x01 \x01(\x05\x12\x14\n\x0cstrGroupName\x18\x02 \x01(\t\x1a=\n\x16\x46riendGroupsMembership\x12\x11\n\tulSteamID\x18\x01 \x01(\x06\x12\x10\n\x08nGroupID\x18\x02 \x01(\x05\"\xba\x01\n\x1c\x43MsgClientPlayerNicknameList\x12\x0f\n\x07removal\x18\x01 \x01(\x08\x12\x13\n\x0bincremental\x18\x02 \x01(\x08\x12?\n\tnicknames\x18\x03 \x03(\x0b\x32,.CMsgClientPlayerNicknameList.PlayerNickname\x1a\x33\n\x0ePlayerNickname\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08nickname\x18\x03 \x01(\t\"@\n\x1b\x43MsgClientSetPlayerNickname\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08nickname\x18\x02 \x01(\t\"6\n#CMsgClientSetPlayerNicknameResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"O\n\x1b\x43MsgClientRequestFriendData\x12\x1f\n\x17persona_state_requested\x18\x01 \x01(\r\x12\x0f\n\x07\x66riends\x18\x02 \x03(\x06\"\xef\x01\n\x16\x43MsgClientChangeStatus\x12\x15\n\rpersona_state\x18\x01 \x01(\r\x12\x13\n\x0bplayer_name\x18\x02 \x01(\t\x12\x1e\n\x16is_auto_generated_name\x18\x03 \x01(\x08\x12\x15\n\rhigh_priority\x18\x04 \x01(\x08\x12\x1b\n\x13persona_set_by_user\x18\x05 \x01(\x08\x12\x1e\n\x13persona_state_flags\x18\x06 \x01(\r:\x01\x30\x12\x1d\n\x15need_persona_response\x18\x07 \x01(\x08\x12\x16\n\x0eis_client_idle\x18\x08 \x01(\x08\"@\n\x19\x43MsgPersonaChangeResponse\x12\x0e\n\x06result\x18\x01 \x01(\r\x12\x13\n\x0bplayer_name\x18\x02 \x01(\t\"\xdf\x07\n\x16\x43MsgClientPersonaState\x12\x14\n\x0cstatus_flags\x18\x01 \x01(\r\x12/\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1e.CMsgClientPersonaState.Friend\x1a\xfd\x06\n\x06\x46riend\x12\x10\n\x08\x66riendid\x18\x01 \x01(\x06\x12\x15\n\rpersona_state\x18\x02 \x01(\r\x12\x1a\n\x12game_played_app_id\x18\x03 \x01(\r\x12\x16\n\x0egame_server_ip\x18\x04 \x01(\r\x12\x18\n\x10game_server_port\x18\x05 \x01(\r\x12\x1b\n\x13persona_state_flags\x18\x06 \x01(\r\x12 \n\x18online_session_instances\x18\x07 \x01(\r\x12\x1d\n\x15published_instance_id\x18\x08 \x01(\r\x12\x1b\n\x13persona_set_by_user\x18\n \x01(\x08\x12\x13\n\x0bplayer_name\x18\x0f \x01(\t\x12\x12\n\nquery_port\x18\x14 \x01(\r\x12\x16\n\x0esteamid_source\x18\x19 \x01(\x06\x12\x13\n\x0b\x61vatar_hash\x18\x1f \x01(\x0c\x12\x13\n\x0blast_logoff\x18- \x01(\r\x12\x12\n\nlast_logon\x18. \x01(\r\x12\x18\n\x10last_seen_online\x18/ \x01(\r\x12\x11\n\tclan_rank\x18\x32 \x01(\r\x12\x11\n\tgame_name\x18\x37 \x01(\t\x12\x0e\n\x06gameid\x18\x38 \x01(\x06\x12\x16\n\x0egame_data_blob\x18< \x01(\x0c\x12:\n\tclan_data\x18@ \x01(\x0b\x32\'.CMsgClientPersonaState.Friend.ClanData\x12\x10\n\x08\x63lan_tag\x18\x41 \x01(\t\x12\x38\n\rrich_presence\x18G \x03(\x0b\x32!.CMsgClientPersonaState.Friend.KV\x12\x14\n\x0c\x62roadcast_id\x18H \x01(\x06\x12\x15\n\rgame_lobby_id\x18I \x01(\x06\x12$\n\x1cwatching_broadcast_accountid\x18J \x01(\r\x12 \n\x18watching_broadcast_appid\x18K \x01(\r\x12\"\n\x1awatching_broadcast_viewers\x18L \x01(\r\x12 \n\x18watching_broadcast_title\x18M \x01(\t\x1a\x35\n\x08\x43lanData\x12\x12\n\nogg_app_id\x18\x01 \x01(\r\x12\x15\n\rchat_group_id\x18\x02 \x01(\x04\x1a \n\x02KV\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"5\n\x1b\x43MsgClientFriendProfileInfo\x12\x16\n\x0esteamid_friend\x18\x01 \x01(\x06\"\xda\x01\n#CMsgClientFriendProfileInfoResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x16\n\x0esteamid_friend\x18\x02 \x01(\x06\x12\x14\n\x0ctime_created\x18\x03 \x01(\r\x12\x11\n\treal_name\x18\x04 \x01(\t\x12\x11\n\tcity_name\x18\x05 \x01(\t\x12\x12\n\nstate_name\x18\x06 \x01(\t\x12\x14\n\x0c\x63ountry_name\x18\x07 \x01(\t\x12\x10\n\x08headline\x18\x08 \x01(\t\x12\x0f\n\x07summary\x18\t \x01(\t\"[\n\x1c\x43MsgClientCreateFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x11\n\tgroupname\x18\x02 \x01(\t\x12\x17\n\x0fsteamid_friends\x18\x03 \x03(\x06\"H\n$CMsgClientCreateFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"@\n\x1c\x43MsgClientDeleteFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"7\n$CMsgClientDeleteFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"\x82\x01\n\x1c\x43MsgClientManageFriendsGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x11\n\tgroupname\x18\x02 \x01(\t\x12\x1d\n\x15steamid_friends_added\x18\x03 \x03(\x06\x12\x1f\n\x17steamid_friends_removed\x18\x04 \x03(\x06\"7\n$CMsgClientManageFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1a\x43MsgClientAddFriendToGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\"5\n\"CMsgClientAddFriendToGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"G\n\x1f\x43MsgClientRemoveFriendFromGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\":\n\'CMsgClientRemoveFriendFromGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"\x1b\n\x19\x43MsgClientGetEmoticonList\"\xb8\x01\n\x16\x43MsgClientEmoticonList\x12\x33\n\temoticons\x18\x01 \x03(\x0b\x32 .CMsgClientEmoticonList.Emoticon\x1ai\n\x08\x45moticon\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x16\n\x0etime_last_used\x18\x03 \x01(\r\x12\x11\n\tuse_count\x18\x04 \x01(\r\x12\x15\n\rtime_received\x18\x05 \x01(\rB\x05H\x01\x90\x01\x00')
+  serialized_pb=_b('\n(steammessages_clientserver_friends.proto\x1a\x18steammessages_base.proto\"\x8a\x01\n\x13\x43MsgClientFriendMsg\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\x0c\x12 \n\x18rtime32_server_timestamp\x18\x04 \x01(\x07\x12\x16\n\x0e\x65\x63ho_to_sender\x18\x05 \x01(\x08\"\x9d\x01\n\x1b\x43MsgClientFriendMsgIncoming\x12\x14\n\x0csteamid_from\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x1c\n\x14\x66rom_limited_account\x18\x03 \x01(\x08\x12\x0f\n\x07message\x18\x04 \x01(\x0c\x12 \n\x18rtime32_server_timestamp\x18\x05 \x01(\x07\"R\n\x13\x43MsgClientAddFriend\x12\x16\n\x0esteamid_to_add\x18\x01 \x01(\x06\x12#\n\x1b\x61\x63\x63ountname_or_email_to_add\x18\x02 \x01(\t\"e\n\x1b\x43MsgClientAddFriendResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x16\n\x0esteam_id_added\x18\x02 \x01(\x06\x12\x1a\n\x12persona_name_added\x18\x03 \x01(\t\"*\n\x16\x43MsgClientRemoveFriend\x12\x10\n\x08\x66riendid\x18\x01 \x01(\x06\"6\n\x14\x43MsgClientHideFriend\x12\x10\n\x08\x66riendid\x18\x01 \x01(\x06\x12\x0c\n\x04hide\x18\x02 \x01(\x08\"\xea\x01\n\x15\x43MsgClientFriendsList\x12\x14\n\x0c\x62incremental\x18\x01 \x01(\x08\x12.\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1d.CMsgClientFriendsList.Friend\x12\x18\n\x10max_friend_count\x18\x03 \x01(\r\x12\x1b\n\x13\x61\x63tive_friend_count\x18\x04 \x01(\r\x12\x19\n\x11\x66riends_limit_hit\x18\x05 \x01(\x08\x1a\x39\n\x06\x46riend\x12\x12\n\nulfriendid\x18\x01 \x01(\x06\x12\x1b\n\x13\x65\x66riendrelationship\x18\x02 \x01(\r\"\xc5\x02\n\x1b\x43MsgClientFriendsGroupsList\x12\x10\n\x08\x62removal\x18\x01 \x01(\x08\x12\x14\n\x0c\x62incremental\x18\x02 \x01(\x08\x12>\n\x0c\x66riendGroups\x18\x03 \x03(\x0b\x32(.CMsgClientFriendsGroupsList.FriendGroup\x12H\n\x0bmemberships\x18\x04 \x03(\x0b\x32\x33.CMsgClientFriendsGroupsList.FriendGroupsMembership\x1a\x35\n\x0b\x46riendGroup\x12\x10\n\x08nGroupID\x18\x01 \x01(\x05\x12\x14\n\x0cstrGroupName\x18\x02 \x01(\t\x1a=\n\x16\x46riendGroupsMembership\x12\x11\n\tulSteamID\x18\x01 \x01(\x06\x12\x10\n\x08nGroupID\x18\x02 \x01(\x05\"\xba\x01\n\x1c\x43MsgClientPlayerNicknameList\x12\x0f\n\x07removal\x18\x01 \x01(\x08\x12\x13\n\x0bincremental\x18\x02 \x01(\x08\x12?\n\tnicknames\x18\x03 \x03(\x0b\x32,.CMsgClientPlayerNicknameList.PlayerNickname\x1a\x33\n\x0ePlayerNickname\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08nickname\x18\x03 \x01(\t\"@\n\x1b\x43MsgClientSetPlayerNickname\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08nickname\x18\x02 \x01(\t\"6\n#CMsgClientSetPlayerNicknameResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"O\n\x1b\x43MsgClientRequestFriendData\x12\x1f\n\x17persona_state_requested\x18\x01 \x01(\r\x12\x0f\n\x07\x66riends\x18\x02 \x03(\x06\"\xef\x01\n\x16\x43MsgClientChangeStatus\x12\x15\n\rpersona_state\x18\x01 \x01(\r\x12\x13\n\x0bplayer_name\x18\x02 \x01(\t\x12\x1e\n\x16is_auto_generated_name\x18\x03 \x01(\x08\x12\x15\n\rhigh_priority\x18\x04 \x01(\x08\x12\x1b\n\x13persona_set_by_user\x18\x05 \x01(\x08\x12\x1e\n\x13persona_state_flags\x18\x06 \x01(\r:\x01\x30\x12\x1d\n\x15need_persona_response\x18\x07 \x01(\x08\x12\x16\n\x0eis_client_idle\x18\x08 \x01(\x08\"@\n\x19\x43MsgPersonaChangeResponse\x12\x0e\n\x06result\x18\x01 \x01(\r\x12\x13\n\x0bplayer_name\x18\x02 \x01(\t\"\xc0\x07\n\x16\x43MsgClientPersonaState\x12\x14\n\x0cstatus_flags\x18\x01 \x01(\r\x12/\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x1e.CMsgClientPersonaState.Friend\x1a\xde\x06\n\x06\x46riend\x12\x10\n\x08\x66riendid\x18\x01 \x01(\x06\x12\x15\n\rpersona_state\x18\x02 \x01(\r\x12\x1a\n\x12game_played_app_id\x18\x03 \x01(\r\x12\x16\n\x0egame_server_ip\x18\x04 \x01(\r\x12\x18\n\x10game_server_port\x18\x05 \x01(\r\x12\x1b\n\x13persona_state_flags\x18\x06 \x01(\r\x12 \n\x18online_session_instances\x18\x07 \x01(\r\x12\x1b\n\x13persona_set_by_user\x18\n \x01(\x08\x12\x13\n\x0bplayer_name\x18\x0f \x01(\t\x12\x12\n\nquery_port\x18\x14 \x01(\r\x12\x16\n\x0esteamid_source\x18\x19 \x01(\x06\x12\x13\n\x0b\x61vatar_hash\x18\x1f \x01(\x0c\x12\x13\n\x0blast_logoff\x18- \x01(\r\x12\x12\n\nlast_logon\x18. \x01(\r\x12\x18\n\x10last_seen_online\x18/ \x01(\r\x12\x11\n\tclan_rank\x18\x32 \x01(\r\x12\x11\n\tgame_name\x18\x37 \x01(\t\x12\x0e\n\x06gameid\x18\x38 \x01(\x06\x12\x16\n\x0egame_data_blob\x18< \x01(\x0c\x12:\n\tclan_data\x18@ \x01(\x0b\x32\'.CMsgClientPersonaState.Friend.ClanData\x12\x10\n\x08\x63lan_tag\x18\x41 \x01(\t\x12\x38\n\rrich_presence\x18G \x03(\x0b\x32!.CMsgClientPersonaState.Friend.KV\x12\x14\n\x0c\x62roadcast_id\x18H \x01(\x06\x12\x15\n\rgame_lobby_id\x18I \x01(\x06\x12$\n\x1cwatching_broadcast_accountid\x18J \x01(\r\x12 \n\x18watching_broadcast_appid\x18K \x01(\r\x12\"\n\x1awatching_broadcast_viewers\x18L \x01(\r\x12 \n\x18watching_broadcast_title\x18M \x01(\t\x1a\x35\n\x08\x43lanData\x12\x12\n\nogg_app_id\x18\x01 \x01(\r\x12\x15\n\rchat_group_id\x18\x02 \x01(\x04\x1a \n\x02KV\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"5\n\x1b\x43MsgClientFriendProfileInfo\x12\x16\n\x0esteamid_friend\x18\x01 \x01(\x06\"\xda\x01\n#CMsgClientFriendProfileInfoResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x16\n\x0esteamid_friend\x18\x02 \x01(\x06\x12\x14\n\x0ctime_created\x18\x03 \x01(\r\x12\x11\n\treal_name\x18\x04 \x01(\t\x12\x11\n\tcity_name\x18\x05 \x01(\t\x12\x12\n\nstate_name\x18\x06 \x01(\t\x12\x14\n\x0c\x63ountry_name\x18\x07 \x01(\t\x12\x10\n\x08headline\x18\x08 \x01(\t\x12\x0f\n\x07summary\x18\t \x01(\t\"[\n\x1c\x43MsgClientCreateFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x11\n\tgroupname\x18\x02 \x01(\t\x12\x17\n\x0fsteamid_friends\x18\x03 \x03(\x06\"H\n$CMsgClientCreateFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"@\n\x1c\x43MsgClientDeleteFriendsGroup\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0f\n\x07groupid\x18\x02 \x01(\x05\"7\n$CMsgClientDeleteFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"\x82\x01\n\x1c\x43MsgClientManageFriendsGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x11\n\tgroupname\x18\x02 \x01(\t\x12\x1d\n\x15steamid_friends_added\x18\x03 \x03(\x06\x12\x1f\n\x17steamid_friends_removed\x18\x04 \x03(\x06\"7\n$CMsgClientManageFriendsGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"B\n\x1a\x43MsgClientAddFriendToGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\"5\n\"CMsgClientAddFriendToGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"G\n\x1f\x43MsgClientRemoveFriendFromGroup\x12\x0f\n\x07groupid\x18\x01 \x01(\x05\x12\x13\n\x0bsteamiduser\x18\x02 \x01(\x06\":\n\'CMsgClientRemoveFriendFromGroupResponse\x12\x0f\n\x07\x65result\x18\x01 \x01(\r\"\x1b\n\x19\x43MsgClientGetEmoticonList\"\xcd\x03\n\x16\x43MsgClientEmoticonList\x12\x33\n\temoticons\x18\x01 \x03(\x0b\x32 .CMsgClientEmoticonList.Emoticon\x12\x31\n\x08stickers\x18\x02 \x03(\x0b\x32\x1f.CMsgClientEmoticonList.Sticker\x12/\n\x07\x65\x66\x66\x65\x63ts\x18\x03 \x03(\x0b\x32\x1e.CMsgClientEmoticonList.Effect\x1ai\n\x08\x45moticon\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x16\n\x0etime_last_used\x18\x03 \x01(\r\x12\x11\n\tuse_count\x18\x04 \x01(\r\x12\x15\n\rtime_received\x18\x05 \x01(\r\x1aL\n\x07Sticker\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x15\n\rtime_received\x18\x03 \x01(\r\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\x1a\x61\n\x06\x45\x66\x66\x65\x63t\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x15\n\rtime_received\x18\x03 \x01(\r\x12\x14\n\x0cinfinite_use\x18\x04 \x01(\x08\x12\r\n\x05\x61ppid\x18\x05 \x01(\rB\x05H\x01\x90\x01\x00')
   ,
   dependencies=[steammessages__base__pb2.DESCRIPTOR,])
 
@@ -860,8 +860,8 @@ _CMSGCLIENTPERSONASTATE_FRIEND_CLANDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2828,
-  serialized_end=2881,
+  serialized_start=2797,
+  serialized_end=2850,
 )
 
 _CMSGCLIENTPERSONASTATE_FRIEND_KV = _descriptor.Descriptor(
@@ -897,8 +897,8 @@ _CMSGCLIENTPERSONASTATE_FRIEND_KV = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2883,
-  serialized_end=2915,
+  serialized_start=2852,
+  serialized_end=2884,
 )
 
 _CMSGCLIENTPERSONASTATE_FRIEND = _descriptor.Descriptor(
@@ -958,154 +958,147 @@ _CMSGCLIENTPERSONASTATE_FRIEND = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='published_instance_id', full_name='CMsgClientPersonaState.Friend.published_instance_id', index=7,
-      number=8, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='persona_set_by_user', full_name='CMsgClientPersonaState.Friend.persona_set_by_user', index=8,
+      name='persona_set_by_user', full_name='CMsgClientPersonaState.Friend.persona_set_by_user', index=7,
       number=10, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='player_name', full_name='CMsgClientPersonaState.Friend.player_name', index=9,
+      name='player_name', full_name='CMsgClientPersonaState.Friend.player_name', index=8,
       number=15, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='query_port', full_name='CMsgClientPersonaState.Friend.query_port', index=10,
+      name='query_port', full_name='CMsgClientPersonaState.Friend.query_port', index=9,
       number=20, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='steamid_source', full_name='CMsgClientPersonaState.Friend.steamid_source', index=11,
+      name='steamid_source', full_name='CMsgClientPersonaState.Friend.steamid_source', index=10,
       number=25, type=6, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='avatar_hash', full_name='CMsgClientPersonaState.Friend.avatar_hash', index=12,
+      name='avatar_hash', full_name='CMsgClientPersonaState.Friend.avatar_hash', index=11,
       number=31, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='last_logoff', full_name='CMsgClientPersonaState.Friend.last_logoff', index=13,
+      name='last_logoff', full_name='CMsgClientPersonaState.Friend.last_logoff', index=12,
       number=45, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='last_logon', full_name='CMsgClientPersonaState.Friend.last_logon', index=14,
+      name='last_logon', full_name='CMsgClientPersonaState.Friend.last_logon', index=13,
       number=46, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='last_seen_online', full_name='CMsgClientPersonaState.Friend.last_seen_online', index=15,
+      name='last_seen_online', full_name='CMsgClientPersonaState.Friend.last_seen_online', index=14,
       number=47, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='clan_rank', full_name='CMsgClientPersonaState.Friend.clan_rank', index=16,
+      name='clan_rank', full_name='CMsgClientPersonaState.Friend.clan_rank', index=15,
       number=50, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='game_name', full_name='CMsgClientPersonaState.Friend.game_name', index=17,
+      name='game_name', full_name='CMsgClientPersonaState.Friend.game_name', index=16,
       number=55, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gameid', full_name='CMsgClientPersonaState.Friend.gameid', index=18,
+      name='gameid', full_name='CMsgClientPersonaState.Friend.gameid', index=17,
       number=56, type=6, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='game_data_blob', full_name='CMsgClientPersonaState.Friend.game_data_blob', index=19,
+      name='game_data_blob', full_name='CMsgClientPersonaState.Friend.game_data_blob', index=18,
       number=60, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='clan_data', full_name='CMsgClientPersonaState.Friend.clan_data', index=20,
+      name='clan_data', full_name='CMsgClientPersonaState.Friend.clan_data', index=19,
       number=64, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='clan_tag', full_name='CMsgClientPersonaState.Friend.clan_tag', index=21,
+      name='clan_tag', full_name='CMsgClientPersonaState.Friend.clan_tag', index=20,
       number=65, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rich_presence', full_name='CMsgClientPersonaState.Friend.rich_presence', index=22,
+      name='rich_presence', full_name='CMsgClientPersonaState.Friend.rich_presence', index=21,
       number=71, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='broadcast_id', full_name='CMsgClientPersonaState.Friend.broadcast_id', index=23,
+      name='broadcast_id', full_name='CMsgClientPersonaState.Friend.broadcast_id', index=22,
       number=72, type=6, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='game_lobby_id', full_name='CMsgClientPersonaState.Friend.game_lobby_id', index=24,
+      name='game_lobby_id', full_name='CMsgClientPersonaState.Friend.game_lobby_id', index=23,
       number=73, type=6, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='watching_broadcast_accountid', full_name='CMsgClientPersonaState.Friend.watching_broadcast_accountid', index=25,
+      name='watching_broadcast_accountid', full_name='CMsgClientPersonaState.Friend.watching_broadcast_accountid', index=24,
       number=74, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='watching_broadcast_appid', full_name='CMsgClientPersonaState.Friend.watching_broadcast_appid', index=26,
+      name='watching_broadcast_appid', full_name='CMsgClientPersonaState.Friend.watching_broadcast_appid', index=25,
       number=75, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='watching_broadcast_viewers', full_name='CMsgClientPersonaState.Friend.watching_broadcast_viewers', index=27,
+      name='watching_broadcast_viewers', full_name='CMsgClientPersonaState.Friend.watching_broadcast_viewers', index=26,
       number=76, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='watching_broadcast_title', full_name='CMsgClientPersonaState.Friend.watching_broadcast_title', index=28,
+      name='watching_broadcast_title', full_name='CMsgClientPersonaState.Friend.watching_broadcast_title', index=27,
       number=77, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1124,7 +1117,7 @@ _CMSGCLIENTPERSONASTATE_FRIEND = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=2022,
-  serialized_end=2915,
+  serialized_end=2884,
 )
 
 _CMSGCLIENTPERSONASTATE = _descriptor.Descriptor(
@@ -1161,7 +1154,7 @@ _CMSGCLIENTPERSONASTATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1924,
-  serialized_end=2915,
+  serialized_end=2884,
 )
 
 
@@ -1191,8 +1184,8 @@ _CMSGCLIENTFRIENDPROFILEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2917,
-  serialized_end=2970,
+  serialized_start=2886,
+  serialized_end=2939,
 )
 
 
@@ -1278,8 +1271,8 @@ _CMSGCLIENTFRIENDPROFILEINFORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2973,
-  serialized_end=3191,
+  serialized_start=2942,
+  serialized_end=3160,
 )
 
 
@@ -1323,8 +1316,8 @@ _CMSGCLIENTCREATEFRIENDSGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3193,
-  serialized_end=3284,
+  serialized_start=3162,
+  serialized_end=3253,
 )
 
 
@@ -1361,8 +1354,8 @@ _CMSGCLIENTCREATEFRIENDSGROUPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3286,
-  serialized_end=3358,
+  serialized_start=3255,
+  serialized_end=3327,
 )
 
 
@@ -1399,8 +1392,8 @@ _CMSGCLIENTDELETEFRIENDSGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3360,
-  serialized_end=3424,
+  serialized_start=3329,
+  serialized_end=3393,
 )
 
 
@@ -1430,8 +1423,8 @@ _CMSGCLIENTDELETEFRIENDSGROUPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3426,
-  serialized_end=3481,
+  serialized_start=3395,
+  serialized_end=3450,
 )
 
 
@@ -1482,8 +1475,8 @@ _CMSGCLIENTMANAGEFRIENDSGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3484,
-  serialized_end=3614,
+  serialized_start=3453,
+  serialized_end=3583,
 )
 
 
@@ -1513,8 +1506,8 @@ _CMSGCLIENTMANAGEFRIENDSGROUPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3616,
-  serialized_end=3671,
+  serialized_start=3585,
+  serialized_end=3640,
 )
 
 
@@ -1551,8 +1544,8 @@ _CMSGCLIENTADDFRIENDTOGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3673,
-  serialized_end=3739,
+  serialized_start=3642,
+  serialized_end=3708,
 )
 
 
@@ -1582,8 +1575,8 @@ _CMSGCLIENTADDFRIENDTOGROUPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3741,
-  serialized_end=3794,
+  serialized_start=3710,
+  serialized_end=3763,
 )
 
 
@@ -1620,8 +1613,8 @@ _CMSGCLIENTREMOVEFRIENDFROMGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3796,
-  serialized_end=3867,
+  serialized_start=3765,
+  serialized_end=3836,
 )
 
 
@@ -1651,8 +1644,8 @@ _CMSGCLIENTREMOVEFRIENDFROMGROUPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3869,
-  serialized_end=3927,
+  serialized_start=3838,
+  serialized_end=3896,
 )
 
 
@@ -1675,8 +1668,8 @@ _CMSGCLIENTGETEMOTICONLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3929,
-  serialized_end=3956,
+  serialized_start=3898,
+  serialized_end=3925,
 )
 
 
@@ -1734,8 +1727,117 @@ _CMSGCLIENTEMOTICONLIST_EMOTICON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4038,
-  serialized_end=4143,
+  serialized_start=4107,
+  serialized_end=4212,
+)
+
+_CMSGCLIENTEMOTICONLIST_STICKER = _descriptor.Descriptor(
+  name='Sticker',
+  full_name='CMsgClientEmoticonList.Sticker',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='CMsgClientEmoticonList.Sticker.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='CMsgClientEmoticonList.Sticker.count', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_received', full_name='CMsgClientEmoticonList.Sticker.time_received', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CMsgClientEmoticonList.Sticker.appid', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4214,
+  serialized_end=4290,
+)
+
+_CMSGCLIENTEMOTICONLIST_EFFECT = _descriptor.Descriptor(
+  name='Effect',
+  full_name='CMsgClientEmoticonList.Effect',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='CMsgClientEmoticonList.Effect.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='CMsgClientEmoticonList.Effect.count', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_received', full_name='CMsgClientEmoticonList.Effect.time_received', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='infinite_use', full_name='CMsgClientEmoticonList.Effect.infinite_use', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CMsgClientEmoticonList.Effect.appid', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4292,
+  serialized_end=4389,
 )
 
 _CMSGCLIENTEMOTICONLIST = _descriptor.Descriptor(
@@ -1752,10 +1854,24 @@ _CMSGCLIENTEMOTICONLIST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='stickers', full_name='CMsgClientEmoticonList.stickers', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='effects', full_name='CMsgClientEmoticonList.effects', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_CMSGCLIENTEMOTICONLIST_EMOTICON, ],
+  nested_types=[_CMSGCLIENTEMOTICONLIST_EMOTICON, _CMSGCLIENTEMOTICONLIST_STICKER, _CMSGCLIENTEMOTICONLIST_EFFECT, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -1764,8 +1880,8 @@ _CMSGCLIENTEMOTICONLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3959,
-  serialized_end=4143,
+  serialized_start=3928,
+  serialized_end=4389,
 )
 
 _CMSGCLIENTFRIENDSLIST_FRIEND.containing_type = _CMSGCLIENTFRIENDSLIST
@@ -1783,7 +1899,11 @@ _CMSGCLIENTPERSONASTATE_FRIEND.fields_by_name['rich_presence'].message_type = _C
 _CMSGCLIENTPERSONASTATE_FRIEND.containing_type = _CMSGCLIENTPERSONASTATE
 _CMSGCLIENTPERSONASTATE.fields_by_name['friends'].message_type = _CMSGCLIENTPERSONASTATE_FRIEND
 _CMSGCLIENTEMOTICONLIST_EMOTICON.containing_type = _CMSGCLIENTEMOTICONLIST
+_CMSGCLIENTEMOTICONLIST_STICKER.containing_type = _CMSGCLIENTEMOTICONLIST
+_CMSGCLIENTEMOTICONLIST_EFFECT.containing_type = _CMSGCLIENTEMOTICONLIST
 _CMSGCLIENTEMOTICONLIST.fields_by_name['emoticons'].message_type = _CMSGCLIENTEMOTICONLIST_EMOTICON
+_CMSGCLIENTEMOTICONLIST.fields_by_name['stickers'].message_type = _CMSGCLIENTEMOTICONLIST_STICKER
+_CMSGCLIENTEMOTICONLIST.fields_by_name['effects'].message_type = _CMSGCLIENTEMOTICONLIST_EFFECT
 DESCRIPTOR.message_types_by_name['CMsgClientFriendMsg'] = _CMSGCLIENTFRIENDMSG
 DESCRIPTOR.message_types_by_name['CMsgClientFriendMsgIncoming'] = _CMSGCLIENTFRIENDMSGINCOMING
 DESCRIPTOR.message_types_by_name['CMsgClientAddFriend'] = _CMSGCLIENTADDFRIEND
@@ -2075,12 +2195,28 @@ CMsgClientEmoticonList = _reflection.GeneratedProtocolMessageType('CMsgClientEmo
     # @@protoc_insertion_point(class_scope:CMsgClientEmoticonList.Emoticon)
     ))
   ,
+
+  Sticker = _reflection.GeneratedProtocolMessageType('Sticker', (_message.Message,), dict(
+    DESCRIPTOR = _CMSGCLIENTEMOTICONLIST_STICKER,
+    __module__ = 'steammessages_clientserver_friends_pb2'
+    # @@protoc_insertion_point(class_scope:CMsgClientEmoticonList.Sticker)
+    ))
+  ,
+
+  Effect = _reflection.GeneratedProtocolMessageType('Effect', (_message.Message,), dict(
+    DESCRIPTOR = _CMSGCLIENTEMOTICONLIST_EFFECT,
+    __module__ = 'steammessages_clientserver_friends_pb2'
+    # @@protoc_insertion_point(class_scope:CMsgClientEmoticonList.Effect)
+    ))
+  ,
   DESCRIPTOR = _CMSGCLIENTEMOTICONLIST,
   __module__ = 'steammessages_clientserver_friends_pb2'
   # @@protoc_insertion_point(class_scope:CMsgClientEmoticonList)
   ))
 _sym_db.RegisterMessage(CMsgClientEmoticonList)
 _sym_db.RegisterMessage(CMsgClientEmoticonList.Emoticon)
+_sym_db.RegisterMessage(CMsgClientEmoticonList.Sticker)
+_sym_db.RegisterMessage(CMsgClientEmoticonList.Effect)
 
 
 DESCRIPTOR._options = None

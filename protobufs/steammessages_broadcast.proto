@@ -34,6 +34,7 @@ message CBroadcast_BeginBroadcastSession_Request {
 	optional uint64 rtmp_token = 6;
 	optional bool thumbnail_upload = 7;
 	optional string client_beta = 8;
+	optional uint32 sysid = 9;
 }
 
 message CBroadcast_BeginBroadcastSession_Response {
@@ -59,6 +60,7 @@ message CBroadcast_StartBroadcastUpload_Request {
 	optional uint64 rtmp_token = 5 [default = 0, (description) = "Only set during RTMP uploads; secret key from the user."];
 	optional uint32 upload_ip_address = 6;
 	optional bool is_replay = 7;
+	optional uint32 sysid = 8;
 }
 
 message CBroadcast_StartBroadcastUpload_Response {
@@ -208,6 +210,8 @@ message CBroadcast_PostChatMessage_Request {
 	optional fixed64 chat_id = 1;
 	optional string message = 2;
 	optional uint32 instance_id = 3;
+	optional uint32 language = 4 [default = 0, (description) = "ELanguage of the user posting the message, default is english"];
+	optional string country_code = 5 [(description) = "The two letter country code"];
 }
 
 message CBroadcast_PostChatMessage_Response {
@@ -418,19 +422,20 @@ message CBroadcast_WebRTCGetHostCandidates_Response {
 message CBroadcast_GetBroadcastUploadStats_Request {
 	optional uint32 row_limit = 1 [default = 100, (description) = "How many at maximum to return."];
 	optional uint32 start_time = 2 [default = 0, (description) = "Start time"];
-	optional uint64 upload_id = 3 [(description) = "Optional relay upload ID"];
+	optional uint64 upload_id = 3 [(description) = "Optional relay upload ID - not compatible with session_id"];
 	optional fixed64 steamid = 4 [(description) = "Optional the steamid whose stats you want, otherwise the user logged in - admin only"];
+	optional uint64 session_id = 5 [(description) = "Optional broadcast session ID - not compatiable with upload_id"];
 }
 
 message CBroadcast_GetBroadcastUploadStats_Response {
 	message UploadStats {
-		optional uint32 upload_result = 1;
+		optional uint32 upload_result = 1 [(description) = ""];
 		optional uint32 time_stopped = 2 [(description) = "time broadcast upload stopped"];
 		optional uint32 seconds_uploaded = 3 [(description) = "seconds of vido uploaded"];
 		optional uint32 max_viewers = 4 [(description) = "max concurrent viewers"];
 		optional uint32 resolution_x = 5 [(description) = "horizontal resultion"];
 		optional uint32 resolution_y = 6 [(description) = "vertical resultion"];
-		optional uint32 avg_bandwidth = 7;
+		optional uint32 avg_bandwidth = 7 [(description) = ""];
 		optional uint64 total_bytes = 8 [(description) = "total byte uploaded by broadcaster"];
 		optional uint32 app_id = 9 [(description) = "game broadcasted"];
 		optional uint32 total_unique_viewers = 10 [(description) = "total unique viewers seen"];
@@ -443,6 +448,7 @@ message CBroadcast_GetBroadcastUploadStats_Response {
 		optional uint32 num_representations = 17 [(description) = "number of video represetations"];
 		optional string app_name = 18 [(description) = "game name"];
 		optional bool is_replay = 19 [(description) = "replay of previous recording"];
+		optional uint64 session_id = 20 [(description) = "broadcast session id"];
 	}
 
 	repeated .CBroadcast_GetBroadcastUploadStats_Response.UploadStats upload_stats = 1;
@@ -552,147 +558,195 @@ message CBroadcast_WebRTCAddViewerCandidate_Notification {
 
 service Broadcast {
 	option (service_description) = "Methods for Steam broadcast operations";
+
 	rpc BeginBroadcastSession (.CBroadcast_BeginBroadcastSession_Request) returns (.CBroadcast_BeginBroadcastSession_Response) {
 		option (method_description) = "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast.";
 	}
+
 	rpc EndBroadcastSession (.CBroadcast_EndBroadcastSession_Request) returns (.CBroadcast_EndBroadcastSession_Response) {
 		option (method_description) = "Request from client to stop a broadcast session. Any uploads will terminate.";
 	}
+
 	rpc StartBroadcastUpload (.CBroadcast_StartBroadcastUpload_Request) returns (.CBroadcast_StartBroadcastUpload_Response) {
 		option (method_description) = "Request from client to begin sending video for a broadcast.";
 	}
+
 	rpc NotifyBroadcastUploadStop (.CBroadcast_NotifyBroadcastUploadStop_Notification) returns (.NoResponse) {
 		option (method_description) = "Tells directory that client stopped uploading broadcast";
 	}
+
 	rpc WatchBroadcast (.CBroadcast_WatchBroadcast_Request) returns (.CBroadcast_WatchBroadcast_Response) {
 		option (method_description) = "Request from viewer to watch a broadcast";
 	}
+
 	rpc HeartbeatBroadcast (.CBroadcast_HeartbeatBroadcast_Notification) returns (.NoResponse) {
 		option (method_description) = "Notify directory that user is still watching.";
 	}
+
 	rpc StopWatchingBroadcast (.CBroadcast_StopWatchingBroadcast_Notification) returns (.NoResponse) {
 		option (method_description) = "Request to immediately stop watching a broadcast. Optional Method, if not called, viewer will time out.";
 	}
+
 	rpc GetBroadcastStatus (.CBroadcast_GetBroadcastStatus_Request) returns (.CBroadcast_GetBroadcastStatus_Response) {
 		option (method_description) = "Request from viewer about broadcast details";
 	}
+
 	rpc GetBroadcastThumbnail (.CBroadcast_GetBroadcastThumbnail_Request) returns (.CBroadcast_GetBroadcastThumbnail_Response) {
 		option (method_description) = "Request thumbnail URL for broadcast";
 	}
+
 	rpc InviteToBroadcast (.CBroadcast_InviteToBroadcast_Request) returns (.CBroadcast_InviteToBroadcast_Response) {
 		option (method_description) = "Invites another steam user to watch the caller's broadcast";
 	}
+
 	rpc SendBroadcastStateToServer (.CBroadcast_SendBroadcastStateToServer_Request) returns (.CBroadcast_SendBroadcastStateToServer_Response) {
 		option (method_description) = "Sends users current broadcast state (permissions, game) to the server";
 	}
+
 	rpc NotifyBroadcastSessionHeartbeat (.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification) returns (.NoResponse) {
 		option (method_description) = "Tells directory broadcast session is still available";
 	}
+
 	rpc GetBroadcastChatInfo (.CBroadcast_GetBroadcastChatInfo_Request) returns (.CBroadcast_GetBroadcastChatInfo_Response) {
 		option (method_description) = "Gets chat room info for a broadcast";
 	}
+
 	rpc PostChatMessage (.CBroadcast_PostChatMessage_Request) returns (.CBroadcast_PostChatMessage_Response) {
 		option (method_description) = "Post chat message to specified chat room";
 	}
+
 	rpc UpdateChatMessageFlair (.CBroadcast_UpdateChatMessageFlair_Request) returns (.CBroadcast_UpdateChatMessageFlair_Response) {
 		option (method_description) = "Update chat message flair in the specified chat room";
 	}
+
 	rpc MuteBroadcastChatUser (.CBroadcast_MuteBroadcastChatUser_Request) returns (.CBroadcast_MuteBroadcastChatUser_Response) {
 		option (method_description) = "Mute a user in your broadcast chat";
 	}
+
 	rpc RemoveUserChatText (.CBroadcast_RemoveUserChatText_Request) returns (.CBroadcast_RemoveUserChatText_Response) {
 		option (method_description) = "Tell all viewers to remove user chat text";
 	}
+
 	rpc GetBroadcastChatUserNames (.CBroadcast_GetBroadcastChatUserNames_Request) returns (.CBroadcast_GetBroadcastChatUserNames_Response) {
 		option (method_description) = "Get names for list of users in chat";
 	}
+
 	rpc StartBuildClip (.CBroadcast_StartBuildClip_Request) returns (.CBroadcast_StartBuildClip_Response) {
 		option (method_description) = "Start building a broadcast clip";
 	}
+
 	rpc GetBuildClipStatus (.CBroadcast_GetBuildClipStatus_Request) returns (.CBroadcast_GetBuildClipStatus_Response) {
 		option (method_description) = "Start building a broadcast clip";
 	}
+
 	rpc SetClipDetails (.CBroadcast_SetClipDetails_Request) returns (.CBroadcast_SetClipDetails_Response) {
 		option (method_description) = "Updates a broadcast clip";
 	}
+
 	rpc GetClipDetails (.CBroadcast_GetClipDetails_Request) returns (.CBroadcast_GetClipDetails_Response) {
 		option (method_description) = "Get details for Broadcast Clips";
 	}
+
 	rpc SetRTMPInfo (.CBroadcast_SetRTMPInfo_Request) returns (.CBroadcast_SetRTMPInfo_Response) {
 		option (method_description) = "Sets RTMP broadcast info";
 	}
+
 	rpc GetRTMPInfo (.CBroadcast_GetRTMPInfo_Request) returns (.CBroadcast_GetRTMPInfo_Response) {
 		option (method_description) = "Gets RTMP broadcast info";
 	}
+
 	rpc NotifyWebRTCHaveTURNServer (.CBroadcast_WebRTCHaveTURNServer_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from client to server with the client's TURN server";
 	}
+
 	rpc WebRTCStartResult (.CBroadcast_WebRTCStartResult_Request) returns (.CBroadcast_WebRTCStartResult_Response) {
 		option (method_description) = "Notify the server that a WebRTC session has been created by the host";
 	}
+
 	rpc WebRTCStopped (.CBroadcast_WebRTCStopped_Request) returns (.CBroadcast_WebRTCStopped_Response) {
 		option (method_description) = "Notify the server that a WebRTC session has been stopped by the host";
 	}
+
 	rpc WebRTCSetAnswer (.CBroadcast_WebRTCSetAnswer_Request) returns (.CBroadcast_WebRTCSetAnswer_Response) {
 		option (method_description) = "Notify the server that a WebRTC session has been created by the viewer";
 	}
+
 	rpc WebRTCLookupTURNServer (.CBroadcast_WebRTCLookupTURNServer_Request) returns (.CBroadcast_WebRTCLookupTURNServer_Response) {
 		option (method_description) = "Lookup the best TURN server for this client";
 	}
+
 	rpc WebRTCAddHostCandidate (.CBroadcast_WebRTCAddHostCandidate_Request) returns (.CBroadcast_WebRTCAddHostCandidate_Response) {
 		option (method_description) = "Add an ICE candidate for the host side of a WebRTC session";
 	}
+
 	rpc WebRTCAddViewerCandidate (.CBroadcast_WebRTCAddViewerCandidate_Request) returns (.CBroadcast_WebRTCAddViewerCandidate_Response) {
 		option (method_description) = "Add an ICE candidate for the viewer side of a WebRTC session";
 	}
+
 	rpc WebRTCGetHostCandidates (.CBroadcast_WebRTCGetHostCandidates_Request) returns (.CBroadcast_WebRTCGetHostCandidates_Response) {
 		option (method_description) = "Get the ICE candidates for the host side of a WebRTC session";
 	}
+
 	rpc GetBroadcastUploadStats (.CBroadcast_GetBroadcastUploadStats_Request) returns (.CBroadcast_GetBroadcastUploadStats_Response) {
 		option (method_description) = "Gets broadcast upload stats for user";
 	}
+
 	rpc GetBroadcastViewerStats (.CBroadcast_GetBroadcastViewerStats_Request) returns (.CBroadcast_GetBroadcastViewerStats_Response) {
 		option (method_description) = "Gets viewer stats for given broadcast";
 	}
 }
+
 service BroadcastClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
 	rpc NotifyBroadcastViewerState (.CBroadcast_BroadcastViewerState_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that a viewers state has changed";
 	}
+
 	rpc NotifyWaitingBroadcastViewer (.CBroadcast_WaitingBroadcastViewer_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client one or more users is waiting for user to start broadcast";
 	}
+
 	rpc NotifyBroadcastUploadStarted (.CBroadcast_BroadcastUploadStarted_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client with information about a broadcast";
 	}
+
 	rpc NotifyStopBroadcastUpload (.CBroadcast_StopBroadcastUpload_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast";
 	}
+
 	rpc NotifySessionClosed (.CBroadcast_SessionClosed_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client telling it a session has been closed unexpectedly by the directory";
 	}
+
 	rpc NotifyViewerBroadcastInvite (.CBroadcast_ViewerBroadcastInvite_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast";
 	}
+
 	rpc NotifyBroadcastStatus (.CBroadcast_BroadcastStatus_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client about current broadcast status";
 	}
+
 	rpc NotifyBroadcastChannelLive (.CBroadcast_BroadcastChannelLive_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client about current broadcast status";
 	}
+
 	rpc SendThumbnailToRelay (.CBroadcast_SendThumbnailToRelay_Notification) returns (.NoResponse) {
 		option (method_description) = "Send thumbnails to relay";
 	}
+
 	rpc NotifyWebRTCNeedTURNServer (.CBroadcast_WebRTCNeedTURNServer_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that it needs the client's TURN server";
 	}
+
 	rpc NotifyWebRTCStart (.CBroadcast_WebRTCStart_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that it should start a WebRTC session";
 	}
+
 	rpc NotifyWebRTCSetAnswer (.CBroadcast_WebRTCSetAnswer_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client about the broadcast viewer WebRTC answer";
 	}
+
 	rpc NotifyWebRTCAddViewerCandidate (.CBroadcast_WebRTCAddViewerCandidate_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client about a broadcast viewer WebRTC ICE candidate";
 	}

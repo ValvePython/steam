@@ -21,12 +21,39 @@ enum EExternalAccountType {
 	k_EExternalFacebookPage = 7;
 }
 
+message CUserAccount_GetAvailableValveDiscountPromotions_Request {
+	optional string country_code = 1;
+}
+
+message CUserAccount_GetAvailableValveDiscountPromotions_Response {
+	message ValveDiscountPromotionDetails {
+		optional uint32 promotionid = 1;
+		optional string promotion_description = 2;
+		optional int64 minimum_cart_amount = 3;
+		optional int64 minimum_cart_amount_for_display = 4;
+		optional int64 discount_amount = 5;
+		optional int32 currency_code = 6;
+		optional int32 available_use_count = 7;
+		optional int32 promotional_discount_type = 8;
+		optional int32 loyalty_reward_id = 9;
+	}
+
+	repeated .CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails promotions = 1;
+}
+
 message CUserAccount_GetAccountLinkStatus_Request {
 }
 
 message CUserAccount_GetAccountLinkStatus_Response {
 	optional uint32 pwid = 1;
 	optional uint32 identity_verification = 2;
+}
+
+message CUserAccount_CancelLicenseForApp_Request {
+	optional uint32 appid = 1;
+}
+
+message CUserAccount_CancelLicenseForApp_Response {
 }
 
 message CUserAccount_CreateFriendInviteToken_Request {
@@ -108,6 +135,7 @@ message CEmbeddedClient_AuthorizeCurrentDevice_Request {
 	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
 	optional string device_info = 3;
+	optional uint32 deviceid = 4;
 }
 
 message CEmbeddedClient_Token {
@@ -124,36 +152,55 @@ message CEmbeddedClient_AuthorizeDevice_Response {
 
 service UserAccount {
 	option (service_description) = "A service to get user account information";
+
+	rpc GetAvailableValveDiscountPromotions (.CUserAccount_GetAvailableValveDiscountPromotions_Request) returns (.CUserAccount_GetAvailableValveDiscountPromotions_Response) {
+		option (method_description) = "Gets the available promotional discounts available to the user";
+	}
+
 	rpc GetAccountLinkStatus (.CUserAccount_GetAccountLinkStatus_Request) returns (.CUserAccount_GetAccountLinkStatus_Response) {
 		option (method_description) = "Fetches account link status";
 	}
+
+	rpc CancelLicenseForApp (.CUserAccount_CancelLicenseForApp_Request) returns (.CUserAccount_CancelLicenseForApp_Response) {
+		option (method_description) = "Cancels a free license for a user";
+	}
+
 	rpc CreateFriendInviteToken (.CUserAccount_CreateFriendInviteToken_Request) returns (.CUserAccount_CreateFriendInviteToken_Response) {
 		option (method_description) = "Create a limited-use token that can be used to create a friend request";
 	}
+
 	rpc GetFriendInviteTokens (.CUserAccount_GetFriendInviteTokens_Request) returns (.CUserAccount_GetFriendInviteTokens_Response) {
 		option (method_description) = "Get the set of active tokens for the user";
 	}
+
 	rpc ViewFriendInviteToken (.CUserAccount_ViewFriendInviteToken_Request) returns (.CUserAccount_ViewFriendInviteToken_Response) {
 		option (method_description) = "View details about an invite token ";
 	}
+
 	rpc RedeemFriendInviteToken (.CUserAccount_RedeemFriendInviteToken_Request) returns (.CUserAccount_RedeemFriendInviteToken_Response) {
 		option (method_description) = "Create a friend relationship using the given invite token";
 	}
+
 	rpc RevokeFriendInviteToken (.CUserAccount_RevokeFriendInviteToken_Request) returns (.CUserAccount_RevokeFriendInviteToken_Response) {
 		option (method_description) = "Revoke an active friend invite token";
 	}
+
 	rpc RegisterCompatTool (.CUserAccount_RegisterCompatTool_Request) returns (.CUserAccount_RegisterCompatTool_Response) {
 		option (method_description) = "Register intended account usage of a tool";
 	}
 }
+
 service AccountLinking {
 	option (service_description) = "A service to manage and link to external accounts";
+
 	rpc GetLinkedAccountInfo (.CAccountLinking_GetLinkedAccountInfo_Request) returns (.CAccountLinking_GetLinkedAccountInfo_Response) {
 		option (method_description) = "List all my active linked external accounts; may be requested to return the access token";
 	}
 }
+
 service EmbeddedClient {
 	option (service_description) = "Service to authorize and manage Steam functions directly embedded in games";
+
 	rpc AuthorizeCurrentDevice (.CEmbeddedClient_AuthorizeCurrentDevice_Request) returns (.CEmbeddedClient_AuthorizeDevice_Response) {
 		option (method_description) = "Use a logged-in (password/etc) session to create a durable access token";
 	}

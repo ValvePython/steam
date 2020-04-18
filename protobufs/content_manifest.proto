@@ -54,4 +54,3 @@ message ContentDeltaChunks {
 	optional uint64 manifest_id_target = 3;
 	repeated .ContentDeltaChunks.DeltaChunk deltaChunks = 4;
 }
-

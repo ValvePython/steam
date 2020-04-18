@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x19steammessages_store.proto\x1a steammessages_unified_base.proto\"J\n&CStore_GetLocalizedNameForTags_Request\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x0e\n\x06tagids\x18\x02 \x03(\r\"\x9f\x01\n\'CStore_GetLocalizedNameForTags_Response\x12:\n\x04tags\x18\x01 \x03(\x0b\x32,.CStore_GetLocalizedNameForTags_Response.Tag\x1a\x38\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x14\n\x0c\x65nglish_name\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"$\n\"CStore_GetStorePreferences_Request\"\xb1\x03\n\x16\x43Store_UserPreferences\x12\x18\n\x10primary_language\x18\x01 \x01(\r\x12\x1b\n\x13secondary_languages\x18\x02 \x01(\r\x12\x18\n\x10platform_windows\x18\x03 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x04 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x05 \x01(\x08\x12#\n\x1bhide_adult_content_violence\x18\x06 \x01(\x08\x12\x1e\n\x16hide_adult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x1c\n\x14hide_store_broadcast\x18\t \x01(\x08\x12`\n\x17review_score_preference\x18\n \x01(\x0e\x32\x1b.EUserReviewScorePreference:\"k_EUserReviewScorePreference_Unset\x12\x38\n0timestamp_content_descriptor_preferences_updated\x18\x0b \x01(\x05\"\x91\x01\n\x19\x43Store_UserTagPreferences\x12\x37\n\x0ftags_to_exclude\x18\x01 \x03(\x0b\x32\x1e.CStore_UserTagPreferences.Tag\x1a;\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0ftimestamp_added\x18\x03 \x01(\r\"\xd9\x01\n\'CStore_UserContentDescriptorPreferences\x12\x62\n\x1e\x63ontent_descriptors_to_exclude\x18\x01 \x03(\x0b\x32:.CStore_UserContentDescriptorPreferences.ContentDescriptor\x1aJ\n\x11\x43ontentDescriptor\x12\x1c\n\x14\x63ontent_descriptorid\x18\x01 \x01(\r\x12\x17\n\x0ftimestamp_added\x18\x02 \x01(\r\"\xda\x01\n#CStore_GetStorePreferences_Response\x12,\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x17.CStore_UserPreferences\x12\x33\n\x0ftag_preferences\x18\x02 \x01(\x0b\x32\x1a.CStore_UserTagPreferences\x12P\n\x1e\x63ontent_descriptor_preferences\x18\x03 \x01(\x0b\x32(.CStore_UserContentDescriptorPreferences*\xa0\x01\n\x1a\x45UserReviewScorePreference\x12&\n\"k_EUserReviewScorePreference_Unset\x10\x00\x12+\n\'k_EUserReviewScorePreference_IncludeAll\x10\x01\x12-\n)k_EUserReviewScorePreference_ExcludeBombs\x10\x02\x32\xf9\x02\n\x05Store\x12\x98\x01\n\x17GetLocalizedNameForTags\x12\'.CStore_GetLocalizedNameForTags_Request\x1a(.CStore_GetLocalizedNameForTags_Response\"*\x82\xb5\x18&Gets tag names in a different language\x12\xaf\x01\n\x13GetStorePreferences\x12#.CStore_GetStorePreferences_Request\x1a$.CStore_GetStorePreferences_Response\"M\x82\xb5\x18IReturns the desired ratings board and maximum rating to show on the store\x1a#\x82\xb5\x18\x1f\x41 service to access store data.B\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x19steammessages_store.proto\x1a steammessages_unified_base.proto\"J\n&CStore_GetLocalizedNameForTags_Request\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x0e\n\x06tagids\x18\x02 \x03(\r\"\x9f\x01\n\'CStore_GetLocalizedNameForTags_Response\x12:\n\x04tags\x18\x01 \x03(\x0b\x32,.CStore_GetLocalizedNameForTags_Response.Tag\x1a\x38\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x14\n\x0c\x65nglish_name\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"$\n\"CStore_GetStorePreferences_Request\"\xb1\x03\n\x16\x43Store_UserPreferences\x12\x18\n\x10primary_language\x18\x01 \x01(\r\x12\x1b\n\x13secondary_languages\x18\x02 \x01(\r\x12\x18\n\x10platform_windows\x18\x03 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x04 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x05 \x01(\x08\x12#\n\x1bhide_adult_content_violence\x18\x06 \x01(\x08\x12\x1e\n\x16hide_adult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x1c\n\x14hide_store_broadcast\x18\t \x01(\x08\x12`\n\x17review_score_preference\x18\n \x01(\x0e\x32\x1b.EUserReviewScorePreference:\"k_EUserReviewScorePreference_Unset\x12\x38\n0timestamp_content_descriptor_preferences_updated\x18\x0b \x01(\x05\"\x91\x01\n\x19\x43Store_UserTagPreferences\x12\x37\n\x0ftags_to_exclude\x18\x01 \x03(\x0b\x32\x1e.CStore_UserTagPreferences.Tag\x1a;\n\x03Tag\x12\r\n\x05tagid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0ftimestamp_added\x18\x03 \x01(\r\"\xd9\x01\n\'CStore_UserContentDescriptorPreferences\x12\x62\n\x1e\x63ontent_descriptors_to_exclude\x18\x01 \x03(\x0b\x32:.CStore_UserContentDescriptorPreferences.ContentDescriptor\x1aJ\n\x11\x43ontentDescriptor\x12\x1c\n\x14\x63ontent_descriptorid\x18\x01 \x01(\r\x12\x17\n\x0ftimestamp_added\x18\x02 \x01(\r\"\xda\x01\n#CStore_GetStorePreferences_Response\x12,\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x17.CStore_UserPreferences\x12\x33\n\x0ftag_preferences\x18\x02 \x01(\x0b\x32\x1a.CStore_UserTagPreferences\x12P\n\x1e\x63ontent_descriptor_preferences\x18\x03 \x01(\x0b\x32(.CStore_UserContentDescriptorPreferences\"\xe2\x01\n+CStore_StorePreferencesChanged_Notification\x12,\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x17.CStore_UserPreferences\x12\x33\n\x0ftag_preferences\x18\x02 \x01(\x0b\x32\x1a.CStore_UserTagPreferences\x12P\n\x1e\x63ontent_descriptor_preferences\x18\x03 \x01(\x0b\x32(.CStore_UserContentDescriptorPreferences*\xa0\x01\n\x1a\x45UserReviewScorePreference\x12&\n\"k_EUserReviewScorePreference_Unset\x10\x00\x12+\n\'k_EUserReviewScorePreference_IncludeAll\x10\x01\x12-\n)k_EUserReviewScorePreference_ExcludeBombs\x10\x02\x32\xf9\x02\n\x05Store\x12\x98\x01\n\x17GetLocalizedNameForTags\x12\'.CStore_GetLocalizedNameForTags_Request\x1a(.CStore_GetLocalizedNameForTags_Response\"*\x82\xb5\x18&Gets tag names in a different language\x12\xaf\x01\n\x13GetStorePreferences\x12#.CStore_GetStorePreferences_Request\x1a$.CStore_GetStorePreferences_Response\"M\x82\xb5\x18IReturns the desired ratings board and maximum rating to show on the store\x1a#\x82\xb5\x18\x1f\x41 service to access store data.2\xee\x01\n\x0bStoreClient\x12\xb1\x01\n\x1dNotifyStorePreferencesChanged\x12,.CStore_StorePreferencesChanged_Notification\x1a\x0b.NoResponse\"U\x82\xb5\x18QNotification from server to client that the user\'s store preferences have changed\x1a+\x82\xb5\x18#Steam store to client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -49,8 +49,8 @@ _EUSERREVIEWSCOREPREFERENCE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1365,
-  serialized_end=1525,
+  serialized_start=1594,
+  serialized_end=1754,
 )
 _sym_db.RegisterEnumDescriptor(_EUSERREVIEWSCOREPREFERENCE)
 
@@ -486,6 +486,51 @@ _CSTORE_GETSTOREPREFERENCES_RESPONSE = _descriptor.Descriptor(
   serialized_end=1362,
 )
 
+
+_CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION = _descriptor.Descriptor(
+  name='CStore_StorePreferencesChanged_Notification',
+  full_name='CStore_StorePreferencesChanged_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='preferences', full_name='CStore_StorePreferencesChanged_Notification.preferences', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag_preferences', full_name='CStore_StorePreferencesChanged_Notification.tag_preferences', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='content_descriptor_preferences', full_name='CStore_StorePreferencesChanged_Notification.content_descriptor_preferences', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1365,
+  serialized_end=1591,
+)
+
 _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE_TAG.containing_type = _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE
 _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE.fields_by_name['tags'].message_type = _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE_TAG
 _CSTORE_USERPREFERENCES.fields_by_name['review_score_preference'].enum_type = _EUSERREVIEWSCOREPREFERENCE
@@ -496,6 +541,9 @@ _CSTORE_USERCONTENTDESCRIPTORPREFERENCES.fields_by_name['content_descriptors_to_
 _CSTORE_GETSTOREPREFERENCES_RESPONSE.fields_by_name['preferences'].message_type = _CSTORE_USERPREFERENCES
 _CSTORE_GETSTOREPREFERENCES_RESPONSE.fields_by_name['tag_preferences'].message_type = _CSTORE_USERTAGPREFERENCES
 _CSTORE_GETSTOREPREFERENCES_RESPONSE.fields_by_name['content_descriptor_preferences'].message_type = _CSTORE_USERCONTENTDESCRIPTORPREFERENCES
+_CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION.fields_by_name['preferences'].message_type = _CSTORE_USERPREFERENCES
+_CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION.fields_by_name['tag_preferences'].message_type = _CSTORE_USERTAGPREFERENCES
+_CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION.fields_by_name['content_descriptor_preferences'].message_type = _CSTORE_USERCONTENTDESCRIPTORPREFERENCES
 DESCRIPTOR.message_types_by_name['CStore_GetLocalizedNameForTags_Request'] = _CSTORE_GETLOCALIZEDNAMEFORTAGS_REQUEST
 DESCRIPTOR.message_types_by_name['CStore_GetLocalizedNameForTags_Response'] = _CSTORE_GETLOCALIZEDNAMEFORTAGS_RESPONSE
 DESCRIPTOR.message_types_by_name['CStore_GetStorePreferences_Request'] = _CSTORE_GETSTOREPREFERENCES_REQUEST
@@ -503,6 +551,7 @@ DESCRIPTOR.message_types_by_name['CStore_UserPreferences'] = _CSTORE_USERPREFERE
 DESCRIPTOR.message_types_by_name['CStore_UserTagPreferences'] = _CSTORE_USERTAGPREFERENCES
 DESCRIPTOR.message_types_by_name['CStore_UserContentDescriptorPreferences'] = _CSTORE_USERCONTENTDESCRIPTORPREFERENCES
 DESCRIPTOR.message_types_by_name['CStore_GetStorePreferences_Response'] = _CSTORE_GETSTOREPREFERENCES_RESPONSE
+DESCRIPTOR.message_types_by_name['CStore_StorePreferencesChanged_Notification'] = _CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION
 DESCRIPTOR.enum_types_by_name['EUserReviewScorePreference'] = _EUSERREVIEWSCOREPREFERENCE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -579,6 +628,13 @@ CStore_GetStorePreferences_Response = _reflection.GeneratedProtocolMessageType('
   ))
 _sym_db.RegisterMessage(CStore_GetStorePreferences_Response)
 
+CStore_StorePreferencesChanged_Notification = _reflection.GeneratedProtocolMessageType('CStore_StorePreferencesChanged_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION,
+  __module__ = 'steammessages_store_pb2'
+  # @@protoc_insertion_point(class_scope:CStore_StorePreferencesChanged_Notification)
+  ))
+_sym_db.RegisterMessage(CStore_StorePreferencesChanged_Notification)
+
 
 DESCRIPTOR._options = None
 
@@ -588,8 +644,8 @@ _STORE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030\037A service to access store data.'),
-  serialized_start=1528,
-  serialized_end=1905,
+  serialized_start=1757,
+  serialized_end=2134,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLocalizedNameForTags',
@@ -614,6 +670,30 @@ _sym_db.RegisterServiceDescriptor(_STORE)
 
 DESCRIPTOR.services_by_name['Store'] = _STORE
 
+
+_STORECLIENT = _descriptor.ServiceDescriptor(
+  name='StoreClient',
+  full_name='StoreClient',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=_b('\202\265\030#Steam store to client notifications\300\265\030\002'),
+  serialized_start=2137,
+  serialized_end=2375,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='NotifyStorePreferencesChanged',
+    full_name='StoreClient.NotifyStorePreferencesChanged',
+    index=0,
+    containing_service=None,
+    input_type=_CSTORE_STOREPREFERENCESCHANGED_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=_b('\202\265\030QNotification from server to client that the user\'s store preferences have changed'),
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_STORECLIENT)
+
+DESCRIPTOR.services_by_name['StoreClient'] = _STORECLIENT
+
 Store = service_reflection.GeneratedServiceType('Store', (_service.Service,), dict(
   DESCRIPTOR = _STORE,
   __module__ = 'steammessages_store_pb2'
@@ -621,6 +701,17 @@ Store = service_reflection.GeneratedServiceType('Store', (_service.Service,), di
 
 Store_Stub = service_reflection.GeneratedServiceStubType('Store_Stub', (Store,), dict(
   DESCRIPTOR = _STORE,
+  __module__ = 'steammessages_store_pb2'
+  ))
+
+
+StoreClient = service_reflection.GeneratedServiceType('StoreClient', (_service.Service,), dict(
+  DESCRIPTOR = _STORECLIENT,
+  __module__ = 'steammessages_store_pb2'
+  ))
+
+StoreClient_Stub = service_reflection.GeneratedServiceStubType('StoreClient_Stub', (StoreClient,), dict(
+  DESCRIPTOR = _STORECLIENT,
   __module__ = 'steammessages_store_pb2'
   ))
 

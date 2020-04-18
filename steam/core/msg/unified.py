@@ -38,6 +38,7 @@ service_lookup = {
     'SiteLicense':               'steam.protobufs.steammessages_site_license_pb2',
     'SiteManagerClient':         'steam.protobufs.steammessages_site_license_pb2',
     'Store':                     'steam.protobufs.steammessages_store_pb2',
+    'StoreClient':               'steam.protobufs.steammessages_store_pb2',
     'TwoFactor':                 'steam.protobufs.steammessages_twofactor_pb2',
     'AccountLinking':            'steam.protobufs.steammessages_useraccount_pb2',
     'EmbeddedClient':            'steam.protobufs.steammessages_useraccount_pb2',

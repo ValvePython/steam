@@ -46,12 +46,15 @@ message CShader_GetBucketManifest_Response {
 
 service Shader {
 	option (service_description) = "Shader methods";
+
 	rpc RegisterShader (.CShader_RegisterShader_Request) returns (.CShader_RegisterShader_Response) {
 		option (method_description) = "Client just finished playing a game, detected new shader cache entries and is notifying us about them";
 	}
+
 	rpc SendShader (.CShader_SendShader_Request) returns (.CShader_SendShader_Response) {
 		option (method_description) = "Client is sending us actual compiled shader code that we requested";
 	}
+
 	rpc GetBucketManifest (.CShader_GetBucketManifest_Request) returns (.CShader_GetBucketManifest_Response) {
 		option (method_description) = "Client wants to know the manifest ID to fetch (if any) for a bucket's depot";
 	}

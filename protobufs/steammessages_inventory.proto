@@ -140,55 +140,72 @@ message CInventoryClient_NewItems_Notification {
 
 service Inventory {
 	option (service_description) = "A service that provides access to inventory";
+
 	rpc GetInventory (.CInventory_GetInventory_Request) returns (.CInventory_Response) {
 		option (method_description) = "Retrieves a users inventory as a big JSON blob";
 	}
+
 	rpc ExchangeItem (.CInventory_ExchangeItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Craft an item in a user's inventory";
 	}
+
 	rpc GetEligiblePromoItemDefIDs (.CInventory_GetEligiblePromoItemDefIDs_Request) returns (.CInventory_GetEligiblePromoItemDefIDs_Response) {
 		option (method_description) = "Returns a list of promo item defs the user is eligible for";
 	}
+
 	rpc AddPromoItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Adds a promo item to a user's inventory";
 	}
+
 	rpc SafeModifyItems (.CInventory_ModifyItems_Request) returns (.CInventory_Response) {
 		option (method_description) = "Modify an item in a user's inventory (safe properties only)";
 	}
+
 	rpc ConsumePlaytime (.CInventory_ConsumePlaytime_Request) returns (.CInventory_Response) {
 		option (method_description) = "Consumes playtime and possibly returns a granted item";
 	}
+
 	rpc ConsumeItem (.CInventory_ConsumeItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Consume an item";
 	}
+
 	rpc DevGenerateItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Grant an item when in developer mode";
 	}
+
 	rpc DevSetNextDrop (.CInventory_DevSetNextDrop_Request) returns (.CInventory_Response) {
 		option (method_description) = "Consume an item";
 	}
+
 	rpc SplitItemStack (.CInventory_SplitItemStack_Request) returns (.CInventory_Response) {
 		option (method_description) = "Split an item stack into two stacks";
 	}
+
 	rpc CombineItemStacks (.CInventory_CombineItemStacks_Request) returns (.CInventory_Response) {
 		option (method_description) = "Combine two stacks of items";
 	}
+
 	rpc GetItemDefMeta (.CInventory_GetItemDefMeta_Request) returns (.CInventory_GetItemDefMeta_Response) {
 		option (method_description) = "Get metadata about the current item definition for this game.";
 	}
+
 	rpc GetUserPurchaseInfo (.CInventory_GetUserPurchaseInfo_Request) returns (.CInventory_GetUserPurchaseInfo_Response) {
 		option (method_description) = "Returns information about the user such as their currency";
 	}
+
 	rpc PurchaseInit (.CInventory_PurchaseInit_Request) returns (.CInventory_PurchaseInit_Response) {
 		option (method_description) = "Initializes a purchase for the user";
 	}
+
 	rpc PurchaseFinalize (.CInventory_PurchaseFinalize_Request) returns (.CInventory_Response) {
 		option (method_description) = "Finalizes a purchase for the user";
 	}
 }
+
 service InventoryClient {
 	option (service_description) = "Client notifications inventory service events";
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
 	rpc NotifyNewItems (.CInventoryClient_NewItems_Notification) returns (.NoResponse) {
 		option (method_description) = "Notify client that the user received new items";
 	}

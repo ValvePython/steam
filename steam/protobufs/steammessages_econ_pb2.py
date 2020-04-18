@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x18steammessages_econ.proto\x1a steammessages_unified_base.proto\"D\n&CEcon_GetTradeOfferAccessToken_Request\x12\x1a\n\x12generate_new_token\x18\x01 \x01(\x08\"K\n\'CEcon_GetTradeOfferAccessToken_Response\x12 \n\x18trade_offer_access_token\x18\x01 \x01(\t\"C\n-CEcon_ClientGetItemShopOverlayAuthURL_Request\x12\x12\n\nreturn_url\x18\x01 \x01(\t\"=\n.CEcon_ClientGetItemShopOverlayAuthURL_Response\x12\x0b\n\x03url\x18\x01 \x01(\t\"\xa9\x01\n\x1f\x43\x45\x63on_GetAssetClassInfo_Request\x12\x10\n\x08language\x18\x01 \x01(\t\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x37\n\x07\x63lasses\x18\x03 \x03(\x0b\x32&.CEcon_GetAssetClassInfo_Request.Class\x1a,\n\x05\x43lass\x12\x0f\n\x07\x63lassid\x18\x01 \x01(\x04\x12\x12\n\ninstanceid\x18\x02 \x01(\x04\"V\n\x19\x43\x45\x63onItem_DescriptionLine\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\r\n\x05\x63olor\x18\x03 \x01(\t\x12\r\n\x05label\x18\x04 \x01(\t\".\n\x10\x43\x45\x63onItem_Action\x12\x0c\n\x04link\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x92\x06\n\x15\x43\x45\x63onItem_Description\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x0f\n\x07\x63lassid\x18\x02 \x01(\x04\x12\x12\n\ninstanceid\x18\x03 \x01(\x04\x12\x10\n\x08\x63urrency\x18\x04 \x01(\x08\x12\x18\n\x10\x62\x61\x63kground_color\x18\x05 \x01(\t\x12\x10\n\x08icon_url\x18\x06 \x01(\t\x12\x16\n\x0eicon_url_large\x18\x07 \x01(\t\x12\x30\n\x0c\x64\x65scriptions\x18\x08 \x03(\x0b\x32\x1a.CEconItem_DescriptionLine\x12\x10\n\x08tradable\x18\t \x01(\x08\x12\"\n\x07\x61\x63tions\x18\n \x03(\x0b\x32\x11.CEconItem_Action\x12\x36\n\x12owner_descriptions\x18\x0b \x03(\x0b\x32\x1a.CEconItem_DescriptionLine\x12(\n\rowner_actions\x18\x0c \x03(\x0b\x32\x11.CEconItem_Action\x12\x15\n\rfraudwarnings\x18\r \x03(\t\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x12\n\nname_color\x18\x0f \x01(\t\x12\x0c\n\x04type\x18\x10 \x01(\t\x12\x13\n\x0bmarket_name\x18\x11 \x01(\t\x12\x18\n\x10market_hash_name\x18\x12 \x01(\t\x12\x12\n\nmarket_fee\x18\x13 \x01(\t\x12\x16\n\x0emarket_fee_app\x18\x1c \x01(\x05\x12.\n\x0e\x63ontained_item\x18\x14 \x01(\x0b\x32\x16.CEconItem_Description\x12)\n\x0emarket_actions\x18\x15 \x03(\x0b\x32\x11.CEconItem_Action\x12\x11\n\tcommodity\x18\x16 \x01(\x08\x12#\n\x1bmarket_tradable_restriction\x18\x17 \x01(\x05\x12%\n\x1dmarket_marketable_restriction\x18\x18 \x01(\x05\x12\x12\n\nmarketable\x18\x19 \x01(\x08\x12\x1c\n\x04tags\x18\x1a \x03(\x0b\x32\x0e.CEconItem_Tag\x12\x17\n\x0fitem_expiration\x18\x1b \x01(\t\"\x98\x03\n\rCEconItem_Tag\x12\x31\n\x05\x61ppid\x18\x01 \x01(\rB\"\x82\xb5\x18\x1eThe app that contains the item\x12J\n\x08\x63\x61tegory\x18\x02 \x01(\tB8\x82\xb5\x18\x34The internal name of the category the tag belongs to\x12\x37\n\rinternal_name\x18\x03 \x01(\tB \x82\xb5\x18\x1cThe internal name of the tag\x12G\n\x17localized_category_name\x18\x04 \x01(\tB&\x82\xb5\x18\"The localized name of the category\x12=\n\x12localized_tag_name\x18\x05 \x01(\tB!\x82\xb5\x18\x1dThe localized name of the tag\x12G\n\x05\x63olor\x18\x06 \x01(\tB8\x82\xb5\x18\x34The color to use when displaying the tag to the user\"P\n CEcon_GetAssetClassInfo_Response\x12,\n\x0c\x64\x65scriptions\x18\x01 \x03(\x0b\x32\x16.CEconItem_Description2\xe2\x04\n\x04\x45\x63on\x12\x9a\x01\n\x18GetTradeOfferAccessToken\x12\'.CEcon_GetTradeOfferAccessToken_Request\x1a(.CEcon_GetTradeOfferAccessToken_Response\"+\x82\xb5\x18\'Get the user\'s trade offer access token\x12\xd9\x01\n\x1f\x43lientGetItemShopOverlayAuthURL\x12..CEcon_ClientGetItemShopOverlayAuthURL_Request\x1a/.CEcon_ClientGetItemShopOverlayAuthURL_Response\"U\x82\xb5\x18QGenerates a URL which sets a secure cookie for in-game-browser itemshop purchases\x12\x9f\x01\n\x11GetAssetClassInfo\x12 .CEcon_GetAssetClassInfo_Request\x1a!.CEcon_GetAssetClassInfo_Response\"E\x82\xb5\x18\x41Returns description information about the passed in asset classes\x1a?\x82\xb5\x18;A service that provides communication with the econ serversB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x18steammessages_econ.proto\x1a steammessages_unified_base.proto\"D\n&CEcon_GetTradeOfferAccessToken_Request\x12\x1a\n\x12generate_new_token\x18\x01 \x01(\x08\"K\n\'CEcon_GetTradeOfferAccessToken_Response\x12 \n\x18trade_offer_access_token\x18\x01 \x01(\t\"C\n-CEcon_ClientGetItemShopOverlayAuthURL_Request\x12\x12\n\nreturn_url\x18\x01 \x01(\t\"=\n.CEcon_ClientGetItemShopOverlayAuthURL_Response\x12\x0b\n\x03url\x18\x01 \x01(\t\"\xa9\x01\n\x1f\x43\x45\x63on_GetAssetClassInfo_Request\x12\x10\n\x08language\x18\x01 \x01(\t\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x37\n\x07\x63lasses\x18\x03 \x03(\x0b\x32&.CEcon_GetAssetClassInfo_Request.Class\x1a,\n\x05\x43lass\x12\x0f\n\x07\x63lassid\x18\x01 \x01(\x04\x12\x12\n\ninstanceid\x18\x02 \x01(\x04\"V\n\x19\x43\x45\x63onItem_DescriptionLine\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\r\n\x05\x63olor\x18\x03 \x01(\t\x12\r\n\x05label\x18\x04 \x01(\t\".\n\x10\x43\x45\x63onItem_Action\x12\x0c\n\x04link\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"\xe3\x06\n\x15\x43\x45\x63onItem_Description\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x0f\n\x07\x63lassid\x18\x02 \x01(\x04\x12\x12\n\ninstanceid\x18\x03 \x01(\x04\x12\x10\n\x08\x63urrency\x18\x04 \x01(\x08\x12\x18\n\x10\x62\x61\x63kground_color\x18\x05 \x01(\t\x12\x10\n\x08icon_url\x18\x06 \x01(\t\x12\x16\n\x0eicon_url_large\x18\x07 \x01(\t\x12\x30\n\x0c\x64\x65scriptions\x18\x08 \x03(\x0b\x32\x1a.CEconItem_DescriptionLine\x12\x10\n\x08tradable\x18\t \x01(\x08\x12\"\n\x07\x61\x63tions\x18\n \x03(\x0b\x32\x11.CEconItem_Action\x12\x36\n\x12owner_descriptions\x18\x0b \x03(\x0b\x32\x1a.CEconItem_DescriptionLine\x12(\n\rowner_actions\x18\x0c \x03(\x0b\x32\x11.CEconItem_Action\x12\x15\n\rfraudwarnings\x18\r \x03(\t\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x12\n\nname_color\x18\x0f \x01(\t\x12\x0c\n\x04type\x18\x10 \x01(\t\x12\x13\n\x0bmarket_name\x18\x11 \x01(\t\x12\x18\n\x10market_hash_name\x18\x12 \x01(\t\x12\x12\n\nmarket_fee\x18\x13 \x01(\t\x12\x16\n\x0emarket_fee_app\x18\x1c \x01(\x05\x12.\n\x0e\x63ontained_item\x18\x14 \x01(\x0b\x32\x16.CEconItem_Description\x12)\n\x0emarket_actions\x18\x15 \x03(\x0b\x32\x11.CEconItem_Action\x12\x11\n\tcommodity\x18\x16 \x01(\x08\x12#\n\x1bmarket_tradable_restriction\x18\x17 \x01(\x05\x12%\n\x1dmarket_marketable_restriction\x18\x18 \x01(\x05\x12\x12\n\nmarketable\x18\x19 \x01(\x08\x12\x1c\n\x04tags\x18\x1a \x03(\x0b\x32\x0e.CEconItem_Tag\x12\x17\n\x0fitem_expiration\x18\x1b \x01(\t\x12&\n\x1emarket_buy_country_restriction\x18\x1e \x01(\t\x12\'\n\x1fmarket_sell_country_restriction\x18\x1f \x01(\t\"\x98\x03\n\rCEconItem_Tag\x12\x31\n\x05\x61ppid\x18\x01 \x01(\rB\"\x82\xb5\x18\x1eThe app that contains the item\x12J\n\x08\x63\x61tegory\x18\x02 \x01(\tB8\x82\xb5\x18\x34The internal name of the category the tag belongs to\x12\x37\n\rinternal_name\x18\x03 \x01(\tB \x82\xb5\x18\x1cThe internal name of the tag\x12G\n\x17localized_category_name\x18\x04 \x01(\tB&\x82\xb5\x18\"The localized name of the category\x12=\n\x12localized_tag_name\x18\x05 \x01(\tB!\x82\xb5\x18\x1dThe localized name of the tag\x12G\n\x05\x63olor\x18\x06 \x01(\tB8\x82\xb5\x18\x34The color to use when displaying the tag to the user\"P\n CEcon_GetAssetClassInfo_Response\x12,\n\x0c\x64\x65scriptions\x18\x01 \x03(\x0b\x32\x16.CEconItem_Description2\xe2\x04\n\x04\x45\x63on\x12\x9a\x01\n\x18GetTradeOfferAccessToken\x12\'.CEcon_GetTradeOfferAccessToken_Request\x1a(.CEcon_GetTradeOfferAccessToken_Response\"+\x82\xb5\x18\'Get the user\'s trade offer access token\x12\xd9\x01\n\x1f\x43lientGetItemShopOverlayAuthURL\x12..CEcon_ClientGetItemShopOverlayAuthURL_Request\x1a/.CEcon_ClientGetItemShopOverlayAuthURL_Response\"U\x82\xb5\x18QGenerates a URL which sets a secure cookie for in-game-browser itemshop purchases\x12\x9f\x01\n\x11GetAssetClassInfo\x12 .CEcon_GetAssetClassInfo_Request\x1a!.CEcon_GetAssetClassInfo_Response\"E\x82\xb5\x18\x41Returns description information about the passed in asset classes\x1a?\x82\xb5\x18;A service that provides communication with the econ serversB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -529,6 +529,20 @@ _CECONITEM_DESCRIPTION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='market_buy_country_restriction', full_name='CEconItem_Description.market_buy_country_restriction', index=28,
+      number=30, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='market_sell_country_restriction', full_name='CEconItem_Description.market_sell_country_restriction', index=29,
+      number=31, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -542,7 +556,7 @@ _CECONITEM_DESCRIPTION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=650,
-  serialized_end=1436,
+  serialized_end=1517,
 )
 
 
@@ -607,8 +621,8 @@ _CECONITEM_TAG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1439,
-  serialized_end=1847,
+  serialized_start=1520,
+  serialized_end=1928,
 )
 
 
@@ -638,8 +652,8 @@ _CECON_GETASSETCLASSINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1849,
-  serialized_end=1929,
+  serialized_start=1930,
+  serialized_end=2010,
 )
 
 _CECON_GETASSETCLASSINFO_REQUEST_CLASS.containing_type = _CECON_GETASSETCLASSINFO_REQUEST
@@ -757,8 +771,8 @@ _ECON = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030;A service that provides communication with the econ servers'),
-  serialized_start=1932,
-  serialized_end=2542,
+  serialized_start=2013,
+  serialized_end=2623,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetTradeOfferAccessToken',

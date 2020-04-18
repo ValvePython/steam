@@ -130,7 +130,6 @@ message CMsgClientPersonaState {
 		optional uint32 game_server_port = 5;
 		optional uint32 persona_state_flags = 6;
 		optional uint32 online_session_instances = 7;
-		optional uint32 published_instance_id = 8;
 		optional bool persona_set_by_user = 10;
 		optional string player_name = 15;
 		optional uint32 query_port = 20;
@@ -235,6 +234,22 @@ message CMsgClientEmoticonList {
 		optional uint32 time_received = 5;
 	}
 
-	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
-}
+	message Sticker {
+		optional string name = 1;
+		optional int32 count = 2;
+		optional uint32 time_received = 3;
+		optional uint32 appid = 4;
+	}
 
+	message Effect {
+		optional string name = 1;
+		optional int32 count = 2;
+		optional uint32 time_received = 3;
+		optional bool infinite_use = 4;
+		optional uint32 appid = 5;
+	}
+
+	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
+	repeated .CMsgClientEmoticonList.Sticker stickers = 2;
+	repeated .CMsgClientEmoticonList.Effect effects = 3;
+}

@@ -34,12 +34,15 @@ message CCommunity_GetLinkFilterListVersion_Response {
 
 service CommunityLinkFilter {
 	option (service_description) = "A service for recording data about Steam Community phishing link filtering";
+
 	rpc GetLinkFilterHashPrefixes (.CCommunity_GetLinkFilterHashPrefixes_Request) returns (.CCommunity_GetLinkFilterHashPrefixes_Response) {
 		option (method_description) = "Get a list of hash prefixes for the specified hit type, to use for client caching.";
 	}
+
 	rpc GetLinkFilterHashes (.CCommunity_GetLinkFilterHashes_Request) returns (.CCommunity_GetLinkFilterHashes_Response) {
 		option (method_description) = "Get a list of hashes for the specified hit type, to use for client caching.";
 	}
+
 	rpc GetLinkFilterListVersion (.CCommunity_GetLinkFilterListVersion_Request) returns (.CCommunity_GetLinkFilterListVersion_Response) {
 		option (method_description) = "Get a list of hashes describing the version of each chunk of the requested size.";
 	}

@@ -91,6 +91,14 @@ message CCommunity_GetCommentThreadRatings_Response {
 	repeated uint32 upvoter_accountids = 5;
 }
 
+message CCommunity_RateClanAnnouncement_Response {
+}
+
+message CCommunity_GetClanAnnouncementVoteForUser_Response {
+	optional bool voted_up = 1;
+	optional bool voted_down = 2;
+}
+
 message CAppPriority {
 	optional uint32 priority = 1;
 	repeated uint32 appid = 2;
@@ -107,10 +115,32 @@ message CCommunity_PartnerEventResult {
 	optional uint32 appid = 4;
 	optional bool possible_takeover = 5;
 	optional uint32 rtime32_last_modified = 6 [default = 0];
+	optional int32 user_app_priority = 7;
 }
 
 message CCommunity_GetBestEventsForUser_Response {
 	repeated .CCommunity_PartnerEventResult results = 1;
+}
+
+message CCommunity_ClearUserPartnerEventsAppPriorities_Response {
+}
+
+message CCommunity_PartnerEventsAppPriority {
+	optional uint32 appid = 1;
+	optional int32 user_app_priority = 2;
+}
+
+message CCommunity_GetUserPartnerEventsAppPriorities_Response {
+	repeated .CCommunity_PartnerEventsAppPriority priorities = 1;
+}
+
+message CCommunity_ClearSinglePartnerEventsAppPriority_Response {
+}
+
+message CCommunity_PartnerEventsShowMoreForApp_Response {
+}
+
+message CCommunity_PartnerEventsShowLessForApp_Response {
 }
 
 message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking {
@@ -124,33 +154,71 @@ message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking {
 message CCommunity_MarkPartnerEventsForUser_Response {
 }
 
-message xCCommunity_ClanAnnouncementInfo {
-	optional uint64 gid = 1;
-	optional uint64 clanid = 2;
-	optional uint64 posterid = 3;
-	optional string headline = 4;
-	optional uint32 posttime = 5;
-	optional uint32 updatetime = 6;
-	optional string body = 7;
-	optional int32 commentcount = 8;
-	repeated string tags = 9;
-	optional int32 language = 10;
-	optional bool hidden = 11;
-	optional fixed64 forum_topic_id = 12;
+message CCommunity_GetUserPartnerEventViewStatus_Response {
+	repeated .CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent events = 1;
 }
 
-message CPlayer_PostStatusToFriends_Response {
+message CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent {
+	optional fixed64 event_gid = 1;
+	optional uint32 last_shown_time = 2;
+	optional uint32 last_read_time = 3;
+	optional uint32 clan_account_id = 4;
 }
 
-message CPlayer_GetPostedStatus_Response {
-	optional uint32 accountid = 1;
-	optional uint64 postid = 2;
-	optional string status_text = 3;
-	optional bool deleted = 4;
-	optional uint32 appid = 5;
+message ProfileItem {
+	optional uint64 communityitemid = 1;
+	optional string image_small = 2;
+	optional string image_large = 3;
+	optional string name = 4;
+	optional string item_title = 5;
+	optional string item_description = 6;
+	optional uint32 appid = 7;
+	optional uint32 item_type = 8;
+	optional uint32 item_class = 9;
+	optional string movie_webm = 10;
+	optional string movie_mp4 = 11;
 }
 
-message CPlayer_DeletePostedStatus_Response {
+message CPlayer_GetProfileBackground_Response {
+	optional .ProfileItem profile_background = 1;
+}
+
+message CPlayer_SetProfileBackground_Response {
+}
+
+message CPlayer_GetMiniProfileBackground_Response {
+	optional .ProfileItem profile_background = 1;
+}
+
+message CPlayer_SetMiniProfileBackground_Response {
+}
+
+message CPlayer_GetAvatarFrame_Response {
+	optional .ProfileItem avatar_frame = 1;
+}
+
+message CPlayer_SetAvatarFrame_Response {
+}
+
+message CPlayer_GetAnimatedAvatar_Response {
+	optional .ProfileItem avatar = 1;
+}
+
+message CPlayer_SetAnimatedAvatar_Response {
+}
+
+message CPlayer_GetProfileItemsOwned_Response {
+	repeated .ProfileItem profile_backgrounds = 1;
+	repeated .ProfileItem mini_profile_backgrounds = 2;
+	repeated .ProfileItem avatar_frames = 3;
+	repeated .ProfileItem animated_avatars = 4;
+}
+
+message CPlayer_GetProfileItemsEquipped_Response {
+	optional .ProfileItem profile_background = 1;
+	optional .ProfileItem mini_profile_background = 2;
+	optional .ProfileItem avatar_frame = 3;
+	optional .ProfileItem animated_avatar = 4;
 }
 
 message CWebRTCClient_InitiateWebRTCConnection_Request {
@@ -659,23 +727,12 @@ message CFriendsList_GetFriendsList_Response {
 	optional .CMsgClientFriendsList friendslist = 1;
 }
 
-message xCMsgClientSecret {
-	optional uint32 version = 1;
-	optional uint32 appid = 2;
-	optional uint32 deviceid = 3;
-	optional fixed64 nonce = 4;
-	optional bytes hmac = 5;
-}
-
 message CClan_RespondToClanInvite_Request {
 	optional fixed64 steamid = 1;
 	optional bool accept = 2;
 }
 
 message CClan_RespondToClanInvite_Response {
-}
-
-message CBroadcast_SetClipDetails_Response {
 }
 
 message CProductImpressionsFromClient_Notification {
@@ -699,9 +756,17 @@ service Community {
 	rpc DeleteCommentFromThread (.NotImplemented) returns (.CCommunity_DeleteCommentFromThread_Response);
 	rpc RateCommentThread (.NotImplemented) returns (.CCommunity_RateCommentThread_Response);
 	rpc GetCommentThreadRatings (.NotImplemented) returns (.CCommunity_GetCommentThreadRatings_Response);
+	rpc RateClanAnnouncement (.NotImplemented) returns (.CCommunity_RateClanAnnouncement_Response);
+	rpc GetClanAnnouncementVoteForUser (.NotImplemented) returns (.CCommunity_GetClanAnnouncementVoteForUser_Response);
 	rpc GetUserPartnerEventNews (.NotImplemented) returns (.CCommunity_GetUserPartnerEventNews_Response);
 	rpc GetBestEventsForUser (.NotImplemented) returns (.CCommunity_GetBestEventsForUser_Response);
 	rpc MarkPartnerEventsForUser (.NotImplemented) returns (.CCommunity_MarkPartnerEventsForUser_Response);
+	rpc GetUserPartnerEventViewStatus (.NotImplemented) returns (.CCommunity_GetUserPartnerEventViewStatus_Response);
+	rpc PartnerEventsShowMoreForApp (.NotImplemented) returns (.CCommunity_PartnerEventsShowMoreForApp_Response);
+	rpc PartnerEventsShowLessForApp (.NotImplemented) returns (.CCommunity_PartnerEventsShowLessForApp_Response);
+	rpc ClearUserPartnerEventsAppPriorities (.NotImplemented) returns (.CCommunity_ClearUserPartnerEventsAppPriorities_Response);
+	rpc GetUserPartnerEventsAppPriorities (.NotImplemented) returns (.CCommunity_GetUserPartnerEventsAppPriorities_Response);
+	rpc ClearSinglePartnerEventsAppPriority (.NotImplemented) returns (.CCommunity_ClearSinglePartnerEventsAppPriority_Response);
 }
 
 service WebRTCClient {

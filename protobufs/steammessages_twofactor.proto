@@ -108,27 +108,35 @@ message CTwoFactor_ValidateToken_Response {
 
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
+
 	rpc QueryStatus (.CTwoFactor_Status_Request) returns (.CTwoFactor_Status_Response) {
 		option (method_description) = "Get two-factor authentication settings for the logged-in account";
 	}
+
 	rpc AddAuthenticator (.CTwoFactor_AddAuthenticator_Request) returns (.CTwoFactor_AddAuthenticator_Response) {
 		option (method_description) = "Add two-factor authenticator to the logged-in account";
 	}
+
 	rpc SendEmail (.CTwoFactor_SendEmail_Request) returns (.CTwoFactor_SendEmail_Response) {
 		option (method_description) = "Send email to the account";
 	}
+
 	rpc FinalizeAddAuthenticator (.CTwoFactor_FinalizeAddAuthenticator_Request) returns (.CTwoFactor_FinalizeAddAuthenticator_Response) {
 		option (method_description) = "Finalize two-factor authentication addition to the logged-in account";
 	}
+
 	rpc RemoveAuthenticator (.CTwoFactor_RemoveAuthenticator_Request) returns (.CTwoFactor_RemoveAuthenticator_Response) {
 		option (method_description) = "Remove two-factor authentication addition from the logged-in account";
 	}
+
 	rpc CreateEmergencyCodes (.CTwoFactor_CreateEmergencyCodes_Request) returns (.CTwoFactor_CreateEmergencyCodes_Response) {
 		option (method_description) = "Generate emergency authenticator codes";
 	}
+
 	rpc DestroyEmergencyCodes (.CTwoFactor_DestroyEmergencyCodes_Request) returns (.CTwoFactor_DestroyEmergencyCodes_Response) {
 		option (method_description) = "Destroy emergency authenticator codes for the account";
 	}
+
 	rpc ValidateToken (.CTwoFactor_ValidateToken_Request) returns (.CTwoFactor_ValidateToken_Response) {
 		option (method_description) = "Validate (and consume) a token";
 	}

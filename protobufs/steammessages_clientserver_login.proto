@@ -34,7 +34,7 @@ message CMsgClientLogon {
 	optional uint32 client_os_type = 7;
 	optional bool should_remember_password = 8 [default = false];
 	optional string wine_version = 9;
-	optional uint32 ping_ms_from_cell_search = 10;
+	optional uint32 deprecated_10 = 10;
 	optional .CMsgIPAddress obfuscated_private_ip = 11;
 	optional uint32 deprecated_public_ip = 20;
 	optional uint32 qos_level = 21;
@@ -154,4 +154,3 @@ message CMsgClientChallengeRequest {
 message CMsgClientChallengeResponse {
 	optional fixed64 challenge = 1;
 }
-

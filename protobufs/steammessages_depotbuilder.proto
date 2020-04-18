@@ -84,21 +84,27 @@ message CContentBuilder_SignInstallScript_Response {
 
 service ContentBuilder {
 	option (service_description) = "Interface to build and upload depot content";
+
 	rpc InitDepotBuild (.CContentBuilder_InitDepotBuild_Request) returns (.CContentBuilder_InitDepotBuild_Response) {
 		option (method_description) = "Get inital parameters to start building a depot";
 	}
+
 	rpc StartDepotUpload (.CContentBuilder_StartDepotUpload_Request) returns (.CContentBuilder_StartDepotUpload_Response) {
 		option (method_description) = "Start uploading manifest and chunks for a depot";
 	}
+
 	rpc GetMissingDepotChunks (.CContentBuilder_GetMissingDepotChunks_Request) returns (.CContentBuilder_GetMissingDepotChunks_Response) {
 		option (method_description) = "Get list of missing chunks for depot upload";
 	}
+
 	rpc FinishDepotUpload (.CContentBuilder_FinishDepotUpload_Request) returns (.CContentBuilder_FinishDepotUpload_Response) {
 		option (method_description) = "Commit a depot build after manifest and all chunks are uploaded";
 	}
+
 	rpc CommitAppBuild (.CContentBuilder_CommitAppBuild_Request) returns (.CContentBuilder_CommitAppBuild_Response) {
 		option (method_description) = "Combine previous depot uploads into an app build and commit it";
 	}
+
 	rpc SignInstallScript (.CContentBuilder_SignInstallScript_Request) returns (.CContentBuilder_SignInstallScript_Response) {
 		option (method_description) = "Sign an install script";
 	}

@@ -3,6 +3,7 @@ import "google/protobuf/descriptor.proto";
 
 option optimize_for = SPEED;
 option py_generic_services = true;
+option (force_php_generation) = true;
 
 extend .google.protobuf.MessageOptions {
 	optional int32 msgpool_soft_limit = 50000 [default = 32];
@@ -51,6 +52,15 @@ enum EProtoClanEventType {
 	k_EClanFreeTrial = 31;
 	k_EClanSeasonRelease = 32;
 	k_EClanSeasonUpdate = 33;
+	k_EClanCrosspostEvent = 34;
+	k_EClanInGameEventGeneral = 35;
+}
+
+enum PartnerEventNotificationType {
+	k_EEventStart = 0;
+	k_EEventBroadcastStart = 1;
+	k_EEventMatchStart = 2;
+	k_EEventPartnerMaxType = 3;
 }
 
 message CMsgIPAddress {
@@ -58,6 +68,11 @@ message CMsgIPAddress {
 		fixed32 v4 = 1;
 		bytes v6 = 2;
 	}
+}
+
+message CMsgIPAddressBucket {
+	optional .CMsgIPAddress original_ip_address = 1;
+	optional fixed64 bucket = 2;
 }
 
 message CMsgProtoBufHeader {
@@ -83,6 +98,9 @@ message CMsgProtoBufHeader {
 	repeated uint32 forward_to_sysid = 27;
 	optional uint32 cm_sysid = 28;
 	optional string wg_token = 30;
+	optional uint32 launcher_type = 31 [default = 0];
+	optional uint32 realm = 32 [default = 0];
+
 	oneof ip_addr {
 		uint32 ip = 15;
 		bytes ip_v6 = 29;
@@ -196,6 +214,9 @@ message CCommunity_ClanAnnouncementInfo {
 	optional int32 language = 10;
 	optional bool hidden = 11;
 	optional fixed64 forum_topic_id = 12;
+	optional fixed64 event_gid = 13;
+	optional int32 voteupcount = 14;
+	optional int32 votedowncount = 15;
 }
 
 message CClanEventData {
@@ -225,3 +246,15 @@ message CClanEventData {
 	optional uint32 rtime32_last_modified = 24;
 }
 
+message CBilling_Address {
+	optional string first_name = 1;
+	optional string last_name = 2;
+	optional string address1 = 3;
+	optional string address2 = 4;
+	optional string city = 5;
+	optional string us_state = 6;
+	optional string country_code = 7;
+	optional string postcode = 8;
+	optional int32 zip_plus4 = 9;
+	optional string phone = 10;
+}

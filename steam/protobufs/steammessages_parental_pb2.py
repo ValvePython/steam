@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x1csteammessages_parental.proto\x1a steammessages_unified_base.proto\"0\n\x0bParentalApp\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\nis_allowed\x18\x02 \x01(\x08\"\xac\x02\n\x10ParentalSettings\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x61pplist_base_id\x18\x02 \x01(\r\x12 \n\x18\x61pplist_base_description\x18\x03 \x01(\t\x12\"\n\x0c\x61pplist_base\x18\x04 \x03(\x0b\x32\x0c.ParentalApp\x12$\n\x0e\x61pplist_custom\x18\x05 \x03(\x0b\x32\x0c.ParentalApp\x12\x18\n\x10passwordhashtype\x18\x06 \x01(\r\x12\x0c\n\x04salt\x18\x07 \x01(\x0c\x12\x14\n\x0cpasswordhash\x18\x08 \x01(\x0c\x12\x12\n\nis_enabled\x18\t \x01(\x08\x12\x18\n\x10\x65nabled_features\x18\n \x01(\r\x12\x16\n\x0erecovery_email\x18\x0b \x01(\t\"\x99\x01\n(CParental_EnableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x11\n\tsessionid\x18\x03 \x01(\t\x12\x12\n\nenablecode\x18\x04 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\"+\n)CParental_EnableParentalSettings_Response\"N\n)CParental_DisableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableParentalSettings_Response\"8\n%CParental_GetParentalSettings_Request\x12\x0f\n\x07steamid\x18\n \x01(\x06\"M\n&CParental_GetParentalSettings_Response\x12#\n\x08settings\x18\x01 \x01(\x0b\x32\x11.ParentalSettings\"?\n+CParental_GetSignedParentalSettings_Request\x12\x10\n\x08priority\x18\x01 \x01(\r\"^\n,CParental_GetSignedParentalSettings_Response\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\"\x98\x01\n%CParental_SetParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x14\n\x0cnew_password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\"(\n&CParental_SetParentalSettings_Response\"7\n\x1f\x43Parental_ValidateToken_Request\x12\x14\n\x0cunlock_token\x18\x01 \x01(\t\"\"\n CParental_ValidateToken_Response\"g\n\"CParental_ValidatePassword_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07session\x18\x02 \x01(\t\x12\x1e\n\x16send_unlock_on_success\x18\x03 \x01(\x08\"4\n#CParental_ValidatePassword_Response\x12\r\n\x05token\x18\x01 \x01(\t\"/\n\x1c\x43Parental_LockClient_Request\x12\x0f\n\x07session\x18\x01 \x01(\t\"\x1f\n\x1d\x43Parental_LockClient_Response\"\'\n%CParental_RequestRecoveryCode_Request\"(\n&CParental_RequestRecoveryCode_Response\"S\n)CParental_DisableWithRecoveryCode_Request\x12\x15\n\rrecovery_code\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableWithRecoveryCode_Response\"\x84\x01\n-CParental_ParentalSettingsChange_Notification\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\x12\x10\n\x08password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\"L\n%CParental_ParentalUnlock_Notification\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x11\n\tsessionid\x18\x02 \x01(\t\"8\n#CParental_ParentalLock_Notification\x12\x11\n\tsessionid\x18\x01 \x01(\t2\xd2\x0e\n\x08Parental\x12\xd0\x01\n\x16\x45nableParentalSettings\x12).CParental_EnableParentalSettings_Request\x1a*.CParental_EnableParentalSettings_Response\"_\x82\xb5\x18[Enable parental settings for the logged in account, optionally setting the current settings\x12\xab\x01\n\x17\x44isableParentalSettings\x12*.CParental_DisableParentalSettings_Request\x1a+.CParental_DisableParentalSettings_Response\"7\x82\xb5\x18\x33\x44isable parental settings for the logged in account\x12\xa7\x01\n\x13GetParentalSettings\x12&.CParental_GetParentalSettings_Request\x1a\'.CParental_GetParentalSettings_Response\"?\x82\xb5\x18;Get the current parental settings for the logged in account\x12\xe8\x01\n\x19GetSignedParentalSettings\x12,.CParental_GetSignedParentalSettings_Request\x1a-.CParental_GetSignedParentalSettings_Response\"n\x82\xb5\x18jGet the current parental settings for the logged in account in a form that can by verified by the receiver\x12\xa7\x01\n\x13SetParentalSettings\x12&.CParental_SetParentalSettings_Request\x1a\'.CParental_SetParentalSettings_Response\"?\x82\xb5\x18;Set the current parental settings for the logged in account\x12\xa7\x01\n\rValidateToken\x12 .CParental_ValidateToken_Request\x1a!.CParental_ValidateToken_Response\"Q\x82\xb5\x18MCheck if the given parental unlock token is correct for the logged in account\x12\xb7\x01\n\x10ValidatePassword\x12#.CParental_ValidatePassword_Request\x1a$.CParental_ValidatePassword_Response\"X\x82\xb5\x18TValidate the plaintext password for the logged in account and return an unlock token\x12\x8f\x01\n\nLockClient\x12\x1d.CParental_LockClient_Request\x1a\x1e.CParental_LockClient_Response\"B\x82\xb5\x18>Notify connected clients that a lock has occurred in a browser\x12\xc3\x01\n\x13RequestRecoveryCode\x12&.CParental_RequestRecoveryCode_Request\x1a\'.CParental_RequestRecoveryCode_Response\"[\x82\xb5\x18WRequest a recovery code be sent to the recovery email address for the specified account\x12\xaa\x01\n\x17\x44isableWithRecoveryCode\x12*.CParental_DisableWithRecoveryCode_Request\x1a+.CParental_DisableWithRecoveryCode_Response\"6\x82\xb5\x18\x32\x41ttempt a recovery unlock on the specified account\x1a\x1d\x82\xb5\x18\x19Parental settings service2\x86\x04\n\x0eParentalClient\x12\x9c\x01\n\x14NotifySettingsChange\x12..CParental_ParentalSettingsChange_Notification\x1a\x0b.NoResponse\"G\x82\xb5\x18\x43Notification from server to client of a change in parental settings\x12\x94\x01\n\x0cNotifyUnlock\x12&.CParental_ParentalUnlock_Notification\x1a\x0b.NoResponse\"O\x82\xb5\x18KNotification from server to client that an unlock has occurred in a browser\x12\x8d\x01\n\nNotifyLock\x12$.CParental_ParentalLock_Notification\x1a\x0b.NoResponse\"L\x82\xb5\x18HNotification from server to client that a lock has occurred in a browser\x1a.\x82\xb5\x18&Parental settings client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1csteammessages_parental.proto\x1a steammessages_unified_base.proto\"0\n\x0bParentalApp\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\nis_allowed\x18\x02 \x01(\x08\"\xca\x02\n\x10ParentalSettings\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x61pplist_base_id\x18\x02 \x01(\r\x12 \n\x18\x61pplist_base_description\x18\x03 \x01(\t\x12\"\n\x0c\x61pplist_base\x18\x04 \x03(\x0b\x32\x0c.ParentalApp\x12$\n\x0e\x61pplist_custom\x18\x05 \x03(\x0b\x32\x0c.ParentalApp\x12\x18\n\x10passwordhashtype\x18\x06 \x01(\r\x12\x0c\n\x04salt\x18\x07 \x01(\x0c\x12\x14\n\x0cpasswordhash\x18\x08 \x01(\x0c\x12\x12\n\nis_enabled\x18\t \x01(\x08\x12\x18\n\x10\x65nabled_features\x18\n \x01(\r\x12\x16\n\x0erecovery_email\x18\x0b \x01(\t\x12\x1c\n\x14is_site_license_lock\x18\x0c \x01(\x08\"\x99\x01\n(CParental_EnableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x11\n\tsessionid\x18\x03 \x01(\t\x12\x12\n\nenablecode\x18\x04 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\"+\n)CParental_EnableParentalSettings_Response\"N\n)CParental_DisableParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableParentalSettings_Response\"8\n%CParental_GetParentalSettings_Request\x12\x0f\n\x07steamid\x18\n \x01(\x06\"M\n&CParental_GetParentalSettings_Response\x12#\n\x08settings\x18\x01 \x01(\x0b\x32\x11.ParentalSettings\"?\n+CParental_GetSignedParentalSettings_Request\x12\x10\n\x08priority\x18\x01 \x01(\r\"^\n,CParental_GetSignedParentalSettings_Response\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\"\x98\x01\n%CParental_SetParentalSettings_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12#\n\x08settings\x18\x02 \x01(\x0b\x32\x11.ParentalSettings\x12\x14\n\x0cnew_password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\x12\x0f\n\x07steamid\x18\n \x01(\x06\"(\n&CParental_SetParentalSettings_Response\"7\n\x1f\x43Parental_ValidateToken_Request\x12\x14\n\x0cunlock_token\x18\x01 \x01(\t\"\"\n CParental_ValidateToken_Response\"g\n\"CParental_ValidatePassword_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x0f\n\x07session\x18\x02 \x01(\t\x12\x1e\n\x16send_unlock_on_success\x18\x03 \x01(\x08\"4\n#CParental_ValidatePassword_Response\x12\r\n\x05token\x18\x01 \x01(\t\"/\n\x1c\x43Parental_LockClient_Request\x12\x0f\n\x07session\x18\x01 \x01(\t\"\x1f\n\x1d\x43Parental_LockClient_Response\"\'\n%CParental_RequestRecoveryCode_Request\"(\n&CParental_RequestRecoveryCode_Response\"S\n)CParental_DisableWithRecoveryCode_Request\x12\x15\n\rrecovery_code\x18\x01 \x01(\r\x12\x0f\n\x07steamid\x18\n \x01(\x06\",\n*CParental_DisableWithRecoveryCode_Response\"\x84\x01\n-CParental_ParentalSettingsChange_Notification\x12\x1b\n\x13serialized_settings\x18\x01 \x01(\x0c\x12\x11\n\tsignature\x18\x02 \x01(\x0c\x12\x10\n\x08password\x18\x03 \x01(\t\x12\x11\n\tsessionid\x18\x04 \x01(\t\"L\n%CParental_ParentalUnlock_Notification\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x11\n\tsessionid\x18\x02 \x01(\t\"8\n#CParental_ParentalLock_Notification\x12\x11\n\tsessionid\x18\x01 \x01(\t2\xd2\x0e\n\x08Parental\x12\xd0\x01\n\x16\x45nableParentalSettings\x12).CParental_EnableParentalSettings_Request\x1a*.CParental_EnableParentalSettings_Response\"_\x82\xb5\x18[Enable parental settings for the logged in account, optionally setting the current settings\x12\xab\x01\n\x17\x44isableParentalSettings\x12*.CParental_DisableParentalSettings_Request\x1a+.CParental_DisableParentalSettings_Response\"7\x82\xb5\x18\x33\x44isable parental settings for the logged in account\x12\xa7\x01\n\x13GetParentalSettings\x12&.CParental_GetParentalSettings_Request\x1a\'.CParental_GetParentalSettings_Response\"?\x82\xb5\x18;Get the current parental settings for the logged in account\x12\xe8\x01\n\x19GetSignedParentalSettings\x12,.CParental_GetSignedParentalSettings_Request\x1a-.CParental_GetSignedParentalSettings_Response\"n\x82\xb5\x18jGet the current parental settings for the logged in account in a form that can by verified by the receiver\x12\xa7\x01\n\x13SetParentalSettings\x12&.CParental_SetParentalSettings_Request\x1a\'.CParental_SetParentalSettings_Response\"?\x82\xb5\x18;Set the current parental settings for the logged in account\x12\xa7\x01\n\rValidateToken\x12 .CParental_ValidateToken_Request\x1a!.CParental_ValidateToken_Response\"Q\x82\xb5\x18MCheck if the given parental unlock token is correct for the logged in account\x12\xb7\x01\n\x10ValidatePassword\x12#.CParental_ValidatePassword_Request\x1a$.CParental_ValidatePassword_Response\"X\x82\xb5\x18TValidate the plaintext password for the logged in account and return an unlock token\x12\x8f\x01\n\nLockClient\x12\x1d.CParental_LockClient_Request\x1a\x1e.CParental_LockClient_Response\"B\x82\xb5\x18>Notify connected clients that a lock has occurred in a browser\x12\xc3\x01\n\x13RequestRecoveryCode\x12&.CParental_RequestRecoveryCode_Request\x1a\'.CParental_RequestRecoveryCode_Response\"[\x82\xb5\x18WRequest a recovery code be sent to the recovery email address for the specified account\x12\xaa\x01\n\x17\x44isableWithRecoveryCode\x12*.CParental_DisableWithRecoveryCode_Request\x1a+.CParental_DisableWithRecoveryCode_Response\"6\x82\xb5\x18\x32\x41ttempt a recovery unlock on the specified account\x1a\x1d\x82\xb5\x18\x19Parental settings service2\x86\x04\n\x0eParentalClient\x12\x9c\x01\n\x14NotifySettingsChange\x12..CParental_ParentalSettingsChange_Notification\x1a\x0b.NoResponse\"G\x82\xb5\x18\x43Notification from server to client of a change in parental settings\x12\x94\x01\n\x0cNotifyUnlock\x12&.CParental_ParentalUnlock_Notification\x1a\x0b.NoResponse\"O\x82\xb5\x18KNotification from server to client that an unlock has occurred in a browser\x12\x8d\x01\n\nNotifyLock\x12$.CParental_ParentalLock_Notification\x1a\x0b.NoResponse\"L\x82\xb5\x18HNotification from server to client that a lock has occurred in a browser\x1a.\x82\xb5\x18&Parental settings client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -152,6 +152,13 @@ _PARENTALSETTINGS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_site_license_lock', full_name='ParentalSettings.is_site_license_lock', index=11,
+      number=12, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -165,7 +172,7 @@ _PARENTALSETTINGS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=117,
-  serialized_end=417,
+  serialized_end=447,
 )
 
 
@@ -223,8 +230,8 @@ _CPARENTAL_ENABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=420,
-  serialized_end=573,
+  serialized_start=450,
+  serialized_end=603,
 )
 
 
@@ -247,8 +254,8 @@ _CPARENTAL_ENABLEPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=575,
-  serialized_end=618,
+  serialized_start=605,
+  serialized_end=648,
 )
 
 
@@ -285,8 +292,8 @@ _CPARENTAL_DISABLEPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=620,
-  serialized_end=698,
+  serialized_start=650,
+  serialized_end=728,
 )
 
 
@@ -309,8 +316,8 @@ _CPARENTAL_DISABLEPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=700,
-  serialized_end=744,
+  serialized_start=730,
+  serialized_end=774,
 )
 
 
@@ -340,8 +347,8 @@ _CPARENTAL_GETPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=746,
-  serialized_end=802,
+  serialized_start=776,
+  serialized_end=832,
 )
 
 
@@ -371,8 +378,8 @@ _CPARENTAL_GETPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=804,
-  serialized_end=881,
+  serialized_start=834,
+  serialized_end=911,
 )
 
 
@@ -402,8 +409,8 @@ _CPARENTAL_GETSIGNEDPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=883,
-  serialized_end=946,
+  serialized_start=913,
+  serialized_end=976,
 )
 
 
@@ -440,8 +447,8 @@ _CPARENTAL_GETSIGNEDPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=948,
-  serialized_end=1042,
+  serialized_start=978,
+  serialized_end=1072,
 )
 
 
@@ -499,8 +506,8 @@ _CPARENTAL_SETPARENTALSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1045,
-  serialized_end=1197,
+  serialized_start=1075,
+  serialized_end=1227,
 )
 
 
@@ -523,8 +530,8 @@ _CPARENTAL_SETPARENTALSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1199,
-  serialized_end=1239,
+  serialized_start=1229,
+  serialized_end=1269,
 )
 
 
@@ -554,8 +561,8 @@ _CPARENTAL_VALIDATETOKEN_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1241,
-  serialized_end=1296,
+  serialized_start=1271,
+  serialized_end=1326,
 )
 
 
@@ -578,8 +585,8 @@ _CPARENTAL_VALIDATETOKEN_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1298,
-  serialized_end=1332,
+  serialized_start=1328,
+  serialized_end=1362,
 )
 
 
@@ -623,8 +630,8 @@ _CPARENTAL_VALIDATEPASSWORD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1334,
-  serialized_end=1437,
+  serialized_start=1364,
+  serialized_end=1467,
 )
 
 
@@ -654,8 +661,8 @@ _CPARENTAL_VALIDATEPASSWORD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1439,
-  serialized_end=1491,
+  serialized_start=1469,
+  serialized_end=1521,
 )
 
 
@@ -685,8 +692,8 @@ _CPARENTAL_LOCKCLIENT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1493,
-  serialized_end=1540,
+  serialized_start=1523,
+  serialized_end=1570,
 )
 
 
@@ -709,8 +716,8 @@ _CPARENTAL_LOCKCLIENT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1542,
-  serialized_end=1573,
+  serialized_start=1572,
+  serialized_end=1603,
 )
 
 
@@ -733,8 +740,8 @@ _CPARENTAL_REQUESTRECOVERYCODE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1575,
-  serialized_end=1614,
+  serialized_start=1605,
+  serialized_end=1644,
 )
 
 
@@ -757,8 +764,8 @@ _CPARENTAL_REQUESTRECOVERYCODE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1616,
-  serialized_end=1656,
+  serialized_start=1646,
+  serialized_end=1686,
 )
 
 
@@ -795,8 +802,8 @@ _CPARENTAL_DISABLEWITHRECOVERYCODE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1658,
-  serialized_end=1741,
+  serialized_start=1688,
+  serialized_end=1771,
 )
 
 
@@ -819,8 +826,8 @@ _CPARENTAL_DISABLEWITHRECOVERYCODE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1743,
-  serialized_end=1787,
+  serialized_start=1773,
+  serialized_end=1817,
 )
 
 
@@ -871,8 +878,8 @@ _CPARENTAL_PARENTALSETTINGSCHANGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1790,
-  serialized_end=1922,
+  serialized_start=1820,
+  serialized_end=1952,
 )
 
 
@@ -909,8 +916,8 @@ _CPARENTAL_PARENTALUNLOCK_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1924,
-  serialized_end=2000,
+  serialized_start=1954,
+  serialized_end=2030,
 )
 
 
@@ -940,8 +947,8 @@ _CPARENTAL_PARENTALLOCK_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2002,
-  serialized_end=2058,
+  serialized_start=2032,
+  serialized_end=2088,
 )
 
 _PARENTALSETTINGS.fields_by_name['applist_base'].message_type = _PARENTALAPP
@@ -1160,8 +1167,8 @@ _PARENTAL = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030\031Parental settings service'),
-  serialized_start=2061,
-  serialized_end=3935,
+  serialized_start=2091,
+  serialized_end=3965,
   methods=[
   _descriptor.MethodDescriptor(
     name='EnableParentalSettings',
@@ -1265,8 +1272,8 @@ _PARENTALCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=_b('\202\265\030&Parental settings client notifications\300\265\030\002'),
-  serialized_start=3938,
-  serialized_end=4456,
+  serialized_start=3968,
+  serialized_end=4486,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifySettingsChange',

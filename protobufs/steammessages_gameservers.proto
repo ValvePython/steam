@@ -52,12 +52,15 @@ message CGameServers_GetServerIPsBySteamID_Request {
 
 service GameServers {
 	option (service_description) = "A service for searching and managing game servers.";
+
 	rpc GetServerList (.CGameServers_GetServerList_Request) returns (.CGameServers_GetServerList_Response) {
 		option (method_description) = "Gets a list of servers given a filter string";
 	}
+
 	rpc GetServerSteamIDsByIP (.CGameServers_GetServerSteamIDsByIP_Request) returns (.CGameServers_IPsWithSteamIDs_Response) {
 		option (method_description) = "Gets a list of server SteamIDs given a list of IPs";
 	}
+
 	rpc GetServerIPsBySteamID (.CGameServers_GetServerIPsBySteamID_Request) returns (.CGameServers_IPsWithSteamIDs_Response) {
 		option (method_description) = "Gets a list of server IP addresses given a list of SteamIDs";
 	}

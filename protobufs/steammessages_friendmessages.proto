@@ -51,12 +51,14 @@ message CFriendMessages_SendMessage_Request {
 	optional bool contains_bbcode = 4;
 	optional bool echo_to_sender = 5;
 	optional bool low_priority = 6;
+	optional string client_message_id = 8;
 }
 
 message CFriendMessages_SendMessage_Response {
 	optional string modified_message = 1;
 	optional uint32 server_timestamp = 2;
 	optional uint32 ordinal = 3;
+	optional string message_without_bb_code = 4;
 }
 
 message CFriendMessages_AckMessage_Notification {
@@ -87,27 +89,35 @@ message CFriendMessages_IncomingMessage_Notification {
 
 service FriendMessages {
 	option (service_description) = "A service for relaying and logging friend messages (user-to-user chats and offline messaging)";
+
 	rpc GetRecentMessages (.CFriendMessages_GetRecentMessages_Request) returns (.CFriendMessages_GetRecentMessages_Response) {
 		option (method_description) = "Get a log of recent chat messages between two users";
 	}
+
 	rpc GetActiveMessageSessions (.CFriendsMessages_GetActiveMessageSessions_Request) returns (.CFriendsMessages_GetActiveMessageSessions_Response) {
 		option (method_description) = "Get information about recent offline messages and chats";
 	}
+
 	rpc SendMessage (.CFriendMessages_SendMessage_Request) returns (.CFriendMessages_SendMessage_Response) {
 		option (method_description) = "Send a chat message to a friend";
 	}
+
 	rpc AckMessage (.CFriendMessages_AckMessage_Notification) returns (.NoResponse) {
 		option (method_description) = "Acknowledge that we have seen the most recent message from a friend";
 	}
+
 	rpc IsInFriendsUIBeta (.CFriendMessages_IsInFriendsUIBeta_Request) returns (.CFriendMessages_IsInFriendsUIBeta_Response) {
 		option (method_description) = "See if a friend is in the friendsui beta.";
 	}
 }
+
 service FriendMessagesClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
 	rpc IncomingMessage (.CFriendMessages_IncomingMessage_Notification) returns (.NoResponse) {
 		option (method_description) = "New chat message from a friend.";
 	}
+
 	rpc NotifyAckMessageEcho (.CFriendMessages_AckMessage_Notification) returns (.NoResponse) {
 		option (method_description) = "A session acked an unread message, echo to other sessions.";
 	}

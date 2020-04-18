@@ -71,6 +71,8 @@ message CEconItem_Description {
 	optional bool marketable = 25;
 	repeated .CEconItem_Tag tags = 26;
 	optional string item_expiration = 27;
+	optional string market_buy_country_restriction = 30;
+	optional string market_sell_country_restriction = 31;
 }
 
 message CEconItem_Tag {
@@ -88,12 +90,15 @@ message CEcon_GetAssetClassInfo_Response {
 
 service Econ {
 	option (service_description) = "A service that provides communication with the econ servers";
+
 	rpc GetTradeOfferAccessToken (.CEcon_GetTradeOfferAccessToken_Request) returns (.CEcon_GetTradeOfferAccessToken_Response) {
 		option (method_description) = "Get the user's trade offer access token";
 	}
+
 	rpc ClientGetItemShopOverlayAuthURL (.CEcon_ClientGetItemShopOverlayAuthURL_Request) returns (.CEcon_ClientGetItemShopOverlayAuthURL_Response) {
 		option (method_description) = "Generates a URL which sets a secure cookie for in-game-browser itemshop purchases";
 	}
+
 	rpc GetAssetClassInfo (.CEcon_GetAssetClassInfo_Request) returns (.CEcon_GetAssetClassInfo_Response) {
 		option (method_description) = "Returns description information about the passed in asset classes";
 	}

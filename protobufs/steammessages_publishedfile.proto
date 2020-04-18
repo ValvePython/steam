@@ -3,6 +3,15 @@ import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
 
+enum EPublishedFileRevision {
+	k_EPublishedFileRevision_Default = 0;
+	k_EPublishedFileRevision_Latest = 1;
+	k_EPublishedFileRevision_ApprovedSnapshot = 2;
+	k_EPublishedFileRevision_ApprovedSnapshot_China = 3;
+	k_EPublishedFileRevision_RejectedSnapshot = 4;
+	k_EPublishedFileRevision_RejectedSnapshot_China = 5;
+}
+
 enum EPublishedFileForSaleStatus {
 	k_PFFSS_NotForSale = 0;
 	k_PFFSS_PendingApproval = 1;
@@ -78,6 +87,7 @@ message CPublishedFile_GetDetails_Request {
 	optional uint32 return_playtime_stats = 13 [(description) = "Return playtime stats for the specified number of days before today."];
 	optional uint32 appid = 14;
 	optional bool strip_description_bbcode = 15 [(description) = "Strips BBCode from descriptions."];
+	optional .EPublishedFileRevision desired_revision = 16 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 }
 
 message PublishedFileDetails {
@@ -192,6 +202,9 @@ message PublishedFileDetails {
 	optional int32 language = 61 [default = 0, (description) = "The language of the title and description."];
 	optional bool maybe_inappropriate_sex = 65;
 	optional bool maybe_inappropriate_violence = 66;
+	optional uint64 revision_change_number = 67 [(description) = "The change number for the specified revision."];
+	optional .EPublishedFileRevision revision = 68 [default = k_EPublishedFileRevision_Default, (description) = "The revision of the data returned, usually k_EPublishedFileRevision_Latest, but can be another revision/snapshot depending on the caller."];
+	repeated .EPublishedFileRevision available_revisions = 69 [(description) = "Available revisions"];
 }
 
 message CPublishedFile_GetDetails_Response {
@@ -202,6 +215,7 @@ message CPublishedFile_GetItemInfo_Request {
 	message WorkshopItem {
 		optional fixed64 published_file_id = 1;
 		optional uint32 time_updated = 2;
+		optional .EPublishedFileRevision desired_revision = 3 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 	}
 
 	optional uint32 app_id = 1;
@@ -219,12 +233,17 @@ message CPublishedFile_GetItemInfo_Response {
 
 	optional uint32 update_time = 1;
 	repeated .CPublishedFile_GetItemInfo_Response.WorkshopItemInfo workshop_items = 2;
+	repeated fixed64 private_items = 3;
 }
 
 message CPublishedFile_GetUserFiles_Request {
 	message KVTag {
 		optional string key = 1;
 		optional string value = 2;
+	}
+
+	message TagGroup {
+		repeated string tags = 1;
 	}
 
 	optional fixed64 steamid = 1 [(description) = "Steam ID of the user whose files are being requested."];
@@ -242,6 +261,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional string match_cloud_filename = 16 [(description) = "Match this cloud filename if specified."];
 	optional uint32 cache_max_age_seconds = 27 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
 	optional int32 language = 29 [default = 0, (description) = "Specifies the localized text to return. Defaults to English."];
+	repeated .CPublishedFile_GetUserFiles_Request.TagGroup taggroups = 34 [(description) = "(Optional) At least one of the tags must be present on a published file to satisfy the query."];
 	optional bool totalonly = 17 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool ids_only = 18 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 19 [default = true, (description) = "Return vote data"];
@@ -254,6 +274,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_metadata = 28 [default = false, (description) = "Populate the metadata field"];
 	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
 	optional bool strip_description_bbcode = 32 [(description) = "Strips BBCode from descriptions."];
+	optional .EPublishedFileRevision desired_revision = 33 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 }
 
 message CPublishedFile_GetUserFiles_Response {
@@ -340,6 +361,7 @@ message CPublishedFile_RefreshVotingQueue_Request {
 	optional bool match_all_tags = 4 [default = true, (description) = "If true, then files must have all the tags specified.  If false, then must have at least one of the tags specified."];
 	repeated string excluded_tags = 5 [(description) = "Exclude any files that have any of these tags."];
 	optional uint32 desired_queue_size = 6 [(description) = "Desired number of items in the voting queue.  May be clamped by the server"];
+	optional .EPublishedFileRevision desired_revision = 8 [default = k_EPublishedFileRevision_Default, (description) = "Filter to items that have data for the specified revision."];
 }
 
 message CPublishedFile_RefreshVotingQueue_Response {
@@ -349,6 +371,10 @@ message CPublishedFile_QueryFiles_Request {
 	message KVTag {
 		optional string key = 1;
 		optional string value = 2;
+	}
+
+	message TagGroup {
+		repeated string tags = 1;
 	}
 
 	optional uint32 query_type = 1 [(description) = "enumeration EPublishedFileQueryType in clientenums.h"];
@@ -370,6 +396,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional uint32 cache_max_age_seconds = 31 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
 	optional int32 language = 33 [default = 0, (description) = "Language to search in and also what gets returned. Defaults to English."];
 	repeated .CPublishedFile_QueryFiles_Request.KVTag required_kv_tags = 34 [(description) = "Required key-value tags to match on."];
+	repeated .CPublishedFile_QueryFiles_Request.TagGroup taggroups = 42 [(description) = "(Optional) At least one of the tags must be present on a published file to satisfy the query."];
 	optional bool totalonly = 16 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool ids_only = 35 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 17 [(description) = "Return vote data"];
@@ -383,6 +410,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional uint32 return_playtime_stats = 36 [(description) = "Return playtime stats for the specified number of days before today."];
 	optional bool return_details = 37 [(description) = "By default, if none of the other 'return_*' fields are set, only some voting details are returned. Set this to true to return the default set of details."];
 	optional bool strip_description_bbcode = 38 [(description) = "Strips BBCode from descriptions."];
+	optional .EPublishedFileRevision desired_revision = 40 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 }
 
 message CPublishedFile_QueryFiles_Response {
@@ -474,7 +502,28 @@ message CPublishedFile_RemoveChild_Request {
 message CPublishedFile_RemoveChild_Response {
 }
 
+message CPublishedFile_GetUserVoteSummary_Request {
+	repeated fixed64 publishedfileids = 1;
+}
+
+message CPublishedFile_GetUserVoteSummary_Response {
+	message VoteSummary {
+		optional fixed64 publishedfileid = 1;
+		optional bool vote_for = 2;
+		optional bool vote_against = 3;
+		optional bool reported = 4;
+	}
+
+	repeated .CPublishedFile_GetUserVoteSummary_Response.VoteSummary summaries = 1;
+}
+
 message CPublishedFile_FileSubscribed_Notification {
+	message RevisionData {
+		optional .EPublishedFileRevision revision = 1 [default = k_EPublishedFileRevision_Default];
+		optional fixed64 file_hcontent = 2 [(description) = "Manifest GID"];
+		optional uint32 rtime_updated = 3 [(description) = "Last time content updated"];
+	}
+
 	optional fixed64 published_file_id = 1 [(description) = "PublishedFileID_t for the content"];
 	optional uint32 app_id = 2;
 	optional fixed64 file_hcontent = 3 [(description) = "UGC file handle or manifest GID"];
@@ -482,6 +531,7 @@ message CPublishedFile_FileSubscribed_Notification {
 	optional uint32 rtime_subscribed = 5;
 	optional bool is_depot_content = 6 [(description) = "True if workshop item is delivered via Steampipe"];
 	optional uint32 rtime_updated = 7 [(description) = "Last time content updated"];
+	repeated .CPublishedFile_FileSubscribed_Notification.RevisionData revisions = 8 [(description) = "Data for each of the revisions that this item has"];
 }
 
 message CPublishedFile_FileUnsubscribed_Notification {
@@ -496,82 +546,112 @@ message CPublishedFile_FileDeleted_Client_Notification {
 
 service PublishedFile {
 	option (service_description) = "A service to access published file data";
+
 	rpc Subscribe (.CPublishedFile_Subscribe_Request) returns (.CPublishedFile_Subscribe_Response) {
 		option (method_description) = "Subscribes the user to the published file";
 	}
+
 	rpc Unsubscribe (.CPublishedFile_Unsubscribe_Request) returns (.CPublishedFile_Unsubscribe_Response) {
 		option (method_description) = "Unsubscribes the user from the published file";
 	}
+
 	rpc CanSubscribe (.CPublishedFile_CanSubscribe_Request) returns (.CPublishedFile_CanSubscribe_Response) {
 		option (method_description) = "Check if the user can subscribe to the published file";
 	}
+
 	rpc Publish (.CPublishedFile_Publish_Request) returns (.CPublishedFile_Publish_Response) {
 		option (method_description) = "Publishes a clouded user file to the Workshop.";
 	}
+
 	rpc GetDetails (.CPublishedFile_GetDetails_Request) returns (.CPublishedFile_GetDetails_Response) {
 		option (method_description) = "Retrieves information about a set of published files.";
 	}
+
 	rpc GetItemInfo (.CPublishedFile_GetItemInfo_Request) returns (.CPublishedFile_GetItemInfo_Response) {
 		option (method_description) = "Retrieves information about a set of published files.";
 	}
+
 	rpc GetUserFiles (.CPublishedFile_GetUserFiles_Request) returns (.CPublishedFile_GetUserFiles_Response) {
 		option (method_description) = "Retrieves files published by a user.";
 	}
+
 	rpc AreFilesInSubscriptionList (.CPublishedFile_AreFilesInSubscriptionList_Request) returns (.CPublishedFile_AreFilesInSubscriptionList_Response) {
 		option (method_description) = "Determines which files in the given list are in a user's subscription list";
 	}
+
 	rpc Update (.CPublishedFile_Update_Request) returns (.CPublishedFile_Update_Response) {
 		option (method_description) = "Updates information about a published file.";
 	}
+
 	rpc GetChangeHistoryEntry (.CPublishedFile_GetChangeHistoryEntry_Request) returns (.CPublishedFile_GetChangeHistoryEntry_Response) {
 		option (method_description) = "Returns data on a specific change history entry for a published file";
 	}
+
 	rpc GetChangeHistory (.CPublishedFile_GetChangeHistory_Request) returns (.CPublishedFile_GetChangeHistory_Response) {
 		option (method_description) = "Returns data on the change history for a published file";
 	}
+
 	rpc RefreshVotingQueue (.CPublishedFile_RefreshVotingQueue_Request) returns (.CPublishedFile_RefreshVotingQueue_Response) {
 		option (method_description) = "Refresh the voting queue for the user";
 	}
+
 	rpc QueryFiles (.CPublishedFile_QueryFiles_Request) returns (.CPublishedFile_QueryFiles_Response) {
 		option (method_description) = "Performs a search query for published files";
 	}
+
 	rpc AddAppRelationship (.CPublishedFile_AddAppRelationship_Request) returns (.CPublishedFile_AddAppRelationship_Response) {
 		option (method_description) = "Adds a relationship between the published file and the given app";
 	}
+
 	rpc RemoveAppRelationship (.CPublishedFile_RemoveAppRelationship_Request) returns (.CPublishedFile_RemoveAppRelationship_Response) {
 		option (method_description) = "Remove a relationship between the published file and the given app";
 	}
+
 	rpc GetAppRelationships (.CPublishedFile_GetAppRelationships_Request) returns (.CPublishedFile_GetAppRelationships_Response) {
 		option (method_description) = "Returns the list of app relationships for this published file";
 	}
+
 	rpc StartPlaytimeTracking (.CPublishedFile_StartPlaytimeTracking_Request) returns (.CPublishedFile_StartPlaytimeTracking_Response) {
 		option (method_description) = "Start usage tracking for a given set of published files";
 	}
+
 	rpc StopPlaytimeTracking (.CPublishedFile_StopPlaytimeTracking_Request) returns (.CPublishedFile_StopPlaytimeTracking_Response) {
 		option (method_description) = "Stops usage tracking for a given set of published files";
 	}
+
 	rpc StopPlaytimeTrackingForAllAppItems (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request) returns (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response) {
 		option (method_description) = "Stops usage tracking for all items currently tracked for the specified app";
 	}
+
 	rpc SetPlaytimeForControllerConfigs (.CPublishedFile_SetPlaytimeForControllerConfigs_Request) returns (.CPublishedFile_SetPlaytimeForControllerConfigs_Response) {
 		option (method_description) = "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs";
 	}
+
 	rpc AddChild (.CPublishedFile_AddChild_Request) returns (.CPublishedFile_AddChild_Response) {
 		option (method_description) = "Adds a parent->child relationship between the given items.";
 	}
+
 	rpc RemoveChild (.CPublishedFile_RemoveChild_Request) returns (.CPublishedFile_RemoveChild_Response) {
 		option (method_description) = "Removes parent->child relationship between the given items.";
 	}
+
+	rpc GetUserVoteSummary (.CPublishedFile_GetUserVoteSummary_Request) returns (.CPublishedFile_GetUserVoteSummary_Response) {
+		option (method_description) = "Get user vote summary";
+	}
 }
+
 service PublishedFileClient {
 	option (service_description) = "Published file client notifications";
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
 	rpc NotifyFileSubscribed (.CPublishedFile_FileSubscribed_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from the server when a user subscribes to a file";
 	}
+
 	rpc NotifyFileUnsubscribed (.CPublishedFile_FileUnsubscribed_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from the server when a user unsubscribes from a file";
 	}
+
 	rpc NotifyFileDeleted (.CPublishedFile_FileDeleted_Client_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from the server when a published file is deleted";
 	}

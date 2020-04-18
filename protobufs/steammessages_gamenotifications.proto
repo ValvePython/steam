@@ -116,31 +116,40 @@ message CGameNotifications_OnUserStatusChanged_Notification {
 
 service GameNotifications {
 	option (service_description) = "A service for functions related to the asyncronous game notification server.";
+
 	rpc UserCreateSession (.CGameNotifications_CreateSession_Request) returns (.CGameNotifications_CreateSession_Response) {
 		option (method_description) = "Creates an async game session";
 	}
+
 	rpc UserDeleteSession (.CGameNotifications_DeleteSession_Request) returns (.CGameNotifications_DeleteSession_Response) {
 		option (method_description) = "Deletes an async game session";
 	}
+
 	rpc UserUpdateSession (.CGameNotifications_UpdateSession_Request) returns (.CGameNotifications_UpdateSession_Response) {
 		option (method_description) = "Updates an async game session";
 	}
+
 	rpc EnumerateSessions (.CGameNotifications_EnumerateSessions_Request) returns (.CGameNotifications_EnumerateSessions_Response) {
 		option (method_description) = "Enumerates a user's sessions";
 	}
+
 	rpc GetSessionDetails (.CGameNotifications_GetSessionDetails_Request) returns (.CGameNotifications_GetSessionDetails_Response) {
 		option (method_description) = "Get the details for a specific session";
 	}
+
 	rpc UpdateNotificationSettings (.CGameNotifications_UpdateNotificationSettings_Request) returns (.CGameNotifications_UpdateNotificationSettings_Response) {
 		option (method_description) = "Updates whether a user allows game notifications for a specific app";
 	}
 }
+
 service GameNotificationsClient {
 	option (service_description) = "Client notifications";
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
 	rpc OnNotificationsRequested (.CGameNotifications_OnNotificationsRequested_Notification) returns (.NoResponse) {
 		option (method_description) = "Requests that the user opt into notifications";
 	}
+
 	rpc OnUserStatusChanged (.CGameNotifications_OnUserStatusChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification that the user's status has changed";
 	}

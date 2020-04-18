@@ -48,6 +48,37 @@ message CPlayer_GetFriendsGameplayInfo_Response {
 	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo in_wishlist = 6;
 }
 
+message CPlayer_GetFriendsAppsActivity_Request {
+	optional string news_language = 1 [(description) = "Language for which to query about news items (for the being_discussed results). DEPRECATED AND UNUSED."];
+	optional uint32 request_flags = 2 [(description) = "Flags describing the request; see EGetFriendsAppsActivityFlags"];
+}
+
+message CPlayer_GetFriendsAppsActivity_Response {
+	message FriendPlayTime {
+		optional fixed64 steamid = 1;
+		optional uint32 minutes_played_this_week = 2 [(description) = "Minutes this friend played the game (from the enclosing structure) this week."];
+		optional uint32 minutes_played_two_weeks = 3 [(description) = "Minutes this friend played the game (from the enclosing structure) in the past 2 weeks."];
+		optional uint32 minutes_played_forever = 4 [(description) = "Minutes this friend played the game (from the enclosing structure) all time."];
+		optional uint32 event_count = 5 [(description) = "Number of events involving this user & app. (Only set for results in being_discussed.) DEPRECATED AND UNUSED."];
+	}
+
+	message AppFriendsInfo {
+		optional uint32 appid = 1;
+		repeated .CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime friends = 2 [(description) = "Friends (w/ playtime) that meet a specific criteria -- e.g. for trending, only includes friends w/ more playtime this week."];
+		optional uint32 display_order = 3 [(description) = "Index indicating the order in which this app should be displayed, relative to other apps in the same response."];
+	}
+
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo trending = 1 [(description) = "Apps that friends have played more this week than last, with list of friends who've played more this week"];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo recent_purchases = 2 [(description) = "Apps friends have played in the past two weeks for which the user recently acquired a license"];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo unowned = 3 [(description) = "Apps friends have played in the past two weeks for which the user has no license"];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo popular = 4 [(description) = "Apps friends have played in the past two weeks, for which the user has a license, sorted by count"];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo dont_forget = 5 [(description) = "Apps friends have played in the past two weeks which the user has neither purchased nor played in the past two weeks"];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo being_discussed = 6 [(description) = "Owned apps that friends have posted status or screenshots for in the past two weeks. DEPRECATED AND UNUSED."];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo new_to_group = 7 [(description) = "Owned apps that none of your friends had played prior to 2 weeks."];
+	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo returned_to_group = 8 [(description) = "Owned apps that friends hadn't played for a while, but are again."];
+	optional uint32 active_friend_count = 9 [default = 0, (description) = "Number of friends with non-trivial activity in the past two weeks."];
+}
+
 message CPlayer_GetGameBadgeLevels_Request {
 	optional uint32 appid = 1;
 }
@@ -76,6 +107,25 @@ message CPlayer_GetEmoticonList_Response {
 	}
 
 	repeated .CPlayer_GetEmoticonList_Response.Emoticon emoticons = 1;
+}
+
+message CPlayer_GetAchievementsProgress_Request {
+	optional uint64 steamid = 1;
+	optional string language = 2;
+	repeated uint32 appids = 3;
+}
+
+message CPlayer_GetAchievementsProgress_Response {
+	message AchievementProgress {
+		optional uint32 appid = 1;
+		optional uint32 unlocked = 2;
+		optional uint32 total = 3;
+		optional float percentage = 4;
+		optional bool all_unlocked = 5;
+		optional uint32 cache_time = 6;
+	}
+
+	repeated .CPlayer_GetAchievementsProgress_Response.AchievementProgress achievement_progress = 1;
 }
 
 message CPlayer_PostStatusToFriends_Request {
@@ -117,6 +167,15 @@ message CPlayer_GetLastPlayedTimes_Response {
 		optional int32 playtime_2weeks = 3;
 		optional int32 playtime_forever = 4;
 		optional uint32 first_playtime = 5;
+		optional int32 playtime_windows_forever = 6;
+		optional int32 playtime_mac_forever = 7;
+		optional int32 playtime_linux_forever = 8;
+		optional uint32 first_windows_playtime = 9;
+		optional uint32 first_mac_playtime = 10;
+		optional uint32 first_linux_playtime = 11;
+		optional uint32 last_windows_playtime = 12;
+		optional uint32 last_mac_playtime = 13;
+		optional uint32 last_linux_playtime = 14;
 	}
 
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
@@ -173,6 +232,7 @@ message CPlayer_AddFriend_Request {
 message CPlayer_AddFriend_Response {
 	optional bool invite_sent = 1 [(description) = "True if the operation was successful, false otherwise."];
 	optional uint32 friend_relationship = 2 [(description) = "the resulting relationship.  Depending on state, may move directly to friends rather than invite sent"];
+	optional int32 result = 3;
 }
 
 message CPlayer_RemoveFriend_Request {
@@ -256,6 +316,9 @@ message CPlayer_GetDurationControl_Request {
 message CPlayer_GetDurationControl_Response {
 	optional bool is_enabled = 1;
 	optional int32 seconds = 2;
+	optional int32 seconds_today = 3;
+	optional bool is_steamchina_account = 4;
+	optional bool is_age_verified = 5;
 }
 
 message CPlayer_LastPlayedTimes_Notification {
@@ -291,88 +354,124 @@ message CPlayer_PrivacySettingsChanged_Notification {
 
 service Player {
 	option (service_description) = "A service for accessing Steam player data";
+
 	rpc GetMutualFriendsForIncomingInvites (.CPlayer_GetMutualFriendsForIncomingInvites_Request) returns (.CPlayer_GetMutualFriendsForIncomingInvites_Response) {
 		option (method_description) = "Get me the mutual friends for each of my pending incoming invites (individuals and clans).";
 	}
+
 	rpc GetFriendsGameplayInfo (.CPlayer_GetFriendsGameplayInfo_Request) returns (.CPlayer_GetFriendsGameplayInfo_Response) {
 		option (method_description) = "Get a list of friends who are playing, have played, own, or want a game";
 	}
+
+	rpc GetFriendsAppsActivity (.CPlayer_GetFriendsAppsActivity_Request) returns (.CPlayer_GetFriendsAppsActivity_Response) {
+		option (method_description) = "Get lists of apps friends are active in, in a variety of ways";
+	}
+
 	rpc GetGameBadgeLevels (.CPlayer_GetGameBadgeLevels_Request) returns (.CPlayer_GetGameBadgeLevels_Response) {
 		option (method_description) = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil";
 	}
+
 	rpc GetEmoticonList (.CPlayer_GetEmoticonList_Request) returns (.CPlayer_GetEmoticonList_Response) {
 		option (method_description) = "Gets a list of the emoticons a user has with metadata";
 	}
+
+	rpc GetAchievementsProgress (.CPlayer_GetAchievementsProgress_Request) returns (.CPlayer_GetAchievementsProgress_Response) {
+		option (method_description) = "Gets the achievement completion stats for the specified list of apps.";
+	}
+
 	rpc PostStatusToFriends (.CPlayer_PostStatusToFriends_Request) returns (.CPlayer_PostStatusToFriends_Response) {
 		option (method_description) = "Posts custom status text into the blotter";
 	}
+
 	rpc GetPostedStatus (.CPlayer_GetPostedStatus_Request) returns (.CPlayer_GetPostedStatus_Response) {
 		option (method_description) = "Gets a posted status text for a user by id";
 	}
+
 	rpc DeletePostedStatus (.CPlayer_DeletePostedStatus_Request) returns (.CPlayer_DeletePostedStatus_Response) {
 		option (method_description) = "Deletes a posted status text for a user by id";
 	}
+
 	rpc ClientGetLastPlayedTimes (.CPlayer_GetLastPlayedTimes_Request) returns (.CPlayer_GetLastPlayedTimes_Response) {
 		option (method_description) = "Gets the last-played times for the account";
 	}
+
 	rpc AcceptSSA (.CPlayer_AcceptSSA_Request) returns (.CPlayer_AcceptSSA_Response) {
 		option (method_description) = "User is accepting the SSA";
 	}
+
 	rpc GetNicknameList (.CPlayer_GetNicknameList_Request) returns (.CPlayer_GetNicknameList_Response) {
 		option (method_description) = "Gets the list of nicknames this user has for other users";
 	}
+
 	rpc GetPerFriendPreferences (.CPlayer_GetPerFriendPreferences_Request) returns (.CPlayer_GetPerFriendPreferences_Response) {
 		option (method_description) = "Gets the list of per-friend preferences this user has set for other users";
 	}
+
 	rpc SetPerFriendPreferences (.CPlayer_SetPerFriendPreferences_Request) returns (.CPlayer_SetPerFriendPreferences_Response) {
 		option (method_description) = "Sets the logged in user's per-friend preferences for the given user";
 	}
+
 	rpc AddFriend (.CPlayer_AddFriend_Request) returns (.CPlayer_AddFriend_Response) {
 		option (method_description) = "Invites another Steam user to be a friend";
 	}
+
 	rpc RemoveFriend (.CPlayer_RemoveFriend_Request) returns (.CPlayer_RemoveFriend_Response) {
 		option (method_description) = "Removes a friend or ignores a friend suggestion";
 	}
+
 	rpc IgnoreFriend (.CPlayer_IgnoreFriend_Request) returns (.CPlayer_IgnoreFriend_Response) {
 		option (method_description) = "Blocks or unblocks communication with the user.  Despite name, can be a non-friend.";
 	}
+
 	rpc GetCommunityPreferences (.CPlayer_GetCommunityPreferences_Request) returns (.CPlayer_GetCommunityPreferences_Response) {
 		option (method_description) = "Returns the player's community preferences";
 	}
+
 	rpc SetCommunityPreferences (.CPlayer_SetCommunityPreferences_Request) returns (.CPlayer_SetCommunityPreferences_Response) {
 		option (method_description) = "Sets the player's community preferences";
 	}
+
 	rpc GetNewSteamAnnouncementState (.CPlayer_GetNewSteamAnnouncementState_Request) returns (.CPlayer_GetNewSteamAnnouncementState_Response) {
 		option (method_description) = "Calculates and returns what to display for UI that renders new steam announcement available";
 	}
+
 	rpc UpdateSteamAnnouncementLastRead (.CPlayer_UpdateSteamAnnouncementLastRead_Request) returns (.CPlayer_UpdateSteamAnnouncementLastRead_Response) {
 		option (method_description) = "Marks latest announcement timestamp read by user";
 	}
+
 	rpc GetPrivacySettings (.CPlayer_GetPrivacySettings_Request) returns (.CPlayer_GetPrivacySettings_Response) {
 		option (method_description) = "Get current privacy settings.";
 	}
+
 	rpc GetDurationControl (.CPlayer_GetDurationControl_Request) returns (.CPlayer_GetDurationControl_Response) {
 		option (method_description) = "Get gameplay duration control settings.";
 	}
 }
+
 service PlayerClient {
 	option (service_description) = "Steam player data client notifications";
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
 	rpc NotifyLastPlayedTimes (.CPlayer_LastPlayedTimes_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client of more recent play time";
 	}
+
 	rpc NotifyFriendNicknameChanged (.CPlayer_FriendNicknameChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that a friend's nickname has changed";
 	}
+
 	rpc NotifyNewSteamAnnouncementState (.CPlayer_NewSteamAnnouncementState_Notification) returns (.NoResponse) {
 		option (method_description) = "Notifies client of changes to steam announcement state for user";
 	}
+
 	rpc NotifyCommunityPreferencesChanged (.CPlayer_CommunityPreferencesChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that their community preferences have changed";
 	}
+
 	rpc NotifyPerFriendPreferencesChanged (.CPlayer_PerFriendPreferencesChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server that per-friend preferences have changed";
 	}
+
 	rpc NotifyPrivacyPrivacySettingsChanged (.CPlayer_PrivacySettingsChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server that privacy settings changed";
 	}
