@@ -1,6 +1,6 @@
 from weakref import WeakValueDictionary
 from steam.client.user import SteamUser
-from steam.enums import EPersonaState, EChatEntryType, EType
+from steam.enums import EPersonaState, EChatEntryType, EType, EClientUIMode
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
 from steam.util import proto_fill_from_dict
