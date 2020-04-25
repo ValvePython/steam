@@ -38,7 +38,7 @@ from steam.steamid import SteamID
 from steam.core.msg import MsgProto
 from steam.enums import EResult
 from steam.enums.emsg import EMsg
-from steam.util import ip_to_int, ip_from_int, proto_to_dict
+from steam.utils import ip_to_int, ip_from_int, proto_to_dict
 
 
 class GameServers(object):

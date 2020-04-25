@@ -31,7 +31,7 @@ All globals params (``key``, ``https``, ``format``, ``raw``) can be specified on
     }
 """
 import json as _json
-from steam.util.web import make_requests_session as _make_session
+from steam.utils.web import make_requests_session as _make_session
 
 class APIHost(object):
     """Enum of currently available API hosts."""

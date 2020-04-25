@@ -2,13 +2,14 @@
 
 ## 1.0.0
 
-This release brings some breaking changes
+This release brings breaking changes
 
 ### General
 
 - Replaced `cryptography` library with `pycryptodomex`
 - Updated all enums
 - Removed imports from 'steam' namespace
+- Renamed `steam.util` to `steam.utils`
 
 ### steam.steamid
 

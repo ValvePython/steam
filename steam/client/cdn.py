@@ -99,7 +99,7 @@ from steam.exceptions import SteamError
 from steam.core.msg import MsgProto
 from steam.enums import EResult, EType
 from steam.enums.emsg import EMsg
-from steam.util.web import make_requests_session
+from steam.utils.web import make_requests_session
 from steam.core.crypto import symmetric_decrypt, symmetric_decrypt_ecb
 from steam.core.manifest import DepotManifest, DepotFile
 from steam.protobufs.content_manifest_pb2 import ContentManifestPayload

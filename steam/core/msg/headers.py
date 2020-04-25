@@ -3,7 +3,7 @@ import struct
 from steam.enums.emsg import EMsg
 from steam.protobufs import steammessages_base_pb2
 from steam.protobufs import gc_pb2
-from steam.util import set_proto_bit, clear_proto_bit
+from steam.utils import set_proto_bit, clear_proto_bit
 
 
 class MsgHdr:

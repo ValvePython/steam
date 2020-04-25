@@ -132,7 +132,7 @@ from re import match as _re_match
 from struct import pack as _pack, unpack_from as _unpack_from
 from time import time as _time
 from enum import IntEnum
-from steam.util.binary import StructReader as _StructReader
+from steam.utils.binary import StructReader as _StructReader
 
 __all__ = ['query_master', 'a2s_info', 'a2s_players', 'a2s_rules', 'a2s_ping']
 

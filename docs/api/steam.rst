@@ -14,4 +14,4 @@ API Reference
     steam.steamid
     steam.webapi
     steam.webauth
-    steam.util
+    steam.utils

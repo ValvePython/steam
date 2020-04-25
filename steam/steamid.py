@@ -4,7 +4,7 @@ import re
 import requests
 from steam.enums.base import SteamIntEnum
 from steam.enums import EType, EUniverse, EInstanceFlag
-from steam.util.web import make_requests_session
+from steam.utils.web import make_requests_session
 
 if sys.version_info < (3,):
     intBase = long

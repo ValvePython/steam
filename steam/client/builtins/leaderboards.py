@@ -5,8 +5,8 @@ import logging
 from steam.core.msg import MsgProto
 from steam.enums import EResult, ELeaderboardDataRequest, ELeaderboardSortMethod, ELeaderboardDisplayType
 from steam.enums.emsg import EMsg
-from steam.util import _range, chunks
-from steam.util.throttle import ConstantRateLimit
+from steam.utils import _range, chunks
+from steam.utils.throttle import ConstantRateLimit
 
 
 class Leaderboards(object):

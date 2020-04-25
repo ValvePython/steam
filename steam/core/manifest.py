@@ -9,7 +9,7 @@ import os.path
 
 from steam.enums import EDepotFileFlag
 from steam.core.crypto import symmetric_decrypt
-from steam.util.binary import StructReader
+from steam.utils.binary import StructReader
 from steam.protobufs.content_manifest_pb2 import (ContentManifestMetadata,
                                                   ContentManifestPayload,
                                                   ContentManifestSignature)

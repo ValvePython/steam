@@ -40,7 +40,7 @@ protobufs needed to (de)serialize message for communication with GC.
 import logging
 import gevent
 from eventemitter import EventEmitter
-from steam.util import set_proto_bit, clear_proto_bit, is_proto
+from steam.utils import set_proto_bit, clear_proto_bit, is_proto
 from steam.enums.emsg import EMsg
 from steam.enums import EResult
 from steam.core.msg import GCMsgHdr, GCMsgHdrProto, MsgProto

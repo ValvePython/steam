@@ -5,7 +5,7 @@ import vdf
 from six.moves import range
 from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
-from steam.util.binary import StructReader
+from steam.utils.binary import StructReader
 
 _emsg_map = {}
 

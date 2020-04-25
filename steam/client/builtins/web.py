@@ -5,7 +5,7 @@ from steam import webapi
 from steam.core.msg import MsgProto
 from steam.enums.emsg import EMsg
 from steam.core.crypto import generate_session_key, symmetric_encrypt
-from steam.util.web import make_requests_session, generate_session_id
+from steam.utils.web import make_requests_session, generate_session_id
 
 
 class Web(object):

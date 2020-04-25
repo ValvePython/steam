@@ -1,31 +1,31 @@
-util
-====
+utils
+=====
 
-.. automodule:: steam.util
+.. automodule:: steam.utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-util.binary
------------
+utils.binary
+------------
 
-.. automodule:: steam.util.binary
+.. automodule:: steam.utils.binary
     :members:
     :undoc-members:
     :show-inheritance:
 
-util.throttle
--------------
+utils.throttle
+--------------
 
-.. automodule:: steam.util.throttle
+.. automodule:: steam.utils.throttle
     :members:
     :undoc-members:
     :show-inheritance:
 
-util.web
---------
+utils.web
+---------
 
-.. automodule:: steam.util.web
+.. automodule:: steam.utils.web
     :members:
     :undoc-members:
     :show-inheritance:
