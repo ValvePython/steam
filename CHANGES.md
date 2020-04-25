@@ -6,6 +6,7 @@ This release brings breaking changes
 
 ### General
 
+- Added steam.utils.appcache methods for parsing appcache files
 - Replaced `cryptography` library with `pycryptodomex`
 - Updated all enums
 - Removed imports from 'steam' namespace

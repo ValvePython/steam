@@ -6,6 +6,14 @@ utils
     :undoc-members:
     :show-inheritance:
 
+utils.appache
+------------
+
+.. automodule:: steam.utils.appcache
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 utils.binary
 ------------
 
