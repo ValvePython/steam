@@ -4,27 +4,45 @@
 
 This release brings some breaking changes
 
-- Removed imports from 'steam' namespace
-- Replaced builtin CM server list with automatic discovery via WebAPI or DNS
-- Removed `SteamClient.unifed_messages`
-- UM/ServiceMethods are now handled in the `SteamClient` instance. See `SteamClient.send_um()`
-- Removed `steam.client.mixins` package
-- Renamed `medium` param to `backend` on `SteamAuthenticator`
-- Added `WebAuth.cli_login()`, handles all steps of the login process
-- Made `password` param optional on `WebAuth`
+### General
+
 - Replaced `cryptography` library with `pycryptodomex`
-- Added `rich_presence` property to `SteamUser`
+- Updated all enums
+- Removed imports from 'steam' namespace
+
+### steam.steamid
+
+- Added support for invite codes in SteamID
+- Updated `SteamID.is_valid`
+
+### steam.guard
+
+- Renamed `medium` param to `backend` on `SteamAuthenticator`
 - Fixed `create_emergency_codes()` not returning codes
 - Fixed `validate_phone_number()` returning no data
-- Updated protobufs
-- Removed `SteamClient.change_email()`
-- Removed `SteamClient.create_account()`
+
+### steam.webauth
+
+- Added `WebAuth.cli_login()`, handles all steps of the login process
+- Updated `password` param to be optional on `WebAuth`
+
+### steam.client
+
+- Replaced builtin CM server list with automatic discovery via WebAPI or DNS
+- UM/ServiceMethods are now handled in the `SteamClient` instance. See `SteamClient.send_um()`
+- Messages now have a `payload` property set when the body cannot be parsed
 - `get_product_info()` now replaces invalid unicode chars
 - `get_product_info()` includes `_missing_token` key with every result
-- Updated `SteamID.is_valid`
-- Updated various Enums
-- Updated EMsg Enum
-- Messages now have a `payload` property set when the body cannot be parsed
-- Updated protocol version to 65580
 - Added `CDNClient` for downloading connect from SteamPipe
-- Update `SteamClient` to use new chat mode, with option to fallback
+- Added `rich_presence` property to `SteamUser`
+- Added block/unblock methods for `SteamUser`
+- Added jitter to reconnect delay in `SteamClient`
+- Updated protocol version to 65580
+- Updated `SteamClient` to use new chat mode, with option to fallback
+- Updated `get_product_info()` to include `_missing_token` variable
+- Updated protobufs
+- Removed `SteamClient.unifed_messages`
+- Removed `steam.client.mixins` package
+- Removed `Account` builtin as all methods have been deprecated
+- Removed `SteamClient.change_email()`
+- Removed `SteamClient.create_account()`
