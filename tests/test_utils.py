@@ -1,6 +1,7 @@
 import unittest
-import steam.util as ut
-import steam.util.web as uweb
+import steam.utils as ut
+import steam.utils.proto as utp
+import steam.utils.web as uweb
 import requests
 from steam.protobufs.test_messages_pb2 import ComplexProtoMessage
 
@@ -17,27 +18,28 @@ class Util_Functions(unittest.TestCase):
         self.assertEqual(ut.ip_to_int('12.34.56.78'), 203569230)
         self.assertEqual(ut.ip_to_int('255.255.255.255'), 4294967295)
 
-    def test_is_proto(self):
-        self.assertTrue(ut.is_proto(proto_mask))
-        self.assertTrue(ut.is_proto(proto_mask | 123456))
-        self.assertFalse(ut.is_proto(0))
-        self.assertFalse(ut.is_proto(proto_mask - 1))
-        self.assertFalse(ut.is_proto(proto_mask << 1))
-
-    def test_set_proto_big(self):
-        self.assertFalse(ut.is_proto(0))
-        self.assertTrue(ut.is_proto(ut.set_proto_bit(0)))
-        self.assertFalse(ut.is_proto(1))
-        self.assertTrue(ut.is_proto(ut.set_proto_bit(1)))
-
-    def test_clear_proto_big(self):
-        self.assertEqual(ut.clear_proto_bit(0), 0)
-        self.assertEqual(ut.clear_proto_bit(123), 123)
-        self.assertEqual(ut.clear_proto_bit(proto_mask | 123), 123)
-        self.assertEqual(ut.clear_proto_bit((proto_mask - 1) | proto_mask), proto_mask - 1)
-
     def test_make_requests_session(self):
         self.assertIsInstance(uweb.make_requests_session(), requests.Session)
+
+class Util_Proto_Functions(unittest.TestCase):
+    def test_is_proto(self):
+        self.assertTrue(utp.is_proto(proto_mask))
+        self.assertTrue(utp.is_proto(proto_mask | 123456))
+        self.assertFalse(utp.is_proto(0))
+        self.assertFalse(utp.is_proto(proto_mask - 1))
+        self.assertFalse(utp.is_proto(proto_mask << 1))
+
+    def test_set_proto_big(self):
+        self.assertFalse(utp.is_proto(0))
+        self.assertTrue(utp.is_proto(utp.set_proto_bit(0)))
+        self.assertFalse(utp.is_proto(1))
+        self.assertTrue(utp.is_proto(utp.set_proto_bit(1)))
+
+    def test_clear_proto_big(self):
+        self.assertEqual(utp.clear_proto_bit(0), 0)
+        self.assertEqual(utp.clear_proto_bit(123), 123)
+        self.assertEqual(utp.clear_proto_bit(proto_mask | 123), 123)
+        self.assertEqual(utp.clear_proto_bit((proto_mask - 1) | proto_mask), proto_mask - 1)
 
 class Util_Proto(unittest.TestCase):
     def setUp(self):
@@ -58,16 +60,16 @@ class Util_Proto(unittest.TestCase):
                 'number64': 72057594037927936
                 }
 
-        ut.proto_fill_from_dict(self.msg, DATA)
+        utp.proto_fill_from_dict(self.msg, DATA)
 
-        RESULT = ut.proto_to_dict(self.msg)
+        RESULT = utp.proto_to_dict(self.msg)
 
         self.assertEqual(DATA, RESULT)
 
     def test_proto_from_dict_merge(self):
         self.msg.list_number32.extend([1,2,3])
 
-        ut.proto_fill_from_dict(self.msg, {'list_number32': [4,5,6]}, clear=False)
+        utp.proto_fill_from_dict(self.msg, {'list_number32': [4,5,6]}, clear=False)
 
         self.assertEqual(self.msg.list_number32, [4,5,6])
 
@@ -75,40 +77,40 @@ class Util_Proto(unittest.TestCase):
         self.msg.messages.add(text='one')
         self.msg.messages.add(text='two')
 
-        ut.proto_fill_from_dict(self.msg, {'messages': [{'text': 'three'}]}, clear=False)
+        utp.proto_fill_from_dict(self.msg, {'messages': [{'text': 'three'}]}, clear=False)
 
         self.assertEqual(len(self.msg.messages), 1)
         self.assertEqual(self.msg.messages[0].text, 'three')
 
     def test_proto_from_dict__dict_insteadof_list(self):
         with self.assertRaises(TypeError):
-            ut.proto_fill_from_dict(self.msg, {'list_number32': [{}, {}]})
+            utp.proto_fill_from_dict(self.msg, {'list_number32': [{}, {}]})
 
     def test_proto_from_dict__list_insteadof_dict(self):
         with self.assertRaises(TypeError):
-            ut.proto_fill_from_dict(self.msg, {'messages': [1,2,3]})
+            utp.proto_fill_from_dict(self.msg, {'messages': [1,2,3]})
 
     def test_proto_fill_from_dict__list(self):
-        ut.proto_fill_from_dict(self.msg, {'list_number32': [1,2,3]})
+        utp.proto_fill_from_dict(self.msg, {'list_number32': [1,2,3]})
         self.assertEqual(self.msg.list_number32, [1,2,3])
 
     def test_proto_fill_from_dict__dict_list(self):
-        ut.proto_fill_from_dict(self.msg, {'messages': [{'text': 'one'}, {'text': 'two'}]})
+        utp.proto_fill_from_dict(self.msg, {'messages': [{'text': 'one'}, {'text': 'two'}]})
         self.assertEqual(len(self.msg.messages), 2)
         self.assertEqual(self.msg.messages[0].text, 'one')
         self.assertEqual(self.msg.messages[1].text, 'two')
 
     def test_proto_fill_from_dict__list(self):
-        ut.proto_fill_from_dict(self.msg, {'list_number32': range(10)})
+        utp.proto_fill_from_dict(self.msg, {'list_number32': range(10)})
         self.assertEqual(self.msg.list_number32, list(range(10)))
 
 
     def test_proto_fill_from_dict__generator(self):
-        ut.proto_fill_from_dict(self.msg, {'list_number32': (x for x in [1,2,3])})
+        utp.proto_fill_from_dict(self.msg, {'list_number32': (x for x in [1,2,3])})
         self.assertEqual(self.msg.list_number32, [1,2,3])
 
     def test_proto_fill_from_dict__dict_generator(self):
-        ut.proto_fill_from_dict(self.msg, {'messages': (x for x in [{'text': 'one'}, {'text': 'two'}])})
+        utp.proto_fill_from_dict(self.msg, {'messages': (x for x in [{'text': 'one'}, {'text': 'two'}])})
         self.assertEqual(len(self.msg.messages), 2)
         self.assertEqual(self.msg.messages[0].text, 'one')
         self.assertEqual(self.msg.messages[1].text, 'two')
@@ -119,7 +121,7 @@ class Util_Proto(unittest.TestCase):
             yield 2
             yield 3
 
-        ut.proto_fill_from_dict(self.msg, {'list_number32': number_gen()})
+        utp.proto_fill_from_dict(self.msg, {'list_number32': number_gen()})
         self.assertEqual(self.msg.list_number32, [1,2,3])
 
     def test_proto_fill_from_dict__dict_func_generator(self):
@@ -127,28 +129,28 @@ class Util_Proto(unittest.TestCase):
             yield {'text': 'one'}
             yield {'text': 'two'}
 
-        ut.proto_fill_from_dict(self.msg, {'messages': dict_gen()})
+        utp.proto_fill_from_dict(self.msg, {'messages': dict_gen()})
         self.assertEqual(len(self.msg.messages), 2)
         self.assertEqual(self.msg.messages[0].text, 'one')
         self.assertEqual(self.msg.messages[1].text, 'two')
 
 
     def test_proto_fill_from_dict__map(self):
-        ut.proto_fill_from_dict(self.msg, {'list_number32': map(int, [1,2,3])})
+        utp.proto_fill_from_dict(self.msg, {'list_number32': map(int, [1,2,3])})
         self.assertEqual(self.msg.list_number32, [1,2,3])
 
     def test_proto_fill_from_dict__dict_map(self):
-        ut.proto_fill_from_dict(self.msg, {'messages': map(dict, [{'text': 'one'}, {'text': 'two'}])})
+        utp.proto_fill_from_dict(self.msg, {'messages': map(dict, [{'text': 'one'}, {'text': 'two'}])})
         self.assertEqual(len(self.msg.messages), 2)
         self.assertEqual(self.msg.messages[0].text, 'one')
         self.assertEqual(self.msg.messages[1].text, 'two')
 
     def test_proto_fill_from_dict__filter(self):
-        ut.proto_fill_from_dict(self.msg, {'list_number32': filter(lambda x: True, [1,2,3])})
+        utp.proto_fill_from_dict(self.msg, {'list_number32': filter(lambda x: True, [1,2,3])})
         self.assertEqual(self.msg.list_number32, [1,2,3])
 
     def test_proto_fill_from_dict__dict_filter(self):
-        ut.proto_fill_from_dict(self.msg, {'messages': filter(lambda x: True, [{'text': 'one'}, {'text': 'two'}])})
+        utp.proto_fill_from_dict(self.msg, {'messages': filter(lambda x: True, [{'text': 'one'}, {'text': 'two'}])})
         self.assertEqual(len(self.msg.messages), 2)
         self.assertEqual(self.msg.messages[0].text, 'one')
         self.assertEqual(self.msg.messages[1].text, 'two')

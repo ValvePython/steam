@@ -19,7 +19,8 @@ from steam.core import crypto
 from steam.core.connection import TCPConnection
 from steam.core.msg import Msg, MsgProto
 from eventemitter import EventEmitter
-from steam.utils import ip_from_int, is_proto, clear_proto_bit
+from steam.utils import ip_from_int
+from steam.utils.proto import is_proto, clear_proto_bit
 
 
 class CMClient(EventEmitter):

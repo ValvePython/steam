@@ -10,6 +10,7 @@ This release brings breaking changes
 - Updated all enums
 - Removed imports from 'steam' namespace
 - Renamed `steam.util` to `steam.utils`
+- Moved proto utils to `steam.utils.proto`
 
 ### steam.steamid
 

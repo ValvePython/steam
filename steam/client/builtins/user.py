@@ -3,7 +3,7 @@ from steam.client.user import SteamUser
 from steam.enums import EPersonaState, EChatEntryType, EType, EClientUIMode
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
-from steam.utils import proto_fill_from_dict
+from steam.utils.proto import proto_fill_from_dict
 
 class User(object):
     EVENT_CHAT_MESSAGE = 'chat_message'

@@ -2,7 +2,8 @@ import vdf
 from steam.enums import EResult, EServerType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
-from steam.utils import ip_from_int, proto_fill_from_dict
+from steam.utils import ip_from_int
+from steam.utils.proto import proto_fill_from_dict
 
 
 class Apps(object):

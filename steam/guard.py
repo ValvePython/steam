@@ -58,7 +58,7 @@ from steam.steamid import SteamID
 from steam.core.crypto import hmac_sha1, sha1_hash
 from steam.enums.common import EResult
 from steam.webauth import MobileWebAuth
-from steam.utils import proto_to_dict
+from steam.utils.proto import proto_to_dict
 
 
 class SteamAuthenticator(object):

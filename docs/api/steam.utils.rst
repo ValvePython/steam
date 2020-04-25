@@ -14,6 +14,14 @@ utils.binary
     :undoc-members:
     :show-inheritance:
 
+utils.proto
+------------
+
+.. automodule:: steam.utils.proto
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 utils.throttle
 --------------
 

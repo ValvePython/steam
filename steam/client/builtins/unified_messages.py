@@ -27,7 +27,7 @@ The backend might error out, but we still get response. Here is how to check for
 """
 from steam.core.msg import MsgProto, get_um
 from steam.enums.emsg import EMsg
-from steam.utils import proto_fill_from_dict
+from steam.utils.proto import proto_fill_from_dict
 
 
 class UnifiedMessages(object):

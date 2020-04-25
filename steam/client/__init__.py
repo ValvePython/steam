@@ -31,7 +31,8 @@ from steam.core.crypto import sha1_hash
 from steam.steamid import SteamID
 from steam.exceptions import SteamError
 from steam.client.builtins import BuiltinBase
-from steam.utils import ip_from_int, ip_to_int, proto_fill_from_dict
+from steam.utils import ip_from_int, ip_to_int
+from steam.utils.proto import proto_fill_from_dict
 
 if six.PY2:
     _cli_input = raw_input
