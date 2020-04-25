@@ -7,24 +7,24 @@ Appache file parsing examples:
 
     >>> header, apps = parse_appinfo(open('/d/Steam/appcache/appinfo.vdf', 'rb'))
     >>> header
-    {'magic': b"'DV\x07", 'universe': 1}
+    {'magic': b"'DV\\x07", 'universe': 1}
     >>> next(apps)
     {'appid': 5,
      'size': 79,
      'info_state': 1,
      'last_updated': 1484735377,
      'access_token': 0,
-     'sha1': b'\x87\xfaCg\x85\x80\r\xb4\x90Im\xdc}\xb4\x81\xeeQ\x8b\x825',
+     'sha1': b'\\x87\\xfaCg\\x85\\x80\\r\\xb4\\x90Im\\xdc}\\xb4\\x81\\xeeQ\\x8b\\x825',
      'change_number': 4603827,
      'data': {'appinfo': {'appid': 5, 'public_only': 1}}}
 
     >>> header, pkgs = parse_packageinfo(open('/d/Steam/appcache/packageinfo.vdf', 'rb'))
     >>> header
-    {'magic': b"'UV\x06", 'universe': 1}
+    {'magic': b"'UV\\x06", 'universe': 1}
 
     >>> next(pkgs)
     {'packageid': 7,
-     'sha1': b's\x8b\xf7n\t\xe5 k#\xb6-\x82\xd2 \x14k@\xfeDQ',
+     'sha1': b's\\x8b\\xf7n\\t\\xe5 k#\\xb6-\\x82\\xd2 \\x14k@\\xfeDQ',
      'change_number': 7469765,
      'data': {'7': {'packageid': 7,
        'billingtype': 1,
@@ -46,7 +46,7 @@ uint64 = struct.Struct('<Q')
 def parse_appinfo(fp):
     """Parse appinfo.vdf from the Steam appcache folder
 
-    :param fp: filelike object
+    :param fp: file-like object
     :raises: SyntaxError
     :rtype: (:class:`dict`, :class:`Generator`)
     :return: (header, apps iterator)
@@ -103,7 +103,7 @@ def parse_appinfo(fp):
 def parse_packageinfo(fp):
     """Parse packageinfo.vdf from the Steam appcache folder
 
-    :param fp: filelike object
+    :param fp: file-like object
     :raises: SyntaxError
     :rtype: (:class:`dict`, :class:`Generator`)
     :return: (header, packages iterator)
