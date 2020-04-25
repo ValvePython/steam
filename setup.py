@@ -19,14 +19,15 @@ install_requires = [
     'pycryptodomex>=3.7.0',
     'requests>=2.9.1,<2.22.0',
     'vdf>=3.3',
-    'gevent>=1.3.0',
-    'protobuf>=3.0.0',
-    'gevent-eventemitter>=2.1',
     'cachetools>=3.0.0',
 ]
 
 install_extras = {
-    'client': [],
+    'client': [
+        'gevent>=1.3.0',
+        'protobuf>=3.0.0',
+        'gevent-eventemitter>=2.1',
+    ],
 }
 
 if sys.version_info < (3, 4):

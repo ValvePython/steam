@@ -35,8 +35,18 @@ For system specific details, see :doc:`install`.
 
 Install latest version from PYPI::
 
+    # with SteamClient dependecies
+    pip install -U steam[client]
+
+    # without (only when using parts that do no rely on gevent, and protobufs)
     pip install -U steam
 
 Install the current dev version from ``github``::
 
+    # cutting edge from master
     pip install git+https://github.com/ValvePython/steam#egg=steam
+
+    # specific version tag (e.g. v1.0.0)
+    pip install git+https://github.com/ValvePython/steam@v1.0.0#egg=steam[client]
+    # without SteamClient extras
+    pip install git+https://github.com/ValvePython/steam@v1.0.0#egg=steam

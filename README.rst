@@ -29,17 +29,27 @@ Install
 
 For system specific details, see `Installation Details <http://steam.readthedocs.io/en/latest/install.html>`_.
 
-Install latest version from PYPI
+Install latest release version from PYPI:
 
 .. code:: bash
 
+    # with SteamClient dependecies
+    pip install -U steam[client]
+
+    # without (only when using parts that do no rely on gevent, and protobufs)
     pip install -U steam
 
-Install the current dev version from ``github``
+Installing directly from ``github`` repository:
 
 .. code:: bash
 
+    # cutting edge from master
     pip install git+https://github.com/ValvePython/steam#egg=steam
+
+    # specific version tag (e.g. v1.0.0)
+    pip install git+https://github.com/ValvePython/steam@v1.0.0#egg=steam[client]
+    # without SteamClient extras
+    pip install git+https://github.com/ValvePython/steam@v1.0.0#egg=steam
 
 Vagrant
 -------

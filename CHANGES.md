@@ -12,6 +12,7 @@ This release brings breaking changes
 - Removed imports from 'steam' namespace
 - Renamed `steam.util` to `steam.utils`
 - Moved proto utils to `steam.utils.proto`
+- Moved SteamClient dependecies to `client` extras
 
 ### steam.steamid
 
