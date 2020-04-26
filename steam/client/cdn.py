@@ -341,8 +341,12 @@ class CDNDepotFile(DepotFile):
             for chunk in self.chunks:
                 if chunk.offset >= end_offset:
                     break
-                elif (self.offset <= chunk.offset < end_offset
-                      or self.offset < (chunk.offset + chunk.cb_original) <= end_offset):
+
+                chunk_start = chunk.offset
+                chunk_end = chunk_start + chunk.cb_original
+
+                if (     chunk_start <= self.offset <  chunk_end
+                      or chunk_start <  end_offset  <= chunk_end):
                     if start_offset is None:
                         start_offset = chunk.offset
                     data.write(self._get_chunk(chunk))
@@ -677,7 +681,7 @@ class CDNClient(object):
 
         is_enc_branch = False
 
-        if branch not in depots['branches']:
+        if branch not in depots.get('branches', {}):
             raise SteamError("No branch named %s for app_id %s" % (repr(branch), app_id))
         elif int(depots['branches'][branch].get('pwdrequired', 0)) > 0:
             is_enc_branch = True
