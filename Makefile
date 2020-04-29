@@ -24,8 +24,11 @@ export HELPBODY
 help:
 	@echo "$$HELPBODY"
 
-init:
+init: init_docs
 	pip install -r requirements.txt
+
+init_docs:
+	pip install sphinx==1.8.5 sphinx_rtd_theme
 
 test:
 	coverage erase
