@@ -148,6 +148,20 @@ class Apps(object):
                                       {'app_id': app_id},
                                       timeout=10
                                       )
+    
+    def get_encrypted_app_ticket(self, app_id, userdata):
+        """Gets the encrypted app ticket
+        :param app_id: app id
+        :type  app_id: :class:`int`
+        :param userdata: userdata
+        :type  userdata: :class:`bytes`
+        :return: `EncryptedAppTicket <https://github.com/ValvePython/steam/blob/39627fe883feeed2206016bacd92cf0e4580ead6/protobufs/encrypted_app_ticket.proto>_`
+        :rtype: proto message
+        """
+        return self.send_job_and_wait(MsgProto(EMsg.ClientRequestEncryptedAppTicket),
+                                      {'app_id': app_id, 'userdata': userdata},
+                                      timeout=10
+                                      )
 
     def get_depot_key(self, app_id, depot_id):
         """Get depot decryption key
