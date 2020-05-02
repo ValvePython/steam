@@ -109,19 +109,19 @@ def parse_packageinfo(fp):
     :return: (header, packages iterator)
     """
 # format:
-#   uint32   - MAGIC: "'UV\x06"
+#   uint32   - MAGIC: b"'UV\x06" or b"(UV\x06"
 #   uint32   - UNIVERSE: 1
 #   ---- repeated package sections ----
 #   uint32   - PackageID
 #   20bytes  - SHA1
 #   uint32   - changeNumber
-#   uint64   - token
+#   uint64   - token           (only on b"(UV\x06")
 #   variable - binary_vdf
 #   ---- end of section ---------
 #   uint32   - EOF: 0xFFFFFFFF
 
     magic = fp.read(4)
-    if magic != b"'UV\x06":
+    if magic not in (b"'UV\x06", b"(UV\x06"):
         raise SyntaxError("Invalid magic, got %s" % repr(magic))
 
     universe = uint32.unpack(fp.read(4))[0]
@@ -139,16 +139,10 @@ def parse_packageinfo(fp):
                 'change_number': uint32.unpack(fp.read(4))[0],
             }
 
-            offset = fp.tell()
-
-            try:
-                pkg['data'] = binary_load(fp)
-            except:
-                # steam beta client has introduced new token field
-                # there is no indicator, so we resolve to hackery
-                fp.seek(offset)
+            if magic == b"(UV\x06":
                 pkg['token'] = uint64.unpack(fp.read(8))[0]
-                pkg['data'] = binary_load(fp)
+
+            pkg['data'] = binary_load(fp)
 
             yield pkg
 
