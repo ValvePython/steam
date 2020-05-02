@@ -1,4 +1,5 @@
-|pypi| |latest| |pypipy| |license| |coverage| |scru| |master_build| |docs|
+|pypi| |latest| |pypipy| |license|  
+|coverage| |scru| |master_build| |docs|
 
 A python module for interacting with various parts of Steam_.
 
