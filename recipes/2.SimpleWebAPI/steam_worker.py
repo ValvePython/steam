@@ -4,7 +4,7 @@ from binascii import hexlify
 from steam.client import SteamClient
 from steam.core.msg import MsgProto
 from steam.enums.emsg import EMsg
-from steam.util import proto_to_dict
+from steam.utils.proto import proto_to_dict
 import vdf
 
 LOG = logging.getLogger("Steam Worker")

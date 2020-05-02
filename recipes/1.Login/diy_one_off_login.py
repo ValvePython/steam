@@ -7,7 +7,7 @@ print("One-off login recipe")
 print("-"*20)
 
 LOGON_DETAILS = {
-    'username': raw_input("Steam user: "),
+    'username': input("Steam user: "),
     'password': getpass("Password: "),
 }
 
@@ -20,10 +20,10 @@ def error(result):
 @client.on('auth_code_required')
 def auth_code_prompt(is_2fa, mismatch):
     if is_2fa:
-        code = raw_input("Enter 2FA Code: ")
+        code = input("Enter 2FA Code: ")
         client.login(two_factor_code=code, **LOGON_DETAILS)
     else:
-        code = raw_input("Enter Email Code: ")
+        code = input("Enter Email Code: ")
         client.login(auth_code=code, **LOGON_DETAILS)
 
 

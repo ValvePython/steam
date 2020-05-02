@@ -161,7 +161,7 @@ After that we logout.
 
 .. code:: python
 
-    from steam.steamid import SteamClient
+    from steam.client import SteamClient
     from steam.enums.emsg import EMsg
 
     client = SteamClient()
