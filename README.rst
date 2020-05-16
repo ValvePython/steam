@@ -92,7 +92,7 @@ To run for specific version, setup a virtual environment
 Contact
 -------
 
-IRC: irc.gamesurge.net / #opensteamworks
+IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.net/#steamkit>`_)
 
 
 .. _Steam: https://store.steampowered.com/
