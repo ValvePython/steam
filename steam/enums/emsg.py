@@ -10,8 +10,8 @@ class EMsg(SteamIntEnum):
     Multi = 1
     ProtobufWrapped = 2
 
-    BaseGeneral = 100
     GenericReply = 100
+    BaseGeneral = 100
     DestJobFailed = 113
     Alert = 115
     SCIDRequest = 120
@@ -47,8 +47,8 @@ class EMsg(SteamIntEnum):
     ServiceMethodCallFromClient = 151
     ServiceMethodSendToClient = 152
 
-    BaseShell = 200
     AssignSysID = 200
+    BaseShell = 200
     Exit = 201
     DirRequest = 202
     DirResponse = 203
@@ -76,8 +76,9 @@ class EMsg(SteamIntEnum):
     UpdateScheduledTaskEnableState_TEST = 244
     UpdateScheduledTaskEnableStateResponse_TEST = 245
     ContentDescriptionDeltaUpdate = 246
-    BaseGM = 300
+
     Heartbeat = 300
+    BaseGM = 300
     ShellFailed = 301
     ExitShells = 307
     ExitShell = 308
@@ -105,6 +106,7 @@ class EMsg(SteamIntEnum):
     GMTestNextBuildSchemaConversionResponse = 335
     ExpectShellRestart = 336
     HotFixProgress = 337
+
     BaseAIS = 400
     AISRefreshContentDescription = 401 #: removed
     AISRequestContentDescription = 402
@@ -226,8 +228,8 @@ class EMsg(SteamIntEnum):
     ClientChatAction = 597
     AMClientChatActionRelay = 598
 
-    BaseVS = 600
     ReqChallenge = 600
+    BaseVS = 600
     VACResponse = 601
     ReqChallengeTest = 602
     VSMarkCheat = 604
@@ -420,8 +422,8 @@ class EMsg(SteamIntEnum):
     GSComputeNewPlayerCompatibility = 940
     GSComputeNewPlayerCompatibilityResponse = 941
 
-    BaseAdmin = 1000
     AdminCmd = 1000
+    BaseAdmin = 1000
     AdminCmdResponse = 1004
     AdminLogListenRequest = 1005
     AdminLogEvent = 1006
@@ -442,8 +444,8 @@ class EMsg(SteamIntEnum):
     FBSConnectionData = 1027
     AdminMsgSpew = 1028
 
-    BaseFBS = 1100
     FBSReqVersion = 1100
+    BaseFBS = 1100
     FBSVersionInfo = 1101
     FBSForceRefresh = 1102
     FBSForceBounce = 1103
@@ -478,15 +480,16 @@ class EMsg(SteamIntEnum):
     FBSBootstrapperPackageTransferProgress = 1132
     FBSRestartBootstrapper = 1133
     FBSPauseFrozenDumps = 1134
-    BaseFileXfer = 1200
+
     FileXferRequest = 1200
+    BaseFileXfer = 1200
     FileXferResponse = 1201
     FileXferData = 1202
     FileXferEnd = 1203
     FileXferDataAck = 1204
 
-    BaseChannelAuth = 1300
     ChannelAuthChallenge = 1300
+    BaseChannelAuth = 1300
     ChannelAuthResponse = 1301
     ChannelAuthResult = 1302
     ChannelEncryptRequest = 1303
@@ -660,8 +663,8 @@ class EMsg(SteamIntEnum):
     EPMStopProcess = 1902 #: removed
     EPMRestartProcess = 1903 #: removed
 
-    BaseGC = 2200
     GCSendClient = 2200 #: removed
+    BaseGC = 2200
     AMRelayToGC = 2201 #: removed
     GCUpdatePlayedState = 2202 #: removed
     GCCmdRevive = 2203
@@ -700,6 +703,7 @@ class EMsg(SteamIntEnum):
     GCHAccountPhoneNumberChange = 2236
     GCHAccountTwoFactorChange = 2237
     GCHInviteUserToLobby = 2238
+
     BaseP2P = 2500
     P2PIntroducerMessage = 2502
 
@@ -1481,6 +1485,7 @@ class EMsg(SteamIntEnum):
     BadgeCraftedNotification = 5625
     ClientNetworkingMobileCertRequest = 5626
     ClientNetworkingMobileCertRequestResponse = 5627
+
     BaseMDS = 5800
     ClientMDSLoginRequest = 5801  #: removed
     ClientMDSLoginResponse = 5802  #: removed
@@ -1600,6 +1605,7 @@ class EMsg(SteamIntEnum):
     NonStdMsgRTMPServer = 6813
     NonStdMsgWebSocket = 6814
     NonStdMsgRedis = 6815
+
     UDSBase = 7000
     ClientUDSP2PSessionStarted = 7001
     ClientUDSP2PSessionEnded = 7002
@@ -1746,8 +1752,8 @@ class EMsg(SteamIntEnum):
     ClientFSGetFriendsSteamLevelsResponse = 7529
     AMRequestFriendData = 7530
 
-    DRMRange2 = 7600
     CEGVersionSetEnableDisableRequest = 7600
+    DRMRange2 = 7600
     CEGVersionSetEnableDisableResponse = 7601
     CEGPropStatusDRMSRequest = 7602
     CEGPropStatusDRMSResponse = 7603
@@ -1780,16 +1786,16 @@ class EMsg(SteamIntEnum):
     RMMsgTraceRemoveTrigger = 7807
     RMMsgTraceEvent = 7808
 
-    UGSBase = 7900
     UGSUpdateGlobalStats = 7900
+    UGSBase = 7900
     ClientUGSGetGlobalStats = 7901
     ClientUGSGetGlobalStatsResponse = 7902
 
-    StoreBase = 8000
     StoreUpdateRecommendationCount = 8000 #: removed
+    StoreBase = 8000
 
-    UMQBase = 8100
     UMQLogonRequest = 8100
+    UMQBase = 8100
     UMQLogonResponse = 8101
     UMQLogoffRequest = 8102
     UMQLogoffResponse = 8103
@@ -1801,12 +1807,12 @@ class EMsg(SteamIntEnum):
     UMQEnqueueMobileSalePromotions = 8109 #: removed
     UMQEnqueueMobileAnnouncements = 8110 #: removed
 
-    WorkshopBase = 8200
     WorkshopAcceptTOSRequest = 8200 #: removed
+    WorkshopBase = 8200
     WorkshopAcceptTOSResponse = 8201 #: removed
 
-    WebAPIBase = 8300
     WebAPIValidateOAuth2Token = 8300
+    WebAPIBase = 8300
     WebAPIValidateOAuth2TokenResponse = 8301
     WebAPIInvalidateTokensForAccount = 8302 #: removed
     WebAPIRegisterGCInterfaces = 8303
@@ -1833,19 +1839,19 @@ class EMsg(SteamIntEnum):
     CREEnumeratePublishedFilesResponse = 8512
     CREPublishedFileVoteAdded = 8513
 
-    SecretsBase = 8600
     SecretsRequestCredentialPair = 8600
+    SecretsBase = 8600
     SecretsCredentialPairResponse = 8601
     SecretsRequestServerIdentity = 8602 #: removed
     SecretsServerIdentityResponse = 8603 #: removed
     SecretsUpdateServerIdentities = 8604 #: removed
 
-    BoxMonitorBase = 8700
     BoxMonitorReportRequest = 8700
+    BoxMonitorBase = 8700
     BoxMonitorReportResponse = 8701
 
-    LogsinkBase = 8800
     LogsinkWriteReport = 8800
+    LogsinkBase = 8800
 
     PICSBase = 8900
     ClientPICSChangesSinceRequest = 8901
@@ -1908,8 +1914,8 @@ class EMsg(SteamIntEnum):
     ClientEmoticonList = 9331
 
 #   ClientSharedLibraryBase = 9400 #: removed
-    SLCBase = 9400
     SLCUserSessionStatus = 9400
+    SLCBase = 9400
     SLCRequestUserSessionStatus = 9401
     SLCSharedLicensesLockStatus = 9402
     ClientSharedLicensesLockStatus = 9403  #: removed
@@ -1919,8 +1925,8 @@ class EMsg(SteamIntEnum):
     SLCOwnerLibraryChanged = 9407
     SLCSharedLibraryChanged = 9408
 
-    RemoteClientBase = 9500
     RemoteClientAuth_OBSOLETE = 9500
+    RemoteClientBase = 9500
     RemoteClientAuthResponse_OBSOLETE = 9501
     RemoteClientAppStatus = 9502
     RemoteClientStartStream = 9503
@@ -1937,32 +1943,34 @@ class EMsg(SteamIntEnum):
     ClientUnlockHEVCResponse = 9514
     RemoteClientStatusRequest = 9515
     RemoteClientStatusResponse = 9516
-    ClientConcurrentSessionsBase = 9600
+
     ClientPlayingSessionState = 9600
+    ClientConcurrentSessionsBase = 9600
     ClientKickPlayingSession = 9601
 
+    ClientBroadcastInit = 9700 #: removed
     ClientBroadcastBase = 9700
-#   ClientBroadcastInit = 9700 #: removed
     ClientBroadcastFrames = 9701
     ClientBroadcastDisconnect = 9702
     ClientBroadcastScreenshot = 9703
     ClientBroadcastUploadConfig = 9704
 
+    ClientVoiceCallPreAuthorize = 9800 #: removed
     BaseClient3 = 9800
-#   ClientVoiceCallPreAuthorize = 9800 #: removed
     ClientVoiceCallPreAuthorizeResponse = 9801
     ClientServerTimestampRequest = 9802
     ClientServerTimestampResponse = 9803
-    ClientLANP2PBase = 9900
+
     ClientLANP2PRequestChunk = 9900
+    ClientLANP2PBase = 9900
     ClientLANP2PRequestChunkResponse = 9901
     ClientLANP2PMax = 9999
 
 #   BaseWatchdogServer = 10000
     NotifyWatchdog = 10000
 
-#   ClientSiteLicenseBase = 10100
     ClientSiteLicenseSiteInfoNotification = 10100
+    ClientSiteLicenseBase = 10100
     ClientSiteLicenseCheckout = 10101
     ClientSiteLicenseCheckoutResponse = 10102
     ClientSiteLicenseGetAvailableSeats = 10103
@@ -1970,9 +1978,9 @@ class EMsg(SteamIntEnum):
     ClientSiteLicenseGetContentCacheInfo = 10105
     ClientSiteLicenseGetContentCacheInfoResponse = 10106
 
-#   BaseChatServer = 12000
     ChatServerGetPendingNotificationCount = 12000
+    BaseChatServer = 12000
     ChatServerGetPendingNotificationCountResponse = 12001
 
-#   BaseSecretServer = 12100
     ServerSecretChanged = 12100
+    BaseSecretServer = 12100
