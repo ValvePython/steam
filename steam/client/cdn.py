@@ -495,6 +495,7 @@ class CDNClient(object):
         self._LOG.debug("Trying to fetch content servers from Steam API")
 
         servers = get_content_servers_from_webapi(self.cell_id)
+        servers = filter(lambda server: server.type != 'OpenCache', servers) # see #264
         self.servers.extend(servers)
 
         if not self.servers:
