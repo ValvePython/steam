@@ -17,7 +17,7 @@ with open(path.join(here, 'steam/__init__.py'), encoding='utf-8') as f:
 install_requires = [
     'six>=1.10',
     'pycryptodomex>=3.7.0',
-    'requests>=2.9.1,<2.22.0',
+    'requests>=2.9.1',
     'vdf>=3.3',
     'cachetools>=3.0.0',
 ]
@@ -49,7 +49,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',

@@ -318,11 +318,11 @@ class steamid_functions(unittest.TestCase):
     def test_steam64_from_url(self):
         def scrub_req(r):
             r.headers.pop('Cookie', None)
-            r.headers.pop('date', None)
+            r.headers.pop('Date', None)
             return r
         def scrub_resp(r):
-            r['headers'].pop('set-cookie', None)
-            r['headers'].pop('date', None)
+            r['headers'].pop('Set-Cookie', None)
+            r['headers'].pop('Date', None)
             return r
 
         with vcr.use_cassette('vcr/steamid_community_urls.yaml',
