@@ -114,6 +114,7 @@ message CChatRoomGroupHeaderState {
 	repeated .CChatPartyBeacon party_beacons = 22;
 	optional uint64 watching_broadcast_channel_id = 23;
 	optional uint64 active_minigame_id = 24;
+	optional string avatar_ugc_url = 25;
 }
 
 message CChatRoomMember {
@@ -504,6 +505,7 @@ message CChatRoom_GetChatRoomGroupSummary_Response {
 	repeated .CChatPartyBeacon party_beacons = 18;
 	optional uint64 watching_broadcast_channel_id = 19;
 	optional uint64 active_minigame_id = 20;
+	optional string avatar_ugc_url = 21;
 }
 
 message CChatRoomSummaryPair {
@@ -525,6 +527,21 @@ message CChatRoom_GetChatRoomGroupState_Response {
 
 message CChatRoom_GetChatRoomGroupSummary_Request {
 	optional uint64 chat_group_id = 1;
+}
+
+message CChatRoom_SetAppChatRoomGroupForceActive_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint32 requesting_app_id = 2;
+}
+
+message CChatRoom_SetAppChatRoomGroupForceActive_Response {
+	optional uint32 result = 1;
+	repeated uint32 accounts_in_channel = 2;
+}
+
+message CChatRoom_SetAppChatRoomGroupStopForceActive_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint32 requesting_app_id = 2;
 }
 
 message CChatRoom_AckChatMessage_Notification {
@@ -835,6 +852,7 @@ message CChatUsability_ClientUsabilityMetrics_Notification {
 		optional bool do_not_disturb_mode = 22;
 		optional bool disable_embed_inlining = 23;
 		optional bool sign_into_friends = 24;
+		optional bool animated_avatars = 25;
 	}
 
 	message VoiceSettings {
@@ -1058,6 +1076,14 @@ service ChatRoom {
 
 	rpc GetChatRoomGroupSummary (.CChatRoom_GetChatRoomGroupSummary_Request) returns (.CChatRoom_GetChatRoomGroupSummary_Response) {
 		option (method_description) = "Get basic information about a chat room group";
+	}
+
+	rpc SetAppChatRoomGroupForceActive (.CChatRoom_SetAppChatRoomGroupForceActive_Request) returns (.CChatRoom_SetAppChatRoomGroupForceActive_Response) {
+		option (method_description) = "Force a group chat to be considered active on the server for this user";
+	}
+
+	rpc SetAppChatRoomGroupStopForceActive (.CChatRoom_SetAppChatRoomGroupStopForceActive_Notification) returns (.NoResponse) {
+		option (method_description) = "If a group chat is forced active (see SetAppChatRoomGroupForceActive), decrement the force count";
 	}
 
 	rpc AckChatMessage (.CChatRoom_AckChatMessage_Notification) returns (.NoResponse) {

@@ -88,6 +88,7 @@ message CPublishedFile_GetDetails_Request {
 	optional uint32 appid = 14;
 	optional bool strip_description_bbcode = 15 [(description) = "Strips BBCode from descriptions."];
 	optional .EPublishedFileRevision desired_revision = 16 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
+	optional bool includereactions = 17 [default = false, (description) = "If true, then reactions to items will be returned."];
 }
 
 message PublishedFileDetails {
@@ -136,6 +137,11 @@ message PublishedFileDetails {
 	message PlaytimeStats {
 		optional uint64 playtime_seconds = 1;
 		optional uint64 num_sessions = 2;
+	}
+
+	message Reaction {
+		optional uint32 reactionid = 1;
+		optional uint32 count = 2;
 	}
 
 	optional uint32 result = 1;
@@ -205,6 +211,7 @@ message PublishedFileDetails {
 	optional uint64 revision_change_number = 67 [(description) = "The change number for the specified revision."];
 	optional .EPublishedFileRevision revision = 68 [default = k_EPublishedFileRevision_Default, (description) = "The revision of the data returned, usually k_EPublishedFileRevision_Latest, but can be another revision/snapshot depending on the caller."];
 	repeated .EPublishedFileRevision available_revisions = 69 [(description) = "Available revisions"];
+	repeated .PublishedFileDetails.Reaction reactions = 70 [(description) = "Reactions to this item"];
 }
 
 message CPublishedFile_GetDetails_Response {
@@ -274,6 +281,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_metadata = 28 [default = false, (description) = "Populate the metadata field"];
 	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
 	optional bool strip_description_bbcode = 32 [(description) = "Strips BBCode from descriptions."];
+	optional bool return_reactions = 35 [default = false, (description) = "If true, then reactions to items will be returned."];
 	optional .EPublishedFileRevision desired_revision = 33 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 }
 
@@ -411,6 +419,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional bool return_details = 37 [(description) = "By default, if none of the other 'return_*' fields are set, only some voting details are returned. Set this to true to return the default set of details."];
 	optional bool strip_description_bbcode = 38 [(description) = "Strips BBCode from descriptions."];
 	optional .EPublishedFileRevision desired_revision = 40 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
+	optional bool return_reactions = 43 [default = false, (description) = "If true, then reactions to items will be returned."];
 }
 
 message CPublishedFile_QueryFiles_Response {

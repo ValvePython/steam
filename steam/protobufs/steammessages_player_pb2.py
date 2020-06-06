@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x1asteammessages_player.proto\x1a steammessages_unified_base.proto\"4\n2CPlayer_GetMutualFriendsForIncomingInvites_Request\"\\\n&CPlayer_IncomingInviteMutualFriendList\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12!\n\x19mutual_friend_account_ids\x18\x02 \x03(\r\"\x8c\x01\n3CPlayer_GetMutualFriendsForIncomingInvites_Response\x12U\n$incoming_invite_mutual_friends_lists\x18\x01 \x03(\x0b\x32\'.CPlayer_IncomingInviteMutualFriendList\"7\n&CPlayer_GetFriendsGameplayInfo_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xee\x05\n\'CPlayer_GetFriendsGameplayInfo_Response\x12K\n\tyour_info\x18\x01 \x01(\x0b\x32\x38.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo\x12M\n\x07in_game\x18\x02 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12U\n\x0fplayed_recently\x18\x03 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12Q\n\x0bplayed_ever\x18\x04 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12J\n\x04owns\x18\x05 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12Q\n\x0bin_wishlist\x18\x06 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x1a^\n\x13\x46riendsGameplayInfo\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x16\n\x0eminutes_played\x18\x02 \x01(\r\x12\x1e\n\x16minutes_played_forever\x18\x03 \x01(\r\x1a~\n\x0fOwnGameplayInfo\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x16\n\x0eminutes_played\x18\x02 \x01(\r\x12\x1e\n\x16minutes_played_forever\x18\x03 \x01(\r\x12\x13\n\x0bin_wishlist\x18\x04 \x01(\x08\x12\r\n\x05owned\x18\x05 \x01(\x08\"\x87\x02\n&CPlayer_GetFriendsAppsActivity_Request\x12\x81\x01\n\rnews_language\x18\x01 \x01(\tBj\x82\xb5\x18\x66Language for which to query about news items (for the being_discussed results). DEPRECATED AND UNUSED.\x12Y\n\rrequest_flags\x18\x02 \x01(\rBB\x82\xb5\x18>Flags describing the request; see EGetFriendsAppsActivityFlags\"\xa3\x13\n\'CPlayer_GetFriendsAppsActivity_Response\x12\xb8\x01\n\x08trending\x18\x01 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBm\x82\xb5\x18iApps that friends have played more this week than last, with list of friends who\'ve played more this week\x12\xb4\x01\n\x10recent_purchases\x18\x02 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBa\x82\xb5\x18]Apps friends have played in the past two weeks for which the user recently acquired a license\x12\x9e\x01\n\x07unowned\x18\x03 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBT\x82\xb5\x18PApps friends have played in the past two weeks for which the user has no license\x12\xaf\x01\n\x07popular\x18\x04 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBe\x82\xb5\x18\x61\x41pps friends have played in the past two weeks, for which the user has a license, sorted by count\x12\xc6\x01\n\x0b\x64ont_forget\x18\x05 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBx\x82\xb5\x18tApps friends have played in the past two weeks which the user has neither purchased nor played in the past two weeks\x12\xc1\x01\n\x0f\x62\x65ing_discussed\x18\x06 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBo\x82\xb5\x18kOwned apps that friends have posted status or screenshots for in the past two weeks. DEPRECATED AND UNUSED.\x12\x94\x01\n\x0cnew_to_group\x18\x07 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBE\x82\xb5\x18\x41Owned apps that none of your friends had played prior to 2 weeks.\x12\x99\x01\n\x11returned_to_group\x18\x08 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBE\x82\xb5\x18\x41Owned apps that friends hadn\'t played for a while, but are again.\x12\x66\n\x13\x61\x63tive_friend_count\x18\t \x01(\r:\x01\x30\x42\x46\x82\xb5\x18\x42Number of friends with non-trivial activity in the past two weeks.\x1a\x90\x04\n\x0e\x46riendPlayTime\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12s\n\x18minutes_played_this_week\x18\x02 \x01(\rBQ\x82\xb5\x18MMinutes this friend played the game (from the enclosing structure) this week.\x12}\n\x18minutes_played_two_weeks\x18\x03 \x01(\rB[\x82\xb5\x18WMinutes this friend played the game (from the enclosing structure) in the past 2 weeks.\x12p\n\x16minutes_played_forever\x18\x04 \x01(\rBP\x82\xb5\x18LMinutes this friend played the game (from the enclosing structure) all time.\x12\x86\x01\n\x0b\x65vent_count\x18\x05 \x01(\rBq\x82\xb5\x18mNumber of events involving this user & app. (Only set for results in being_discussed.) DEPRECATED AND UNUSED.\x1a\xf7\x02\n\x0e\x41ppFriendsInfo\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\xc9\x01\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTimeB\x7f\x82\xb5\x18{Friends (w/ playtime) that meet a specific criteria -- e.g. for trending, only includes friends w/ more playtime this week.\x12\x89\x01\n\rdisplay_order\x18\x03 \x01(\rBr\x82\xb5\x18nIndex indicating the order in which this app should be displayed, relative to other apps in the same response.\"3\n\"CPlayer_GetGameBadgeLevels_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xb5\x01\n#CPlayer_GetGameBadgeLevels_Response\x12\x14\n\x0cplayer_level\x18\x01 \x01(\r\x12:\n\x06\x62\x61\x64ges\x18\x02 \x03(\x0b\x32*.CPlayer_GetGameBadgeLevels_Response.Badge\x1a<\n\x05\x42\x61\x64ge\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0e\n\x06series\x18\x02 \x01(\x05\x12\x14\n\x0c\x62order_color\x18\x03 \x01(\r\"!\n\x1f\x43Player_GetEmoticonList_Request\"\xcc\x01\n CPlayer_GetEmoticonList_Response\x12=\n\temoticons\x18\x01 \x03(\x0b\x32*.CPlayer_GetEmoticonList_Response.Emoticon\x1ai\n\x08\x45moticon\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x16\n\x0etime_last_used\x18\x03 \x01(\r\x12\x11\n\tuse_count\x18\x04 \x01(\r\x12\x15\n\rtime_received\x18\x05 \x01(\r\"\\\n\'CPlayer_GetAchievementsProgress_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x04\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x0e\n\x06\x61ppids\x18\x03 \x03(\r\"\x8d\x02\n(CPlayer_GetAchievementsProgress_Response\x12[\n\x14\x61\x63hievement_progress\x18\x01 \x03(\x0b\x32=.CPlayer_GetAchievementsProgress_Response.AchievementProgress\x1a\x83\x01\n\x13\x41\x63hievementProgress\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08unlocked\x18\x02 \x01(\r\x12\r\n\x05total\x18\x03 \x01(\r\x12\x12\n\npercentage\x18\x04 \x01(\x02\x12\x14\n\x0c\x61ll_unlocked\x18\x05 \x01(\x08\x12\x12\n\ncache_time\x18\x06 \x01(\r\"I\n#CPlayer_PostStatusToFriends_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x13\n\x0bstatus_text\x18\x02 \x01(\t\"&\n$CPlayer_PostStatusToFriends_Response\"e\n\x1f\x43Player_GetPostedStatus_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x04\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\x0e\n\x06postid\x18\x02 \x01(\x04\"z\n CPlayer_GetPostedStatus_Response\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x0e\n\x06postid\x18\x02 \x01(\x04\x12\x13\n\x0bstatus_text\x18\x03 \x01(\t\x12\x0f\n\x07\x64\x65leted\x18\x04 \x01(\x08\x12\r\n\x05\x61ppid\x18\x05 \x01(\r\"4\n\"CPlayer_DeletePostedStatus_Request\x12\x0e\n\x06postid\x18\x01 \x01(\x04\"%\n#CPlayer_DeletePostedStatus_Response\"\x82\x01\n\"CPlayer_GetLastPlayedTimes_Request\x12\\\n\x0fmin_last_played\x18\x01 \x01(\rBC\x82\xb5\x18?The most recent last-played time the client already knows about\"\xea\x03\n#CPlayer_GetLastPlayedTimes_Response\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\x1a\x88\x03\n\x04Game\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x15\n\rlast_playtime\x18\x02 \x01(\r\x12\x17\n\x0fplaytime_2weeks\x18\x03 \x01(\x05\x12\x18\n\x10playtime_forever\x18\x04 \x01(\x05\x12\x16\n\x0e\x66irst_playtime\x18\x05 \x01(\r\x12 \n\x18playtime_windows_forever\x18\x06 \x01(\x05\x12\x1c\n\x14playtime_mac_forever\x18\x07 \x01(\x05\x12\x1e\n\x16playtime_linux_forever\x18\x08 \x01(\x05\x12\x1e\n\x16\x66irst_windows_playtime\x18\t \x01(\r\x12\x1a\n\x12\x66irst_mac_playtime\x18\n \x01(\r\x12\x1c\n\x14\x66irst_linux_playtime\x18\x0b \x01(\r\x12\x1d\n\x15last_windows_playtime\x18\x0c \x01(\r\x12\x19\n\x11last_mac_playtime\x18\r \x01(\r\x12\x1b\n\x13last_linux_playtime\x18\x0e \x01(\r\"\x1b\n\x19\x43Player_AcceptSSA_Request\"\x1c\n\x1a\x43Player_AcceptSSA_Response\"!\n\x1f\x43Player_GetNicknameList_Request\"\x9e\x01\n CPlayer_GetNicknameList_Response\x12\x43\n\tnicknames\x18\x01 \x03(\x0b\x32\x30.CPlayer_GetNicknameList_Response.PlayerNickname\x1a\x35\n\x0ePlayerNickname\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\")\n\'CPlayer_GetPerFriendPreferences_Request\"\xd1\x05\n\x14PerFriendPreferences\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12_\n\x18notifications_showingame\x18\x03 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12_\n\x18notifications_showonline\x18\x04 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12\x61\n\x1anotifications_showmessages\x18\x05 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12X\n\x11sounds_showingame\x18\x06 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12X\n\x11sounds_showonline\x18\x07 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12Z\n\x13sounds_showmessages\x18\x08 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12_\n\x18notifications_sendmobile\x18\t \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\"V\n(CPlayer_GetPerFriendPreferences_Response\x12*\n\x0bpreferences\x18\x01 \x03(\x0b\x32\x15.PerFriendPreferences\"U\n\'CPlayer_SetPerFriendPreferences_Request\x12*\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x15.PerFriendPreferences\"*\n(CPlayer_SetPerFriendPreferences_Response\"c\n\x19\x43Player_AddFriend_Request\x12\x46\n\x07steamid\x18\x01 \x01(\x06\x42\x35\x82\xb5\x18\x31Steam ID of user to whom to send a friend invite.\"\x86\x02\n\x1a\x43Player_AddFriend_Response\x12O\n\x0binvite_sent\x18\x01 \x01(\x08\x42:\x82\xb5\x18\x36True if the operation was successful, false otherwise.\x12\x86\x01\n\x13\x66riend_relationship\x18\x02 \x01(\rBi\x82\xb5\x18\x65the resulting relationship.  Depending on state, may move directly to friends rather than invite sent\x12\x0e\n\x06result\x18\x03 \x01(\x05\"R\n\x1c\x43Player_RemoveFriend_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x06\x42!\x82\xb5\x18\x1dSteam ID of friend to remove.\"\\\n\x1d\x43Player_RemoveFriend_Response\x12;\n\x13\x66riend_relationship\x18\x01 \x01(\rB\x1e\x82\xb5\x18\x1athe resulting relationship\"\x7f\n\x1c\x43Player_IgnoreFriend_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12N\n\x08unignore\x18\x02 \x01(\x08\x42<\x82\xb5\x18\x38If set, remove from ignore/block list instead of adding \"\\\n\x1d\x43Player_IgnoreFriend_Response\x12;\n\x13\x66riend_relationship\x18\x01 \x01(\rB\x1e\x82\xb5\x18\x1athe resulting relationship\")\n\'CPlayer_GetCommunityPreferences_Request\"\xb1\x01\n\x1c\x43Player_CommunityPreferences\x12)\n\x1bhide_adult_content_violence\x18\x01 \x01(\x08:\x04true\x12$\n\x16hide_adult_content_sex\x18\x02 \x01(\x08:\x04true\x12%\n\x16parenthesize_nicknames\x18\x04 \x01(\x08:\x05\x66\x61lse\x12\x19\n\x11timestamp_updated\x18\x03 \x01(\r\"^\n(CPlayer_GetCommunityPreferences_Response\x12\x32\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x1d.CPlayer_CommunityPreferences\"]\n\'CPlayer_SetCommunityPreferences_Request\x12\x32\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x1d.CPlayer_CommunityPreferences\"*\n(CPlayer_SetCommunityPreferences_Response\"@\n,CPlayer_GetNewSteamAnnouncementState_Request\x12\x10\n\x08language\x18\x01 \x01(\x05\"\xa6\x01\n-CPlayer_GetNewSteamAnnouncementState_Response\x12\r\n\x05state\x18\x01 \x01(\x05\x12\x1d\n\x15\x61nnouncement_headline\x18\x02 \x01(\t\x12\x18\n\x10\x61nnouncement_url\x18\x03 \x01(\t\x12\x13\n\x0btime_posted\x18\x04 \x01(\r\x12\x18\n\x10\x61nnouncement_gid\x18\x05 \x01(\x04\"`\n/CPlayer_UpdateSteamAnnouncementLastRead_Request\x12\x18\n\x10\x61nnouncement_gid\x18\x01 \x01(\x04\x12\x13\n\x0btime_posted\x18\x02 \x01(\r\"2\n0CPlayer_UpdateSteamAnnouncementLastRead_Response\"$\n\"CPlayer_GetPrivacySettings_Request\"\xcc\x01\n\x10\x43PrivacySettings\x12\x15\n\rprivacy_state\x18\x01 \x01(\x05\x12\x1f\n\x17privacy_state_inventory\x18\x02 \x01(\x05\x12\x1b\n\x13privacy_state_gifts\x18\x03 \x01(\x05\x12 \n\x18privacy_state_ownedgames\x18\x04 \x01(\x05\x12\x1e\n\x16privacy_state_playtime\x18\x05 \x01(\x05\x12!\n\x19privacy_state_friendslist\x18\x06 \x01(\x05\"R\n#CPlayer_GetPrivacySettings_Response\x12+\n\x10privacy_settings\x18\x01 \x01(\x0b\x32\x11.CPrivacySettings\"3\n\"CPlayer_GetDurationControl_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\x99\x01\n#CPlayer_GetDurationControl_Response\x12\x12\n\nis_enabled\x18\x01 \x01(\x08\x12\x0f\n\x07seconds\x18\x02 \x01(\x05\x12\x15\n\rseconds_today\x18\x03 \x01(\x05\x12\x1d\n\x15is_steamchina_account\x18\x04 \x01(\x08\x12\x17\n\x0fis_age_verified\x18\x05 \x01(\x08\"`\n$CPlayer_LastPlayedTimes_Notification\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\"j\n*CPlayer_FriendNicknameChanged_Notification\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x17\n\x0fis_echo_to_self\x18\x03 \x01(\x08\"\xa7\x01\n.CPlayer_NewSteamAnnouncementState_Notification\x12\r\n\x05state\x18\x01 \x01(\x05\x12\x1d\n\x15\x61nnouncement_headline\x18\x02 \x01(\t\x12\x18\n\x10\x61nnouncement_url\x18\x03 \x01(\t\x12\x13\n\x0btime_posted\x18\x04 \x01(\r\x12\x18\n\x10\x61nnouncement_gid\x18\x05 \x01(\x04\"f\n0CPlayer_CommunityPreferencesChanged_Notification\x12\x32\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x1d.CPlayer_CommunityPreferences\"q\n0CPlayer_PerFriendPreferencesChanged_Notification\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12*\n\x0bpreferences\x18\x02 \x01(\x0b\x32\x15.PerFriendPreferences\"Z\n+CPlayer_PrivacySettingsChanged_Notification\x12+\n\x10privacy_settings\x18\x01 \x01(\x0b\x32\x11.CPrivacySettings*\x85\x01\n\x14\x45NotificationSetting\x12*\n&k_ENotificationSettingNotifyUseDefault\x10\x00\x12 \n\x1ck_ENotificationSettingAlways\x10\x01\x12\x1f\n\x1bk_ENotificationSettingNever\x10\x02\x32\xf4\x1d\n\x06Player\x12\xef\x01\n\"GetMutualFriendsForIncomingInvites\x12\x33.CPlayer_GetMutualFriendsForIncomingInvites_Request\x1a\x34.CPlayer_GetMutualFriendsForIncomingInvites_Response\"^\x82\xb5\x18ZGet me the mutual friends for each of my pending incoming invites (individuals and clans).\x12\xb8\x01\n\x16GetFriendsGameplayInfo\x12\'.CPlayer_GetFriendsGameplayInfo_Request\x1a(.CPlayer_GetFriendsGameplayInfo_Response\"K\x82\xb5\x18GGet a list of friends who are playing, have played, own, or want a game\x12\xae\x01\n\x16GetFriendsAppsActivity\x12\'.CPlayer_GetFriendsAppsActivity_Request\x1a(.CPlayer_GetFriendsAppsActivity_Response\"A\x82\xb5\x18=Get lists of apps friends are active in, in a variety of ways\x12\xb6\x01\n\x12GetGameBadgeLevels\x12#.CPlayer_GetGameBadgeLevels_Request\x1a$.CPlayer_GetGameBadgeLevels_Response\"U\x82\xb5\x18QReturns the Steam Level of a user, the Badge level for the game, and if it\'s foil\x12\x91\x01\n\x0fGetEmoticonList\x12 .CPlayer_GetEmoticonList_Request\x1a!.CPlayer_GetEmoticonList_Response\"9\x82\xb5\x18\x35Gets a list of the emoticons a user has with metadata\x12\xb9\x01\n\x17GetAchievementsProgress\x12(.CPlayer_GetAchievementsProgress_Request\x1a).CPlayer_GetAchievementsProgress_Response\"I\x82\xb5\x18\x45Gets the achievement completion stats for the specified list of apps.\x12\x91\x01\n\x13PostStatusToFriends\x12$.CPlayer_PostStatusToFriends_Request\x1a%.CPlayer_PostStatusToFriends_Response\"-\x82\xb5\x18)Posts custom status text into the blotter\x12\x86\x01\n\x0fGetPostedStatus\x12 .CPlayer_GetPostedStatus_Request\x1a!.CPlayer_GetPostedStatus_Response\".\x82\xb5\x18*Gets a posted status text for a user by id\x12\x92\x01\n\x12\x44\x65letePostedStatus\x12#.CPlayer_DeletePostedStatus_Request\x1a$.CPlayer_DeletePostedStatus_Response\"1\x82\xb5\x18-Deletes a posted status text for a user by id\x12\x95\x01\n\x18\x43lientGetLastPlayedTimes\x12#.CPlayer_GetLastPlayedTimes_Request\x1a$.CPlayer_GetLastPlayedTimes_Response\".\x82\xb5\x18*Gets the last-played times for the account\x12\x63\n\tAcceptSSA\x12\x1a.CPlayer_AcceptSSA_Request\x1a\x1b.CPlayer_AcceptSSA_Response\"\x1d\x82\xb5\x18\x19User is accepting the SSA\x12\x94\x01\n\x0fGetNicknameList\x12 .CPlayer_GetNicknameList_Request\x1a!.CPlayer_GetNicknameList_Response\"<\x82\xb5\x18\x38Gets the list of nicknames this user has for other users\x12\xbd\x01\n\x17GetPerFriendPreferences\x12(.CPlayer_GetPerFriendPreferences_Request\x1a).CPlayer_GetPerFriendPreferences_Response\"M\x82\xb5\x18IGets the list of per-friend preferences this user has set for other users\x12\xb7\x01\n\x17SetPerFriendPreferences\x12(.CPlayer_SetPerFriendPreferences_Request\x1a).CPlayer_SetPerFriendPreferences_Response\"G\x82\xb5\x18\x43Sets the logged in user\'s per-friend preferences for the given user\x12s\n\tAddFriend\x12\x1a.CPlayer_AddFriend_Request\x1a\x1b.CPlayer_AddFriend_Response\"-\x82\xb5\x18)Invites another Steam user to be a friend\x12\x82\x01\n\x0cRemoveFriend\x12\x1d.CPlayer_RemoveFriend_Request\x1a\x1e.CPlayer_RemoveFriend_Response\"3\x82\xb5\x18/Removes a friend or ignores a friend suggestion\x12\xa6\x01\n\x0cIgnoreFriend\x12\x1d.CPlayer_IgnoreFriend_Request\x1a\x1e.CPlayer_IgnoreFriend_Response\"W\x82\xb5\x18SBlocks or unblocks communication with the user.  Despite name, can be a non-friend.\x12\x9e\x01\n\x17GetCommunityPreferences\x12(.CPlayer_GetCommunityPreferences_Request\x1a).CPlayer_GetCommunityPreferences_Response\".\x82\xb5\x18*Returns the player\'s community preferences\x12\x9b\x01\n\x17SetCommunityPreferences\x12(.CPlayer_SetCommunityPreferences_Request\x1a).CPlayer_SetCommunityPreferences_Response\"+\x82\xb5\x18\'Sets the player\'s community preferences\x12\xde\x01\n\x1cGetNewSteamAnnouncementState\x12-.CPlayer_GetNewSteamAnnouncementState_Request\x1a..CPlayer_GetNewSteamAnnouncementState_Response\"_\x82\xb5\x18[Calculates and returns what to display for UI that renders new steam announcement available\x12\xbc\x01\n\x1fUpdateSteamAnnouncementLastRead\x12\x30.CPlayer_UpdateSteamAnnouncementLastRead_Request\x1a\x31.CPlayer_UpdateSteamAnnouncementLastRead_Response\"4\x82\xb5\x18\x30Marks latest announcement timestamp read by user\x12\x82\x01\n\x12GetPrivacySettings\x12#.CPlayer_GetPrivacySettings_Request\x1a$.CPlayer_GetPrivacySettings_Response\"!\x82\xb5\x18\x1dGet current privacy settings.\x12\x8c\x01\n\x12GetDurationControl\x12#.CPlayer_GetDurationControl_Request\x1a$.CPlayer_GetDurationControl_Response\"+\x82\xb5\x18\'Get gameplay duration control settings.\x1a-\x82\xb5\x18)A service for accessing Steam player data2\xa3\x08\n\x0cPlayerClient\x12\x8c\x01\n\x15NotifyLastPlayedTimes\x12%.CPlayer_LastPlayedTimes_Notification\x1a\x0b.NoResponse\"?\x82\xb5\x18;Notification from server to client of more recent play time\x12\xa4\x01\n\x1bNotifyFriendNicknameChanged\x12+.CPlayer_FriendNicknameChanged_Notification\x1a\x0b.NoResponse\"K\x82\xb5\x18GNotification from server to client that a friend\'s nickname has changed\x12\xa4\x01\n\x1fNotifyNewSteamAnnouncementState\x12/.CPlayer_NewSteamAnnouncementState_Notification\x1a\x0b.NoResponse\"C\x82\xb5\x18?Notifies client of changes to steam announcement state for user\x12\xb9\x01\n!NotifyCommunityPreferencesChanged\x12\x31.CPlayer_CommunityPreferencesChanged_Notification\x1a\x0b.NoResponse\"T\x82\xb5\x18PNotification from server to client that their community preferences have changed\x12\xaa\x01\n!NotifyPerFriendPreferencesChanged\x12\x31.CPlayer_PerFriendPreferencesChanged_Notification\x1a\x0b.NoResponse\"E\x82\xb5\x18\x41Notification from server that per-friend preferences have changed\x12\x9c\x01\n#NotifyPrivacyPrivacySettingsChanged\x12,.CPlayer_PrivacySettingsChanged_Notification\x1a\x0b.NoResponse\":\x82\xb5\x18\x36Notification from server that privacy settings changed\x1a.\x82\xb5\x18&Steam player data client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1asteammessages_player.proto\x1a steammessages_unified_base.proto\"4\n2CPlayer_GetMutualFriendsForIncomingInvites_Request\"\\\n&CPlayer_IncomingInviteMutualFriendList\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12!\n\x19mutual_friend_account_ids\x18\x02 \x03(\r\"\x8c\x01\n3CPlayer_GetMutualFriendsForIncomingInvites_Response\x12U\n$incoming_invite_mutual_friends_lists\x18\x01 \x03(\x0b\x32\'.CPlayer_IncomingInviteMutualFriendList\"\xed\x03\n\x1d\x43Player_GetOwnedGames_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x04\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\\\n\x0finclude_appinfo\x18\x02 \x01(\x08\x42\x43\x82\xb5\x18?true if we want additional details (name, icon) about each game\x12\x8c\x01\n\x19include_played_free_games\x18\x03 \x01(\x08\x42i\x82\xb5\x18\x65\x46ree games are excluded by default.  If this is set, free games the user has played will be returned.\x12M\n\rappids_filter\x18\x04 \x03(\rB6\x82\xb5\x18\x32if set, restricts result set to the passed in apps\x12\\\n\x10include_free_sub\x18\x05 \x01(\x08\x42\x42\x82\xb5\x18>Some games are in the free sub, which are excluded by default.\"\xf3\x02\n\x1e\x43Player_GetOwnedGames_Response\x12\x12\n\ngame_count\x18\x01 \x01(\r\x12\x33\n\x05games\x18\x02 \x03(\x0b\x32$.CPlayer_GetOwnedGames_Response.Game\x1a\x87\x02\n\x04Game\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0fplaytime_2weeks\x18\x03 \x01(\x05\x12\x18\n\x10playtime_forever\x18\x04 \x01(\x05\x12\x14\n\x0cimg_icon_url\x18\x05 \x01(\t\x12\x14\n\x0cimg_logo_url\x18\x06 \x01(\t\x12#\n\x1bhas_community_visible_stats\x18\x07 \x01(\x08\x12 \n\x18playtime_windows_forever\x18\x08 \x01(\x05\x12\x1c\n\x14playtime_mac_forever\x18\t \x01(\x05\x12\x1e\n\x16playtime_linux_forever\x18\n \x01(\x05\"M\n\x1b\x43Player_GetPlayNext_Request\x12\x17\n\x0fmax_age_seconds\x18\x01 \x01(\r\x12\x15\n\rignore_appids\x18\x02 \x03(\r\"H\n\x1c\x43Player_GetPlayNext_Response\x12\x18\n\x10last_update_time\x18\x01 \x01(\r\x12\x0e\n\x06\x61ppids\x18\x02 \x03(\r\"7\n&CPlayer_GetFriendsGameplayInfo_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xee\x05\n\'CPlayer_GetFriendsGameplayInfo_Response\x12K\n\tyour_info\x18\x01 \x01(\x0b\x32\x38.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo\x12M\n\x07in_game\x18\x02 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12U\n\x0fplayed_recently\x18\x03 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12Q\n\x0bplayed_ever\x18\x04 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12J\n\x04owns\x18\x05 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x12Q\n\x0bin_wishlist\x18\x06 \x03(\x0b\x32<.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo\x1a^\n\x13\x46riendsGameplayInfo\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x16\n\x0eminutes_played\x18\x02 \x01(\r\x12\x1e\n\x16minutes_played_forever\x18\x03 \x01(\r\x1a~\n\x0fOwnGameplayInfo\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x16\n\x0eminutes_played\x18\x02 \x01(\r\x12\x1e\n\x16minutes_played_forever\x18\x03 \x01(\r\x12\x13\n\x0bin_wishlist\x18\x04 \x01(\x08\x12\r\n\x05owned\x18\x05 \x01(\x08\"\x87\x02\n&CPlayer_GetFriendsAppsActivity_Request\x12\x81\x01\n\rnews_language\x18\x01 \x01(\tBj\x82\xb5\x18\x66Language for which to query about news items (for the being_discussed results). DEPRECATED AND UNUSED.\x12Y\n\rrequest_flags\x18\x02 \x01(\rBB\x82\xb5\x18>Flags describing the request; see EGetFriendsAppsActivityFlags\"\xa3\x13\n\'CPlayer_GetFriendsAppsActivity_Response\x12\xb8\x01\n\x08trending\x18\x01 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBm\x82\xb5\x18iApps that friends have played more this week than last, with list of friends who\'ve played more this week\x12\xb4\x01\n\x10recent_purchases\x18\x02 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBa\x82\xb5\x18]Apps friends have played in the past two weeks for which the user recently acquired a license\x12\x9e\x01\n\x07unowned\x18\x03 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBT\x82\xb5\x18PApps friends have played in the past two weeks for which the user has no license\x12\xaf\x01\n\x07popular\x18\x04 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBe\x82\xb5\x18\x61\x41pps friends have played in the past two weeks, for which the user has a license, sorted by count\x12\xc6\x01\n\x0b\x64ont_forget\x18\x05 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBx\x82\xb5\x18tApps friends have played in the past two weeks which the user has neither purchased nor played in the past two weeks\x12\xc1\x01\n\x0f\x62\x65ing_discussed\x18\x06 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBo\x82\xb5\x18kOwned apps that friends have posted status or screenshots for in the past two weeks. DEPRECATED AND UNUSED.\x12\x94\x01\n\x0cnew_to_group\x18\x07 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBE\x82\xb5\x18\x41Owned apps that none of your friends had played prior to 2 weeks.\x12\x99\x01\n\x11returned_to_group\x18\x08 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfoBE\x82\xb5\x18\x41Owned apps that friends hadn\'t played for a while, but are again.\x12\x66\n\x13\x61\x63tive_friend_count\x18\t \x01(\r:\x01\x30\x42\x46\x82\xb5\x18\x42Number of friends with non-trivial activity in the past two weeks.\x1a\x90\x04\n\x0e\x46riendPlayTime\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12s\n\x18minutes_played_this_week\x18\x02 \x01(\rBQ\x82\xb5\x18MMinutes this friend played the game (from the enclosing structure) this week.\x12}\n\x18minutes_played_two_weeks\x18\x03 \x01(\rB[\x82\xb5\x18WMinutes this friend played the game (from the enclosing structure) in the past 2 weeks.\x12p\n\x16minutes_played_forever\x18\x04 \x01(\rBP\x82\xb5\x18LMinutes this friend played the game (from the enclosing structure) all time.\x12\x86\x01\n\x0b\x65vent_count\x18\x05 \x01(\rBq\x82\xb5\x18mNumber of events involving this user & app. (Only set for results in being_discussed.) DEPRECATED AND UNUSED.\x1a\xf7\x02\n\x0e\x41ppFriendsInfo\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\xc9\x01\n\x07\x66riends\x18\x02 \x03(\x0b\x32\x37.CPlayer_GetFriendsAppsActivity_Response.FriendPlayTimeB\x7f\x82\xb5\x18{Friends (w/ playtime) that meet a specific criteria -- e.g. for trending, only includes friends w/ more playtime this week.\x12\x89\x01\n\rdisplay_order\x18\x03 \x01(\rBr\x82\xb5\x18nIndex indicating the order in which this app should be displayed, relative to other apps in the same response.\"3\n\"CPlayer_GetGameBadgeLevels_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xb5\x01\n#CPlayer_GetGameBadgeLevels_Response\x12\x14\n\x0cplayer_level\x18\x01 \x01(\r\x12:\n\x06\x62\x61\x64ges\x18\x02 \x03(\x0b\x32*.CPlayer_GetGameBadgeLevels_Response.Badge\x1a<\n\x05\x42\x61\x64ge\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0e\n\x06series\x18\x02 \x01(\x05\x12\x14\n\x0c\x62order_color\x18\x03 \x01(\r\"l\n$CPlayer_GetProfileBackground_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x06\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\x10\n\x08language\x18\x02 \x01(\t\"\xf9\x03\n\x0bProfileItem\x12\x17\n\x0f\x63ommunityitemid\x18\x01 \x01(\x04\x12\x42\n\x0bimage_small\x18\x02 \x01(\tB-\x82\xb5\x18)small image used in backpack or selection\x12)\n\x0bimage_large\x18\x03 \x01(\tB\x14\x82\xb5\x18\x10the image itself\x12\x1e\n\x04name\x18\x04 \x01(\tB\x10\x82\xb5\x18\x0c\x65nglish name\x12\'\n\nitem_title\x18\x05 \x01(\tB\x13\x82\xb5\x18\x0flocalized title\x12\x33\n\x10item_description\x18\x06 \x01(\tB\x19\x82\xb5\x18\x15localized description\x12\r\n\x05\x61ppid\x18\x07 \x01(\r\x12\x11\n\titem_type\x18\x08 \x01(\r\x12\x12\n\nitem_class\x18\t \x01(\r\x12+\n\nmovie_webm\x18\n \x01(\tB\x17\x82\xb5\x18\x13URL to webm, if any\x12)\n\tmovie_mp4\x18\x0b \x01(\tB\x16\x82\xb5\x18\x12URL to mp4, if any\x12V\n\x0e\x65quipped_flags\x18\x0c \x01(\rB>\x82\xb5\x18:Special flags set when equipped (EProfileItemEquippedFlag)\"Q\n%CPlayer_GetProfileBackground_Response\x12(\n\x12profile_background\x18\x01 \x01(\x0b\x32\x0c.ProfileItem\"?\n$CPlayer_SetProfileBackground_Request\x12\x17\n\x0f\x63ommunityitemid\x18\x01 \x01(\x04\"\'\n%CPlayer_SetProfileBackground_Response\"p\n(CPlayer_GetMiniProfileBackground_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x06\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\x10\n\x08language\x18\x02 \x01(\t\"U\n)CPlayer_GetMiniProfileBackground_Response\x12(\n\x12profile_background\x18\x01 \x01(\x0b\x32\x0c.ProfileItem\"C\n(CPlayer_SetMiniProfileBackground_Request\x12\x17\n\x0f\x63ommunityitemid\x18\x01 \x01(\x04\"+\n)CPlayer_SetMiniProfileBackground_Response\"f\n\x1e\x43Player_GetAvatarFrame_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x06\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\x10\n\x08language\x18\x02 \x01(\t\"E\n\x1f\x43Player_GetAvatarFrame_Response\x12\"\n\x0c\x61vatar_frame\x18\x01 \x01(\x0b\x32\x0c.ProfileItem\"9\n\x1e\x43Player_SetAvatarFrame_Request\x12\x17\n\x0f\x63ommunityitemid\x18\x01 \x01(\x04\"!\n\x1f\x43Player_SetAvatarFrame_Response\"i\n!CPlayer_GetAnimatedAvatar_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x06\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\x10\n\x08language\x18\x02 \x01(\t\"B\n\"CPlayer_GetAnimatedAvatar_Response\x12\x1c\n\x06\x61vatar\x18\x01 \x01(\x0b\x32\x0c.ProfileItem\"<\n!CPlayer_SetAnimatedAvatar_Request\x12\x17\n\x0f\x63ommunityitemid\x18\x01 \x01(\x04\"$\n\"CPlayer_SetAnimatedAvatar_Response\"8\n$CPlayer_GetProfileItemsOwned_Request\x12\x10\n\x08language\x18\x01 \x01(\t\"\xf8\x01\n%CPlayer_GetProfileItemsOwned_Response\x12)\n\x13profile_backgrounds\x18\x01 \x03(\x0b\x32\x0c.ProfileItem\x12.\n\x18mini_profile_backgrounds\x18\x02 \x03(\x0b\x32\x0c.ProfileItem\x12#\n\ravatar_frames\x18\x03 \x03(\x0b\x32\x0c.ProfileItem\x12&\n\x10\x61nimated_avatars\x18\x04 \x03(\x0b\x32\x0c.ProfileItem\x12\'\n\x11profile_modifiers\x18\x05 \x03(\x0b\x32\x0c.ProfileItem\"L\n\'CPlayer_GetProfileItemsEquipped_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x10\n\x08language\x18\x02 \x01(\t\"\xf6\x01\n(CPlayer_GetProfileItemsEquipped_Response\x12(\n\x12profile_background\x18\x01 \x01(\x0b\x32\x0c.ProfileItem\x12-\n\x17mini_profile_background\x18\x02 \x01(\x0b\x32\x0c.ProfileItem\x12\"\n\x0c\x61vatar_frame\x18\x03 \x01(\x0b\x32\x0c.ProfileItem\x12%\n\x0f\x61nimated_avatar\x18\x04 \x01(\x0b\x32\x0c.ProfileItem\x12&\n\x10profile_modifier\x18\x05 \x01(\x0b\x32\x0c.ProfileItem\"z\n+CPlayer_SetEquippedProfileItemFlags_Request\x12\x17\n\x0f\x63ommunityitemid\x18\x01 \x01(\x04\x12\x32\n\x05\x66lags\x18\x02 \x01(\rB#\x82\xb5\x18\x1fSet of EProfileItemEquippedFlag\".\n,CPlayer_SetEquippedProfileItemFlags_Response\"!\n\x1f\x43Player_GetEmoticonList_Request\"\xcc\x01\n CPlayer_GetEmoticonList_Response\x12=\n\temoticons\x18\x01 \x03(\x0b\x32*.CPlayer_GetEmoticonList_Response.Emoticon\x1ai\n\x08\x45moticon\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x16\n\x0etime_last_used\x18\x03 \x01(\r\x12\x11\n\tuse_count\x18\x04 \x01(\r\x12\x15\n\rtime_received\x18\x05 \x01(\r\"\\\n\'CPlayer_GetAchievementsProgress_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x04\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x0e\n\x06\x61ppids\x18\x03 \x03(\r\"\x8d\x02\n(CPlayer_GetAchievementsProgress_Response\x12[\n\x14\x61\x63hievement_progress\x18\x01 \x03(\x0b\x32=.CPlayer_GetAchievementsProgress_Response.AchievementProgress\x1a\x83\x01\n\x13\x41\x63hievementProgress\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08unlocked\x18\x02 \x01(\r\x12\r\n\x05total\x18\x03 \x01(\r\x12\x12\n\npercentage\x18\x04 \x01(\x02\x12\x14\n\x0c\x61ll_unlocked\x18\x05 \x01(\x08\x12\x12\n\ncache_time\x18\x06 \x01(\r\"I\n#CPlayer_PostStatusToFriends_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x13\n\x0bstatus_text\x18\x02 \x01(\t\"&\n$CPlayer_PostStatusToFriends_Response\"e\n\x1f\x43Player_GetPostedStatus_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x04\x42!\x82\xb5\x18\x1dThe player we\'re asking about\x12\x0e\n\x06postid\x18\x02 \x01(\x04\"z\n CPlayer_GetPostedStatus_Response\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x0e\n\x06postid\x18\x02 \x01(\x04\x12\x13\n\x0bstatus_text\x18\x03 \x01(\t\x12\x0f\n\x07\x64\x65leted\x18\x04 \x01(\x08\x12\r\n\x05\x61ppid\x18\x05 \x01(\r\"4\n\"CPlayer_DeletePostedStatus_Request\x12\x0e\n\x06postid\x18\x01 \x01(\x04\"%\n#CPlayer_DeletePostedStatus_Response\"\x82\x01\n\"CPlayer_GetLastPlayedTimes_Request\x12\\\n\x0fmin_last_played\x18\x01 \x01(\rBC\x82\xb5\x18?The most recent last-played time the client already knows about\"\xea\x03\n#CPlayer_GetLastPlayedTimes_Response\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\x1a\x88\x03\n\x04Game\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x15\n\rlast_playtime\x18\x02 \x01(\r\x12\x17\n\x0fplaytime_2weeks\x18\x03 \x01(\x05\x12\x18\n\x10playtime_forever\x18\x04 \x01(\x05\x12\x16\n\x0e\x66irst_playtime\x18\x05 \x01(\r\x12 \n\x18playtime_windows_forever\x18\x06 \x01(\x05\x12\x1c\n\x14playtime_mac_forever\x18\x07 \x01(\x05\x12\x1e\n\x16playtime_linux_forever\x18\x08 \x01(\x05\x12\x1e\n\x16\x66irst_windows_playtime\x18\t \x01(\r\x12\x1a\n\x12\x66irst_mac_playtime\x18\n \x01(\r\x12\x1c\n\x14\x66irst_linux_playtime\x18\x0b \x01(\r\x12\x1d\n\x15last_windows_playtime\x18\x0c \x01(\r\x12\x19\n\x11last_mac_playtime\x18\r \x01(\r\x12\x1b\n\x13last_linux_playtime\x18\x0e \x01(\r\"\x1b\n\x19\x43Player_AcceptSSA_Request\"\x1c\n\x1a\x43Player_AcceptSSA_Response\"!\n\x1f\x43Player_GetNicknameList_Request\"\x9e\x01\n CPlayer_GetNicknameList_Response\x12\x43\n\tnicknames\x18\x01 \x03(\x0b\x32\x30.CPlayer_GetNicknameList_Response.PlayerNickname\x1a\x35\n\x0ePlayerNickname\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\")\n\'CPlayer_GetPerFriendPreferences_Request\"\xd1\x05\n\x14PerFriendPreferences\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12_\n\x18notifications_showingame\x18\x03 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12_\n\x18notifications_showonline\x18\x04 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12\x61\n\x1anotifications_showmessages\x18\x05 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12X\n\x11sounds_showingame\x18\x06 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12X\n\x11sounds_showonline\x18\x07 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12Z\n\x13sounds_showmessages\x18\x08 \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\x12_\n\x18notifications_sendmobile\x18\t \x01(\x0e\x32\x15.ENotificationSetting:&k_ENotificationSettingNotifyUseDefault\"V\n(CPlayer_GetPerFriendPreferences_Response\x12*\n\x0bpreferences\x18\x01 \x03(\x0b\x32\x15.PerFriendPreferences\"U\n\'CPlayer_SetPerFriendPreferences_Request\x12*\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x15.PerFriendPreferences\"*\n(CPlayer_SetPerFriendPreferences_Response\"c\n\x19\x43Player_AddFriend_Request\x12\x46\n\x07steamid\x18\x01 \x01(\x06\x42\x35\x82\xb5\x18\x31Steam ID of user to whom to send a friend invite.\"\x86\x02\n\x1a\x43Player_AddFriend_Response\x12O\n\x0binvite_sent\x18\x01 \x01(\x08\x42:\x82\xb5\x18\x36True if the operation was successful, false otherwise.\x12\x86\x01\n\x13\x66riend_relationship\x18\x02 \x01(\rBi\x82\xb5\x18\x65the resulting relationship.  Depending on state, may move directly to friends rather than invite sent\x12\x0e\n\x06result\x18\x03 \x01(\x05\"R\n\x1c\x43Player_RemoveFriend_Request\x12\x32\n\x07steamid\x18\x01 \x01(\x06\x42!\x82\xb5\x18\x1dSteam ID of friend to remove.\"\\\n\x1d\x43Player_RemoveFriend_Response\x12;\n\x13\x66riend_relationship\x18\x01 \x01(\rB\x1e\x82\xb5\x18\x1athe resulting relationship\"\x7f\n\x1c\x43Player_IgnoreFriend_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12N\n\x08unignore\x18\x02 \x01(\x08\x42<\x82\xb5\x18\x38If set, remove from ignore/block list instead of adding \"\\\n\x1d\x43Player_IgnoreFriend_Response\x12;\n\x13\x66riend_relationship\x18\x01 \x01(\rB\x1e\x82\xb5\x18\x1athe resulting relationship\")\n\'CPlayer_GetCommunityPreferences_Request\"\xb1\x01\n\x1c\x43Player_CommunityPreferences\x12)\n\x1bhide_adult_content_violence\x18\x01 \x01(\x08:\x04true\x12$\n\x16hide_adult_content_sex\x18\x02 \x01(\x08:\x04true\x12%\n\x16parenthesize_nicknames\x18\x04 \x01(\x08:\x05\x66\x61lse\x12\x19\n\x11timestamp_updated\x18\x03 \x01(\r\"^\n(CPlayer_GetCommunityPreferences_Response\x12\x32\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x1d.CPlayer_CommunityPreferences\"]\n\'CPlayer_SetCommunityPreferences_Request\x12\x32\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x1d.CPlayer_CommunityPreferences\"*\n(CPlayer_SetCommunityPreferences_Response\"@\n,CPlayer_GetNewSteamAnnouncementState_Request\x12\x10\n\x08language\x18\x01 \x01(\x05\"\xa6\x01\n-CPlayer_GetNewSteamAnnouncementState_Response\x12\r\n\x05state\x18\x01 \x01(\x05\x12\x1d\n\x15\x61nnouncement_headline\x18\x02 \x01(\t\x12\x18\n\x10\x61nnouncement_url\x18\x03 \x01(\t\x12\x13\n\x0btime_posted\x18\x04 \x01(\r\x12\x18\n\x10\x61nnouncement_gid\x18\x05 \x01(\x04\"`\n/CPlayer_UpdateSteamAnnouncementLastRead_Request\x12\x18\n\x10\x61nnouncement_gid\x18\x01 \x01(\x04\x12\x13\n\x0btime_posted\x18\x02 \x01(\r\"2\n0CPlayer_UpdateSteamAnnouncementLastRead_Response\"$\n\"CPlayer_GetPrivacySettings_Request\"\xcc\x01\n\x10\x43PrivacySettings\x12\x15\n\rprivacy_state\x18\x01 \x01(\x05\x12\x1f\n\x17privacy_state_inventory\x18\x02 \x01(\x05\x12\x1b\n\x13privacy_state_gifts\x18\x03 \x01(\x05\x12 \n\x18privacy_state_ownedgames\x18\x04 \x01(\x05\x12\x1e\n\x16privacy_state_playtime\x18\x05 \x01(\x05\x12!\n\x19privacy_state_friendslist\x18\x06 \x01(\x05\"R\n#CPlayer_GetPrivacySettings_Response\x12+\n\x10privacy_settings\x18\x01 \x01(\x0b\x32\x11.CPrivacySettings\"3\n\"CPlayer_GetDurationControl_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"\xb8\x01\n#CPlayer_GetDurationControl_Response\x12\x12\n\nis_enabled\x18\x01 \x01(\x08\x12\x0f\n\x07seconds\x18\x02 \x01(\x05\x12\x15\n\rseconds_today\x18\x03 \x01(\x05\x12\x1d\n\x15is_steamchina_account\x18\x04 \x01(\x08\x12\x17\n\x0fis_age_verified\x18\x05 \x01(\x08\x12\x1d\n\x15seconds_allowed_today\x18\x06 \x01(\r\"`\n$CPlayer_LastPlayedTimes_Notification\x12\x38\n\x05games\x18\x01 \x03(\x0b\x32).CPlayer_GetLastPlayedTimes_Response.Game\"j\n*CPlayer_FriendNicknameChanged_Notification\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12\x10\n\x08nickname\x18\x02 \x01(\t\x12\x17\n\x0fis_echo_to_self\x18\x03 \x01(\x08\"K\n6CPlayer_FriendEquippedProfileItemsChanged_Notification\x12\x11\n\taccountid\x18\x01 \x01(\x07\"\xa7\x01\n.CPlayer_NewSteamAnnouncementState_Notification\x12\r\n\x05state\x18\x01 \x01(\x05\x12\x1d\n\x15\x61nnouncement_headline\x18\x02 \x01(\t\x12\x18\n\x10\x61nnouncement_url\x18\x03 \x01(\t\x12\x13\n\x0btime_posted\x18\x04 \x01(\r\x12\x18\n\x10\x61nnouncement_gid\x18\x05 \x01(\x04\"f\n0CPlayer_CommunityPreferencesChanged_Notification\x12\x32\n\x0bpreferences\x18\x01 \x01(\x0b\x32\x1d.CPlayer_CommunityPreferences\"q\n0CPlayer_PerFriendPreferencesChanged_Notification\x12\x11\n\taccountid\x18\x01 \x01(\x07\x12*\n\x0bpreferences\x18\x02 \x01(\x0b\x32\x15.PerFriendPreferences\"Z\n+CPlayer_PrivacySettingsChanged_Notification\x12+\n\x10privacy_settings\x18\x01 \x01(\x0b\x32\x11.CPrivacySettings*\x85\x01\n\x14\x45NotificationSetting\x12*\n&k_ENotificationSettingNotifyUseDefault\x10\x00\x12 \n\x1ck_ENotificationSettingAlways\x10\x01\x12\x1f\n\x1bk_ENotificationSettingNever\x10\x02\x32\xd6-\n\x06Player\x12\xef\x01\n\"GetMutualFriendsForIncomingInvites\x12\x33.CPlayer_GetMutualFriendsForIncomingInvites_Request\x1a\x34.CPlayer_GetMutualFriendsForIncomingInvites_Response\"^\x82\xb5\x18ZGet me the mutual friends for each of my pending incoming invites (individuals and clans).\x12\x80\x01\n\rGetOwnedGames\x12\x1e.CPlayer_GetOwnedGames_Request\x1a\x1f.CPlayer_GetOwnedGames_Response\".\x82\xb5\x18*Return a list of games owned by the player\x12\x7f\n\x0bGetPlayNext\x12\x1c.CPlayer_GetPlayNext_Request\x1a\x1d.CPlayer_GetPlayNext_Response\"3\x82\xb5\x18/Return suggested games for player to play next.\x12\xb8\x01\n\x16GetFriendsGameplayInfo\x12\'.CPlayer_GetFriendsGameplayInfo_Request\x1a(.CPlayer_GetFriendsGameplayInfo_Response\"K\x82\xb5\x18GGet a list of friends who are playing, have played, own, or want a game\x12\xae\x01\n\x16GetFriendsAppsActivity\x12\'.CPlayer_GetFriendsAppsActivity_Request\x1a(.CPlayer_GetFriendsAppsActivity_Response\"A\x82\xb5\x18=Get lists of apps friends are active in, in a variety of ways\x12\xb6\x01\n\x12GetGameBadgeLevels\x12#.CPlayer_GetGameBadgeLevels_Request\x1a$.CPlayer_GetGameBadgeLevels_Response\"U\x82\xb5\x18QReturns the Steam Level of a user, the Badge level for the game, and if it\'s foil\x12\xa6\x01\n\x14GetProfileBackground\x12%.CPlayer_GetProfileBackground_Request\x1a&.CPlayer_GetProfileBackground_Response\"?\x82\xb5\x18;Gets which profile background is active for a specific user\x12\x8d\x01\n\x14SetProfileBackground\x12%.CPlayer_SetProfileBackground_Request\x1a&.CPlayer_SetProfileBackground_Response\"&\x82\xb5\x18\"Sets the user\'s profile background\x12\xb7\x01\n\x18GetMiniProfileBackground\x12).CPlayer_GetMiniProfileBackground_Request\x1a*.CPlayer_GetMiniProfileBackground_Response\"D\x82\xb5\x18@Gets which mini profile background is active for a specific user\x12\x9e\x01\n\x18SetMiniProfileBackground\x12).CPlayer_SetMiniProfileBackground_Request\x1a*.CPlayer_SetMiniProfileBackground_Response\"+\x82\xb5\x18\'Sets the user\'s mini profile background\x12\x8e\x01\n\x0eGetAvatarFrame\x12\x1f.CPlayer_GetAvatarFrame_Request\x1a .CPlayer_GetAvatarFrame_Response\"9\x82\xb5\x18\x35Gets which avatar frame is active for a specific user\x12\x87\x01\n\x0eSetAvatarFrame\x12\x1f.CPlayer_SetAvatarFrame_Request\x1a .CPlayer_SetAvatarFrame_Response\"2\x82\xb5\x18.Sets the user\'s avatar frame for their profile\x12\x9a\x01\n\x11GetAnimatedAvatar\x12\".CPlayer_GetAnimatedAvatar_Request\x1a#.CPlayer_GetAnimatedAvatar_Response\"<\x82\xb5\x18\x38Gets which animated avatar is active for a specific user\x12\x93\x01\n\x11SetAnimatedAvatar\x12\".CPlayer_SetAnimatedAvatar_Request\x1a#.CPlayer_SetAnimatedAvatar_Response\"5\x82\xb5\x18\x31Sets the user\'s animated avatar for their profile\x12\xa0\x01\n\x14GetProfileItemsOwned\x12%.CPlayer_GetProfileItemsOwned_Request\x1a&.CPlayer_GetProfileItemsOwned_Response\"9\x82\xb5\x18\x35Returns the items the user can equip on their profile\x12\xac\x01\n\x17GetProfileItemsEquipped\x12(.CPlayer_GetProfileItemsEquipped_Request\x1a).CPlayer_GetProfileItemsEquipped_Response\"<\x82\xb5\x18\x38Returns the items the user has equipped on their profile\x12\xa7\x01\n\x1bSetEquippedProfileItemFlags\x12,.CPlayer_SetEquippedProfileItemFlags_Request\x1a-.CPlayer_SetEquippedProfileItemFlags_Response\"+\x82\xb5\x18\'Sets special flags on the equipped item\x12\x91\x01\n\x0fGetEmoticonList\x12 .CPlayer_GetEmoticonList_Request\x1a!.CPlayer_GetEmoticonList_Response\"9\x82\xb5\x18\x35Gets a list of the emoticons a user has with metadata\x12\xb9\x01\n\x17GetAchievementsProgress\x12(.CPlayer_GetAchievementsProgress_Request\x1a).CPlayer_GetAchievementsProgress_Response\"I\x82\xb5\x18\x45Gets the achievement completion stats for the specified list of apps.\x12\x91\x01\n\x13PostStatusToFriends\x12$.CPlayer_PostStatusToFriends_Request\x1a%.CPlayer_PostStatusToFriends_Response\"-\x82\xb5\x18)Posts custom status text into the blotter\x12\x86\x01\n\x0fGetPostedStatus\x12 .CPlayer_GetPostedStatus_Request\x1a!.CPlayer_GetPostedStatus_Response\".\x82\xb5\x18*Gets a posted status text for a user by id\x12\x92\x01\n\x12\x44\x65letePostedStatus\x12#.CPlayer_DeletePostedStatus_Request\x1a$.CPlayer_DeletePostedStatus_Response\"1\x82\xb5\x18-Deletes a posted status text for a user by id\x12\x95\x01\n\x18\x43lientGetLastPlayedTimes\x12#.CPlayer_GetLastPlayedTimes_Request\x1a$.CPlayer_GetLastPlayedTimes_Response\".\x82\xb5\x18*Gets the last-played times for the account\x12\x63\n\tAcceptSSA\x12\x1a.CPlayer_AcceptSSA_Request\x1a\x1b.CPlayer_AcceptSSA_Response\"\x1d\x82\xb5\x18\x19User is accepting the SSA\x12\x94\x01\n\x0fGetNicknameList\x12 .CPlayer_GetNicknameList_Request\x1a!.CPlayer_GetNicknameList_Response\"<\x82\xb5\x18\x38Gets the list of nicknames this user has for other users\x12\xbd\x01\n\x17GetPerFriendPreferences\x12(.CPlayer_GetPerFriendPreferences_Request\x1a).CPlayer_GetPerFriendPreferences_Response\"M\x82\xb5\x18IGets the list of per-friend preferences this user has set for other users\x12\xb7\x01\n\x17SetPerFriendPreferences\x12(.CPlayer_SetPerFriendPreferences_Request\x1a).CPlayer_SetPerFriendPreferences_Response\"G\x82\xb5\x18\x43Sets the logged in user\'s per-friend preferences for the given user\x12s\n\tAddFriend\x12\x1a.CPlayer_AddFriend_Request\x1a\x1b.CPlayer_AddFriend_Response\"-\x82\xb5\x18)Invites another Steam user to be a friend\x12\x82\x01\n\x0cRemoveFriend\x12\x1d.CPlayer_RemoveFriend_Request\x1a\x1e.CPlayer_RemoveFriend_Response\"3\x82\xb5\x18/Removes a friend or ignores a friend suggestion\x12\xa6\x01\n\x0cIgnoreFriend\x12\x1d.CPlayer_IgnoreFriend_Request\x1a\x1e.CPlayer_IgnoreFriend_Response\"W\x82\xb5\x18SBlocks or unblocks communication with the user.  Despite name, can be a non-friend.\x12\x9e\x01\n\x17GetCommunityPreferences\x12(.CPlayer_GetCommunityPreferences_Request\x1a).CPlayer_GetCommunityPreferences_Response\".\x82\xb5\x18*Returns the player\'s community preferences\x12\x9b\x01\n\x17SetCommunityPreferences\x12(.CPlayer_SetCommunityPreferences_Request\x1a).CPlayer_SetCommunityPreferences_Response\"+\x82\xb5\x18\'Sets the player\'s community preferences\x12\xde\x01\n\x1cGetNewSteamAnnouncementState\x12-.CPlayer_GetNewSteamAnnouncementState_Request\x1a..CPlayer_GetNewSteamAnnouncementState_Response\"_\x82\xb5\x18[Calculates and returns what to display for UI that renders new steam announcement available\x12\xbc\x01\n\x1fUpdateSteamAnnouncementLastRead\x12\x30.CPlayer_UpdateSteamAnnouncementLastRead_Request\x1a\x31.CPlayer_UpdateSteamAnnouncementLastRead_Response\"4\x82\xb5\x18\x30Marks latest announcement timestamp read by user\x12\x82\x01\n\x12GetPrivacySettings\x12#.CPlayer_GetPrivacySettings_Request\x1a$.CPlayer_GetPrivacySettings_Response\"!\x82\xb5\x18\x1dGet current privacy settings.\x12\x8c\x01\n\x12GetDurationControl\x12#.CPlayer_GetDurationControl_Request\x1a$.CPlayer_GetDurationControl_Response\"+\x82\xb5\x18\'Get gameplay duration control settings.\x1a-\x82\xb5\x18)A service for accessing Steam player data2\xf1\t\n\x0cPlayerClient\x12\x8c\x01\n\x15NotifyLastPlayedTimes\x12%.CPlayer_LastPlayedTimes_Notification\x1a\x0b.NoResponse\"?\x82\xb5\x18;Notification from server to client of more recent play time\x12\xa4\x01\n\x1bNotifyFriendNicknameChanged\x12+.CPlayer_FriendNicknameChanged_Notification\x1a\x0b.NoResponse\"K\x82\xb5\x18GNotification from server to client that a friend\'s nickname has changed\x12\xcb\x01\n\'NotifyFriendEquippedProfileItemsChanged\x12\x37.CPlayer_FriendEquippedProfileItemsChanged_Notification\x1a\x0b.NoResponse\"Z\x82\xb5\x18VNotification from server to client that a friend\'s equipped profile items have changed\x12\xa4\x01\n\x1fNotifyNewSteamAnnouncementState\x12/.CPlayer_NewSteamAnnouncementState_Notification\x1a\x0b.NoResponse\"C\x82\xb5\x18?Notifies client of changes to steam announcement state for user\x12\xb9\x01\n!NotifyCommunityPreferencesChanged\x12\x31.CPlayer_CommunityPreferencesChanged_Notification\x1a\x0b.NoResponse\"T\x82\xb5\x18PNotification from server to client that their community preferences have changed\x12\xaa\x01\n!NotifyPerFriendPreferencesChanged\x12\x31.CPlayer_PerFriendPreferencesChanged_Notification\x1a\x0b.NoResponse\"E\x82\xb5\x18\x41Notification from server that per-friend preferences have changed\x12\x9c\x01\n#NotifyPrivacyPrivacySettingsChanged\x12,.CPlayer_PrivacySettingsChanged_Notification\x1a\x0b.NoResponse\":\x82\xb5\x18\x36Notification from server that privacy settings changed\x1a.\x82\xb5\x18&Steam player data client notifications\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -49,8 +49,8 @@ _ENOTIFICATIONSETTING = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=9884,
-  serialized_end=10017,
+  serialized_start=13489,
+  serialized_end=13622,
 )
 _sym_db.RegisterEnumDescriptor(_ENOTIFICATIONSETTING)
 
@@ -154,6 +154,272 @@ _CPLAYER_GETMUTUALFRIENDSFORINCOMINGINVITES_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CPLAYER_GETOWNEDGAMES_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetOwnedGames_Request',
+  full_name='CPlayer_GetOwnedGames_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CPlayer_GetOwnedGames_Request.steamid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035The player we\'re asking about'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='include_appinfo', full_name='CPlayer_GetOwnedGames_Request.include_appinfo', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030?true if we want additional details (name, icon) about each game'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='include_played_free_games', full_name='CPlayer_GetOwnedGames_Request.include_played_free_games', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030eFree games are excluded by default.  If this is set, free games the user has played will be returned.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appids_filter', full_name='CPlayer_GetOwnedGames_Request.appids_filter', index=3,
+      number=4, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\0302if set, restricts result set to the passed in apps'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='include_free_sub', full_name='CPlayer_GetOwnedGames_Request.include_free_sub', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030>Some games are in the free sub, which are excluded by default.'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=356,
+  serialized_end=849,
+)
+
+
+_CPLAYER_GETOWNEDGAMES_RESPONSE_GAME = _descriptor.Descriptor(
+  name='Game',
+  full_name='CPlayer_GetOwnedGames_Response.Game',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CPlayer_GetOwnedGames_Response.Game.appid', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='CPlayer_GetOwnedGames_Response.Game.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='playtime_2weeks', full_name='CPlayer_GetOwnedGames_Response.Game.playtime_2weeks', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='playtime_forever', full_name='CPlayer_GetOwnedGames_Response.Game.playtime_forever', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='img_icon_url', full_name='CPlayer_GetOwnedGames_Response.Game.img_icon_url', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='img_logo_url', full_name='CPlayer_GetOwnedGames_Response.Game.img_logo_url', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='has_community_visible_stats', full_name='CPlayer_GetOwnedGames_Response.Game.has_community_visible_stats', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='playtime_windows_forever', full_name='CPlayer_GetOwnedGames_Response.Game.playtime_windows_forever', index=7,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='playtime_mac_forever', full_name='CPlayer_GetOwnedGames_Response.Game.playtime_mac_forever', index=8,
+      number=9, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='playtime_linux_forever', full_name='CPlayer_GetOwnedGames_Response.Game.playtime_linux_forever', index=9,
+      number=10, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=960,
+  serialized_end=1223,
+)
+
+_CPLAYER_GETOWNEDGAMES_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetOwnedGames_Response',
+  full_name='CPlayer_GetOwnedGames_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='game_count', full_name='CPlayer_GetOwnedGames_Response.game_count', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='games', full_name='CPlayer_GetOwnedGames_Response.games', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CPLAYER_GETOWNEDGAMES_RESPONSE_GAME, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=852,
+  serialized_end=1223,
+)
+
+
+_CPLAYER_GETPLAYNEXT_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetPlayNext_Request',
+  full_name='CPlayer_GetPlayNext_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='max_age_seconds', full_name='CPlayer_GetPlayNext_Request.max_age_seconds', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ignore_appids', full_name='CPlayer_GetPlayNext_Request.ignore_appids', index=1,
+      number=2, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1225,
+  serialized_end=1302,
+)
+
+
+_CPLAYER_GETPLAYNEXT_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetPlayNext_Response',
+  full_name='CPlayer_GetPlayNext_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='last_update_time', full_name='CPlayer_GetPlayNext_Response.last_update_time', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appids', full_name='CPlayer_GetPlayNext_Response.appids', index=1,
+      number=2, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1304,
+  serialized_end=1376,
+)
+
+
 _CPLAYER_GETFRIENDSGAMEPLAYINFO_REQUEST = _descriptor.Descriptor(
   name='CPlayer_GetFriendsGameplayInfo_Request',
   full_name='CPlayer_GetFriendsGameplayInfo_Request',
@@ -180,8 +446,8 @@ _CPLAYER_GETFRIENDSGAMEPLAYINFO_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=355,
-  serialized_end=410,
+  serialized_start=1378,
+  serialized_end=1433,
 )
 
 
@@ -225,8 +491,8 @@ _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE_FRIENDSGAMEPLAYINFO = _descriptor.Descr
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=941,
-  serialized_end=1035,
+  serialized_start=1964,
+  serialized_end=2058,
 )
 
 _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE_OWNGAMEPLAYINFO = _descriptor.Descriptor(
@@ -283,8 +549,8 @@ _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE_OWNGAMEPLAYINFO = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1037,
-  serialized_end=1163,
+  serialized_start=2060,
+  serialized_end=2186,
 )
 
 _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE = _descriptor.Descriptor(
@@ -348,8 +614,8 @@ _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=413,
-  serialized_end=1163,
+  serialized_start=1436,
+  serialized_end=2186,
 )
 
 
@@ -386,8 +652,8 @@ _CPLAYER_GETFRIENDSAPPSACTIVITY_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1166,
-  serialized_end=1429,
+  serialized_start=2189,
+  serialized_end=2452,
 )
 
 
@@ -445,8 +711,8 @@ _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE_FRIENDPLAYTIME = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2993,
-  serialized_end=3521,
+  serialized_start=4016,
+  serialized_end=4544,
 )
 
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE_APPFRIENDSINFO = _descriptor.Descriptor(
@@ -489,8 +755,8 @@ _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE_APPFRIENDSINFO = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3524,
-  serialized_end=3899,
+  serialized_start=4547,
+  serialized_end=4922,
 )
 
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE = _descriptor.Descriptor(
@@ -575,8 +841,8 @@ _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1432,
-  serialized_end=3899,
+  serialized_start=2455,
+  serialized_end=4922,
 )
 
 
@@ -606,8 +872,8 @@ _CPLAYER_GETGAMEBADGELEVELS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3901,
-  serialized_end=3952,
+  serialized_start=4924,
+  serialized_end=4975,
 )
 
 
@@ -651,8 +917,8 @@ _CPLAYER_GETGAMEBADGELEVELS_RESPONSE_BADGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4076,
-  serialized_end=4136,
+  serialized_start=5099,
+  serialized_end=5159,
 )
 
 _CPLAYER_GETGAMEBADGELEVELS_RESPONSE = _descriptor.Descriptor(
@@ -688,8 +954,861 @@ _CPLAYER_GETGAMEBADGELEVELS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3955,
-  serialized_end=4136,
+  serialized_start=4978,
+  serialized_end=5159,
+)
+
+
+_CPLAYER_GETPROFILEBACKGROUND_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetProfileBackground_Request',
+  full_name='CPlayer_GetProfileBackground_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CPlayer_GetProfileBackground_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035The player we\'re asking about'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CPlayer_GetProfileBackground_Request.language', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5161,
+  serialized_end=5269,
+)
+
+
+_PROFILEITEM = _descriptor.Descriptor(
+  name='ProfileItem',
+  full_name='ProfileItem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='communityitemid', full_name='ProfileItem.communityitemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='image_small', full_name='ProfileItem.image_small', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030)small image used in backpack or selection'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='image_large', full_name='ProfileItem.image_large', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\020the image itself'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='ProfileItem.name', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\014english name'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='item_title', full_name='ProfileItem.item_title', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\017localized title'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='item_description', full_name='ProfileItem.item_description', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\025localized description'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='ProfileItem.appid', index=6,
+      number=7, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='item_type', full_name='ProfileItem.item_type', index=7,
+      number=8, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='item_class', full_name='ProfileItem.item_class', index=8,
+      number=9, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='movie_webm', full_name='ProfileItem.movie_webm', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\023URL to webm, if any'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='movie_mp4', full_name='ProfileItem.movie_mp4', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\022URL to mp4, if any'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='equipped_flags', full_name='ProfileItem.equipped_flags', index=11,
+      number=12, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030:Special flags set when equipped (EProfileItemEquippedFlag)'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5272,
+  serialized_end=5777,
+)
+
+
+_CPLAYER_GETPROFILEBACKGROUND_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetProfileBackground_Response',
+  full_name='CPlayer_GetProfileBackground_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='profile_background', full_name='CPlayer_GetProfileBackground_Response.profile_background', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5779,
+  serialized_end=5860,
+)
+
+
+_CPLAYER_SETPROFILEBACKGROUND_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_SetProfileBackground_Request',
+  full_name='CPlayer_SetProfileBackground_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='communityitemid', full_name='CPlayer_SetProfileBackground_Request.communityitemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5862,
+  serialized_end=5925,
+)
+
+
+_CPLAYER_SETPROFILEBACKGROUND_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_SetProfileBackground_Response',
+  full_name='CPlayer_SetProfileBackground_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5927,
+  serialized_end=5966,
+)
+
+
+_CPLAYER_GETMINIPROFILEBACKGROUND_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetMiniProfileBackground_Request',
+  full_name='CPlayer_GetMiniProfileBackground_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CPlayer_GetMiniProfileBackground_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035The player we\'re asking about'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CPlayer_GetMiniProfileBackground_Request.language', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5968,
+  serialized_end=6080,
+)
+
+
+_CPLAYER_GETMINIPROFILEBACKGROUND_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetMiniProfileBackground_Response',
+  full_name='CPlayer_GetMiniProfileBackground_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='profile_background', full_name='CPlayer_GetMiniProfileBackground_Response.profile_background', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6082,
+  serialized_end=6167,
+)
+
+
+_CPLAYER_SETMINIPROFILEBACKGROUND_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_SetMiniProfileBackground_Request',
+  full_name='CPlayer_SetMiniProfileBackground_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='communityitemid', full_name='CPlayer_SetMiniProfileBackground_Request.communityitemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6169,
+  serialized_end=6236,
+)
+
+
+_CPLAYER_SETMINIPROFILEBACKGROUND_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_SetMiniProfileBackground_Response',
+  full_name='CPlayer_SetMiniProfileBackground_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6238,
+  serialized_end=6281,
+)
+
+
+_CPLAYER_GETAVATARFRAME_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetAvatarFrame_Request',
+  full_name='CPlayer_GetAvatarFrame_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CPlayer_GetAvatarFrame_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035The player we\'re asking about'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CPlayer_GetAvatarFrame_Request.language', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6283,
+  serialized_end=6385,
+)
+
+
+_CPLAYER_GETAVATARFRAME_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetAvatarFrame_Response',
+  full_name='CPlayer_GetAvatarFrame_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='avatar_frame', full_name='CPlayer_GetAvatarFrame_Response.avatar_frame', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6387,
+  serialized_end=6456,
+)
+
+
+_CPLAYER_SETAVATARFRAME_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_SetAvatarFrame_Request',
+  full_name='CPlayer_SetAvatarFrame_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='communityitemid', full_name='CPlayer_SetAvatarFrame_Request.communityitemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6458,
+  serialized_end=6515,
+)
+
+
+_CPLAYER_SETAVATARFRAME_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_SetAvatarFrame_Response',
+  full_name='CPlayer_SetAvatarFrame_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6517,
+  serialized_end=6550,
+)
+
+
+_CPLAYER_GETANIMATEDAVATAR_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetAnimatedAvatar_Request',
+  full_name='CPlayer_GetAnimatedAvatar_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CPlayer_GetAnimatedAvatar_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035The player we\'re asking about'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CPlayer_GetAnimatedAvatar_Request.language', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6552,
+  serialized_end=6657,
+)
+
+
+_CPLAYER_GETANIMATEDAVATAR_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetAnimatedAvatar_Response',
+  full_name='CPlayer_GetAnimatedAvatar_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='avatar', full_name='CPlayer_GetAnimatedAvatar_Response.avatar', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6659,
+  serialized_end=6725,
+)
+
+
+_CPLAYER_SETANIMATEDAVATAR_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_SetAnimatedAvatar_Request',
+  full_name='CPlayer_SetAnimatedAvatar_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='communityitemid', full_name='CPlayer_SetAnimatedAvatar_Request.communityitemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6727,
+  serialized_end=6787,
+)
+
+
+_CPLAYER_SETANIMATEDAVATAR_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_SetAnimatedAvatar_Response',
+  full_name='CPlayer_SetAnimatedAvatar_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6789,
+  serialized_end=6825,
+)
+
+
+_CPLAYER_GETPROFILEITEMSOWNED_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetProfileItemsOwned_Request',
+  full_name='CPlayer_GetProfileItemsOwned_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CPlayer_GetProfileItemsOwned_Request.language', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6827,
+  serialized_end=6883,
+)
+
+
+_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetProfileItemsOwned_Response',
+  full_name='CPlayer_GetProfileItemsOwned_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='profile_backgrounds', full_name='CPlayer_GetProfileItemsOwned_Response.profile_backgrounds', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mini_profile_backgrounds', full_name='CPlayer_GetProfileItemsOwned_Response.mini_profile_backgrounds', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='avatar_frames', full_name='CPlayer_GetProfileItemsOwned_Response.avatar_frames', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='animated_avatars', full_name='CPlayer_GetProfileItemsOwned_Response.animated_avatars', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='profile_modifiers', full_name='CPlayer_GetProfileItemsOwned_Response.profile_modifiers', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6886,
+  serialized_end=7134,
+)
+
+
+_CPLAYER_GETPROFILEITEMSEQUIPPED_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_GetProfileItemsEquipped_Request',
+  full_name='CPlayer_GetProfileItemsEquipped_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CPlayer_GetProfileItemsEquipped_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CPlayer_GetProfileItemsEquipped_Request.language', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7136,
+  serialized_end=7212,
+)
+
+
+_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_GetProfileItemsEquipped_Response',
+  full_name='CPlayer_GetProfileItemsEquipped_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='profile_background', full_name='CPlayer_GetProfileItemsEquipped_Response.profile_background', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mini_profile_background', full_name='CPlayer_GetProfileItemsEquipped_Response.mini_profile_background', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='avatar_frame', full_name='CPlayer_GetProfileItemsEquipped_Response.avatar_frame', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='animated_avatar', full_name='CPlayer_GetProfileItemsEquipped_Response.animated_avatar', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='profile_modifier', full_name='CPlayer_GetProfileItemsEquipped_Response.profile_modifier', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7215,
+  serialized_end=7461,
+)
+
+
+_CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_REQUEST = _descriptor.Descriptor(
+  name='CPlayer_SetEquippedProfileItemFlags_Request',
+  full_name='CPlayer_SetEquippedProfileItemFlags_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='communityitemid', full_name='CPlayer_SetEquippedProfileItemFlags_Request.communityitemid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='flags', full_name='CPlayer_SetEquippedProfileItemFlags_Request.flags', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\037Set of EProfileItemEquippedFlag'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7463,
+  serialized_end=7585,
+)
+
+
+_CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_RESPONSE = _descriptor.Descriptor(
+  name='CPlayer_SetEquippedProfileItemFlags_Response',
+  full_name='CPlayer_SetEquippedProfileItemFlags_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7587,
+  serialized_end=7633,
 )
 
 
@@ -712,8 +1831,8 @@ _CPLAYER_GETEMOTICONLIST_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4138,
-  serialized_end=4171,
+  serialized_start=7635,
+  serialized_end=7668,
 )
 
 
@@ -771,8 +1890,8 @@ _CPLAYER_GETEMOTICONLIST_RESPONSE_EMOTICON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4273,
-  serialized_end=4378,
+  serialized_start=7770,
+  serialized_end=7875,
 )
 
 _CPLAYER_GETEMOTICONLIST_RESPONSE = _descriptor.Descriptor(
@@ -801,8 +1920,8 @@ _CPLAYER_GETEMOTICONLIST_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4174,
-  serialized_end=4378,
+  serialized_start=7671,
+  serialized_end=7875,
 )
 
 
@@ -846,8 +1965,8 @@ _CPLAYER_GETACHIEVEMENTSPROGRESS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4380,
-  serialized_end=4472,
+  serialized_start=7877,
+  serialized_end=7969,
 )
 
 
@@ -912,8 +2031,8 @@ _CPLAYER_GETACHIEVEMENTSPROGRESS_RESPONSE_ACHIEVEMENTPROGRESS = _descriptor.Desc
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4613,
-  serialized_end=4744,
+  serialized_start=8110,
+  serialized_end=8241,
 )
 
 _CPLAYER_GETACHIEVEMENTSPROGRESS_RESPONSE = _descriptor.Descriptor(
@@ -942,8 +2061,8 @@ _CPLAYER_GETACHIEVEMENTSPROGRESS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4475,
-  serialized_end=4744,
+  serialized_start=7972,
+  serialized_end=8241,
 )
 
 
@@ -980,8 +2099,8 @@ _CPLAYER_POSTSTATUSTOFRIENDS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4746,
-  serialized_end=4819,
+  serialized_start=8243,
+  serialized_end=8316,
 )
 
 
@@ -1004,8 +2123,8 @@ _CPLAYER_POSTSTATUSTOFRIENDS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4821,
-  serialized_end=4859,
+  serialized_start=8318,
+  serialized_end=8356,
 )
 
 
@@ -1042,8 +2161,8 @@ _CPLAYER_GETPOSTEDSTATUS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4861,
-  serialized_end=4962,
+  serialized_start=8358,
+  serialized_end=8459,
 )
 
 
@@ -1101,8 +2220,8 @@ _CPLAYER_GETPOSTEDSTATUS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4964,
-  serialized_end=5086,
+  serialized_start=8461,
+  serialized_end=8583,
 )
 
 
@@ -1132,8 +2251,8 @@ _CPLAYER_DELETEPOSTEDSTATUS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5088,
-  serialized_end=5140,
+  serialized_start=8585,
+  serialized_end=8637,
 )
 
 
@@ -1156,8 +2275,8 @@ _CPLAYER_DELETEPOSTEDSTATUS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5142,
-  serialized_end=5179,
+  serialized_start=8639,
+  serialized_end=8676,
 )
 
 
@@ -1187,8 +2306,8 @@ _CPLAYER_GETLASTPLAYEDTIMES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5182,
-  serialized_end=5312,
+  serialized_start=8679,
+  serialized_end=8809,
 )
 
 
@@ -1309,8 +2428,8 @@ _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE_GAME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5413,
-  serialized_end=5805,
+  serialized_start=8910,
+  serialized_end=9302,
 )
 
 _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE = _descriptor.Descriptor(
@@ -1339,8 +2458,8 @@ _CPLAYER_GETLASTPLAYEDTIMES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5315,
-  serialized_end=5805,
+  serialized_start=8812,
+  serialized_end=9302,
 )
 
 
@@ -1363,8 +2482,8 @@ _CPLAYER_ACCEPTSSA_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5807,
-  serialized_end=5834,
+  serialized_start=9304,
+  serialized_end=9331,
 )
 
 
@@ -1387,8 +2506,8 @@ _CPLAYER_ACCEPTSSA_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5836,
-  serialized_end=5864,
+  serialized_start=9333,
+  serialized_end=9361,
 )
 
 
@@ -1411,8 +2530,8 @@ _CPLAYER_GETNICKNAMELIST_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5866,
-  serialized_end=5899,
+  serialized_start=9363,
+  serialized_end=9396,
 )
 
 
@@ -1449,8 +2568,8 @@ _CPLAYER_GETNICKNAMELIST_RESPONSE_PLAYERNICKNAME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6007,
-  serialized_end=6060,
+  serialized_start=9504,
+  serialized_end=9557,
 )
 
 _CPLAYER_GETNICKNAMELIST_RESPONSE = _descriptor.Descriptor(
@@ -1479,8 +2598,8 @@ _CPLAYER_GETNICKNAMELIST_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5902,
-  serialized_end=6060,
+  serialized_start=9399,
+  serialized_end=9557,
 )
 
 
@@ -1503,8 +2622,8 @@ _CPLAYER_GETPERFRIENDPREFERENCES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6062,
-  serialized_end=6103,
+  serialized_start=9559,
+  serialized_end=9600,
 )
 
 
@@ -1590,8 +2709,8 @@ _PERFRIENDPREFERENCES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6106,
-  serialized_end=6827,
+  serialized_start=9603,
+  serialized_end=10324,
 )
 
 
@@ -1621,8 +2740,8 @@ _CPLAYER_GETPERFRIENDPREFERENCES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6829,
-  serialized_end=6915,
+  serialized_start=10326,
+  serialized_end=10412,
 )
 
 
@@ -1652,8 +2771,8 @@ _CPLAYER_SETPERFRIENDPREFERENCES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6917,
-  serialized_end=7002,
+  serialized_start=10414,
+  serialized_end=10499,
 )
 
 
@@ -1676,8 +2795,8 @@ _CPLAYER_SETPERFRIENDPREFERENCES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7004,
-  serialized_end=7046,
+  serialized_start=10501,
+  serialized_end=10543,
 )
 
 
@@ -1707,8 +2826,8 @@ _CPLAYER_ADDFRIEND_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7048,
-  serialized_end=7147,
+  serialized_start=10545,
+  serialized_end=10644,
 )
 
 
@@ -1752,8 +2871,8 @@ _CPLAYER_ADDFRIEND_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7150,
-  serialized_end=7412,
+  serialized_start=10647,
+  serialized_end=10909,
 )
 
 
@@ -1783,8 +2902,8 @@ _CPLAYER_REMOVEFRIEND_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7414,
-  serialized_end=7496,
+  serialized_start=10911,
+  serialized_end=10993,
 )
 
 
@@ -1814,8 +2933,8 @@ _CPLAYER_REMOVEFRIEND_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7498,
-  serialized_end=7590,
+  serialized_start=10995,
+  serialized_end=11087,
 )
 
 
@@ -1852,8 +2971,8 @@ _CPLAYER_IGNOREFRIEND_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7592,
-  serialized_end=7719,
+  serialized_start=11089,
+  serialized_end=11216,
 )
 
 
@@ -1883,8 +3002,8 @@ _CPLAYER_IGNOREFRIEND_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7721,
-  serialized_end=7813,
+  serialized_start=11218,
+  serialized_end=11310,
 )
 
 
@@ -1907,8 +3026,8 @@ _CPLAYER_GETCOMMUNITYPREFERENCES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7815,
-  serialized_end=7856,
+  serialized_start=11312,
+  serialized_end=11353,
 )
 
 
@@ -1959,8 +3078,8 @@ _CPLAYER_COMMUNITYPREFERENCES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7859,
-  serialized_end=8036,
+  serialized_start=11356,
+  serialized_end=11533,
 )
 
 
@@ -1990,8 +3109,8 @@ _CPLAYER_GETCOMMUNITYPREFERENCES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8038,
-  serialized_end=8132,
+  serialized_start=11535,
+  serialized_end=11629,
 )
 
 
@@ -2021,8 +3140,8 @@ _CPLAYER_SETCOMMUNITYPREFERENCES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8134,
-  serialized_end=8227,
+  serialized_start=11631,
+  serialized_end=11724,
 )
 
 
@@ -2045,8 +3164,8 @@ _CPLAYER_SETCOMMUNITYPREFERENCES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8229,
-  serialized_end=8271,
+  serialized_start=11726,
+  serialized_end=11768,
 )
 
 
@@ -2076,8 +3195,8 @@ _CPLAYER_GETNEWSTEAMANNOUNCEMENTSTATE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8273,
-  serialized_end=8337,
+  serialized_start=11770,
+  serialized_end=11834,
 )
 
 
@@ -2135,8 +3254,8 @@ _CPLAYER_GETNEWSTEAMANNOUNCEMENTSTATE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8340,
-  serialized_end=8506,
+  serialized_start=11837,
+  serialized_end=12003,
 )
 
 
@@ -2173,8 +3292,8 @@ _CPLAYER_UPDATESTEAMANNOUNCEMENTLASTREAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8508,
-  serialized_end=8604,
+  serialized_start=12005,
+  serialized_end=12101,
 )
 
 
@@ -2197,8 +3316,8 @@ _CPLAYER_UPDATESTEAMANNOUNCEMENTLASTREAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8606,
-  serialized_end=8656,
+  serialized_start=12103,
+  serialized_end=12153,
 )
 
 
@@ -2221,8 +3340,8 @@ _CPLAYER_GETPRIVACYSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8658,
-  serialized_end=8694,
+  serialized_start=12155,
+  serialized_end=12191,
 )
 
 
@@ -2287,8 +3406,8 @@ _CPRIVACYSETTINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8697,
-  serialized_end=8901,
+  serialized_start=12194,
+  serialized_end=12398,
 )
 
 
@@ -2318,8 +3437,8 @@ _CPLAYER_GETPRIVACYSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8903,
-  serialized_end=8985,
+  serialized_start=12400,
+  serialized_end=12482,
 )
 
 
@@ -2349,8 +3468,8 @@ _CPLAYER_GETDURATIONCONTROL_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8987,
-  serialized_end=9038,
+  serialized_start=12484,
+  serialized_end=12535,
 )
 
 
@@ -2396,6 +3515,13 @@ _CPLAYER_GETDURATIONCONTROL_RESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='seconds_allowed_today', full_name='CPlayer_GetDurationControl_Response.seconds_allowed_today', index=5,
+      number=6, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -2408,8 +3534,8 @@ _CPLAYER_GETDURATIONCONTROL_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9041,
-  serialized_end=9194,
+  serialized_start=12538,
+  serialized_end=12722,
 )
 
 
@@ -2439,8 +3565,8 @@ _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9196,
-  serialized_end=9292,
+  serialized_start=12724,
+  serialized_end=12820,
 )
 
 
@@ -2484,8 +3610,39 @@ _CPLAYER_FRIENDNICKNAMECHANGED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9294,
-  serialized_end=9400,
+  serialized_start=12822,
+  serialized_end=12928,
+)
+
+
+_CPLAYER_FRIENDEQUIPPEDPROFILEITEMSCHANGED_NOTIFICATION = _descriptor.Descriptor(
+  name='CPlayer_FriendEquippedProfileItemsChanged_Notification',
+  full_name='CPlayer_FriendEquippedProfileItemsChanged_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='accountid', full_name='CPlayer_FriendEquippedProfileItemsChanged_Notification.accountid', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12930,
+  serialized_end=13005,
 )
 
 
@@ -2543,8 +3700,8 @@ _CPLAYER_NEWSTEAMANNOUNCEMENTSTATE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9403,
-  serialized_end=9570,
+  serialized_start=13008,
+  serialized_end=13175,
 )
 
 
@@ -2574,8 +3731,8 @@ _CPLAYER_COMMUNITYPREFERENCESCHANGED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9572,
-  serialized_end=9674,
+  serialized_start=13177,
+  serialized_end=13279,
 )
 
 
@@ -2612,8 +3769,8 @@ _CPLAYER_PERFRIENDPREFERENCESCHANGED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9676,
-  serialized_end=9789,
+  serialized_start=13281,
+  serialized_end=13394,
 )
 
 
@@ -2643,11 +3800,13 @@ _CPLAYER_PRIVACYSETTINGSCHANGED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9791,
-  serialized_end=9881,
+  serialized_start=13396,
+  serialized_end=13486,
 )
 
 _CPLAYER_GETMUTUALFRIENDSFORINCOMINGINVITES_RESPONSE.fields_by_name['incoming_invite_mutual_friends_lists'].message_type = _CPLAYER_INCOMINGINVITEMUTUALFRIENDLIST
+_CPLAYER_GETOWNEDGAMES_RESPONSE_GAME.containing_type = _CPLAYER_GETOWNEDGAMES_RESPONSE
+_CPLAYER_GETOWNEDGAMES_RESPONSE.fields_by_name['games'].message_type = _CPLAYER_GETOWNEDGAMES_RESPONSE_GAME
 _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE_FRIENDSGAMEPLAYINFO.containing_type = _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE
 _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE_OWNGAMEPLAYINFO.containing_type = _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE
 _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE.fields_by_name['your_info'].message_type = _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE_OWNGAMEPLAYINFO
@@ -2669,6 +3828,20 @@ _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE.fields_by_name['new_to_group'].message_
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE.fields_by_name['returned_to_group'].message_type = _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE_APPFRIENDSINFO
 _CPLAYER_GETGAMEBADGELEVELS_RESPONSE_BADGE.containing_type = _CPLAYER_GETGAMEBADGELEVELS_RESPONSE
 _CPLAYER_GETGAMEBADGELEVELS_RESPONSE.fields_by_name['badges'].message_type = _CPLAYER_GETGAMEBADGELEVELS_RESPONSE_BADGE
+_CPLAYER_GETPROFILEBACKGROUND_RESPONSE.fields_by_name['profile_background'].message_type = _PROFILEITEM
+_CPLAYER_GETMINIPROFILEBACKGROUND_RESPONSE.fields_by_name['profile_background'].message_type = _PROFILEITEM
+_CPLAYER_GETAVATARFRAME_RESPONSE.fields_by_name['avatar_frame'].message_type = _PROFILEITEM
+_CPLAYER_GETANIMATEDAVATAR_RESPONSE.fields_by_name['avatar'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE.fields_by_name['profile_backgrounds'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE.fields_by_name['mini_profile_backgrounds'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE.fields_by_name['avatar_frames'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE.fields_by_name['animated_avatars'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE.fields_by_name['profile_modifiers'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE.fields_by_name['profile_background'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE.fields_by_name['mini_profile_background'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE.fields_by_name['avatar_frame'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE.fields_by_name['animated_avatar'].message_type = _PROFILEITEM
+_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE.fields_by_name['profile_modifier'].message_type = _PROFILEITEM
 _CPLAYER_GETEMOTICONLIST_RESPONSE_EMOTICON.containing_type = _CPLAYER_GETEMOTICONLIST_RESPONSE
 _CPLAYER_GETEMOTICONLIST_RESPONSE.fields_by_name['emoticons'].message_type = _CPLAYER_GETEMOTICONLIST_RESPONSE_EMOTICON
 _CPLAYER_GETACHIEVEMENTSPROGRESS_RESPONSE_ACHIEVEMENTPROGRESS.containing_type = _CPLAYER_GETACHIEVEMENTSPROGRESS_RESPONSE
@@ -2696,12 +3869,39 @@ _CPLAYER_PRIVACYSETTINGSCHANGED_NOTIFICATION.fields_by_name['privacy_settings'].
 DESCRIPTOR.message_types_by_name['CPlayer_GetMutualFriendsForIncomingInvites_Request'] = _CPLAYER_GETMUTUALFRIENDSFORINCOMINGINVITES_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_IncomingInviteMutualFriendList'] = _CPLAYER_INCOMINGINVITEMUTUALFRIENDLIST
 DESCRIPTOR.message_types_by_name['CPlayer_GetMutualFriendsForIncomingInvites_Response'] = _CPLAYER_GETMUTUALFRIENDSFORINCOMINGINVITES_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetOwnedGames_Request'] = _CPLAYER_GETOWNEDGAMES_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetOwnedGames_Response'] = _CPLAYER_GETOWNEDGAMES_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetPlayNext_Request'] = _CPLAYER_GETPLAYNEXT_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetPlayNext_Response'] = _CPLAYER_GETPLAYNEXT_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_GetFriendsGameplayInfo_Request'] = _CPLAYER_GETFRIENDSGAMEPLAYINFO_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_GetFriendsGameplayInfo_Response'] = _CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_GetFriendsAppsActivity_Request'] = _CPLAYER_GETFRIENDSAPPSACTIVITY_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_GetFriendsAppsActivity_Response'] = _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_GetGameBadgeLevels_Request'] = _CPLAYER_GETGAMEBADGELEVELS_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_GetGameBadgeLevels_Response'] = _CPLAYER_GETGAMEBADGELEVELS_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetProfileBackground_Request'] = _CPLAYER_GETPROFILEBACKGROUND_REQUEST
+DESCRIPTOR.message_types_by_name['ProfileItem'] = _PROFILEITEM
+DESCRIPTOR.message_types_by_name['CPlayer_GetProfileBackground_Response'] = _CPLAYER_GETPROFILEBACKGROUND_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_SetProfileBackground_Request'] = _CPLAYER_SETPROFILEBACKGROUND_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_SetProfileBackground_Response'] = _CPLAYER_SETPROFILEBACKGROUND_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetMiniProfileBackground_Request'] = _CPLAYER_GETMINIPROFILEBACKGROUND_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetMiniProfileBackground_Response'] = _CPLAYER_GETMINIPROFILEBACKGROUND_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_SetMiniProfileBackground_Request'] = _CPLAYER_SETMINIPROFILEBACKGROUND_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_SetMiniProfileBackground_Response'] = _CPLAYER_SETMINIPROFILEBACKGROUND_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetAvatarFrame_Request'] = _CPLAYER_GETAVATARFRAME_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetAvatarFrame_Response'] = _CPLAYER_GETAVATARFRAME_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_SetAvatarFrame_Request'] = _CPLAYER_SETAVATARFRAME_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_SetAvatarFrame_Response'] = _CPLAYER_SETAVATARFRAME_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetAnimatedAvatar_Request'] = _CPLAYER_GETANIMATEDAVATAR_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetAnimatedAvatar_Response'] = _CPLAYER_GETANIMATEDAVATAR_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_SetAnimatedAvatar_Request'] = _CPLAYER_SETANIMATEDAVATAR_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_SetAnimatedAvatar_Response'] = _CPLAYER_SETANIMATEDAVATAR_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetProfileItemsOwned_Request'] = _CPLAYER_GETPROFILEITEMSOWNED_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetProfileItemsOwned_Response'] = _CPLAYER_GETPROFILEITEMSOWNED_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_GetProfileItemsEquipped_Request'] = _CPLAYER_GETPROFILEITEMSEQUIPPED_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_GetProfileItemsEquipped_Response'] = _CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE
+DESCRIPTOR.message_types_by_name['CPlayer_SetEquippedProfileItemFlags_Request'] = _CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_REQUEST
+DESCRIPTOR.message_types_by_name['CPlayer_SetEquippedProfileItemFlags_Response'] = _CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_GetEmoticonList_Request'] = _CPLAYER_GETEMOTICONLIST_REQUEST
 DESCRIPTOR.message_types_by_name['CPlayer_GetEmoticonList_Response'] = _CPLAYER_GETEMOTICONLIST_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_GetAchievementsProgress_Request'] = _CPLAYER_GETACHIEVEMENTSPROGRESS_REQUEST
@@ -2745,6 +3945,7 @@ DESCRIPTOR.message_types_by_name['CPlayer_GetDurationControl_Request'] = _CPLAYE
 DESCRIPTOR.message_types_by_name['CPlayer_GetDurationControl_Response'] = _CPLAYER_GETDURATIONCONTROL_RESPONSE
 DESCRIPTOR.message_types_by_name['CPlayer_LastPlayedTimes_Notification'] = _CPLAYER_LASTPLAYEDTIMES_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CPlayer_FriendNicknameChanged_Notification'] = _CPLAYER_FRIENDNICKNAMECHANGED_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CPlayer_FriendEquippedProfileItemsChanged_Notification'] = _CPLAYER_FRIENDEQUIPPEDPROFILEITEMSCHANGED_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CPlayer_NewSteamAnnouncementState_Notification'] = _CPLAYER_NEWSTEAMANNOUNCEMENTSTATE_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CPlayer_CommunityPreferencesChanged_Notification'] = _CPLAYER_COMMUNITYPREFERENCESCHANGED_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CPlayer_PerFriendPreferencesChanged_Notification'] = _CPLAYER_PERFRIENDPREFERENCESCHANGED_NOTIFICATION
@@ -2772,6 +3973,42 @@ CPlayer_GetMutualFriendsForIncomingInvites_Response = _reflection.GeneratedProto
   # @@protoc_insertion_point(class_scope:CPlayer_GetMutualFriendsForIncomingInvites_Response)
   ))
 _sym_db.RegisterMessage(CPlayer_GetMutualFriendsForIncomingInvites_Response)
+
+CPlayer_GetOwnedGames_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetOwnedGames_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETOWNEDGAMES_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetOwnedGames_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetOwnedGames_Request)
+
+CPlayer_GetOwnedGames_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetOwnedGames_Response', (_message.Message,), dict(
+
+  Game = _reflection.GeneratedProtocolMessageType('Game', (_message.Message,), dict(
+    DESCRIPTOR = _CPLAYER_GETOWNEDGAMES_RESPONSE_GAME,
+    __module__ = 'steammessages_player_pb2'
+    # @@protoc_insertion_point(class_scope:CPlayer_GetOwnedGames_Response.Game)
+    ))
+  ,
+  DESCRIPTOR = _CPLAYER_GETOWNEDGAMES_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetOwnedGames_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetOwnedGames_Response)
+_sym_db.RegisterMessage(CPlayer_GetOwnedGames_Response.Game)
+
+CPlayer_GetPlayNext_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetPlayNext_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPLAYNEXT_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetPlayNext_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetPlayNext_Request)
+
+CPlayer_GetPlayNext_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetPlayNext_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPLAYNEXT_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetPlayNext_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetPlayNext_Response)
 
 CPlayer_GetFriendsGameplayInfo_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetFriendsGameplayInfo_Request', (_message.Message,), dict(
   DESCRIPTOR = _CPLAYER_GETFRIENDSGAMEPLAYINFO_REQUEST,
@@ -2854,6 +4091,167 @@ CPlayer_GetGameBadgeLevels_Response = _reflection.GeneratedProtocolMessageType('
   ))
 _sym_db.RegisterMessage(CPlayer_GetGameBadgeLevels_Response)
 _sym_db.RegisterMessage(CPlayer_GetGameBadgeLevels_Response.Badge)
+
+CPlayer_GetProfileBackground_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetProfileBackground_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPROFILEBACKGROUND_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetProfileBackground_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetProfileBackground_Request)
+
+ProfileItem = _reflection.GeneratedProtocolMessageType('ProfileItem', (_message.Message,), dict(
+  DESCRIPTOR = _PROFILEITEM,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:ProfileItem)
+  ))
+_sym_db.RegisterMessage(ProfileItem)
+
+CPlayer_GetProfileBackground_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetProfileBackground_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPROFILEBACKGROUND_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetProfileBackground_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetProfileBackground_Response)
+
+CPlayer_SetProfileBackground_Request = _reflection.GeneratedProtocolMessageType('CPlayer_SetProfileBackground_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETPROFILEBACKGROUND_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetProfileBackground_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetProfileBackground_Request)
+
+CPlayer_SetProfileBackground_Response = _reflection.GeneratedProtocolMessageType('CPlayer_SetProfileBackground_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETPROFILEBACKGROUND_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetProfileBackground_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetProfileBackground_Response)
+
+CPlayer_GetMiniProfileBackground_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetMiniProfileBackground_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETMINIPROFILEBACKGROUND_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetMiniProfileBackground_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetMiniProfileBackground_Request)
+
+CPlayer_GetMiniProfileBackground_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetMiniProfileBackground_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETMINIPROFILEBACKGROUND_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetMiniProfileBackground_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetMiniProfileBackground_Response)
+
+CPlayer_SetMiniProfileBackground_Request = _reflection.GeneratedProtocolMessageType('CPlayer_SetMiniProfileBackground_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETMINIPROFILEBACKGROUND_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetMiniProfileBackground_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetMiniProfileBackground_Request)
+
+CPlayer_SetMiniProfileBackground_Response = _reflection.GeneratedProtocolMessageType('CPlayer_SetMiniProfileBackground_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETMINIPROFILEBACKGROUND_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetMiniProfileBackground_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetMiniProfileBackground_Response)
+
+CPlayer_GetAvatarFrame_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetAvatarFrame_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETAVATARFRAME_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetAvatarFrame_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetAvatarFrame_Request)
+
+CPlayer_GetAvatarFrame_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetAvatarFrame_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETAVATARFRAME_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetAvatarFrame_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetAvatarFrame_Response)
+
+CPlayer_SetAvatarFrame_Request = _reflection.GeneratedProtocolMessageType('CPlayer_SetAvatarFrame_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETAVATARFRAME_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetAvatarFrame_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetAvatarFrame_Request)
+
+CPlayer_SetAvatarFrame_Response = _reflection.GeneratedProtocolMessageType('CPlayer_SetAvatarFrame_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETAVATARFRAME_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetAvatarFrame_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetAvatarFrame_Response)
+
+CPlayer_GetAnimatedAvatar_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetAnimatedAvatar_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETANIMATEDAVATAR_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetAnimatedAvatar_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetAnimatedAvatar_Request)
+
+CPlayer_GetAnimatedAvatar_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetAnimatedAvatar_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETANIMATEDAVATAR_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetAnimatedAvatar_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetAnimatedAvatar_Response)
+
+CPlayer_SetAnimatedAvatar_Request = _reflection.GeneratedProtocolMessageType('CPlayer_SetAnimatedAvatar_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETANIMATEDAVATAR_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetAnimatedAvatar_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetAnimatedAvatar_Request)
+
+CPlayer_SetAnimatedAvatar_Response = _reflection.GeneratedProtocolMessageType('CPlayer_SetAnimatedAvatar_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETANIMATEDAVATAR_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetAnimatedAvatar_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetAnimatedAvatar_Response)
+
+CPlayer_GetProfileItemsOwned_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetProfileItemsOwned_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPROFILEITEMSOWNED_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetProfileItemsOwned_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetProfileItemsOwned_Request)
+
+CPlayer_GetProfileItemsOwned_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetProfileItemsOwned_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPROFILEITEMSOWNED_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetProfileItemsOwned_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetProfileItemsOwned_Response)
+
+CPlayer_GetProfileItemsEquipped_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetProfileItemsEquipped_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPROFILEITEMSEQUIPPED_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetProfileItemsEquipped_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetProfileItemsEquipped_Request)
+
+CPlayer_GetProfileItemsEquipped_Response = _reflection.GeneratedProtocolMessageType('CPlayer_GetProfileItemsEquipped_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_GetProfileItemsEquipped_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_GetProfileItemsEquipped_Response)
+
+CPlayer_SetEquippedProfileItemFlags_Request = _reflection.GeneratedProtocolMessageType('CPlayer_SetEquippedProfileItemFlags_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_REQUEST,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetEquippedProfileItemFlags_Request)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetEquippedProfileItemFlags_Request)
+
+CPlayer_SetEquippedProfileItemFlags_Response = _reflection.GeneratedProtocolMessageType('CPlayer_SetEquippedProfileItemFlags_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_RESPONSE,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_SetEquippedProfileItemFlags_Response)
+  ))
+_sym_db.RegisterMessage(CPlayer_SetEquippedProfileItemFlags_Response)
 
 CPlayer_GetEmoticonList_Request = _reflection.GeneratedProtocolMessageType('CPlayer_GetEmoticonList_Request', (_message.Message,), dict(
   DESCRIPTOR = _CPLAYER_GETEMOTICONLIST_REQUEST,
@@ -3188,6 +4586,13 @@ CPlayer_FriendNicknameChanged_Notification = _reflection.GeneratedProtocolMessag
   ))
 _sym_db.RegisterMessage(CPlayer_FriendNicknameChanged_Notification)
 
+CPlayer_FriendEquippedProfileItemsChanged_Notification = _reflection.GeneratedProtocolMessageType('CPlayer_FriendEquippedProfileItemsChanged_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CPLAYER_FRIENDEQUIPPEDPROFILEITEMSCHANGED_NOTIFICATION,
+  __module__ = 'steammessages_player_pb2'
+  # @@protoc_insertion_point(class_scope:CPlayer_FriendEquippedProfileItemsChanged_Notification)
+  ))
+_sym_db.RegisterMessage(CPlayer_FriendEquippedProfileItemsChanged_Notification)
+
 CPlayer_NewSteamAnnouncementState_Notification = _reflection.GeneratedProtocolMessageType('CPlayer_NewSteamAnnouncementState_Notification', (_message.Message,), dict(
   DESCRIPTOR = _CPLAYER_NEWSTEAMANNOUNCEMENTSTATE_NOTIFICATION,
   __module__ = 'steammessages_player_pb2'
@@ -3218,6 +4623,11 @@ _sym_db.RegisterMessage(CPlayer_PrivacySettingsChanged_Notification)
 
 
 DESCRIPTOR._options = None
+_CPLAYER_GETOWNEDGAMES_REQUEST.fields_by_name['steamid']._options = None
+_CPLAYER_GETOWNEDGAMES_REQUEST.fields_by_name['include_appinfo']._options = None
+_CPLAYER_GETOWNEDGAMES_REQUEST.fields_by_name['include_played_free_games']._options = None
+_CPLAYER_GETOWNEDGAMES_REQUEST.fields_by_name['appids_filter']._options = None
+_CPLAYER_GETOWNEDGAMES_REQUEST.fields_by_name['include_free_sub']._options = None
 _CPLAYER_GETFRIENDSAPPSACTIVITY_REQUEST.fields_by_name['news_language']._options = None
 _CPLAYER_GETFRIENDSAPPSACTIVITY_REQUEST.fields_by_name['request_flags']._options = None
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE_FRIENDPLAYTIME.fields_by_name['minutes_played_this_week']._options = None
@@ -3235,6 +4645,19 @@ _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE.fields_by_name['being_discussed']._opti
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE.fields_by_name['new_to_group']._options = None
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE.fields_by_name['returned_to_group']._options = None
 _CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE.fields_by_name['active_friend_count']._options = None
+_CPLAYER_GETPROFILEBACKGROUND_REQUEST.fields_by_name['steamid']._options = None
+_PROFILEITEM.fields_by_name['image_small']._options = None
+_PROFILEITEM.fields_by_name['image_large']._options = None
+_PROFILEITEM.fields_by_name['name']._options = None
+_PROFILEITEM.fields_by_name['item_title']._options = None
+_PROFILEITEM.fields_by_name['item_description']._options = None
+_PROFILEITEM.fields_by_name['movie_webm']._options = None
+_PROFILEITEM.fields_by_name['movie_mp4']._options = None
+_PROFILEITEM.fields_by_name['equipped_flags']._options = None
+_CPLAYER_GETMINIPROFILEBACKGROUND_REQUEST.fields_by_name['steamid']._options = None
+_CPLAYER_GETAVATARFRAME_REQUEST.fields_by_name['steamid']._options = None
+_CPLAYER_GETANIMATEDAVATAR_REQUEST.fields_by_name['steamid']._options = None
+_CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_REQUEST.fields_by_name['flags']._options = None
 _CPLAYER_GETPOSTEDSTATUS_REQUEST.fields_by_name['steamid']._options = None
 _CPLAYER_GETLASTPLAYEDTIMES_REQUEST.fields_by_name['min_last_played']._options = None
 _CPLAYER_ADDFRIEND_REQUEST.fields_by_name['steamid']._options = None
@@ -3251,8 +4674,8 @@ _PLAYER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030)A service for accessing Steam player data'),
-  serialized_start=10020,
-  serialized_end=13848,
+  serialized_start=13625,
+  serialized_end=19471,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetMutualFriendsForIncomingInvites',
@@ -3264,9 +4687,27 @@ _PLAYER = _descriptor.ServiceDescriptor(
     serialized_options=_b('\202\265\030ZGet me the mutual friends for each of my pending incoming invites (individuals and clans).'),
   ),
   _descriptor.MethodDescriptor(
+    name='GetOwnedGames',
+    full_name='Player.GetOwnedGames',
+    index=1,
+    containing_service=None,
+    input_type=_CPLAYER_GETOWNEDGAMES_REQUEST,
+    output_type=_CPLAYER_GETOWNEDGAMES_RESPONSE,
+    serialized_options=_b('\202\265\030*Return a list of games owned by the player'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetPlayNext',
+    full_name='Player.GetPlayNext',
+    index=2,
+    containing_service=None,
+    input_type=_CPLAYER_GETPLAYNEXT_REQUEST,
+    output_type=_CPLAYER_GETPLAYNEXT_RESPONSE,
+    serialized_options=_b('\202\265\030/Return suggested games for player to play next.'),
+  ),
+  _descriptor.MethodDescriptor(
     name='GetFriendsGameplayInfo',
     full_name='Player.GetFriendsGameplayInfo',
-    index=1,
+    index=3,
     containing_service=None,
     input_type=_CPLAYER_GETFRIENDSGAMEPLAYINFO_REQUEST,
     output_type=_CPLAYER_GETFRIENDSGAMEPLAYINFO_RESPONSE,
@@ -3275,7 +4716,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetFriendsAppsActivity',
     full_name='Player.GetFriendsAppsActivity',
-    index=2,
+    index=4,
     containing_service=None,
     input_type=_CPLAYER_GETFRIENDSAPPSACTIVITY_REQUEST,
     output_type=_CPLAYER_GETFRIENDSAPPSACTIVITY_RESPONSE,
@@ -3284,16 +4725,115 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetGameBadgeLevels',
     full_name='Player.GetGameBadgeLevels',
-    index=3,
+    index=5,
     containing_service=None,
     input_type=_CPLAYER_GETGAMEBADGELEVELS_REQUEST,
     output_type=_CPLAYER_GETGAMEBADGELEVELS_RESPONSE,
     serialized_options=_b('\202\265\030QReturns the Steam Level of a user, the Badge level for the game, and if it\'s foil'),
   ),
   _descriptor.MethodDescriptor(
+    name='GetProfileBackground',
+    full_name='Player.GetProfileBackground',
+    index=6,
+    containing_service=None,
+    input_type=_CPLAYER_GETPROFILEBACKGROUND_REQUEST,
+    output_type=_CPLAYER_GETPROFILEBACKGROUND_RESPONSE,
+    serialized_options=_b('\202\265\030;Gets which profile background is active for a specific user'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetProfileBackground',
+    full_name='Player.SetProfileBackground',
+    index=7,
+    containing_service=None,
+    input_type=_CPLAYER_SETPROFILEBACKGROUND_REQUEST,
+    output_type=_CPLAYER_SETPROFILEBACKGROUND_RESPONSE,
+    serialized_options=_b('\202\265\030\"Sets the user\'s profile background'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetMiniProfileBackground',
+    full_name='Player.GetMiniProfileBackground',
+    index=8,
+    containing_service=None,
+    input_type=_CPLAYER_GETMINIPROFILEBACKGROUND_REQUEST,
+    output_type=_CPLAYER_GETMINIPROFILEBACKGROUND_RESPONSE,
+    serialized_options=_b('\202\265\030@Gets which mini profile background is active for a specific user'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetMiniProfileBackground',
+    full_name='Player.SetMiniProfileBackground',
+    index=9,
+    containing_service=None,
+    input_type=_CPLAYER_SETMINIPROFILEBACKGROUND_REQUEST,
+    output_type=_CPLAYER_SETMINIPROFILEBACKGROUND_RESPONSE,
+    serialized_options=_b('\202\265\030\'Sets the user\'s mini profile background'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetAvatarFrame',
+    full_name='Player.GetAvatarFrame',
+    index=10,
+    containing_service=None,
+    input_type=_CPLAYER_GETAVATARFRAME_REQUEST,
+    output_type=_CPLAYER_GETAVATARFRAME_RESPONSE,
+    serialized_options=_b('\202\265\0305Gets which avatar frame is active for a specific user'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetAvatarFrame',
+    full_name='Player.SetAvatarFrame',
+    index=11,
+    containing_service=None,
+    input_type=_CPLAYER_SETAVATARFRAME_REQUEST,
+    output_type=_CPLAYER_SETAVATARFRAME_RESPONSE,
+    serialized_options=_b('\202\265\030.Sets the user\'s avatar frame for their profile'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetAnimatedAvatar',
+    full_name='Player.GetAnimatedAvatar',
+    index=12,
+    containing_service=None,
+    input_type=_CPLAYER_GETANIMATEDAVATAR_REQUEST,
+    output_type=_CPLAYER_GETANIMATEDAVATAR_RESPONSE,
+    serialized_options=_b('\202\265\0308Gets which animated avatar is active for a specific user'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetAnimatedAvatar',
+    full_name='Player.SetAnimatedAvatar',
+    index=13,
+    containing_service=None,
+    input_type=_CPLAYER_SETANIMATEDAVATAR_REQUEST,
+    output_type=_CPLAYER_SETANIMATEDAVATAR_RESPONSE,
+    serialized_options=_b('\202\265\0301Sets the user\'s animated avatar for their profile'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetProfileItemsOwned',
+    full_name='Player.GetProfileItemsOwned',
+    index=14,
+    containing_service=None,
+    input_type=_CPLAYER_GETPROFILEITEMSOWNED_REQUEST,
+    output_type=_CPLAYER_GETPROFILEITEMSOWNED_RESPONSE,
+    serialized_options=_b('\202\265\0305Returns the items the user can equip on their profile'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetProfileItemsEquipped',
+    full_name='Player.GetProfileItemsEquipped',
+    index=15,
+    containing_service=None,
+    input_type=_CPLAYER_GETPROFILEITEMSEQUIPPED_REQUEST,
+    output_type=_CPLAYER_GETPROFILEITEMSEQUIPPED_RESPONSE,
+    serialized_options=_b('\202\265\0308Returns the items the user has equipped on their profile'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetEquippedProfileItemFlags',
+    full_name='Player.SetEquippedProfileItemFlags',
+    index=16,
+    containing_service=None,
+    input_type=_CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_REQUEST,
+    output_type=_CPLAYER_SETEQUIPPEDPROFILEITEMFLAGS_RESPONSE,
+    serialized_options=_b('\202\265\030\'Sets special flags on the equipped item'),
+  ),
+  _descriptor.MethodDescriptor(
     name='GetEmoticonList',
     full_name='Player.GetEmoticonList',
-    index=4,
+    index=17,
     containing_service=None,
     input_type=_CPLAYER_GETEMOTICONLIST_REQUEST,
     output_type=_CPLAYER_GETEMOTICONLIST_RESPONSE,
@@ -3302,7 +4842,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetAchievementsProgress',
     full_name='Player.GetAchievementsProgress',
-    index=5,
+    index=18,
     containing_service=None,
     input_type=_CPLAYER_GETACHIEVEMENTSPROGRESS_REQUEST,
     output_type=_CPLAYER_GETACHIEVEMENTSPROGRESS_RESPONSE,
@@ -3311,7 +4851,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='PostStatusToFriends',
     full_name='Player.PostStatusToFriends',
-    index=6,
+    index=19,
     containing_service=None,
     input_type=_CPLAYER_POSTSTATUSTOFRIENDS_REQUEST,
     output_type=_CPLAYER_POSTSTATUSTOFRIENDS_RESPONSE,
@@ -3320,7 +4860,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetPostedStatus',
     full_name='Player.GetPostedStatus',
-    index=7,
+    index=20,
     containing_service=None,
     input_type=_CPLAYER_GETPOSTEDSTATUS_REQUEST,
     output_type=_CPLAYER_GETPOSTEDSTATUS_RESPONSE,
@@ -3329,7 +4869,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='DeletePostedStatus',
     full_name='Player.DeletePostedStatus',
-    index=8,
+    index=21,
     containing_service=None,
     input_type=_CPLAYER_DELETEPOSTEDSTATUS_REQUEST,
     output_type=_CPLAYER_DELETEPOSTEDSTATUS_RESPONSE,
@@ -3338,7 +4878,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ClientGetLastPlayedTimes',
     full_name='Player.ClientGetLastPlayedTimes',
-    index=9,
+    index=22,
     containing_service=None,
     input_type=_CPLAYER_GETLASTPLAYEDTIMES_REQUEST,
     output_type=_CPLAYER_GETLASTPLAYEDTIMES_RESPONSE,
@@ -3347,7 +4887,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='AcceptSSA',
     full_name='Player.AcceptSSA',
-    index=10,
+    index=23,
     containing_service=None,
     input_type=_CPLAYER_ACCEPTSSA_REQUEST,
     output_type=_CPLAYER_ACCEPTSSA_RESPONSE,
@@ -3356,7 +4896,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetNicknameList',
     full_name='Player.GetNicknameList',
-    index=11,
+    index=24,
     containing_service=None,
     input_type=_CPLAYER_GETNICKNAMELIST_REQUEST,
     output_type=_CPLAYER_GETNICKNAMELIST_RESPONSE,
@@ -3365,7 +4905,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetPerFriendPreferences',
     full_name='Player.GetPerFriendPreferences',
-    index=12,
+    index=25,
     containing_service=None,
     input_type=_CPLAYER_GETPERFRIENDPREFERENCES_REQUEST,
     output_type=_CPLAYER_GETPERFRIENDPREFERENCES_RESPONSE,
@@ -3374,7 +4914,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='SetPerFriendPreferences',
     full_name='Player.SetPerFriendPreferences',
-    index=13,
+    index=26,
     containing_service=None,
     input_type=_CPLAYER_SETPERFRIENDPREFERENCES_REQUEST,
     output_type=_CPLAYER_SETPERFRIENDPREFERENCES_RESPONSE,
@@ -3383,7 +4923,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='AddFriend',
     full_name='Player.AddFriend',
-    index=14,
+    index=27,
     containing_service=None,
     input_type=_CPLAYER_ADDFRIEND_REQUEST,
     output_type=_CPLAYER_ADDFRIEND_RESPONSE,
@@ -3392,7 +4932,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='RemoveFriend',
     full_name='Player.RemoveFriend',
-    index=15,
+    index=28,
     containing_service=None,
     input_type=_CPLAYER_REMOVEFRIEND_REQUEST,
     output_type=_CPLAYER_REMOVEFRIEND_RESPONSE,
@@ -3401,7 +4941,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='IgnoreFriend',
     full_name='Player.IgnoreFriend',
-    index=16,
+    index=29,
     containing_service=None,
     input_type=_CPLAYER_IGNOREFRIEND_REQUEST,
     output_type=_CPLAYER_IGNOREFRIEND_RESPONSE,
@@ -3410,7 +4950,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetCommunityPreferences',
     full_name='Player.GetCommunityPreferences',
-    index=17,
+    index=30,
     containing_service=None,
     input_type=_CPLAYER_GETCOMMUNITYPREFERENCES_REQUEST,
     output_type=_CPLAYER_GETCOMMUNITYPREFERENCES_RESPONSE,
@@ -3419,7 +4959,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='SetCommunityPreferences',
     full_name='Player.SetCommunityPreferences',
-    index=18,
+    index=31,
     containing_service=None,
     input_type=_CPLAYER_SETCOMMUNITYPREFERENCES_REQUEST,
     output_type=_CPLAYER_SETCOMMUNITYPREFERENCES_RESPONSE,
@@ -3428,7 +4968,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetNewSteamAnnouncementState',
     full_name='Player.GetNewSteamAnnouncementState',
-    index=19,
+    index=32,
     containing_service=None,
     input_type=_CPLAYER_GETNEWSTEAMANNOUNCEMENTSTATE_REQUEST,
     output_type=_CPLAYER_GETNEWSTEAMANNOUNCEMENTSTATE_RESPONSE,
@@ -3437,7 +4977,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='UpdateSteamAnnouncementLastRead',
     full_name='Player.UpdateSteamAnnouncementLastRead',
-    index=20,
+    index=33,
     containing_service=None,
     input_type=_CPLAYER_UPDATESTEAMANNOUNCEMENTLASTREAD_REQUEST,
     output_type=_CPLAYER_UPDATESTEAMANNOUNCEMENTLASTREAD_RESPONSE,
@@ -3446,7 +4986,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetPrivacySettings',
     full_name='Player.GetPrivacySettings',
-    index=21,
+    index=34,
     containing_service=None,
     input_type=_CPLAYER_GETPRIVACYSETTINGS_REQUEST,
     output_type=_CPLAYER_GETPRIVACYSETTINGS_RESPONSE,
@@ -3455,7 +4995,7 @@ _PLAYER = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetDurationControl',
     full_name='Player.GetDurationControl',
-    index=22,
+    index=35,
     containing_service=None,
     input_type=_CPLAYER_GETDURATIONCONTROL_REQUEST,
     output_type=_CPLAYER_GETDURATIONCONTROL_RESPONSE,
@@ -3473,8 +5013,8 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=_b('\202\265\030&Steam player data client notifications\300\265\030\002'),
-  serialized_start=13851,
-  serialized_end=14910,
+  serialized_start=19474,
+  serialized_end=20739,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyLastPlayedTimes',
@@ -3495,9 +5035,18 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
     serialized_options=_b('\202\265\030GNotification from server to client that a friend\'s nickname has changed'),
   ),
   _descriptor.MethodDescriptor(
+    name='NotifyFriendEquippedProfileItemsChanged',
+    full_name='PlayerClient.NotifyFriendEquippedProfileItemsChanged',
+    index=2,
+    containing_service=None,
+    input_type=_CPLAYER_FRIENDEQUIPPEDPROFILEITEMSCHANGED_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=_b('\202\265\030VNotification from server to client that a friend\'s equipped profile items have changed'),
+  ),
+  _descriptor.MethodDescriptor(
     name='NotifyNewSteamAnnouncementState',
     full_name='PlayerClient.NotifyNewSteamAnnouncementState',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_CPLAYER_NEWSTEAMANNOUNCEMENTSTATE_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
@@ -3506,7 +5055,7 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='NotifyCommunityPreferencesChanged',
     full_name='PlayerClient.NotifyCommunityPreferencesChanged',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_CPLAYER_COMMUNITYPREFERENCESCHANGED_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
@@ -3515,7 +5064,7 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='NotifyPerFriendPreferencesChanged',
     full_name='PlayerClient.NotifyPerFriendPreferencesChanged',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_CPLAYER_PERFRIENDPREFERENCESCHANGED_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
@@ -3524,7 +5073,7 @@ _PLAYERCLIENT = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='NotifyPrivacyPrivacySettingsChanged',
     full_name='PlayerClient.NotifyPrivacyPrivacySettingsChanged',
-    index=5,
+    index=6,
     containing_service=None,
     input_type=_CPLAYER_PRIVACYSETTINGSCHANGED_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,

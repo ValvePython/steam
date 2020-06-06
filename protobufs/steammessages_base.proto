@@ -157,6 +157,7 @@ message CMsgAppRights {
 	optional bool economy_support_supervisor = 13;
 	optional bool manage_pricing = 14;
 	optional bool broadcast_live = 15;
+	optional bool view_marketing_traffic = 16;
 }
 
 message CCuratorPreferences {
@@ -244,6 +245,8 @@ message CClanEventData {
 	optional uint32 ignore_count = 22;
 	optional fixed64 forum_topic_id = 23;
 	optional uint32 rtime32_last_modified = 24;
+	optional fixed64 news_post_gid = 25;
+	optional uint32 rtime_mod_reviewed = 26;
 }
 
 message CBilling_Address {

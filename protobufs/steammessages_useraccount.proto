@@ -36,6 +36,8 @@ message CUserAccount_GetAvailableValveDiscountPromotions_Response {
 		optional int32 available_use_count = 7;
 		optional int32 promotional_discount_type = 8;
 		optional int32 loyalty_reward_id = 9;
+		optional string localized_name_token = 10;
+		optional int32 max_use_count = 11;
 	}
 
 	repeated .CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails promotions = 1;
@@ -47,6 +49,7 @@ message CUserAccount_GetAccountLinkStatus_Request {
 message CUserAccount_GetAccountLinkStatus_Response {
 	optional uint32 pwid = 1;
 	optional uint32 identity_verification = 2;
+	optional bool performed_age_verification = 3;
 }
 
 message CUserAccount_CancelLicenseForApp_Request {

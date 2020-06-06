@@ -21,6 +21,42 @@ message CPlayer_GetMutualFriendsForIncomingInvites_Response {
 	repeated .CPlayer_IncomingInviteMutualFriendList incoming_invite_mutual_friends_lists = 1;
 }
 
+message CPlayer_GetOwnedGames_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+	optional bool include_appinfo = 2 [(description) = "true if we want additional details (name, icon) about each game"];
+	optional bool include_played_free_games = 3 [(description) = "Free games are excluded by default.  If this is set, free games the user has played will be returned."];
+	repeated uint32 appids_filter = 4 [(description) = "if set, restricts result set to the passed in apps"];
+	optional bool include_free_sub = 5 [(description) = "Some games are in the free sub, which are excluded by default."];
+}
+
+message CPlayer_GetOwnedGames_Response {
+	message Game {
+		optional int32 appid = 1;
+		optional string name = 2;
+		optional int32 playtime_2weeks = 3;
+		optional int32 playtime_forever = 4;
+		optional string img_icon_url = 5;
+		optional string img_logo_url = 6;
+		optional bool has_community_visible_stats = 7;
+		optional int32 playtime_windows_forever = 8;
+		optional int32 playtime_mac_forever = 9;
+		optional int32 playtime_linux_forever = 10;
+	}
+
+	optional uint32 game_count = 1;
+	repeated .CPlayer_GetOwnedGames_Response.Game games = 2;
+}
+
+message CPlayer_GetPlayNext_Request {
+	optional uint32 max_age_seconds = 1;
+	repeated uint32 ignore_appids = 2;
+}
+
+message CPlayer_GetPlayNext_Response {
+	optional uint32 last_update_time = 1;
+	repeated uint32 appids = 2;
+}
+
 message CPlayer_GetFriendsGameplayInfo_Request {
 	optional uint32 appid = 1;
 }
@@ -92,6 +128,118 @@ message CPlayer_GetGameBadgeLevels_Response {
 
 	optional uint32 player_level = 1;
 	repeated .CPlayer_GetGameBadgeLevels_Response.Badge badges = 2;
+}
+
+message CPlayer_GetProfileBackground_Request {
+	optional fixed64 steamid = 1 [(description) = "The player we're asking about"];
+	optional string language = 2;
+}
+
+message ProfileItem {
+	optional uint64 communityitemid = 1;
+	optional string image_small = 2 [(description) = "small image used in backpack or selection"];
+	optional string image_large = 3 [(description) = "the image itself"];
+	optional string name = 4 [(description) = "english name"];
+	optional string item_title = 5 [(description) = "localized title"];
+	optional string item_description = 6 [(description) = "localized description"];
+	optional uint32 appid = 7;
+	optional uint32 item_type = 8;
+	optional uint32 item_class = 9;
+	optional string movie_webm = 10 [(description) = "URL to webm, if any"];
+	optional string movie_mp4 = 11 [(description) = "URL to mp4, if any"];
+	optional uint32 equipped_flags = 12 [(description) = "Special flags set when equipped (EProfileItemEquippedFlag)"];
+}
+
+message CPlayer_GetProfileBackground_Response {
+	optional .ProfileItem profile_background = 1;
+}
+
+message CPlayer_SetProfileBackground_Request {
+	optional uint64 communityitemid = 1;
+}
+
+message CPlayer_SetProfileBackground_Response {
+}
+
+message CPlayer_GetMiniProfileBackground_Request {
+	optional fixed64 steamid = 1 [(description) = "The player we're asking about"];
+	optional string language = 2;
+}
+
+message CPlayer_GetMiniProfileBackground_Response {
+	optional .ProfileItem profile_background = 1;
+}
+
+message CPlayer_SetMiniProfileBackground_Request {
+	optional uint64 communityitemid = 1;
+}
+
+message CPlayer_SetMiniProfileBackground_Response {
+}
+
+message CPlayer_GetAvatarFrame_Request {
+	optional fixed64 steamid = 1 [(description) = "The player we're asking about"];
+	optional string language = 2;
+}
+
+message CPlayer_GetAvatarFrame_Response {
+	optional .ProfileItem avatar_frame = 1;
+}
+
+message CPlayer_SetAvatarFrame_Request {
+	optional uint64 communityitemid = 1;
+}
+
+message CPlayer_SetAvatarFrame_Response {
+}
+
+message CPlayer_GetAnimatedAvatar_Request {
+	optional fixed64 steamid = 1 [(description) = "The player we're asking about"];
+	optional string language = 2;
+}
+
+message CPlayer_GetAnimatedAvatar_Response {
+	optional .ProfileItem avatar = 1;
+}
+
+message CPlayer_SetAnimatedAvatar_Request {
+	optional uint64 communityitemid = 1;
+}
+
+message CPlayer_SetAnimatedAvatar_Response {
+}
+
+message CPlayer_GetProfileItemsOwned_Request {
+	optional string language = 1;
+}
+
+message CPlayer_GetProfileItemsOwned_Response {
+	repeated .ProfileItem profile_backgrounds = 1;
+	repeated .ProfileItem mini_profile_backgrounds = 2;
+	repeated .ProfileItem avatar_frames = 3;
+	repeated .ProfileItem animated_avatars = 4;
+	repeated .ProfileItem profile_modifiers = 5;
+}
+
+message CPlayer_GetProfileItemsEquipped_Request {
+	optional fixed64 steamid = 1;
+	optional string language = 2;
+}
+
+message CPlayer_GetProfileItemsEquipped_Response {
+	optional .ProfileItem profile_background = 1;
+	optional .ProfileItem mini_profile_background = 2;
+	optional .ProfileItem avatar_frame = 3;
+	optional .ProfileItem animated_avatar = 4;
+	optional .ProfileItem profile_modifier = 5;
+}
+
+message CPlayer_SetEquippedProfileItemFlags_Request {
+	optional uint64 communityitemid = 1;
+	optional uint32 flags = 2 [(description) = "Set of EProfileItemEquippedFlag"];
+}
+
+message CPlayer_SetEquippedProfileItemFlags_Response {
 }
 
 message CPlayer_GetEmoticonList_Request {
@@ -319,6 +467,7 @@ message CPlayer_GetDurationControl_Response {
 	optional int32 seconds_today = 3;
 	optional bool is_steamchina_account = 4;
 	optional bool is_age_verified = 5;
+	optional uint32 seconds_allowed_today = 6;
 }
 
 message CPlayer_LastPlayedTimes_Notification {
@@ -329,6 +478,10 @@ message CPlayer_FriendNicknameChanged_Notification {
 	optional fixed32 accountid = 1;
 	optional string nickname = 2;
 	optional bool is_echo_to_self = 3;
+}
+
+message CPlayer_FriendEquippedProfileItemsChanged_Notification {
+	optional fixed32 accountid = 1;
 }
 
 message CPlayer_NewSteamAnnouncementState_Notification {
@@ -359,6 +512,14 @@ service Player {
 		option (method_description) = "Get me the mutual friends for each of my pending incoming invites (individuals and clans).";
 	}
 
+	rpc GetOwnedGames (.CPlayer_GetOwnedGames_Request) returns (.CPlayer_GetOwnedGames_Response) {
+		option (method_description) = "Return a list of games owned by the player";
+	}
+
+	rpc GetPlayNext (.CPlayer_GetPlayNext_Request) returns (.CPlayer_GetPlayNext_Response) {
+		option (method_description) = "Return suggested games for player to play next.";
+	}
+
 	rpc GetFriendsGameplayInfo (.CPlayer_GetFriendsGameplayInfo_Request) returns (.CPlayer_GetFriendsGameplayInfo_Response) {
 		option (method_description) = "Get a list of friends who are playing, have played, own, or want a game";
 	}
@@ -369,6 +530,50 @@ service Player {
 
 	rpc GetGameBadgeLevels (.CPlayer_GetGameBadgeLevels_Request) returns (.CPlayer_GetGameBadgeLevels_Response) {
 		option (method_description) = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil";
+	}
+
+	rpc GetProfileBackground (.CPlayer_GetProfileBackground_Request) returns (.CPlayer_GetProfileBackground_Response) {
+		option (method_description) = "Gets which profile background is active for a specific user";
+	}
+
+	rpc SetProfileBackground (.CPlayer_SetProfileBackground_Request) returns (.CPlayer_SetProfileBackground_Response) {
+		option (method_description) = "Sets the user's profile background";
+	}
+
+	rpc GetMiniProfileBackground (.CPlayer_GetMiniProfileBackground_Request) returns (.CPlayer_GetMiniProfileBackground_Response) {
+		option (method_description) = "Gets which mini profile background is active for a specific user";
+	}
+
+	rpc SetMiniProfileBackground (.CPlayer_SetMiniProfileBackground_Request) returns (.CPlayer_SetMiniProfileBackground_Response) {
+		option (method_description) = "Sets the user's mini profile background";
+	}
+
+	rpc GetAvatarFrame (.CPlayer_GetAvatarFrame_Request) returns (.CPlayer_GetAvatarFrame_Response) {
+		option (method_description) = "Gets which avatar frame is active for a specific user";
+	}
+
+	rpc SetAvatarFrame (.CPlayer_SetAvatarFrame_Request) returns (.CPlayer_SetAvatarFrame_Response) {
+		option (method_description) = "Sets the user's avatar frame for their profile";
+	}
+
+	rpc GetAnimatedAvatar (.CPlayer_GetAnimatedAvatar_Request) returns (.CPlayer_GetAnimatedAvatar_Response) {
+		option (method_description) = "Gets which animated avatar is active for a specific user";
+	}
+
+	rpc SetAnimatedAvatar (.CPlayer_SetAnimatedAvatar_Request) returns (.CPlayer_SetAnimatedAvatar_Response) {
+		option (method_description) = "Sets the user's animated avatar for their profile";
+	}
+
+	rpc GetProfileItemsOwned (.CPlayer_GetProfileItemsOwned_Request) returns (.CPlayer_GetProfileItemsOwned_Response) {
+		option (method_description) = "Returns the items the user can equip on their profile";
+	}
+
+	rpc GetProfileItemsEquipped (.CPlayer_GetProfileItemsEquipped_Request) returns (.CPlayer_GetProfileItemsEquipped_Response) {
+		option (method_description) = "Returns the items the user has equipped on their profile";
+	}
+
+	rpc SetEquippedProfileItemFlags (.CPlayer_SetEquippedProfileItemFlags_Request) returns (.CPlayer_SetEquippedProfileItemFlags_Response) {
+		option (method_description) = "Sets special flags on the equipped item";
 	}
 
 	rpc GetEmoticonList (.CPlayer_GetEmoticonList_Request) returns (.CPlayer_GetEmoticonList_Response) {
@@ -458,6 +663,10 @@ service PlayerClient {
 
 	rpc NotifyFriendNicknameChanged (.CPlayer_FriendNicknameChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that a friend's nickname has changed";
+	}
+
+	rpc NotifyFriendEquippedProfileItemsChanged (.CPlayer_FriendEquippedProfileItemsChanged_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that a friend's equipped profile items have changed";
 	}
 
 	rpc NotifyNewSteamAnnouncementState (.CPlayer_NewSteamAnnouncementState_Notification) returns (.NoResponse) {

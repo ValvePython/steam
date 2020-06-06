@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x1fsteammessages_useraccount.proto\x1a steammessages_unified_base.proto\"P\n8CUserAccount_GetAvailableValveDiscountPromotions_Request\x12\x14\n\x0c\x63ountry_code\x18\x01 \x01(\t\"\xd0\x03\n9CUserAccount_GetAvailableValveDiscountPromotions_Response\x12l\n\npromotions\x18\x01 \x03(\x0b\x32X.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails\x1a\xa4\x02\n\x1dValveDiscountPromotionDetails\x12\x13\n\x0bpromotionid\x18\x01 \x01(\r\x12\x1d\n\x15promotion_description\x18\x02 \x01(\t\x12\x1b\n\x13minimum_cart_amount\x18\x03 \x01(\x03\x12\'\n\x1fminimum_cart_amount_for_display\x18\x04 \x01(\x03\x12\x17\n\x0f\x64iscount_amount\x18\x05 \x01(\x03\x12\x15\n\rcurrency_code\x18\x06 \x01(\x05\x12\x1b\n\x13\x61vailable_use_count\x18\x07 \x01(\x05\x12!\n\x19promotional_discount_type\x18\x08 \x01(\x05\x12\x19\n\x11loyalty_reward_id\x18\t \x01(\x05\"+\n)CUserAccount_GetAccountLinkStatus_Request\"Y\n*CUserAccount_GetAccountLinkStatus_Response\x12\x0c\n\x04pwid\x18\x01 \x01(\r\x12\x1d\n\x15identity_verification\x18\x02 \x01(\r\"9\n(CUserAccount_CancelLicenseForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"+\n)CUserAccount_CancelLicenseForApp_Response\"r\n,CUserAccount_CreateFriendInviteToken_Request\x12\x14\n\x0cinvite_limit\x18\x01 \x01(\r\x12\x17\n\x0finvite_duration\x18\x02 \x01(\r\x12\x13\n\x0binvite_note\x18\x03 \x01(\t\"\x99\x01\n-CUserAccount_CreateFriendInviteToken_Response\x12\x14\n\x0cinvite_token\x18\x01 \x01(\t\x12\x14\n\x0cinvite_limit\x18\x02 \x01(\x04\x12\x17\n\x0finvite_duration\x18\x03 \x01(\x04\x12\x14\n\x0ctime_created\x18\x04 \x01(\x07\x12\r\n\x05valid\x18\x05 \x01(\x08\",\n*CUserAccount_GetFriendInviteTokens_Request\"m\n+CUserAccount_GetFriendInviteTokens_Response\x12>\n\x06tokens\x18\x01 \x03(\x0b\x32..CUserAccount_CreateFriendInviteToken_Response\"S\n*CUserAccount_ViewFriendInviteToken_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0cinvite_token\x18\x02 \x01(\t\"f\n+CUserAccount_ViewFriendInviteToken_Response\x12\r\n\x05valid\x18\x01 \x01(\x08\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x17\n\x0finvite_duration\x18\x03 \x01(\x04\"U\n,CUserAccount_RedeemFriendInviteToken_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0cinvite_token\x18\x02 \x01(\t\"/\n-CUserAccount_RedeemFriendInviteToken_Response\"D\n,CUserAccount_RevokeFriendInviteToken_Request\x12\x14\n\x0cinvite_token\x18\x01 \x01(\t\"/\n-CUserAccount_RevokeFriendInviteToken_Response\">\n\'CUserAccount_RegisterCompatTool_Request\x12\x13\n\x0b\x63ompat_tool\x18\x01 \x01(\r\"*\n(CUserAccount_RegisterCompatTool_Response\"\x9c\x03\n,CAccountLinking_GetLinkedAccountInfo_Request\x12H\n\x0c\x61\x63\x63ount_type\x18\x01 \x01(\x0e\x32\x15.EInternalAccountType:\x1bk_EInternalSteamAccountType\x12+\n\naccount_id\x18\x02 \x01(\x04\x42\x17\x82\xb5\x18\x13Internal account ID\x12t\n\x06\x66ilter\x18\x03 \x01(\x0e\x32\x15.EExternalAccountType:\x0fk_EExternalNoneB<\x82\xb5\x18\x38if specified then only return this external account type\x12\x7f\n\x13return_access_token\x18\x04 \x01(\x08\x42\x62\x82\xb5\x18^if provided and true, then returns valid access token if available. It may refresh the token. \"\x8b\x06\n-CAccountLinking_GetLinkedAccountInfo_Response\x12h\n\x11\x65xternal_accounts\x18\x01 \x03(\x0b\x32M.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response\x1a\xef\x04\n\x1e\x43\x45xternalAccountTuple_Response\x12=\n\rexternal_type\x18\x01 \x01(\x0e\x32\x15.EExternalAccountType:\x0fk_EExternalNone\x12;\n\x0b\x65xternal_id\x18\x02 \x01(\tB&\x82\xb5\x18\"unique external account identifier\x12:\n\x12\x65xternal_user_name\x18\x03 \x01(\tB\x1e\x82\xb5\x18\x1auser readable; best effort\x12S\n\x0c\x65xternal_url\x18\x04 \x01(\tB=\x82\xb5\x18\x39required for all, can be a sentinal to verify correctness\x12@\n\x0c\x61\x63\x63\x65ss_token\x18\x05 \x01(\tB*\x82\xb5\x18&provided if requeest and it was valid.\x12k\n\x13\x61\x63\x63\x65ss_token_secret\x18\x06 \x01(\tBN\x82\xb5\x18Jrequired for OAuth v1 and signing the message, provided with access token.\x12\x90\x01\n\x08is_valid\x18\x07 \x01(\x08\x42~\x82\xb5\x18zIf false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh.\"w\n.CEmbeddedClient_AuthorizeCurrentDevice_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x13\n\x0b\x64\x65vice_info\x18\x03 \x01(\t\x12\x10\n\x08\x64\x65viceid\x18\x04 \x01(\r\"`\n\x15\x43\x45mbeddedClient_Token\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0c\x63lient_token\x18\x02 \x01(\x0c\x12\x0e\n\x06\x65xpiry\x18\x03 \x01(\r\x12\x10\n\x08\x64\x65viceid\x18\x04 \x01(\r\"a\n(CEmbeddedClient_AuthorizeDevice_Response\x12\x0e\n\x06result\x18\x01 \x01(\r\x12%\n\x05token\x18\x02 \x01(\x0b\x32\x16.CEmbeddedClient_Token*\x8d\x01\n\x14\x45InternalAccountType\x12\x1f\n\x1bk_EInternalSteamAccountType\x10\x01\x12\x17\n\x13k_EInternalClanType\x10\x02\x12\x16\n\x12k_EInternalAppType\x10\x03\x12#\n\x1fk_EInternalBroadcastChannelType\x10\x04*\x86\x02\n\x14\x45\x45xternalAccountType\x12\x13\n\x0fk_EExternalNone\x10\x00\x12\x1b\n\x17k_EExternalSteamAccount\x10\x01\x12\x1c\n\x18k_EExternalGoogleAccount\x10\x02\x12\x1e\n\x1ak_EExternalFacebookAccount\x10\x03\x12\x1d\n\x19k_EExternalTwitterAccount\x10\x04\x12\x1c\n\x18k_EExternalTwitchAccount\x10\x05\x12$\n k_EExternalYouTubeChannelAccount\x10\x06\x12\x1b\n\x17k_EExternalFacebookPage\x10\x07\x32\xcb\x0c\n\x0bUserAccount\x12\xe0\x01\n#GetAvailableValveDiscountPromotions\x12\x39.CUserAccount_GetAvailableValveDiscountPromotions_Request\x1a:.CUserAccount_GetAvailableValveDiscountPromotions_Response\"B\x82\xb5\x18>Gets the available promotional discounts available to the user\x12\x90\x01\n\x14GetAccountLinkStatus\x12*.CUserAccount_GetAccountLinkStatus_Request\x1a+.CUserAccount_GetAccountLinkStatus_Response\"\x1f\x82\xb5\x18\x1b\x46\x65tches account link status\x12\x93\x01\n\x13\x43\x61ncelLicenseForApp\x12).CUserAccount_CancelLicenseForApp_Request\x1a*.CUserAccount_CancelLicenseForApp_Response\"%\x82\xb5\x18!Cancels a free license for a user\x12\xc4\x01\n\x17\x43reateFriendInviteToken\x12-.CUserAccount_CreateFriendInviteToken_Request\x1a..CUserAccount_CreateFriendInviteToken_Response\"J\x82\xb5\x18\x46\x43reate a limited-use token that can be used to create a friend request\x12\xa1\x01\n\x15GetFriendInviteTokens\x12+.CUserAccount_GetFriendInviteTokens_Request\x1a,.CUserAccount_GetFriendInviteTokens_Response\"-\x82\xb5\x18)Get the set of active tokens for the user\x12\x9b\x01\n\x15ViewFriendInviteToken\x12+.CUserAccount_ViewFriendInviteToken_Request\x1a,.CUserAccount_ViewFriendInviteToken_Response\"\'\x82\xb5\x18#View details about an invite token \x12\xb7\x01\n\x17RedeemFriendInviteToken\x12-.CUserAccount_RedeemFriendInviteToken_Request\x1a..CUserAccount_RedeemFriendInviteToken_Response\"=\x82\xb5\x18\x39\x43reate a friend relationship using the given invite token\x12\xa2\x01\n\x17RevokeFriendInviteToken\x12-.CUserAccount_RevokeFriendInviteToken_Request\x1a..CUserAccount_RevokeFriendInviteToken_Response\"(\x82\xb5\x18$Revoke an active friend invite token\x12\x98\x01\n\x12RegisterCompatTool\x12(.CUserAccount_RegisterCompatTool_Request\x1a).CUserAccount_RegisterCompatTool_Response\"-\x82\xb5\x18)Register intended account usage of a tool\x1a-\x82\xb5\x18)A service to get user account information2\x9d\x02\n\x0e\x41\x63\x63ountLinking\x12\xd3\x01\n\x14GetLinkedAccountInfo\x12-.CAccountLinking_GetLinkedAccountInfo_Request\x1a..CAccountLinking_GetLinkedAccountInfo_Response\"\\\x82\xb5\x18XList all my active linked external accounts; may be requested to return the access token\x1a\x35\x82\xb5\x18\x31\x41 service to manage and link to external accounts2\xa4\x02\n\x0e\x45mbeddedClient\x12\xc1\x01\n\x16\x41uthorizeCurrentDevice\x12/.CEmbeddedClient_AuthorizeCurrentDevice_Request\x1a).CEmbeddedClient_AuthorizeDevice_Response\"K\x82\xb5\x18GUse a logged-in (password/etc) session to create a durable access token\x1aN\x82\xb5\x18JService to authorize and manage Steam functions directly embedded in gamesB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1fsteammessages_useraccount.proto\x1a steammessages_unified_base.proto\"P\n8CUserAccount_GetAvailableValveDiscountPromotions_Request\x12\x14\n\x0c\x63ountry_code\x18\x01 \x01(\t\"\x85\x04\n9CUserAccount_GetAvailableValveDiscountPromotions_Response\x12l\n\npromotions\x18\x01 \x03(\x0b\x32X.CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails\x1a\xd9\x02\n\x1dValveDiscountPromotionDetails\x12\x13\n\x0bpromotionid\x18\x01 \x01(\r\x12\x1d\n\x15promotion_description\x18\x02 \x01(\t\x12\x1b\n\x13minimum_cart_amount\x18\x03 \x01(\x03\x12\'\n\x1fminimum_cart_amount_for_display\x18\x04 \x01(\x03\x12\x17\n\x0f\x64iscount_amount\x18\x05 \x01(\x03\x12\x15\n\rcurrency_code\x18\x06 \x01(\x05\x12\x1b\n\x13\x61vailable_use_count\x18\x07 \x01(\x05\x12!\n\x19promotional_discount_type\x18\x08 \x01(\x05\x12\x19\n\x11loyalty_reward_id\x18\t \x01(\x05\x12\x1c\n\x14localized_name_token\x18\n \x01(\t\x12\x15\n\rmax_use_count\x18\x0b \x01(\x05\"+\n)CUserAccount_GetAccountLinkStatus_Request\"}\n*CUserAccount_GetAccountLinkStatus_Response\x12\x0c\n\x04pwid\x18\x01 \x01(\r\x12\x1d\n\x15identity_verification\x18\x02 \x01(\r\x12\"\n\x1aperformed_age_verification\x18\x03 \x01(\x08\"9\n(CUserAccount_CancelLicenseForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"+\n)CUserAccount_CancelLicenseForApp_Response\"r\n,CUserAccount_CreateFriendInviteToken_Request\x12\x14\n\x0cinvite_limit\x18\x01 \x01(\r\x12\x17\n\x0finvite_duration\x18\x02 \x01(\r\x12\x13\n\x0binvite_note\x18\x03 \x01(\t\"\x99\x01\n-CUserAccount_CreateFriendInviteToken_Response\x12\x14\n\x0cinvite_token\x18\x01 \x01(\t\x12\x14\n\x0cinvite_limit\x18\x02 \x01(\x04\x12\x17\n\x0finvite_duration\x18\x03 \x01(\x04\x12\x14\n\x0ctime_created\x18\x04 \x01(\x07\x12\r\n\x05valid\x18\x05 \x01(\x08\",\n*CUserAccount_GetFriendInviteTokens_Request\"m\n+CUserAccount_GetFriendInviteTokens_Response\x12>\n\x06tokens\x18\x01 \x03(\x0b\x32..CUserAccount_CreateFriendInviteToken_Response\"S\n*CUserAccount_ViewFriendInviteToken_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0cinvite_token\x18\x02 \x01(\t\"f\n+CUserAccount_ViewFriendInviteToken_Response\x12\r\n\x05valid\x18\x01 \x01(\x08\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x17\n\x0finvite_duration\x18\x03 \x01(\x04\"U\n,CUserAccount_RedeemFriendInviteToken_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0cinvite_token\x18\x02 \x01(\t\"/\n-CUserAccount_RedeemFriendInviteToken_Response\"D\n,CUserAccount_RevokeFriendInviteToken_Request\x12\x14\n\x0cinvite_token\x18\x01 \x01(\t\"/\n-CUserAccount_RevokeFriendInviteToken_Response\">\n\'CUserAccount_RegisterCompatTool_Request\x12\x13\n\x0b\x63ompat_tool\x18\x01 \x01(\r\"*\n(CUserAccount_RegisterCompatTool_Response\"\x9c\x03\n,CAccountLinking_GetLinkedAccountInfo_Request\x12H\n\x0c\x61\x63\x63ount_type\x18\x01 \x01(\x0e\x32\x15.EInternalAccountType:\x1bk_EInternalSteamAccountType\x12+\n\naccount_id\x18\x02 \x01(\x04\x42\x17\x82\xb5\x18\x13Internal account ID\x12t\n\x06\x66ilter\x18\x03 \x01(\x0e\x32\x15.EExternalAccountType:\x0fk_EExternalNoneB<\x82\xb5\x18\x38if specified then only return this external account type\x12\x7f\n\x13return_access_token\x18\x04 \x01(\x08\x42\x62\x82\xb5\x18^if provided and true, then returns valid access token if available. It may refresh the token. \"\x8b\x06\n-CAccountLinking_GetLinkedAccountInfo_Response\x12h\n\x11\x65xternal_accounts\x18\x01 \x03(\x0b\x32M.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response\x1a\xef\x04\n\x1e\x43\x45xternalAccountTuple_Response\x12=\n\rexternal_type\x18\x01 \x01(\x0e\x32\x15.EExternalAccountType:\x0fk_EExternalNone\x12;\n\x0b\x65xternal_id\x18\x02 \x01(\tB&\x82\xb5\x18\"unique external account identifier\x12:\n\x12\x65xternal_user_name\x18\x03 \x01(\tB\x1e\x82\xb5\x18\x1auser readable; best effort\x12S\n\x0c\x65xternal_url\x18\x04 \x01(\tB=\x82\xb5\x18\x39required for all, can be a sentinal to verify correctness\x12@\n\x0c\x61\x63\x63\x65ss_token\x18\x05 \x01(\tB*\x82\xb5\x18&provided if requeest and it was valid.\x12k\n\x13\x61\x63\x63\x65ss_token_secret\x18\x06 \x01(\tBN\x82\xb5\x18Jrequired for OAuth v1 and signing the message, provided with access token.\x12\x90\x01\n\x08is_valid\x18\x07 \x01(\x08\x42~\x82\xb5\x18zIf false, it means access token no longer work (expired, disconnected) and the link is now broken. Inform user to refresh.\"w\n.CEmbeddedClient_AuthorizeCurrentDevice_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x13\n\x0b\x64\x65vice_info\x18\x03 \x01(\t\x12\x10\n\x08\x64\x65viceid\x18\x04 \x01(\r\"`\n\x15\x43\x45mbeddedClient_Token\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x14\n\x0c\x63lient_token\x18\x02 \x01(\x0c\x12\x0e\n\x06\x65xpiry\x18\x03 \x01(\r\x12\x10\n\x08\x64\x65viceid\x18\x04 \x01(\r\"a\n(CEmbeddedClient_AuthorizeDevice_Response\x12\x0e\n\x06result\x18\x01 \x01(\r\x12%\n\x05token\x18\x02 \x01(\x0b\x32\x16.CEmbeddedClient_Token*\x8d\x01\n\x14\x45InternalAccountType\x12\x1f\n\x1bk_EInternalSteamAccountType\x10\x01\x12\x17\n\x13k_EInternalClanType\x10\x02\x12\x16\n\x12k_EInternalAppType\x10\x03\x12#\n\x1fk_EInternalBroadcastChannelType\x10\x04*\x86\x02\n\x14\x45\x45xternalAccountType\x12\x13\n\x0fk_EExternalNone\x10\x00\x12\x1b\n\x17k_EExternalSteamAccount\x10\x01\x12\x1c\n\x18k_EExternalGoogleAccount\x10\x02\x12\x1e\n\x1ak_EExternalFacebookAccount\x10\x03\x12\x1d\n\x19k_EExternalTwitterAccount\x10\x04\x12\x1c\n\x18k_EExternalTwitchAccount\x10\x05\x12$\n k_EExternalYouTubeChannelAccount\x10\x06\x12\x1b\n\x17k_EExternalFacebookPage\x10\x07\x32\xcb\x0c\n\x0bUserAccount\x12\xe0\x01\n#GetAvailableValveDiscountPromotions\x12\x39.CUserAccount_GetAvailableValveDiscountPromotions_Request\x1a:.CUserAccount_GetAvailableValveDiscountPromotions_Response\"B\x82\xb5\x18>Gets the available promotional discounts available to the user\x12\x90\x01\n\x14GetAccountLinkStatus\x12*.CUserAccount_GetAccountLinkStatus_Request\x1a+.CUserAccount_GetAccountLinkStatus_Response\"\x1f\x82\xb5\x18\x1b\x46\x65tches account link status\x12\x93\x01\n\x13\x43\x61ncelLicenseForApp\x12).CUserAccount_CancelLicenseForApp_Request\x1a*.CUserAccount_CancelLicenseForApp_Response\"%\x82\xb5\x18!Cancels a free license for a user\x12\xc4\x01\n\x17\x43reateFriendInviteToken\x12-.CUserAccount_CreateFriendInviteToken_Request\x1a..CUserAccount_CreateFriendInviteToken_Response\"J\x82\xb5\x18\x46\x43reate a limited-use token that can be used to create a friend request\x12\xa1\x01\n\x15GetFriendInviteTokens\x12+.CUserAccount_GetFriendInviteTokens_Request\x1a,.CUserAccount_GetFriendInviteTokens_Response\"-\x82\xb5\x18)Get the set of active tokens for the user\x12\x9b\x01\n\x15ViewFriendInviteToken\x12+.CUserAccount_ViewFriendInviteToken_Request\x1a,.CUserAccount_ViewFriendInviteToken_Response\"\'\x82\xb5\x18#View details about an invite token \x12\xb7\x01\n\x17RedeemFriendInviteToken\x12-.CUserAccount_RedeemFriendInviteToken_Request\x1a..CUserAccount_RedeemFriendInviteToken_Response\"=\x82\xb5\x18\x39\x43reate a friend relationship using the given invite token\x12\xa2\x01\n\x17RevokeFriendInviteToken\x12-.CUserAccount_RevokeFriendInviteToken_Request\x1a..CUserAccount_RevokeFriendInviteToken_Response\"(\x82\xb5\x18$Revoke an active friend invite token\x12\x98\x01\n\x12RegisterCompatTool\x12(.CUserAccount_RegisterCompatTool_Request\x1a).CUserAccount_RegisterCompatTool_Response\"-\x82\xb5\x18)Register intended account usage of a tool\x1a-\x82\xb5\x18)A service to get user account information2\x9d\x02\n\x0e\x41\x63\x63ountLinking\x12\xd3\x01\n\x14GetLinkedAccountInfo\x12-.CAccountLinking_GetLinkedAccountInfo_Request\x1a..CAccountLinking_GetLinkedAccountInfo_Response\"\\\x82\xb5\x18XList all my active linked external accounts; may be requested to return the access token\x1a\x35\x82\xb5\x18\x31\x41 service to manage and link to external accounts2\xa4\x02\n\x0e\x45mbeddedClient\x12\xc1\x01\n\x16\x41uthorizeCurrentDevice\x12/.CEmbeddedClient_AuthorizeCurrentDevice_Request\x1a).CEmbeddedClient_AuthorizeDevice_Response\"K\x82\xb5\x18GUse a logged-in (password/etc) session to create a durable access token\x1aN\x82\xb5\x18JService to authorize and manage Steam functions directly embedded in gamesB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -53,8 +53,8 @@ _EINTERNALACCOUNTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3355,
-  serialized_end=3496,
+  serialized_start=3444,
+  serialized_end=3585,
 )
 _sym_db.RegisterEnumDescriptor(_EINTERNALACCOUNTTYPE)
 
@@ -100,8 +100,8 @@ _EEXTERNALACCOUNTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3499,
-  serialized_end=3761,
+  serialized_start=3588,
+  serialized_end=3850,
 )
 _sym_db.RegisterEnumDescriptor(_EEXTERNALACCOUNTTYPE)
 
@@ -222,6 +222,20 @@ _CUSERACCOUNT_GETAVAILABLEVALVEDISCOUNTPROMOTIONS_RESPONSE_VALVEDISCOUNTPROMOTIO
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='localized_name_token', full_name='CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.localized_name_token', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='max_use_count', full_name='CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails.max_use_count', index=10,
+      number=11, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -235,7 +249,7 @@ _CUSERACCOUNT_GETAVAILABLEVALVEDISCOUNTPROMOTIONS_RESPONSE_VALVEDISCOUNTPROMOTIO
   oneofs=[
   ],
   serialized_start=324,
-  serialized_end=616,
+  serialized_end=669,
 )
 
 _CUSERACCOUNT_GETAVAILABLEVALVEDISCOUNTPROMOTIONS_RESPONSE = _descriptor.Descriptor(
@@ -265,7 +279,7 @@ _CUSERACCOUNT_GETAVAILABLEVALVEDISCOUNTPROMOTIONS_RESPONSE = _descriptor.Descrip
   oneofs=[
   ],
   serialized_start=152,
-  serialized_end=616,
+  serialized_end=669,
 )
 
 
@@ -288,8 +302,8 @@ _CUSERACCOUNT_GETACCOUNTLINKSTATUS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=618,
-  serialized_end=661,
+  serialized_start=671,
+  serialized_end=714,
 )
 
 
@@ -314,6 +328,13 @@ _CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='performed_age_verification', full_name='CUserAccount_GetAccountLinkStatus_Response.performed_age_verification', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -326,8 +347,8 @@ _CUSERACCOUNT_GETACCOUNTLINKSTATUS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=663,
-  serialized_end=752,
+  serialized_start=716,
+  serialized_end=841,
 )
 
 
@@ -357,8 +378,8 @@ _CUSERACCOUNT_CANCELLICENSEFORAPP_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=754,
-  serialized_end=811,
+  serialized_start=843,
+  serialized_end=900,
 )
 
 
@@ -381,8 +402,8 @@ _CUSERACCOUNT_CANCELLICENSEFORAPP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=813,
-  serialized_end=856,
+  serialized_start=902,
+  serialized_end=945,
 )
 
 
@@ -426,8 +447,8 @@ _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=858,
-  serialized_end=972,
+  serialized_start=947,
+  serialized_end=1061,
 )
 
 
@@ -485,8 +506,8 @@ _CUSERACCOUNT_CREATEFRIENDINVITETOKEN_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=975,
-  serialized_end=1128,
+  serialized_start=1064,
+  serialized_end=1217,
 )
 
 
@@ -509,8 +530,8 @@ _CUSERACCOUNT_GETFRIENDINVITETOKENS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1130,
-  serialized_end=1174,
+  serialized_start=1219,
+  serialized_end=1263,
 )
 
 
@@ -540,8 +561,8 @@ _CUSERACCOUNT_GETFRIENDINVITETOKENS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1176,
-  serialized_end=1285,
+  serialized_start=1265,
+  serialized_end=1374,
 )
 
 
@@ -578,8 +599,8 @@ _CUSERACCOUNT_VIEWFRIENDINVITETOKEN_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1287,
-  serialized_end=1370,
+  serialized_start=1376,
+  serialized_end=1459,
 )
 
 
@@ -623,8 +644,8 @@ _CUSERACCOUNT_VIEWFRIENDINVITETOKEN_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1372,
-  serialized_end=1474,
+  serialized_start=1461,
+  serialized_end=1563,
 )
 
 
@@ -661,8 +682,8 @@ _CUSERACCOUNT_REDEEMFRIENDINVITETOKEN_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1476,
-  serialized_end=1561,
+  serialized_start=1565,
+  serialized_end=1650,
 )
 
 
@@ -685,8 +706,8 @@ _CUSERACCOUNT_REDEEMFRIENDINVITETOKEN_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1563,
-  serialized_end=1610,
+  serialized_start=1652,
+  serialized_end=1699,
 )
 
 
@@ -716,8 +737,8 @@ _CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1612,
-  serialized_end=1680,
+  serialized_start=1701,
+  serialized_end=1769,
 )
 
 
@@ -740,8 +761,8 @@ _CUSERACCOUNT_REVOKEFRIENDINVITETOKEN_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1682,
-  serialized_end=1729,
+  serialized_start=1771,
+  serialized_end=1818,
 )
 
 
@@ -771,8 +792,8 @@ _CUSERACCOUNT_REGISTERCOMPATTOOL_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1731,
-  serialized_end=1793,
+  serialized_start=1820,
+  serialized_end=1882,
 )
 
 
@@ -795,8 +816,8 @@ _CUSERACCOUNT_REGISTERCOMPATTOOL_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1795,
-  serialized_end=1837,
+  serialized_start=1884,
+  serialized_end=1926,
 )
 
 
@@ -847,8 +868,8 @@ _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1840,
-  serialized_end=2252,
+  serialized_start=1929,
+  serialized_end=2341,
 )
 
 
@@ -920,8 +941,8 @@ _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE_CEXTERNALACCOUNTTUPLE_RESPONSE = 
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2411,
-  serialized_end=3034,
+  serialized_start=2500,
+  serialized_end=3123,
 )
 
 _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE = _descriptor.Descriptor(
@@ -950,8 +971,8 @@ _CACCOUNTLINKING_GETLINKEDACCOUNTINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2255,
-  serialized_end=3034,
+  serialized_start=2344,
+  serialized_end=3123,
 )
 
 
@@ -1002,8 +1023,8 @@ _CEMBEDDEDCLIENT_AUTHORIZECURRENTDEVICE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3036,
-  serialized_end=3155,
+  serialized_start=3125,
+  serialized_end=3244,
 )
 
 
@@ -1054,8 +1075,8 @@ _CEMBEDDEDCLIENT_TOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3157,
-  serialized_end=3253,
+  serialized_start=3246,
+  serialized_end=3342,
 )
 
 
@@ -1092,8 +1113,8 @@ _CEMBEDDEDCLIENT_AUTHORIZEDEVICE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3255,
-  serialized_end=3352,
+  serialized_start=3344,
+  serialized_end=3441,
 )
 
 _CUSERACCOUNT_GETAVAILABLEVALVEDISCOUNTPROMOTIONS_RESPONSE_VALVEDISCOUNTPROMOTIONDETAILS.containing_type = _CUSERACCOUNT_GETAVAILABLEVALVEDISCOUNTPROMOTIONS_RESPONSE
@@ -1327,8 +1348,8 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030)A service to get user account information'),
-  serialized_start=3764,
-  serialized_end=5375,
+  serialized_start=3853,
+  serialized_end=5464,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAvailableValveDiscountPromotions',
@@ -1423,8 +1444,8 @@ _ACCOUNTLINKING = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=_b('\202\265\0301A service to manage and link to external accounts'),
-  serialized_start=5378,
-  serialized_end=5663,
+  serialized_start=5467,
+  serialized_end=5752,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLinkedAccountInfo',
@@ -1447,8 +1468,8 @@ _EMBEDDEDCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   serialized_options=_b('\202\265\030JService to authorize and manage Steam functions directly embedded in games'),
-  serialized_start=5666,
-  serialized_end=5958,
+  serialized_start=5755,
+  serialized_end=6047,
   methods=[
   _descriptor.MethodDescriptor(
     name='AuthorizeCurrentDevice',

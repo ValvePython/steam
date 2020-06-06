@@ -230,6 +230,7 @@ message CMsgClientLicenseList {
 		optional uint32 renewal_period = 15;
 		optional uint32 renewal_time_unit = 16;
 		optional uint64 access_token = 17;
+		optional uint32 master_package_id = 18;
 	}
 
 	optional int32 eresult = 1 [default = 2];

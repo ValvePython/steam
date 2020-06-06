@@ -16,6 +16,10 @@ message CContentBuilder_InitDepotBuild_Response {
 	optional bytes aes_key = 3;
 	optional bytes rsa_key = 4;
 	optional string url_host = 5;
+	optional bool offset_detection_enabled = 6;
+	optional uint32 offset_detection_min_clean_chunk = 7;
+	optional uint32 offset_detection_blast_radius_pre = 8;
+	optional uint32 offset_detection_blast_radius_post = 9;
 }
 
 message CContentBuilder_StartDepotUpload_Request {

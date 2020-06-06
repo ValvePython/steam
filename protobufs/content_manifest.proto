@@ -2,6 +2,11 @@ syntax = "proto2";
 option optimize_for = SPEED;
 option py_generic_services = false;
 
+enum EContentDeltaChunkDataLocation {
+	k_EContentDeltaChunkDataLocationInProtobuf = 0;
+	k_EContentDeltaChunkDataLocationAfterProtobuf = 1;
+}
+
 message ContentManifestPayload {
 	message FileMapping {
 		message ChunkData {
@@ -47,10 +52,12 @@ message ContentDeltaChunks {
 		optional uint32 size_original = 3;
 		optional uint32 patch_method = 4;
 		optional bytes chunk = 5;
+		optional uint32 size_delta = 6;
 	}
 
 	optional uint32 depot_id = 1;
 	optional uint64 manifest_id_source = 2;
 	optional uint64 manifest_id_target = 3;
 	repeated .ContentDeltaChunks.DeltaChunk deltaChunks = 4;
+	optional .EContentDeltaChunkDataLocation chunk_data_location = 5 [default = k_EContentDeltaChunkDataLocationInProtobuf];
 }
