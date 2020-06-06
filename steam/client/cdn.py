@@ -478,7 +478,8 @@ class CDNClient(object):
                 self._LOG.debug("No steam licenses found on SteamClient instance")
                 return
 
-            packages = list(self.steam.licenses.keys())
+            packages = list(map(lambda l: {'packageid': l.package_id, 'access_token': l.access_token},
+                                itervalues(self.steam.licenses)))
 
         for package_id, info in iteritems(self.steam.get_product_info(packages=packages)['packages']):
             self.licensed_app_ids.update(info['appids'].values())

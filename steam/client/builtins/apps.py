@@ -7,7 +7,7 @@ from steam.utils.proto import proto_fill_from_dict
 
 
 class Apps(object):
-    licenses = None  #: :class:`dict` Account licenses
+    licenses = None  #: :class:`dict` Accounts' package licenses
 
     def __init__(self, *args, **kwargs):
         super(Apps, self).__init__(*args, **kwargs)
@@ -57,9 +57,12 @@ class Apps(object):
              'packages': {123: {...}, ...}
             }
 
-        When a token is needed to access the full info (e.g. branches and depots) the ``_missing_token``
-        will be set to ``True``. The token can be obtained by calling :meth:`get_access_tokens` if
-        the account has a license.
+        Access token is needed to access full information for certain apps, and also package info.
+        Each app and package has its' own access token.
+        If a token is required then ``_missing_token=True`` in the response.
+
+        App access tokens are obtained by calling :meth:`get_access_tokens`, and are returned only
+        when the account has a license for the specified app. Example code:
 
         .. code:: python
 
@@ -68,9 +71,21 @@ class Apps(object):
             if result['apps'][123]['_missing_token']:
                 tokens = client.get_access_token(apps=[123])
 
-                result = client.get_product_info(apps={'appid': 123,
-                                                       'access_token': tokens['apps'][123]
-                                                       })
+                result = client.get_product_info(apps=[{'appid': 123,
+                                                        'access_token': tokens['apps'][123]
+                                                        }])
+
+        .. note::
+            It is best to just request access token for all apps, before sending a product info
+            request.
+
+        Package tokens are located in the account license list. See :attr:`.licenses`
+
+        .. code:: python
+
+            result = client.get_product_info(packages=[{'packageid': 123,
+                                                        'access_token': client.licenses[123].access_token,
+                                                        }])
         """
         if not apps and not packages:
             return
@@ -107,7 +122,7 @@ class Apps(object):
                 data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
                 data['apps'][app.appid]['_missing_token'] = app.missing_token
             for pkg in chunk.packages:
-                data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:])[str(pkg.packageid)]
+                data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:]).get(str(pkg.packageid), {})
                 data['packages'][pkg.packageid]['_missing_token'] = pkg.missing_token
 
             if not chunk.response_pending:
