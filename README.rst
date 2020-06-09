@@ -118,15 +118,15 @@ IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.n
     :alt: Test coverage
 
 .. |sonar_maintainability| image:: https://sonarcloud.io/api/project_badges/measure?project=ValvePython_steam&metric=sqale_rating
-    :target: https://sonarcloud.io/dashboard?id=ValvePython_vdf
+    :target: https://sonarcloud.io/dashboard?id=ValvePython_steam
     :alt: SonarCloud Rating
 
 .. |sonar_reliability| image:: https://sonarcloud.io/api/project_badges/measure?project=ValvePython_steam&metric=reliability_rating
-    :target: https://sonarcloud.io/dashboard?id=ValvePython_vdf
+    :target: https://sonarcloud.io/dashboard?id=ValvePython_steam
     :alt: SonarCloud Rating
 
 .. |sonar_security| image:: https://sonarcloud.io/api/project_badges/measure?project=ValvePython_steam&metric=security_rating
-    :target: https://sonarcloud.io/dashboard?id=ValvePython_vdf
+    :target: https://sonarcloud.io/dashboard?id=ValvePython_steam
     :alt: SonarCloud Rating
 
 .. |master_build| image:: https://img.shields.io/travis/ValvePython/steam/master.svg?style=flat&label=master
