@@ -59,9 +59,7 @@ jobs:
 install:
     - pip install -r requirements.txt
     - pip install coveralls
-    - pip install scrutinizer-ocular
 script:
     - PYTHONHASHSEED=0 pytest --cov=steam tests
 after_script:
     - coveralls
-    - ocular
