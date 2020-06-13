@@ -40,6 +40,7 @@ from steam.enums import EResult
 from steam.enums.emsg import EMsg
 from steam.utils import ip_to_int, ip_from_int
 from steam.utils.proto import proto_to_dict
+from steam.exceptions import SteamError
 
 
 class GameServers(object):

@@ -180,7 +180,7 @@ class DepotManifest(object):
             try:
                 filename = symmetric_decrypt(filename, depot_key)
             except Exception:
-                RuntimeError("Unable to decrypt filename for depot manifest")
+                raise RuntimeError("Unable to decrypt filename for depot manifest")
 
             mapping.filename = filename
 

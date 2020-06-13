@@ -230,8 +230,6 @@ class WebAuth(object):
                 self.password = ''
                 raise LoginIncorrect(resp['message'])
 
-        return None
-
     def cli_login(self, password='', captcha='', email_code='', twofactor_code='', language='english'):
         """Generates CLI prompts to perform the entire login process
 

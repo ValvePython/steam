@@ -397,7 +397,7 @@ def webapi_request(url, method='GET', caller=None, session=None, params=None):
     :rtype: :class:`dict`, :class:`lxml.etree.Element`, :class:`str`
     """
     if method not in ('GET', 'POST'):
-        raise NotImplemented("HTTP method: %s" % repr(self.method))
+        raise ValueError("Only GET and POST methods are supported, got: %s" % repr(method))
     if params is None:
         params = {}
 

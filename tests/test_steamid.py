@@ -185,7 +185,7 @@ class SteamID_initialization(unittest.TestCase):
 class SteamID_properties(unittest.TestCase):
     def test_repr(self):
         # just to cover in coverage
-        repr(SteamID())
+        self.assertTrue('SteamID' in repr(SteamID()))
 
     def test_is_valid(self):
         # default
