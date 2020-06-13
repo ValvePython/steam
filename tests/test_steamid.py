@@ -7,6 +7,9 @@ from steam import steamid
 from steam.steamid import SteamID, ETypeChar
 from steam.enums import EType, EUniverse, EInstanceFlag
 
+def create_steam64(accountid, etype, euniverse, instance):
+    return (euniverse << 56) | (etype << 52) | (instance << 32) | accountid
+
 
 class SteamID_initialization(unittest.TestCase):
     def compare(self, obj, test_list):
@@ -81,6 +84,14 @@ class SteamID_initialization(unittest.TestCase):
         self.compare(SteamID('103582791429521412'),
                      [4, EType.Clan, EUniverse.Public, 0]
                      )
+
+    def test_arg_steam64_invalid_universe(self):
+        with self.assertRaises(ValueError):
+            SteamID(create_steam64(1, 1, 255, 1))
+
+    def test_arg_steam64_invalid_type(self):
+        with self.assertRaises(ValueError):
+            SteamID(create_steam64(1, 15, 1, 1))
 
     ######################################################
     # 1 arg - steam2/steam3 format

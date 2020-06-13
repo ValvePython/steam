@@ -289,7 +289,10 @@ def make_steam64(id=0, *args, **kwargs):
                 universe = EUniverse.Public
             # 64 bit
             elif value < 2**64:
-                return value
+                accountid = value & 0xFFFFFFFF
+                instance = (value >> 32) & 0xFFFFF
+                etype = (value >> 52) & 0xF
+                universe = (value >> 56) & 0xFF
             # invalid account id
             else:
                 accountid = 0
