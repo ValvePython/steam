@@ -326,11 +326,11 @@ class MobileWebAuth(WebAuth):
         """Attempts a mobile authenticator login using an oauth token, which can be obtained from a previously logged-in
         `MobileWebAuth`
 
-        :param oauth_token: The oauth token string
+        :param oauth_token: oauth token string, if it wasn't provided on instance init
         :type  oauth_token: :class:`str`
-        :param steam_id: The `SteamID` of the account to log into
+        :param steam_id: `SteamID` of the account to log into, if it wasn't provided on instance init
         :type  steam_id: :class:`str` or :class:`SteamID`
-        :param language: The language in which to start the session
+        :param language: select language for steam web pages (sets language cookie)
         :type  language: :class:`str`
         :return: a session on success and :class:`None` otherwise
         :rtype: :class:`requests.Session`, :class:`None`
