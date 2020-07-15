@@ -323,6 +323,20 @@ class MobileWebAuth(WebAuth):
         self.oauth_token = data['oauth_token']
 
     def oauth_login(self, oauth_token='', steam_id='', language='english'):
+        """Attempts a mobile authenticator login using an oauth token, which can be obtained from a previously logged-in
+        `MobileWebAuth`
+
+        :param oauth_token: The oauth token string
+        :type  oauth_token: :class:`str`
+        :param steam_id: The `SteamID` of the account to log into
+        :type  steam_id: :class:`str` or :class:`SteamID`
+        :param language: The language in which to start the session
+        :type  language: :class:`str`
+        :return: a session on success and :class:`None` otherwise
+        :rtype: :class:`requests.Session`, :class:`None`
+        :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
+        :raises LoginIncorrect: Invalid token or SteamID
+        """
         if oauth_token:
             self.oauth_token = oauth_token
         else:
@@ -354,7 +368,7 @@ class MobileWebAuth(WebAuth):
             if 'Please verify your <pre>key=</pre> parameter.' in resp.text:
                 raise LoginIncorrect('invalid token')
             else:
-                raise WebAuthException('failed to decode response')
+                raise e
 
         self.session_id = generate_session_id()
 
