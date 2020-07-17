@@ -373,7 +373,6 @@ class MobileWebAuth(WebAuth):
         self.session_id = generate_session_id()
 
         for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-            self.session.cookies.set('steamid', str(steam_id), domain=domain)
             self.session.cookies.set('birthtime', '-3333', domain=domain)
             self.session.cookies.set('sessionid', self.session_id, domain=domain)
             self.session.cookies.set('mobileClientVersion', '0 (2.1.3)', domain=domain)
