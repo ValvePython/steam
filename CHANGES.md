@@ -1,5 +1,14 @@
 # Change notes
 
+## 2.0.0 (in progress)
+
+This release brings breaking changes
+
+### steam.client
+
+- Importing `steam.client` no longer automatically patches `socket or `ssl` to
+  use gevent.
+
 ## 1.0.0
 
 This release brings breaking changes
