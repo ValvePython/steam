@@ -74,7 +74,7 @@ else:
     _cli_input = input
 
 
-class WebAuth(object):
+class WebAuth(BrowserRequests):
     key = None
     logged_on = False    #: whether authentication has been completed successfully
     session = None      #: :class:`requests.Session` (with auth cookies after auth is completed)
