@@ -59,7 +59,7 @@ message CMsgClientP2PConnectionInfo {
 	optional fixed64 steam_id_src = 2;
 	optional uint32 app_id = 3;
 	optional bytes candidate = 4;
-	optional fixed64 connection_id_src = 5;
+	optional fixed64 legacy_connection_id_src = 5;
 	optional bytes rendezvous = 6;
 }
 
@@ -301,16 +301,6 @@ message CMsgClientLBSGetLBEntriesResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional int32 leaderboard_entry_count = 2;
 	repeated .CMsgClientLBSGetLBEntriesResponse.Entry entries = 3;
-}
-
-message CMsgClientAppMinutesPlayedData {
-	message AppMinutesPlayedData {
-		optional uint32 app_id = 1;
-		optional int32 forever = 2;
-		optional int32 last_two_weeks = 3;
-	}
-
-	repeated .CMsgClientAppMinutesPlayedData.AppMinutesPlayedData minutes_played = 1;
 }
 
 message CMsgClientIsLimitedAccount {
@@ -1034,7 +1024,7 @@ message CMsgClientPICSProductInfoRequest {
 	message AppInfo {
 		optional uint32 appid = 1;
 		optional uint64 access_token = 2;
-		optional bool only_public = 3;
+		optional bool only_public_obsolete = 3;
 	}
 
 	message PackageInfo {

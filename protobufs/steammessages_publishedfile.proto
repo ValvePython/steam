@@ -1,5 +1,6 @@
 syntax = "proto2";
 import "steammessages_unified_base.proto";
+import "enums.proto";
 
 option py_generic_services = true;
 
@@ -95,6 +96,7 @@ message PublishedFileDetails {
 	message Tag {
 		optional string tag = 1;
 		optional bool adminonly = 2;
+		optional string display_name = 3;
 	}
 
 	message Preview {
@@ -212,6 +214,7 @@ message PublishedFileDetails {
 	optional .EPublishedFileRevision revision = 68 [default = k_EPublishedFileRevision_Default, (description) = "The revision of the data returned, usually k_EPublishedFileRevision_Latest, but can be another revision/snapshot depending on the caller."];
 	repeated .EPublishedFileRevision available_revisions = 69 [(description) = "Available revisions"];
 	repeated .PublishedFileDetails.Reaction reactions = 70 [(description) = "Reactions to this item"];
+	optional .EBanContentCheckResult ban_text_check_result = 71 [default = k_EBanContentCheckResult_NotScanned];
 }
 
 message CPublishedFile_GetDetails_Response {
@@ -282,6 +285,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
 	optional bool strip_description_bbcode = 32 [(description) = "Strips BBCode from descriptions."];
 	optional bool return_reactions = 35 [default = false, (description) = "If true, then reactions to items will be returned."];
+	optional uint32 startindex_override = 25 [(description) = "Backwards compatible for the client."];
 	optional .EPublishedFileRevision desired_revision = 33 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 }
 

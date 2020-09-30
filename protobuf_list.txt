@@ -32,4 +32,5 @@ https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/s
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_unified_test.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_useraccount.steamclient.proto
 https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/steammessages_video.steamclient.proto
-https://raw.githubusercontent.com/SteamDatabase/Protobufs/master/webui/friends.proto
+https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Protobufs/enums.proto
+https://raw.githubusercontent.com/SteamDatabase/Protobufs/master/webui/friends_mobile.proto

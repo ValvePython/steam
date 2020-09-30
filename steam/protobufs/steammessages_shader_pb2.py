@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x1asteammessages_shader.proto\x1a steammessages_unified_base.proto\"\xc9\x01\n\x1e\x43Shader_RegisterShader_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08gpu_desc\x18\x02 \x01(\t\x12\x13\n\x0b\x64river_desc\x18\x03 \x01(\t\x12\x37\n\x07shaders\x18\x04 \x03(\x0b\x32&.CShader_RegisterShader_Request.Shader\x1a\x38\n\x06Shader\x12\x15\n\rcache_key_sha\x18\x01 \x01(\x0c\x12\x17\n\x0fshader_code_sha\x18\x02 \x01(\x0c\"<\n\x1f\x43Shader_RegisterShader_Response\x12\x19\n\x11requested_codeids\x18\x01 \x03(\r\"\xa0\x01\n\x1a\x43Shader_SendShader_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x37\n\x07shaders\x18\x02 \x03(\x0b\x32&.CShader_SendShader_Request.ShaderCode\x1a:\n\nShaderCode\x12\x17\n\x0fshader_code_sha\x18\x01 \x01(\x0c\x12\x13\n\x0bshader_code\x18\x02 \x01(\x0c\"\x1d\n\x1b\x43Shader_SendShader_Response\"Y\n!CShader_GetBucketManifest_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08gpu_desc\x18\x02 \x01(\t\x12\x13\n\x0b\x64river_desc\x18\x03 \x01(\t\"]\n\"CShader_GetBucketManifest_Response\x12\x12\n\nmanifestid\x18\x01 \x01(\x04\x12\x11\n\tdepotsize\x18\x02 \x01(\r\x12\x10\n\x08\x62ucketid\x18\x03 \x01(\x04\x32\x9f\x04\n\x06Shader\x12\xbe\x01\n\x0eRegisterShader\x12\x1f.CShader_RegisterShader_Request\x1a .CShader_RegisterShader_Response\"i\x82\xb5\x18\x65\x43lient just finished playing a game, detected new shader cache entries and is notifying us about them\x12\x8f\x01\n\nSendShader\x12\x1b.CShader_SendShader_Request\x1a\x1c.CShader_SendShader_Response\"F\x82\xb5\x18\x42\x43lient is sending us actual compiled shader code that we requested\x12\xad\x01\n\x11GetBucketManifest\x12\".CShader_GetBucketManifest_Request\x1a#.CShader_GetBucketManifest_Response\"O\x82\xb5\x18KClient wants to know the manifest ID to fetch (if any) for a bucket\'s depot\x1a\x12\x82\xb5\x18\x0eShader methodsB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1asteammessages_shader.proto\x1a steammessages_unified_base.proto\"\xc9\x01\n\x1e\x43Shader_RegisterShader_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08gpu_desc\x18\x02 \x01(\t\x12\x13\n\x0b\x64river_desc\x18\x03 \x01(\t\x12\x37\n\x07shaders\x18\x04 \x03(\x0b\x32&.CShader_RegisterShader_Request.Shader\x1a\x38\n\x06Shader\x12\x15\n\rcache_key_sha\x18\x01 \x01(\x0c\x12\x17\n\x0fshader_code_sha\x18\x02 \x01(\x0c\"<\n\x1f\x43Shader_RegisterShader_Response\x12\x19\n\x11requested_codeids\x18\x01 \x03(\r\"\xa0\x01\n\x1a\x43Shader_SendShader_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x37\n\x07shaders\x18\x02 \x03(\x0b\x32&.CShader_SendShader_Request.ShaderCode\x1a:\n\nShaderCode\x12\x17\n\x0fshader_code_sha\x18\x01 \x01(\x0c\x12\x13\n\x0bshader_code\x18\x02 \x01(\x0c\"\x1d\n\x1b\x43Shader_SendShader_Response\"Y\n!CShader_GetBucketManifest_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08gpu_desc\x18\x02 \x01(\t\x12\x13\n\x0b\x64river_desc\x18\x03 \x01(\t\"]\n\"CShader_GetBucketManifest_Response\x12\x12\n\nmanifestid\x18\x01 \x01(\x04\x12\x11\n\tdepotsize\x18\x02 \x01(\x04\x12\x10\n\x08\x62ucketid\x18\x03 \x01(\x04\"G\n\x1e\x43Shader_GetStaleBucket_Request\x12\x10\n\x08gpu_desc\x18\x01 \x01(\t\x12\x13\n\x0b\x64river_desc\x18\x02 \x01(\t\"V\n\x1f\x43Shader_GetStaleBucket_Response\x12\x10\n\x08\x62ucketid\x18\x01 \x01(\x04\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x12\n\nmanifestid\x18\x03 \x01(\x04\"\xb7\x01\n#CShader_ReportExternalBuild_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08gpu_desc\x18\x02 \x01(\t\x12\x13\n\x0b\x64river_desc\x18\x03 \x01(\t\x12\x12\n\nmanifestid\x18\x04 \x01(\x04\x12\x17\n\x0fsource_gpu_desc\x18\x05 \x01(\t\x12\x1a\n\x12source_driver_desc\x18\x06 \x01(\t\x12\x11\n\tdepotsize\x18\x07 \x01(\x04\"&\n$CShader_ReportExternalBuild_Response2\xbb\x06\n\x06Shader\x12\xbe\x01\n\x0eRegisterShader\x12\x1f.CShader_RegisterShader_Request\x1a .CShader_RegisterShader_Response\"i\x82\xb5\x18\x65\x43lient just finished playing a game, detected new shader cache entries and is notifying us about them\x12\x8f\x01\n\nSendShader\x12\x1b.CShader_SendShader_Request\x1a\x1c.CShader_SendShader_Response\"F\x82\xb5\x18\x42\x43lient is sending us actual compiled shader code that we requested\x12\xad\x01\n\x11GetBucketManifest\x12\".CShader_GetBucketManifest_Request\x1a#.CShader_GetBucketManifest_Response\"O\x82\xb5\x18KClient wants to know the manifest ID to fetch (if any) for a bucket\'s depot\x12\x8e\x01\n\x0eGetStaleBucket\x12\x1f.CShader_GetStaleBucket_Request\x1a .CShader_GetStaleBucket_Response\"9\x82\xb5\x18\x35Job to get a stale bucket given a gpu and driver desc\x12\x88\x01\n\x13ReportExternalBuild\x12$.CShader_ReportExternalBuild_Request\x1a%.CShader_ReportExternalBuild_Response\"$\x82\xb5\x18 Report an exernally built bucket\x1a\x12\x82\xb5\x18\x0eShader methodsB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -310,7 +310,7 @@ _CSHADER_GETBUCKETMANIFEST_RESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='depotsize', full_name='CShader_GetBucketManifest_Response.depotsize', index=1,
-      number=2, type=13, cpp_type=3, label=1,
+      number=2, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -338,6 +338,186 @@ _CSHADER_GETBUCKETMANIFEST_RESPONSE = _descriptor.Descriptor(
   serialized_end=708,
 )
 
+
+_CSHADER_GETSTALEBUCKET_REQUEST = _descriptor.Descriptor(
+  name='CShader_GetStaleBucket_Request',
+  full_name='CShader_GetStaleBucket_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='gpu_desc', full_name='CShader_GetStaleBucket_Request.gpu_desc', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='driver_desc', full_name='CShader_GetStaleBucket_Request.driver_desc', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=710,
+  serialized_end=781,
+)
+
+
+_CSHADER_GETSTALEBUCKET_RESPONSE = _descriptor.Descriptor(
+  name='CShader_GetStaleBucket_Response',
+  full_name='CShader_GetStaleBucket_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='bucketid', full_name='CShader_GetStaleBucket_Response.bucketid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CShader_GetStaleBucket_Response.appid', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manifestid', full_name='CShader_GetStaleBucket_Response.manifestid', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=783,
+  serialized_end=869,
+)
+
+
+_CSHADER_REPORTEXTERNALBUILD_REQUEST = _descriptor.Descriptor(
+  name='CShader_ReportExternalBuild_Request',
+  full_name='CShader_ReportExternalBuild_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CShader_ReportExternalBuild_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gpu_desc', full_name='CShader_ReportExternalBuild_Request.gpu_desc', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='driver_desc', full_name='CShader_ReportExternalBuild_Request.driver_desc', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manifestid', full_name='CShader_ReportExternalBuild_Request.manifestid', index=3,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='source_gpu_desc', full_name='CShader_ReportExternalBuild_Request.source_gpu_desc', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='source_driver_desc', full_name='CShader_ReportExternalBuild_Request.source_driver_desc', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='depotsize', full_name='CShader_ReportExternalBuild_Request.depotsize', index=6,
+      number=7, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=872,
+  serialized_end=1055,
+)
+
+
+_CSHADER_REPORTEXTERNALBUILD_RESPONSE = _descriptor.Descriptor(
+  name='CShader_ReportExternalBuild_Response',
+  full_name='CShader_ReportExternalBuild_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1057,
+  serialized_end=1095,
+)
+
 _CSHADER_REGISTERSHADER_REQUEST_SHADER.containing_type = _CSHADER_REGISTERSHADER_REQUEST
 _CSHADER_REGISTERSHADER_REQUEST.fields_by_name['shaders'].message_type = _CSHADER_REGISTERSHADER_REQUEST_SHADER
 _CSHADER_SENDSHADER_REQUEST_SHADERCODE.containing_type = _CSHADER_SENDSHADER_REQUEST
@@ -348,6 +528,10 @@ DESCRIPTOR.message_types_by_name['CShader_SendShader_Request'] = _CSHADER_SENDSH
 DESCRIPTOR.message_types_by_name['CShader_SendShader_Response'] = _CSHADER_SENDSHADER_RESPONSE
 DESCRIPTOR.message_types_by_name['CShader_GetBucketManifest_Request'] = _CSHADER_GETBUCKETMANIFEST_REQUEST
 DESCRIPTOR.message_types_by_name['CShader_GetBucketManifest_Response'] = _CSHADER_GETBUCKETMANIFEST_RESPONSE
+DESCRIPTOR.message_types_by_name['CShader_GetStaleBucket_Request'] = _CSHADER_GETSTALEBUCKET_REQUEST
+DESCRIPTOR.message_types_by_name['CShader_GetStaleBucket_Response'] = _CSHADER_GETSTALEBUCKET_RESPONSE
+DESCRIPTOR.message_types_by_name['CShader_ReportExternalBuild_Request'] = _CSHADER_REPORTEXTERNALBUILD_REQUEST
+DESCRIPTOR.message_types_by_name['CShader_ReportExternalBuild_Response'] = _CSHADER_REPORTEXTERNALBUILD_RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CShader_RegisterShader_Request = _reflection.GeneratedProtocolMessageType('CShader_RegisterShader_Request', (_message.Message,), dict(
@@ -408,6 +592,34 @@ CShader_GetBucketManifest_Response = _reflection.GeneratedProtocolMessageType('C
   ))
 _sym_db.RegisterMessage(CShader_GetBucketManifest_Response)
 
+CShader_GetStaleBucket_Request = _reflection.GeneratedProtocolMessageType('CShader_GetStaleBucket_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CSHADER_GETSTALEBUCKET_REQUEST,
+  __module__ = 'steammessages_shader_pb2'
+  # @@protoc_insertion_point(class_scope:CShader_GetStaleBucket_Request)
+  ))
+_sym_db.RegisterMessage(CShader_GetStaleBucket_Request)
+
+CShader_GetStaleBucket_Response = _reflection.GeneratedProtocolMessageType('CShader_GetStaleBucket_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CSHADER_GETSTALEBUCKET_RESPONSE,
+  __module__ = 'steammessages_shader_pb2'
+  # @@protoc_insertion_point(class_scope:CShader_GetStaleBucket_Response)
+  ))
+_sym_db.RegisterMessage(CShader_GetStaleBucket_Response)
+
+CShader_ReportExternalBuild_Request = _reflection.GeneratedProtocolMessageType('CShader_ReportExternalBuild_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CSHADER_REPORTEXTERNALBUILD_REQUEST,
+  __module__ = 'steammessages_shader_pb2'
+  # @@protoc_insertion_point(class_scope:CShader_ReportExternalBuild_Request)
+  ))
+_sym_db.RegisterMessage(CShader_ReportExternalBuild_Request)
+
+CShader_ReportExternalBuild_Response = _reflection.GeneratedProtocolMessageType('CShader_ReportExternalBuild_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CSHADER_REPORTEXTERNALBUILD_RESPONSE,
+  __module__ = 'steammessages_shader_pb2'
+  # @@protoc_insertion_point(class_scope:CShader_ReportExternalBuild_Response)
+  ))
+_sym_db.RegisterMessage(CShader_ReportExternalBuild_Response)
+
 
 DESCRIPTOR._options = None
 
@@ -417,8 +629,8 @@ _SHADER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030\016Shader methods'),
-  serialized_start=711,
-  serialized_end=1254,
+  serialized_start=1098,
+  serialized_end=1925,
   methods=[
   _descriptor.MethodDescriptor(
     name='RegisterShader',
@@ -446,6 +658,24 @@ _SHADER = _descriptor.ServiceDescriptor(
     input_type=_CSHADER_GETBUCKETMANIFEST_REQUEST,
     output_type=_CSHADER_GETBUCKETMANIFEST_RESPONSE,
     serialized_options=_b('\202\265\030KClient wants to know the manifest ID to fetch (if any) for a bucket\'s depot'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetStaleBucket',
+    full_name='Shader.GetStaleBucket',
+    index=3,
+    containing_service=None,
+    input_type=_CSHADER_GETSTALEBUCKET_REQUEST,
+    output_type=_CSHADER_GETSTALEBUCKET_RESPONSE,
+    serialized_options=_b('\202\265\0305Job to get a stale bucket given a gpu and driver desc'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReportExternalBuild',
+    full_name='Shader.ReportExternalBuild',
+    index=4,
+    containing_service=None,
+    input_type=_CSHADER_REPORTEXTERNALBUILD_REQUEST,
+    output_type=_CSHADER_REPORTEXTERNALBUILD_RESPONSE,
+    serialized_options=_b('\202\265\030 Report an exernally built bucket'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_SHADER)
