@@ -148,8 +148,8 @@ class SteamAuthenticator(object):
             if resp is None:
                 raise SteamAuthenticatorError("Failed. Request timeout")
             if resp.header.eresult != EResult.OK:
-                raise SteamAuthenticatorError("Failed: %s (%s)" % str(resp.header.error_message,
-                                                                      repr(resp.header.eresult)))
+                raise SteamAuthenticatorError("Failed: %s (%s)" % (resp.header.error_message,
+                                                                   repr(resp.header.eresult)))
 
             resp = proto_to_dict(resp.body)
 
