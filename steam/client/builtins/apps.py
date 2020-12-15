@@ -41,13 +41,15 @@ class Apps(object):
         else:
             return EResult(resp.eresult)
 
-    def get_product_info(self, apps=[], packages=[], timeout=15):
+    def get_product_info(self, apps=[], packages=[], auto_access_tokens=True, timeout=15):
         """Get product info for apps and packages
 
         :param apps: items in the list should be either just ``app_id``, or :class:`dict`
-        :type apps: :class:`list`
+        :type  apps: :class:`list`
         :param packages: items in the list should be either just ``package_id``, or :class:`dict`
-        :type packages: :class:`list`
+        :type  packages: :class:`list`
+        :param auto_access_token: automatically request and fill access tokens
+        :type  auto_access_token: :class:`bool`
         :return: dict with ``apps`` and ``packages`` containing their info, see example below
         :rtype: :class:`dict`, :class:`None`
 
@@ -90,11 +92,24 @@ class Apps(object):
         if not apps and not packages:
             return
 
+        if auto_access_tokens:
+            tokens = self.get_access_tokens(app_ids=list(map(lambda app: app['appid'] if isinstance(app, dict) else app, apps)),
+                                            package_ids=list(map(lambda pkg: pkg['packageid'] if isinstance(pkg, dict) else pkg, packages))
+                                            )
+        else:
+            tokens = None
+
+        print(tokens)
+
         message = MsgProto(EMsg.ClientPICSProductInfoRequest)
 
         for app in apps:
                 app_info = message.body.apps.add()
                 app_info.only_public = False
+
+                if tokens:
+                    app_info.access_token = tokens['apps'].get(app['appid'] if isinstance(app, dict) else app, 0)
+
                 if isinstance(app, dict):
                         proto_fill_from_dict(app_info, app)
                 else:
@@ -102,6 +117,10 @@ class Apps(object):
 
         for package in packages:
                 package_info = message.body.packages.add()
+
+                if tokens:
+                    package_info.access_token = tokens['packages'].get(package['packageid'] if isinstance(package, dict) else package, 0)
+
                 if isinstance(package, dict):
                         proto_fill_from_dict(package_info, package)
                 else:
@@ -163,7 +182,7 @@ class Apps(object):
                                       {'app_id': app_id},
                                       timeout=10
                                       )
-    
+
     def get_encrypted_app_ticket(self, app_id, userdata):
         """Gets the encrypted app ticket
         :param app_id: app id
@@ -246,7 +265,7 @@ class Apps(object):
 
         if resp:
             return {'apps': dict(map(lambda app: (app.appid, app.access_token), resp.app_access_tokens)),
-                    'packages': dict(map(lambda pkg: (pkg.appid, pkg.access_token), resp.package_access_tokens)),
+                    'packages': dict(map(lambda pkg: (pkg.packageid, pkg.access_token), resp.package_access_tokens)),
                     }
 
     def register_product_key(self, key):
