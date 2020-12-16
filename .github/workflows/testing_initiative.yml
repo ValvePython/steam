@@ -31,26 +31,16 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Install dependencies
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
           pip install coveralls
       - name: Run Tests
         run: |
           PYTHONHASHSEED=0 pytest --cov=steam tests
-      - name: Coveralls Parallel
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          flag-name: run-${{ matrix.test_number }}
-          parallel: true
-  finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        parallel-finished: true      
+      - name: Coveralls
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          coveralls
   build-docs:
     runs-on: ${{ matrix.os }}
     strategy:
