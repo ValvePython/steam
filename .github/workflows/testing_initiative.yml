@@ -34,8 +34,10 @@ jobs:
           pip install -r requirements.txt
           pip install coveralls
       - name: Run Tests
+        env:
+          PYTHONHASHSEED: "0"
         run: |
-          PYTHONHASHSEED=0 pytest --cov=steam tests
+          pytest --cov=steam tests
       - name: Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
