@@ -10,7 +10,7 @@ on:
     branches: [ master ]
     
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -36,8 +36,33 @@ jobs:
       - name: Run Tests
         run: |
           PYTHONHASHSEED=0 pytest --cov=steam tests
-      - name: Submit coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }} 
-        run: |
-          coveralls
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.test_number }}
+          parallel: true
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true      
+  build-docs:
+    run-on: ubuntu-latest
+    python-version: 3.6
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python Env
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install dependencies
+        run: make init
+      - name: Build Docs
+        run: make docs
