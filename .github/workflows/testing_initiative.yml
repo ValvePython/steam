@@ -6,9 +6,26 @@ name: Testing Initiative
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '.gitignore'
+      - '*.md'
+      - '*.rst'
+      - 'LICENSE'
+      - 'Vagrantfile'
+      - 'protobuf_list.txt'
+      - 'protobufs/**'
+      - 'recipes/**'
   pull_request:
     branches: [ master ]
-    
+    paths-ignore:
+      - '.gitignore'
+      - '*.md'
+      - '*.rst'
+      - 'LICENSE'
+      - 'Vagrantfile'
+      - 'protobuf_list.txt'
+      - 'protobufs/**'
+      - 'recipes/**'
 jobs:
   test:
     runs-on: ${{ matrix.os }}
