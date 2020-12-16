@@ -52,8 +52,11 @@ jobs:
         github-token: ${{ secrets.github_token }}
         parallel-finished: true      
   build-docs:
-    run-on: ubuntu-latest
-    python-version: 3.6
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.6]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python Env
