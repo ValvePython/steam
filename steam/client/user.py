@@ -111,26 +111,37 @@ class SteamUser(object):
 
         return url % (ahash[:2], ahash, sizes[size])
 
-    def send_message(self, message):
+    def send_message(self, message, groupid=0, chatroomid=0):
         """Send chat message to this steam user
 
         :param message: message to send
         :type message: str
+        :param groupid: chat group id
+        :type groupid: int
+        :param chatroomid: text channel id
+        :type chatroomid: int
         """
-        # new chat
-        if self._steam.chat_mode == 2:
-            self._steam.send_um("FriendMessages.SendMessage#1", {
-                'steamid': self.steam_id,
-                'message': message,
-                'chat_entry_type': EChatEntryType.ChatMsg,
-                })
-        # old chat
+        if groupid == 0:
+            # new chat
+            if self._steam.chat_mode == 2:
+                self._steam.send_um("FriendMessages.SendMessage#1", {
+                    'steamid': self.steam_id,
+                    'message': message,
+                    'chat_entry_type': EChatEntryType.ChatMsg,
+                    })
+            # old chat
+            else:
+                self._steam.send(MsgProto(EMsg.ClientFriendMsg), {
+                    'steamid': self.steam_id,
+                    'chat_entry_type': EChatEntryType.ChatMsg,
+                    'message': message.encode('utf8'),
+                    })
         else:
-            self._steam.send(MsgProto(EMsg.ClientFriendMsg), {
-                'steamid': self.steam_id,
-                'chat_entry_type': EChatEntryType.ChatMsg,
-                'message': message.encode('utf8'),
-                })
+            self._steam.send_um("ChatRoom.SendChatMessage#1", {
+                'chat_group_id': groupid,
+                'chat_id': chatroomid,
+                'message': message,
+            })
 
     def block(self):
         """Block user"""
