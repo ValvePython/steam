@@ -56,6 +56,22 @@ class DepotFile(object):
         :type: str
         """
         return os.path.join(*self.filename_raw.split('\\'))
+    
+    @property
+    def linktarget_raw(self):
+        """Link target with null terminator and whitespaces removed
+
+        :type: str
+        """
+        return self.file_mapping.linktarget.rstrip('\x00 \n\t')
+
+    @property
+    def linktarget(self):
+        """Link target matching the OS
+
+        :type: str
+        """
+        return os.path.join(*self.linktarget_raw.split('\\'))
 
     @property
     def size(self):
@@ -177,12 +193,20 @@ class DepotManifest(object):
         for mapping in self.payload.mappings:
             filename = b64decode(mapping.filename)
 
+            if mapping.linktarget:
+                linktarget = b64decode(mapping.linktarget)
+
             try:
                 filename = symmetric_decrypt(filename, depot_key)
+                if mapping.linktarget:
+                    linktarget = symmetric_decrypt(linktarget, depot_key)
             except Exception:
                 raise RuntimeError("Unable to decrypt filename for depot manifest")
 
             mapping.filename = filename
+
+            if mapping.linktarget:
+                mapping.linktarget = linktarget
 
         self.metadata.filenames_encrypted = False
 
