@@ -48,19 +48,33 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install coveralls
+          make init
       - name: Run Tests
-        env:
-          PYTHONHASHSEED: "0"
         run: |
-          pytest --cov=steam tests
-      - name: Coveralls
+          make test
+      - name: Upload to Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          COVERALLS_PARALLEL: true
+          COVERALLS_FLAG_NAME: "${{ matrix.os }}_${{ matrix.python-version }}"
         run: |
-          coveralls
+          coveralls --service=github
+
+  coveralls:
+    name: Finish Coveralls
+    needs: test
+    runs-on: ubuntu-latest
+    container: python:3-slim
+    steps:
+    - name: Install coveralls
+      run: |
+        pip3 install --upgrade coveralls
+    - name: Send coverage finish to coveralls.io
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        coveralls --finish
+
   build-docs:
     runs-on: ${{ matrix.os }}
     strategy:

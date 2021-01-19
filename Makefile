@@ -25,14 +25,14 @@ help:
 	@echo "$$HELPBODY"
 
 init: init_docs
-	pip install -r requirements.txt
+	pip install -r dev_requirements.txt
 
 init_docs:
 	pip install sphinx==1.8.5 sphinx_rtd_theme
 
 test:
 	coverage erase
-	PYTHONHASHSEED=0 pytest --cov=steam tests
+	PYTHONHASHSEED=0 pytest --tb=short --cov-config .coveragerc --cov=steam tests
 
 webauth_gen:
 	rm -f vcr/webauth*
