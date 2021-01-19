@@ -113,8 +113,8 @@ IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.n
     :target: https://pypi.python.org/pypi/steam
     :alt: MIT License
 
-.. |coverage| image:: https://scrutinizer-ci.com/g/ValvePython/steam/badges/coverage.png?b=master
-    :target: https://scrutinizer-ci.com/g/ValvePython/steam/?branch=master
+.. |coverage| image:: https://img.shields.io/coveralls/ValvePython/steam/master.svg?style=flat
+    :target: https://coveralls.io/r/ValvePython/steam?branch=master
     :alt: Test coverage
 
 .. |sonar_maintainability| image:: https://sonarcloud.io/api/project_badges/measure?project=ValvePython_steam&metric=sqale_rating
