@@ -41,13 +41,15 @@ class Apps(object):
         else:
             return EResult(resp.eresult)
 
-    def get_product_info(self, apps=[], packages=[], auto_access_tokens=True, timeout=15):
+    def get_product_info(self, apps=[], packages=[], meta_data_only=False, auto_access_tokens=True, timeout=15):
         """Get product info for apps and packages
 
         :param apps: items in the list should be either just ``app_id``, or :class:`dict`
         :type  apps: :class:`list`
         :param packages: items in the list should be either just ``package_id``, or :class:`dict`
         :type  packages: :class:`list`
+        :param meta_data_only: only meta data will be returned in the reponse (e.g. change number, missing_token, sha1)
+        :type  meta_data_only: :class:`bool`
         :param auto_access_token: automatically request and fill access tokens
         :type  auto_access_token: :class:`bool`
         :return: dict with ``apps`` and ``packages`` containing their info, see example below
@@ -124,7 +126,9 @@ class Apps(object):
                 else:
                         package_info.packageid = package
 
-        message.body.meta_data_only = False
+        message.body.meta_data_only = meta_data_only
+        message.body.num_prev_failed = 0
+        message.body.supports_package_tokens = 1
 
         job_id = self.send_job(message)
 
@@ -136,11 +140,26 @@ class Apps(object):
             chunk = chunk[0].body
 
             for app in chunk.apps:
-                data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
+                if app.buffer:
+                    data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
+                else:
+                    data['apps'][app.appid] = {}
+
                 data['apps'][app.appid]['_missing_token'] = app.missing_token
+                data['apps'][app.appid]['_change_number'] = app.change_number
+                data['apps'][app.appid]['_sha'] = app.sha
+                data['apps'][app.appid]['_size'] = app.size
+
             for pkg in chunk.packages:
-                data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:]).get(str(pkg.packageid), {})
+                if pkg.buffer:
+                    data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:]).get(str(pkg.packageid), {})
+                else:
+                    data['packages'][pkg.packageid] = {}
+
                 data['packages'][pkg.packageid]['_missing_token'] = pkg.missing_token
+                data['packages'][pkg.packageid]['_change_number'] = pkg.change_number
+                data['packages'][pkg.packageid]['_sha'] = pkg.sha
+                data['packages'][pkg.packageid]['_size'] = pkg.size
 
             if not chunk.response_pending:
                 break
