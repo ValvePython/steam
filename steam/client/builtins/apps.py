@@ -99,8 +99,6 @@ class Apps(object):
         else:
             tokens = None
 
-        print(tokens)
-
         message = MsgProto(EMsg.ClientPICSProductInfoRequest)
 
         for app in apps:
