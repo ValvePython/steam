@@ -896,6 +896,53 @@ class EPurchaseResultDetail(SteamIntEnum):
     PaymentMethodNotSupportedForProduct = 83
 
 
+class ELicenseFlags(SteamIntEnum):
+    NONE = 0
+    Renew = 0x01
+    RenewalFailed = 0x02
+    Pending = 0x04
+    Expired = 0x08
+    CancelledByUser = 0x10
+    CancelledByAdmin = 0x20
+    LowViolenceContent = 0x40
+    ImportedFromSteam2 = 0x80
+    ForceRunRestriction = 0x100
+    RegionRestrictionExpired = 0x200
+    CancelledByFriendlyFraudLock = 0x400
+    NotActivated = 0x800
+
+
+class ELicenseType(SteamIntEnum):
+    NoLicense = 0
+    SinglePurchase = 1
+    SinglePurchaseLimitedUse = 2
+    RecurringCharge = 3
+    RecurringChargeLimitedUse = 4
+    RecurringChargeLimitedUseWithOverages = 5
+    RecurringOption = 6
+    LimitedUseDelayedActivation = 7
+
+
+class EBillingType(SteamIntEnum):
+    NoCost = 0
+    BillOnceOnly = 1
+    BillMonthly = 2
+    ProofOfPrepurchaseOnly = 3
+    GuestPass = 4
+    HardwarePromo = 5
+    Gift = 6
+    AutoGrant = 7
+    OEMTicket = 8
+    RecurringOption = 9
+    BillOnceOrCDKey = 10
+    Repurchaseable = 11
+    FreeOnDemand = 12
+    Rental = 13
+    CommercialLicense = 14
+    FreeCommercialLicense = 15
+    NumBillingTypes = 16
+
+
 # Do not remove
 from enum import EnumMeta
 
