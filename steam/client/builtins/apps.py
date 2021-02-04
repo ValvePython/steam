@@ -41,7 +41,7 @@ class Apps(object):
         else:
             return EResult(resp.eresult)
 
-    def get_product_info(self, apps=[], packages=[], meta_data_only=False, auto_access_tokens=True, timeout=15):
+    def get_product_info(self, apps=[], packages=[], meta_data_only=False, raw=False, auto_access_tokens=True, timeout=15):
         """Get product info for apps and packages
 
         :param apps: items in the list should be either just ``app_id``, or :class:`dict`
@@ -50,6 +50,8 @@ class Apps(object):
         :type  packages: :class:`list`
         :param meta_data_only: only meta data will be returned in the reponse (e.g. change number, missing_token, sha1)
         :type  meta_data_only: :class:`bool`
+        :param raw: Data buffer for each app is returned as bytes in its' original form. Apps buffer is text VDF, and package buffer is binary VDF
+        :type  raw: :class:`bool`
         :param auto_access_token: automatically request and fill access tokens
         :type  auto_access_token: :class:`bool`
         :return: dict with ``apps`` and ``packages`` containing their info, see example below
@@ -140,7 +142,7 @@ class Apps(object):
             chunk = chunk[0].body
 
             for app in chunk.apps:
-                if app.buffer:
+                if app.buffer and not raw:
                     data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
                 else:
                     data['apps'][app.appid] = {}
@@ -150,8 +152,11 @@ class Apps(object):
                 data['apps'][app.appid]['_sha'] = app.sha
                 data['apps'][app.appid]['_size'] = app.size
 
+                if app.buffer and raw:
+                    data['apps'][app.appid]['_buffer'] = app.buffer
+
             for pkg in chunk.packages:
-                if pkg.buffer:
+                if pkg.buffer and not raw:
                     data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:]).get(str(pkg.packageid), {})
                 else:
                     data['packages'][pkg.packageid] = {}
@@ -160,6 +165,9 @@ class Apps(object):
                 data['packages'][pkg.packageid]['_change_number'] = pkg.change_number
                 data['packages'][pkg.packageid]['_sha'] = pkg.sha
                 data['packages'][pkg.packageid]['_size'] = pkg.size
+
+                if pkg.buffer and raw:
+                    data['packages'][pkg.packageid]['_buffer'] = pkg.buffer
 
             if not chunk.response_pending:
                 break
