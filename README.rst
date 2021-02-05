@@ -98,13 +98,13 @@ IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.n
 
 .. _Steam: https://store.steampowered.com/
 
-.. |pypi| image:: https://img.shields.io/github/tag/valvepython/steam.svg?label=release&color=green&logo=steam
+.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?label=pypi&color=green
     :target: https://pypi.python.org/pypi/steam
     :alt: Latest version released on PyPi
 
-.. |latest| image:: https://img.shields.io/github/tag-pre/valvepython/steam.svg?label=latest&logo=steam
+.. |latest| image:: https://img.shields.io/github/v/tag/ValvePython/steam?include_prereleases&sort=semver&label=release
    :target: https://github.com/ValvePython/steam/releases
-   :alt: GitHub Releases
+   :alt: Latest release on Github
 
 .. |pypipy| image:: https://img.shields.io/pypi/pyversions/steam.svg?label=%20&logo=python&logoColor=white
     :alt: PyPI - Python Version
