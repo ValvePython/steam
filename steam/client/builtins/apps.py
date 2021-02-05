@@ -1,3 +1,4 @@
+from binascii import hexlify
 import vdf
 from steam.enums import EResult, EServerType
 from steam.enums.emsg import EMsg
@@ -149,7 +150,7 @@ class Apps(object):
 
                 data['apps'][app.appid]['_missing_token'] = app.missing_token
                 data['apps'][app.appid]['_change_number'] = app.change_number
-                data['apps'][app.appid]['_sha'] = app.sha
+                data['apps'][app.appid]['_sha'] = hexlify(app.sha).decode('ascii')
                 data['apps'][app.appid]['_size'] = app.size
 
                 if app.buffer and raw:
@@ -163,7 +164,7 @@ class Apps(object):
 
                 data['packages'][pkg.packageid]['_missing_token'] = pkg.missing_token
                 data['packages'][pkg.packageid]['_change_number'] = pkg.change_number
-                data['packages'][pkg.packageid]['_sha'] = pkg.sha
+                data['packages'][pkg.packageid]['_sha'] = hexlify(pkg.sha).decode('ascii')
                 data['packages'][pkg.packageid]['_size'] = pkg.size
 
                 if pkg.buffer and raw:
