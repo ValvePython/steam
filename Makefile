@@ -24,15 +24,21 @@ export HELPBODY
 help:
 	@echo "$$HELPBODY"
 
-init: init_docs
+init:
 	pip install -r dev_requirements.txt
 
 init_docs:
 	pip install sphinx==1.8.5 sphinx_rtd_theme
 
+COVOPTS = --cov-config .coveragerc --cov=steam
+
+ifeq ($(NOCOV), 1)
+	COVOPTS =
+endif
+
 test:
 	coverage erase
-	PYTHONHASHSEED=0 pytest --tb=short --cov-config .coveragerc --cov=steam tests
+	PYTHONHASHSEED=0 pytest --tb=short $(COVOPTS) tests
 
 webauth_gen:
 	rm -f vcr/webauth*
