@@ -32,12 +32,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
-#       exclude:
-#         - os: macos-latest
-#           python-version: 3.8
-#         - os: windows-latest
-#           python-version: 3.6
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9]
+        no-coverage: [0]
+        include:
+          - os: ubuntu-latest
+            python-version: pypy-2.7
+            no-coverage: 1
+          - os: ubuntu-latest
+            python-version: pypy-3.6
+            no-coverage: 1
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python Env
@@ -50,9 +53,13 @@ jobs:
         run: |
           make init
       - name: Run Tests
+        env:
+            NOCOV: ${{ matrix.no-coverage }}
         run: |
           make test
       - name: Upload to Coveralls
+        # pypy + concurrenct=gevent not supported in coveragepy. See https://github.com/nedbat/coveragepy/issues/560
+        if: matrix.no-coverage == 0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_PARALLEL: true
@@ -90,6 +97,8 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
       - name: Install dependencies
-        run: make init
+        run: |
+          make init
+          make init_docs
       - name: Build Docs
         run: make docs
