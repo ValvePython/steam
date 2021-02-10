@@ -38,7 +38,7 @@ class User(object):
 
     def __handle_message_incoming2(self, msg):
         # new chat
-        if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
+        if msg.body.chat_entry_type == EChatEntryType.ChatMsg and not msg.body.local_echo:
             user = self.get_user(msg.body.steamid_friend)
             self.emit("chat_message", user, msg.body.message)
 
