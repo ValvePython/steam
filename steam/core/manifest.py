@@ -190,23 +190,14 @@ class DepotManifest(object):
         if not self.metadata.filenames_encrypted:
             return
 
-        for mapping in self.payload.mappings:
-            filename = b64decode(mapping.filename)
+        try:
+            for m in self.payload.mappings:
+                m.filename = symmetric_decrypt(b64decode(m.filename), depot_key)
 
-            if mapping.linktarget:
-                linktarget = b64decode(mapping.linktarget)
-
-            try:
-                filename = symmetric_decrypt(filename, depot_key)
-                if mapping.linktarget:
-                    linktarget = symmetric_decrypt(linktarget, depot_key)
-            except Exception:
-                raise RuntimeError("Unable to decrypt filename for depot manifest")
-
-            mapping.filename = filename
-
-            if mapping.linktarget:
-                mapping.linktarget = linktarget
+                if m.linktarget:
+                    m.linktarget = symmetric_decrypt(b64decode(m.linktarget), depot_key)
+        except Exception:
+            raise RuntimeError("Unable to decrypt filename for depot manifest")
 
         self.metadata.filenames_encrypted = False
 
