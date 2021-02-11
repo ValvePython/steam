@@ -8,3 +8,4 @@ gevent-eventemitter~=2.1
 enum34==1.1.2; python_version < '3.4'
 PyYAML==5.1
 cachetools>=3.0.0
+mypy-protobuf>=1.23
