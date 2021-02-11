@@ -112,6 +112,11 @@ class DepotFile(object):
         """:type: bool"""
         return not self.is_directory and not self.is_symlink
 
+    @property
+    def is_executable(self):
+        """:type: bool"""
+        return self.flags & EDepotFileFlag.Executable > 0
+
 
 class DepotManifest(object):
     DepotFileClass = DepotFile
