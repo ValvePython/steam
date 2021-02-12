@@ -3,7 +3,6 @@ import vdf
 from steam.enums import EResult, EServerType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
-from steam.utils import ip_from_int
 from steam.utils.proto import proto_fill_from_dict
 
 
@@ -108,7 +107,6 @@ class Apps(object):
 
         for app in apps:
                 app_info = message.body.apps.add()
-                app_info.only_public = False
 
                 if tokens:
                     app_info.access_token = tokens['apps'].get(app['appid'] if isinstance(app, dict) else app, 0)

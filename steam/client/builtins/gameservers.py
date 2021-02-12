@@ -38,7 +38,7 @@ from steam.steamid import SteamID
 from steam.core.msg import MsgProto
 from steam.enums import EResult
 from steam.enums.emsg import EMsg
-from steam.utils import ip_to_int, ip_from_int
+from steam.utils import ip4_to_int, ip4_from_int, ip6_from_bytes
 from steam.utils.proto import proto_to_dict
 from steam.exceptions import SteamError
 
@@ -81,13 +81,13 @@ class SteamGameServers(object):
 
         .. code:: python
 
-            [{'auth_players': 0, 'server_ip': '1.2.3.4', 'server_port': 27015},
-             {'auth_players': 6, 'server_ip': '1.2.3.4', 'server_port': 27016},
+            [{'auth_players': 0, 'server_ip': '1.2.3.4', 'query_port': 27015},
+             {'auth_players': 6, 'server_ip': '1:2:3:4::5', 'query_port': 27016},
              ...
             ]
         """
         if 'geo_location_ip' in kw:
-            kw['geo_location_ip'] = ip_to_int(kw['geo_location_ip'])
+            kw['geo_location_ip'] = ip4_to_int(kw['geo_location_ip'])
 
         kw['filter_text'] = filter_text
         kw['max_servers'] = max_servers
@@ -103,7 +103,12 @@ class SteamGameServers(object):
         resp = proto_to_dict(resp)
 
         for server in resp['servers']:
-            server['server_ip'] = ip_from_int(server['server_ip'])
+            server.pop('deprecated_server_ip', None)  # no point returning this
+
+            if 'v4' in server['server_ip']:
+                server['server_ip'] = ip4_from_int(server['server_ip']['v4'])
+            else:
+                server['server_ip'] = ip6_from_bytes(server['server_ip']['v6'])
 
         return resp['servers']
 

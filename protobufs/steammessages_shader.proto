@@ -40,8 +40,32 @@ message CShader_GetBucketManifest_Request {
 
 message CShader_GetBucketManifest_Response {
 	optional uint64 manifestid = 1;
-	optional uint32 depotsize = 2;
+	optional uint64 depotsize = 2;
 	optional uint64 bucketid = 3;
+}
+
+message CShader_GetStaleBucket_Request {
+	optional string gpu_desc = 1;
+	optional string driver_desc = 2;
+}
+
+message CShader_GetStaleBucket_Response {
+	optional uint64 bucketid = 1;
+	optional uint32 appid = 2;
+	optional uint64 manifestid = 3;
+}
+
+message CShader_ReportExternalBuild_Request {
+	optional uint32 appid = 1;
+	optional string gpu_desc = 2;
+	optional string driver_desc = 3;
+	optional uint64 manifestid = 4;
+	optional string source_gpu_desc = 5;
+	optional string source_driver_desc = 6;
+	optional uint64 depotsize = 7;
+}
+
+message CShader_ReportExternalBuild_Response {
 }
 
 service Shader {
@@ -57,5 +81,13 @@ service Shader {
 
 	rpc GetBucketManifest (.CShader_GetBucketManifest_Request) returns (.CShader_GetBucketManifest_Response) {
 		option (method_description) = "Client wants to know the manifest ID to fetch (if any) for a bucket's depot";
+	}
+
+	rpc GetStaleBucket (.CShader_GetStaleBucket_Request) returns (.CShader_GetStaleBucket_Response) {
+		option (method_description) = "Job to get a stale bucket given a gpu and driver desc";
+	}
+
+	rpc ReportExternalBuild (.CShader_ReportExternalBuild_Request) returns (.CShader_ReportExternalBuild_Response) {
+		option (method_description) = "Report an exernally built bucket";
 	}
 }

@@ -31,7 +31,7 @@ from steam.core.crypto import sha1_hash
 from steam.steamid import SteamID
 from steam.exceptions import SteamError
 from steam.client.builtins import BuiltinBase
-from steam.utils import ip_from_int, ip_to_int
+from steam.utils import ip4_from_int, ip4_to_int
 from steam.utils.proto import proto_fill_from_dict
 
 if six.PY2:
@@ -174,7 +174,7 @@ class SteamClient(CMClient, BuiltinBase):
             data = {
                 'cell_id': self.cm_servers.cell_id,
                 'last_updated': self.cm_servers.last_updated,
-                'servers': list(zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
+                'servers': list(zip(map(ip4_from_int, msg.body.cm_addresses), msg.body.cm_ports)),
             }
             try:
                 with open(filepath, 'wb') as f:
@@ -539,7 +539,7 @@ class SteamClient(CMClient, BuiltinBase):
         message.body.chat_mode = self.chat_mode
 
         if login_id is None:
-            message.body.obfuscated_private_ip.v4 = ip_to_int(self.connection.local_address) ^ 0xF00DBAAD
+            message.body.obfuscated_private_ip.v4 = ip4_to_int(self.connection.local_address) ^ 0xF00DBAAD
         else:
             message.body.obfuscated_private_ip.v4 = login_id
 

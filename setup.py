@@ -3,7 +3,6 @@
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
-import sys
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
@@ -20,6 +19,8 @@ install_requires = [
     'requests>=2.9.1',
     'vdf>=3.3',
     'cachetools>=3.0.0',
+    "win-inet-pton; python_version == '2.7' and sys_platform == 'win32'",
+    "enum34==1.1.2; python_version < '3.4'",
 ]
 
 install_extras = {
@@ -29,9 +30,6 @@ install_extras = {
         'gevent-eventemitter>=2.1',
     ],
 }
-
-if sys.version_info < (3, 4):
-    install_requires.append('enum34>=1.0.4')
 
 setup(
     name='steam',

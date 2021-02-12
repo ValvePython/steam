@@ -67,7 +67,7 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt || exit 0
-	mv protobufs/friends.proto protobufs/steammessages_webui_friends.steamclient.proto
+	mv protobufs/friends_mobile.proto protobufs/steammessages_webui_friends.steamclient.proto
 	sed -i 's/CCommunity_ClanAnnouncementInfo/xCCommunity_ClanAnnouncementInfo/' protobufs/steammessages_webui_friends.steamclient.proto
 	sed -i 's/CMsgClientSecret/xCMsgClientSecret/' protobufs/steammessages_webui_friends.steamclient.proto
 	sed -i '1s/^/option py_generic_services = true\;\n/' protobufs/steammessages_webui_friends.steamclient.proto

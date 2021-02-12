@@ -8,6 +8,7 @@ message CContentBuilder_InitDepotBuild_Request {
 	optional uint32 depotid = 2;
 	optional uint64 workshop_itemid = 3;
 	optional bool for_local_cs = 4;
+	optional string target_branch = 5;
 }
 
 message CContentBuilder_InitDepotBuild_Response {
@@ -20,6 +21,8 @@ message CContentBuilder_InitDepotBuild_Response {
 	optional uint32 offset_detection_min_clean_chunk = 7;
 	optional uint32 offset_detection_blast_radius_pre = 8;
 	optional uint32 offset_detection_blast_radius_post = 9;
+	optional uint32 offset_detection_max_distance_pre = 10;
+	optional uint32 offset_detection_max_distance_post = 11;
 }
 
 message CContentBuilder_StartDepotUpload_Request {

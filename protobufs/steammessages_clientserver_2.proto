@@ -461,12 +461,14 @@ message CMsgClientGetDepotDecryptionKeyResponse {
 message CMsgClientCheckAppBetaPassword {
 	optional uint32 app_id = 1;
 	optional string betapassword = 2;
+	optional int32 language = 3;
 }
 
 message CMsgClientCheckAppBetaPasswordResponse {
 	message BetaPassword {
 		optional string betaname = 1;
 		optional string betapassword = 2;
+		optional string betadescription = 3;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -529,6 +531,7 @@ message CMsgDownloadRateStatistics {
 	optional uint32 cell_id = 1;
 	repeated .CMsgDownloadRateStatistics.StatsInfo stats = 2;
 	optional uint32 throttling_kbps = 3;
+	optional uint32 steam_realm = 4;
 }
 
 message CMsgClientRequestAccountData {
@@ -576,13 +579,16 @@ message CMsgGameServerData {
 		optional fixed64 steam_id = 1;
 	}
 
+	optional uint32 revision = 24;
 	optional fixed64 steam_id_gs = 1;
-	optional uint32 deprecated_ip = 2;
 	optional uint32 query_port = 3;
 	optional uint32 game_port = 4;
-	optional uint32 sourcetv_port = 5;
-	optional string name = 22;
-	optional .CMsgIPAddress game_ip_address = 23;
+	optional uint32 spectator_port = 5;
+	optional string server_name = 22;
+	optional string game_description = 29;
+	optional string spectator_server_name = 27;
+	optional fixed32 fake_ip = 28;
+	optional bytes sdr_login = 26;
 	optional uint32 app_id = 6;
 	optional string gamedir = 7;
 	optional string version = 8;
@@ -596,16 +602,13 @@ message CMsgGameServerData {
 	optional bool dedicated = 16;
 	optional string os = 17;
 	optional string game_data = 18;
-	optional uint32 game_data_version = 19;
 	optional string game_type = 20;
 	optional string map = 21;
 }
 
 message CMsgGameServerRemove {
-	optional fixed64 steam_id = 1;
-	optional uint32 deprecated_ip = 2;
-	optional uint32 query_port = 3;
-	optional .CMsgIPAddress ip = 4;
+	optional fixed64 legacy_steam_id_gs = 1;
+	optional uint32 legacy_query_port = 3;
 }
 
 message CMsgClientGMSServerQuery {
@@ -619,7 +622,7 @@ message CMsgClientGMSServerQuery {
 message CMsgGMSClientServerQueryResponse {
 	message Server {
 		optional uint32 deprecated_server_ip = 1;
-		optional uint32 server_port = 2;
+		optional uint32 query_port = 2;
 		optional uint32 auth_players = 3;
 		optional .CMsgIPAddress server_ip = 4;
 	}
