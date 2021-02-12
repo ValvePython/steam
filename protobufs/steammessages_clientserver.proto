@@ -929,6 +929,7 @@ message CMsgClientWalletInfoUpdate {
 	optional int32 balance_delayed = 4;
 	optional int64 balance64 = 5 [(php_output_always_number) = true];
 	optional int64 balance64_delayed = 6 [(php_output_always_number) = true];
+	optional int32 realm = 7;
 }
 
 message CMsgClientAppInfoUpdate {
