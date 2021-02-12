@@ -19,7 +19,7 @@ from steam.core import crypto
 from steam.core.connection import TCPConnection
 from steam.core.msg import Msg, MsgProto
 from eventemitter import EventEmitter
-from steam.utils import ip_from_int
+from steam.utils import ip4_from_int
 from steam.utils.proto import is_proto, clear_proto_bit
 
 
@@ -392,7 +392,7 @@ class CMClient(EventEmitter):
     def _handle_cm_list(self, msg):
         self._LOG.debug("Updating CM list")
 
-        new_servers = zip(map(ip_from_int, msg.body.cm_addresses), msg.body.cm_ports)
+        new_servers = zip(map(ip4_from_int, msg.body.cm_addresses), msg.body.cm_ports)
         self.cm_servers.clear()
         self.cm_servers.merge_list(new_servers)
         self.cm_servers.cell_id = self.cell_id
