@@ -1,10 +1,15 @@
 """Utility package with various useful functions
 """
+import six
+from six.moves import xrange as _range
+
+if sys.PY2:
+    import win_inet_pton
+
 import weakref
 import struct
 import socket
 import sys
-from six.moves import xrange as _range
 
 
 def ip4_from_int(ip):
