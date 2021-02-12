@@ -3,7 +3,7 @@
 import six
 from six.moves import xrange as _range
 
-if sys.PY2:
+if six.PY2:
     import win_inet_pton
 
 import weakref
