@@ -19,7 +19,7 @@ install_requires = [
     'requests>=2.9.1',
     'vdf>=3.3',
     'cachetools>=3.0.0',
-    "win-inet-pton; python_version == '2.7' and platform_system == 'Windows'",
+    "win-inet-pton; python_version == '2.7' and sys_platform == 'win32'",
     "enum34==1.1.2; python_version < '3.4'",
 ]
 
