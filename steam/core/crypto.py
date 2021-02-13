@@ -6,7 +6,7 @@ from os import urandom as random_bytes
 from struct import pack
 from base64 import b64decode
 
-from Cryptodome.Hash import SHA1, HMAC
+from Cryptodome.Hash import MD5, SHA1, HMAC
 from Cryptodome.PublicKey.RSA import import_key as rsa_import_key, construct as rsa_construct
 from Cryptodome.Cipher import PKCS1_OAEP, PKCS1_v1_5
 from Cryptodome.Cipher import AES as AES
@@ -95,6 +95,9 @@ def hmac_sha1(secret, data):
 
 def sha1_hash(data):
     return SHA1.new(data).digest()
+
+def md5_hash(data):
+    return MD5.new(data).digest()
 
 def rsa_publickey(mod, exp):
     return rsa_construct((mod, exp))
