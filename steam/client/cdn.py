@@ -466,6 +466,12 @@ class CDNClient(object):
 
         self.load_licenses()
 
+    def clear_cache(self):
+        """Cleared cached information. Next call on methods with caching will return fresh data"""
+        self.manifests.clear()
+        self.app_depots.clear()
+        self.beta_passwords.clear()
+
     def load_licenses(self):
         """Read licenses from SteamClient instance, required for determining accessible content"""
         self.licensed_app_ids.clear()
