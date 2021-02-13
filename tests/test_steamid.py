@@ -295,6 +295,15 @@ class SteamID_properties(unittest.TestCase):
         self.assertEqual(SteamID(123456, EType.Invalid   , EUniverse.Public, instance=1).as_invite_code, None)
         self.assertEqual(SteamID(123456, EType.Clan      , EUniverse.Public, instance=1).as_invite_code, None)
 
+    def test_as_csgo_friend_code(self):
+        self.assertEqual(SteamID(0         , EType.Individual, EUniverse.Public, instance=1).as_csgo_friend_code, None)
+        self.assertEqual(SteamID(1         , EType.Invalid   , EUniverse.Public, instance=1).as_csgo_friend_code, None)
+        self.assertEqual(SteamID(1         , EType.Clan      , EUniverse.Public, instance=1).as_csgo_friend_code, None)
+        self.assertEqual(SteamID(1         , EType.Individual, EUniverse.Beta  , instance=1).as_csgo_friend_code, 'AJJJS-ABAA')
+        self.assertEqual(SteamID(1         , EType.Individual, EUniverse.Public, instance=1).as_csgo_friend_code, 'AJJJS-ABAA')
+        self.assertEqual(SteamID(123456    , EType.Individual, EUniverse.Public, instance=1).as_csgo_friend_code, 'ABNBT-GBDC')
+        self.assertEqual(SteamID(4294967295, EType.Individual, EUniverse.Public, instance=1).as_csgo_friend_code, 'S9ZZR-999P')
+
     def test_as_invite_url(self):
         self.assertEqual(SteamID(0     , EType.Individual, EUniverse.Public, instance=1).invite_url, None)
         self.assertEqual(SteamID(123456, EType.Individual, EUniverse.Public, instance=1).invite_url, 'https://s.team/p/cv-dgb')
@@ -449,3 +458,17 @@ class steamid_functions(unittest.TestCase):
                          (123456, EType.Individual, EUniverse.Public, 1))
         self.assertEqual(steamid.invite_code_to_tuple('https://s.team/p/cv-dgb/ABCDE12354'),
                          (123456, EType.Individual, EUniverse.Public, 1))
+
+    def test_from_csgo_friend_code(self):
+        self.assertIsNone(steamid.from_csgo_friend_code(''))
+        self.assertIsNone(steamid.from_csgo_friend_code('aaaaaaaaaaaaaaaaaaaaaaaaaaaa'))
+        self.assertIsNone(steamid.from_csgo_friend_code('11111-1111'))
+
+        self.assertEqual(steamid.from_csgo_friend_code('AJJJS-ABAA', EUniverse.Beta),
+                         SteamID(1, EType.Individual, EUniverse.Beta, instance=1))
+        self.assertEqual(steamid.from_csgo_friend_code('AJJJS-ABAA'),
+                         SteamID(1, EType.Individual, EUniverse.Public, instance=1))
+        self.assertEqual(steamid.from_csgo_friend_code('ABNBT-GBDC'),
+                         SteamID(123456, EType.Individual, EUniverse.Public, instance=1))
+        self.assertEqual(steamid.from_csgo_friend_code('S9ZZR-999P'),
+                         SteamID(4294967295, EType.Individual, EUniverse.Public, instance=1))
