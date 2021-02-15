@@ -458,7 +458,7 @@ def steam3_to_tuple(value):
 
     return (steam32, etype, universe, instance)
 
-def invite_code_to_tuple(code, universe=EUniverse.Public):
+def from_invite_code(code, universe=EUniverse.Public):
     """
     Invites urls can be generated at https://steamcommunity.com/my/friends/add
 
@@ -486,7 +486,9 @@ def invite_code_to_tuple(code, universe=EUniverse.Public):
     accountid = int(re.sub("["+_icode_custom+"]", repl_mapper, code), 16)
 
     if 0 < accountid < 2**32:
-        return (accountid, EType(1), EUniverse(universe), 1)
+        return SteamID(accountid, EType.Individual, EUniverse(universe), 1)
+
+SteamID.from_invite_code = staticmethod(from_invite_code)
 
 def from_csgo_friend_code(code, universe=EUniverse.Public):
     """
@@ -520,7 +522,7 @@ def from_csgo_friend_code(code, universe=EUniverse.Public):
         result = result >> 4
         accountid = (accountid << 4) | id_nib
 
-    return SteamID(accountid, EType.Individual, EUniverse(universe))
+    return SteamID(accountid, EType.Individual, EUniverse(universe), 1)
 
 SteamID.from_csgo_friend_code = staticmethod(from_csgo_friend_code)
 
