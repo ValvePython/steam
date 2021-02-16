@@ -1,0 +1,33 @@
+syntax = "proto2";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+enum ELobbyStatus {
+	k_ELobbyStatusInvalid = 0;
+	k_ELobbyStatusExists = 1;
+	k_ELobbyStatusDoesNotExist = 2;
+	k_ELobbyStatusNotAMember = 3;
+}
+
+message LobbyMatchmakingLegacy_GetLobbyStatus_Request {
+	optional uint32 app_id = 1;
+	optional fixed64 steamid_lobby = 2;
+	optional bool claim_ownership = 3;
+	optional bool claim_membership = 4;
+	optional uint32 version_num = 5;
+}
+
+message LobbyMatchmakingLegacy_GetLobbyStatus_Response {
+	optional uint32 app_id = 1;
+	optional fixed64 steamid_lobby = 2;
+	optional .ELobbyStatus lobby_status = 3 [default = k_ELobbyStatusInvalid];
+}
+
+service LobbyMatchmakingLegacy {
+	option (service_description) = "Lobby matchmaking legacy service";
+
+	rpc GetLobbyStatus (.LobbyMatchmakingLegacy_GetLobbyStatus_Request) returns (.LobbyMatchmakingLegacy_GetLobbyStatus_Response) {
+		option (method_description) = "GetLobbyStatus";
+	}
+}

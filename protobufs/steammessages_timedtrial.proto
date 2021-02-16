@@ -1,0 +1,50 @@
+syntax = "proto2";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+message CTimedTrial_GetTimeRemaining_Request {
+	optional uint32 appid = 1;
+}
+
+message CTimedTrial_GetTimeRemaining_Response {
+	optional uint32 seconds_played = 1;
+	optional uint32 seconds_allowed = 2;
+	optional uint32 packageid = 3;
+	optional uint32 mastersub_appid = 4;
+}
+
+message CTimedTrial_RecordPlaytime_Request {
+	optional uint32 appid = 1;
+	optional uint32 seconds_played = 2;
+}
+
+message CTimedTrial_RecordPlaytime_Response {
+	optional uint32 seconds_played = 1;
+	optional uint32 seconds_allowed = 2;
+}
+
+message CTimedTrial_ResetPlaytime_Request {
+	optional uint32 appid = 1;
+}
+
+message CTimedTrial_ResetPlaytime_Response {
+	optional uint32 seconds_played = 1;
+	optional uint32 seconds_allowed = 2;
+}
+
+service TimedTrial {
+	option (service_description) = "A service to get user timed trial information";
+
+	rpc GetTimeRemaining (.CTimedTrial_GetTimeRemaining_Request) returns (.CTimedTrial_GetTimeRemaining_Response) {
+		option (method_description) = "Returns the amount of time a user has left on a timed trial for an app";
+	}
+
+	rpc RecordPlaytime (.CTimedTrial_RecordPlaytime_Request) returns (.CTimedTrial_RecordPlaytime_Response) {
+		option (method_description) = "Updates the user's remaining playtime while in game";
+	}
+
+	rpc ResetPlaytime (.CTimedTrial_ResetPlaytime_Request) returns (.CTimedTrial_ResetPlaytime_Response) {
+		option (method_description) = "Reset the user's remaining playtime (developer only)";
+	}
+}

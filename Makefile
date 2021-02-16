@@ -87,4 +87,10 @@ pb_compile:
 pb_clear:
 	rm -f ./protobufs/*.proto ./steam/protobufs/*_pb2.py
 
-pb_update: pb_fetch pb_compile
+pb_services:
+	grep -B 99999 MARK_SERVICE_START steam/core/msg/unified.py > steam/core/msg/unified.py.tmp
+	grep '^service' protobufs/*.proto | tr '/.:' ' ' | awk '{ printf("    %-35s '\''steam.protobufs.%s_pb2'\'',\n", "'\''" $$5 "'\'':", $$2) }' >> steam/core/msg/unified.py.tmp
+	grep -A 99999 MARK_SERVICE_END steam/core/msg/unified.py >> steam/core/msg/unified.py.tmp
+	mv steam/core/msg/unified.py.tmp steam/core/msg/unified.py
+
+pb_update: pb_fetch pb_compile pb_services

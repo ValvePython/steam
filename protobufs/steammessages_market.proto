@@ -1,0 +1,26 @@
+syntax = "proto2";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+message CEconMarket_IsMarketplaceAllowed_Request {
+	optional string webcookie = 1 [(description) = "The user's Steam Guard machine auth cookie."];
+}
+
+message CEconMarket_IsMarketplaceAllowed_Response {
+	optional bool allowed = 1 [(description) = "Whether or not the user is allowed to use the market"];
+	optional uint32 reason = 2 [(description) = "The reason the user can't use the market, if applicable"];
+	optional uint32 allowed_at_time = 3 [(description) = "The time the user will be allowed to use the market"];
+	optional uint32 steamguard_required_days = 4 [(description) = "The number of days any user is required to have had Steam Guard before they can use the market"];
+	optional bool forms_requested = 7 [(description) = "Whether or not we've requested the user fill out tax forms"];
+	optional bool forms_require_verification = 8 [(description) = "True if we've received forms but they require verification first"];
+	optional uint32 new_device_cooldown_days = 9 [(description) = "The number of days after initial device authorization a user must wait before using the market on that device"];
+}
+
+service EconMarket {
+	option (service_description) = "A service to use market functions";
+
+	rpc IsMarketplaceAllowed (.CEconMarket_IsMarketplaceAllowed_Request) returns (.CEconMarket_IsMarketplaceAllowed_Response) {
+		option (method_description) = "Checks whether or not the authed account is allowed to use the market";
+	}
+}
