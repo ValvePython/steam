@@ -183,7 +183,7 @@ class SteamAuthenticator(object):
         try:
             if not re.search(r'[&\?].*digits', resp['uri']):
                 resp['uri'] += '&digits=5'
-        except (KeyError, AttributeError):
+        except (KeyError, TypeError):
             pass
 
         self.secrets = resp
