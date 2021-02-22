@@ -49,6 +49,7 @@ import json
 import subprocess
 import struct
 import requests
+import re
 from base64 import b64decode, b64encode
 from binascii import hexlify
 from time import time
@@ -178,6 +179,12 @@ class SteamAuthenticator(object):
 
         if resp['status'] != EResult.OK:
             raise SteamAuthenticatorError("Failed to add authenticator. Error: %s" % repr(EResult(resp['status'])))
+
+        try:
+            if not re.search('[&\?].*digits', resp['uri']):
+                resp['uri'] += '&digits=5'
+        except KeyError, AttributeError:
+            pass
 
         self.secrets = resp
         self.steam_time_offset = int(resp['server_time']) - time()
