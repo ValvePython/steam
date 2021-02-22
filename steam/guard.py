@@ -181,7 +181,7 @@ class SteamAuthenticator(object):
             raise SteamAuthenticatorError("Failed to add authenticator. Error: %s" % repr(EResult(resp['status'])))
 
         try:
-            if not re.search('[&\?].*digits', resp['uri']):
+            if not re.search(r'[&\?].*digits', resp['uri']):
                 resp['uri'] += '&digits=5'
         except KeyError, AttributeError:
             pass
