@@ -27,7 +27,7 @@ install_extras = {
     'client': [
         'gevent>=1.3.0',
         'protobuf>=3.0.0',
-        'gevent-eventemitter>=2.1',
+        'gevent-eventemitter~=2.1',
     ],
 }
 
