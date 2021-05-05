@@ -1039,6 +1039,13 @@ class EPaymentMethod(SteamIntEnum):
     Complimentary = 1024
 
 
+class EPackageStatus(SteamIntEnum):
+    Available = 0
+    Preorder = 1
+    Unavailable = 2
+    Invalid = 3
+
+
 # Do not remove
 from enum import EnumMeta
 
