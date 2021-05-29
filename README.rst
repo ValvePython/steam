@@ -93,7 +93,7 @@ To run for specific version, setup a virtual environment
 Contact
 -------
 
-IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.net/#steamkit>`_)
+IRC: irc.libera.chat / #steamre (`join via webchat <https://web.libera.chat/#steamre>`_)
 
 
 .. _Steam: https://store.steampowered.com/
