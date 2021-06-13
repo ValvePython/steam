@@ -597,7 +597,7 @@ def from_url(url, http_timeout=30):
 
     """
 
-    steam64 = steam64_from_url(url)
+    steam64 = steam64_from_url(url, http_timeout)
 
     if steam64:
         return SteamID(steam64)
