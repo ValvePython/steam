@@ -179,11 +179,10 @@ class WebAuth(object):
 
         if password:
             self.password = password
+        elif self.password:
+            password = self.password
         else:
-            if self.password:
-                password = self.password
-            else:
-                raise LoginIncorrect("password is not specified")
+            raise LoginIncorrect("password is not specified")
 
         if not captcha and self.captcha_code:
             captcha = self.captcha_code
@@ -339,17 +338,15 @@ class MobileWebAuth(WebAuth):
         """
         if oauth_token:
             self.oauth_token = oauth_token
+        elif self.oauth_token:
+            oauth_token = self.oauth_token
         else:
-            if self.oauth_token:
-                oauth_token = self.oauth_token
-            else:
-                raise LoginIncorrect('token is not specified')
+            raise LoginIncorrect('token is not specified')
 
         if steam_id:
             self.steam_id = SteamID(steam_id)
-        else:
-            if not self.steam_id:
-                raise LoginIncorrect('steam_id is not specified')
+        elif not self.steam_id:
+            raise LoginIncorrect('steam_id is not specified')
 
         steam_id = self.steam_id.as_64
 
