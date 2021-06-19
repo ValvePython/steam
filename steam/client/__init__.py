@@ -297,9 +297,8 @@ class SteamClient(CMClient, BuiltinBase):
         """
         if not self.connected:
             self._LOG.debug("Trying to send message when not connected. (discarded)")
-        else:
-            if body_params and isinstance(message, MsgProto):
-                proto_fill_from_dict(message.body, body_params)
+        elif body_params and isinstance(message, MsgProto):
+            proto_fill_from_dict(message.body, body_params)
 
             CMClient.send(self, message)
 
