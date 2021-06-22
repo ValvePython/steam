@@ -333,7 +333,7 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False, challenge=0):
     # request server info
     payload = _pack('<lc', -1, b'T') + b'Source Engine Query\x00'
     if challenge not in (-1, 0): # If a valid challenge was supplied, append it to the payload
-        payload += challenge.to_bytes(4, 'little', signed = True)
+        payload += _pack('<i', challenge)
 
     ss.send(payload)
     start = _time()
