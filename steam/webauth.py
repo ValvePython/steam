@@ -152,6 +152,20 @@ class WebAuth(object):
     def _finalize_login(self, login_response):
         self.steam_id = SteamID(login_response['transfer_parameters']['steamid'])
 
+    def _transfer_cookie(self, name, value, **kwargs):
+        """
+        Sets session cookie for the three main steam domains
+
+        :param name: the name of the cookie
+        :type  name: :class:`str`
+        :param value: the value of the cookie
+        :type  value: :class:`str`
+        :rtype: :class:`None`
+        """
+        kwargs.pop("domain", None)
+        for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
+            self.session.cookies.set(name, value, domain=domain, **kwargs)
+
     def login(self, password='', captcha='', email_code='', twofactor_code='', language='english'):
         """Attempts web login and returns on a session with cookies set
 
@@ -196,15 +210,13 @@ class WebAuth(object):
             self.captcha_gid = -1
 
             for cookie in list(self.session.cookies):
-                for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-                    self.session.cookies.set(cookie.name, cookie.value, domain=domain, secure=cookie.secure)
+                self._transfer_cookie(cookie.name, cookie.value, secure=cookie.secure)
 
             self.session_id = generate_session_id()
 
-            for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-                self.session.cookies.set('Steam_Language', language, domain=domain)
-                self.session.cookies.set('birthtime', '-3333', domain=domain)
-                self.session.cookies.set('sessionid', self.session_id, domain=domain)
+            self._transfer_cookie('Steam_Language', language)
+            self._transfer_cookie('birthtime', '-3333')
+            self._transfer_cookie('sessionid', self.session_id)
 
             self._finalize_login(resp)
 
@@ -369,15 +381,13 @@ class MobileWebAuth(WebAuth):
 
         self.session_id = generate_session_id()
 
-        for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
-            self.session.cookies.set('birthtime', '-3333', domain=domain)
-            self.session.cookies.set('sessionid', self.session_id, domain=domain)
-            self.session.cookies.set('mobileClientVersion', '0 (2.1.3)', domain=domain)
-            self.session.cookies.set('mobileClient', 'android', domain=domain)
-            self.session.cookies.set('steamLogin', str(steam_id) + "%7C%7C" + resp_data['token'], domain=domain)
-            self.session.cookies.set('steamLoginSecure', str(steam_id) + "%7C%7C" + resp_data['token_secure'],
-                                     domain=domain, secure=True)
-            self.session.cookies.set('Steam_Language', language, domain=domain)
+        self._transfer_cookie('birthtime', '-3333')
+        self._transfer_cookie('sessionid', self.session_id)
+        self._transfer_cookie('mobileClientVersion', '0 (2.1.3)')
+        self._transfer_cookie('mobileClient', 'android')
+        self._transfer_cookie('steamLogin', str(steam_id) + "%7C%7C" + resp_data['token'])
+        self._transfer_cookie('steamLoginSecure', str(steam_id) + "%7C%7C" + resp_data['token_secure'], secure=True)
+        self._transfer_cookie('Steam_Language', language)
 
         self.logged_on = True
 
