@@ -14,6 +14,7 @@ class SteamUser(object):
         This is an internal object that can be obtained by :meth:`SteamClient.get_user`
     """
     _pstate = None
+    _pstate_requested = False
     steam_id = SteamID()  #: steam id
     relationship = EFriendRelationship.NONE   #: friendship status
 
@@ -30,18 +31,31 @@ class SteamUser(object):
             self.state,
             )
 
+    def refresh(self, wait=True):
+        if self._pstate_requested and self._pstate_ready.is_set():
+            self._pstate_requested = False
+
+        if not self._pstate_requested:
+            self._steam.request_persona_state([self.steam_id])
+            self._pstate_ready.clear()
+            self._pstate_requested = True
+
+        if wait:
+            self._pstate_ready.wait(timeout=5)
+            self._pstate_requested = False
+
     def get_ps(self, field_name, wait_pstate=True):
         """Get property from PersonaState
 
         `See full list of available fields_names <https://github.com/ValvePython/steam/blob/fa8a5127e9bb23185483930da0b6ae85e93055a7/protobufs/steammessages_clientserver_friends.proto#L125-L153>`_
         """
-        if not wait_pstate or self._pstate_ready.wait(timeout=5):
-            if self._pstate is None and wait_pstate:
-                self._steam.request_persona_state([self.steam_id])
-                self._pstate_ready.wait(timeout=5)
+        if not self._pstate_ready.is_set() and wait_pstate:
+            self.refresh()
 
+        if self._pstate is not None:
             return getattr(self._pstate, field_name)
-        return None
+        else:
+            return None
 
     @property
     def last_logon(self):

@@ -114,7 +114,7 @@ class User(object):
             self._user_cache[steam_id] = suser
 
             if fetch_persona_state:
-                self.request_persona_state([steam_id])
+                suser.refresh(wait=False)
 
         return suser
 
