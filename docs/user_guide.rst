@@ -218,8 +218,8 @@ Alternatively, a callback can be registered to handle the response event every t
     client.on(EMsg.ClientAddFriendResponse, handle_add_response)
 
 
-Loggging
---------
+Logging
+-------
 
 It is often useful to see the message that are coming in and going on.
 Here is how to enable debug logging to the console.
