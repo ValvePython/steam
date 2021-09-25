@@ -579,10 +579,11 @@ def a2s_rules(server_addr, timeout=2, challenge=0, binary=False):
         name = data.read_cstring(binary=binary)
         value = data.read_cstring(binary=binary)
 
-        if not binary and _re_match(r'^\-?[0-9]+$', value):
-            value = int(value)
-        elif not binary and _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
-            value = float(value)
+        if not binary:
+            if _re_match(r'^\-?[0-9]+$', value):
+                value = int(value)
+            elif _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
+                value = float(value)
 
         rules[name] = value
 
