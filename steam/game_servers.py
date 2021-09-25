@@ -538,6 +538,8 @@ def a2s_rules(server_addr, timeout=2, challenge=0, binary=False):
     :type  timeout: float
     :param challenge: (optional) challenge number
     :type  challenge: int
+    :param binary: (optional) return rules as raw bytes
+    :type  binary: bool
     :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a list of rules
     :rtype: :class:`list`
