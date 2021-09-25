@@ -18,7 +18,7 @@ class TestA2SRules(unittest.TestCase):
 
         self.assertEqual(
             {
-                "text": "b\ufffdr",
+                "text": u"b\ufffdr",
                 "int": 42,
                 "float": 21.12
             },
