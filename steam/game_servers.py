@@ -542,7 +542,7 @@ def a2s_rules(server_addr, timeout=2, challenge=0, binary=False):
     :type  binary: bool
     :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a list of rules
-    :rtype: :class:`list`
+    :rtype: :class:`dict`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
