@@ -151,6 +151,9 @@ message CMsgClientPersonaState {
 		optional uint32 watching_broadcast_appid = 75;
 		optional uint32 watching_broadcast_viewers = 76;
 		optional string watching_broadcast_title = 77;
+		optional bool is_community_banned = 78;
+		optional bool player_name_pending_review = 79;
+		optional bool avatar_pending_review = 80;
 	}
 
 	optional uint32 status_flags = 1;

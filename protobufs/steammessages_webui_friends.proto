@@ -331,9 +331,87 @@ message CFriendsList_GetFriendsList_Response {
 	optional .CMsgClientFriendsList friendslist = 1;
 }
 
+message CMsgClientUCMEnumerateUserPublishedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 sort_order = 3;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 list_type = 3 [default = 1];
+	optional uint32 matching_file_type = 4 [default = 0];
+	optional uint32 count = 5 [default = 50];
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId subscribed_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+	optional fixed32 rtime32_subscribed = 2 [default = 0];
+}
+
 message CMsgClientUCMPublishedFileDeleted {
 	optional fixed64 published_file_id = 1;
 	optional uint32 app_id = 2;
+}
+
+message CMsgClientWorkshopItemInfoRequest {
+	optional uint32 app_id = 1;
+	optional uint32 last_time_updated = 2;
+	repeated .CMsgClientWorkshopItemInfoRequest_WorkshopItem workshop_items = 3;
+}
+
+message CMsgClientWorkshopItemInfoRequest_WorkshopItem {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+}
+
+message CMsgClientWorkshopItemInfoResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 update_time = 2;
+	repeated .CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo workshop_items = 3;
+	repeated fixed64 private_items = 4;
+}
+
+message CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+	optional fixed64 manifest_id = 3;
+	optional bool is_legacy = 4;
+}
+
+message CMsgClientUCMGetPublishedFilesForUser {
+	optional uint32 app_id = 1;
+	optional fixed64 creator_steam_id = 2;
+	repeated string required_tags = 3;
+	repeated string excluded_tags = 4;
+	optional uint32 start_index = 5;
+}
+
+message CMsgClientUCMGetPublishedFilesForUserResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
 }
 
 message CMsgCREEnumeratePublishedFiles {
@@ -359,6 +437,18 @@ message CMsgCREEnumeratePublishedFilesResponse_PublishedFileId {
 	optional int32 votes_against = 3;
 	optional int32 reports = 4;
 	optional float score = 5;
+}
+
+message CMsgGameServerPingSample {
+	optional fixed32 my_ip = 1;
+	optional int32 gs_app_id = 2;
+	repeated .CMsgGameServerPingSample_Sample gs_samples = 3;
+}
+
+message CMsgGameServerPingSample_Sample {
+	optional fixed32 ip = 1;
+	optional uint32 avg_ping_ms = 2;
+	optional uint32 stddev_ping_ms_x10 = 3;
 }
 
 message CClan_RespondToClanInvite_Request {

@@ -362,6 +362,10 @@ message ProfileTheme {
 	optional string title = 2;
 }
 
+message ProfilePreferences {
+	optional bool hide_profile_awards = 1;
+}
+
 message CPlayer_GetProfileCustomization_Response {
 	message PurchasedCustomization {
 		optional uint64 purchaseid = 1;
@@ -373,6 +377,7 @@ message CPlayer_GetProfileCustomization_Response {
 	optional uint32 slots_available = 2;
 	optional .ProfileTheme profile_theme = 3;
 	repeated .CPlayer_GetProfileCustomization_Response.PurchasedCustomization purchased_customizations = 4;
+	optional .ProfilePreferences profile_preferences = 5;
 }
 
 message CPlayer_GetPurchasedProfileCustomizations_Request {
@@ -419,6 +424,13 @@ message CPlayer_SetProfileTheme_Request {
 }
 
 message CPlayer_SetProfileTheme_Response {
+}
+
+message CPlayer_SetProfilePreferences_Request {
+	optional .ProfilePreferences profile_preferences = 1;
+}
+
+message CPlayer_SetProfilePreferences_Response {
 }
 
 message CPlayer_PostStatusToFriends_Request {
@@ -476,6 +488,7 @@ message CPlayer_GetLastPlayedTimes_Response {
 
 message CPlayer_AcceptSSA_Request {
 	optional .EAgreementType agreement_type = 1 [default = k_EAgreementType_Invalid];
+	optional uint32 time_signed_utc = 2;
 }
 
 message CPlayer_AcceptSSA_Response {
@@ -630,6 +643,8 @@ message CPlayer_GetDurationControl_Response {
 	optional bool is_steamchina_account = 4;
 	optional bool is_age_verified = 5;
 	optional uint32 seconds_allowed_today = 6;
+	optional bool age_verification_pending = 7;
+	optional bool block_minors = 8;
 }
 
 message CPlayer_LastPlayedTimes_Notification {
@@ -776,6 +791,10 @@ service Player {
 
 	rpc SetProfileTheme (.CPlayer_SetProfileTheme_Request) returns (.CPlayer_SetProfileTheme_Response) {
 		option (method_description) = "Selects a theme for the profile";
+	}
+
+	rpc SetProfilePreferences (.CPlayer_SetProfilePreferences_Request) returns (.CPlayer_SetProfilePreferences_Response) {
+		option (method_description) = "Sets profile preferences";
 	}
 
 	rpc PostStatusToFriends (.CPlayer_PostStatusToFriends_Request) returns (.CPlayer_PostStatusToFriends_Response) {

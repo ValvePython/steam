@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('H\001\220\001\001\200\265\030\001'),
-  serialized_pb=_b('\n\x0b\x65nums.proto\x1a\x18steammessages_base.proto*\x94\t\n\x17\x45PublishedFileQueryType\x12)\n%k_PublishedFileQueryType_RankedByVote\x10\x00\x12\x34\n0k_PublishedFileQueryType_RankedByPublicationDate\x10\x01\x12\x42\n>k_PublishedFileQueryType_AcceptedForGameRankedByAcceptanceDate\x10\x02\x12*\n&k_PublishedFileQueryType_RankedByTrend\x10\x03\x12\x46\nBk_PublishedFileQueryType_FavoritedByFriendsRankedByPublicationDate\x10\x04\x12\x44\n@k_PublishedFileQueryType_CreatedByFriendsRankedByPublicationDate\x10\x05\x12\x35\n1k_PublishedFileQueryType_RankedByNumTimesReported\x10\x06\x12J\nFk_PublishedFileQueryType_CreatedByFollowedUsersRankedByPublicationDate\x10\x07\x12(\n$k_PublishedFileQueryType_NotYetRated\x10\x08\x12=\n9k_PublishedFileQueryType_RankedByTotalUniqueSubscriptions\x10\t\x12\x32\n.k_PublishedFileQueryType_RankedByTotalVotesAsc\x10\n\x12,\n(k_PublishedFileQueryType_RankedByVotesUp\x10\x0b\x12/\n+k_PublishedFileQueryType_RankedByTextSearch\x10\x0c\x12\x32\n.k_PublishedFileQueryType_RankedByPlaytimeTrend\x10\r\x12\x32\n.k_PublishedFileQueryType_RankedByTotalPlaytime\x10\x0e\x12\x39\n5k_PublishedFileQueryType_RankedByAveragePlaytimeTrend\x10\x0f\x12<\n8k_PublishedFileQueryType_RankedByLifetimeAveragePlaytime\x10\x10\x12:\n6k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend\x10\x11\x12=\n9k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions\x10\x12\x12?\n;k_PublishedFileQueryType_RankedByInappropriateContentRating\x10\x13*\xbc\x01\n#EPublishedFileInappropriateProvider\x12\x31\n-k_EPublishedFileInappropriateProvider_Invalid\x10\x00\x12\x30\n,k_EPublishedFileInappropriateProvider_Google\x10\x01\x12\x30\n,k_EPublishedFileInappropriateProvider_Amazon\x10\x02*\xd5\x02\n!EPublishedFileInappropriateResult\x12\x32\n.k_EPublishedFileInappropriateResult_NotScanned\x10\x00\x12\x34\n0k_EPublishedFileInappropriateResult_VeryUnlikely\x10\x01\x12\x30\n,k_EPublishedFileInappropriateResult_Unlikely\x10\x1e\x12\x30\n,k_EPublishedFileInappropriateResult_Possible\x10\x32\x12.\n*k_EPublishedFileInappropriateResult_Likely\x10K\x12\x32\n.k_EPublishedFileInappropriateResult_VeryLikely\x10\x64*\xb1\x03\n\x11\x45PersonaStateFlag\x12\'\n#k_EPersonaStateFlag_HasRichPresence\x10\x01\x12&\n\"k_EPersonaStateFlag_InJoinableGame\x10\x02\x12\x1e\n\x1ak_EPersonaStateFlag_Golden\x10\x04\x12*\n&k_EPersonaStateFlag_RemotePlayTogether\x10\x08\x12&\n!k_EPersonaStateFlag_ClientTypeWeb\x10\x80\x02\x12)\n$k_EPersonaStateFlag_ClientTypeMobile\x10\x80\x04\x12*\n%k_EPersonaStateFlag_ClientTypeTenfoot\x10\x80\x08\x12%\n k_EPersonaStateFlag_ClientTypeVR\x10\x80\x10\x12*\n%k_EPersonaStateFlag_LaunchTypeGamepad\x10\x80 \x12-\n(k_EPersonaStateFlag_LaunchTypeCompatTool\x10\x80@*\xa7\x01\n\x15\x45\x43ontentCheckProvider\x12#\n\x1fk_EContentCheckProvider_Invalid\x10\x00\x12\"\n\x1ek_EContentCheckProvider_Google\x10\x01\x12\"\n\x1ek_EContentCheckProvider_Amazon\x10\x02\x12!\n\x1dk_EContentCheckProvider_Local\x10\x03*\xd8\x02\n\x16\x45\x42\x61nContentCheckResult\x12\'\n#k_EBanContentCheckResult_NotScanned\x10\x00\x12\"\n\x1ek_EBanContentCheckResult_Reset\x10\x01\x12*\n&k_EBanContentCheckResult_NeedsChecking\x10\x02\x12)\n%k_EBanContentCheckResult_VeryUnlikely\x10\x05\x12%\n!k_EBanContentCheckResult_Unlikely\x10\x1e\x12%\n!k_EBanContentCheckResult_Possible\x10\x32\x12#\n\x1fk_EBanContentCheckResult_Likely\x10K\x12\'\n#k_EBanContentCheckResult_VeryLikely\x10\x64*\xec\x08\n\x19\x45ProfileCustomizationType\x12&\n\"k_EProfileCustomizationTypeInvalid\x10\x00\x12\x36\n2k_EProfileCustomizationTypeRareAchievementShowcase\x10\x01\x12,\n(k_EProfileCustomizationTypeGameCollector\x10\x02\x12+\n\'k_EProfileCustomizationTypeItemShowcase\x10\x03\x12,\n(k_EProfileCustomizationTypeTradeShowcase\x10\x04\x12%\n!k_EProfileCustomizationTypeBadges\x10\x05\x12+\n\'k_EProfileCustomizationTypeFavoriteGame\x10\x06\x12\x31\n-k_EProfileCustomizationTypeScreenshotShowcase\x10\x07\x12)\n%k_EProfileCustomizationTypeCustomText\x10\x08\x12,\n(k_EProfileCustomizationTypeFavoriteGroup\x10\t\x12-\n)k_EProfileCustomizationTypeRecommendation\x10\n\x12+\n\'k_EProfileCustomizationTypeWorkshopItem\x10\x0b\x12)\n%k_EProfileCustomizationTypeMyWorkshop\x10\x0c\x12.\n*k_EProfileCustomizationTypeArtworkShowcase\x10\r\x12,\n(k_EProfileCustomizationTypeVideoShowcase\x10\x0e\x12%\n!k_EProfileCustomizationTypeGuides\x10\x0f\x12\'\n#k_EProfileCustomizationTypeMyGuides\x10\x10\x12+\n\'k_EProfileCustomizationTypeAchievements\x10\x11\x12)\n%k_EProfileCustomizationTypeGreenlight\x10\x12\x12+\n\'k_EProfileCustomizationTypeMyGreenlight\x10\x13\x12%\n!k_EProfileCustomizationTypeSalien\x10\x14\x12\x35\n1k_EProfileCustomizationTypeLoyaltyRewardReactions\x10\x15\x12\x34\n0k_EProfileCustomizationTypeSingleArtworkShowcase\x10\x16\x12\x38\n4k_EProfileCustomizationTypeAchievementsCompletionist\x10\x17\x42\tH\x01\x90\x01\x01\x80\xb5\x18\x01')
+  serialized_pb=_b('\n\x0b\x65nums.proto\x1a\x18steammessages_base.proto*\x80\n\n\x17\x45PublishedFileQueryType\x12)\n%k_PublishedFileQueryType_RankedByVote\x10\x00\x12\x34\n0k_PublishedFileQueryType_RankedByPublicationDate\x10\x01\x12\x42\n>k_PublishedFileQueryType_AcceptedForGameRankedByAcceptanceDate\x10\x02\x12*\n&k_PublishedFileQueryType_RankedByTrend\x10\x03\x12\x46\nBk_PublishedFileQueryType_FavoritedByFriendsRankedByPublicationDate\x10\x04\x12\x44\n@k_PublishedFileQueryType_CreatedByFriendsRankedByPublicationDate\x10\x05\x12\x35\n1k_PublishedFileQueryType_RankedByNumTimesReported\x10\x06\x12J\nFk_PublishedFileQueryType_CreatedByFollowedUsersRankedByPublicationDate\x10\x07\x12(\n$k_PublishedFileQueryType_NotYetRated\x10\x08\x12=\n9k_PublishedFileQueryType_RankedByTotalUniqueSubscriptions\x10\t\x12\x32\n.k_PublishedFileQueryType_RankedByTotalVotesAsc\x10\n\x12,\n(k_PublishedFileQueryType_RankedByVotesUp\x10\x0b\x12/\n+k_PublishedFileQueryType_RankedByTextSearch\x10\x0c\x12\x32\n.k_PublishedFileQueryType_RankedByPlaytimeTrend\x10\r\x12\x32\n.k_PublishedFileQueryType_RankedByTotalPlaytime\x10\x0e\x12\x39\n5k_PublishedFileQueryType_RankedByAveragePlaytimeTrend\x10\x0f\x12<\n8k_PublishedFileQueryType_RankedByLifetimeAveragePlaytime\x10\x10\x12:\n6k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend\x10\x11\x12=\n9k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions\x10\x12\x12?\n;k_PublishedFileQueryType_RankedByInappropriateContentRating\x10\x13\x12\x34\n0k_PublishedFileQueryType_RankedByBanContentCheck\x10\x14\x12\x34\n0k_PublishedFileQueryType_RankedByLastUpdatedDate\x10\x15*\xbc\x01\n#EPublishedFileInappropriateProvider\x12\x31\n-k_EPublishedFileInappropriateProvider_Invalid\x10\x00\x12\x30\n,k_EPublishedFileInappropriateProvider_Google\x10\x01\x12\x30\n,k_EPublishedFileInappropriateProvider_Amazon\x10\x02*\xd5\x02\n!EPublishedFileInappropriateResult\x12\x32\n.k_EPublishedFileInappropriateResult_NotScanned\x10\x00\x12\x34\n0k_EPublishedFileInappropriateResult_VeryUnlikely\x10\x01\x12\x30\n,k_EPublishedFileInappropriateResult_Unlikely\x10\x1e\x12\x30\n,k_EPublishedFileInappropriateResult_Possible\x10\x32\x12.\n*k_EPublishedFileInappropriateResult_Likely\x10K\x12\x32\n.k_EPublishedFileInappropriateResult_VeryLikely\x10\x64*\xb1\x03\n\x11\x45PersonaStateFlag\x12\'\n#k_EPersonaStateFlag_HasRichPresence\x10\x01\x12&\n\"k_EPersonaStateFlag_InJoinableGame\x10\x02\x12\x1e\n\x1ak_EPersonaStateFlag_Golden\x10\x04\x12*\n&k_EPersonaStateFlag_RemotePlayTogether\x10\x08\x12&\n!k_EPersonaStateFlag_ClientTypeWeb\x10\x80\x02\x12)\n$k_EPersonaStateFlag_ClientTypeMobile\x10\x80\x04\x12*\n%k_EPersonaStateFlag_ClientTypeTenfoot\x10\x80\x08\x12%\n k_EPersonaStateFlag_ClientTypeVR\x10\x80\x10\x12*\n%k_EPersonaStateFlag_LaunchTypeGamepad\x10\x80 \x12-\n(k_EPersonaStateFlag_LaunchTypeCompatTool\x10\x80@*\xa7\x01\n\x15\x45\x43ontentCheckProvider\x12#\n\x1fk_EContentCheckProvider_Invalid\x10\x00\x12\"\n\x1ek_EContentCheckProvider_Google\x10\x01\x12\"\n\x1ek_EContentCheckProvider_Amazon\x10\x02\x12!\n\x1dk_EContentCheckProvider_Local\x10\x03*\xd8\x02\n\x16\x45\x42\x61nContentCheckResult\x12\'\n#k_EBanContentCheckResult_NotScanned\x10\x00\x12\"\n\x1ek_EBanContentCheckResult_Reset\x10\x01\x12*\n&k_EBanContentCheckResult_NeedsChecking\x10\x02\x12)\n%k_EBanContentCheckResult_VeryUnlikely\x10\x05\x12%\n!k_EBanContentCheckResult_Unlikely\x10\x1e\x12%\n!k_EBanContentCheckResult_Possible\x10\x32\x12#\n\x1fk_EBanContentCheckResult_Likely\x10K\x12\'\n#k_EBanContentCheckResult_VeryLikely\x10\x64*\xec\x08\n\x19\x45ProfileCustomizationType\x12&\n\"k_EProfileCustomizationTypeInvalid\x10\x00\x12\x36\n2k_EProfileCustomizationTypeRareAchievementShowcase\x10\x01\x12,\n(k_EProfileCustomizationTypeGameCollector\x10\x02\x12+\n\'k_EProfileCustomizationTypeItemShowcase\x10\x03\x12,\n(k_EProfileCustomizationTypeTradeShowcase\x10\x04\x12%\n!k_EProfileCustomizationTypeBadges\x10\x05\x12+\n\'k_EProfileCustomizationTypeFavoriteGame\x10\x06\x12\x31\n-k_EProfileCustomizationTypeScreenshotShowcase\x10\x07\x12)\n%k_EProfileCustomizationTypeCustomText\x10\x08\x12,\n(k_EProfileCustomizationTypeFavoriteGroup\x10\t\x12-\n)k_EProfileCustomizationTypeRecommendation\x10\n\x12+\n\'k_EProfileCustomizationTypeWorkshopItem\x10\x0b\x12)\n%k_EProfileCustomizationTypeMyWorkshop\x10\x0c\x12.\n*k_EProfileCustomizationTypeArtworkShowcase\x10\r\x12,\n(k_EProfileCustomizationTypeVideoShowcase\x10\x0e\x12%\n!k_EProfileCustomizationTypeGuides\x10\x0f\x12\'\n#k_EProfileCustomizationTypeMyGuides\x10\x10\x12+\n\'k_EProfileCustomizationTypeAchievements\x10\x11\x12)\n%k_EProfileCustomizationTypeGreenlight\x10\x12\x12+\n\'k_EProfileCustomizationTypeMyGreenlight\x10\x13\x12%\n!k_EProfileCustomizationTypeSalien\x10\x14\x12\x35\n1k_EProfileCustomizationTypeLoyaltyRewardReactions\x10\x15\x12\x34\n0k_EProfileCustomizationTypeSingleArtworkShowcase\x10\x16\x12\x38\n4k_EProfileCustomizationTypeAchievementsCompletionist\x10\x17*\xc8\x01\n\x1b\x45PublishedFileStorageSystem\x12(\n$k_EPublishedFileStorageSystemInvalid\x10\x00\x12,\n(k_EPublishedFileStorageSystemLegacyCloud\x10\x01\x12&\n\"k_EPublishedFileStorageSystemDepot\x10\x02\x12)\n%k_EPublishedFileStorageSystemUGCCloud\x10\x03*\x97\x01\n\x19\x45\x43loudStoragePersistState\x12(\n$k_ECloudStoragePersistStatePersisted\x10\x00\x12(\n$k_ECloudStoragePersistStateForgotten\x10\x01\x12&\n\"k_ECloudStoragePersistStateDeleted\x10\x02*\xc0\x03\n\x14\x45\x42luetoothDeviceType\x12!\n\x1dk_BluetoothDeviceType_Invalid\x10\x00\x12!\n\x1dk_BluetoothDeviceType_Unknown\x10\x01\x12\x1f\n\x1bk_BluetoothDeviceType_Phone\x10\x02\x12\"\n\x1ek_BluetoothDeviceType_Computer\x10\x03\x12!\n\x1dk_BluetoothDeviceType_Headset\x10\x04\x12$\n k_BluetoothDeviceType_Headphones\x10\x05\x12\"\n\x1ek_BluetoothDeviceType_Speakers\x10\x06\x12$\n k_BluetoothDeviceType_OtherAudio\x10\x07\x12\x1f\n\x1bk_BluetoothDeviceType_Mouse\x10\x08\x12\"\n\x1ek_BluetoothDeviceType_Joystick\x10\t\x12!\n\x1dk_BluetoothDeviceType_Gamepad\x10\n\x12\"\n\x1ek_BluetoothDeviceType_Keyboard\x10\x0b*\xe1\x01\n\x18\x45StorageBlockContentType\x12&\n\"k_EStorageBlockContentType_Invalid\x10\x00\x12&\n\"k_EStorageBlockContentType_Unknown\x10\x01\x12)\n%k_EStorageBlockContentType_FileSystem\x10\x02\x12%\n!k_EStorageBlockContentType_Crypto\x10\x03\x12#\n\x1fk_EStorageBlockContentType_Raid\x10\x04*\xc3\x01\n\x1b\x45StorageBlockFileSystemType\x12)\n%k_EStorageBlockFileSystemType_Invalid\x10\x00\x12)\n%k_EStorageBlockFileSystemType_Unknown\x10\x01\x12&\n\"k_EStorageBlockFileSystemType_VFat\x10\x02\x12&\n\"k_EStorageBlockFileSystemType_Ext4\x10\x03\x42\tH\x01\x90\x01\x01\x80\xb5\x18\x01')
   ,
   dependencies=[steammessages__base__pb2.DESCRIPTOR,])
 
@@ -112,11 +112,19 @@ _EPUBLISHEDFILEQUERYTYPE = _descriptor.EnumDescriptor(
       name='k_PublishedFileQueryType_RankedByInappropriateContentRating', index=19, number=19,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_PublishedFileQueryType_RankedByBanContentCheck', index=20, number=20,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_PublishedFileQueryType_RankedByLastUpdatedDate', index=21, number=21,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=42,
-  serialized_end=1214,
+  serialized_end=1322,
 )
 _sym_db.RegisterEnumDescriptor(_EPUBLISHEDFILEQUERYTYPE)
 
@@ -142,8 +150,8 @@ _EPUBLISHEDFILEINAPPROPRIATEPROVIDER = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1217,
-  serialized_end=1405,
+  serialized_start=1325,
+  serialized_end=1513,
 )
 _sym_db.RegisterEnumDescriptor(_EPUBLISHEDFILEINAPPROPRIATEPROVIDER)
 
@@ -181,8 +189,8 @@ _EPUBLISHEDFILEINAPPROPRIATERESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1408,
-  serialized_end=1749,
+  serialized_start=1516,
+  serialized_end=1857,
 )
 _sym_db.RegisterEnumDescriptor(_EPUBLISHEDFILEINAPPROPRIATERESULT)
 
@@ -236,8 +244,8 @@ _EPERSONASTATEFLAG = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1752,
-  serialized_end=2185,
+  serialized_start=1860,
+  serialized_end=2293,
 )
 _sym_db.RegisterEnumDescriptor(_EPERSONASTATEFLAG)
 
@@ -267,8 +275,8 @@ _ECONTENTCHECKPROVIDER = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2188,
-  serialized_end=2355,
+  serialized_start=2296,
+  serialized_end=2463,
 )
 _sym_db.RegisterEnumDescriptor(_ECONTENTCHECKPROVIDER)
 
@@ -314,8 +322,8 @@ _EBANCONTENTCHECKRESULT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2358,
-  serialized_end=2702,
+  serialized_start=2466,
+  serialized_end=2810,
 )
 _sym_db.RegisterEnumDescriptor(_EBANCONTENTCHECKRESULT)
 
@@ -425,12 +433,199 @@ _EPROFILECUSTOMIZATIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2705,
-  serialized_end=3837,
+  serialized_start=2813,
+  serialized_end=3945,
 )
 _sym_db.RegisterEnumDescriptor(_EPROFILECUSTOMIZATIONTYPE)
 
 EProfileCustomizationType = enum_type_wrapper.EnumTypeWrapper(_EPROFILECUSTOMIZATIONTYPE)
+_EPUBLISHEDFILESTORAGESYSTEM = _descriptor.EnumDescriptor(
+  name='EPublishedFileStorageSystem',
+  full_name='EPublishedFileStorageSystem',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EPublishedFileStorageSystemInvalid', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EPublishedFileStorageSystemLegacyCloud', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EPublishedFileStorageSystemDepot', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EPublishedFileStorageSystemUGCCloud', index=3, number=3,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=3948,
+  serialized_end=4148,
+)
+_sym_db.RegisterEnumDescriptor(_EPUBLISHEDFILESTORAGESYSTEM)
+
+EPublishedFileStorageSystem = enum_type_wrapper.EnumTypeWrapper(_EPUBLISHEDFILESTORAGESYSTEM)
+_ECLOUDSTORAGEPERSISTSTATE = _descriptor.EnumDescriptor(
+  name='ECloudStoragePersistState',
+  full_name='ECloudStoragePersistState',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_ECloudStoragePersistStatePersisted', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_ECloudStoragePersistStateForgotten', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_ECloudStoragePersistStateDeleted', index=2, number=2,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=4151,
+  serialized_end=4302,
+)
+_sym_db.RegisterEnumDescriptor(_ECLOUDSTORAGEPERSISTSTATE)
+
+ECloudStoragePersistState = enum_type_wrapper.EnumTypeWrapper(_ECLOUDSTORAGEPERSISTSTATE)
+_EBLUETOOTHDEVICETYPE = _descriptor.EnumDescriptor(
+  name='EBluetoothDeviceType',
+  full_name='EBluetoothDeviceType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Invalid', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Unknown', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Phone', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Computer', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Headset', index=4, number=4,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Headphones', index=5, number=5,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Speakers', index=6, number=6,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_OtherAudio', index=7, number=7,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Mouse', index=8, number=8,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Joystick', index=9, number=9,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Gamepad', index=10, number=10,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_BluetoothDeviceType_Keyboard', index=11, number=11,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=4305,
+  serialized_end=4753,
+)
+_sym_db.RegisterEnumDescriptor(_EBLUETOOTHDEVICETYPE)
+
+EBluetoothDeviceType = enum_type_wrapper.EnumTypeWrapper(_EBLUETOOTHDEVICETYPE)
+_ESTORAGEBLOCKCONTENTTYPE = _descriptor.EnumDescriptor(
+  name='EStorageBlockContentType',
+  full_name='EStorageBlockContentType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockContentType_Invalid', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockContentType_Unknown', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockContentType_FileSystem', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockContentType_Crypto', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockContentType_Raid', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=4756,
+  serialized_end=4981,
+)
+_sym_db.RegisterEnumDescriptor(_ESTORAGEBLOCKCONTENTTYPE)
+
+EStorageBlockContentType = enum_type_wrapper.EnumTypeWrapper(_ESTORAGEBLOCKCONTENTTYPE)
+_ESTORAGEBLOCKFILESYSTEMTYPE = _descriptor.EnumDescriptor(
+  name='EStorageBlockFileSystemType',
+  full_name='EStorageBlockFileSystemType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockFileSystemType_Invalid', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockFileSystemType_Unknown', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockFileSystemType_VFat', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EStorageBlockFileSystemType_Ext4', index=3, number=3,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=4984,
+  serialized_end=5179,
+)
+_sym_db.RegisterEnumDescriptor(_ESTORAGEBLOCKFILESYSTEMTYPE)
+
+EStorageBlockFileSystemType = enum_type_wrapper.EnumTypeWrapper(_ESTORAGEBLOCKFILESYSTEMTYPE)
 k_PublishedFileQueryType_RankedByVote = 0
 k_PublishedFileQueryType_RankedByPublicationDate = 1
 k_PublishedFileQueryType_AcceptedForGameRankedByAcceptanceDate = 2
@@ -451,6 +646,8 @@ k_PublishedFileQueryType_RankedByLifetimeAveragePlaytime = 16
 k_PublishedFileQueryType_RankedByPlaytimeSessionsTrend = 17
 k_PublishedFileQueryType_RankedByLifetimePlaytimeSessions = 18
 k_PublishedFileQueryType_RankedByInappropriateContentRating = 19
+k_PublishedFileQueryType_RankedByBanContentCheck = 20
+k_PublishedFileQueryType_RankedByLastUpdatedDate = 21
 k_EPublishedFileInappropriateProvider_Invalid = 0
 k_EPublishedFileInappropriateProvider_Google = 1
 k_EPublishedFileInappropriateProvider_Amazon = 2
@@ -506,6 +703,34 @@ k_EProfileCustomizationTypeSalien = 20
 k_EProfileCustomizationTypeLoyaltyRewardReactions = 21
 k_EProfileCustomizationTypeSingleArtworkShowcase = 22
 k_EProfileCustomizationTypeAchievementsCompletionist = 23
+k_EPublishedFileStorageSystemInvalid = 0
+k_EPublishedFileStorageSystemLegacyCloud = 1
+k_EPublishedFileStorageSystemDepot = 2
+k_EPublishedFileStorageSystemUGCCloud = 3
+k_ECloudStoragePersistStatePersisted = 0
+k_ECloudStoragePersistStateForgotten = 1
+k_ECloudStoragePersistStateDeleted = 2
+k_BluetoothDeviceType_Invalid = 0
+k_BluetoothDeviceType_Unknown = 1
+k_BluetoothDeviceType_Phone = 2
+k_BluetoothDeviceType_Computer = 3
+k_BluetoothDeviceType_Headset = 4
+k_BluetoothDeviceType_Headphones = 5
+k_BluetoothDeviceType_Speakers = 6
+k_BluetoothDeviceType_OtherAudio = 7
+k_BluetoothDeviceType_Mouse = 8
+k_BluetoothDeviceType_Joystick = 9
+k_BluetoothDeviceType_Gamepad = 10
+k_BluetoothDeviceType_Keyboard = 11
+k_EStorageBlockContentType_Invalid = 0
+k_EStorageBlockContentType_Unknown = 1
+k_EStorageBlockContentType_FileSystem = 2
+k_EStorageBlockContentType_Crypto = 3
+k_EStorageBlockContentType_Raid = 4
+k_EStorageBlockFileSystemType_Invalid = 0
+k_EStorageBlockFileSystemType_Unknown = 1
+k_EStorageBlockFileSystemType_VFat = 2
+k_EStorageBlockFileSystemType_Ext4 = 3
 
 
 DESCRIPTOR.enum_types_by_name['EPublishedFileQueryType'] = _EPUBLISHEDFILEQUERYTYPE
@@ -515,6 +740,11 @@ DESCRIPTOR.enum_types_by_name['EPersonaStateFlag'] = _EPERSONASTATEFLAG
 DESCRIPTOR.enum_types_by_name['EContentCheckProvider'] = _ECONTENTCHECKPROVIDER
 DESCRIPTOR.enum_types_by_name['EBanContentCheckResult'] = _EBANCONTENTCHECKRESULT
 DESCRIPTOR.enum_types_by_name['EProfileCustomizationType'] = _EPROFILECUSTOMIZATIONTYPE
+DESCRIPTOR.enum_types_by_name['EPublishedFileStorageSystem'] = _EPUBLISHEDFILESTORAGESYSTEM
+DESCRIPTOR.enum_types_by_name['ECloudStoragePersistState'] = _ECLOUDSTORAGEPERSISTSTATE
+DESCRIPTOR.enum_types_by_name['EBluetoothDeviceType'] = _EBLUETOOTHDEVICETYPE
+DESCRIPTOR.enum_types_by_name['EStorageBlockContentType'] = _ESTORAGEBLOCKCONTENTTYPE
+DESCRIPTOR.enum_types_by_name['EStorageBlockFileSystemType'] = _ESTORAGEBLOCKFILESYSTEMTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

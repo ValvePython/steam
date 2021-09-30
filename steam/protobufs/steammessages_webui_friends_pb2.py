@@ -25,7 +25,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n!steammessages_webui_friends.proto\x1a steammessages_unified_base.proto\x1a\x18steammessages_base.proto\x1a(steammessages_clientserver_friends.proto\"\x82\x01\n1CHelpRequestLogs_UploadUserApplicationLog_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08log_type\x18\x02 \x01(\t\x12\x16\n\x0eversion_string\x18\x03 \x01(\t\x12\x14\n\x0clog_contents\x18\x04 \x01(\t\"@\n2CHelpRequestLogs_UploadUserApplicationLog_Response\x12\n\n\x02id\x18\x01 \x01(\x04\"n\n\x1e\x43MsgClientAppMinutesPlayedData\x12L\n\x0eminutes_played\x18\x01 \x03(\x0b\x32\x34.CMsgClientAppMinutesPlayedData_AppMinutesPlayedData\"n\n3CMsgClientAppMinutesPlayedData_AppMinutesPlayedData\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x05\x12\x16\n\x0elast_two_weeks\x18\x03 \x01(\x05\">\n\x1a\x43\x43ommunity_GetApps_Request\x12\x0e\n\x06\x61ppids\x18\x01 \x03(\x05\x12\x10\n\x08language\x18\x02 \x01(\r\"B\n\x1b\x43\x43ommunity_GetApps_Response\x12#\n\x04\x61pps\x18\x01 \x03(\x0b\x32\x15.CCDDBAppDetailCommon\"T\n1CCommunity_GetAppRichPresenceLocalization_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x10\n\x08language\x18\x02 \x01(\t\"\x97\x01\n2CCommunity_GetAppRichPresenceLocalization_Response\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12R\n\x0btoken_lists\x18\x02 \x03(\x0b\x32=.CCommunity_GetAppRichPresenceLocalization_Response_TokenList\"W\n8CCommunity_GetAppRichPresenceLocalization_Response_Token\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x9b\x01\n<CCommunity_GetAppRichPresenceLocalization_Response_TokenList\x12\x10\n\x08language\x18\x01 \x01(\t\x12I\n\x06tokens\x18\x02 \x03(\x0b\x32\x39.CCommunity_GetAppRichPresenceLocalization_Response_Token\"\x9d\x02\n#CCommunity_GetCommentThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x05 \x01(\x06\x12\r\n\x05start\x18\x06 \x01(\x05\x12\r\n\x05\x63ount\x18\x07 \x01(\x05\x12\x10\n\x08upvoters\x18\x08 \x01(\x05\x12\x17\n\x0finclude_deleted\x18\t \x01(\x08\x12\x12\n\ngidcomment\x18\n \x01(\x06\x12\x13\n\x0btime_oldest\x18\x0b \x01(\r\x12\x14\n\x0coldest_first\x18\x0c \x01(\x08\"\xf6\x01\n\x12\x43\x43ommunity_Comment\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x11\n\ttimestamp\x18\x03 \x01(\r\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x0f\n\x07upvotes\x18\x05 \x01(\x05\x12\x0e\n\x06hidden\x18\x06 \x01(\x08\x12\x16\n\x0ehidden_by_user\x18\x07 \x01(\x08\x12\x0f\n\x07\x64\x65leted\x18\x08 \x01(\x08\x12!\n\tipaddress\x18\t \x01(\x0b\x32\x0e.CMsgIPAddress\x12\x14\n\x0ctotal_hidden\x18\n \x01(\x05\x12\x17\n\x0fupvoted_by_user\x18\x0b \x01(\x08\"\x88\x03\n$CCommunity_GetCommentThread_Response\x12%\n\x08\x63omments\x18\x01 \x03(\x0b\x32\x13.CCommunity_Comment\x12-\n\x10\x64\x65leted_comments\x18\x02 \x03(\x0b\x32\x13.CCommunity_Comment\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x04 \x01(\x06\x12\r\n\x05start\x18\x05 \x01(\x05\x12\r\n\x05\x63ount\x18\x06 \x01(\x05\x12\x13\n\x0btotal_count\x18\x07 \x01(\x05\x12\x0f\n\x07upvotes\x18\x08 \x01(\x05\x12\x10\n\x08upvoters\x18\t \x03(\r\x12\x17\n\x0fuser_subscribed\x18\n \x01(\x08\x12\x14\n\x0cuser_upvoted\x18\x0b \x01(\x08\x12\x18\n\x10\x61nswer_commentid\x18\x0c \x01(\x06\x12\x14\n\x0c\x61nswer_actor\x18\r \x01(\r\x12\x19\n\x11\x61nswer_actor_rank\x18\x0e \x01(\x05\x12\x10\n\x08\x63\x61n_post\x18\x0f \x01(\x08\"\xc7\x01\n&CCommunity_PostCommentToThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x0c\n\x04text\x18\x06 \x01(\t\x12\x18\n\x10gidparentcomment\x18\x07 \x01(\x06\x12\x1e\n\x16suppress_notifications\x18\x08 \x01(\x08\"v\n\'CCommunity_PostCommentToThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x06\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\x0f\n\x07upvotes\x18\x04 \x01(\x05\"\xa9\x01\n*CCommunity_DeleteCommentFromThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x12\n\ngidcomment\x18\x05 \x01(\x06\x12\x10\n\x08undelete\x18\x06 \x01(\x08\"-\n+CCommunity_DeleteCommentFromThread_Response\"\xc0\x01\n$CCommunity_RateCommentThread_Request\x12\x19\n\x11\x63ommentthreadtype\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x12\n\ngidfeature\x18\x03 \x01(\x04\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x04\x12\x12\n\ngidcomment\x18\x05 \x01(\x04\x12\x0f\n\x07rate_up\x18\x06 \x01(\x08\x12\x1e\n\x16suppress_notifications\x18\x07 \x01(\x08\"\x89\x01\n%CCommunity_RateCommentThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x04\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\r\x12\x0f\n\x07upvotes\x18\x04 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x05 \x01(\x08\"\xaa\x01\n*CCommunity_GetCommentThreadRatings_Request\x12\x19\n\x11\x63ommentthreadtype\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x12\n\ngidfeature\x18\x03 \x01(\x04\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x04\x12\x12\n\ngidcomment\x18\x05 \x01(\x04\x12\x13\n\x0bmax_results\x18\x06 \x01(\r\"\x9c\x01\n+CCommunity_GetCommentThreadRatings_Response\x12\x17\n\x0f\x63ommentthreadid\x18\x01 \x01(\x04\x12\x12\n\ngidcomment\x18\x02 \x01(\x04\x12\x0f\n\x07upvotes\x18\x03 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x04 \x01(\x08\x12\x1a\n\x12upvoter_accountids\x18\x05 \x03(\r\"R\n\'CCommunity_RateClanAnnouncement_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\x12\x0f\n\x07vote_up\x18\x02 \x01(\x08\"*\n(CCommunity_RateClanAnnouncement_Response\"K\n1CCommunity_GetClanAnnouncementVoteForUser_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\"Z\n2CCommunity_GetClanAnnouncementVoteForUser_Response\x12\x10\n\x08voted_up\x18\x01 \x01(\x08\x12\x12\n\nvoted_down\x18\x02 \x01(\x08\"/\n\x0c\x43\x41ppPriority\x12\x10\n\x08priority\x18\x01 \x01(\r\x12\r\n\x05\x61ppid\x18\x02 \x03(\r\"\xd8\x02\n*CCommunity_GetUserPartnerEventNews_Request\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x1a\n\x12rtime32_start_time\x18\x03 \x01(\r\x12\x18\n\x10rtime32_end_time\x18\x04 \x01(\r\x12\x1b\n\x13language_preference\x18\x05 \x03(\r\x12M\n\x11\x66ilter_event_type\x18\x06 \x03(\x05\x42\x32\x82\xb5\x18.enum; suggested type: ECommunityWordFilterType\x12\x17\n\x0f\x66ilter_to_appid\x18\x07 \x01(\x08\x12\x1f\n\x08\x61pp_list\x18\x08 \x03(\x0b\x32\r.CAppPriority\x12\x16\n\x0b\x63ount_after\x18\t \x01(\r:\x01\x30\x12\x17\n\x0c\x63ount_before\x18\n \x01(\r:\x01\x30\"W\n+CCommunity_GetUserPartnerEventNews_Response\x12(\n\x07results\x18\x01 \x03(\x0b\x32\x17.CClanMatchEventByRange\"k\n\'CCommunity_GetBestEventsForUser_Request\x12\x1a\n\x12include_steam_blog\x18\x01 \x01(\x08\x12$\n\x1c\x66ilter_to_played_within_days\x18\x02 \x01(\r\"\xc3\x01\n\x1d\x43\x43ommunity_PartnerEventResult\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\x18\n\x10\x61nnouncement_gid\x18\x03 \x01(\x06\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\x12\x19\n\x11possible_takeover\x18\x05 \x01(\x08\x12 \n\x15rtime32_last_modified\x18\x06 \x01(\r:\x01\x30\x12\x19\n\x11user_app_priority\x18\x07 \x01(\x05\"[\n(CCommunity_GetBestEventsForUser_Response\x12/\n\x07results\x18\x01 \x03(\x0b\x32\x1e.CCommunity_PartnerEventResult\"8\n6CCommunity_ClearUserPartnerEventsAppPriorities_Request\"9\n7CCommunity_ClearUserPartnerEventsAppPriorities_Response\"O\n#CCommunity_PartnerEventsAppPriority\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x19\n\x11user_app_priority\x18\x02 \x01(\x05\"6\n4CCommunity_GetUserPartnerEventsAppPriorities_Request\"q\n5CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x38\n\npriorities\x18\x01 \x03(\x0b\x32$.CCommunity_PartnerEventsAppPriority\"G\n6CCommunity_ClearSinglePartnerEventsAppPriority_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"9\n7CCommunity_ClearSinglePartnerEventsAppPriority_Response\"?\n.CCommunity_PartnerEventsShowMoreForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"1\n/CCommunity_PartnerEventsShowMoreForApp_Response\"?\n.CCommunity_PartnerEventsShowLessForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"1\n/CCommunity_PartnerEventsShowLessForApp_Response\"\x81\x01\n+CCommunity_MarkPartnerEventsForUser_Request\x12R\n\x08markings\x18\x01 \x03(\x0b\x32@.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\"\xdd\x01\n?CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12P\n\x10\x64isplay_location\x18\x03 \x01(\x05\x42\x36\x82\xb5\x18\x32\x65num; suggested type: EPartnerEventDisplayLocation\x12\x12\n\nmark_shown\x18\x04 \x01(\x08\x12\x11\n\tmark_read\x18\x05 \x01(\x08\".\n,CCommunity_MarkPartnerEventsForUser_Response\"y\n*CProductImpressionsFromClient_Notification\x12K\n\x0bimpressions\x18\x01 \x03(\x0b\x32\x36.CProductImpressionsFromClient_Notification_Impression\"\xa9\x01\n5CProductImpressionsFromClient_Notification_Impression\x12H\n\x04type\x18\x01 \x01(\x05\x42:\x82\xb5\x18\x36\x65num; suggested type: EProductImpressionFromClientType\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x17\n\x0fnum_impressions\x18\x03 \x01(\r\"P\n\x14\x43\x46riendsListCategory\x12\x0f\n\x07groupid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x19\n\x11\x61\x63\x63ountid_members\x18\x03 \x03(\r\"$\n\"CFriendsList_GetCategories_Request\"P\n#CFriendsList_GetCategories_Response\x12)\n\ncategories\x18\x01 \x03(\x0b\x32\x15.CFriendsListCategory\"U\n\x19\x43\x46riendsListFavoriteEntry\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x0e\n\x06\x63lanid\x18\x02 \x01(\r\x12\x15\n\rchat_group_id\x18\x03 \x01(\x04\"#\n!CFriendsList_GetFavorites_Request\"S\n\"CFriendsList_GetFavorites_Response\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"R\n!CFriendsList_SetFavorites_Request\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"$\n\"CFriendsList_SetFavorites_Response\"[\n*CFriendsList_FavoritesChanged_Notification\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"%\n#CFriendsList_GetFriendsList_Request\"S\n$CFriendsList_GetFriendsList_Response\x12+\n\x0b\x66riendslist\x18\x01 \x01(\x0b\x32\x16.CMsgClientFriendsList\"N\n!CMsgClientUCMPublishedFileDeleted\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"\xb7\x01\n\x1e\x43MsgCREEnumeratePublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x12\n\nquery_type\x18\x02 \x01(\x05\x12\x13\n\x0bstart_index\x18\x03 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\r\x12\r\n\x05\x63ount\x18\x05 \x01(\r\x12\x0c\n\x04tags\x18\x06 \x03(\t\x12\x11\n\tuser_tags\x18\x07 \x03(\t\x12\x1e\n\x12matching_file_type\x18\x08 \x01(\r:\x02\x31\x33\"\xa5\x01\n&CMsgCREEnumeratePublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12P\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x37.CMsgCREEnumeratePublishedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"\x9d\x01\n6CMsgCREEnumeratePublishedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"D\n!CClan_RespondToClanInvite_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0e\n\x06\x61\x63\x63\x65pt\x18\x02 \x01(\x08\"$\n\"CClan_RespondToClanInvite_Response\"A\n&CVoiceChat_RequestOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"?\n\'CVoiceChat_RequestOneOnOneChat_Response\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"^\n-CVoiceChat_OneOnOneChatRequested_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\"p\n%CVoiceChat_AnswerOneOnOneChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"(\n&CVoiceChat_AnswerOneOnOneChat_Response\"~\n3CVoiceChat_OneOnOneChatRequestResponse_Notification\x12\x14\n\x0cvoicechat_id\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"=\n\"CVoiceChat_EndOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"%\n#CVoiceChat_EndOneOnOneChat_Response\"U\n$CVoiceChat_LeaveOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x14\n\x0cvoice_chatid\x18\x02 \x01(\x06\"\'\n%CVoiceChat_LeaveOneOnOneChat_Response\"\xdd\x01\n+CVoiceChat_UserJoinedVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xe0\x01\n\'CVoiceChat_UserVoiceStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x1e\n\x16user_muted_mic_locally\x18\x03 \x01(\x08\x12!\n\x19user_muted_output_locally\x18\x04 \x01(\x08\x12#\n\x1buser_has_no_mic_for_session\x18\x05 \x01(\x08\x12!\n\x19user_webaudio_sample_rate\x18\x06 \x01(\x05\"y\n(CVoiceChat_AllMembersStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x37\n\x05users\x18\x02 \x03(\x0b\x32(.CVoiceChat_UserVoiceStatus_Notification\"\x88\x02\n,CVoiceChat_UpdateVoiceChatWebRTCData_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x18\n\x10ip_webrtc_server\x18\x02 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x03 \x01(\r\x12\x18\n\x10ip_webrtc_client\x18\x04 \x01(\r\x12\x1a\n\x12port_webrtc_client\x18\x05 \x01(\r\x12\x1e\n\x16ssrc_my_sending_stream\x18\x06 \x01(\r\x12\x12\n\nuser_agent\x18\x07 \x01(\t\x12\"\n\x1ahas_audio_worklets_support\x18\x08 \x01(\x08\"O\n-CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12\x1e\n\x16send_client_voice_logs\x18\x01 \x01(\x08\"i\n,CVoiceChat_UploadClientVoiceChatLogs_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12#\n\x1b\x63lient_voice_logs_new_lines\x18\x02 \x01(\t\"/\n-CVoiceChat_UploadClientVoiceChatLogs_Response\"9\n!CVoiceChat_LeaveVoiceChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"$\n\"CVoiceChat_LeaveVoiceChat_Response\"\xdb\x01\n)CVoiceChat_UserLeftVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xaa\x01\n&CVoiceChat_VoiceChatEnded_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12 \n\x18one_on_one_steamid_lower\x18\x02 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x03 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x04 \x01(\x04\x12\x15\n\rchat_group_id\x18\x05 \x01(\x04\"=\n.CWebRTCClient_InitiateWebRTCConnection_Request\x12\x0b\n\x03sdp\x18\x01 \x01(\t\"M\n/CWebRTCClient_InitiateWebRTCConnection_Response\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\"\x8b\x01\n+CWebRTC_WebRTCSessionConnected_Notification\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\tclient_ip\x18\x02 \x01(\r\x12\x13\n\x0b\x63lient_port\x18\x03 \x01(\r\x12\x11\n\tserver_ip\x18\x04 \x01(\r\x12\x13\n\x0bserver_port\x18\x05 \x01(\r\"\xde\x01\n2CWebRTC_WebRTCUpdateRemoteDescription_Notification\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\x12\"\n\x1aremote_description_version\x18\x02 \x01(\x04\x12h\n\x13ssrcs_to_accountids\x18\x03 \x03(\x0b\x32K.CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\"m\nJCWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\taccountid\x18\x02 \x01(\r\"\xdb\x01\n9CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x12\x18\n\x10ip_webrtc_server\x18\x01 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x02 \x01(\r\x12 \n\x18ip_webrtc_session_client\x18\x03 \x01(\r\x12\"\n\x1aport_webrtc_session_client\x18\x04 \x01(\r\x12\"\n\x1aremote_description_version\x18\x05 \x01(\x04\"<\n:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response\"\'\n%CMobilePerAccount_GetSettings_Request\"\xec\x01\n&CMobilePerAccount_GetSettings_Response\x12\x14\n\x0chas_settings\x18\x04 \x01(\x08\x12\x17\n\x0f\x61llow_sale_push\x18\x02 \x01(\x08\x12\x1b\n\x13\x61llow_wishlist_push\x18\x03 \x01(\x08\x12\x1f\n\x17\x63hat_notification_level\x18\x05 \x01(\r\x12\x1a\n\x12notify_direct_chat\x18\x06 \x01(\x08\x12\x19\n\x11notify_group_chat\x18\x07 \x01(\x08\x12\x1e\n\x10\x61llow_event_push\x18\x08 \x01(\x08:\x04true\"\xd5\x01\n%CMobilePerAccount_SetSettings_Request\x12\x17\n\x0f\x61llow_sale_push\x18\x02 \x01(\x08\x12\x1b\n\x13\x61llow_wishlist_push\x18\x03 \x01(\x08\x12\x1f\n\x17\x63hat_notification_level\x18\x04 \x01(\r\x12\x1a\n\x12notify_direct_chat\x18\x05 \x01(\x08\x12\x19\n\x11notify_group_chat\x18\x06 \x01(\x08\x12\x1e\n\x10\x61llow_event_push\x18\x07 \x01(\x08:\x04true\"(\n&CMobilePerAccount_SetSettings_Response\"\x84\x02\n*CMobileDevice_RegisterMobileDevice_Request\x12\x10\n\x08\x64\x65viceid\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x14\n\x0cpush_enabled\x18\x03 \x01(\x08\x12\x13\n\x0b\x61pp_version\x18\x04 \x01(\t\x12\x12\n\nos_version\x18\x05 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x06 \x01(\t\x12#\n\x1btwofactor_device_identifier\x18\x07 \x01(\t\x12\x38\n\nmobile_app\x18\x08 \x01(\x05\x42$\x82\xb5\x18 enum; suggested type: EMobileApp\"F\n+CMobileDevice_RegisterMobileDevice_Response\x12\x17\n\x0funique_deviceid\x18\x02 \x01(\r\"E\n1CMobileDevice_DeregisterMobileDevice_Notification\x12\x10\n\x08\x64\x65viceid\x18\x01 \x01(\t\"\x0e\n\x0cUnknownProto2\x97\x01\n\x0fHelpRequestLogs\x12\x83\x01\n\x18UploadUserApplicationLog\x12\x32.CHelpRequestLogs_UploadUserApplicationLog_Request\x1a\x33.CHelpRequestLogs_UploadUserApplicationLog_Response2\x9e\x10\n\tCommunity\x12\x44\n\x07GetApps\x12\x1b.CCommunity_GetApps_Request\x1a\x1c.CCommunity_GetApps_Response\x12\x89\x01\n\x1eGetAppRichPresenceLocalization\x12\x32.CCommunity_GetAppRichPresenceLocalization_Request\x1a\x33.CCommunity_GetAppRichPresenceLocalization_Response\x12_\n\x10GetCommentThread\x12$.CCommunity_GetCommentThread_Request\x1a%.CCommunity_GetCommentThread_Response\x12h\n\x13PostCommentToThread\x12\'.CCommunity_PostCommentToThread_Request\x1a(.CCommunity_PostCommentToThread_Response\x12t\n\x17\x44\x65leteCommentFromThread\x12+.CCommunity_DeleteCommentFromThread_Request\x1a,.CCommunity_DeleteCommentFromThread_Response\x12\x62\n\x11RateCommentThread\x12%.CCommunity_RateCommentThread_Request\x1a&.CCommunity_RateCommentThread_Response\x12t\n\x17GetCommentThreadRatings\x12+.CCommunity_GetCommentThreadRatings_Request\x1a,.CCommunity_GetCommentThreadRatings_Response\x12k\n\x14RateClanAnnouncement\x12(.CCommunity_RateClanAnnouncement_Request\x1a).CCommunity_RateClanAnnouncement_Response\x12\x89\x01\n\x1eGetClanAnnouncementVoteForUser\x12\x32.CCommunity_GetClanAnnouncementVoteForUser_Request\x1a\x33.CCommunity_GetClanAnnouncementVoteForUser_Response\x12t\n\x17GetUserPartnerEventNews\x12+.CCommunity_GetUserPartnerEventNews_Request\x1a,.CCommunity_GetUserPartnerEventNews_Response\x12k\n\x14GetBestEventsForUser\x12(.CCommunity_GetBestEventsForUser_Request\x1a).CCommunity_GetBestEventsForUser_Response\x12w\n\x18MarkPartnerEventsForUser\x12,.CCommunity_MarkPartnerEventsForUser_Request\x1a-.CCommunity_MarkPartnerEventsForUser_Response\x12\x80\x01\n\x1bPartnerEventsShowMoreForApp\x12/.CCommunity_PartnerEventsShowMoreForApp_Request\x1a\x30.CCommunity_PartnerEventsShowMoreForApp_Response\x12\x80\x01\n\x1bPartnerEventsShowLessForApp\x12/.CCommunity_PartnerEventsShowLessForApp_Request\x1a\x30.CCommunity_PartnerEventsShowLessForApp_Response\x12\x98\x01\n#ClearUserPartnerEventsAppPriorities\x12\x37.CCommunity_ClearUserPartnerEventsAppPriorities_Request\x1a\x38.CCommunity_ClearUserPartnerEventsAppPriorities_Response\x12\x92\x01\n!GetUserPartnerEventsAppPriorities\x12\x35.CCommunity_GetUserPartnerEventsAppPriorities_Request\x1a\x36.CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x98\x01\n#ClearSinglePartnerEventsAppPriority\x12\x37.CCommunity_ClearSinglePartnerEventsAppPriority_Request\x1a\x38.CCommunity_ClearSinglePartnerEventsAppPriority_Response2U\n\x11\x45xperimentService\x12@\n\"ReportProductImpressionsFromClient\x12\r.UnknownProto\x1a\x0b.NoResponse2\xfa\x02\n\x0b\x46riendsList\x12Z\n\rGetCategories\x12#.CFriendsList_GetCategories_Request\x1a$.CFriendsList_GetCategories_Response\x12]\n\x0eGetFriendsList\x12$.CFriendsList_GetFriendsList_Request\x1a%.CFriendsList_GetFriendsList_Response\x12W\n\x0cGetFavorites\x12\".CFriendsList_GetFavorites_Request\x1a#.CFriendsList_GetFavorites_Response\x12W\n\x0cSetFavorites\x12\".CFriendsList_SetFavorites_Request\x1a#.CFriendsList_SetFavorites_Response2a\n\x11\x46riendsListClient\x12L\n\x10\x46\x61voritesChanged\x12+.CFriendsList_FavoritesChanged_Notification\x1a\x0b.NoResponse2f\n\x04\x43lan\x12^\n\x13RespondToClanInvite\x12\".CClan_RespondToClanInvite_Request\x1a#.CClan_RespondToClanInvite_Response2\xc1\x06\n\tVoiceChat\x12z\n\x19UpdateVoiceChatWebRTCData\x12-.CVoiceChat_UpdateVoiceChatWebRTCData_Request\x1a..CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12z\n\x19UploadClientVoiceChatLogs\x12-.CVoiceChat_UploadClientVoiceChatLogs_Request\x1a..CVoiceChat_UploadClientVoiceChatLogs_Response\x12Y\n\x0eLeaveVoiceChat\x12\".CVoiceChat_LeaveVoiceChat_Request\x1a#.CVoiceChat_LeaveVoiceChat_Response\x12h\n\x13RequestOneOnOneChat\x12\'.CVoiceChat_RequestOneOnOneChat_Request\x1a(.CVoiceChat_RequestOneOnOneChat_Response\x12\x65\n\x12\x41nswerOneOnOneChat\x12&.CVoiceChat_AnswerOneOnOneChat_Request\x1a\'.CVoiceChat_AnswerOneOnOneChat_Response\x12\\\n\x0f\x45ndOneOnOneChat\x12#.CVoiceChat_EndOneOnOneChat_Request\x1a$.CVoiceChat_EndOneOnOneChat_Response\x12\x62\n\x11LeaveOneOnOneChat\x12%.CVoiceChat_LeaveOneOnOneChat_Request\x1a&.CVoiceChat_LeaveOneOnOneChat_Response2\xed\x04\n\x0fVoiceChatClient\x12V\n\x19NotifyUserJoinedVoiceChat\x12,.CVoiceChat_UserJoinedVoiceChat_Notification\x1a\x0b.NoResponse\x12R\n\x17NotifyUserLeftVoiceChat\x12*.CVoiceChat_UserLeftVoiceChat_Notification\x1a\x0b.NoResponse\x12L\n\x14NotifyVoiceChatEnded\x12\'.CVoiceChat_VoiceChatEnded_Notification\x1a\x0b.NoResponse\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12S\n\x19NotifyAllUsersVoiceStatus\x12).CVoiceChat_AllMembersStatus_Notification\x1a\x0b.NoResponse\x12Z\n\x1bNotifyOneOnOneChatRequested\x12..CVoiceChat_OneOnOneChatRequested_Notification\x1a\x0b.NoResponse\x12_\n\x1aNotifyOneOnOneChatResponse\x12\x34.CVoiceChat_OneOnOneChatRequestResponse_Notification\x1a\x0b.NoResponse2\xae\x02\n\x0cWebRTCClient\x12}\n\x18InitiateWebRTCConnection\x12/.CWebRTCClient_InitiateWebRTCConnection_Request\x1a\x30.CWebRTCClient_InitiateWebRTCConnection_Response\x12\x9e\x01\n#AcknowledgeUpdatedRemoteDescription\x12:.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x1a;.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response2\xdf\x01\n\x19WebRTCClientNotifications\x12Y\n\x1cNotifyWebRTCSessionConnected\x12,.CWebRTC_WebRTCSessionConnected_Notification\x1a\x0b.NoResponse\x12g\n#NotifyWebRTCUpdateRemoteDescription\x12\x33.CWebRTC_WebRTCUpdateRemoteDescription_Notification\x1a\x0b.NoResponse2\xd2\x01\n\x10MobilePerAccount\x12^\n\x0bGetSettings\x12&.CMobilePerAccount_GetSettings_Request\x1a\'.CMobilePerAccount_GetSettings_Response\x12^\n\x0bSetSettings\x12&.CMobilePerAccount_SetSettings_Request\x1a\'.CMobilePerAccount_SetSettings_Response2\xdc\x01\n\x0cMobileDevice\x12q\n\x14RegisterMobileDevice\x12+.CMobileDevice_RegisterMobileDevice_Request\x1a,.CMobileDevice_RegisterMobileDevice_Response\x12Y\n\x16\x44\x65registerMobileDevice\x12\x32.CMobileDevice_DeregisterMobileDevice_Notification\x1a\x0b.NoResponseB\x03\x90\x01\x01')
+  serialized_pb=_b('\n!steammessages_webui_friends.proto\x1a steammessages_unified_base.proto\x1a\x18steammessages_base.proto\x1a(steammessages_clientserver_friends.proto\"\x82\x01\n1CHelpRequestLogs_UploadUserApplicationLog_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08log_type\x18\x02 \x01(\t\x12\x16\n\x0eversion_string\x18\x03 \x01(\t\x12\x14\n\x0clog_contents\x18\x04 \x01(\t\"@\n2CHelpRequestLogs_UploadUserApplicationLog_Response\x12\n\n\x02id\x18\x01 \x01(\x04\"n\n\x1e\x43MsgClientAppMinutesPlayedData\x12L\n\x0eminutes_played\x18\x01 \x03(\x0b\x32\x34.CMsgClientAppMinutesPlayedData_AppMinutesPlayedData\"n\n3CMsgClientAppMinutesPlayedData_AppMinutesPlayedData\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x05\x12\x16\n\x0elast_two_weeks\x18\x03 \x01(\x05\">\n\x1a\x43\x43ommunity_GetApps_Request\x12\x0e\n\x06\x61ppids\x18\x01 \x03(\x05\x12\x10\n\x08language\x18\x02 \x01(\r\"B\n\x1b\x43\x43ommunity_GetApps_Response\x12#\n\x04\x61pps\x18\x01 \x03(\x0b\x32\x15.CCDDBAppDetailCommon\"T\n1CCommunity_GetAppRichPresenceLocalization_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x10\n\x08language\x18\x02 \x01(\t\"\x97\x01\n2CCommunity_GetAppRichPresenceLocalization_Response\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12R\n\x0btoken_lists\x18\x02 \x03(\x0b\x32=.CCommunity_GetAppRichPresenceLocalization_Response_TokenList\"W\n8CCommunity_GetAppRichPresenceLocalization_Response_Token\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x9b\x01\n<CCommunity_GetAppRichPresenceLocalization_Response_TokenList\x12\x10\n\x08language\x18\x01 \x01(\t\x12I\n\x06tokens\x18\x02 \x03(\x0b\x32\x39.CCommunity_GetAppRichPresenceLocalization_Response_Token\"\x9d\x02\n#CCommunity_GetCommentThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x05 \x01(\x06\x12\r\n\x05start\x18\x06 \x01(\x05\x12\r\n\x05\x63ount\x18\x07 \x01(\x05\x12\x10\n\x08upvoters\x18\x08 \x01(\x05\x12\x17\n\x0finclude_deleted\x18\t \x01(\x08\x12\x12\n\ngidcomment\x18\n \x01(\x06\x12\x13\n\x0btime_oldest\x18\x0b \x01(\r\x12\x14\n\x0coldest_first\x18\x0c \x01(\x08\"\xf6\x01\n\x12\x43\x43ommunity_Comment\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x11\n\ttimestamp\x18\x03 \x01(\r\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x0f\n\x07upvotes\x18\x05 \x01(\x05\x12\x0e\n\x06hidden\x18\x06 \x01(\x08\x12\x16\n\x0ehidden_by_user\x18\x07 \x01(\x08\x12\x0f\n\x07\x64\x65leted\x18\x08 \x01(\x08\x12!\n\tipaddress\x18\t \x01(\x0b\x32\x0e.CMsgIPAddress\x12\x14\n\x0ctotal_hidden\x18\n \x01(\x05\x12\x17\n\x0fupvoted_by_user\x18\x0b \x01(\x08\"\x88\x03\n$CCommunity_GetCommentThread_Response\x12%\n\x08\x63omments\x18\x01 \x03(\x0b\x32\x13.CCommunity_Comment\x12-\n\x10\x64\x65leted_comments\x18\x02 \x03(\x0b\x32\x13.CCommunity_Comment\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x04 \x01(\x06\x12\r\n\x05start\x18\x05 \x01(\x05\x12\r\n\x05\x63ount\x18\x06 \x01(\x05\x12\x13\n\x0btotal_count\x18\x07 \x01(\x05\x12\x0f\n\x07upvotes\x18\x08 \x01(\x05\x12\x10\n\x08upvoters\x18\t \x03(\r\x12\x17\n\x0fuser_subscribed\x18\n \x01(\x08\x12\x14\n\x0cuser_upvoted\x18\x0b \x01(\x08\x12\x18\n\x10\x61nswer_commentid\x18\x0c \x01(\x06\x12\x14\n\x0c\x61nswer_actor\x18\r \x01(\r\x12\x19\n\x11\x61nswer_actor_rank\x18\x0e \x01(\x05\x12\x10\n\x08\x63\x61n_post\x18\x0f \x01(\x08\"\xc7\x01\n&CCommunity_PostCommentToThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x0c\n\x04text\x18\x06 \x01(\t\x12\x18\n\x10gidparentcomment\x18\x07 \x01(\x06\x12\x1e\n\x16suppress_notifications\x18\x08 \x01(\x08\"v\n\'CCommunity_PostCommentToThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x06\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\x0f\n\x07upvotes\x18\x04 \x01(\x05\"\xa9\x01\n*CCommunity_DeleteCommentFromThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x12\n\ngidcomment\x18\x05 \x01(\x06\x12\x10\n\x08undelete\x18\x06 \x01(\x08\"-\n+CCommunity_DeleteCommentFromThread_Response\"\xc0\x01\n$CCommunity_RateCommentThread_Request\x12\x19\n\x11\x63ommentthreadtype\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x12\n\ngidfeature\x18\x03 \x01(\x04\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x04\x12\x12\n\ngidcomment\x18\x05 \x01(\x04\x12\x0f\n\x07rate_up\x18\x06 \x01(\x08\x12\x1e\n\x16suppress_notifications\x18\x07 \x01(\x08\"\x89\x01\n%CCommunity_RateCommentThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x04\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\r\x12\x0f\n\x07upvotes\x18\x04 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x05 \x01(\x08\"\xaa\x01\n*CCommunity_GetCommentThreadRatings_Request\x12\x19\n\x11\x63ommentthreadtype\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x12\n\ngidfeature\x18\x03 \x01(\x04\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x04\x12\x12\n\ngidcomment\x18\x05 \x01(\x04\x12\x13\n\x0bmax_results\x18\x06 \x01(\r\"\x9c\x01\n+CCommunity_GetCommentThreadRatings_Response\x12\x17\n\x0f\x63ommentthreadid\x18\x01 \x01(\x04\x12\x12\n\ngidcomment\x18\x02 \x01(\x04\x12\x0f\n\x07upvotes\x18\x03 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x04 \x01(\x08\x12\x1a\n\x12upvoter_accountids\x18\x05 \x03(\r\"R\n\'CCommunity_RateClanAnnouncement_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\x12\x0f\n\x07vote_up\x18\x02 \x01(\x08\"*\n(CCommunity_RateClanAnnouncement_Response\"K\n1CCommunity_GetClanAnnouncementVoteForUser_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\"Z\n2CCommunity_GetClanAnnouncementVoteForUser_Response\x12\x10\n\x08voted_up\x18\x01 \x01(\x08\x12\x12\n\nvoted_down\x18\x02 \x01(\x08\"/\n\x0c\x43\x41ppPriority\x12\x10\n\x08priority\x18\x01 \x01(\r\x12\r\n\x05\x61ppid\x18\x02 \x03(\r\"\xd8\x02\n*CCommunity_GetUserPartnerEventNews_Request\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x1a\n\x12rtime32_start_time\x18\x03 \x01(\r\x12\x18\n\x10rtime32_end_time\x18\x04 \x01(\r\x12\x1b\n\x13language_preference\x18\x05 \x03(\r\x12M\n\x11\x66ilter_event_type\x18\x06 \x03(\x05\x42\x32\x82\xb5\x18.enum; suggested type: ECommunityWordFilterType\x12\x17\n\x0f\x66ilter_to_appid\x18\x07 \x01(\x08\x12\x1f\n\x08\x61pp_list\x18\x08 \x03(\x0b\x32\r.CAppPriority\x12\x16\n\x0b\x63ount_after\x18\t \x01(\r:\x01\x30\x12\x17\n\x0c\x63ount_before\x18\n \x01(\r:\x01\x30\"W\n+CCommunity_GetUserPartnerEventNews_Response\x12(\n\x07results\x18\x01 \x03(\x0b\x32\x17.CClanMatchEventByRange\"k\n\'CCommunity_GetBestEventsForUser_Request\x12\x1a\n\x12include_steam_blog\x18\x01 \x01(\x08\x12$\n\x1c\x66ilter_to_played_within_days\x18\x02 \x01(\r\"\xc3\x01\n\x1d\x43\x43ommunity_PartnerEventResult\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\x18\n\x10\x61nnouncement_gid\x18\x03 \x01(\x06\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\x12\x19\n\x11possible_takeover\x18\x05 \x01(\x08\x12 \n\x15rtime32_last_modified\x18\x06 \x01(\r:\x01\x30\x12\x19\n\x11user_app_priority\x18\x07 \x01(\x05\"[\n(CCommunity_GetBestEventsForUser_Response\x12/\n\x07results\x18\x01 \x03(\x0b\x32\x1e.CCommunity_PartnerEventResult\"8\n6CCommunity_ClearUserPartnerEventsAppPriorities_Request\"9\n7CCommunity_ClearUserPartnerEventsAppPriorities_Response\"O\n#CCommunity_PartnerEventsAppPriority\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x19\n\x11user_app_priority\x18\x02 \x01(\x05\"6\n4CCommunity_GetUserPartnerEventsAppPriorities_Request\"q\n5CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x38\n\npriorities\x18\x01 \x03(\x0b\x32$.CCommunity_PartnerEventsAppPriority\"G\n6CCommunity_ClearSinglePartnerEventsAppPriority_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"9\n7CCommunity_ClearSinglePartnerEventsAppPriority_Response\"?\n.CCommunity_PartnerEventsShowMoreForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"1\n/CCommunity_PartnerEventsShowMoreForApp_Response\"?\n.CCommunity_PartnerEventsShowLessForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"1\n/CCommunity_PartnerEventsShowLessForApp_Response\"\x81\x01\n+CCommunity_MarkPartnerEventsForUser_Request\x12R\n\x08markings\x18\x01 \x03(\x0b\x32@.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\"\xdd\x01\n?CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12P\n\x10\x64isplay_location\x18\x03 \x01(\x05\x42\x36\x82\xb5\x18\x32\x65num; suggested type: EPartnerEventDisplayLocation\x12\x12\n\nmark_shown\x18\x04 \x01(\x08\x12\x11\n\tmark_read\x18\x05 \x01(\x08\".\n,CCommunity_MarkPartnerEventsForUser_Response\"y\n*CProductImpressionsFromClient_Notification\x12K\n\x0bimpressions\x18\x01 \x03(\x0b\x32\x36.CProductImpressionsFromClient_Notification_Impression\"\xa9\x01\n5CProductImpressionsFromClient_Notification_Impression\x12H\n\x04type\x18\x01 \x01(\x05\x42:\x82\xb5\x18\x36\x65num; suggested type: EProductImpressionFromClientType\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x17\n\x0fnum_impressions\x18\x03 \x01(\r\"P\n\x14\x43\x46riendsListCategory\x12\x0f\n\x07groupid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x19\n\x11\x61\x63\x63ountid_members\x18\x03 \x03(\r\"$\n\"CFriendsList_GetCategories_Request\"P\n#CFriendsList_GetCategories_Response\x12)\n\ncategories\x18\x01 \x03(\x0b\x32\x15.CFriendsListCategory\"U\n\x19\x43\x46riendsListFavoriteEntry\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x0e\n\x06\x63lanid\x18\x02 \x01(\r\x12\x15\n\rchat_group_id\x18\x03 \x01(\x04\"#\n!CFriendsList_GetFavorites_Request\"S\n\"CFriendsList_GetFavorites_Response\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"R\n!CFriendsList_SetFavorites_Request\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"$\n\"CFriendsList_SetFavorites_Response\"[\n*CFriendsList_FavoritesChanged_Notification\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"%\n#CFriendsList_GetFriendsList_Request\"S\n$CFriendsList_GetFriendsList_Response\x12+\n\x0b\x66riendslist\x18\x01 \x01(\x0b\x32\x16.CMsgClientFriendsList\"c\n(CMsgClientUCMEnumerateUserPublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x12\n\nsort_order\x18\x03 \x01(\r\"\xb9\x01\n0CMsgClientUCMEnumerateUserPublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12Z\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x41.CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"]\n@CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\x98\x01\n)CMsgClientUCMEnumerateUserSubscribedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x14\n\tlist_type\x18\x03 \x01(\r:\x01\x31\x12\x1d\n\x12matching_file_type\x18\x04 \x01(\r:\x01\x30\x12\x11\n\x05\x63ount\x18\x05 \x01(\r:\x02\x35\x30\"\xbc\x01\n1CMsgClientUCMEnumerateUserSubscribedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\\\n\x10subscribed_files\x18\x02 \x03(\x0b\x32\x42.CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"}\nACMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1d\n\x12rtime32_subscribed\x18\x02 \x01(\x07:\x01\x30\"N\n!CMsgClientUCMPublishedFileDeleted\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"\x97\x01\n!CMsgClientWorkshopItemInfoRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12G\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32/.CMsgClientWorkshopItemInfoRequest_WorkshopItem\"a\n.CMsgClientWorkshopItemInfoRequest_WorkshopItem\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\"\xb2\x01\n\"CMsgClientWorkshopItemInfoResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x13\n\x0bupdate_time\x18\x02 \x01(\r\x12L\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32\x34.CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo\x12\x15\n\rprivate_items\x18\x04 \x03(\x06\"\x8e\x01\n3CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\x12\x11\n\tis_legacy\x18\x04 \x01(\x08\"\x94\x01\n%CMsgClientUCMGetPublishedFilesForUser\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x18\n\x10\x63reator_steam_id\x18\x02 \x01(\x06\x12\x15\n\rrequired_tags\x18\x03 \x03(\t\x12\x15\n\rexcluded_tags\x18\x04 \x03(\t\x12\x13\n\x0bstart_index\x18\x05 \x01(\r\"\xb3\x01\n-CMsgClientUCMGetPublishedFilesForUserResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12W\n\x0fpublished_files\x18\x02 \x03(\x0b\x32>.CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"Z\n=CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\xb7\x01\n\x1e\x43MsgCREEnumeratePublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x12\n\nquery_type\x18\x02 \x01(\x05\x12\x13\n\x0bstart_index\x18\x03 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\r\x12\r\n\x05\x63ount\x18\x05 \x01(\r\x12\x0c\n\x04tags\x18\x06 \x03(\t\x12\x11\n\tuser_tags\x18\x07 \x03(\t\x12\x1e\n\x12matching_file_type\x18\x08 \x01(\r:\x02\x31\x33\"\xa5\x01\n&CMsgCREEnumeratePublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12P\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x37.CMsgCREEnumeratePublishedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"\x9d\x01\n6CMsgCREEnumeratePublishedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"r\n\x18\x43MsgGameServerPingSample\x12\r\n\x05my_ip\x18\x01 \x01(\x07\x12\x11\n\tgs_app_id\x18\x02 \x01(\x05\x12\x34\n\ngs_samples\x18\x03 \x03(\x0b\x32 .CMsgGameServerPingSample_Sample\"^\n\x1f\x43MsgGameServerPingSample_Sample\x12\n\n\x02ip\x18\x01 \x01(\x07\x12\x13\n\x0b\x61vg_ping_ms\x18\x02 \x01(\r\x12\x1a\n\x12stddev_ping_ms_x10\x18\x03 \x01(\r\"D\n!CClan_RespondToClanInvite_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0e\n\x06\x61\x63\x63\x65pt\x18\x02 \x01(\x08\"$\n\"CClan_RespondToClanInvite_Response\"A\n&CVoiceChat_RequestOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"?\n\'CVoiceChat_RequestOneOnOneChat_Response\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"^\n-CVoiceChat_OneOnOneChatRequested_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\"p\n%CVoiceChat_AnswerOneOnOneChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"(\n&CVoiceChat_AnswerOneOnOneChat_Response\"~\n3CVoiceChat_OneOnOneChatRequestResponse_Notification\x12\x14\n\x0cvoicechat_id\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"=\n\"CVoiceChat_EndOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"%\n#CVoiceChat_EndOneOnOneChat_Response\"U\n$CVoiceChat_LeaveOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x14\n\x0cvoice_chatid\x18\x02 \x01(\x06\"\'\n%CVoiceChat_LeaveOneOnOneChat_Response\"\xdd\x01\n+CVoiceChat_UserJoinedVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xe0\x01\n\'CVoiceChat_UserVoiceStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x1e\n\x16user_muted_mic_locally\x18\x03 \x01(\x08\x12!\n\x19user_muted_output_locally\x18\x04 \x01(\x08\x12#\n\x1buser_has_no_mic_for_session\x18\x05 \x01(\x08\x12!\n\x19user_webaudio_sample_rate\x18\x06 \x01(\x05\"y\n(CVoiceChat_AllMembersStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x37\n\x05users\x18\x02 \x03(\x0b\x32(.CVoiceChat_UserVoiceStatus_Notification\"\x88\x02\n,CVoiceChat_UpdateVoiceChatWebRTCData_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x18\n\x10ip_webrtc_server\x18\x02 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x03 \x01(\r\x12\x18\n\x10ip_webrtc_client\x18\x04 \x01(\r\x12\x1a\n\x12port_webrtc_client\x18\x05 \x01(\r\x12\x1e\n\x16ssrc_my_sending_stream\x18\x06 \x01(\r\x12\x12\n\nuser_agent\x18\x07 \x01(\t\x12\"\n\x1ahas_audio_worklets_support\x18\x08 \x01(\x08\"O\n-CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12\x1e\n\x16send_client_voice_logs\x18\x01 \x01(\x08\"i\n,CVoiceChat_UploadClientVoiceChatLogs_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12#\n\x1b\x63lient_voice_logs_new_lines\x18\x02 \x01(\t\"/\n-CVoiceChat_UploadClientVoiceChatLogs_Response\"9\n!CVoiceChat_LeaveVoiceChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"$\n\"CVoiceChat_LeaveVoiceChat_Response\"\xdb\x01\n)CVoiceChat_UserLeftVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xaa\x01\n&CVoiceChat_VoiceChatEnded_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12 \n\x18one_on_one_steamid_lower\x18\x02 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x03 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x04 \x01(\x04\x12\x15\n\rchat_group_id\x18\x05 \x01(\x04\"=\n.CWebRTCClient_InitiateWebRTCConnection_Request\x12\x0b\n\x03sdp\x18\x01 \x01(\t\"M\n/CWebRTCClient_InitiateWebRTCConnection_Response\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\"\x8b\x01\n+CWebRTC_WebRTCSessionConnected_Notification\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\tclient_ip\x18\x02 \x01(\r\x12\x13\n\x0b\x63lient_port\x18\x03 \x01(\r\x12\x11\n\tserver_ip\x18\x04 \x01(\r\x12\x13\n\x0bserver_port\x18\x05 \x01(\r\"\xde\x01\n2CWebRTC_WebRTCUpdateRemoteDescription_Notification\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\x12\"\n\x1aremote_description_version\x18\x02 \x01(\x04\x12h\n\x13ssrcs_to_accountids\x18\x03 \x03(\x0b\x32K.CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\"m\nJCWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\taccountid\x18\x02 \x01(\r\"\xdb\x01\n9CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x12\x18\n\x10ip_webrtc_server\x18\x01 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x02 \x01(\r\x12 \n\x18ip_webrtc_session_client\x18\x03 \x01(\r\x12\"\n\x1aport_webrtc_session_client\x18\x04 \x01(\r\x12\"\n\x1aremote_description_version\x18\x05 \x01(\x04\"<\n:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response\"\'\n%CMobilePerAccount_GetSettings_Request\"\xec\x01\n&CMobilePerAccount_GetSettings_Response\x12\x14\n\x0chas_settings\x18\x04 \x01(\x08\x12\x17\n\x0f\x61llow_sale_push\x18\x02 \x01(\x08\x12\x1b\n\x13\x61llow_wishlist_push\x18\x03 \x01(\x08\x12\x1f\n\x17\x63hat_notification_level\x18\x05 \x01(\r\x12\x1a\n\x12notify_direct_chat\x18\x06 \x01(\x08\x12\x19\n\x11notify_group_chat\x18\x07 \x01(\x08\x12\x1e\n\x10\x61llow_event_push\x18\x08 \x01(\x08:\x04true\"\xd5\x01\n%CMobilePerAccount_SetSettings_Request\x12\x17\n\x0f\x61llow_sale_push\x18\x02 \x01(\x08\x12\x1b\n\x13\x61llow_wishlist_push\x18\x03 \x01(\x08\x12\x1f\n\x17\x63hat_notification_level\x18\x04 \x01(\r\x12\x1a\n\x12notify_direct_chat\x18\x05 \x01(\x08\x12\x19\n\x11notify_group_chat\x18\x06 \x01(\x08\x12\x1e\n\x10\x61llow_event_push\x18\x07 \x01(\x08:\x04true\"(\n&CMobilePerAccount_SetSettings_Response\"\x84\x02\n*CMobileDevice_RegisterMobileDevice_Request\x12\x10\n\x08\x64\x65viceid\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x14\n\x0cpush_enabled\x18\x03 \x01(\x08\x12\x13\n\x0b\x61pp_version\x18\x04 \x01(\t\x12\x12\n\nos_version\x18\x05 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x06 \x01(\t\x12#\n\x1btwofactor_device_identifier\x18\x07 \x01(\t\x12\x38\n\nmobile_app\x18\x08 \x01(\x05\x42$\x82\xb5\x18 enum; suggested type: EMobileApp\"F\n+CMobileDevice_RegisterMobileDevice_Response\x12\x17\n\x0funique_deviceid\x18\x02 \x01(\r\"E\n1CMobileDevice_DeregisterMobileDevice_Notification\x12\x10\n\x08\x64\x65viceid\x18\x01 \x01(\t\"\x0e\n\x0cUnknownProto2\x97\x01\n\x0fHelpRequestLogs\x12\x83\x01\n\x18UploadUserApplicationLog\x12\x32.CHelpRequestLogs_UploadUserApplicationLog_Request\x1a\x33.CHelpRequestLogs_UploadUserApplicationLog_Response2\x9e\x10\n\tCommunity\x12\x44\n\x07GetApps\x12\x1b.CCommunity_GetApps_Request\x1a\x1c.CCommunity_GetApps_Response\x12\x89\x01\n\x1eGetAppRichPresenceLocalization\x12\x32.CCommunity_GetAppRichPresenceLocalization_Request\x1a\x33.CCommunity_GetAppRichPresenceLocalization_Response\x12_\n\x10GetCommentThread\x12$.CCommunity_GetCommentThread_Request\x1a%.CCommunity_GetCommentThread_Response\x12h\n\x13PostCommentToThread\x12\'.CCommunity_PostCommentToThread_Request\x1a(.CCommunity_PostCommentToThread_Response\x12t\n\x17\x44\x65leteCommentFromThread\x12+.CCommunity_DeleteCommentFromThread_Request\x1a,.CCommunity_DeleteCommentFromThread_Response\x12\x62\n\x11RateCommentThread\x12%.CCommunity_RateCommentThread_Request\x1a&.CCommunity_RateCommentThread_Response\x12t\n\x17GetCommentThreadRatings\x12+.CCommunity_GetCommentThreadRatings_Request\x1a,.CCommunity_GetCommentThreadRatings_Response\x12k\n\x14RateClanAnnouncement\x12(.CCommunity_RateClanAnnouncement_Request\x1a).CCommunity_RateClanAnnouncement_Response\x12\x89\x01\n\x1eGetClanAnnouncementVoteForUser\x12\x32.CCommunity_GetClanAnnouncementVoteForUser_Request\x1a\x33.CCommunity_GetClanAnnouncementVoteForUser_Response\x12t\n\x17GetUserPartnerEventNews\x12+.CCommunity_GetUserPartnerEventNews_Request\x1a,.CCommunity_GetUserPartnerEventNews_Response\x12k\n\x14GetBestEventsForUser\x12(.CCommunity_GetBestEventsForUser_Request\x1a).CCommunity_GetBestEventsForUser_Response\x12w\n\x18MarkPartnerEventsForUser\x12,.CCommunity_MarkPartnerEventsForUser_Request\x1a-.CCommunity_MarkPartnerEventsForUser_Response\x12\x80\x01\n\x1bPartnerEventsShowMoreForApp\x12/.CCommunity_PartnerEventsShowMoreForApp_Request\x1a\x30.CCommunity_PartnerEventsShowMoreForApp_Response\x12\x80\x01\n\x1bPartnerEventsShowLessForApp\x12/.CCommunity_PartnerEventsShowLessForApp_Request\x1a\x30.CCommunity_PartnerEventsShowLessForApp_Response\x12\x98\x01\n#ClearUserPartnerEventsAppPriorities\x12\x37.CCommunity_ClearUserPartnerEventsAppPriorities_Request\x1a\x38.CCommunity_ClearUserPartnerEventsAppPriorities_Response\x12\x92\x01\n!GetUserPartnerEventsAppPriorities\x12\x35.CCommunity_GetUserPartnerEventsAppPriorities_Request\x1a\x36.CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x98\x01\n#ClearSinglePartnerEventsAppPriority\x12\x37.CCommunity_ClearSinglePartnerEventsAppPriority_Request\x1a\x38.CCommunity_ClearSinglePartnerEventsAppPriority_Response2U\n\x11\x45xperimentService\x12@\n\"ReportProductImpressionsFromClient\x12\r.UnknownProto\x1a\x0b.NoResponse2\xfa\x02\n\x0b\x46riendsList\x12Z\n\rGetCategories\x12#.CFriendsList_GetCategories_Request\x1a$.CFriendsList_GetCategories_Response\x12]\n\x0eGetFriendsList\x12$.CFriendsList_GetFriendsList_Request\x1a%.CFriendsList_GetFriendsList_Response\x12W\n\x0cGetFavorites\x12\".CFriendsList_GetFavorites_Request\x1a#.CFriendsList_GetFavorites_Response\x12W\n\x0cSetFavorites\x12\".CFriendsList_SetFavorites_Request\x1a#.CFriendsList_SetFavorites_Response2a\n\x11\x46riendsListClient\x12L\n\x10\x46\x61voritesChanged\x12+.CFriendsList_FavoritesChanged_Notification\x1a\x0b.NoResponse2f\n\x04\x43lan\x12^\n\x13RespondToClanInvite\x12\".CClan_RespondToClanInvite_Request\x1a#.CClan_RespondToClanInvite_Response2\xc1\x06\n\tVoiceChat\x12z\n\x19UpdateVoiceChatWebRTCData\x12-.CVoiceChat_UpdateVoiceChatWebRTCData_Request\x1a..CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12z\n\x19UploadClientVoiceChatLogs\x12-.CVoiceChat_UploadClientVoiceChatLogs_Request\x1a..CVoiceChat_UploadClientVoiceChatLogs_Response\x12Y\n\x0eLeaveVoiceChat\x12\".CVoiceChat_LeaveVoiceChat_Request\x1a#.CVoiceChat_LeaveVoiceChat_Response\x12h\n\x13RequestOneOnOneChat\x12\'.CVoiceChat_RequestOneOnOneChat_Request\x1a(.CVoiceChat_RequestOneOnOneChat_Response\x12\x65\n\x12\x41nswerOneOnOneChat\x12&.CVoiceChat_AnswerOneOnOneChat_Request\x1a\'.CVoiceChat_AnswerOneOnOneChat_Response\x12\\\n\x0f\x45ndOneOnOneChat\x12#.CVoiceChat_EndOneOnOneChat_Request\x1a$.CVoiceChat_EndOneOnOneChat_Response\x12\x62\n\x11LeaveOneOnOneChat\x12%.CVoiceChat_LeaveOneOnOneChat_Request\x1a&.CVoiceChat_LeaveOneOnOneChat_Response2\xed\x04\n\x0fVoiceChatClient\x12V\n\x19NotifyUserJoinedVoiceChat\x12,.CVoiceChat_UserJoinedVoiceChat_Notification\x1a\x0b.NoResponse\x12R\n\x17NotifyUserLeftVoiceChat\x12*.CVoiceChat_UserLeftVoiceChat_Notification\x1a\x0b.NoResponse\x12L\n\x14NotifyVoiceChatEnded\x12\'.CVoiceChat_VoiceChatEnded_Notification\x1a\x0b.NoResponse\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12S\n\x19NotifyAllUsersVoiceStatus\x12).CVoiceChat_AllMembersStatus_Notification\x1a\x0b.NoResponse\x12Z\n\x1bNotifyOneOnOneChatRequested\x12..CVoiceChat_OneOnOneChatRequested_Notification\x1a\x0b.NoResponse\x12_\n\x1aNotifyOneOnOneChatResponse\x12\x34.CVoiceChat_OneOnOneChatRequestResponse_Notification\x1a\x0b.NoResponse2\xae\x02\n\x0cWebRTCClient\x12}\n\x18InitiateWebRTCConnection\x12/.CWebRTCClient_InitiateWebRTCConnection_Request\x1a\x30.CWebRTCClient_InitiateWebRTCConnection_Response\x12\x9e\x01\n#AcknowledgeUpdatedRemoteDescription\x12:.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x1a;.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response2\xdf\x01\n\x19WebRTCClientNotifications\x12Y\n\x1cNotifyWebRTCSessionConnected\x12,.CWebRTC_WebRTCSessionConnected_Notification\x1a\x0b.NoResponse\x12g\n#NotifyWebRTCUpdateRemoteDescription\x12\x33.CWebRTC_WebRTCUpdateRemoteDescription_Notification\x1a\x0b.NoResponse2\xd2\x01\n\x10MobilePerAccount\x12^\n\x0bGetSettings\x12&.CMobilePerAccount_GetSettings_Request\x1a\'.CMobilePerAccount_GetSettings_Response\x12^\n\x0bSetSettings\x12&.CMobilePerAccount_SetSettings_Request\x1a\'.CMobilePerAccount_SetSettings_Response2\xdc\x01\n\x0cMobileDevice\x12q\n\x14RegisterMobileDevice\x12+.CMobileDevice_RegisterMobileDevice_Request\x1a,.CMobileDevice_RegisterMobileDevice_Response\x12Y\n\x16\x44\x65registerMobileDevice\x12\x32.CMobileDevice_DeregisterMobileDevice_Notification\x1a\x0b.NoResponseB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,steammessages__base__pb2.DESCRIPTOR,steammessages__clientserver__friends__pb2.DESCRIPTOR,])
 
@@ -2495,6 +2495,269 @@ _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE = _descriptor.Descriptor(
 )
 
 
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILES = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserPublishedFiles',
+  full_name='CMsgClientUCMEnumerateUserPublishedFiles',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMEnumerateUserPublishedFiles.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_index', full_name='CMsgClientUCMEnumerateUserPublishedFiles.start_index', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sort_order', full_name='CMsgClientUCMEnumerateUserPublishedFiles.sort_order', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6685,
+  serialized_end=6784,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserPublishedFilesResponse',
+  full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='published_files', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse.published_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6787,
+  serialized_end=6972,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId',
+  full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6974,
+  serialized_end=7067,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILES = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserSubscribedFiles',
+  full_name='CMsgClientUCMEnumerateUserSubscribedFiles',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_index', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.start_index', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='list_type', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.list_type', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='matching_file_type', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.matching_file_type', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.count', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=50,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7070,
+  serialized_end=7222,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserSubscribedFilesResponse',
+  full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='subscribed_files', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse.subscribed_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7225,
+  serialized_end=7413,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId',
+  full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rtime32_subscribed', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId.rtime32_subscribed', index=1,
+      number=2, type=7, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7415,
+  serialized_end=7540,
+)
+
+
 _CMSGCLIENTUCMPUBLISHEDFILEDELETED = _descriptor.Descriptor(
   name='CMsgClientUCMPublishedFileDeleted',
   full_name='CMsgClientUCMPublishedFileDeleted',
@@ -2528,8 +2791,330 @@ _CMSGCLIENTUCMPUBLISHEDFILEDELETED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6685,
-  serialized_end=6763,
+  serialized_start=7542,
+  serialized_end=7620,
+)
+
+
+_CMSGCLIENTWORKSHOPITEMINFOREQUEST = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoRequest',
+  full_name='CMsgClientWorkshopItemInfoRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientWorkshopItemInfoRequest.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='last_time_updated', full_name='CMsgClientWorkshopItemInfoRequest.last_time_updated', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='workshop_items', full_name='CMsgClientWorkshopItemInfoRequest.workshop_items', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7623,
+  serialized_end=7774,
+)
+
+
+_CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoRequest_WorkshopItem',
+  full_name='CMsgClientWorkshopItemInfoRequest_WorkshopItem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientWorkshopItemInfoRequest_WorkshopItem.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_updated', full_name='CMsgClientWorkshopItemInfoRequest_WorkshopItem.time_updated', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7776,
+  serialized_end=7873,
+)
+
+
+_CMSGCLIENTWORKSHOPITEMINFORESPONSE = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoResponse',
+  full_name='CMsgClientWorkshopItemInfoResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientWorkshopItemInfoResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='update_time', full_name='CMsgClientWorkshopItemInfoResponse.update_time', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='workshop_items', full_name='CMsgClientWorkshopItemInfoResponse.workshop_items', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='private_items', full_name='CMsgClientWorkshopItemInfoResponse.private_items', index=3,
+      number=4, type=6, cpp_type=4, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7876,
+  serialized_end=8054,
+)
+
+
+_CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo',
+  full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_updated', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.time_updated', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manifest_id', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.manifest_id', index=2,
+      number=3, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_legacy', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.is_legacy', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8057,
+  serialized_end=8199,
+)
+
+
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSER = _descriptor.Descriptor(
+  name='CMsgClientUCMGetPublishedFilesForUser',
+  full_name='CMsgClientUCMGetPublishedFilesForUser',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMGetPublishedFilesForUser.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='creator_steam_id', full_name='CMsgClientUCMGetPublishedFilesForUser.creator_steam_id', index=1,
+      number=2, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='required_tags', full_name='CMsgClientUCMGetPublishedFilesForUser.required_tags', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='excluded_tags', full_name='CMsgClientUCMGetPublishedFilesForUser.excluded_tags', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_index', full_name='CMsgClientUCMGetPublishedFilesForUser.start_index', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8202,
+  serialized_end=8350,
+)
+
+
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientUCMGetPublishedFilesForUserResponse',
+  full_name='CMsgClientUCMGetPublishedFilesForUserResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientUCMGetPublishedFilesForUserResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='published_files', full_name='CMsgClientUCMGetPublishedFilesForUserResponse.published_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgClientUCMGetPublishedFilesForUserResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8353,
+  serialized_end=8532,
+)
+
+
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId',
+  full_name='CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8534,
+  serialized_end=8624,
 )
 
 
@@ -2608,8 +3193,8 @@ _CMSGCREENUMERATEPUBLISHEDFILES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6766,
-  serialized_end=6949,
+  serialized_start=8627,
+  serialized_end=8810,
 )
 
 
@@ -2653,8 +3238,8 @@ _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6952,
-  serialized_end=7117,
+  serialized_start=8813,
+  serialized_end=8978,
 )
 
 
@@ -2712,8 +3297,98 @@ _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7120,
-  serialized_end=7277,
+  serialized_start=8981,
+  serialized_end=9138,
+)
+
+
+_CMSGGAMESERVERPINGSAMPLE = _descriptor.Descriptor(
+  name='CMsgGameServerPingSample',
+  full_name='CMsgGameServerPingSample',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='my_ip', full_name='CMsgGameServerPingSample.my_ip', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gs_app_id', full_name='CMsgGameServerPingSample.gs_app_id', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gs_samples', full_name='CMsgGameServerPingSample.gs_samples', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9140,
+  serialized_end=9254,
+)
+
+
+_CMSGGAMESERVERPINGSAMPLE_SAMPLE = _descriptor.Descriptor(
+  name='CMsgGameServerPingSample_Sample',
+  full_name='CMsgGameServerPingSample_Sample',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='CMsgGameServerPingSample_Sample.ip', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='avg_ping_ms', full_name='CMsgGameServerPingSample_Sample.avg_ping_ms', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='stddev_ping_ms_x10', full_name='CMsgGameServerPingSample_Sample.stddev_ping_ms_x10', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9256,
+  serialized_end=9350,
 )
 
 
@@ -2750,8 +3425,8 @@ _CCLAN_RESPONDTOCLANINVITE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7279,
-  serialized_end=7347,
+  serialized_start=9352,
+  serialized_end=9420,
 )
 
 
@@ -2774,8 +3449,8 @@ _CCLAN_RESPONDTOCLANINVITE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7349,
-  serialized_end=7385,
+  serialized_start=9422,
+  serialized_end=9458,
 )
 
 
@@ -2805,8 +3480,8 @@ _CVOICECHAT_REQUESTONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7387,
-  serialized_end=7452,
+  serialized_start=9460,
+  serialized_end=9525,
 )
 
 
@@ -2836,8 +3511,8 @@ _CVOICECHAT_REQUESTONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7454,
-  serialized_end=7517,
+  serialized_start=9527,
+  serialized_end=9590,
 )
 
 
@@ -2874,8 +3549,8 @@ _CVOICECHAT_ONEONONECHATREQUESTED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7519,
-  serialized_end=7613,
+  serialized_start=9592,
+  serialized_end=9686,
 )
 
 
@@ -2919,8 +3594,8 @@ _CVOICECHAT_ANSWERONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7615,
-  serialized_end=7727,
+  serialized_start=9688,
+  serialized_end=9800,
 )
 
 
@@ -2943,8 +3618,8 @@ _CVOICECHAT_ANSWERONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7729,
-  serialized_end=7769,
+  serialized_start=9802,
+  serialized_end=9842,
 )
 
 
@@ -2988,8 +3663,8 @@ _CVOICECHAT_ONEONONECHATREQUESTRESPONSE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7771,
-  serialized_end=7897,
+  serialized_start=9844,
+  serialized_end=9970,
 )
 
 
@@ -3019,8 +3694,8 @@ _CVOICECHAT_ENDONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7899,
-  serialized_end=7960,
+  serialized_start=9972,
+  serialized_end=10033,
 )
 
 
@@ -3043,8 +3718,8 @@ _CVOICECHAT_ENDONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7962,
-  serialized_end=7999,
+  serialized_start=10035,
+  serialized_end=10072,
 )
 
 
@@ -3081,8 +3756,8 @@ _CVOICECHAT_LEAVEONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8001,
-  serialized_end=8086,
+  serialized_start=10074,
+  serialized_end=10159,
 )
 
 
@@ -3105,8 +3780,8 @@ _CVOICECHAT_LEAVEONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8088,
-  serialized_end=8127,
+  serialized_start=10161,
+  serialized_end=10200,
 )
 
 
@@ -3178,8 +3853,8 @@ _CVOICECHAT_USERJOINEDVOICECHAT_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8130,
-  serialized_end=8351,
+  serialized_start=10203,
+  serialized_end=10424,
 )
 
 
@@ -3244,8 +3919,8 @@ _CVOICECHAT_USERVOICESTATUS_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8354,
-  serialized_end=8578,
+  serialized_start=10427,
+  serialized_end=10651,
 )
 
 
@@ -3282,8 +3957,8 @@ _CVOICECHAT_ALLMEMBERSSTATUS_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8580,
-  serialized_end=8701,
+  serialized_start=10653,
+  serialized_end=10774,
 )
 
 
@@ -3362,8 +4037,8 @@ _CVOICECHAT_UPDATEVOICECHATWEBRTCDATA_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8704,
-  serialized_end=8968,
+  serialized_start=10777,
+  serialized_end=11041,
 )
 
 
@@ -3393,8 +4068,8 @@ _CVOICECHAT_UPDATEVOICECHATWEBRTCDATA_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8970,
-  serialized_end=9049,
+  serialized_start=11043,
+  serialized_end=11122,
 )
 
 
@@ -3431,8 +4106,8 @@ _CVOICECHAT_UPLOADCLIENTVOICECHATLOGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9051,
-  serialized_end=9156,
+  serialized_start=11124,
+  serialized_end=11229,
 )
 
 
@@ -3455,8 +4130,8 @@ _CVOICECHAT_UPLOADCLIENTVOICECHATLOGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9158,
-  serialized_end=9205,
+  serialized_start=11231,
+  serialized_end=11278,
 )
 
 
@@ -3486,8 +4161,8 @@ _CVOICECHAT_LEAVEVOICECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9207,
-  serialized_end=9264,
+  serialized_start=11280,
+  serialized_end=11337,
 )
 
 
@@ -3510,8 +4185,8 @@ _CVOICECHAT_LEAVEVOICECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9266,
-  serialized_end=9302,
+  serialized_start=11339,
+  serialized_end=11375,
 )
 
 
@@ -3583,8 +4258,8 @@ _CVOICECHAT_USERLEFTVOICECHAT_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9305,
-  serialized_end=9524,
+  serialized_start=11378,
+  serialized_end=11597,
 )
 
 
@@ -3642,8 +4317,8 @@ _CVOICECHAT_VOICECHATENDED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9527,
-  serialized_end=9697,
+  serialized_start=11600,
+  serialized_end=11770,
 )
 
 
@@ -3673,8 +4348,8 @@ _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9699,
-  serialized_end=9760,
+  serialized_start=11772,
+  serialized_end=11833,
 )
 
 
@@ -3704,8 +4379,8 @@ _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9762,
-  serialized_end=9839,
+  serialized_start=11835,
+  serialized_end=11912,
 )
 
 
@@ -3763,8 +4438,8 @@ _CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9842,
-  serialized_end=9981,
+  serialized_start=11915,
+  serialized_end=12054,
 )
 
 
@@ -3808,8 +4483,8 @@ _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9984,
-  serialized_end=10206,
+  serialized_start=12057,
+  serialized_end=12279,
 )
 
 
@@ -3846,8 +4521,8 @@ _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING = _d
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10208,
-  serialized_end=10317,
+  serialized_start=12281,
+  serialized_end=12390,
 )
 
 
@@ -3905,8 +4580,8 @@ _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10320,
-  serialized_end=10539,
+  serialized_start=12393,
+  serialized_end=12612,
 )
 
 
@@ -3929,8 +4604,8 @@ _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE = _descriptor.Descri
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10541,
-  serialized_end=10601,
+  serialized_start=12614,
+  serialized_end=12674,
 )
 
 
@@ -3953,8 +4628,8 @@ _CMOBILEPERACCOUNT_GETSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10603,
-  serialized_end=10642,
+  serialized_start=12676,
+  serialized_end=12715,
 )
 
 
@@ -4026,8 +4701,8 @@ _CMOBILEPERACCOUNT_GETSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10645,
-  serialized_end=10881,
+  serialized_start=12718,
+  serialized_end=12954,
 )
 
 
@@ -4092,8 +4767,8 @@ _CMOBILEPERACCOUNT_SETSETTINGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10884,
-  serialized_end=11097,
+  serialized_start=12957,
+  serialized_end=13170,
 )
 
 
@@ -4116,8 +4791,8 @@ _CMOBILEPERACCOUNT_SETSETTINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11099,
-  serialized_end=11139,
+  serialized_start=13172,
+  serialized_end=13212,
 )
 
 
@@ -4196,8 +4871,8 @@ _CMOBILEDEVICE_REGISTERMOBILEDEVICE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11142,
-  serialized_end=11402,
+  serialized_start=13215,
+  serialized_end=13475,
 )
 
 
@@ -4227,8 +4902,8 @@ _CMOBILEDEVICE_REGISTERMOBILEDEVICE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11404,
-  serialized_end=11474,
+  serialized_start=13477,
+  serialized_end=13547,
 )
 
 
@@ -4258,8 +4933,8 @@ _CMOBILEDEVICE_DEREGISTERMOBILEDEVICE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11476,
-  serialized_end=11545,
+  serialized_start=13549,
+  serialized_end=13618,
 )
 
 
@@ -4282,8 +4957,8 @@ _UNKNOWNPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11547,
-  serialized_end=11561,
+  serialized_start=13620,
+  serialized_end=13634,
 )
 
 _CMSGCLIENTAPPMINUTESPLAYEDDATA.fields_by_name['minutes_played'].message_type = _CMSGCLIENTAPPMINUTESPLAYEDDATA_APPMINUTESPLAYEDDATA
@@ -4304,7 +4979,13 @@ _CFRIENDSLIST_GETFAVORITES_RESPONSE.fields_by_name['favorites'].message_type = _
 _CFRIENDSLIST_SETFAVORITES_REQUEST.fields_by_name['favorites'].message_type = _CFRIENDSLISTFAVORITEENTRY
 _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION.fields_by_name['favorites'].message_type = _CFRIENDSLISTFAVORITEENTRY
 _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE.fields_by_name['friendslist'].message_type = steammessages__clientserver__friends__pb2._CMSGCLIENTFRIENDSLIST
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE.fields_by_name['published_files'].message_type = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE.fields_by_name['subscribed_files'].message_type = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID
+_CMSGCLIENTWORKSHOPITEMINFOREQUEST.fields_by_name['workshop_items'].message_type = _CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM
+_CMSGCLIENTWORKSHOPITEMINFORESPONSE.fields_by_name['workshop_items'].message_type = _CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE.fields_by_name['published_files'].message_type = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID
 _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE.fields_by_name['published_files'].message_type = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+_CMSGGAMESERVERPINGSAMPLE.fields_by_name['gs_samples'].message_type = _CMSGGAMESERVERPINGSAMPLE_SAMPLE
 _CVOICECHAT_ALLMEMBERSSTATUS_NOTIFICATION.fields_by_name['users'].message_type = _CVOICECHAT_USERVOICESTATUS_NOTIFICATION
 _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION.fields_by_name['ssrcs_to_accountids'].message_type = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING
 DESCRIPTOR.message_types_by_name['CHelpRequestLogs_UploadUserApplicationLog_Request'] = _CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_REQUEST
@@ -4365,10 +5046,25 @@ DESCRIPTOR.message_types_by_name['CFriendsList_SetFavorites_Response'] = _CFRIEN
 DESCRIPTOR.message_types_by_name['CFriendsList_FavoritesChanged_Notification'] = _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CFriendsList_GetFriendsList_Request'] = _CFRIENDSLIST_GETFRIENDSLIST_REQUEST
 DESCRIPTOR.message_types_by_name['CFriendsList_GetFriendsList_Response'] = _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserPublishedFiles'] = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILES
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserPublishedFilesResponse'] = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId'] = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserSubscribedFiles'] = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILES
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserSubscribedFilesResponse'] = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId'] = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID
 DESCRIPTOR.message_types_by_name['CMsgClientUCMPublishedFileDeleted'] = _CMSGCLIENTUCMPUBLISHEDFILEDELETED
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoRequest'] = _CMSGCLIENTWORKSHOPITEMINFOREQUEST
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoRequest_WorkshopItem'] = _CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoResponse'] = _CMSGCLIENTWORKSHOPITEMINFORESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo'] = _CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO
+DESCRIPTOR.message_types_by_name['CMsgClientUCMGetPublishedFilesForUser'] = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSER
+DESCRIPTOR.message_types_by_name['CMsgClientUCMGetPublishedFilesForUserResponse'] = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId'] = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID
 DESCRIPTOR.message_types_by_name['CMsgCREEnumeratePublishedFiles'] = _CMSGCREENUMERATEPUBLISHEDFILES
 DESCRIPTOR.message_types_by_name['CMsgCREEnumeratePublishedFilesResponse'] = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE
 DESCRIPTOR.message_types_by_name['CMsgCREEnumeratePublishedFilesResponse_PublishedFileId'] = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+DESCRIPTOR.message_types_by_name['CMsgGameServerPingSample'] = _CMSGGAMESERVERPINGSAMPLE
+DESCRIPTOR.message_types_by_name['CMsgGameServerPingSample_Sample'] = _CMSGGAMESERVERPINGSAMPLE_SAMPLE
 DESCRIPTOR.message_types_by_name['CClan_RespondToClanInvite_Request'] = _CCLAN_RESPONDTOCLANINVITE_REQUEST
 DESCRIPTOR.message_types_by_name['CClan_RespondToClanInvite_Response'] = _CCLAN_RESPONDTOCLANINVITE_RESPONSE
 DESCRIPTOR.message_types_by_name['CVoiceChat_RequestOneOnOneChat_Request'] = _CVOICECHAT_REQUESTONEONONECHAT_REQUEST
@@ -4815,12 +5511,103 @@ CFriendsList_GetFriendsList_Response = _reflection.GeneratedProtocolMessageType(
   ))
 _sym_db.RegisterMessage(CFriendsList_GetFriendsList_Response)
 
+CMsgClientUCMEnumerateUserPublishedFiles = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserPublishedFiles', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILES,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserPublishedFiles)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserPublishedFiles)
+
+CMsgClientUCMEnumerateUserPublishedFilesResponse = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserPublishedFilesResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserPublishedFilesResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserPublishedFilesResponse)
+
+CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId)
+
+CMsgClientUCMEnumerateUserSubscribedFiles = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserSubscribedFiles', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILES,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserSubscribedFiles)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserSubscribedFiles)
+
+CMsgClientUCMEnumerateUserSubscribedFilesResponse = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserSubscribedFilesResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserSubscribedFilesResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserSubscribedFilesResponse)
+
+CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId)
+
 CMsgClientUCMPublishedFileDeleted = _reflection.GeneratedProtocolMessageType('CMsgClientUCMPublishedFileDeleted', (_message.Message,), dict(
   DESCRIPTOR = _CMSGCLIENTUCMPUBLISHEDFILEDELETED,
   __module__ = 'steammessages_webui_friends_pb2'
   # @@protoc_insertion_point(class_scope:CMsgClientUCMPublishedFileDeleted)
   ))
 _sym_db.RegisterMessage(CMsgClientUCMPublishedFileDeleted)
+
+CMsgClientWorkshopItemInfoRequest = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFOREQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoRequest)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoRequest)
+
+CMsgClientWorkshopItemInfoRequest_WorkshopItem = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoRequest_WorkshopItem', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoRequest_WorkshopItem)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoRequest_WorkshopItem)
+
+CMsgClientWorkshopItemInfoResponse = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFORESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoResponse)
+
+CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo)
+
+CMsgClientUCMGetPublishedFilesForUser = _reflection.GeneratedProtocolMessageType('CMsgClientUCMGetPublishedFilesForUser', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSER,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMGetPublishedFilesForUser)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMGetPublishedFilesForUser)
+
+CMsgClientUCMGetPublishedFilesForUserResponse = _reflection.GeneratedProtocolMessageType('CMsgClientUCMGetPublishedFilesForUserResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMGetPublishedFilesForUserResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMGetPublishedFilesForUserResponse)
+
+CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId)
 
 CMsgCREEnumeratePublishedFiles = _reflection.GeneratedProtocolMessageType('CMsgCREEnumeratePublishedFiles', (_message.Message,), dict(
   DESCRIPTOR = _CMSGCREENUMERATEPUBLISHEDFILES,
@@ -4842,6 +5629,20 @@ CMsgCREEnumeratePublishedFilesResponse_PublishedFileId = _reflection.GeneratedPr
   # @@protoc_insertion_point(class_scope:CMsgCREEnumeratePublishedFilesResponse_PublishedFileId)
   ))
 _sym_db.RegisterMessage(CMsgCREEnumeratePublishedFilesResponse_PublishedFileId)
+
+CMsgGameServerPingSample = _reflection.GeneratedProtocolMessageType('CMsgGameServerPingSample', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGGAMESERVERPINGSAMPLE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgGameServerPingSample)
+  ))
+_sym_db.RegisterMessage(CMsgGameServerPingSample)
+
+CMsgGameServerPingSample_Sample = _reflection.GeneratedProtocolMessageType('CMsgGameServerPingSample_Sample', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGGAMESERVERPINGSAMPLE_SAMPLE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgGameServerPingSample_Sample)
+  ))
+_sym_db.RegisterMessage(CMsgGameServerPingSample_Sample)
 
 CClan_RespondToClanInvite_Request = _reflection.GeneratedProtocolMessageType('CClan_RespondToClanInvite_Request', (_message.Message,), dict(
   DESCRIPTOR = _CCLAN_RESPONDTOCLANINVITE_REQUEST,
@@ -5122,8 +5923,8 @@ _HELPREQUESTLOGS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=11564,
-  serialized_end=11715,
+  serialized_start=13637,
+  serialized_end=13788,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadUserApplicationLog',
@@ -5146,8 +5947,8 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=11718,
-  serialized_end=13796,
+  serialized_start=13791,
+  serialized_end=15869,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetApps',
@@ -5314,8 +6115,8 @@ _EXPERIMENTSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   serialized_options=None,
-  serialized_start=13798,
-  serialized_end=13883,
+  serialized_start=15871,
+  serialized_end=15956,
   methods=[
   _descriptor.MethodDescriptor(
     name='ReportProductImpressionsFromClient',
@@ -5338,8 +6139,8 @@ _FRIENDSLIST = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=3,
   serialized_options=None,
-  serialized_start=13886,
-  serialized_end=14264,
+  serialized_start=15959,
+  serialized_end=16337,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCategories',
@@ -5389,8 +6190,8 @@ _FRIENDSLISTCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=4,
   serialized_options=None,
-  serialized_start=14266,
-  serialized_end=14363,
+  serialized_start=16339,
+  serialized_end=16436,
   methods=[
   _descriptor.MethodDescriptor(
     name='FavoritesChanged',
@@ -5413,8 +6214,8 @@ _CLAN = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=5,
   serialized_options=None,
-  serialized_start=14365,
-  serialized_end=14467,
+  serialized_start=16438,
+  serialized_end=16540,
   methods=[
   _descriptor.MethodDescriptor(
     name='RespondToClanInvite',
@@ -5437,8 +6238,8 @@ _VOICECHAT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=6,
   serialized_options=None,
-  serialized_start=14470,
-  serialized_end=15303,
+  serialized_start=16543,
+  serialized_end=17376,
   methods=[
   _descriptor.MethodDescriptor(
     name='UpdateVoiceChatWebRTCData',
@@ -5524,8 +6325,8 @@ _VOICECHATCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=7,
   serialized_options=None,
-  serialized_start=15306,
-  serialized_end=15927,
+  serialized_start=17379,
+  serialized_end=18000,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyUserJoinedVoiceChat',
@@ -5602,8 +6403,8 @@ _WEBRTCCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=8,
   serialized_options=None,
-  serialized_start=15930,
-  serialized_end=16232,
+  serialized_start=18003,
+  serialized_end=18305,
   methods=[
   _descriptor.MethodDescriptor(
     name='InitiateWebRTCConnection',
@@ -5635,8 +6436,8 @@ _WEBRTCCLIENTNOTIFICATIONS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=9,
   serialized_options=None,
-  serialized_start=16235,
-  serialized_end=16458,
+  serialized_start=18308,
+  serialized_end=18531,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyWebRTCSessionConnected',
@@ -5668,8 +6469,8 @@ _MOBILEPERACCOUNT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=10,
   serialized_options=None,
-  serialized_start=16461,
-  serialized_end=16671,
+  serialized_start=18534,
+  serialized_end=18744,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetSettings',
@@ -5701,8 +6502,8 @@ _MOBILEDEVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=11,
   serialized_options=None,
-  serialized_start=16674,
-  serialized_end=16894,
+  serialized_start=18747,
+  serialized_end=18967,
   methods=[
   _descriptor.MethodDescriptor(
     name='RegisterMobileDevice',

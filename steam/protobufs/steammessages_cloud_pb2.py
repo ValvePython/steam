@@ -16,6 +16,8 @@ _sym_db = _symbol_database.Default()
 
 
 import steam.protobufs.steammessages_unified_base_pb2 as steammessages__unified__base__pb2
+import steam.protobufs.enums_pb2 as enums__pb2
+import steam.protobufs.steammessages_client_objects_pb2 as steammessages__client__objects__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -23,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x19steammessages_cloud.proto\x1a steammessages_unified_base.proto\"d\n\"CCloud_GetUploadServerInfo_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID to which a file will be uploaded to.\"9\n#CCloud_GetUploadServerInfo_Response\x12\x12\n\nserver_url\x18\x01 \x01(\t\"\xb2\x06\n\x1e\x43\x43loud_BeginHTTPUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x33\n\tfile_size\x18\x02 \x01(\rB \x82\xb5\x18\x1cOriginal file size in bytes.\x12=\n\x08\x66ilename\x18\x03 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12V\n\x08\x66ile_sha\x18\x04 \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\x12\\\n\tis_public\x18\x05 \x01(\x08\x42I\x82\xb5\x18\x45True if the file should be marked public on the UFS, false otherwise.\x12\x97\x01\n\x11platforms_to_sync\x18\x06 \x03(\tB|\x82\xb5\x18xArray of string specifying which platforms to sync; value values: all, Windows, MacOS, linux, Switch, iPhoneOS, Android.\x12r\n\x15request_headers_names\x18\x07 \x03(\tBS\x82\xb5\x18ONames for headers you\'ll want to set on your upload request. May be left blank.\x12\x96\x01\n\x16request_headers_values\x18\x08 \x03(\tBv\x82\xb5\x18rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.\"\x98\x04\n\x1f\x43\x43loud_BeginHTTPUpload_Response\x12/\n\x05ugcid\x18\x01 \x01(\x06\x42 \x82\xb5\x18\x1cUGC ID of the uploaded file.\x12\x30\n\ttimestamp\x18\x02 \x01(\x07\x42\x1d\x82\xb5\x18\x19Server timestamp of file.\x12X\n\x08url_host\x18\x03 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x04 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x05 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12{\n\x0frequest_headers\x18\x06 \x03(\x0b\x32,.CCloud_BeginHTTPUpload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xad\x04\n\x1f\x43\x43loud_CommitHTTPUpload_Request\x12\xa4\x01\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x87\x01\x82\xb5\x18\x82\x01True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.\x12\x95\x01\n\x08\x66ile_sha\x18\x03 \x01(\tB\x82\x01\x82\xb5\x18~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginHTTPUpload request.\"}\n CCloud_CommitHTTPUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\x8c\x01\n\x1d\x43\x43loud_GetFileDetails_Request\x12;\n\x05ugcid\x18\x01 \x01(\x04\x42,\x82\xb5\x18(ID of the Cloud file to get details for.\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x8e\x03\n\x0f\x43\x43loud_UserFile\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\r\n\x05ugcid\x18\x02 \x01(\x04\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x04\x12\x11\n\tfile_size\x18\x05 \x01(\r\x12\x0b\n\x03url\x18\x06 \x01(\t\x12\x17\n\x0fsteamid_creator\x18\x07 \x01(\x06\x12\r\n\x05\x66lags\x18\x08 \x01(\r\x12\x97\x01\n\x11platforms_to_sync\x18\t \x03(\tB|\x82\xb5\x18xArray of string specifying which platforms to sync; value values: all, Windows, MacOS, linux, Switch, iPhoneOS, Android.\x12V\n\x08\x66ile_sha\x18\n \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\"C\n\x1e\x43\x43loud_GetFileDetails_Response\x12!\n\x07\x64\x65tails\x18\x01 \x01(\x0b\x32\x10.CCloud_UserFile\"\xe9\x03\n!CCloud_EnumerateUserFiles_Request\x12\x34\n\x05\x61ppid\x18\x01 \x01(\rB%\x82\xb5\x18!App ID to enumerate the files of.\x12\x9b\x01\n\x10\x65xtended_details\x18\x02 \x01(\x08\x42\x80\x01\x82\xb5\x18|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.\x12|\n\x05\x63ount\x18\x03 \x01(\rBm\x82\xb5\x18i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.\x12r\n\x0bstart_index\x18\x04 \x01(\rB]\x82\xb5\x18Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.\"Z\n\"CCloud_EnumerateUserFiles_Response\x12\x1f\n\x05\x66iles\x18\x01 \x03(\x0b\x32\x10.CCloud_UserFile\x12\x13\n\x0btotal_files\x18\x02 \x01(\r\"Y\n\x15\x43\x43loud_Delete_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x18\n\x16\x43\x43loud_Delete_Response\"\'\n%CCloud_GetClientEncryptionKey_Request\"n\n&CCloud_GetClientEncryptionKey_Response\x12\'\n\x03key\x18\x01 \x01(\x0c\x42\x1a\x82\xb5\x18\x16\x41\x45S-256 encryption key\x12\x1b\n\x03\x63rc\x18\x02 \x01(\x05\x42\x0e\x82\xb5\x18\nCRC of key\"\xaa\x01\n\x1d\x43\x43loud_CDNReport_Notification\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0f\n\x07success\x18\x03 \x01(\x08\x12\x18\n\x10http_status_code\x18\x04 \x01(\r\x12\x16\n\x0e\x65xpected_bytes\x18\x05 \x01(\x04\x12\x16\n\x0ereceived_bytes\x18\x06 \x01(\x04\x12\x10\n\x08\x64uration\x18\x07 \x01(\r\"\x9a\x02\n1CCloud_ExternalStorageTransferReport_Notification\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x11\n\tis_upload\x18\x03 \x01(\x08\x12\x0f\n\x07success\x18\x04 \x01(\x08\x12\x18\n\x10http_status_code\x18\x05 \x01(\r\x12\x16\n\x0e\x62ytes_expected\x18\x06 \x01(\x04\x12\x14\n\x0c\x62ytes_actual\x18\x07 \x01(\x04\x12\x13\n\x0b\x64uration_ms\x18\x08 \x01(\r\x12\x0e\n\x06\x63\x65llid\x18\t \x01(\r\x12\x0f\n\x07proxied\x18\n \x01(\x08\x12\x12\n\nipv6_local\x18\x0b \x01(\x08\x12\x13\n\x0bipv6_remote\x18\x0c \x01(\x08\"\xdc\x05\n$CCloud_ClientBeginFileUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x44\n\tfile_size\x18\x02 \x01(\rB1\x82\xb5\x18-file size as transmitted and stored in Cloud.\x12N\n\rraw_file_size\x18\x03 \x01(\rB7\x82\xb5\x18\x33\x66ile size before any compression and/or encryption.\x12(\n\x08\x66ile_sha\x18\x04 \x01(\x0c\x42\x16\x82\xb5\x18\x12SHA-1 of raw file.\x12*\n\ntime_stamp\x18\x05 \x01(\x04\x42\x16\x82\xb5\x18\x12Timestamp of file.\x12=\n\x08\x66ilename\x18\x06 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12%\n\x11platforms_to_sync\x18\x07 \x01(\r:\n4294967295\x12\x46\n\x07\x63\x65ll_id\x18\t \x01(\rB5\x82\xb5\x18\x31\x43lient\'s cell ID so we can pick storage location.\x12Q\n\x0b\x63\x61n_encrypt\x18\n \x01(\x08\x42<\x82\xb5\x18\x38if true, client can encrypt the file before uploading it\x12\x66\n\x0eis_shared_file\x18\x0b \x01(\x08\x42N\x82\xb5\x18Jif true, this is going to be UGC or a screenshot or some other shared file\x12\x1e\n\x05realm\x18\x0c \x01(\rB\x0f\x82\xb5\x18\x0bSteam Realm\"\xf1\x06\n!ClientCloudFileUploadBlockDetails\x12X\n\x08url_host\x18\x01 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x02 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x03 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12;\n\x0bhttp_method\x18\x04 \x01(\x05\x42&\x82\xb5\x18\"EHTTPMethod to use for this block.\x12}\n\x0frequest_headers\x18\x05 \x03(\x0b\x32..ClientCloudFileUploadBlockDetails.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x12\x38\n\x0c\x62lock_offset\x18\x06 \x01(\x04\x42\"\x82\xb5\x18\x1eoffset of file block to upload\x12m\n\x0c\x62lock_length\x18\x07 \x01(\rBW\x82\xb5\x18Slength of file block to upload - if zero, no part of the file is part of this block\x12_\n\x12\x65xplicit_body_data\x18\x08 \x01(\x0c\x42\x43\x82\xb5\x18?explicit body data to use, instead of file data, for this block\x12o\n\x0fmay_parallelize\x18\t \x01(\x08\x42V\x82\xb5\x18Rif true, this request may be done in parallel with other similarly-marked requests\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xed\x01\n%CCloud_ClientBeginFileUpload_Response\x12[\n\x0c\x65ncrypt_file\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41If true, the file should be encrypted by the client before upload\x12g\n\x0e\x62lock_requests\x18\x02 \x03(\x0b\x32\".ClientCloudFileUploadBlockDetailsB+\x82\xb5\x18\'HTTP requests to make to perform upload\"\xc9\x03\n%CCloud_ClientCommitFileUpload_Request\x12\x61\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41True if all block uploads succeeded, false if any of them failed.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.\x12p\n\x08\x66ile_sha\x18\x03 \x01(\x0c\x42^\x82\xb5\x18ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginFileUpload request.\"\x83\x01\n&CCloud_ClientCommitFileUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\xa0\x01\n!CCloud_ClientFileDownload_Request\x12.\n\x05\x61ppid\x18\x01 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file is part of.\x12+\n\x08\x66ilename\x18\x02 \x01(\tB\x19\x82\xb5\x18\x15\x46ilename of the file.\x12\x1e\n\x05realm\x18\x03 \x01(\rB\x0f\x82\xb5\x18\x0bSteam Realm\"\xfe\x05\n\"CCloud_ClientFileDownload_Response\x12\x32\n\x05\x61ppid\x18\x01 \x01(\rB#\x82\xb5\x18\x1f\x41pplication the file belongs to\x12G\n\tfile_size\x18\x02 \x01(\rB4\x82\xb5\x18\x30\x66ile size as transmitted and stored in the Cloud\x12G\n\rraw_file_size\x18\x03 \x01(\rB0\x82\xb5\x18,file size when decompressed and/or decrypted\x12!\n\x08sha_file\x18\x04 \x01(\x0c\x42\x0f\x82\xb5\x18\x0bSHA of file\x12)\n\ntime_stamp\x18\x05 \x01(\x04\x42\x15\x82\xb5\x18\x11Timestamp of file\x12J\n\x12is_explicit_delete\x18\x06 \x01(\x08\x42.\x82\xb5\x18*True if this is an explicitly deleted file\x12/\n\x08url_host\x18\x07 \x01(\tB\x1d\x82\xb5\x18\x19Host to GET the file from\x12O\n\x08url_path\x18\x08 \x01(\tB=\x82\xb5\x18\x39Path on that host to use, including URL parameters if any\x12\x37\n\tuse_https\x18\t \x01(\x08\x42$\x82\xb5\x18 If set, use HTTPS, else use HTTP\x12~\n\x0frequest_headers\x18\n \x03(\x0b\x32/.CCloud_ClientFileDownload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP GET request.\x12\x11\n\tencrypted\x18\x0b \x01(\x08\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xe3\x01\n\x1f\x43\x43loud_ClientDeleteFile_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID for which the file is being deleted.\x12\'\n\x08\x66ilename\x18\x02 \x01(\tB\x15\x82\xb5\x18\x11\x46ilename of file.\x12W\n\x12is_explicit_delete\x18\x03 \x01(\x08\x42;\x82\xb5\x18\x37If true, this is a \'delete\'; if false, it is a \'forget\'\"\"\n CCloud_ClientDeleteFile_Response\"\xe0\x01\n,CCloud_ClientConflictResolution_Notification\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID for which the conflict was resolved.\x12p\n\x11\x63hose_local_files\x18\x02 \x01(\x08\x42U\x82\xb5\x18QDid the user choose to keep the files local to the machine they are on right now?\"\"\n CCloud_EnumerateUserApps_Request\"\x98\x01\n!CCloud_EnumerateUserApps_Response\x12\x35\n\x04\x61pps\x18\x01 \x03(\x0b\x32\'.CCloud_EnumerateUserApps_Response.Apps\x1a<\n\x04\x41pps\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\ntotalcount\x18\x02 \x01(\x05\x12\x11\n\ttotalsize\x18\x03 \x01(\x03\x32\xab\x12\n\x05\x43loud\x12\x9c\x01\n\x13GetUploadServerInfo\x12#.CCloud_GetUploadServerInfo_Request\x1a$.CCloud_GetUploadServerInfo_Response\":\x82\xb5\x18\x36Returns the URL of the proper cloud server for a user.\x12\xa8\x02\n\x0f\x42\x65ginHTTPUpload\x12\x1f.CCloud_BeginHTTPUpload_Request\x1a .CCloud_BeginHTTPUpload_Response\"\xd1\x01\x82\xb5\x18\xcc\x01\x42\x65gins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.\x12\xad\x01\n\x10\x43ommitHTTPUpload\x12 .CCloud_CommitHTTPUpload_Request\x1a!.CCloud_CommitHTTPUpload_Response\"T\x82\xb5\x18PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.\x12w\n\x0eGetFileDetails\x12\x1e.CCloud_GetFileDetails_Request\x1a\x1f.CCloud_GetFileDetails_Response\"$\x82\xb5\x18 Returns details on a Cloud file.\x12\xba\x01\n\x12\x45numerateUserFiles\x12\".CCloud_EnumerateUserFiles_Request\x1a#.CCloud_EnumerateUserFiles_Response\"[\x82\xb5\x18WEnumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.\x12\x64\n\x06\x44\x65lete\x12\x16.CCloud_Delete_Request\x1a\x17.CCloud_Delete_Response\")\x82\xb5\x18%Deletes a file from the user\'s cloud.\x12\x99\x01\n\x16GetClientEncryptionKey\x12&.CCloud_GetClientEncryptionKey_Request\x1a\'.CCloud_GetClientEncryptionKey_Response\".\x82\xb5\x18*Gets the user\'s Cloud file encryption key.\x12\x63\n\tCDNReport\x12\x1e.CCloud_CDNReport_Notification\x1a\x0b.NoResponse\")\x82\xb5\x18%Reports the result of a CDN transfer.\x12\x9f\x01\n\x1d\x45xternalStorageTransferReport\x12\x32.CCloud_ExternalStorageTransferReport_Notification\x1a\x0b.NoResponse\"=\x82\xb5\x18\x39Reports the result of an external Cloud storage transfer.\x12\x88\x01\n\x15\x43lientBeginFileUpload\x12%.CCloud_ClientBeginFileUpload_Request\x1a&.CCloud_ClientBeginFileUpload_Response\" \x82\xb5\x18\x1cInitiate an upload to Cloud.\x12\x9a\x01\n\x16\x43lientCommitFileUpload\x12&.CCloud_ClientCommitFileUpload_Request\x1a\'.CCloud_ClientCommitFileUpload_Response\"/\x82\xb5\x18+Commit the file upload or indicate failure.\x12|\n\x12\x43lientFileDownload\x12\".CCloud_ClientFileDownload_Request\x1a#.CCloud_ClientFileDownload_Response\"\x1d\x82\xb5\x18\x19Initiate a file download.\x12u\n\x10\x43lientDeleteFile\x12 .CCloud_ClientDeleteFile_Request\x1a!.CCloud_ClientDeleteFile_Response\"\x1c\x82\xb5\x18\x18\x44\x65lete or forget a file.\x12\x8e\x01\n\x18\x43lientConflictResolution\x12-.CCloud_ClientConflictResolution_Notification\x1a\x0b.NoResponse\"6\x82\xb5\x18\x32User has picked a resolution for a Cloud conflict.\x12\x8f\x01\n\x11\x45numerateUserApps\x12!.CCloud_EnumerateUserApps_Request\x1a\".CCloud_EnumerateUserApps_Response\"3\x82\xb5\x18/Enumerates apps stroing cloud files for a user.\x1a)\x82\xb5\x18%A service for Steam Cloud operations.B\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x19steammessages_cloud.proto\x1a steammessages_unified_base.proto\x1a\x0b\x65nums.proto\x1a\"steammessages_client_objects.proto\"d\n\"CCloud_GetUploadServerInfo_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID to which a file will be uploaded to.\"9\n#CCloud_GetUploadServerInfo_Response\x12\x12\n\nserver_url\x18\x01 \x01(\t\"\x8d\x07\n\x1e\x43\x43loud_BeginHTTPUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x33\n\tfile_size\x18\x02 \x01(\rB \x82\xb5\x18\x1cOriginal file size in bytes.\x12=\n\x08\x66ilename\x18\x03 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12V\n\x08\x66ile_sha\x18\x04 \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\x12\\\n\tis_public\x18\x05 \x01(\x08\x42I\x82\xb5\x18\x45True if the file should be marked public on the UFS, false otherwise.\x12\x97\x01\n\x11platforms_to_sync\x18\x06 \x03(\tB|\x82\xb5\x18xArray of string specifying which platforms to sync; value values: all, Windows, MacOS, linux, Switch, iPhoneOS, Android.\x12r\n\x15request_headers_names\x18\x07 \x03(\tBS\x82\xb5\x18ONames for headers you\'ll want to set on your upload request. May be left blank.\x12\x96\x01\n\x16request_headers_values\x18\x08 \x03(\tBv\x82\xb5\x18rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.\x12Y\n\x0fupload_batch_id\x18\t \x01(\x04\x42@\x82\xb5\x18<ID of this batch returned by prior BeginAppUploadBatch call.\"\x98\x04\n\x1f\x43\x43loud_BeginHTTPUpload_Response\x12/\n\x05ugcid\x18\x01 \x01(\x06\x42 \x82\xb5\x18\x1cUGC ID of the uploaded file.\x12\x30\n\ttimestamp\x18\x02 \x01(\x07\x42\x1d\x82\xb5\x18\x19Server timestamp of file.\x12X\n\x08url_host\x18\x03 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x04 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x05 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12{\n\x0frequest_headers\x18\x06 \x03(\x0b\x32,.CCloud_BeginHTTPUpload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xad\x04\n\x1f\x43\x43loud_CommitHTTPUpload_Request\x12\xa4\x01\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x87\x01\x82\xb5\x18\x82\x01True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload.\x12\x95\x01\n\x08\x66ile_sha\x18\x03 \x01(\tB\x82\x01\x82\xb5\x18~Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginHTTPUpload request.\"}\n CCloud_CommitHTTPUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\xb5\x02\n\x1d\x43\x43loud_BeginUGCUpload_Request\x12.\n\x05\x61ppid\x18\x01 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID this UGC belongs to.\x12*\n\tfile_size\x18\x02 \x01(\rB\x17\x82\xb5\x18\x13\x46ile size in bytes.\x12\'\n\x08\x66ilename\x18\x03 \x01(\tB\x15\x82\xb5\x18\x11Name of the file.\x12V\n\x08\x66ile_sha\x18\x04 \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\x12\x37\n\x0c\x63ontent_type\x18\x05 \x01(\tB!\x82\xb5\x18\x1dMIME content type of the file\"\xa0\x05\n\x1e\x43\x43loud_BeginUGCUpload_Response\x12\x87\x01\n\x0estorage_system\x18\x01 \x01(\x0e\x32\x1c.EPublishedFileStorageSystem:$k_EPublishedFileStorageSystemInvalidB+\x82\xb5\x18\'UGC Storage system chosen for this file\x12/\n\x05ugcid\x18\x02 \x01(\x06\x42 \x82\xb5\x18\x1cUGC ID of the uploaded file.\x12\x30\n\ttimestamp\x18\x03 \x01(\x07\x42\x1d\x82\xb5\x18\x19Server timestamp of file.\x12X\n\x08url_host\x18\x04 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x05 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x06 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12z\n\x0frequest_headers\x18\x07 \x03(\x0b\x32+.CCloud_BeginUGCUpload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xf0\x02\n\x1e\x43\x43loud_CommitUGCUpload_Request\x12\xa3\x01\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x86\x01\x82\xb5\x18\x81\x01True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginUGCUpload), false if a failure occurred.\x12w\n\x05\x61ppid\x18\x02 \x01(\rBh\x82\xb5\x18\x64\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginUGCUpload.\x12/\n\x05ugcid\x18\x03 \x01(\x06\x42 \x82\xb5\x18\x1cUGC ID of the uploaded file.\"|\n\x1f\x43\x43loud_CommitUGCUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\x8c\x01\n\x1d\x43\x43loud_GetFileDetails_Request\x12;\n\x05ugcid\x18\x01 \x01(\x04\x42,\x82\xb5\x18(ID of the Cloud file to get details for.\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\"\x8e\x03\n\x0f\x43\x43loud_UserFile\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\r\n\x05ugcid\x18\x02 \x01(\x04\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x04\x12\x11\n\tfile_size\x18\x05 \x01(\r\x12\x0b\n\x03url\x18\x06 \x01(\t\x12\x17\n\x0fsteamid_creator\x18\x07 \x01(\x06\x12\r\n\x05\x66lags\x18\x08 \x01(\r\x12\x97\x01\n\x11platforms_to_sync\x18\t \x03(\tB|\x82\xb5\x18xArray of string specifying which platforms to sync; value values: all, Windows, MacOS, linux, Switch, iPhoneOS, Android.\x12V\n\x08\x66ile_sha\x18\n \x01(\tBD\x82\xb5\x18@Hex string (40 digits) representing the SHA1 digest of the file.\"C\n\x1e\x43\x43loud_GetFileDetails_Response\x12!\n\x07\x64\x65tails\x18\x01 \x01(\x0b\x32\x10.CCloud_UserFile\"\xe9\x03\n!CCloud_EnumerateUserFiles_Request\x12\x34\n\x05\x61ppid\x18\x01 \x01(\rB%\x82\xb5\x18!App ID to enumerate the files of.\x12\x9b\x01\n\x10\x65xtended_details\x18\x02 \x01(\x08\x42\x80\x01\x82\xb5\x18|(Optional) Get extended details back on the files found. Defaults to only returned the app Id and UGC Id of the files found.\x12|\n\x05\x63ount\x18\x03 \x01(\rBm\x82\xb5\x18i(Optional) Maximum number of results to return on this call. Defaults to a maximum of 500 files returned.\x12r\n\x0bstart_index\x18\x04 \x01(\rB]\x82\xb5\x18Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list.\"Z\n\"CCloud_EnumerateUserFiles_Response\x12\x1f\n\x05\x66iles\x18\x01 \x03(\x0b\x32\x10.CCloud_UserFile\x12\x13\n\x0btotal_files\x18\x02 \x01(\r\"\xb4\x01\n\x15\x43\x43loud_Delete_Request\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12.\n\x05\x61ppid\x18\x02 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file belongs to.\x12Y\n\x0fupload_batch_id\x18\x03 \x01(\x04\x42@\x82\xb5\x18<ID of this batch returned by prior BeginAppUploadBatch call.\"\x18\n\x16\x43\x43loud_Delete_Response\"\'\n%CCloud_GetClientEncryptionKey_Request\"n\n&CCloud_GetClientEncryptionKey_Response\x12\'\n\x03key\x18\x01 \x01(\x0c\x42\x1a\x82\xb5\x18\x16\x41\x45S-256 encryption key\x12\x1b\n\x03\x63rc\x18\x02 \x01(\x05\x42\x0e\x82\xb5\x18\nCRC of key\"\xaa\x01\n\x1d\x43\x43loud_CDNReport_Notification\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0f\n\x07success\x18\x03 \x01(\x08\x12\x18\n\x10http_status_code\x18\x04 \x01(\r\x12\x16\n\x0e\x65xpected_bytes\x18\x05 \x01(\x04\x12\x16\n\x0ereceived_bytes\x18\x06 \x01(\x04\x12\x10\n\x08\x64uration\x18\x07 \x01(\r\"\x9a\x02\n1CCloud_ExternalStorageTransferReport_Notification\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x11\n\tis_upload\x18\x03 \x01(\x08\x12\x0f\n\x07success\x18\x04 \x01(\x08\x12\x18\n\x10http_status_code\x18\x05 \x01(\r\x12\x16\n\x0e\x62ytes_expected\x18\x06 \x01(\x04\x12\x14\n\x0c\x62ytes_actual\x18\x07 \x01(\x04\x12\x13\n\x0b\x64uration_ms\x18\x08 \x01(\r\x12\x0e\n\x06\x63\x65llid\x18\t \x01(\r\x12\x0f\n\x07proxied\x18\n \x01(\x08\x12\x12\n\nipv6_local\x18\x0b \x01(\x08\x12\x13\n\x0bipv6_remote\x18\x0c \x01(\x08\"\xd7\x02\n\"CCloud_BeginAppUploadBatch_Request\x12\x30\n\x05\x61ppid\x18\x01 \x01(\rB!\x82\xb5\x18\x1d\x41pp ID for this batch is for.\x12\x44\n\x0cmachine_name\x18\x02 \x01(\tB.\x82\xb5\x18*Client machine name (may be user\'s alias).\x12G\n\x0f\x66iles_to_upload\x18\x03 \x03(\tB.\x82\xb5\x18*Filenames of files to upload in this batch\x12G\n\x0f\x66iles_to_delete\x18\x04 \x03(\tB.\x82\xb5\x18*Filenames of files to delete in this batch\x12\'\n\tclient_id\x18\x05 \x01(\x04\x42\x14\x82\xb5\x18\x10\x43lient ID number\"\x84\x01\n#CCloud_BeginAppUploadBatch_Response\x12\'\n\x08\x62\x61tch_id\x18\x01 \x01(\x04\x42\x15\x82\xb5\x18\x11ID of this batch.\x12\x34\n\x11\x61pp_change_number\x18\x04 \x01(\x04\x42\x19\x82\xb5\x18\x15New App Change Number\"\xb9\x01\n*CCloud_CompleteAppUploadBatch_Notification\x12\x30\n\x05\x61ppid\x18\x01 \x01(\rB!\x82\xb5\x18\x1d\x41pp ID for this batch is for.\x12\'\n\x08\x62\x61tch_id\x18\x02 \x01(\x04\x42\x15\x82\xb5\x18\x11ID of this batch.\x12\x30\n\rbatch_eresult\x18\x03 \x01(\rB\x19\x82\xb5\x18\x15result of this batch.\"\xb4\x01\n%CCloud_CompleteAppUploadBatch_Request\x12\x30\n\x05\x61ppid\x18\x01 \x01(\rB!\x82\xb5\x18\x1d\x41pp ID for this batch is for.\x12\'\n\x08\x62\x61tch_id\x18\x02 \x01(\x04\x42\x15\x82\xb5\x18\x11ID of this batch.\x12\x30\n\rbatch_eresult\x18\x03 \x01(\rB\x19\x82\xb5\x18\x15result of this batch.\"(\n&CCloud_CompleteAppUploadBatch_Response\"\x92\x06\n$CCloud_ClientBeginFileUpload_Request\x12?\n\x05\x61ppid\x18\x01 \x01(\rB0\x82\xb5\x18,App ID for which the file is being uploaded.\x12\x44\n\tfile_size\x18\x02 \x01(\rB1\x82\xb5\x18-file size as transmitted and stored in Cloud.\x12N\n\rraw_file_size\x18\x03 \x01(\rB7\x82\xb5\x18\x33\x66ile size before any compression and/or encryption.\x12(\n\x08\x66ile_sha\x18\x04 \x01(\x0c\x42\x16\x82\xb5\x18\x12SHA-1 of raw file.\x12*\n\ntime_stamp\x18\x05 \x01(\x04\x42\x16\x82\xb5\x18\x12Timestamp of file.\x12=\n\x08\x66ilename\x18\x06 \x01(\tB+\x82\xb5\x18\'Name of the file to store in the cloud.\x12%\n\x11platforms_to_sync\x18\x07 \x01(\r:\n4294967295\x12\x46\n\x07\x63\x65ll_id\x18\t \x01(\rB5\x82\xb5\x18\x31\x43lient\'s cell ID so we can pick storage location.\x12Q\n\x0b\x63\x61n_encrypt\x18\n \x01(\x08\x42<\x82\xb5\x18\x38if true, client can encrypt the file before uploading it\x12\x66\n\x0eis_shared_file\x18\x0b \x01(\x08\x42N\x82\xb5\x18Jif true, this is going to be UGC or a screenshot or some other shared file\x12$\n\x10\x64\x65precated_realm\x18\x0c \x01(\rB\n\x82\xb5\x18\x06unused\x12.\n\x0fupload_batch_id\x18\r \x01(\x04\x42\x15\x82\xb5\x18\x11ID of this batch.\"\xf1\x06\n!ClientCloudFileUploadBlockDetails\x12X\n\x08url_host\x18\x01 \x01(\tBF\x82\xb5\x18\x42Host name of server to which file should be uploaded via HTTP PUT.\x12O\n\x08url_path\x18\x02 \x01(\tB=\x82\xb5\x18\x39Relative path on server to which file should be uploaded.\x12>\n\tuse_https\x18\x03 \x01(\x08\x42+\x82\xb5\x18\'If true, use https, otherwise use http.\x12;\n\x0bhttp_method\x18\x04 \x01(\x05\x42&\x82\xb5\x18\"EHTTPMethod to use for this block.\x12}\n\x0frequest_headers\x18\x05 \x03(\x0b\x32..ClientCloudFileUploadBlockDetails.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP PUT request.\x12\x38\n\x0c\x62lock_offset\x18\x06 \x01(\x04\x42\"\x82\xb5\x18\x1eoffset of file block to upload\x12m\n\x0c\x62lock_length\x18\x07 \x01(\rBW\x82\xb5\x18Slength of file block to upload - if zero, no part of the file is part of this block\x12_\n\x12\x65xplicit_body_data\x18\x08 \x01(\x0c\x42\x43\x82\xb5\x18?explicit body data to use, instead of file data, for this block\x12o\n\x0fmay_parallelize\x18\t \x01(\x08\x42V\x82\xb5\x18Rif true, this request may be done in parallel with other similarly-marked requests\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xed\x01\n%CCloud_ClientBeginFileUpload_Response\x12[\n\x0c\x65ncrypt_file\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41If true, the file should be encrypted by the client before upload\x12g\n\x0e\x62lock_requests\x18\x02 \x03(\x0b\x32\".ClientCloudFileUploadBlockDetailsB+\x82\xb5\x18\'HTTP requests to make to perform upload\"\xc9\x03\n%CCloud_ClientCommitFileUpload_Request\x12\x61\n\x12transfer_succeeded\x18\x01 \x01(\x08\x42\x45\x82\xb5\x18\x41True if all block uploads succeeded, false if any of them failed.\x12x\n\x05\x61ppid\x18\x02 \x01(\rBi\x82\xb5\x18\x65\x41pp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload.\x12p\n\x08\x66ile_sha\x18\x03 \x01(\x0c\x42^\x82\xb5\x18ZSHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload.\x12Q\n\x08\x66ilename\x18\x04 \x01(\tB?\x82\xb5\x18;Filename as specified in the Cloud.BeginFileUpload request.\"\x83\x01\n&CCloud_ClientCommitFileUpload_Response\x12Y\n\x0e\x66ile_committed\x18\x01 \x01(\x08\x42\x41\x82\xb5\x18=True if the file was successfully committed, false otherwise.\"\xa0\x01\n!CCloud_ClientFileDownload_Request\x12.\n\x05\x61ppid\x18\x01 \x01(\rB\x1f\x82\xb5\x18\x1b\x41pp ID the file is part of.\x12+\n\x08\x66ilename\x18\x02 \x01(\tB\x19\x82\xb5\x18\x15\x46ilename of the file.\x12\x1e\n\x05realm\x18\x03 \x01(\rB\x0f\x82\xb5\x18\x0bSteam Realm\"\xfe\x05\n\"CCloud_ClientFileDownload_Response\x12\x32\n\x05\x61ppid\x18\x01 \x01(\rB#\x82\xb5\x18\x1f\x41pplication the file belongs to\x12G\n\tfile_size\x18\x02 \x01(\rB4\x82\xb5\x18\x30\x66ile size as transmitted and stored in the Cloud\x12G\n\rraw_file_size\x18\x03 \x01(\rB0\x82\xb5\x18,file size when decompressed and/or decrypted\x12!\n\x08sha_file\x18\x04 \x01(\x0c\x42\x0f\x82\xb5\x18\x0bSHA of file\x12)\n\ntime_stamp\x18\x05 \x01(\x04\x42\x15\x82\xb5\x18\x11Timestamp of file\x12J\n\x12is_explicit_delete\x18\x06 \x01(\x08\x42.\x82\xb5\x18*True if this is an explicitly deleted file\x12/\n\x08url_host\x18\x07 \x01(\tB\x1d\x82\xb5\x18\x19Host to GET the file from\x12O\n\x08url_path\x18\x08 \x01(\tB=\x82\xb5\x18\x39Path on that host to use, including URL parameters if any\x12\x37\n\tuse_https\x18\t \x01(\x08\x42$\x82\xb5\x18 If set, use HTTPS, else use HTTP\x12~\n\x0frequest_headers\x18\n \x03(\x0b\x32/.CCloud_ClientFileDownload_Response.HTTPHeadersB4\x82\xb5\x18\x30Name-value pairs to be sent in HTTP GET request.\x12\x11\n\tencrypted\x18\x0b \x01(\x08\x1a*\n\x0bHTTPHeaders\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x93\x02\n\x1f\x43\x43loud_ClientDeleteFile_Request\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID for which the file is being deleted.\x12\'\n\x08\x66ilename\x18\x02 \x01(\tB\x15\x82\xb5\x18\x11\x46ilename of file.\x12W\n\x12is_explicit_delete\x18\x03 \x01(\x08\x42;\x82\xb5\x18\x37If true, this is a \'delete\'; if false, it is a \'forget\'\x12.\n\x0fupload_batch_id\x18\x04 \x01(\x04\x42\x15\x82\xb5\x18\x11ID of this batch.\"\"\n CCloud_ClientDeleteFile_Response\"\xe0\x01\n,CCloud_ClientConflictResolution_Notification\x12>\n\x05\x61ppid\x18\x01 \x01(\rB/\x82\xb5\x18+App ID for which the conflict was resolved.\x12p\n\x11\x63hose_local_files\x18\x02 \x01(\x08\x42U\x82\xb5\x18QDid the user choose to keep the files local to the machine they are on right now?\"\"\n CCloud_EnumerateUserApps_Request\"\x98\x01\n!CCloud_EnumerateUserApps_Response\x12\x35\n\x04\x61pps\x18\x01 \x03(\x0b\x32\'.CCloud_EnumerateUserApps_Response.Apps\x1a<\n\x04\x41pps\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x12\n\ntotalcount\x18\x02 \x01(\x05\x12\x11\n\ttotalsize\x18\x03 \x01(\x03\"\xa5\x01\n#CCloud_GetAppFileChangelist_Request\x12\x19\n\x05\x61ppid\x18\x01 \x01(\rB\n\x82\xb5\x18\x06\x41pp ID\x12\x63\n\x14synced_change_number\x18\x02 \x01(\x04\x42\x45\x82\xb5\x18\x41\x43hange Number to which local machine was last successfully synced\"\x9b\x04\n\x12\x43\x43loud_AppFileInfo\x12+\n\tfile_name\x18\x01 \x01(\tB\x18\x82\xb5\x18\x14unqualified filename\x12!\n\x08sha_file\x18\x02 \x01(\x0c\x42\x0f\x82\xb5\x18\x0bSHA of file\x12=\n\ntime_stamp\x18\x03 \x01(\x04\x42)\x82\xb5\x18%server timestamp of last modification\x12+\n\rraw_file_size\x18\x04 \x01(\rB\x14\x82\xb5\x18\x10size of raw file\x12~\n\rpersist_state\x18\x05 \x01(\x0e\x32\x1a.ECloudStoragePersistState:$k_ECloudStoragePersistStatePersistedB%\x82\xb5\x18!current persist state of the file\x12:\n\x11platforms_to_sync\x18\x06 \x01(\rB\x1f\x82\xb5\x18\x1b\x45RemoteStoragePlatform bits\x12G\n\x11path_prefix_index\x18\x07 \x01(\rB,\x82\xb5\x18(index into string table of path prefixes\x12\x44\n\x12machine_name_index\x18\x08 \x01(\rB(\x82\xb5\x18$what machine last modified this file\"\xd6\x03\n$CCloud_GetAppFileChangelist_Response\x12\x42\n\x15\x63urrent_change_number\x18\x01 \x01(\x04\x42#\x82\xb5\x18\x1f\x43hange Number current on server\x12\x89\x01\n\x05\x66iles\x18\x02 \x03(\x0b\x32\x13.CCloud_AppFileInfoBe\x82\xb5\x18\x61List of files; may be the full list of extant/deleted files, or just a delta from the client list\x12j\n\ris_only_delta\x18\x03 \x01(\x08\x42S\x82\xb5\x18OIf true, \'files\' omits any files that have not changed since client\'s change ID\x12\x38\n\rpath_prefixes\x18\x04 \x03(\tB!\x82\xb5\x18\x1dstring table of path prefixes\x12\x38\n\rmachine_names\x18\x05 \x03(\tB!\x82\xb5\x18\x1dstring table of machine names\"x\n CCloud_AppSessionSuspend_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\tclient_id\x18\x02 \x01(\x04\x12\x14\n\x0cmachine_name\x18\x03 \x01(\t\x12\x1c\n\x14\x63loud_sync_completed\x18\x04 \x01(\x08\"#\n!CCloud_AppSessionSuspend_Response\"C\n\x1f\x43\x43loud_AppSessionResume_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\tclient_id\x18\x02 \x01(\x04\"\"\n CCloud_AppSessionResume_Response\"{\n\x1e\x43\x43loud_AppLaunchIntent_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\tclient_id\x18\x02 \x01(\x04\x12\x14\n\x0cmachine_name\x18\x03 \x01(\t\x12!\n\x19ignore_pending_operations\x18\x04 \x01(\x08\"\x9a\x01\n\x1f\x43\x43loud_AppLaunchIntent_Response\x12w\n\x19pending_remote_operations\x18\x01 \x03(\x0b\x32\x1e.CCloud_PendingRemoteOperationB4\x82\xb5\x18\x30pending remote operations you should be aware of\"b\n#CCloud_AppExitSyncDone_Notification\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\tclient_id\x18\x02 \x01(\x04\x12\x19\n\x11uploads_completed\x18\x03 \x01(\x08\"\x9d\x01\n\'CCloud_AppCloudStateChange_Notification\x12<\n\x05\x61ppid\x18\x01 \x01(\rB-\x82\xb5\x18)App which has had a change in cloud state\x12\x34\n\x11\x61pp_change_number\x18\x02 \x01(\x04\x42\x19\x82\xb5\x18\x15New App Change Number2\xd7\x1f\n\x05\x43loud\x12\x9c\x01\n\x13GetUploadServerInfo\x12#.CCloud_GetUploadServerInfo_Request\x1a$.CCloud_GetUploadServerInfo_Response\":\x82\xb5\x18\x36Returns the URL of the proper cloud server for a user.\x12\xa8\x02\n\x0f\x42\x65ginHTTPUpload\x12\x1f.CCloud_BeginHTTPUpload_Request\x1a .CCloud_BeginHTTPUpload_Response\"\xd1\x01\x82\xb5\x18\xcc\x01\x42\x65gins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.\x12\xad\x01\n\x10\x43ommitHTTPUpload\x12 .CCloud_CommitHTTPUpload_Request\x1a!.CCloud_CommitHTTPUpload_Response\"T\x82\xb5\x18PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.\x12\xa5\x02\n\x0e\x42\x65ginUGCUpload\x12\x1e.CCloud_BeginUGCUpload_Request\x1a\x1f.CCloud_BeginUGCUpload_Response\"\xd1\x01\x82\xb5\x18\xcc\x01\x42\x65gins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.\x12\xa9\x01\n\x0f\x43ommitUGCUpload\x12\x1f.CCloud_CommitUGCUpload_Request\x1a .CCloud_CommitUGCUpload_Response\"S\x82\xb5\x18OCommits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT.\x12w\n\x0eGetFileDetails\x12\x1e.CCloud_GetFileDetails_Request\x1a\x1f.CCloud_GetFileDetails_Response\"$\x82\xb5\x18 Returns details on a Cloud file.\x12\xba\x01\n\x12\x45numerateUserFiles\x12\".CCloud_EnumerateUserFiles_Request\x1a#.CCloud_EnumerateUserFiles_Response\"[\x82\xb5\x18WEnumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.\x12\x64\n\x06\x44\x65lete\x12\x16.CCloud_Delete_Request\x1a\x17.CCloud_Delete_Response\")\x82\xb5\x18%Deletes a file from the user\'s cloud.\x12\x99\x01\n\x16GetClientEncryptionKey\x12&.CCloud_GetClientEncryptionKey_Request\x1a\'.CCloud_GetClientEncryptionKey_Response\".\x82\xb5\x18*Gets the user\'s Cloud file encryption key.\x12\x63\n\tCDNReport\x12\x1e.CCloud_CDNReport_Notification\x1a\x0b.NoResponse\")\x82\xb5\x18%Reports the result of a CDN transfer.\x12\x9f\x01\n\x1d\x45xternalStorageTransferReport\x12\x32.CCloud_ExternalStorageTransferReport_Notification\x1a\x0b.NoResponse\"=\x82\xb5\x18\x39Reports the result of an external Cloud storage transfer.\x12\xab\x01\n\x13\x42\x65ginAppUploadBatch\x12#.CCloud_BeginAppUploadBatch_Request\x1a$.CCloud_BeginAppUploadBatch_Response\"I\x82\xb5\x18\x45Indicate a batch of files that will be uploaded / deleted for an app.\x12\xa3\x01\n\x16\x43ompleteAppUploadBatch\x12+.CCloud_CompleteAppUploadBatch_Notification\x1a\x0b.NoResponse\"O\x82\xb5\x18KIndicate that the batch is complete or being stopped for some other reason.\x12\xc2\x01\n\x1e\x43ompleteAppUploadBatchBlocking\x12&.CCloud_CompleteAppUploadBatch_Request\x1a\'.CCloud_CompleteAppUploadBatch_Response\"O\x82\xb5\x18KIndicate that the batch is complete or being stopped for some other reason.\x12\x88\x01\n\x15\x43lientBeginFileUpload\x12%.CCloud_ClientBeginFileUpload_Request\x1a&.CCloud_ClientBeginFileUpload_Response\" \x82\xb5\x18\x1cInitiate an upload to Cloud.\x12\x9a\x01\n\x16\x43lientCommitFileUpload\x12&.CCloud_ClientCommitFileUpload_Request\x1a\'.CCloud_ClientCommitFileUpload_Response\"/\x82\xb5\x18+Commit the file upload or indicate failure.\x12|\n\x12\x43lientFileDownload\x12\".CCloud_ClientFileDownload_Request\x1a#.CCloud_ClientFileDownload_Response\"\x1d\x82\xb5\x18\x19Initiate a file download.\x12u\n\x10\x43lientDeleteFile\x12 .CCloud_ClientDeleteFile_Request\x1a!.CCloud_ClientDeleteFile_Response\"\x1c\x82\xb5\x18\x18\x44\x65lete or forget a file.\x12\x8e\x01\n\x18\x43lientConflictResolution\x12-.CCloud_ClientConflictResolution_Notification\x1a\x0b.NoResponse\"6\x82\xb5\x18\x32User has picked a resolution for a Cloud conflict.\x12\x8f\x01\n\x11\x45numerateUserApps\x12!.CCloud_EnumerateUserApps_Request\x1a\".CCloud_EnumerateUserApps_Response\"3\x82\xb5\x18/Enumerates apps stroing cloud files for a user.\x12\xb4\x01\n\x14GetAppFileChangelist\x12$.CCloud_GetAppFileChangelist_Request\x1a%.CCloud_GetAppFileChangelist_Response\"O\x82\xb5\x18KGet a list of Cloud file changes for an app given a starting Change Number.\x12\x81\x01\n\x11SuspendAppSession\x12!.CCloud_AppSessionSuspend_Request\x1a\".CCloud_AppSessionSuspend_Response\"%\x82\xb5\x18!An app session is being suspended\x12|\n\x10ResumeAppSession\x12 .CCloud_AppSessionResume_Request\x1a!.CCloud_AppSessionResume_Response\"#\x82\xb5\x18\x1f\x41n app session is being resumed\x12\x7f\n\x15SignalAppLaunchIntent\x12\x1f.CCloud_AppLaunchIntent_Request\x1a .CCloud_AppLaunchIntent_Response\"#\x82\xb5\x18\x1f\x43lient intends to launch an app\x12\x82\x01\n\x15SignalAppExitSyncDone\x12$.CCloud_AppExitSyncDone_Notification\x1a\x0b.NoResponse\"6\x82\xb5\x18\x32\x43lient is done trying to sync after a game session\x1a)\x82\xb5\x18%A service for Steam Cloud operations.2\xc1\x01\n\x0b\x43loudClient\x12}\n\x14NotifyAppStateChange\x12(.CCloud_AppCloudStateChange_Notification\x1a\x0b.NoResponse\".\x82\xb5\x18*Cloud state for the given app has changed.\x1a\x33\x82\xb5\x18+Client notifications for Steam cloud events\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
-  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
+  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,enums__pb2.DESCRIPTOR,steammessages__client__objects__pb2.DESCRIPTOR,])
 
 
 
@@ -56,8 +58,8 @@ _CCLOUD_GETUPLOADSERVERINFO_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=63,
-  serialized_end=163,
+  serialized_start=112,
+  serialized_end=212,
 )
 
 
@@ -87,8 +89,8 @@ _CCLOUD_GETUPLOADSERVERINFO_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=165,
-  serialized_end=222,
+  serialized_start=214,
+  serialized_end=271,
 )
 
 
@@ -155,6 +157,13 @@ _CCLOUD_BEGINHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=_b('\202\265\030rValues for headers you\'ll want to set on your upload request. The number of names must equal the number of values.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='upload_batch_id', full_name='CCloud_BeginHTTPUpload_Request.upload_batch_id', index=8,
+      number=9, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030<ID of this batch returned by prior BeginAppUploadBatch call.'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -167,8 +176,8 @@ _CCLOUD_BEGINHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=225,
-  serialized_end=1043,
+  serialized_start=274,
+  serialized_end=1183,
 )
 
 
@@ -205,8 +214,8 @@ _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1540,
-  serialized_end=1582,
+  serialized_start=1680,
+  serialized_end=1722,
 )
 
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
@@ -270,8 +279,8 @@ _CCLOUD_BEGINHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1046,
-  serialized_end=1582,
+  serialized_start=1186,
+  serialized_end=1722,
 )
 
 
@@ -322,8 +331,8 @@ _CCLOUD_COMMITHTTPUPLOAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1585,
-  serialized_end=2142,
+  serialized_start=1725,
+  serialized_end=2282,
 )
 
 
@@ -353,8 +362,253 @@ _CCLOUD_COMMITHTTPUPLOAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2144,
-  serialized_end=2269,
+  serialized_start=2284,
+  serialized_end=2409,
+)
+
+
+_CCLOUD_BEGINUGCUPLOAD_REQUEST = _descriptor.Descriptor(
+  name='CCloud_BeginUGCUpload_Request',
+  full_name='CCloud_BeginUGCUpload_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_BeginUGCUpload_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\033App ID this UGC belongs to.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='file_size', full_name='CCloud_BeginUGCUpload_Request.file_size', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\023File size in bytes.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='filename', full_name='CCloud_BeginUGCUpload_Request.filename', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\021Name of the file.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='file_sha', full_name='CCloud_BeginUGCUpload_Request.file_sha', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030@Hex string (40 digits) representing the SHA1 digest of the file.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='content_type', full_name='CCloud_BeginUGCUpload_Request.content_type', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035MIME content type of the file'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2412,
+  serialized_end=2721,
+)
+
+
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
+  name='HTTPHeaders',
+  full_name='CCloud_BeginUGCUpload_Response.HTTPHeaders',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='CCloud_BeginUGCUpload_Response.HTTPHeaders.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='CCloud_BeginUGCUpload_Response.HTTPHeaders.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1680,
+  serialized_end=1722,
+)
+
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_BeginUGCUpload_Response',
+  full_name='CCloud_BeginUGCUpload_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='storage_system', full_name='CCloud_BeginUGCUpload_Response.storage_system', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\'UGC Storage system chosen for this file'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ugcid', full_name='CCloud_BeginUGCUpload_Response.ugcid', index=1,
+      number=2, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\034UGC ID of the uploaded file.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='CCloud_BeginUGCUpload_Response.timestamp', index=2,
+      number=3, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\031Server timestamp of file.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='url_host', full_name='CCloud_BeginUGCUpload_Response.url_host', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030BHost name of server to which file should be uploaded via HTTP PUT.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='url_path', full_name='CCloud_BeginUGCUpload_Response.url_path', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\0309Relative path on server to which file should be uploaded.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='use_https', full_name='CCloud_BeginUGCUpload_Response.use_https', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\'If true, use https, otherwise use http.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='request_headers', full_name='CCloud_BeginUGCUpload_Response.request_headers', index=6,
+      number=7, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\0300Name-value pairs to be sent in HTTP PUT request.'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CCLOUD_BEGINUGCUPLOAD_RESPONSE_HTTPHEADERS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2724,
+  serialized_end=3396,
+)
+
+
+_CCLOUD_COMMITUGCUPLOAD_REQUEST = _descriptor.Descriptor(
+  name='CCloud_CommitUGCUpload_Request',
+  full_name='CCloud_CommitUGCUpload_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='transfer_succeeded', full_name='CCloud_CommitUGCUpload_Request.transfer_succeeded', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\201\001True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginUGCUpload), false if a failure occurred.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_CommitUGCUpload_Request.appid', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030dApp ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginUGCUpload.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ugcid', full_name='CCloud_CommitUGCUpload_Request.ugcid', index=2,
+      number=3, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\034UGC ID of the uploaded file.'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3399,
+  serialized_end=3767,
+)
+
+
+_CCLOUD_COMMITUGCUPLOAD_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_CommitUGCUpload_Response',
+  full_name='CCloud_CommitUGCUpload_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='file_committed', full_name='CCloud_CommitUGCUpload_Response.file_committed', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030=True if the file was successfully committed, false otherwise.'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3769,
+  serialized_end=3893,
 )
 
 
@@ -391,8 +645,8 @@ _CCLOUD_GETFILEDETAILS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2272,
-  serialized_end=2412,
+  serialized_start=3896,
+  serialized_end=4036,
 )
 
 
@@ -485,8 +739,8 @@ _CCLOUD_USERFILE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2415,
-  serialized_end=2813,
+  serialized_start=4039,
+  serialized_end=4437,
 )
 
 
@@ -516,8 +770,8 @@ _CCLOUD_GETFILEDETAILS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2815,
-  serialized_end=2882,
+  serialized_start=4439,
+  serialized_end=4506,
 )
 
 
@@ -568,8 +822,8 @@ _CCLOUD_ENUMERATEUSERFILES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2885,
-  serialized_end=3374,
+  serialized_start=4509,
+  serialized_end=4998,
 )
 
 
@@ -606,8 +860,8 @@ _CCLOUD_ENUMERATEUSERFILES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3376,
-  serialized_end=3466,
+  serialized_start=5000,
+  serialized_end=5090,
 )
 
 
@@ -632,6 +886,13 @@ _CCLOUD_DELETE_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=_b('\202\265\030\033App ID the file belongs to.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='upload_batch_id', full_name='CCloud_Delete_Request.upload_batch_id', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030<ID of this batch returned by prior BeginAppUploadBatch call.'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -644,8 +905,8 @@ _CCLOUD_DELETE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3468,
-  serialized_end=3557,
+  serialized_start=5093,
+  serialized_end=5273,
 )
 
 
@@ -668,8 +929,8 @@ _CCLOUD_DELETE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3559,
-  serialized_end=3583,
+  serialized_start=5275,
+  serialized_end=5299,
 )
 
 
@@ -692,8 +953,8 @@ _CCLOUD_GETCLIENTENCRYPTIONKEY_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3585,
-  serialized_end=3624,
+  serialized_start=5301,
+  serialized_end=5340,
 )
 
 
@@ -730,8 +991,8 @@ _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3626,
-  serialized_end=3736,
+  serialized_start=5342,
+  serialized_end=5452,
 )
 
 
@@ -803,8 +1064,8 @@ _CCLOUD_CDNREPORT_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3739,
-  serialized_end=3909,
+  serialized_start=5455,
+  serialized_end=5625,
 )
 
 
@@ -911,8 +1172,219 @@ _CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3912,
-  serialized_end=4194,
+  serialized_start=5628,
+  serialized_end=5910,
+)
+
+
+_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST = _descriptor.Descriptor(
+  name='CCloud_BeginAppUploadBatch_Request',
+  full_name='CCloud_BeginAppUploadBatch_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_BeginAppUploadBatch_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035App ID for this batch is for.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='machine_name', full_name='CCloud_BeginAppUploadBatch_Request.machine_name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030*Client machine name (may be user\'s alias).'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='files_to_upload', full_name='CCloud_BeginAppUploadBatch_Request.files_to_upload', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030*Filenames of files to upload in this batch'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='files_to_delete', full_name='CCloud_BeginAppUploadBatch_Request.files_to_delete', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030*Filenames of files to delete in this batch'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='client_id', full_name='CCloud_BeginAppUploadBatch_Request.client_id', index=4,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\020Client ID number'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5913,
+  serialized_end=6256,
+)
+
+
+_CCLOUD_BEGINAPPUPLOADBATCH_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_BeginAppUploadBatch_Response',
+  full_name='CCloud_BeginAppUploadBatch_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='batch_id', full_name='CCloud_BeginAppUploadBatch_Response.batch_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\021ID of this batch.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_change_number', full_name='CCloud_BeginAppUploadBatch_Response.app_change_number', index=1,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\025New App Change Number'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6259,
+  serialized_end=6391,
+)
+
+
+_CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION = _descriptor.Descriptor(
+  name='CCloud_CompleteAppUploadBatch_Notification',
+  full_name='CCloud_CompleteAppUploadBatch_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_CompleteAppUploadBatch_Notification.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035App ID for this batch is for.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='batch_id', full_name='CCloud_CompleteAppUploadBatch_Notification.batch_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\021ID of this batch.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='batch_eresult', full_name='CCloud_CompleteAppUploadBatch_Notification.batch_eresult', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\025result of this batch.'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6394,
+  serialized_end=6579,
+)
+
+
+_CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST = _descriptor.Descriptor(
+  name='CCloud_CompleteAppUploadBatch_Request',
+  full_name='CCloud_CompleteAppUploadBatch_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_CompleteAppUploadBatch_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035App ID for this batch is for.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='batch_id', full_name='CCloud_CompleteAppUploadBatch_Request.batch_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\021ID of this batch.'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='batch_eresult', full_name='CCloud_CompleteAppUploadBatch_Request.batch_eresult', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\025result of this batch.'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6582,
+  serialized_end=6762,
+)
+
+
+_CCLOUD_COMPLETEAPPUPLOADBATCH_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_CompleteAppUploadBatch_Response',
+  full_name='CCloud_CompleteAppUploadBatch_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6764,
+  serialized_end=6804,
 )
 
 
@@ -994,12 +1466,19 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=_b('\202\265\030Jif true, this is going to be UGC or a screenshot or some other shared file'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='realm', full_name='CCloud_ClientBeginFileUpload_Request.realm', index=10,
+      name='deprecated_realm', full_name='CCloud_ClientBeginFileUpload_Request.deprecated_realm', index=10,
       number=12, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\202\265\030\013Steam Realm'), file=DESCRIPTOR),
+      serialized_options=_b('\202\265\030\006unused'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='upload_batch_id', full_name='CCloud_ClientBeginFileUpload_Request.upload_batch_id', index=11,
+      number=13, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\021ID of this batch.'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1012,8 +1491,8 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4197,
-  serialized_end=4929,
+  serialized_start=6807,
+  serialized_end=7593,
 )
 
 
@@ -1050,8 +1529,8 @@ _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1540,
-  serialized_end=1582,
+  serialized_start=1680,
+  serialized_end=1722,
 )
 
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS = _descriptor.Descriptor(
@@ -1136,8 +1615,8 @@ _CLIENTCLOUDFILEUPLOADBLOCKDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4932,
-  serialized_end=5813,
+  serialized_start=7596,
+  serialized_end=8477,
 )
 
 
@@ -1174,8 +1653,8 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5816,
-  serialized_end=6053,
+  serialized_start=8480,
+  serialized_end=8717,
 )
 
 
@@ -1226,8 +1705,8 @@ _CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6056,
-  serialized_end=6513,
+  serialized_start=8720,
+  serialized_end=9177,
 )
 
 
@@ -1257,8 +1736,8 @@ _CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6516,
-  serialized_end=6647,
+  serialized_start=9180,
+  serialized_end=9311,
 )
 
 
@@ -1302,8 +1781,8 @@ _CCLOUD_CLIENTFILEDOWNLOAD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6650,
-  serialized_end=6810,
+  serialized_start=9314,
+  serialized_end=9474,
 )
 
 
@@ -1340,8 +1819,8 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1540,
-  serialized_end=1582,
+  serialized_start=1680,
+  serialized_end=1722,
 )
 
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE = _descriptor.Descriptor(
@@ -1440,8 +1919,8 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6813,
-  serialized_end=7579,
+  serialized_start=9477,
+  serialized_end=10243,
 )
 
 
@@ -1473,6 +1952,13 @@ _CCLOUD_CLIENTDELETEFILE_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=_b('\202\265\0307If true, this is a \'delete\'; if false, it is a \'forget\''), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='upload_batch_id', full_name='CCloud_ClientDeleteFile_Request.upload_batch_id', index=3,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\021ID of this batch.'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1485,8 +1971,8 @@ _CCLOUD_CLIENTDELETEFILE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7582,
-  serialized_end=7809,
+  serialized_start=10246,
+  serialized_end=10521,
 )
 
 
@@ -1509,8 +1995,8 @@ _CCLOUD_CLIENTDELETEFILE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7811,
-  serialized_end=7845,
+  serialized_start=10523,
+  serialized_end=10557,
 )
 
 
@@ -1547,8 +2033,8 @@ _CCLOUD_CLIENTCONFLICTRESOLUTION_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7848,
-  serialized_end=8072,
+  serialized_start=10560,
+  serialized_end=10784,
 )
 
 
@@ -1571,8 +2057,8 @@ _CCLOUD_ENUMERATEUSERAPPS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8074,
-  serialized_end=8108,
+  serialized_start=10786,
+  serialized_end=10820,
 )
 
 
@@ -1616,8 +2102,8 @@ _CCLOUD_ENUMERATEUSERAPPS_RESPONSE_APPS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8203,
-  serialized_end=8263,
+  serialized_start=10915,
+  serialized_end=10975,
 )
 
 _CCLOUD_ENUMERATEUSERAPPS_RESPONSE = _descriptor.Descriptor(
@@ -1646,12 +2132,496 @@ _CCLOUD_ENUMERATEUSERAPPS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8111,
-  serialized_end=8263,
+  serialized_start=10823,
+  serialized_end=10975,
+)
+
+
+_CCLOUD_GETAPPFILECHANGELIST_REQUEST = _descriptor.Descriptor(
+  name='CCloud_GetAppFileChangelist_Request',
+  full_name='CCloud_GetAppFileChangelist_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_GetAppFileChangelist_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\006App ID'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='synced_change_number', full_name='CCloud_GetAppFileChangelist_Request.synced_change_number', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030AChange Number to which local machine was last successfully synced'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10978,
+  serialized_end=11143,
+)
+
+
+_CCLOUD_APPFILEINFO = _descriptor.Descriptor(
+  name='CCloud_AppFileInfo',
+  full_name='CCloud_AppFileInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='file_name', full_name='CCloud_AppFileInfo.file_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\024unqualified filename'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sha_file', full_name='CCloud_AppFileInfo.sha_file', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\013SHA of file'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_stamp', full_name='CCloud_AppFileInfo.time_stamp', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030%server timestamp of last modification'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='raw_file_size', full_name='CCloud_AppFileInfo.raw_file_size', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\020size of raw file'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='persist_state', full_name='CCloud_AppFileInfo.persist_state', index=4,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030!current persist state of the file'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='platforms_to_sync', full_name='CCloud_AppFileInfo.platforms_to_sync', index=5,
+      number=6, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\033ERemoteStoragePlatform bits'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='path_prefix_index', full_name='CCloud_AppFileInfo.path_prefix_index', index=6,
+      number=7, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030(index into string table of path prefixes'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='machine_name_index', full_name='CCloud_AppFileInfo.machine_name_index', index=7,
+      number=8, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030$what machine last modified this file'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11146,
+  serialized_end=11685,
+)
+
+
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_GetAppFileChangelist_Response',
+  full_name='CCloud_GetAppFileChangelist_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='current_change_number', full_name='CCloud_GetAppFileChangelist_Response.current_change_number', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\037Change Number current on server'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='files', full_name='CCloud_GetAppFileChangelist_Response.files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030aList of files; may be the full list of extant/deleted files, or just a delta from the client list'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_only_delta', full_name='CCloud_GetAppFileChangelist_Response.is_only_delta', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030OIf true, \'files\' omits any files that have not changed since client\'s change ID'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='path_prefixes', full_name='CCloud_GetAppFileChangelist_Response.path_prefixes', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035string table of path prefixes'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='machine_names', full_name='CCloud_GetAppFileChangelist_Response.machine_names', index=4,
+      number=5, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\035string table of machine names'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11688,
+  serialized_end=12158,
+)
+
+
+_CCLOUD_APPSESSIONSUSPEND_REQUEST = _descriptor.Descriptor(
+  name='CCloud_AppSessionSuspend_Request',
+  full_name='CCloud_AppSessionSuspend_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_AppSessionSuspend_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='client_id', full_name='CCloud_AppSessionSuspend_Request.client_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='machine_name', full_name='CCloud_AppSessionSuspend_Request.machine_name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cloud_sync_completed', full_name='CCloud_AppSessionSuspend_Request.cloud_sync_completed', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12160,
+  serialized_end=12280,
+)
+
+
+_CCLOUD_APPSESSIONSUSPEND_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_AppSessionSuspend_Response',
+  full_name='CCloud_AppSessionSuspend_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12282,
+  serialized_end=12317,
+)
+
+
+_CCLOUD_APPSESSIONRESUME_REQUEST = _descriptor.Descriptor(
+  name='CCloud_AppSessionResume_Request',
+  full_name='CCloud_AppSessionResume_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_AppSessionResume_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='client_id', full_name='CCloud_AppSessionResume_Request.client_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12319,
+  serialized_end=12386,
+)
+
+
+_CCLOUD_APPSESSIONRESUME_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_AppSessionResume_Response',
+  full_name='CCloud_AppSessionResume_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12388,
+  serialized_end=12422,
+)
+
+
+_CCLOUD_APPLAUNCHINTENT_REQUEST = _descriptor.Descriptor(
+  name='CCloud_AppLaunchIntent_Request',
+  full_name='CCloud_AppLaunchIntent_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_AppLaunchIntent_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='client_id', full_name='CCloud_AppLaunchIntent_Request.client_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='machine_name', full_name='CCloud_AppLaunchIntent_Request.machine_name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ignore_pending_operations', full_name='CCloud_AppLaunchIntent_Request.ignore_pending_operations', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12424,
+  serialized_end=12547,
+)
+
+
+_CCLOUD_APPLAUNCHINTENT_RESPONSE = _descriptor.Descriptor(
+  name='CCloud_AppLaunchIntent_Response',
+  full_name='CCloud_AppLaunchIntent_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pending_remote_operations', full_name='CCloud_AppLaunchIntent_Response.pending_remote_operations', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\0300pending remote operations you should be aware of'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12550,
+  serialized_end=12704,
+)
+
+
+_CCLOUD_APPEXITSYNCDONE_NOTIFICATION = _descriptor.Descriptor(
+  name='CCloud_AppExitSyncDone_Notification',
+  full_name='CCloud_AppExitSyncDone_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_AppExitSyncDone_Notification.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='client_id', full_name='CCloud_AppExitSyncDone_Notification.client_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='uploads_completed', full_name='CCloud_AppExitSyncDone_Notification.uploads_completed', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12706,
+  serialized_end=12804,
+)
+
+
+_CCLOUD_APPCLOUDSTATECHANGE_NOTIFICATION = _descriptor.Descriptor(
+  name='CCloud_AppCloudStateChange_Notification',
+  full_name='CCloud_AppCloudStateChange_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCloud_AppCloudStateChange_Notification.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030)App which has had a change in cloud state'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_change_number', full_name='CCloud_AppCloudStateChange_Notification.app_change_number', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030\025New App Change Number'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12807,
+  serialized_end=12964,
 )
 
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['request_headers'].message_type = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE_HTTPHEADERS
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_BEGINUGCUPLOAD_RESPONSE
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['storage_system'].enum_type = enums__pb2._EPUBLISHEDFILESTORAGESYSTEM
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['request_headers'].message_type = _CCLOUD_BEGINUGCUPLOAD_RESPONSE_HTTPHEADERS
 _CCLOUD_GETFILEDETAILS_RESPONSE.fields_by_name['details'].message_type = _CCLOUD_USERFILE
 _CCLOUD_ENUMERATEUSERFILES_RESPONSE.fields_by_name['files'].message_type = _CCLOUD_USERFILE
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS_HTTPHEADERS.containing_type = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS
@@ -1661,12 +2631,19 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS.containing_type = _CCLOUD_CLIENT
 _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['request_headers'].message_type = _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE_HTTPHEADERS
 _CCLOUD_ENUMERATEUSERAPPS_RESPONSE_APPS.containing_type = _CCLOUD_ENUMERATEUSERAPPS_RESPONSE
 _CCLOUD_ENUMERATEUSERAPPS_RESPONSE.fields_by_name['apps'].message_type = _CCLOUD_ENUMERATEUSERAPPS_RESPONSE_APPS
+_CCLOUD_APPFILEINFO.fields_by_name['persist_state'].enum_type = enums__pb2._ECLOUDSTORAGEPERSISTSTATE
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE.fields_by_name['files'].message_type = _CCLOUD_APPFILEINFO
+_CCLOUD_APPLAUNCHINTENT_RESPONSE.fields_by_name['pending_remote_operations'].message_type = steammessages__client__objects__pb2._CCLOUD_PENDINGREMOTEOPERATION
 DESCRIPTOR.message_types_by_name['CCloud_GetUploadServerInfo_Request'] = _CCLOUD_GETUPLOADSERVERINFO_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_GetUploadServerInfo_Response'] = _CCLOUD_GETUPLOADSERVERINFO_RESPONSE
 DESCRIPTOR.message_types_by_name['CCloud_BeginHTTPUpload_Request'] = _CCLOUD_BEGINHTTPUPLOAD_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_BeginHTTPUpload_Response'] = _CCLOUD_BEGINHTTPUPLOAD_RESPONSE
 DESCRIPTOR.message_types_by_name['CCloud_CommitHTTPUpload_Request'] = _CCLOUD_COMMITHTTPUPLOAD_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_CommitHTTPUpload_Response'] = _CCLOUD_COMMITHTTPUPLOAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_BeginUGCUpload_Request'] = _CCLOUD_BEGINUGCUPLOAD_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_BeginUGCUpload_Response'] = _CCLOUD_BEGINUGCUPLOAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_CommitUGCUpload_Request'] = _CCLOUD_COMMITUGCUPLOAD_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_CommitUGCUpload_Response'] = _CCLOUD_COMMITUGCUPLOAD_RESPONSE
 DESCRIPTOR.message_types_by_name['CCloud_GetFileDetails_Request'] = _CCLOUD_GETFILEDETAILS_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_UserFile'] = _CCLOUD_USERFILE
 DESCRIPTOR.message_types_by_name['CCloud_GetFileDetails_Response'] = _CCLOUD_GETFILEDETAILS_RESPONSE
@@ -1678,6 +2655,11 @@ DESCRIPTOR.message_types_by_name['CCloud_GetClientEncryptionKey_Request'] = _CCL
 DESCRIPTOR.message_types_by_name['CCloud_GetClientEncryptionKey_Response'] = _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE
 DESCRIPTOR.message_types_by_name['CCloud_CDNReport_Notification'] = _CCLOUD_CDNREPORT_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CCloud_ExternalStorageTransferReport_Notification'] = _CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CCloud_BeginAppUploadBatch_Request'] = _CCLOUD_BEGINAPPUPLOADBATCH_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_BeginAppUploadBatch_Response'] = _CCLOUD_BEGINAPPUPLOADBATCH_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_CompleteAppUploadBatch_Notification'] = _CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CCloud_CompleteAppUploadBatch_Request'] = _CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_CompleteAppUploadBatch_Response'] = _CCLOUD_COMPLETEAPPUPLOADBATCH_RESPONSE
 DESCRIPTOR.message_types_by_name['CCloud_ClientBeginFileUpload_Request'] = _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST
 DESCRIPTOR.message_types_by_name['ClientCloudFileUploadBlockDetails'] = _CLIENTCLOUDFILEUPLOADBLOCKDETAILS
 DESCRIPTOR.message_types_by_name['CCloud_ClientBeginFileUpload_Response'] = _CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE
@@ -1690,6 +2672,17 @@ DESCRIPTOR.message_types_by_name['CCloud_ClientDeleteFile_Response'] = _CCLOUD_C
 DESCRIPTOR.message_types_by_name['CCloud_ClientConflictResolution_Notification'] = _CCLOUD_CLIENTCONFLICTRESOLUTION_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CCloud_EnumerateUserApps_Request'] = _CCLOUD_ENUMERATEUSERAPPS_REQUEST
 DESCRIPTOR.message_types_by_name['CCloud_EnumerateUserApps_Response'] = _CCLOUD_ENUMERATEUSERAPPS_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_GetAppFileChangelist_Request'] = _CCLOUD_GETAPPFILECHANGELIST_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_AppFileInfo'] = _CCLOUD_APPFILEINFO
+DESCRIPTOR.message_types_by_name['CCloud_GetAppFileChangelist_Response'] = _CCLOUD_GETAPPFILECHANGELIST_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_AppSessionSuspend_Request'] = _CCLOUD_APPSESSIONSUSPEND_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_AppSessionSuspend_Response'] = _CCLOUD_APPSESSIONSUSPEND_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_AppSessionResume_Request'] = _CCLOUD_APPSESSIONRESUME_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_AppSessionResume_Response'] = _CCLOUD_APPSESSIONRESUME_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_AppLaunchIntent_Request'] = _CCLOUD_APPLAUNCHINTENT_REQUEST
+DESCRIPTOR.message_types_by_name['CCloud_AppLaunchIntent_Response'] = _CCLOUD_APPLAUNCHINTENT_RESPONSE
+DESCRIPTOR.message_types_by_name['CCloud_AppExitSyncDone_Notification'] = _CCLOUD_APPEXITSYNCDONE_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CCloud_AppCloudStateChange_Notification'] = _CCLOUD_APPCLOUDSTATECHANGE_NOTIFICATION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CCloud_GetUploadServerInfo_Request = _reflection.GeneratedProtocolMessageType('CCloud_GetUploadServerInfo_Request', (_message.Message,), dict(
@@ -1741,6 +2734,42 @@ CCloud_CommitHTTPUpload_Response = _reflection.GeneratedProtocolMessageType('CCl
   # @@protoc_insertion_point(class_scope:CCloud_CommitHTTPUpload_Response)
   ))
 _sym_db.RegisterMessage(CCloud_CommitHTTPUpload_Response)
+
+CCloud_BeginUGCUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_BeginUGCUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_BEGINUGCUPLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_BeginUGCUpload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_BeginUGCUpload_Request)
+
+CCloud_BeginUGCUpload_Response = _reflection.GeneratedProtocolMessageType('CCloud_BeginUGCUpload_Response', (_message.Message,), dict(
+
+  HTTPHeaders = _reflection.GeneratedProtocolMessageType('HTTPHeaders', (_message.Message,), dict(
+    DESCRIPTOR = _CCLOUD_BEGINUGCUPLOAD_RESPONSE_HTTPHEADERS,
+    __module__ = 'steammessages_cloud_pb2'
+    # @@protoc_insertion_point(class_scope:CCloud_BeginUGCUpload_Response.HTTPHeaders)
+    ))
+  ,
+  DESCRIPTOR = _CCLOUD_BEGINUGCUPLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_BeginUGCUpload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_BeginUGCUpload_Response)
+_sym_db.RegisterMessage(CCloud_BeginUGCUpload_Response.HTTPHeaders)
+
+CCloud_CommitUGCUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_CommitUGCUpload_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMMITUGCUPLOAD_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_CommitUGCUpload_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_CommitUGCUpload_Request)
+
+CCloud_CommitUGCUpload_Response = _reflection.GeneratedProtocolMessageType('CCloud_CommitUGCUpload_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMMITUGCUPLOAD_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_CommitUGCUpload_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_CommitUGCUpload_Response)
 
 CCloud_GetFileDetails_Request = _reflection.GeneratedProtocolMessageType('CCloud_GetFileDetails_Request', (_message.Message,), dict(
   DESCRIPTOR = _CCLOUD_GETFILEDETAILS_REQUEST,
@@ -1818,6 +2847,41 @@ CCloud_ExternalStorageTransferReport_Notification = _reflection.GeneratedProtoco
   # @@protoc_insertion_point(class_scope:CCloud_ExternalStorageTransferReport_Notification)
   ))
 _sym_db.RegisterMessage(CCloud_ExternalStorageTransferReport_Notification)
+
+CCloud_BeginAppUploadBatch_Request = _reflection.GeneratedProtocolMessageType('CCloud_BeginAppUploadBatch_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_BEGINAPPUPLOADBATCH_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_BeginAppUploadBatch_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_BeginAppUploadBatch_Request)
+
+CCloud_BeginAppUploadBatch_Response = _reflection.GeneratedProtocolMessageType('CCloud_BeginAppUploadBatch_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_BEGINAPPUPLOADBATCH_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_BeginAppUploadBatch_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_BeginAppUploadBatch_Response)
+
+CCloud_CompleteAppUploadBatch_Notification = _reflection.GeneratedProtocolMessageType('CCloud_CompleteAppUploadBatch_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_CompleteAppUploadBatch_Notification)
+  ))
+_sym_db.RegisterMessage(CCloud_CompleteAppUploadBatch_Notification)
+
+CCloud_CompleteAppUploadBatch_Request = _reflection.GeneratedProtocolMessageType('CCloud_CompleteAppUploadBatch_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_CompleteAppUploadBatch_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_CompleteAppUploadBatch_Request)
+
+CCloud_CompleteAppUploadBatch_Response = _reflection.GeneratedProtocolMessageType('CCloud_CompleteAppUploadBatch_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_COMPLETEAPPUPLOADBATCH_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_CompleteAppUploadBatch_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_CompleteAppUploadBatch_Response)
 
 CCloud_ClientBeginFileUpload_Request = _reflection.GeneratedProtocolMessageType('CCloud_ClientBeginFileUpload_Request', (_message.Message,), dict(
   DESCRIPTOR = _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST,
@@ -1927,6 +2991,83 @@ CCloud_EnumerateUserApps_Response = _reflection.GeneratedProtocolMessageType('CC
 _sym_db.RegisterMessage(CCloud_EnumerateUserApps_Response)
 _sym_db.RegisterMessage(CCloud_EnumerateUserApps_Response.Apps)
 
+CCloud_GetAppFileChangelist_Request = _reflection.GeneratedProtocolMessageType('CCloud_GetAppFileChangelist_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETAPPFILECHANGELIST_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_GetAppFileChangelist_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_GetAppFileChangelist_Request)
+
+CCloud_AppFileInfo = _reflection.GeneratedProtocolMessageType('CCloud_AppFileInfo', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPFILEINFO,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppFileInfo)
+  ))
+_sym_db.RegisterMessage(CCloud_AppFileInfo)
+
+CCloud_GetAppFileChangelist_Response = _reflection.GeneratedProtocolMessageType('CCloud_GetAppFileChangelist_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_GETAPPFILECHANGELIST_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_GetAppFileChangelist_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_GetAppFileChangelist_Response)
+
+CCloud_AppSessionSuspend_Request = _reflection.GeneratedProtocolMessageType('CCloud_AppSessionSuspend_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPSESSIONSUSPEND_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppSessionSuspend_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_AppSessionSuspend_Request)
+
+CCloud_AppSessionSuspend_Response = _reflection.GeneratedProtocolMessageType('CCloud_AppSessionSuspend_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPSESSIONSUSPEND_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppSessionSuspend_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_AppSessionSuspend_Response)
+
+CCloud_AppSessionResume_Request = _reflection.GeneratedProtocolMessageType('CCloud_AppSessionResume_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPSESSIONRESUME_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppSessionResume_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_AppSessionResume_Request)
+
+CCloud_AppSessionResume_Response = _reflection.GeneratedProtocolMessageType('CCloud_AppSessionResume_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPSESSIONRESUME_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppSessionResume_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_AppSessionResume_Response)
+
+CCloud_AppLaunchIntent_Request = _reflection.GeneratedProtocolMessageType('CCloud_AppLaunchIntent_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPLAUNCHINTENT_REQUEST,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppLaunchIntent_Request)
+  ))
+_sym_db.RegisterMessage(CCloud_AppLaunchIntent_Request)
+
+CCloud_AppLaunchIntent_Response = _reflection.GeneratedProtocolMessageType('CCloud_AppLaunchIntent_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPLAUNCHINTENT_RESPONSE,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppLaunchIntent_Response)
+  ))
+_sym_db.RegisterMessage(CCloud_AppLaunchIntent_Response)
+
+CCloud_AppExitSyncDone_Notification = _reflection.GeneratedProtocolMessageType('CCloud_AppExitSyncDone_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPEXITSYNCDONE_NOTIFICATION,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppExitSyncDone_Notification)
+  ))
+_sym_db.RegisterMessage(CCloud_AppExitSyncDone_Notification)
+
+CCloud_AppCloudStateChange_Notification = _reflection.GeneratedProtocolMessageType('CCloud_AppCloudStateChange_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CCLOUD_APPCLOUDSTATECHANGE_NOTIFICATION,
+  __module__ = 'steammessages_cloud_pb2'
+  # @@protoc_insertion_point(class_scope:CCloud_AppCloudStateChange_Notification)
+  ))
+_sym_db.RegisterMessage(CCloud_AppCloudStateChange_Notification)
+
 
 DESCRIPTOR._options = None
 _CCLOUD_GETUPLOADSERVERINFO_REQUEST.fields_by_name['appid']._options = None
@@ -1938,6 +3079,7 @@ _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['is_public']._options = None
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['platforms_to_sync']._options = None
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_names']._options = None
 _CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['request_headers_values']._options = None
+_CCLOUD_BEGINHTTPUPLOAD_REQUEST.fields_by_name['upload_batch_id']._options = None
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['ugcid']._options = None
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['timestamp']._options = None
 _CCLOUD_BEGINHTTPUPLOAD_RESPONSE.fields_by_name['url_host']._options = None
@@ -1949,6 +3091,22 @@ _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['appid']._options = None
 _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['file_sha']._options = None
 _CCLOUD_COMMITHTTPUPLOAD_REQUEST.fields_by_name['filename']._options = None
 _CCLOUD_COMMITHTTPUPLOAD_RESPONSE.fields_by_name['file_committed']._options = None
+_CCLOUD_BEGINUGCUPLOAD_REQUEST.fields_by_name['appid']._options = None
+_CCLOUD_BEGINUGCUPLOAD_REQUEST.fields_by_name['file_size']._options = None
+_CCLOUD_BEGINUGCUPLOAD_REQUEST.fields_by_name['filename']._options = None
+_CCLOUD_BEGINUGCUPLOAD_REQUEST.fields_by_name['file_sha']._options = None
+_CCLOUD_BEGINUGCUPLOAD_REQUEST.fields_by_name['content_type']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['storage_system']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['ugcid']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['timestamp']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['url_host']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['url_path']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['use_https']._options = None
+_CCLOUD_BEGINUGCUPLOAD_RESPONSE.fields_by_name['request_headers']._options = None
+_CCLOUD_COMMITUGCUPLOAD_REQUEST.fields_by_name['transfer_succeeded']._options = None
+_CCLOUD_COMMITUGCUPLOAD_REQUEST.fields_by_name['appid']._options = None
+_CCLOUD_COMMITUGCUPLOAD_REQUEST.fields_by_name['ugcid']._options = None
+_CCLOUD_COMMITUGCUPLOAD_RESPONSE.fields_by_name['file_committed']._options = None
 _CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['ugcid']._options = None
 _CCLOUD_GETFILEDETAILS_REQUEST.fields_by_name['appid']._options = None
 _CCLOUD_USERFILE.fields_by_name['platforms_to_sync']._options = None
@@ -1958,8 +3116,22 @@ _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['extended_details']._options =
 _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['count']._options = None
 _CCLOUD_ENUMERATEUSERFILES_REQUEST.fields_by_name['start_index']._options = None
 _CCLOUD_DELETE_REQUEST.fields_by_name['appid']._options = None
+_CCLOUD_DELETE_REQUEST.fields_by_name['upload_batch_id']._options = None
 _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['key']._options = None
 _CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE.fields_by_name['crc']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST.fields_by_name['appid']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST.fields_by_name['machine_name']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST.fields_by_name['files_to_upload']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST.fields_by_name['files_to_delete']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST.fields_by_name['client_id']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_RESPONSE.fields_by_name['batch_id']._options = None
+_CCLOUD_BEGINAPPUPLOADBATCH_RESPONSE.fields_by_name['app_change_number']._options = None
+_CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION.fields_by_name['appid']._options = None
+_CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION.fields_by_name['batch_id']._options = None
+_CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION.fields_by_name['batch_eresult']._options = None
+_CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST.fields_by_name['appid']._options = None
+_CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST.fields_by_name['batch_id']._options = None
+_CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST.fields_by_name['batch_eresult']._options = None
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['appid']._options = None
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['file_size']._options = None
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['raw_file_size']._options = None
@@ -1969,7 +3141,8 @@ _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['filename']._options = None
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['cell_id']._options = None
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['can_encrypt']._options = None
 _CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['is_shared_file']._options = None
-_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['realm']._options = None
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['deprecated_realm']._options = None
+_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST.fields_by_name['upload_batch_id']._options = None
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_host']._options = None
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['url_path']._options = None
 _CLIENTCLOUDFILEUPLOADBLOCKDETAILS.fields_by_name['use_https']._options = None
@@ -2002,8 +3175,27 @@ _CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE.fields_by_name['request_headers']._options =
 _CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['appid']._options = None
 _CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['filename']._options = None
 _CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['is_explicit_delete']._options = None
+_CCLOUD_CLIENTDELETEFILE_REQUEST.fields_by_name['upload_batch_id']._options = None
 _CCLOUD_CLIENTCONFLICTRESOLUTION_NOTIFICATION.fields_by_name['appid']._options = None
 _CCLOUD_CLIENTCONFLICTRESOLUTION_NOTIFICATION.fields_by_name['chose_local_files']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_REQUEST.fields_by_name['appid']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_REQUEST.fields_by_name['synced_change_number']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['file_name']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['sha_file']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['time_stamp']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['raw_file_size']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['persist_state']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['platforms_to_sync']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['path_prefix_index']._options = None
+_CCLOUD_APPFILEINFO.fields_by_name['machine_name_index']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE.fields_by_name['current_change_number']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE.fields_by_name['files']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE.fields_by_name['is_only_delta']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE.fields_by_name['path_prefixes']._options = None
+_CCLOUD_GETAPPFILECHANGELIST_RESPONSE.fields_by_name['machine_names']._options = None
+_CCLOUD_APPLAUNCHINTENT_RESPONSE.fields_by_name['pending_remote_operations']._options = None
+_CCLOUD_APPCLOUDSTATECHANGE_NOTIFICATION.fields_by_name['appid']._options = None
+_CCLOUD_APPCLOUDSTATECHANGE_NOTIFICATION.fields_by_name['app_change_number']._options = None
 
 _CLOUD = _descriptor.ServiceDescriptor(
   name='Cloud',
@@ -2011,8 +3203,8 @@ _CLOUD = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030%A service for Steam Cloud operations.'),
-  serialized_start=8266,
-  serialized_end=10613,
+  serialized_start=12967,
+  serialized_end=17022,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetUploadServerInfo',
@@ -2042,9 +3234,27 @@ _CLOUD = _descriptor.ServiceDescriptor(
     serialized_options=_b('\202\265\030PCommits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.'),
   ),
   _descriptor.MethodDescriptor(
+    name='BeginUGCUpload',
+    full_name='Cloud.BeginUGCUpload',
+    index=3,
+    containing_service=None,
+    input_type=_CCLOUD_BEGINUGCUPLOAD_REQUEST,
+    output_type=_CCLOUD_BEGINUGCUPLOAD_RESPONSE,
+    serialized_options=_b('\202\265\030\314\001Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='CommitUGCUpload',
+    full_name='Cloud.CommitUGCUpload',
+    index=4,
+    containing_service=None,
+    input_type=_CCLOUD_COMMITUGCUPLOAD_REQUEST,
+    output_type=_CCLOUD_COMMITUGCUPLOAD_RESPONSE,
+    serialized_options=_b('\202\265\030OCommits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT.'),
+  ),
+  _descriptor.MethodDescriptor(
     name='GetFileDetails',
     full_name='Cloud.GetFileDetails',
-    index=3,
+    index=5,
     containing_service=None,
     input_type=_CCLOUD_GETFILEDETAILS_REQUEST,
     output_type=_CCLOUD_GETFILEDETAILS_RESPONSE,
@@ -2053,7 +3263,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='EnumerateUserFiles',
     full_name='Cloud.EnumerateUserFiles',
-    index=4,
+    index=6,
     containing_service=None,
     input_type=_CCLOUD_ENUMERATEUSERFILES_REQUEST,
     output_type=_CCLOUD_ENUMERATEUSERFILES_RESPONSE,
@@ -2062,7 +3272,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Delete',
     full_name='Cloud.Delete',
-    index=5,
+    index=7,
     containing_service=None,
     input_type=_CCLOUD_DELETE_REQUEST,
     output_type=_CCLOUD_DELETE_RESPONSE,
@@ -2071,7 +3281,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetClientEncryptionKey',
     full_name='Cloud.GetClientEncryptionKey',
-    index=6,
+    index=8,
     containing_service=None,
     input_type=_CCLOUD_GETCLIENTENCRYPTIONKEY_REQUEST,
     output_type=_CCLOUD_GETCLIENTENCRYPTIONKEY_RESPONSE,
@@ -2080,7 +3290,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CDNReport',
     full_name='Cloud.CDNReport',
-    index=7,
+    index=9,
     containing_service=None,
     input_type=_CCLOUD_CDNREPORT_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
@@ -2089,16 +3299,43 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ExternalStorageTransferReport',
     full_name='Cloud.ExternalStorageTransferReport',
-    index=8,
+    index=10,
     containing_service=None,
     input_type=_CCLOUD_EXTERNALSTORAGETRANSFERREPORT_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     serialized_options=_b('\202\265\0309Reports the result of an external Cloud storage transfer.'),
   ),
   _descriptor.MethodDescriptor(
+    name='BeginAppUploadBatch',
+    full_name='Cloud.BeginAppUploadBatch',
+    index=11,
+    containing_service=None,
+    input_type=_CCLOUD_BEGINAPPUPLOADBATCH_REQUEST,
+    output_type=_CCLOUD_BEGINAPPUPLOADBATCH_RESPONSE,
+    serialized_options=_b('\202\265\030EIndicate a batch of files that will be uploaded / deleted for an app.'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='CompleteAppUploadBatch',
+    full_name='Cloud.CompleteAppUploadBatch',
+    index=12,
+    containing_service=None,
+    input_type=_CCLOUD_COMPLETEAPPUPLOADBATCH_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=_b('\202\265\030KIndicate that the batch is complete or being stopped for some other reason.'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='CompleteAppUploadBatchBlocking',
+    full_name='Cloud.CompleteAppUploadBatchBlocking',
+    index=13,
+    containing_service=None,
+    input_type=_CCLOUD_COMPLETEAPPUPLOADBATCH_REQUEST,
+    output_type=_CCLOUD_COMPLETEAPPUPLOADBATCH_RESPONSE,
+    serialized_options=_b('\202\265\030KIndicate that the batch is complete or being stopped for some other reason.'),
+  ),
+  _descriptor.MethodDescriptor(
     name='ClientBeginFileUpload',
     full_name='Cloud.ClientBeginFileUpload',
-    index=9,
+    index=14,
     containing_service=None,
     input_type=_CCLOUD_CLIENTBEGINFILEUPLOAD_REQUEST,
     output_type=_CCLOUD_CLIENTBEGINFILEUPLOAD_RESPONSE,
@@ -2107,7 +3344,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ClientCommitFileUpload',
     full_name='Cloud.ClientCommitFileUpload',
-    index=10,
+    index=15,
     containing_service=None,
     input_type=_CCLOUD_CLIENTCOMMITFILEUPLOAD_REQUEST,
     output_type=_CCLOUD_CLIENTCOMMITFILEUPLOAD_RESPONSE,
@@ -2116,7 +3353,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ClientFileDownload',
     full_name='Cloud.ClientFileDownload',
-    index=11,
+    index=16,
     containing_service=None,
     input_type=_CCLOUD_CLIENTFILEDOWNLOAD_REQUEST,
     output_type=_CCLOUD_CLIENTFILEDOWNLOAD_RESPONSE,
@@ -2125,7 +3362,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ClientDeleteFile',
     full_name='Cloud.ClientDeleteFile',
-    index=12,
+    index=17,
     containing_service=None,
     input_type=_CCLOUD_CLIENTDELETEFILE_REQUEST,
     output_type=_CCLOUD_CLIENTDELETEFILE_RESPONSE,
@@ -2134,7 +3371,7 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ClientConflictResolution',
     full_name='Cloud.ClientConflictResolution',
-    index=13,
+    index=18,
     containing_service=None,
     input_type=_CCLOUD_CLIENTCONFLICTRESOLUTION_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
@@ -2143,16 +3380,85 @@ _CLOUD = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='EnumerateUserApps',
     full_name='Cloud.EnumerateUserApps',
-    index=14,
+    index=19,
     containing_service=None,
     input_type=_CCLOUD_ENUMERATEUSERAPPS_REQUEST,
     output_type=_CCLOUD_ENUMERATEUSERAPPS_RESPONSE,
     serialized_options=_b('\202\265\030/Enumerates apps stroing cloud files for a user.'),
   ),
+  _descriptor.MethodDescriptor(
+    name='GetAppFileChangelist',
+    full_name='Cloud.GetAppFileChangelist',
+    index=20,
+    containing_service=None,
+    input_type=_CCLOUD_GETAPPFILECHANGELIST_REQUEST,
+    output_type=_CCLOUD_GETAPPFILECHANGELIST_RESPONSE,
+    serialized_options=_b('\202\265\030KGet a list of Cloud file changes for an app given a starting Change Number.'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SuspendAppSession',
+    full_name='Cloud.SuspendAppSession',
+    index=21,
+    containing_service=None,
+    input_type=_CCLOUD_APPSESSIONSUSPEND_REQUEST,
+    output_type=_CCLOUD_APPSESSIONSUSPEND_RESPONSE,
+    serialized_options=_b('\202\265\030!An app session is being suspended'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='ResumeAppSession',
+    full_name='Cloud.ResumeAppSession',
+    index=22,
+    containing_service=None,
+    input_type=_CCLOUD_APPSESSIONRESUME_REQUEST,
+    output_type=_CCLOUD_APPSESSIONRESUME_RESPONSE,
+    serialized_options=_b('\202\265\030\037An app session is being resumed'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SignalAppLaunchIntent',
+    full_name='Cloud.SignalAppLaunchIntent',
+    index=23,
+    containing_service=None,
+    input_type=_CCLOUD_APPLAUNCHINTENT_REQUEST,
+    output_type=_CCLOUD_APPLAUNCHINTENT_RESPONSE,
+    serialized_options=_b('\202\265\030\037Client intends to launch an app'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='SignalAppExitSyncDone',
+    full_name='Cloud.SignalAppExitSyncDone',
+    index=24,
+    containing_service=None,
+    input_type=_CCLOUD_APPEXITSYNCDONE_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=_b('\202\265\0302Client is done trying to sync after a game session'),
+  ),
 ])
 _sym_db.RegisterServiceDescriptor(_CLOUD)
 
 DESCRIPTOR.services_by_name['Cloud'] = _CLOUD
+
+
+_CLOUDCLIENT = _descriptor.ServiceDescriptor(
+  name='CloudClient',
+  full_name='CloudClient',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=_b('\202\265\030+Client notifications for Steam cloud events\300\265\030\002'),
+  serialized_start=17025,
+  serialized_end=17218,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='NotifyAppStateChange',
+    full_name='CloudClient.NotifyAppStateChange',
+    index=0,
+    containing_service=None,
+    input_type=_CCLOUD_APPCLOUDSTATECHANGE_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=_b('\202\265\030*Cloud state for the given app has changed.'),
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_CLOUDCLIENT)
+
+DESCRIPTOR.services_by_name['CloudClient'] = _CLOUDCLIENT
 
 Cloud = service_reflection.GeneratedServiceType('Cloud', (_service.Service,), dict(
   DESCRIPTOR = _CLOUD,
@@ -2161,6 +3467,17 @@ Cloud = service_reflection.GeneratedServiceType('Cloud', (_service.Service,), di
 
 Cloud_Stub = service_reflection.GeneratedServiceStubType('Cloud_Stub', (Cloud,), dict(
   DESCRIPTOR = _CLOUD,
+  __module__ = 'steammessages_cloud_pb2'
+  ))
+
+
+CloudClient = service_reflection.GeneratedServiceType('CloudClient', (_service.Service,), dict(
+  DESCRIPTOR = _CLOUDCLIENT,
+  __module__ = 'steammessages_cloud_pb2'
+  ))
+
+CloudClient_Stub = service_reflection.GeneratedServiceStubType('CloudClient_Stub', (CloudClient,), dict(
+  DESCRIPTOR = _CLOUDCLIENT,
   __module__ = 'steammessages_cloud_pb2'
   ))
 

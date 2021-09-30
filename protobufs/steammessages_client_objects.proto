@@ -1,0 +1,196 @@
+syntax = "proto2";
+import "enums.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+enum ECloudPendingRemoteOperation {
+	k_ECloudPendingRemoteOperationNone = 0;
+	k_ECloudPendingRemoteOperationAppSessionActive = 1;
+	k_ECloudPendingRemoteOperationUploadInProgress = 2;
+	k_ECloudPendingRemoteOperationUploadPending = 3;
+	k_ECloudPendingRemoteOperationAppSessionSuspended = 4;
+}
+
+message SteamMessagesClientIClientForcedEnumDependencies {
+	optional .EBluetoothDeviceType a = 1 [default = k_BluetoothDeviceType_Invalid];
+	optional .EStorageBlockContentType b = 2 [default = k_EStorageBlockContentType_Invalid];
+	optional .EStorageBlockFileSystemType c = 3 [default = k_EStorageBlockFileSystemType_Invalid];
+}
+
+message CMsgNetworkDeviceIP4Address {
+	optional int32 ip = 1 [default = 0];
+	optional int32 netmask = 2;
+}
+
+message CMsgNetworkDeviceIP4Config {
+	repeated .CMsgNetworkDeviceIP4Address addresses = 1;
+	repeated int32 dns_ip = 2;
+	optional int32 gateway_ip = 3;
+	optional bool is_dhcp_enabled = 4;
+	optional bool is_default_route = 5;
+	optional bool is_enabled = 6 [default = false];
+}
+
+message CMsgNetworkDeviceIP6Address {
+	optional string ip = 1;
+}
+
+message CMsgNetworkDeviceIP6Config {
+	repeated .CMsgNetworkDeviceIP6Address addresses = 1;
+	repeated string dns_ip = 2;
+	optional string gateway_ip = 3;
+	optional bool is_dhcp_enabled = 4;
+	optional bool is_default_route = 5;
+	optional bool is_enabled = 6 [default = false];
+}
+
+message CMsgNetworkDevicesData {
+	message Device {
+		message Wired {
+			optional bool is_cable_present = 1 [default = false];
+			optional uint32 speed_mbit = 2;
+			optional string friendly_name = 3;
+		}
+
+		message Wireless {
+			message AP {
+				optional uint32 id = 1 [default = 0];
+				optional int32 estrength = 2;
+				optional string ssid = 3;
+				optional bool is_active = 4;
+				optional bool is_autoconnect = 5;
+				optional int32 esecurity = 6;
+				optional string user_name = 7;
+				optional string password = 8;
+				optional int32 strength_raw = 9;
+			}
+
+			repeated .CMsgNetworkDevicesData.Device.Wireless.AP aps = 1;
+			optional int32 esecurity_supported = 2;
+		}
+
+		optional uint32 id = 1 [default = 0];
+		optional int32 etype = 2;
+		optional int32 estate = 3;
+		optional string mac = 4;
+		optional string vendor = 5;
+		optional string product = 6;
+		optional .CMsgNetworkDeviceIP4Config ip4 = 7;
+		optional .CMsgNetworkDeviceIP6Config ip6 = 8;
+		optional .CMsgNetworkDevicesData.Device.Wired wired = 9;
+		optional .CMsgNetworkDevicesData.Device.Wireless wireless = 10;
+	}
+
+	repeated .CMsgNetworkDevicesData.Device devices = 1;
+	optional bool is_wifi_enabled = 2;
+	optional bool is_wifi_scanning_enabled = 3;
+}
+
+message CMsgNetworkDeviceConnect {
+	message KnownAP {
+		optional uint32 ap_id = 1;
+	}
+
+	message CustomAP {
+		optional string ssid = 1;
+		optional int32 esecurity = 2;
+	}
+
+	message Credentials {
+		optional string username = 1;
+		optional string password = 2;
+	}
+
+	optional uint32 device_id = 1 [default = 0];
+	optional .CMsgNetworkDeviceConnect.Credentials credentials = 4;
+	optional .CMsgNetworkDeviceIP4Config ip4 = 5;
+	optional .CMsgNetworkDeviceIP6Config ip6 = 6;
+
+	oneof ap_info {
+		.CMsgNetworkDeviceConnect.KnownAP ap_known = 2;
+		.CMsgNetworkDeviceConnect.CustomAP ap_custom = 3;
+	}
+}
+
+message CMsgStorageDevicesData {
+	message Drive {
+		optional uint32 id = 1 [default = 0];
+		optional string model = 2;
+		optional string vendor = 3;
+		optional string serial = 4;
+		optional bool is_ejectable = 5;
+		optional uint64 size_bytes = 6;
+	}
+
+	message BlockDevice {
+		optional uint32 id = 1 [default = 0];
+		optional uint32 drive_id = 2 [default = 0];
+		optional string path = 3;
+		optional string friendly_path = 4;
+		optional string label = 5;
+		optional uint64 size_bytes = 6;
+		optional bool is_formattable = 7;
+		optional bool is_read_only = 8;
+		optional bool is_root_device = 9;
+		optional .EStorageBlockContentType content_type = 10 [default = k_EStorageBlockContentType_Invalid];
+		optional .EStorageBlockFileSystemType filesystem_type = 11 [default = k_EStorageBlockFileSystemType_Invalid];
+		optional string mount_path = 12;
+	}
+
+	repeated .CMsgStorageDevicesData.Drive drives = 1;
+	repeated .CMsgStorageDevicesData.BlockDevice block_devices = 2;
+}
+
+message CCloud_PendingRemoteOperation {
+	optional .ECloudPendingRemoteOperation operation = 1 [default = k_ECloudPendingRemoteOperationNone];
+	optional string machine_name = 2;
+	optional uint64 client_id = 3;
+	optional uint32 time_last_updated = 4;
+}
+
+message CMsgCloudPendingRemoteOperations {
+	repeated .CCloud_PendingRemoteOperation operations = 1;
+}
+
+message CMsgBluetoothDevicesData {
+	message Adapter {
+		optional uint32 id = 1 [default = 0];
+		optional string mac = 2;
+		optional string name = 3;
+		optional bool is_enabled = 4;
+		optional bool is_discovering = 5;
+	}
+
+	message Device {
+		optional uint32 id = 1 [default = 0];
+		optional uint32 adapter_id = 2 [default = 0];
+		optional .EBluetoothDeviceType etype = 3 [default = k_BluetoothDeviceType_Invalid];
+		optional string mac = 4;
+		optional string name = 5;
+		optional bool is_connected = 6;
+		optional bool is_paired = 7;
+		optional int32 strength_raw = 8;
+	}
+
+	repeated .CMsgBluetoothDevicesData.Adapter adapters = 1;
+	repeated .CMsgBluetoothDevicesData.Device devices = 2;
+}
+
+message CMsgBluetoothSettings {
+	optional bool is_enabled = 1;
+}
+
+message CMsgSystemPerfDiagnosticEntry {
+	optional string name = 1;
+	optional string value = 2;
+}
+
+message CMsgSystemPerfDiagnosticInfo {
+	repeated .CMsgSystemPerfDiagnosticEntry entries = 1;
+}
+
+message CMsgSystemPerfSettings {
+	optional float diagnostic_update_rate = 1;
+	optional bool is_shark_mode = 2;
+}

@@ -1,0 +1,158 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+message CMsgGSServerType {
+	optional uint32 app_id_served = 1;
+	optional uint32 flags = 2;
+	optional uint32 deprecated_game_ip_address = 3;
+	optional uint32 game_port = 4;
+	optional string game_dir = 5;
+	optional string game_version = 6;
+	optional uint32 game_query_port = 7;
+	optional bytes sdr_logon = 8;
+	optional fixed32 fake_ip = 9;
+}
+
+message CMsgGSStatusReply {
+	optional bool is_secure = 1;
+}
+
+message CMsgGSPlayerList {
+	message Player {
+		optional uint64 steam_id = 1;
+		optional uint32 deprecated_public_ip = 2;
+		optional bytes token = 3;
+		optional .CMsgIPAddress public_ip = 4;
+	}
+
+	repeated .CMsgGSPlayerList.Player players = 1;
+}
+
+message CMsgGSUserPlaying {
+	optional fixed64 steam_id = 1;
+	optional uint32 deprecated_public_ip = 2;
+	optional bytes token = 3;
+	optional .CMsgIPAddress public_ip = 4;
+}
+
+message CMsgGSDisconnectNotice {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgGameServerData {
+	message Player {
+		optional fixed64 steam_id = 1;
+	}
+
+	optional uint32 revision = 24;
+	optional fixed64 steam_id_gs = 1;
+	optional uint32 query_port = 3;
+	optional uint32 game_port = 4;
+	optional uint32 spectator_port = 5;
+	optional string server_name = 22;
+	optional string game_description = 29;
+	optional string spectator_server_name = 27;
+	optional fixed32 fake_ip = 28;
+	optional uint32 app_id = 6;
+	optional string gamedir = 7;
+	optional string version = 8;
+	optional string product = 9;
+	optional string region = 10;
+	repeated .CMsgGameServerData.Player players = 11;
+	optional uint32 max_players = 12;
+	optional uint32 bot_count = 13;
+	optional bool password = 14;
+	optional bool secure = 15;
+	optional bool dedicated = 16;
+	optional string os = 17;
+	optional string game_data = 18;
+	optional string game_type = 20;
+	optional string map = 21;
+}
+
+message CMsgGameServerRemove {
+	optional fixed64 legacy_steam_id_gs = 1;
+	optional uint32 legacy_query_port = 3;
+}
+
+message CMsgClientGMSServerQuery {
+	optional uint32 app_id = 1;
+	optional uint32 geo_location_ip = 2;
+	optional uint32 region_code = 3;
+	optional string filter_text = 4;
+	optional uint32 max_servers = 5;
+}
+
+message CMsgGMSClientServerQueryResponse {
+	message Server {
+		optional uint32 deprecated_server_ip = 1;
+		optional uint32 query_port = 2;
+		optional uint32 auth_players = 3;
+		optional .CMsgIPAddress server_ip = 4;
+		optional fixed64 steam_id = 6;
+		optional uint32 revision = 7;
+		optional uint32 players = 8;
+		optional uint32 game_port = 9;
+		optional fixed32 sdr_popid = 10;
+		optional uint32 flags = 11;
+		optional uint32 app_id = 12;
+		optional uint32 max_players = 13;
+		optional uint32 bots = 14;
+		optional uint32 spectator_port = 15;
+		optional string gamedir_str = 16;
+		optional uint32 gamedir_strindex = 17;
+		optional string map_str = 18;
+		optional uint32 map_strindex = 19;
+		optional string name_str = 20;
+		optional uint32 name_strindex = 21;
+		optional string game_description_str = 22;
+		optional uint32 game_description_strindex = 23;
+		optional string version_str = 24;
+		optional uint32 version_strindex = 25;
+		optional string gametype_str = 26;
+		optional uint32 gametype_strindex = 27;
+		optional string spectator_name_str = 30;
+		optional uint32 spectator_name_strindex = 31;
+	}
+
+	enum EFlags {
+		k_EFlag_HasPassword = 1;
+		k_EFlag_Secure = 2;
+	}
+
+	repeated .CMsgGMSClientServerQueryResponse.Server servers = 1;
+	optional string error = 2;
+	optional .CMsgGMSClientServerQueryResponse.Server default_server_data = 3;
+	repeated string server_strings = 4;
+}
+
+message CMsgGameServerOutOfDate {
+	optional fixed64 steam_id_gs = 1;
+	optional bool reject = 2;
+	optional string message = 3;
+}
+
+message CMsgGSAssociateWithClan {
+	optional fixed64 steam_id_clan = 1;
+}
+
+message CMsgGSAssociateWithClanResponse {
+	optional fixed64 steam_id_clan = 1;
+	optional uint32 eresult = 2 [default = 2];
+}
+
+message CMsgGSComputeNewPlayerCompatibility {
+	optional fixed64 steam_id_candidate = 1;
+}
+
+message CMsgGSComputeNewPlayerCompatibilityResponse {
+	optional fixed64 steam_id_candidate = 1;
+	optional uint32 eresult = 2 [default = 2];
+	optional bool is_clan_member = 3;
+	optional int32 ct_dont_like_you = 4;
+	optional int32 ct_you_dont_like = 5;
+	optional int32 ct_clanmembers_dont_like_you = 6;
+}
