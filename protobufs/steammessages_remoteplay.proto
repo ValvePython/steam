@@ -1,0 +1,857 @@
+syntax = "proto2";
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+enum EStreamChannel {
+	k_EStreamChannelInvalid = -1;
+	k_EStreamChannelDiscovery = 0;
+	k_EStreamChannelControl = 1;
+	k_EStreamChannelStats = 2;
+	k_EStreamChannelDataChannelStart = 3;
+}
+
+enum EStreamDiscoveryMessage {
+	k_EStreamDiscoveryPingRequest = 1;
+	k_EStreamDiscoveryPingResponse = 2;
+}
+
+enum EStreamControlMessage {
+	k_EStreamControlAuthenticationRequest = 1;
+	k_EStreamControlAuthenticationResponse = 2;
+	k_EStreamControlNegotiationInit = 3;
+	k_EStreamControlNegotiationSetConfig = 4;
+	k_EStreamControlNegotiationComplete = 5;
+	k_EStreamControlClientHandshake = 6;
+	k_EStreamControlServerHandshake = 7;
+	k_EStreamControlStartNetworkTest = 8;
+	k_EStreamControlKeepAlive = 9;
+	k_EStreamControl_LAST_SETUP_MESSAGE = 15;
+	k_EStreamControlStartAudioData = 50;
+	k_EStreamControlStopAudioData = 51;
+	k_EStreamControlStartVideoData = 52;
+	k_EStreamControlStopVideoData = 53;
+	k_EStreamControlInputMouseMotion = 54;
+	k_EStreamControlInputMouseWheel = 55;
+	k_EStreamControlInputMouseDown = 56;
+	k_EStreamControlInputMouseUp = 57;
+	k_EStreamControlInputKeyDown = 58;
+	k_EStreamControlInputKeyUp = 59;
+	k_EStreamControlInputGamepadAttached_OBSOLETE = 60;
+	k_EStreamControlInputGamepadEvent_OBSOLETE = 61;
+	k_EStreamControlInputGamepadDetached_OBSOLETE = 62;
+	k_EStreamControlShowCursor = 63;
+	k_EStreamControlHideCursor = 64;
+	k_EStreamControlSetCursor = 65;
+	k_EStreamControlGetCursorImage = 66;
+	k_EStreamControlSetCursorImage = 67;
+	k_EStreamControlDeleteCursor = 68;
+	k_EStreamControlSetTargetFramerate = 69;
+	k_EStreamControlInputLatencyTest = 70;
+	k_EStreamControlGamepadRumble_OBSOLETE = 71;
+	k_EStreamControlOverlayEnabled = 74;
+	k_EStreamControlInputControllerAttached_OBSOLETE = 75;
+	k_EStreamControlInputControllerState_OBSOLETE = 76;
+	k_EStreamControlTriggerHapticPulse_OBSOLETE = 77;
+	k_EStreamControlInputControllerDetached_OBSOLETE = 78;
+	k_EStreamControlVideoDecoderInfo = 80;
+	k_EStreamControlSetTitle = 81;
+	k_EStreamControlSetIcon = 82;
+	k_EStreamControlQuitRequest = 83;
+	k_EStreamControlSetQoS = 87;
+	k_EStreamControlInputControllerWirelessPresence_OBSOLETE = 88;
+	k_EStreamControlSetGammaRamp = 89;
+	k_EStreamControlVideoEncoderInfo = 90;
+	k_EStreamControlInputControllerStateHID_OBSOLETE = 93;
+	k_EStreamControlSetTargetBitrate = 94;
+	k_EStreamControlSetControllerPairingEnabled_OBSOLETE = 95;
+	k_EStreamControlSetControllerPairingResult_OBSOLETE = 96;
+	k_EStreamControlTriggerControllerDisconnect_OBSOLETE = 97;
+	k_EStreamControlSetActivity = 98;
+	k_EStreamControlSetStreamingClientConfig = 99;
+	k_EStreamControlSystemSuspend = 100;
+	k_EStreamControlSetControllerSettings_OBSOLETE = 101;
+	k_EStreamControlVirtualHereRequest = 102;
+	k_EStreamControlVirtualHereReady = 103;
+	k_EStreamControlVirtualHereShareDevice = 104;
+	k_EStreamControlSetSpectatorMode = 105;
+	k_EStreamControlRemoteHID = 106;
+	k_EStreamControlStartMicrophoneData = 107;
+	k_EStreamControlStopMicrophoneData = 108;
+	k_EStreamControlInputText = 109;
+	k_EStreamControlTouchConfigActive = 110;
+	k_EStreamControlGetTouchConfigData = 111;
+	k_EStreamControlSetTouchConfigData = 112;
+	k_EStreamControlSaveTouchConfigLayout = 113;
+	k_EStreamControlTouchActionSetActive = 114;
+	k_EStreamControlGetTouchIconData = 115;
+	k_EStreamControlSetTouchIconData = 116;
+	k_EStreamControlInputTouchFingerDown = 117;
+	k_EStreamControlInputTouchFingerMotion = 118;
+	k_EStreamControlInputTouchFingerUp = 119;
+	k_EStreamControlSetCaptureSize = 120;
+	k_EStreamControlSetFlashState = 121;
+	k_EStreamControlPause = 122;
+	k_EStreamControlResume = 123;
+	k_EStreamControlEnableHighResCapture = 124;
+	k_EStreamControlDisableHighResCapture = 125;
+	k_EStreamControlToggleMagnification = 126;
+	k_EStreamControlSetCapslock = 127;
+	k_EStreamControlSetKeymap = 128;
+	k_EStreamControlStopRequest = 129;
+	k_EStreamControlTouchActionSetLayerAdded = 130;
+	k_EStreamControlTouchActionSetLayerRemoved = 131;
+	k_EStreamControlRemotePlayTogetherGroupUpdate = 132;
+	k_EStreamControlSetInputTemporarilyDisabled = 133;
+	k_EStreamControlSetQualityOverride = 134;
+	k_EStreamControlSetBitrateOverride = 135;
+}
+
+enum EStreamVersion {
+	k_EStreamVersionNone = 0;
+	k_EStreamVersionCurrent = 1;
+}
+
+enum EStreamAudioCodec {
+	k_EStreamAudioCodecNone = 0;
+	k_EStreamAudioCodecRaw = 1;
+	k_EStreamAudioCodecVorbis = 2;
+	k_EStreamAudioCodecOpus = 3;
+	k_EStreamAudioCodecMP3 = 4;
+	k_EStreamAudioCodecAAC = 5;
+}
+
+enum EStreamVideoCodec {
+	k_EStreamVideoCodecNone = 0;
+	k_EStreamVideoCodecRaw = 1;
+	k_EStreamVideoCodecVP8 = 2;
+	k_EStreamVideoCodecVP9 = 3;
+	k_EStreamVideoCodecH264 = 4;
+	k_EStreamVideoCodecHEVC = 5;
+	k_EStreamVideoCodecORBX1 = 6;
+	k_EStreamVideoCodecORBX2 = 7;
+}
+
+enum EStreamQualityPreference {
+	k_EStreamQualityAutomatic = -1;
+	k_EStreamQualityFast = 1;
+	k_EStreamQualityBalanced = 2;
+	k_EStreamQualityBeautiful = 3;
+}
+
+enum EStreamBitrate {
+	k_EStreamBitrateAutodetect = -1;
+	k_EStreamBitrateUnlimited = 0;
+}
+
+enum EStreamP2PScope {
+	k_EStreamP2PScopeAutomatic = 0;
+	k_EStreamP2PScopeDisabled = 1;
+	k_EStreamP2PScopeOnlyMe = 2;
+	k_EStreamP2PScopeFriends = 3;
+	k_EStreamP2PScopeEveryone = 4;
+}
+
+enum EStreamHostPlayAudioPreference {
+	k_EStreamHostPlayAudioDefault = 0;
+	k_EStreamHostPlayAudioAlways = 1;
+}
+
+enum EStreamingDataType {
+	k_EStreamingAudioData = 0;
+	k_EStreamingVideoData = 1;
+	k_EStreamingMicrophoneData = 2;
+}
+
+enum EStreamMouseButton {
+	k_EStreamMouseButtonLeft = 1;
+	k_EStreamMouseButtonRight = 2;
+	k_EStreamMouseButtonMiddle = 16;
+	k_EStreamMouseButtonX1 = 32;
+	k_EStreamMouseButtonX2 = 64;
+	k_EStreamMouseButtonUnknown = 4096;
+}
+
+enum EStreamMouseWheelDirection {
+	k_EStreamMouseWheelUp = 120;
+	k_EStreamMouseWheelDown = -120;
+	k_EStreamMouseWheelLeft = 3;
+	k_EStreamMouseWheelRight = 4;
+}
+
+enum EStreamFramerateLimiter {
+	k_EStreamFramerateSlowCapture = 1;
+	k_EStreamFramerateSlowConvert = 2;
+	k_EStreamFramerateSlowEncode = 4;
+	k_EStreamFramerateSlowNetwork = 8;
+	k_EStreamFramerateSlowDecode = 16;
+	k_EStreamFramerateSlowGame = 32;
+	k_EStreamFramerateSlowDisplay = 64;
+}
+
+enum EStreamActivity {
+	k_EStreamActivityIdle = 1;
+	k_EStreamActivityGame = 2;
+	k_EStreamActivityDesktop = 3;
+	k_EStreamActivitySecureDesktop = 4;
+	k_EStreamActivityMusic = 5;
+}
+
+enum EStreamDataMessage {
+	k_EStreamDataPacket = 1;
+	k_EStreamDataLost = 2;
+}
+
+enum EAudioFormat {
+	k_EAudioFormatNone = 0;
+	k_EAudioFormat16BitLittleEndian = 1;
+	k_EAudioFormatFloat = 2;
+}
+
+enum EVideoFormat {
+	k_EVideoFormatNone = 0;
+	k_EVideoFormatYV12 = 1;
+	k_EVideoFormatAccel = 2;
+}
+
+enum EStreamStatsMessage {
+	k_EStreamStatsFrameEvents = 1;
+	k_EStreamStatsDebugDump = 2;
+	k_EStreamStatsLogMessage = 3;
+	k_EStreamStatsLogUploadBegin = 4;
+	k_EStreamStatsLogUploadData = 5;
+	k_EStreamStatsLogUploadComplete = 6;
+}
+
+enum EStreamFrameEvent {
+	k_EStreamInputEventStart = 0;
+	k_EStreamInputEventSend = 1;
+	k_EStreamInputEventRecv = 2;
+	k_EStreamInputEventQueued = 3;
+	k_EStreamInputEventHandled = 4;
+	k_EStreamFrameEventStart = 5;
+	k_EStreamFrameEventCaptureBegin = 6;
+	k_EStreamFrameEventCaptureEnd = 7;
+	k_EStreamFrameEventConvertBegin = 8;
+	k_EStreamFrameEventConvertEnd = 9;
+	k_EStreamFrameEventEncodeBegin = 10;
+	k_EStreamFrameEventEncodeEnd = 11;
+	k_EStreamFrameEventSend = 12;
+	k_EStreamFrameEventRecv = 13;
+	k_EStreamFrameEventDecodeBegin = 14;
+	k_EStreamFrameEventDecodeEnd = 15;
+	k_EStreamFrameEventUploadBegin = 16;
+	k_EStreamFrameEventUploadEnd = 17;
+	k_EStreamFrameEventComplete = 18;
+}
+
+enum EStreamFrameResult {
+	k_EStreamFrameResultPending = 0;
+	k_EStreamFrameResultDisplayed = 1;
+	k_EStreamFrameResultDroppedNetworkSlow = 2;
+	k_EStreamFrameResultDroppedNetworkLost = 3;
+	k_EStreamFrameResultDroppedDecodeSlow = 4;
+	k_EStreamFrameResultDroppedDecodeCorrupt = 5;
+	k_EStreamFrameResultDroppedLate = 6;
+	k_EStreamFrameResultDroppedReset = 7;
+}
+
+enum EFrameAccumulatedStat {
+	k_EFrameStatFPS = 0;
+	k_EFrameStatCaptureDurationMS = 1;
+	k_EFrameStatConvertDurationMS = 2;
+	k_EFrameStatEncodeDurationMS = 3;
+	k_EFrameStatSteamDurationMS = 4;
+	k_EFrameStatServerDurationMS = 5;
+	k_EFrameStatNetworkDurationMS = 6;
+	k_EFrameStatDecodeDurationMS = 7;
+	k_EFrameStatDisplayDurationMS = 8;
+	k_EFrameStatClientDurationMS = 9;
+	k_EFrameStatFrameDurationMS = 10;
+	k_EFrameStatInputLatencyMS = 11;
+	k_EFrameStatGameLatencyMS = 12;
+	k_EFrameStatRoundTripLatencyMS = 13;
+	k_EFrameStatPingTimeMS = 14;
+	k_EFrameStatServerBitrateKbitPerSec = 15;
+	k_EFrameStatClientBitrateKbitPerSec = 16;
+	k_EFrameStatLinkBandwidthKbitPerSec = 17;
+	k_EFrameStatPacketLossPercentage = 18;
+}
+
+enum ELogFileType {
+	k_ELogFileSystemBoot = 0;
+	k_ELogFileSystemReset = 1;
+	k_ELogFileSystemDebug = 2;
+}
+
+message CDiscoveryPingRequest {
+	optional uint32 sequence = 1;
+	optional uint32 packet_size_requested = 2;
+}
+
+message CDiscoveryPingResponse {
+	optional uint32 sequence = 1;
+	optional uint32 packet_size_received = 2;
+}
+
+message CStreamingClientHandshakeInfo {
+	optional int32 network_test = 2;
+}
+
+message CClientHandshakeMsg {
+	required .CStreamingClientHandshakeInfo info = 1;
+}
+
+message CStreamingServerHandshakeInfo {
+	optional int32 mtu = 1;
+}
+
+message CServerHandshakeMsg {
+	required .CStreamingServerHandshakeInfo info = 1;
+}
+
+message CAuthenticationRequestMsg {
+	optional bytes token = 1;
+	optional .EStreamVersion version = 2 [default = k_EStreamVersionNone];
+	optional uint64 steamid = 3;
+}
+
+message CAuthenticationResponseMsg {
+	enum AuthenticationResult {
+		SUCCEEDED = 0;
+		FAILED = 1;
+	}
+
+	optional .CAuthenticationResponseMsg.AuthenticationResult result = 1 [default = SUCCEEDED];
+	optional .EStreamVersion version = 2 [default = k_EStreamVersionNone];
+}
+
+message CKeepAliveMsg {
+}
+
+message CStartNetworkTestMsg {
+	optional uint32 frames = 1;
+	optional uint32 framerate = 2;
+	optional uint32 bitrate_kbps = 3;
+	optional uint32 burst_bitrate_kbps = 4;
+	optional bool bandwidth_test = 5;
+}
+
+message CStreamVideoMode {
+	required uint32 width = 1;
+	required uint32 height = 2;
+	optional uint32 refresh_rate = 3;
+	optional uint32 refresh_rate_numerator = 4;
+	optional uint32 refresh_rate_denominator = 5;
+}
+
+message CStreamingClientCaps {
+	optional string system_info = 1;
+	optional bool system_can_suspend = 2;
+	optional int32 maximum_decode_bitrate_kbps = 3;
+	optional int32 maximum_burst_bitrate_kbps = 4;
+	optional bool supports_video_hevc = 5;
+	optional bool disable_steam_store = 6;
+	optional bool disable_client_cursor = 7;
+	optional bool disable_intel_hardware_encoding = 8;
+	optional bool disable_amd_hardware_encoding = 9;
+	optional bool disable_nvidia_hardware_encoding = 10;
+	optional int32 form_factor = 11;
+}
+
+message CStreamingClientConfig {
+	optional .EStreamQualityPreference quality = 1 [default = k_EStreamQualityBalanced];
+	optional uint32 maximum_resolution_x = 2;
+	optional uint32 maximum_resolution_y = 3;
+	optional uint32 maximum_framerate_numerator = 4;
+	optional uint32 maximum_framerate_denominator = 5;
+	optional int32 maximum_bitrate_kbps = 6 [default = -1];
+	optional bool enable_hardware_decoding = 7 [default = true];
+	optional bool enable_performance_overlay = 8 [default = false];
+	optional bool enable_video_streaming = 9 [default = true];
+	optional bool enable_audio_streaming = 10 [default = true];
+	optional bool enable_input_streaming = 11 [default = true];
+	optional int32 audio_channels = 12 [default = 2];
+	optional bool enable_video_hevc = 13 [default = false];
+	optional bool enable_performance_icons = 14 [default = true];
+	optional bool enable_microphone_streaming = 15 [default = false];
+	optional string controller_overlay_hotkey = 16;
+	optional bool enable_touch_controller = 17 [default = false];
+	optional .EStreamP2PScope p2p_scope = 19 [default = k_EStreamP2PScopeAutomatic];
+}
+
+message CStreamingServerConfig {
+	optional bool change_desktop_resolution = 1;
+	optional bool dynamically_adjust_resolution = 2;
+	optional bool enable_capture_nvfbc = 3;
+	optional bool enable_hardware_encoding_nvidia = 4;
+	optional bool enable_hardware_encoding_amd = 5;
+	optional bool enable_hardware_encoding_intel = 6;
+	optional int32 software_encoding_threads = 7;
+	optional bool enable_traffic_priority = 8;
+	optional .EStreamHostPlayAudioPreference host_play_audio = 9 [default = k_EStreamHostPlayAudioDefault];
+}
+
+message CNegotiatedConfig {
+	optional bool reliable_data = 1;
+	optional .EStreamAudioCodec selected_audio_codec = 2 [default = k_EStreamAudioCodecNone];
+	optional .EStreamVideoCodec selected_video_codec = 3 [default = k_EStreamVideoCodecNone];
+	repeated .CStreamVideoMode available_video_modes = 4;
+	optional bool enable_remote_hid = 5;
+	optional bool enable_touch_input = 6;
+}
+
+message CNegotiationInitMsg {
+	optional bool reliable_data = 1;
+	repeated .EStreamAudioCodec supported_audio_codecs = 2;
+	repeated .EStreamVideoCodec supported_video_codecs = 3;
+	optional bool supports_remote_hid = 4;
+	optional bool supports_touch_input = 5;
+}
+
+message CNegotiationSetConfigMsg {
+	required .CNegotiatedConfig config = 1;
+	optional .CStreamingClientConfig streaming_client_config = 2;
+	optional .CStreamingClientCaps streaming_client_caps = 3;
+}
+
+message CNegotiationCompleteMsg {
+}
+
+message CStartAudioDataMsg {
+	required uint32 channel = 2;
+	optional .EStreamAudioCodec codec = 3 [default = k_EStreamAudioCodecNone];
+	optional bytes codec_data = 4;
+	optional uint32 frequency = 5;
+	optional uint32 channels = 6;
+}
+
+message CStopAudioDataMsg {
+}
+
+message CStartVideoDataMsg {
+	required uint32 channel = 1;
+	optional .EStreamVideoCodec codec = 2 [default = k_EStreamVideoCodecNone];
+	optional bytes codec_data = 3;
+	optional uint32 width = 4;
+	optional uint32 height = 5;
+}
+
+message CStopVideoDataMsg {
+}
+
+message CRecordedInput {
+	optional .EStreamControlMessage type = 1 [default = k_EStreamControlAuthenticationRequest];
+	optional uint32 timestamp = 2;
+
+	oneof data {
+		.CInputTouchFingerDownMsg finger_down = 3;
+		.CInputTouchFingerMotionMsg finger_motion = 4;
+		.CInputTouchFingerUpMsg finger_up = 5;
+		.CInputMouseMotionMsg mouse_motion = 6;
+		.CInputMouseWheelMsg mouse_wheel = 7;
+		.CInputMouseDownMsg mouse_down = 8;
+		.CInputMouseUpMsg mouse_up = 9;
+		.CInputKeyDownMsg key_down = 10;
+		.CInputKeyUpMsg key_up = 11;
+		.CInputTextMsg text = 12;
+		.CRemoteHIDMsg hid = 13;
+	}
+}
+
+message CRecordedInputStream {
+	repeated .CRecordedInput entries = 1;
+}
+
+message CInputLatencyTestMsg {
+	required uint32 input_mark = 1;
+	optional uint32 color = 2;
+}
+
+message CInputTouchFingerDownMsg {
+	optional uint32 input_mark = 1;
+	optional uint64 fingerid = 2;
+	optional float x_normalized = 3;
+	optional float y_normalized = 4;
+}
+
+message CInputTouchFingerMotionMsg {
+	optional uint32 input_mark = 1;
+	optional uint64 fingerid = 2;
+	optional float x_normalized = 3;
+	optional float y_normalized = 4;
+}
+
+message CInputTouchFingerUpMsg {
+	optional uint32 input_mark = 1;
+	optional uint64 fingerid = 2;
+	optional float x_normalized = 3;
+	optional float y_normalized = 4;
+}
+
+message CInputMouseMotionMsg {
+	optional uint32 input_mark = 1;
+	optional float x_normalized = 2;
+	optional float y_normalized = 3;
+	optional int32 dx = 4;
+	optional int32 dy = 5;
+}
+
+message CInputMouseWheelMsg {
+	optional uint32 input_mark = 1;
+	required .EStreamMouseWheelDirection direction = 2 [default = k_EStreamMouseWheelUp];
+}
+
+message CInputMouseDownMsg {
+	optional uint32 input_mark = 1;
+	required .EStreamMouseButton button = 2 [default = k_EStreamMouseButtonLeft];
+}
+
+message CInputMouseUpMsg {
+	optional uint32 input_mark = 1;
+	required .EStreamMouseButton button = 2 [default = k_EStreamMouseButtonLeft];
+}
+
+message CInputKeyDownMsg {
+	optional uint32 input_mark = 1;
+	required uint32 scancode = 2;
+}
+
+message CInputKeyUpMsg {
+	optional uint32 input_mark = 1;
+	required uint32 scancode = 2;
+}
+
+message CInputTextMsg {
+	optional uint32 input_mark = 1;
+	required string text_utf8 = 2;
+}
+
+message CSetTitleMsg {
+	optional string text = 1;
+}
+
+message CSetCaptureSizeMsg {
+	optional int32 width = 1;
+	optional int32 height = 2;
+}
+
+message CSetIconMsg {
+	optional int32 width = 1;
+	optional int32 height = 2;
+	optional bytes image = 3;
+}
+
+message CSetFlashStateMsg {
+	optional uint32 flags = 1;
+	optional uint32 count = 2;
+	optional uint32 timeout_ms = 3;
+}
+
+message CShowCursorMsg {
+	optional float x_normalized = 1;
+	optional float y_normalized = 2;
+}
+
+message CHideCursorMsg {
+}
+
+message CSetCursorMsg {
+	required uint64 cursor_id = 1;
+}
+
+message CGetCursorImageMsg {
+	required uint64 cursor_id = 1;
+}
+
+message CSetCursorImageMsg {
+	required uint64 cursor_id = 1;
+	optional int32 width = 2;
+	optional int32 height = 3;
+	optional int32 hot_x = 4;
+	optional int32 hot_y = 5;
+	optional bytes image = 6;
+}
+
+message CVideoDecoderInfoMsg {
+	optional string info = 1;
+	optional int32 threads = 2;
+}
+
+message CVideoEncoderInfoMsg {
+	optional string info = 1;
+}
+
+message CPauseMsg {
+}
+
+message CResumeMsg {
+}
+
+message CEnableHighResCaptureMsg {
+}
+
+message CDisableHighResCaptureMsg {
+}
+
+message CToggleMagnificationMsg {
+}
+
+message CSetCapslockMsg {
+	optional bool pressed = 1;
+}
+
+message CStreamingKeymapEntry {
+	optional int32 scancode = 1;
+	optional int32 normal_keycode = 2;
+	optional int32 shift_keycode = 3;
+	optional int32 capslock_keycode = 4;
+	optional int32 shift_capslock_keycode = 5;
+	optional int32 altgr_keycode = 6;
+	optional int32 altgr_shift_keycode = 7;
+	optional int32 altgr_capslock_keycode = 8;
+	optional int32 altgr_shift_capslock_keycode = 9;
+}
+
+message CStreamingKeymap {
+	repeated .CStreamingKeymapEntry entries = 1;
+}
+
+message CSetKeymapMsg {
+	optional .CStreamingKeymap keymap = 1;
+}
+
+message CStopRequest {
+}
+
+message CQuitRequest {
+}
+
+message CDeleteCursorMsg {
+	required uint64 cursor_id = 1;
+}
+
+message CSetStreamingClientConfig {
+	required .CStreamingClientConfig config = 1;
+}
+
+message CSetQoSMsg {
+	required bool use_qos = 1;
+}
+
+message CSetTargetFramerateMsg {
+	required uint32 framerate = 1;
+	optional uint32 reasons = 2;
+	optional uint32 framerate_numerator = 3;
+	optional uint32 framerate_denominator = 4;
+}
+
+message CSetTargetBitrateMsg {
+	required int32 bitrate = 1;
+}
+
+message COverlayEnabledMsg {
+	required bool enabled = 1;
+}
+
+message CSetGammaRampMsg {
+	optional bytes gamma_ramp = 1;
+}
+
+message CSetActivityMsg {
+	optional .EStreamActivity activity = 1 [default = k_EStreamActivityIdle];
+	optional uint32 appid = 2;
+	optional uint64 gameid = 3;
+	optional string game_name = 4;
+}
+
+message CSystemSuspendMsg {
+}
+
+message CVirtualHereRequestMsg {
+	optional string hostname = 1;
+}
+
+message CVirtualHereReadyMsg {
+	optional uint32 licensed_device_count = 1;
+}
+
+message CVirtualHereShareDeviceMsg {
+	optional string device_address = 1;
+}
+
+message CSetSpectatorModeMsg {
+	optional bool enabled = 1;
+}
+
+message CRemoteHIDMsg {
+	optional bytes data = 1;
+}
+
+message CTouchConfigActiveMsg {
+	optional uint32 appid = 1;
+	optional uint32 revision = 2;
+	optional uint64 creator = 3;
+}
+
+message CGetTouchConfigDataMsg {
+	optional uint32 appid = 1;
+}
+
+message CSetTouchConfigDataMsg {
+	optional uint32 appid = 1;
+	optional uint32 revision = 2;
+	optional bytes data = 3;
+	optional bytes layout = 4;
+	optional uint64 creator = 5;
+}
+
+message CSaveTouchConfigLayoutMsg {
+	optional uint32 appid = 1;
+	optional bytes layout = 4;
+}
+
+message CTouchActionSetActiveMsg {
+	optional uint32 appid = 1;
+	optional int32 actionset_id = 2;
+}
+
+message CTouchActionSetLayerAddedMsg {
+	optional uint32 appid = 1;
+	optional int32 actionset_id = 2;
+}
+
+message CTouchActionSetLayerRemovedMsg {
+	optional uint32 appid = 1;
+	optional int32 actionset_id = 2;
+}
+
+message CGetTouchIconDataMsg {
+	optional uint32 appid = 1;
+	optional string icon = 2;
+}
+
+message CSetTouchIconDataMsg {
+	optional uint32 appid = 1;
+	optional string icon = 2;
+	optional bytes data = 3;
+}
+
+message CRemotePlayTogetherGroupUpdateMsg {
+	message Player {
+		optional uint32 accountid = 1;
+		optional uint32 guestid = 2;
+		optional bool keyboard_enabled = 3;
+		optional bool mouse_enabled = 4;
+		optional bool controller_enabled = 5;
+		repeated uint32 controller_slots = 6;
+		optional bytes avatar_hash = 7;
+	}
+
+	repeated .CRemotePlayTogetherGroupUpdateMsg.Player players = 1;
+	optional int32 player_index = 2;
+	optional string miniprofile_location = 3;
+	optional string game_name = 4;
+	optional string avatar_location = 5;
+}
+
+message CSetInputTemporarilyDisabledMsg {
+	optional bool disabled = 1;
+}
+
+message CSetQualityOverrideMsg {
+	optional int32 value = 1;
+}
+
+message CSetBitrateOverrideMsg {
+	optional int32 value = 1;
+}
+
+message CStreamDataLostMsg {
+	repeated uint32 packets = 1;
+}
+
+message CAudioFormat {
+	required .EAudioFormat format = 1 [default = k_EAudioFormatNone];
+	optional uint32 frequency = 2;
+	optional uint32 channels = 3;
+}
+
+message CVideoFormat {
+	required .EVideoFormat format = 1 [default = k_EVideoFormatNone];
+	optional uint32 width = 2;
+	optional uint32 height = 3;
+}
+
+message CFrameEvent {
+	required .EStreamFrameEvent event_id = 1 [default = k_EStreamInputEventStart];
+	required uint32 timestamp = 2;
+}
+
+message CFrameStats {
+	required uint32 frame_id = 1;
+	optional uint32 input_mark = 2;
+	repeated .CFrameEvent events = 3;
+	required .EStreamFrameResult result = 4 [default = k_EStreamFrameResultPending];
+	optional float frame_start_delta = 5;
+	optional float frame_display_delta = 6;
+	optional float ping_time = 7;
+	optional float server_bitrate = 8;
+	optional float client_bitrate = 9;
+	optional float link_bandwidth = 10;
+	optional float packet_loss = 11;
+	optional uint32 frame_size = 12;
+}
+
+message CFrameStatAccumulatedValue {
+	required .EFrameAccumulatedStat stat_type = 1 [default = k_EFrameStatFPS];
+	required int32 count = 2;
+	required float average = 3;
+	optional float stddev = 4;
+}
+
+message CFrameStatsListMsg {
+	required .EStreamingDataType data_type = 1 [default = k_EStreamingAudioData];
+	repeated .CFrameStats stats = 2;
+	repeated .CFrameStatAccumulatedValue accumulated_stats = 3;
+	required int32 latest_frame_id = 4;
+}
+
+message CStreamingSessionStats {
+	optional float frame_loss_percentage = 1;
+	optional float average_network_time_ms = 2;
+	optional float stddev_network_time_ms = 3;
+}
+
+message CDebugDumpMsg {
+	optional bytes screenshot = 1;
+}
+
+message CLogMsg {
+	optional int32 type = 1;
+	optional string message = 2;
+}
+
+message CLogUploadMsg {
+	optional .ELogFileType type = 1 [default = k_ELogFileSystemBoot];
+	optional bytes data = 3;
+}
+
+message CTransportSignalMsg {
+	message WebRTCMessage {
+		message Candidate {
+			optional string sdp_mid = 1;
+			optional int32 sdp_mline_index = 2;
+			optional string candidate = 3;
+		}
+
+		oneof msg {
+			bool greeting = 1;
+			string offer = 2;
+			string answer = 3;
+			.CTransportSignalMsg.WebRTCMessage.Candidate candidate = 4;
+		}
+	}
+
+	optional .CTransportSignalMsg.WebRTCMessage webrtc = 1;
+	repeated bytes sdr = 2;
+}

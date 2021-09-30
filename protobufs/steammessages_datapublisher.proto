@@ -16,6 +16,31 @@ message CDataPublisher_ClientContentCorruptionReport_Notification {
 	optional bool oc_proxy_detected = 10 [(description) = "detected an OpenCache proxy"];
 }
 
+message CDataPublisher_ClientUpdateAppJob_Notification {
+	optional uint32 app_id = 1;
+	repeated uint32 depot_ids = 2;
+	optional uint32 app_state = 3;
+	optional uint32 job_app_error = 4;
+	optional string error_details = 5;
+	optional uint32 job_duration = 6;
+	optional uint32 files_validation_failed = 7;
+	optional uint64 job_bytes_downloaded = 8;
+	optional uint64 job_bytes_staged = 9;
+	optional uint64 bytes_comitted = 10;
+	optional uint32 start_app_state = 11;
+	optional fixed64 stats_machine_id = 12;
+	optional string branch_name = 13;
+	optional uint64 total_bytes_downloaded = 14;
+	optional uint64 total_bytes_staged = 15;
+	optional uint64 total_bytes_restored = 16;
+	optional bool is_borrowed = 17;
+	optional bool is_free_weekend = 18;
+	optional uint64 total_bytes_legacy = 19;
+	optional uint64 total_bytes_patched = 20;
+	optional uint64 total_bytes_saved = 21;
+	optional uint32 cell_id = 22;
+}
+
 message CValveHWSurvey_GetSurveySchedule_Request {
 	optional string surveydatetoken = 1;
 	optional fixed64 surveydatetokenversion = 2;
@@ -30,6 +55,7 @@ service DataPublisher {
 	option (service_description) = "Data Publisher (DP) server services";
 
 	rpc ClientContentCorruptionReport (.CDataPublisher_ClientContentCorruptionReport_Notification) returns (.NoResponse);
+	rpc ClientUpdateAppJobReport (.CDataPublisher_ClientUpdateAppJob_Notification) returns (.NoResponse);
 }
 
 service ValveHWSurvey {

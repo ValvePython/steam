@@ -46,6 +46,7 @@ enum EChatRoomServerMessage {
 enum EChatRoomMessageReactionType {
 	k_EChatRoomMessageReactionType_Invalid = 0;
 	k_EChatRoomMessageReactionType_Emoticon = 1;
+	k_EChatRoomMessageReactionType_Sticker = 2;
 }
 
 enum EChatRoomMemberStateChange {
@@ -120,6 +121,7 @@ message CChatRoomGroupHeaderState {
 	optional uint64 watching_broadcast_channel_id = 23;
 	optional uint64 active_minigame_id = 24;
 	optional string avatar_ugc_url = 25;
+	optional bool disabled = 26;
 }
 
 message CChatRoomMember {
@@ -519,6 +521,7 @@ message CChatRoom_GetChatRoomGroupSummary_Response {
 	optional uint64 watching_broadcast_channel_id = 19;
 	optional uint64 active_minigame_id = 20;
 	optional string avatar_ugc_url = 21;
+	optional bool disabled = 22;
 }
 
 message CChatRoomSummaryPair {

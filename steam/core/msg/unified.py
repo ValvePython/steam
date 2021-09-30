@@ -11,6 +11,7 @@ service_lookup = {  # MARK_SERVICE_START
     'ChatUsability':                    'steam.protobufs.steammessages_chat_pb2',
     'ChatUsabilityClient':              'steam.protobufs.steammessages_chat_pb2',
     'Cloud':                            'steam.protobufs.steammessages_cloud_pb2',
+    'CloudClient':                      'steam.protobufs.steammessages_cloud_pb2',
     'ContentServerDirectory':           'steam.protobufs.steammessages_contentsystem_pb2',
     'Credentials':                      'steam.protobufs.steammessages_credentials_pb2',
     'DataPublisher':                    'steam.protobufs.steammessages_datapublisher_pb2',

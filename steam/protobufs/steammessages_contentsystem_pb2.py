@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n!steammessages_contentsystem.proto\x1a steammessages_unified_base.proto\"\xb5\x02\n6CContentServerDirectory_GetServersForSteamPipe_Request\x12#\n\x07\x63\x65ll_id\x18\x01 \x01(\rB\x12\x82\xb5\x18\x0e\x63lient Cell ID\x12\x39\n\x0bmax_servers\x18\x02 \x01(\r:\x02\x32\x30\x42 \x82\xb5\x18\x1cmax servers in response list\x12*\n\x0bip_override\x18\x03 \x01(\tB\x15\x82\xb5\x18\x11\x63lient IP address\x12+\n\rlauncher_type\x18\x04 \x01(\x05:\x01\x30\x42\x11\x82\xb5\x18\rlauncher type\x12\x42\n\x0bipv6_public\x18\x05 \x01(\tB-\x82\xb5\x18)client public ipv6 address if it knows it\"\xdb\x02\n\"CContentServerDirectory_ServerInfo\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tsource_id\x18\x02 \x01(\x05\x12\x0f\n\x07\x63\x65ll_id\x18\x03 \x01(\x05\x12\x0c\n\x04load\x18\x04 \x01(\x05\x12\x15\n\rweighted_load\x18\x05 \x01(\x02\x12\"\n\x1anum_entries_in_client_list\x18\x06 \x01(\x05\x12\x18\n\x10steam_china_only\x18\x07 \x01(\x08\x12\x0c\n\x04host\x18\x08 \x01(\t\x12\r\n\x05vhost\x18\t \x01(\t\x12\x14\n\x0cuse_as_proxy\x18\n \x01(\x08\x12#\n\x1bproxy_request_path_template\x18\x0b \x01(\t\x12\x15\n\rhttps_support\x18\x0c \x01(\t\x12\x17\n\x0f\x61llowed_app_ids\x18\r \x03(\r\x12\x18\n\x10preferred_server\x18\x0e \x01(\x08\"o\n7CContentServerDirectory_GetServersForSteamPipe_Response\x12\x34\n\x07servers\x18\x01 \x03(\x0b\x32#.CContentServerDirectory_ServerInfo\"\x89\x01\n1CContentServerDirectory_GetDepotPatchInfo_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x64\x65potid\x18\x02 \x01(\r\x12\x19\n\x11source_manifestid\x18\x03 \x01(\x04\x12\x19\n\x11target_manifestid\x18\x04 \x01(\x04\"J\n2CContentServerDirectory_GetDepotPatchInfo_Response\x12\x14\n\x0cis_available\x18\x01 \x01(\x08\"P\n4CContentServerDirectory_GetClientUpdateHosts_Request\x12\x18\n\x10\x63\x61\x63hed_signature\x18\x01 \x01(\t\"w\n5CContentServerDirectory_GetClientUpdateHosts_Response\x12\x10\n\x08hosts_kv\x18\x01 \x01(\t\x12\x18\n\x10valid_until_time\x18\x02 \x01(\x04\x12\x12\n\nip_country\x18\x03 \x01(\t2\xd2\x03\n\x16\x43ontentServerDirectory\x12\x8b\x01\n\x16GetServersForSteamPipe\x12\x37.CContentServerDirectory_GetServersForSteamPipe_Request\x1a\x38.CContentServerDirectory_GetServersForSteamPipe_Response\x12|\n\x11GetDepotPatchInfo\x12\x32.CContentServerDirectory_GetDepotPatchInfo_Request\x1a\x33.CContentServerDirectory_GetDepotPatchInfo_Response\x12\x85\x01\n\x14GetClientUpdateHosts\x12\x35.CContentServerDirectory_GetClientUpdateHosts_Request\x1a\x36.CContentServerDirectory_GetClientUpdateHosts_Response\x1a$\x82\xb5\x18 Content Server and CDN directoryB\x03\x90\x01\x01')
+  serialized_pb=_b('\n!steammessages_contentsystem.proto\x1a steammessages_unified_base.proto\"\xb5\x02\n6CContentServerDirectory_GetServersForSteamPipe_Request\x12#\n\x07\x63\x65ll_id\x18\x01 \x01(\rB\x12\x82\xb5\x18\x0e\x63lient Cell ID\x12\x39\n\x0bmax_servers\x18\x02 \x01(\r:\x02\x32\x30\x42 \x82\xb5\x18\x1cmax servers in response list\x12*\n\x0bip_override\x18\x03 \x01(\tB\x15\x82\xb5\x18\x11\x63lient IP address\x12+\n\rlauncher_type\x18\x04 \x01(\x05:\x01\x30\x42\x11\x82\xb5\x18\rlauncher type\x12\x42\n\x0bipv6_public\x18\x05 \x01(\tB-\x82\xb5\x18)client public ipv6 address if it knows it\"\xdb\x02\n\"CContentServerDirectory_ServerInfo\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tsource_id\x18\x02 \x01(\x05\x12\x0f\n\x07\x63\x65ll_id\x18\x03 \x01(\x05\x12\x0c\n\x04load\x18\x04 \x01(\x05\x12\x15\n\rweighted_load\x18\x05 \x01(\x02\x12\"\n\x1anum_entries_in_client_list\x18\x06 \x01(\x05\x12\x18\n\x10steam_china_only\x18\x07 \x01(\x08\x12\x0c\n\x04host\x18\x08 \x01(\t\x12\r\n\x05vhost\x18\t \x01(\t\x12\x14\n\x0cuse_as_proxy\x18\n \x01(\x08\x12#\n\x1bproxy_request_path_template\x18\x0b \x01(\t\x12\x15\n\rhttps_support\x18\x0c \x01(\t\x12\x17\n\x0f\x61llowed_app_ids\x18\r \x03(\r\x12\x18\n\x10preferred_server\x18\x0e \x01(\x08\"o\n7CContentServerDirectory_GetServersForSteamPipe_Response\x12\x34\n\x07servers\x18\x01 \x03(\x0b\x32#.CContentServerDirectory_ServerInfo\"\x89\x01\n1CContentServerDirectory_GetDepotPatchInfo_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x64\x65potid\x18\x02 \x01(\r\x12\x19\n\x11source_manifestid\x18\x03 \x01(\x04\x12\x19\n\x11target_manifestid\x18\x04 \x01(\x04\"{\n2CContentServerDirectory_GetDepotPatchInfo_Response\x12\x14\n\x0cis_available\x18\x01 \x01(\x08\x12\x12\n\npatch_size\x18\x02 \x01(\x04\x12\x1b\n\x13patched_chunks_size\x18\x03 \x01(\x04\"P\n4CContentServerDirectory_GetClientUpdateHosts_Request\x12\x18\n\x10\x63\x61\x63hed_signature\x18\x01 \x01(\t\"w\n5CContentServerDirectory_GetClientUpdateHosts_Response\x12\x10\n\x08hosts_kv\x18\x01 \x01(\t\x12\x18\n\x10valid_until_time\x18\x02 \x01(\x04\x12\x12\n\nip_country\x18\x03 \x01(\t\"\xa1\x01\n6CContentServerDirectory_GetManifestRequestCode_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x10\n\x08\x64\x65pot_id\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x04\x12\x12\n\napp_branch\x18\x04 \x01(\t\x12\x1c\n\x14\x62ranch_password_hash\x18\x05 \x01(\t\"X\n7CContentServerDirectory_GetManifestRequestCode_Response\x12\x1d\n\x15manifest_request_code\x18\x01 \x01(\x04\x32\xe0\x04\n\x16\x43ontentServerDirectory\x12\x8b\x01\n\x16GetServersForSteamPipe\x12\x37.CContentServerDirectory_GetServersForSteamPipe_Request\x1a\x38.CContentServerDirectory_GetServersForSteamPipe_Response\x12|\n\x11GetDepotPatchInfo\x12\x32.CContentServerDirectory_GetDepotPatchInfo_Request\x1a\x33.CContentServerDirectory_GetDepotPatchInfo_Response\x12\x85\x01\n\x14GetClientUpdateHosts\x12\x35.CContentServerDirectory_GetClientUpdateHosts_Request\x1a\x36.CContentServerDirectory_GetClientUpdateHosts_Response\x12\x8b\x01\n\x16GetManifestRequestCode\x12\x37.CContentServerDirectory_GetManifestRequestCode_Request\x1a\x38.CContentServerDirectory_GetManifestRequestCode_Response\x1a$\x82\xb5\x18 Content Server and CDN directoryB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -308,6 +308,20 @@ _CCONTENTSERVERDIRECTORY_GETDEPOTPATCHINFO_RESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='patch_size', full_name='CContentServerDirectory_GetDepotPatchInfo_Response.patch_size', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='patched_chunks_size', full_name='CContentServerDirectory_GetDepotPatchInfo_Response.patched_chunks_size', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -321,7 +335,7 @@ _CCONTENTSERVERDIRECTORY_GETDEPOTPATCHINFO_RESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=986,
-  serialized_end=1060,
+  serialized_end=1109,
 )
 
 
@@ -351,8 +365,8 @@ _CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1062,
-  serialized_end=1142,
+  serialized_start=1111,
+  serialized_end=1191,
 )
 
 
@@ -396,8 +410,98 @@ _CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1144,
-  serialized_end=1263,
+  serialized_start=1193,
+  serialized_end=1312,
+)
+
+
+_CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_REQUEST = _descriptor.Descriptor(
+  name='CContentServerDirectory_GetManifestRequestCode_Request',
+  full_name='CContentServerDirectory_GetManifestRequestCode_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CContentServerDirectory_GetManifestRequestCode_Request.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='depot_id', full_name='CContentServerDirectory_GetManifestRequestCode_Request.depot_id', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manifest_id', full_name='CContentServerDirectory_GetManifestRequestCode_Request.manifest_id', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_branch', full_name='CContentServerDirectory_GetManifestRequestCode_Request.app_branch', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='branch_password_hash', full_name='CContentServerDirectory_GetManifestRequestCode_Request.branch_password_hash', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1315,
+  serialized_end=1476,
+)
+
+
+_CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE = _descriptor.Descriptor(
+  name='CContentServerDirectory_GetManifestRequestCode_Response',
+  full_name='CContentServerDirectory_GetManifestRequestCode_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='manifest_request_code', full_name='CContentServerDirectory_GetManifestRequestCode_Response.manifest_request_code', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1478,
+  serialized_end=1566,
 )
 
 _CCONTENTSERVERDIRECTORY_GETSERVERSFORSTEAMPIPE_RESPONSE.fields_by_name['servers'].message_type = _CCONTENTSERVERDIRECTORY_SERVERINFO
@@ -408,6 +512,8 @@ DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetDepotPatchInfo_Requ
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetDepotPatchInfo_Response'] = _CCONTENTSERVERDIRECTORY_GETDEPOTPATCHINFO_RESPONSE
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetClientUpdateHosts_Request'] = _CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_REQUEST
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetClientUpdateHosts_Response'] = _CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_RESPONSE
+DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetManifestRequestCode_Request'] = _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_REQUEST
+DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetManifestRequestCode_Response'] = _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CContentServerDirectory_GetServersForSteamPipe_Request = _reflection.GeneratedProtocolMessageType('CContentServerDirectory_GetServersForSteamPipe_Request', (_message.Message,), dict(
@@ -459,6 +565,20 @@ CContentServerDirectory_GetClientUpdateHosts_Response = _reflection.GeneratedPro
   ))
 _sym_db.RegisterMessage(CContentServerDirectory_GetClientUpdateHosts_Response)
 
+CContentServerDirectory_GetManifestRequestCode_Request = _reflection.GeneratedProtocolMessageType('CContentServerDirectory_GetManifestRequestCode_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_REQUEST,
+  __module__ = 'steammessages_contentsystem_pb2'
+  # @@protoc_insertion_point(class_scope:CContentServerDirectory_GetManifestRequestCode_Request)
+  ))
+_sym_db.RegisterMessage(CContentServerDirectory_GetManifestRequestCode_Request)
+
+CContentServerDirectory_GetManifestRequestCode_Response = _reflection.GeneratedProtocolMessageType('CContentServerDirectory_GetManifestRequestCode_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE,
+  __module__ = 'steammessages_contentsystem_pb2'
+  # @@protoc_insertion_point(class_scope:CContentServerDirectory_GetManifestRequestCode_Response)
+  ))
+_sym_db.RegisterMessage(CContentServerDirectory_GetManifestRequestCode_Response)
+
 
 DESCRIPTOR._options = None
 _CCONTENTSERVERDIRECTORY_GETSERVERSFORSTEAMPIPE_REQUEST.fields_by_name['cell_id']._options = None
@@ -473,8 +593,8 @@ _CONTENTSERVERDIRECTORY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030 Content Server and CDN directory'),
-  serialized_start=1266,
-  serialized_end=1732,
+  serialized_start=1569,
+  serialized_end=2177,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetServersForSteamPipe',
@@ -501,6 +621,15 @@ _CONTENTSERVERDIRECTORY = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_REQUEST,
     output_type=_CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetManifestRequestCode',
+    full_name='ContentServerDirectory.GetManifestRequestCode',
+    index=3,
+    containing_service=None,
+    input_type=_CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_REQUEST,
+    output_type=_CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE,
     serialized_options=None,
   ),
 ])
