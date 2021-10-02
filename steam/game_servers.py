@@ -142,8 +142,11 @@ def _u(data):
 
 
 class StructReader(_StructReader):
-    def read_cstring(self):
-        return _u(super(StructReader, self).read_cstring())
+    def read_cstring(self, binary=False):
+        raw = super(StructReader, self).read_cstring()
+        if binary:
+            return raw
+        return _u(raw)
 
 
 class MSRegion(IntEnum):
@@ -526,7 +529,7 @@ def a2s_players(server_addr, timeout=2, challenge=0):
     return players
 
 
-def a2s_rules(server_addr, timeout=2, challenge=0):
+def a2s_rules(server_addr, timeout=2, challenge=0, binary=False):
     """Get rules from server
 
     :param server_addr: (ip, port) for the server
@@ -535,9 +538,11 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     :type  timeout: float
     :param challenge: (optional) challenge number
     :type  challenge: int
+    :param binary: (optional) return rules as raw bytes
+    :type  binary: bool
     :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a list of rules
-    :rtype: :class:`list`
+    :rtype: :class:`dict`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
@@ -571,13 +576,14 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     rules = {}
 
     while len(rules) != num_rules:
-        name = data.read_cstring()
-        value = data.read_cstring()
+        name = data.read_cstring(binary=binary)
+        value = data.read_cstring(binary=binary)
 
-        if _re_match(r'^\-?[0-9]+$', value):
-            value = int(value)
-        elif _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
-            value = float(value)
+        if not binary:
+            if _re_match(r'^\-?[0-9]+$', value):
+                value = int(value)
+            elif _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
+                value = float(value)
 
         rules[name] = value
 
