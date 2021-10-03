@@ -1,6 +1,11 @@
 """
 Implementation of Steam client based on ``gevent``
 
+.. warning::
+    ``steam.client`` no longer patches stdlib to make it gevent cooperative.
+    This provides flexibility if you want to use :class:`.SteamClient` with async or other modules.
+    If you want to monkey patch anyway use :meth:`steam.client.monkey.patch_minimal()`
+
 .. note::
     Additional features are located in separate submodules. All functionality from :mod:`.builtins` is inherited by default.
 
@@ -8,11 +13,6 @@ Implementation of Steam client based on ``gevent``
     Optional features are available as :mod:`.mixins`. This allows the client to remain light yet flexible.
 
 """
-import gevent
-import gevent.monkey
-gevent.monkey.patch_socket()
-gevent.monkey.patch_ssl()
-
 import os
 import json
 from random import random

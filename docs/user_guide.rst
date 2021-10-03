@@ -153,6 +153,10 @@ SteamClient
 ``gevent`` based implementation for interacting with the Steam network.
 The library comes with some Steam client features implemented, see :doc:`api/steam.client` for more details.
 
+.. warning::
+    :class:`.SteamClient` no longer applies gevent monkey patches by default.
+    See :mod:`steam.client.monkey` for details how make stdlib gevent cooperative.
+
 CLI example
 -----------
 
