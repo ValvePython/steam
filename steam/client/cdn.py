@@ -3,9 +3,20 @@ The :class:`.CDNClient` class provides a simple API for downloading Steam conten
 
 Initializing :class:`.CDNClient` requires a logged in :class:`.SteamClient` instance
 
+.. warning::
+    This module uses :mod:`requests` library, which is not gevent cooperative by default.
+    It is high recommended that you use :meth:`steam.client.monkey.patch_minimal()`.
+    See example below
+
 .. code:: python
+    import steam.client.monkey
+    steam.client.monkey.patch_minimal()
+
+    from steam.client import SteamClient, EMsg
+    from steam.client.cdn import CDNClient
 
     mysteam = SteamClient()
+    mysteam.cli_login()
     ...
     mycdn = CDNClient(mysteam)
 

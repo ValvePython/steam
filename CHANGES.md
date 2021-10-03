@@ -1,5 +1,13 @@
 # Change notes
 
+## 2.0.0
+
+This release brings breaking changes
+
+### steam.cleint
+
+- Removed monkey patching by default. See `steam.client.monkey` for details
+
 ## 1.0.0
 
 This release brings breaking changes
