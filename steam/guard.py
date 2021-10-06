@@ -44,6 +44,23 @@ Once authenticator is enabled all you need is the secrets to generate codes.
 You can obtain the authenticator secrets from an Android device using
 :func:`extract_secrets_from_android_rooted`. See the function docstring for
 details on what is required for it to work.
+
+Format of ``secrets.json`` file:
+
+.. code:: json
+
+    {
+        "account_name": "<username>",               # account username
+        "identity_secret": "<base64 encoded>",      # uknown
+        "revocation_code": "R51234",                # revocation code
+        "secret_1": "<base54 encoded>",             # unknown
+        "serial_number": "1111222333344445555",     # serial number
+        "server_time": "1600000000",                # creation timestamp
+        "shared_secret": "<base65 encoded>",        # secret used for code generation
+        "status": 1,                                # status, 1 = token active
+        "token_gid": "a1a1a1a1a1a1a1a1",            # token gid
+        "uri": "otpauth://totp/Steam:<username>?secret=<base32 encoded shared seceret>&issuer=Steam"
+    }
 """
 import json
 import subprocess
