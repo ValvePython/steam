@@ -224,6 +224,8 @@ class WebAuth(object):
                 raise EmailCodeRequired(resp['message'])
             elif resp.get('requires_twofactor', False):
                 raise TwoFactorCodeRequired(resp['message'])
+            elif 'short time period' in resp.get('message', ''):
+                raise TooManyTimesFailed(resp['message'])
             else:
                 self.password = ''
                 raise LoginIncorrect(resp['message'])
@@ -403,4 +405,7 @@ class EmailCodeRequired(WebAuthException):
     pass
 
 class TwoFactorCodeRequired(WebAuthException):
+    pass
+
+class TooManyTimesFailed(WebAuthException):
     pass
