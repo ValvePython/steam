@@ -7,8 +7,8 @@ See :mod:`gevent.monkey` for details
 
 .. code:: python
 
-    import steam.client.monkey
-    steam.client.monkey.patch_minimal()
+    import steam.monkey
+    steam.monkey.patch_minimal()
 
     import requests
     from steam.client import SteamClient, EMsg

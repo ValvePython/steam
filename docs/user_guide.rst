@@ -155,7 +155,7 @@ The library comes with some Steam client features implemented, see :doc:`api/ste
 
 .. warning::
     :class:`.SteamClient` no longer applies gevent monkey patches by default.
-    See :mod:`steam.client.monkey` for details how make stdlib gevent cooperative.
+    See :mod:`steam.monkey` for details how make stdlib gevent cooperative.
 
 CLI example
 -----------

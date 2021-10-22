@@ -4,7 +4,7 @@ Implementation of Steam client based on ``gevent``
 .. warning::
     ``steam.client`` no longer patches stdlib to make it gevent cooperative.
     This provides flexibility if you want to use :class:`.SteamClient` with async or other modules.
-    If you want to monkey patch anyway use :meth:`steam.client.monkey.patch_minimal()`
+    If you want to monkey patch anyway use :meth:`steam.monkey.patch_minimal()`
 
 .. note::
     Additional features are located in separate submodules. All functionality from :mod:`.builtins` is inherited by default.

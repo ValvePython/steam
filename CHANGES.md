@@ -4,9 +4,10 @@
 
 This release brings breaking changes
 
-### steam.cleint
+### steam.client
 
-- Removed monkey patching by default. See `steam.client.monkey` for details
+- Add `steam.monkey` module for applying gevent monkey patches
+- Removed monkey patching by default. See `steam.monkey` for details
 
 ## 1.0.0
 
