@@ -51,7 +51,7 @@ Format of ``secrets.json`` file:
 
     {
         "account_name": "<username>",               # account username
-        "identity_secret": "<base64 encoded>",      # uknown
+        "identity_secret": "<base64 encoded>",      # unknown
         "revocation_code": "R51234",                # revocation code
         "secret_1": "<base54 encoded>",             # unknown
         "serial_number": "1111222333344445555",     # serial number
