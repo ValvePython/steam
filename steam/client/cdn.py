@@ -740,7 +740,7 @@ class CDNClient(object):
                and depot_id not in self.licensed_depot_ids
                and depot_id not in self.licensed_app_ids):
                 self._LOG.debug("No license for depot %s (%s). Skipping...",
-                                repr(depot_info['name']),
+                                repr(depot_info.get('name', depot_id)),
                                 depot_id,
                                 )
                 continue
@@ -769,7 +769,7 @@ class CDNClient(object):
                                               depot_id,
                                               manifest_gid,
                                               decrypt,
-                                              depot_info['name'],
+                                              depot_info.get('name', depot_id),
                                               ))
 
         # collect results
