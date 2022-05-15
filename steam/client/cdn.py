@@ -106,7 +106,7 @@ import vdf
 from gevent.pool import Pool as GPool
 from cachetools import LRUCache
 from steam import webapi
-from steam.exceptions import SteamError
+from steam.exceptions import SteamError, ManifestError
 from steam.core.msg import MsgProto
 from steam.enums import EResult, EType
 from steam.enums.emsg import EMsg
@@ -628,7 +628,48 @@ class CDNClient(object):
 
         return self._chunk_cache[(depot_id, chunk_id)]
 
-    def get_manifest(self, app_id, depot_id, manifest_gid, decrypt=True):
+    def get_manifest_request_code(self, app_id, depot_id, manifest_gid, branch='public', branch_password_hash=None):
+        """Get manifest request code for authenticating manifest download
+
+        :param app_id: App ID
+        :type  app_id: int
+        :param depot_id: Depot ID
+        :type  depot_id: int
+        :param manifest_gid: Manifest gid
+        :type  manifest_gid: int
+        :param branch: (optional) branch name
+        :type  branch: str
+        :param branch_password_hash: (optional) branch password hash
+        :type  branch_password_hash: str
+        :returns: manifest request code
+        :rtype: int
+        """
+
+        body = {
+            "app_id":      int(app_id),
+            "depot_id":    int(depot_id),
+            "manifest_id": int(manifest_gid),
+        }
+
+        if branch and branch.lower() != 'public':
+            body['app_branch'] = branch
+
+            if branch_password_hash:
+                body['branch_password_hash'] = branch_password_hash
+
+        resp = self.steam.send_um_and_wait(
+            'ContentServerDirectory.GetManifestRequestCode#1',
+            body,
+            timeout=5,
+        )
+
+        if resp is None or resp.header.eresult != EResult.OK:
+                raise SteamError("Failed to get manifest code for %s, %s, %s" % (app_id, depot_id, manifest_gid),
+                                 EResult.Timeout if resp is None else EResult(resp.header.eresult))
+
+        return resp.body.manifest_request_code
+
+    def get_manifest(self, app_id, depot_id, manifest_gid, decrypt=True, manifest_request_code=0):
         """Download a manifest file
 
         :param app_id: App ID
@@ -639,11 +680,16 @@ class CDNClient(object):
         :type  manifest_gid: int
         :param decrypt: Decrypt manifest filenames
         :type  decrypt: bool
+        :param manifest_request_code: Manifest request code, authenticates the download
+        :type  manifest_request_code: int
         :returns: manifest instance
         :rtype: :class:`.CDNDepotManifest`
         """
         if (app_id, depot_id, manifest_gid) not in self.manifests:
-            resp = self.cdn_cmd('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
+            if manifest_request_code:
+                resp = self.cdn_cmd('depot', '%s/manifest/%s/5/%s' % (depot_id, manifest_gid, manifest_request_code))
+            else:
+                resp = self.cdn_cmd('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
 
             if resp.ok:
                 manifest = self.DepotManifestClass(self, app_id, resp.content)
@@ -681,6 +727,19 @@ class CDNClient(object):
             self.app_depots[app_id] = self.steam.get_product_info([app_id])['apps'][app_id]['depots']
         return self.app_depots[app_id]
 
+    def has_license_for_depot(self, depot_id):
+        """ Check if there is license for depot
+
+        :param depot_id: depot ID
+        :type  depot_id: int
+        :returns: True if we have license
+        :rtype: bool
+        """
+        if depot_id in self.licensed_depot_ids or depot_id in self.licensed_app_ids:
+            return True
+        else:
+            return False
+
     def get_manifests(self, app_id, branch='public', password=None, filter_func=None, decrypt=True):
         """Get a list of CDNDepotManifest for app
 
@@ -694,7 +753,7 @@ class CDNClient(object):
             Function to filter depots. ``func(depot_id, depot_info)``
         :returns: list of :class:`.CDNDepotManifest`
         :rtype: :class:`list` [:class:`.CDNDepotManifest`]
-        :raises SteamError: error message
+        :raises: ManifestError, SteamError
         """
         depots = self.get_app_depot_info(app_id)
 
@@ -717,9 +776,24 @@ class CDNClient(object):
                 if (app_id, branch) not in self.beta_passwords:
                     raise SteamError("Incorrect password for branch %r" % branch)
 
-        def async_fetch_manifest(app_id, depot_id, manifest_gid, decrypt, name):
-            manifest = self.get_manifest(app_id, depot_id, manifest_gid, decrypt)
-            manifest.name = name
+        def async_fetch_manifest(
+            app_id, depot_id, manifest_gid, decrypt, depot_name, branch_name, branch_pass
+        ):
+            try:
+                manifest_code = self.get_manifest_request_code(
+                    app_id, depot_id, int(manifest_gid), branch_name, branch_pass
+                )
+            except SteamError as exc:
+                return ManifestError("Failed to acquire manifest code", app_id, depot_id, manifest_gid, exc)
+
+            try:
+                manifest = self.get_manifest(
+                    app_id, depot_id, manifest_gid, decrypt=decrypt, manifest_request_code=manifest_code
+                )
+            except Exception as exc:
+                return ManifestError("Failed download", app_id, depot_id, manifest_gid, exc)
+
+            manifest.name = depot_name
             return manifest
 
         tasks = []
@@ -736,10 +810,8 @@ class CDNClient(object):
                 continue
 
             # if we have no license for the depot, no point trying as we won't get depot_key
-            if (decrypt
-               and depot_id not in self.licensed_depot_ids
-               and depot_id not in self.licensed_app_ids):
-                self._LOG.debug("No license for depot %s (%s). Skipping...",
+            if not self.has_license_for_depot(depot_id):
+                self._LOG.debug("No license for depot %s (%s). Skipped",
                                 repr(depot_info.get('name', depot_id)),
                                 depot_id,
                                 )
@@ -764,29 +836,27 @@ class CDNClient(object):
                 manifest_gid = depot_info.get('manifests', {}).get(branch)
 
             if manifest_gid is not None:
-                tasks.append(self.gpool.spawn(async_fetch_manifest,
-                                              app_id,
-                                              depot_id,
-                                              manifest_gid,
-                                              decrypt,
-                                              depot_info.get('name', depot_id),
-                                              ))
+                tasks.append(
+                    self.gpool.spawn(
+                        async_fetch_manifest,
+                        app_id,
+                        depot_id,
+                        manifest_gid,
+                        decrypt,
+                        depot_info.get('name', depot_id),
+                        branch_name=branch,
+                        branch_pass=None, # TODO: figure out how to pass this correctly
+                  )
+              )
 
         # collect results
         manifests = []
 
         for task in tasks:
-            manifests.append(task.get())
-#           try:
-#               result = task.get()
-#           except SteamError as exp:
-#               self._LOG.error("Error: %s", exp)
-#               raise
-#           else:
-#               if isinstance(result, list):
-#                   manifests.extend(result)
-#               else:
-#                   manifests.append(result)
+            result = task.get()
+            if isinstance(result, ManifestError):
+                raise result
+            manifests.append(result)
 
         # load shared depot manifests
         for app_id, depot_ids in iteritems(shared_depots):
@@ -826,7 +896,7 @@ class CDNClient(object):
         :type  item_id: int
         :returns: manifest instance
         :rtype: :class:`.CDNDepotManifest`
-        :raises SteamError: error message
+        :raises: ManifestError, SteamError
         """
         resp = self.steam.send_um_and_wait('PublishedFile.GetDetails#1', {
             'publishedfileids': [item_id],
@@ -854,7 +924,12 @@ class CDNClient(object):
 
         app_id = ws_app_id = wf.consumer_appid
 
-        manifest = self.get_manifest(app_id, ws_app_id, wf.hcontent_file)
+        try:
+            manifest_code = self.get_manifest_request_code(app_id, ws_app_id, int(wf.hcontent_file))
+            manifest = self.get_manifest(app_id, ws_app_id, wf.hcontent_file, manifest_request_code=manifest_code)
+        except SteamError as exc:
+            return ManifestError("Failed to acquire manifest", app_id, depot_id, manifest_gid, exc)
+
         manifest.name = wf.title
         return manifest
 
