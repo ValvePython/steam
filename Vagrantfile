@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
   end
   config.vm.define :ubuntu do |box|
-    box.vm.box = "bento/ubuntu-18.04"
+    box.vm.box = "bento/ubuntu-20.04"
     box.vm.host_name = 'ubuntu.local'
     box.vm.network "private_network", ip: "192.168.50.10"
 
@@ -17,8 +17,9 @@ Vagrant.configure("2") do |config|
     box.vm.provision "shell", inline: <<-SHELL
       set -x
       export DEBIAN_FRONTEND='noninteractive'
+      sed -i 's#us.archive#archive#' /etc/apt/sources.list
       apt-get -y update
-      apt-get -y install python-pip python-virtualenv
+      apt-get -y install python2 python3-pip python3-virtualenv
     SHELL
 
     box.vm.provision "shell", privileged: false, inline: <<-SHELL
