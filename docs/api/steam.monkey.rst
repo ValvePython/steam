@@ -1,7 +1,7 @@
 monkey
 ======
 
-.. automodule:: steam.client.monkey
+.. automodule:: steam.monkey
     :members:
     :show-inheritance:
 
