@@ -57,10 +57,6 @@ class SteamCommunityClient():
     def set_avatar(self, avatar: bytes) -> dict:
         """Set image to avatar picture
 
-            Example usage:
-
-            .. code:: python
-
         :param avatar: bytes image
         :type avatar: :class:`bytes`
         :return: json response
