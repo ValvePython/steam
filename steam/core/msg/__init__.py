@@ -12,6 +12,14 @@ from steam.protobufs import steammessages_clientserver_pb2
 from steam.protobufs import steammessages_clientserver_2_pb2
 from steam.protobufs import steammessages_clientserver_friends_pb2
 from steam.protobufs import steammessages_clientserver_login_pb2
+from steam.protobufs import steammessages_clientserver_appinfo_pb2
+from steam.protobufs import steammessages_clientserver_gameservers_pb2
+from steam.protobufs import steammessages_clientserver_lbs_pb2
+from steam.protobufs import steammessages_clientserver_mms_pb2
+from steam.protobufs import steammessages_clientserver_ucm_pb2
+from steam.protobufs import steammessages_clientserver_uds_pb2
+from steam.protobufs import steammessages_clientserver_ufs_pb2
+from steam.protobufs import steammessages_clientserver_userstats_pb2
 
 
 cmsg_lookup_predefined = {
@@ -36,6 +44,14 @@ for proto_module in [
                     steammessages_clientserver_2_pb2,
                     steammessages_clientserver_friends_pb2,
                     steammessages_clientserver_login_pb2,
+                    steammessages_clientserver_appinfo_pb2,
+                    steammessages_clientserver_gameservers_pb2,
+                    steammessages_clientserver_lbs_pb2,
+                    steammessages_clientserver_mms_pb2,
+                    steammessages_clientserver_ucm_pb2,
+                    steammessages_clientserver_uds_pb2,
+                    steammessages_clientserver_ufs_pb2,
+                    steammessages_clientserver_userstats_pb2,
                     ]:
     cmsg_list = proto_module.__dict__
     cmsg_list = fnmatch.filter(cmsg_list, 'CMsg*')

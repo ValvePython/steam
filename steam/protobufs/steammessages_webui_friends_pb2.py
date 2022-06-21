@@ -25,11 +25,170 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n!steammessages_webui_friends.proto\x1a steammessages_unified_base.proto\x1a\x18steammessages_base.proto\x1a(steammessages_clientserver_friends.proto\">\n\x1a\x43\x43ommunity_GetApps_Request\x12\x0e\n\x06\x61ppids\x18\x01 \x03(\x05\x12\x10\n\x08language\x18\x02 \x01(\r\"B\n\x1b\x43\x43ommunity_GetApps_Response\x12#\n\x04\x61pps\x18\x01 \x03(\x0b\x32\x15.CCDDBAppDetailCommon\"T\n1CCommunity_GetAppRichPresenceLocalization_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x10\n\x08language\x18\x02 \x01(\t\"\x97\x01\n2CCommunity_GetAppRichPresenceLocalization_Response\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12R\n\x0btoken_lists\x18\x02 \x03(\x0b\x32=.CCommunity_GetAppRichPresenceLocalization_Response_TokenList\"W\n8CCommunity_GetAppRichPresenceLocalization_Response_Token\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x9b\x01\n<CCommunity_GetAppRichPresenceLocalization_Response_TokenList\x12\x10\n\x08language\x18\x01 \x01(\t\x12I\n\x06tokens\x18\x02 \x03(\x0b\x32\x39.CCommunity_GetAppRichPresenceLocalization_Response_Token\"\xf6\x01\n\x12\x43\x43ommunity_Comment\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x11\n\ttimestamp\x18\x03 \x01(\r\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x0f\n\x07upvotes\x18\x05 \x01(\x05\x12\x0e\n\x06hidden\x18\x06 \x01(\x08\x12\x16\n\x0ehidden_by_user\x18\x07 \x01(\x08\x12\x0f\n\x07\x64\x65leted\x18\x08 \x01(\x08\x12!\n\tipaddress\x18\t \x01(\x0b\x32\x0e.CMsgIPAddress\x12\x14\n\x0ctotal_hidden\x18\n \x01(\x05\x12\x17\n\x0fupvoted_by_user\x18\x0b \x01(\x08\"\x88\x03\n$CCommunity_GetCommentThread_Response\x12%\n\x08\x63omments\x18\x01 \x03(\x0b\x32\x13.CCommunity_Comment\x12-\n\x10\x64\x65leted_comments\x18\x02 \x03(\x0b\x32\x13.CCommunity_Comment\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x04 \x01(\x06\x12\r\n\x05start\x18\x05 \x01(\x05\x12\r\n\x05\x63ount\x18\x06 \x01(\x05\x12\x13\n\x0btotal_count\x18\x07 \x01(\x05\x12\x0f\n\x07upvotes\x18\x08 \x01(\x05\x12\x10\n\x08upvoters\x18\t \x03(\r\x12\x17\n\x0fuser_subscribed\x18\n \x01(\x08\x12\x14\n\x0cuser_upvoted\x18\x0b \x01(\x08\x12\x18\n\x10\x61nswer_commentid\x18\x0c \x01(\x06\x12\x14\n\x0c\x61nswer_actor\x18\r \x01(\r\x12\x19\n\x11\x61nswer_actor_rank\x18\x0e \x01(\x05\x12\x10\n\x08\x63\x61n_post\x18\x0f \x01(\x08\"v\n\'CCommunity_PostCommentToThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x06\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\x0f\n\x07upvotes\x18\x04 \x01(\x05\"-\n+CCommunity_DeleteCommentFromThread_Response\"\x89\x01\n%CCommunity_RateCommentThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x04\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\r\x12\x0f\n\x07upvotes\x18\x04 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x05 \x01(\x08\"\x9c\x01\n+CCommunity_GetCommentThreadRatings_Response\x12\x17\n\x0f\x63ommentthreadid\x18\x01 \x01(\x04\x12\x12\n\ngidcomment\x18\x02 \x01(\x04\x12\x0f\n\x07upvotes\x18\x03 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x04 \x01(\x08\x12\x1a\n\x12upvoter_accountids\x18\x05 \x03(\r\"j\n\'CCommunity_RateClanAnnouncement_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\x12\x0f\n\x07vote_up\x18\x02 \x01(\x08\x12\x16\n\x0e\x63lan_accountid\x18\x03 \x01(\r\"*\n(CCommunity_RateClanAnnouncement_Response\"K\n1CCommunity_GetClanAnnouncementVoteForUser_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\"Z\n2CCommunity_GetClanAnnouncementVoteForUser_Response\x12\x10\n\x08voted_up\x18\x01 \x01(\x08\x12\x12\n\nvoted_down\x18\x02 \x01(\x08\"i\n$CCommunity_GetAvatarHistory_Response\x12\x41\n\x07\x61vatars\x18\x01 \x03(\x0b\x32\x30.CCommunity_GetAvatarHistory_Response_AvatarData\"p\n/CCommunity_GetAvatarHistory_Response_AvatarData\x12\x13\n\x0b\x61vatar_sha1\x18\x01 \x01(\t\x12\x15\n\ruser_uploaded\x18\x02 \x01(\x08\x12\x11\n\ttimestamp\x18\x03 \x01(\r\"/\n\x0c\x43\x41ppPriority\x12\x10\n\x08priority\x18\x01 \x01(\r\x12\r\n\x05\x61ppid\x18\x02 \x03(\r\"W\n+CCommunity_GetUserPartnerEventNews_Response\x12(\n\x07results\x18\x01 \x03(\x0b\x32\x17.CClanMatchEventByRange\"\xc3\x01\n\x1d\x43\x43ommunity_PartnerEventResult\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\x18\n\x10\x61nnouncement_gid\x18\x03 \x01(\x06\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\x12\x19\n\x11possible_takeover\x18\x05 \x01(\x08\x12 \n\x15rtime32_last_modified\x18\x06 \x01(\r:\x01\x30\x12\x19\n\x11user_app_priority\x18\x07 \x01(\x05\"[\n(CCommunity_GetBestEventsForUser_Response\x12/\n\x07results\x18\x01 \x03(\x0b\x32\x1e.CCommunity_PartnerEventResult\"9\n7CCommunity_ClearUserPartnerEventsAppPriorities_Response\"O\n#CCommunity_PartnerEventsAppPriority\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x19\n\x11user_app_priority\x18\x02 \x01(\x05\"q\n5CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x38\n\npriorities\x18\x01 \x03(\x0b\x32$.CCommunity_PartnerEventsAppPriority\"9\n7CCommunity_ClearSinglePartnerEventsAppPriority_Response\"1\n/CCommunity_PartnerEventsShowMoreForApp_Response\"1\n/CCommunity_PartnerEventsShowLessForApp_Response\"\x81\x01\n+CCommunity_MarkPartnerEventsForUser_Request\x12R\n\x08markings\x18\x01 \x03(\x0b\x32@.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\"\xaf\x01\n?CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\"\n\x10\x64isplay_location\x18\x03 \x01(\x05\x42\x08\x82\xb5\x18\x04\x65num\x12\x12\n\nmark_shown\x18\x04 \x01(\x08\x12\x11\n\tmark_read\x18\x05 \x01(\x08\".\n,CCommunity_MarkPartnerEventsForUser_Response\"\x84\x01\n1CCommunity_GetUserPartnerEventViewStatus_Response\x12O\n\x06\x65vents\x18\x01 \x03(\x0b\x32?.CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent\"\x9d\x01\n>CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent\x12\x11\n\tevent_gid\x18\x01 \x01(\x06\x12\x17\n\x0flast_shown_time\x18\x02 \x01(\r\x12\x16\n\x0elast_read_time\x18\x03 \x01(\r\x12\x17\n\x0f\x63lan_account_id\x18\x04 \x01(\r\"=\n.CWebRTCClient_InitiateWebRTCConnection_Request\x12\x0b\n\x03sdp\x18\x01 \x01(\t\"M\n/CWebRTCClient_InitiateWebRTCConnection_Response\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\"\x8b\x01\n+CWebRTC_WebRTCSessionConnected_Notification\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\tclient_ip\x18\x02 \x01(\r\x12\x13\n\x0b\x63lient_port\x18\x03 \x01(\r\x12\x11\n\tserver_ip\x18\x04 \x01(\r\x12\x13\n\x0bserver_port\x18\x05 \x01(\r\"\xde\x01\n2CWebRTC_WebRTCUpdateRemoteDescription_Notification\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\x12\"\n\x1aremote_description_version\x18\x02 \x01(\x04\x12h\n\x13ssrcs_to_accountids\x18\x03 \x03(\x0b\x32K.CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\"m\nJCWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\taccountid\x18\x02 \x01(\r\"\xdb\x01\n9CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x12\x18\n\x10ip_webrtc_server\x18\x01 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x02 \x01(\r\x12 \n\x18ip_webrtc_session_client\x18\x03 \x01(\r\x12\"\n\x1aport_webrtc_session_client\x18\x04 \x01(\r\x12\"\n\x1aremote_description_version\x18\x05 \x01(\x04\"<\n:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response\"A\n&CVoiceChat_RequestOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"?\n\'CVoiceChat_RequestOneOnOneChat_Response\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"^\n-CVoiceChat_OneOnOneChatRequested_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\"p\n%CVoiceChat_AnswerOneOnOneChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"(\n&CVoiceChat_AnswerOneOnOneChat_Response\"~\n3CVoiceChat_OneOnOneChatRequestResponse_Notification\x12\x14\n\x0cvoicechat_id\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"=\n\"CVoiceChat_EndOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"%\n#CVoiceChat_EndOneOnOneChat_Response\"U\n$CVoiceChat_LeaveOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x14\n\x0cvoice_chatid\x18\x02 \x01(\x06\"\'\n%CVoiceChat_LeaveOneOnOneChat_Response\"\xdd\x01\n+CVoiceChat_UserJoinedVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xe0\x01\n\'CVoiceChat_UserVoiceStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x1e\n\x16user_muted_mic_locally\x18\x03 \x01(\x08\x12!\n\x19user_muted_output_locally\x18\x04 \x01(\x08\x12#\n\x1buser_has_no_mic_for_session\x18\x05 \x01(\x08\x12!\n\x19user_webaudio_sample_rate\x18\x06 \x01(\x05\"y\n(CVoiceChat_AllMembersStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x37\n\x05users\x18\x02 \x03(\x0b\x32(.CVoiceChat_UserVoiceStatus_Notification\"\x88\x02\n,CVoiceChat_UpdateVoiceChatWebRTCData_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x18\n\x10ip_webrtc_server\x18\x02 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x03 \x01(\r\x12\x18\n\x10ip_webrtc_client\x18\x04 \x01(\r\x12\x1a\n\x12port_webrtc_client\x18\x05 \x01(\r\x12\x1e\n\x16ssrc_my_sending_stream\x18\x06 \x01(\r\x12\x12\n\nuser_agent\x18\x07 \x01(\t\x12\"\n\x1ahas_audio_worklets_support\x18\x08 \x01(\x08\"O\n-CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12\x1e\n\x16send_client_voice_logs\x18\x01 \x01(\x08\"i\n,CVoiceChat_UploadClientVoiceChatLogs_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12#\n\x1b\x63lient_voice_logs_new_lines\x18\x02 \x01(\t\"/\n-CVoiceChat_UploadClientVoiceChatLogs_Response\"$\n\"CVoiceChat_LeaveVoiceChat_Response\"\xdb\x01\n)CVoiceChat_UserLeftVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xaa\x01\n&CVoiceChat_VoiceChatEnded_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12 \n\x18one_on_one_steamid_lower\x18\x02 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x03 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x04 \x01(\x04\x12\x15\n\rchat_group_id\x18\x05 \x01(\x04\"H\n(CSteamTV_CreateBroadcastChannel_Response\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\"m\n\'CSteamTV_GetBroadcastChannelID_Response\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\x12\x13\n\x0bunique_name\x18\x02 \x01(\t\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\".\n,CSteamTV_SetBroadcastChannelProfile_Response\"\xe4\x01\n,CSteamTV_GetBroadcastChannelProfile_Response\x12\x13\n\x0bunique_name\x18\x01 \x01(\t\x12\x15\n\rowner_steamid\x18\x02 \x01(\x06\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x10\n\x08headline\x18\x05 \x01(\t\x12\x0f\n\x07summary\x18\x06 \x01(\t\x12\x10\n\x08schedule\x18\x07 \x01(\t\x12\r\n\x05rules\x18\x08 \x01(\t\x12\x0e\n\x06panels\x18\t \x01(\t\x12\x14\n\x0cis_partnered\x18\n \x01(\x08\"H\n*CSteamTV_SetBroadcastChannelImage_Response\x12\x1a\n\x12replace_image_hash\x18\x01 \x01(\t\"r\n+CSteamTV_GetBroadcastChannelImages_Response\x12\x43\n\x06images\x18\x01 \x03(\x0b\x32\x33.CSteamTV_GetBroadcastChannelImages_Response_Images\"{\n2CSteamTV_GetBroadcastChannelImages_Response_Images\x12\x1c\n\nimage_type\x18\x01 \x01(\x05\x42\x08\x82\xb5\x18\x04\x65num\x12\x12\n\nimage_path\x18\x02 \x01(\t\x12\x13\n\x0bimage_index\x18\x03 \x01(\r\"n\n*CSteamTV_GetBroadcastChannelLinks_Response\x12@\n\x05links\x18\x01 \x03(\x0b\x32\x31.CSteamTV_GetBroadcastChannelLinks_Response_Links\"\xa7\x01\n0CSteamTV_GetBroadcastChannelLinks_Response_Links\x12\x12\n\nlink_index\x18\x01 \x01(\r\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x18\n\x10link_description\x18\x03 \x01(\t\x12\x0c\n\x04left\x18\x04 \x01(\r\x12\x0b\n\x03top\x18\x05 \x01(\r\x12\r\n\x05width\x18\x06 \x01(\r\x12\x0e\n\x06height\x18\x07 \x01(\r\"\xac\x01\n5CSteamTV_SetBroadcastChannelLinkRegions_Request_Links\x12\x12\n\nlink_index\x18\x01 \x01(\r\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x18\n\x10link_description\x18\x03 \x01(\t\x12\x0c\n\x04left\x18\x04 \x01(\r\x12\x0b\n\x03top\x18\x05 \x01(\r\x12\r\n\x05width\x18\x06 \x01(\r\x12\x0e\n\x06height\x18\x07 \x01(\r\"2\n0CSteamTV_SetBroadcastChannelLinkRegions_Response\"\x91\x02\n+CSteamTV_GetBroadcastChannelStatus_Response\x12\x0f\n\x07is_live\x18\x01 \x01(\x08\x12\x13\n\x0bis_disabled\x18\x02 \x01(\x08\x12\r\n\x05\x61ppid\x18\x03 \x01(\r\x12\x0f\n\x07viewers\x18\x04 \x01(\x04\x12\r\n\x05views\x18\x05 \x01(\x04\x12\x1b\n\x13\x62roadcaster_steamid\x18\x06 \x01(\x06\x12\x15\n\rthumbnail_url\x18\x07 \x01(\t\x12\x11\n\tfollowers\x18\x08 \x01(\x04\x12\x13\n\x0bsubscribers\x18\t \x01(\x04\x12\x13\n\x0bunique_name\x18\n \x01(\t\x12\x1c\n\x14\x62roadcast_session_id\x18\x0b \x01(\x04\"\x98\x03\n\x18GetBroadcastChannelEntry\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\x12\x13\n\x0bunique_name\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\x12\x0f\n\x07viewers\x18\x05 \x01(\x04\x12\r\n\x05views\x18\x06 \x01(\x04\x12\x15\n\rthumbnail_url\x18\x07 \x01(\t\x12\x11\n\tfollowers\x18\x08 \x01(\x04\x12\x10\n\x08headline\x18\t \x01(\t\x12\x12\n\navatar_url\x18\n \x01(\t\x12\x1b\n\x13\x62roadcaster_steamid\x18\x0b \x01(\x06\x12\x13\n\x0bsubscribers\x18\x0c \x01(\x04\x12\x16\n\x0e\x62\x61\x63kground_url\x18\r \x01(\t\x12\x13\n\x0bis_featured\x18\x0e \x01(\x08\x12\x13\n\x0bis_disabled\x18\x0f \x01(\x08\x12\x0f\n\x07is_live\x18\x10 \x01(\x08\x12\x10\n\x08language\x18\x11 \x01(\t\x12\x0f\n\x07reports\x18\x12 \x01(\r\x12\x14\n\x0cis_partnered\x18\x13 \x01(\x08\"S\n%CSteamTV_GetFollowedChannels_Response\x12*\n\x07results\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\"U\n\'CSteamTV_GetSubscribedChannels_Response\x12*\n\x07results\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\"?\n(CSteamTV_FollowBroadcastChannel_Response\x12\x13\n\x0bis_followed\x18\x01 \x01(\x08\"D\n+CSteamTV_SubscribeBroadcastChannel_Response\x12\x15\n\ris_subscribed\x18\x01 \x01(\x08\"*\n(CSteamTV_ReportBroadcastChannel_Response\"^\n0CSteamTV_GetBroadcastChannelInteraction_Response\x12\x13\n\x0bis_followed\x18\x01 \x01(\x08\x12\x15\n\ris_subscribed\x18\x02 \x01(\x08\"\xb5\x01\n\rCSteamTV_Game\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05image\x18\x03 \x01(\t\x12\x0f\n\x07viewers\x18\x04 \x01(\x04\x12+\n\x08\x63hannels\x18\x05 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\x12\x14\n\x0crelease_date\x18\x06 \x01(\t\x12\x11\n\tdeveloper\x18\x07 \x01(\t\x12\x11\n\tpublisher\x18\x08 \x01(\t\"=\n\x1a\x43SteamTV_GetGames_Response\x12\x1f\n\x07results\x18\x01 \x03(\x0b\x32\x0e.CSteamTV_Game\"K\n\x1d\x43SteamTV_GetChannels_Response\x12*\n\x07results\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\"\x89\x01\n1CSteamTV_GetBroadcastChannelBroadcasters_Response\x12T\n\x0c\x62roadcasters\x18\x01 \x03(\x0b\x32>.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster\"r\n=CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\nrtmp_token\x18\x03 \x01(\t\"z\n\x10\x43SteamTV_ChatBan\x12\x16\n\x0eissuer_steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hatter_steamid\x18\x02 \x01(\x06\x12\x14\n\x0ctime_expires\x18\x03 \x01(\t\x12\x11\n\tpermanent\x18\x04 \x01(\x08\x12\x0c\n\x04name\x18\x05 \x01(\t\"\x87\x01\n\x1b\x43SteamTV_AddChatBan_Request\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hatter_steamid\x18\x02 \x01(\x06\x12\x10\n\x08\x64uration\x18\x03 \x01(\r\x12\x11\n\tpermanent\x18\x04 \x01(\x08\x12\x0c\n\x04undo\x18\x05 \x01(\x08\"\x1e\n\x1c\x43SteamTV_AddChatBan_Response\"C\n\x1d\x43SteamTV_GetChatBans_Response\x12\"\n\x07results\x18\x01 \x03(\x0b\x32\x11.CSteamTV_ChatBan\"j\n!CSteamTV_AddChatModerator_Request\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\x12\x19\n\x11moderator_steamid\x18\x02 \x01(\x06\x12\x0c\n\x04undo\x18\x03 \x01(\x08\"$\n\"CSteamTV_AddChatModerator_Response\"B\n\"CSteamTV_GetChatModerators_Request\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\"7\n\x16\x43SteamTV_ChatModerator\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0c\n\x04name\x18\x02 \x01(\t\"O\n#CSteamTV_GetChatModerators_Response\x12(\n\x07results\x18\x01 \x03(\x0b\x32\x17.CSteamTV_ChatModerator\"\x1e\n\x1c\x43SteamTV_AddWordBan_Response\"0\n\x1d\x43SteamTV_GetWordBans_Response\x12\x0f\n\x07results\x18\x01 \x03(\t\"9\n\x19\x43SteamTV_JoinChat_Request\x12\x1c\n\x14\x62roadcast_channel_id\x18\x01 \x01(\x06\"a\n\x1a\x43SteamTV_JoinChat_Response\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x06\x12\x19\n\x11view_url_template\x18\x02 \x01(\t\x12\x17\n\x0f\x66lair_group_ids\x18\x03 \x03(\x04\"F\n\x18\x43SteamTV_Search_Response\x12*\n\x07results\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\"g\n(CSteamTV_GetSteamTVUserSettings_Response\x12\x19\n\x11stream_live_email\x18\x01 \x01(\x08\x12 \n\x18stream_live_notification\x18\x02 \x01(\x08\"*\n(CSteamTV_SetSteamTVUserSettings_Response\"V\n(CSteamTV_GetMyBroadcastChannels_Response\x12*\n\x07results\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\"S\n\"CSteamTV_HomePageTemplate_Takeover\x12-\n\nbroadcasts\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\"s\n$CSteamTV_HomePageTemplate_SingleGame\x12-\n\nbroadcasts\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\r\n\x05title\x18\x03 \x01(\t\"_\n\rGameListEntry\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x11\n\tgame_name\x18\x02 \x01(\t\x12,\n\tbroadcast\x18\x03 \x01(\x0b\x32\x19.GetBroadcastChannelEntry\"T\n\"CSteamTV_HomePageTemplate_GameList\x12\x1f\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x0e.GameListEntry\x12\r\n\x05title\x18\x02 \x01(\t\"f\n&CSteamTV_HomePageTemplate_QuickExplore\x12-\n\nbroadcasts\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\x12\r\n\x05title\x18\x02 \x01(\t\"f\n&CSteamTV_HomePageTemplate_ConveyorBelt\x12-\n\nbroadcasts\x18\x01 \x03(\x0b\x32\x19.GetBroadcastChannelEntry\x12\r\n\x05title\x18\x02 \x01(\t\"z\n$CSteamTV_HomePageTemplate_WatchParty\x12,\n\tbroadcast\x18\x01 \x01(\x0b\x32\x19.GetBroadcastChannelEntry\x12\r\n\x05title\x18\x02 \x01(\t\x12\x15\n\rchat_group_id\x18\x03 \x01(\x04\"b\n#CSteamTV_HomePageTemplate_Developer\x12,\n\tbroadcast\x18\x01 \x01(\x0b\x32\x19.GetBroadcastChannelEntry\x12\r\n\x05title\x18\x02 \x01(\t\"0\n\x1f\x43SteamTV_HomePageTemplate_Event\x12\r\n\x05title\x18\x01 \x01(\t\"\x8f\x04\n\x1b\x43SteamTV_HomePageContentRow\x12\x1f\n\rtemplate_type\x18\x01 \x01(\x05\x42\x08\x82\xb5\x18\x04\x65num\x12\x35\n\x08takeover\x18\x02 \x01(\x0b\x32#.CSteamTV_HomePageTemplate_Takeover\x12:\n\x0bsingle_game\x18\x03 \x01(\x0b\x32%.CSteamTV_HomePageTemplate_SingleGame\x12\x36\n\tgame_list\x18\x04 \x01(\x0b\x32#.CSteamTV_HomePageTemplate_GameList\x12>\n\rquick_explore\x18\x05 \x01(\x0b\x32\'.CSteamTV_HomePageTemplate_QuickExplore\x12>\n\rconveyor_belt\x18\x06 \x01(\x0b\x32\'.CSteamTV_HomePageTemplate_ConveyorBelt\x12:\n\x0bwatch_party\x18\x07 \x01(\x0b\x32%.CSteamTV_HomePageTemplate_WatchParty\x12\x37\n\tdeveloper\x18\x08 \x01(\x0b\x32$.CSteamTV_HomePageTemplate_Developer\x12/\n\x05\x65vent\x18\t \x01(\x0b\x32 .CSteamTV_HomePageTemplate_Event\"S\n%CSteamTV_GetHomePageContents_Response\x12*\n\x04rows\x18\x01 \x03(\x0b\x32\x1c.CSteamTV_HomePageContentRow\"\xea\x01\n\x1a\x43SteamTV_BroadcastClipInfo\x12\x19\n\x11\x62roadcast_clip_id\x18\x01 \x01(\x04\x12\x12\n\nchannel_id\x18\x02 \x01(\x04\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\x12\x1b\n\x13\x62roadcaster_steamid\x18\x04 \x01(\x06\x12\x17\n\x0f\x63reator_steamid\x18\x05 \x01(\x06\x12\x19\n\x11video_description\x18\x06 \x01(\t\x12\x11\n\tlive_time\x18\x07 \x01(\r\x12\x11\n\tlength_ms\x18\x08 \x01(\r\x12\x16\n\x0ethumbnail_path\x18\t \x01(\t\"p\n*CSteamTV_GetBroadcastChannelClips_Response\x12*\n\x05\x63lips\x18\x01 \x03(\x0b\x32\x1b.CSteamTV_BroadcastClipInfo\x12\x16\n\x0ethumbnail_host\x18\x02 \x01(\t\"P\n\x14\x43\x46riendsListCategory\x12\x0f\n\x07groupid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x19\n\x11\x61\x63\x63ountid_members\x18\x03 \x03(\r\"$\n\"CFriendsList_GetCategories_Request\"P\n#CFriendsList_GetCategories_Response\x12)\n\ncategories\x18\x01 \x03(\x0b\x32\x15.CFriendsListCategory\"U\n\x19\x43\x46riendsListFavoriteEntry\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x0e\n\x06\x63lanid\x18\x02 \x01(\r\x12\x15\n\rchat_group_id\x18\x03 \x01(\x04\"#\n!CFriendsList_GetFavorites_Request\"S\n\"CFriendsList_GetFavorites_Response\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"R\n!CFriendsList_SetFavorites_Request\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"$\n\"CFriendsList_SetFavorites_Response\"[\n*CFriendsList_FavoritesChanged_Notification\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"%\n#CFriendsList_GetFriendsList_Request\"S\n$CFriendsList_GetFriendsList_Response\x12+\n\x0b\x66riendslist\x18\x01 \x01(\x0b\x32\x16.CMsgClientFriendsList\"D\n!CClan_RespondToClanInvite_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0e\n\x06\x61\x63\x63\x65pt\x18\x02 \x01(\x08\"$\n\"CClan_RespondToClanInvite_Response\"y\n*CProductImpressionsFromClient_Notification\x12K\n\x0bimpressions\x18\x01 \x03(\x0b\x32\x36.CProductImpressionsFromClient_Notification_Impression\"w\n5CProductImpressionsFromClient_Notification_Impression\x12\x16\n\x04type\x18\x01 \x01(\x05\x42\x08\x82\xb5\x18\x04\x65num\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x17\n\x0fnum_impressions\x18\x03 \x01(\r\"\x10\n\x0eNotImplemented2\xe5\x0e\n\tCommunity\x12\x44\n\x07GetApps\x12\x1b.CCommunity_GetApps_Request\x1a\x1c.CCommunity_GetApps_Response\x12\x89\x01\n\x1eGetAppRichPresenceLocalization\x12\x32.CCommunity_GetAppRichPresenceLocalization_Request\x1a\x33.CCommunity_GetAppRichPresenceLocalization_Response\x12J\n\x10GetCommentThread\x12\x0f.NotImplemented\x1a%.CCommunity_GetCommentThread_Response\x12P\n\x13PostCommentToThread\x12\x0f.NotImplemented\x1a(.CCommunity_PostCommentToThread_Response\x12X\n\x17\x44\x65leteCommentFromThread\x12\x0f.NotImplemented\x1a,.CCommunity_DeleteCommentFromThread_Response\x12L\n\x11RateCommentThread\x12\x0f.NotImplemented\x1a&.CCommunity_RateCommentThread_Response\x12X\n\x17GetCommentThreadRatings\x12\x0f.NotImplemented\x1a,.CCommunity_GetCommentThreadRatings_Response\x12k\n\x14RateClanAnnouncement\x12(.CCommunity_RateClanAnnouncement_Request\x1a).CCommunity_RateClanAnnouncement_Response\x12\x89\x01\n\x1eGetClanAnnouncementVoteForUser\x12\x32.CCommunity_GetClanAnnouncementVoteForUser_Request\x1a\x33.CCommunity_GetClanAnnouncementVoteForUser_Response\x12J\n\x10GetAvatarHistory\x12\x0f.NotImplemented\x1a%.CCommunity_GetAvatarHistory_Response\x12X\n\x17GetUserPartnerEventNews\x12\x0f.NotImplemented\x1a,.CCommunity_GetUserPartnerEventNews_Response\x12R\n\x14GetBestEventsForUser\x12\x0f.NotImplemented\x1a).CCommunity_GetBestEventsForUser_Response\x12w\n\x18MarkPartnerEventsForUser\x12,.CCommunity_MarkPartnerEventsForUser_Request\x1a-.CCommunity_MarkPartnerEventsForUser_Response\x12\x64\n\x1dGetUserPartnerEventViewStatus\x12\x0f.NotImplemented\x1a\x32.CCommunity_GetUserPartnerEventViewStatus_Response\x12`\n\x1bPartnerEventsShowMoreForApp\x12\x0f.NotImplemented\x1a\x30.CCommunity_PartnerEventsShowMoreForApp_Response\x12`\n\x1bPartnerEventsShowLessForApp\x12\x0f.NotImplemented\x1a\x30.CCommunity_PartnerEventsShowLessForApp_Response\x12p\n#ClearUserPartnerEventsAppPriorities\x12\x0f.NotImplemented\x1a\x38.CCommunity_ClearUserPartnerEventsAppPriorities_Response\x12l\n!GetUserPartnerEventsAppPriorities\x12\x0f.NotImplemented\x1a\x36.CCommunity_GetUserPartnerEventsAppPriorities_Response\x12p\n#ClearSinglePartnerEventsAppPriority\x12\x0f.NotImplemented\x1a\x38.CCommunity_ClearSinglePartnerEventsAppPriority_Response2\xae\x02\n\x0cWebRTCClient\x12}\n\x18InitiateWebRTCConnection\x12/.CWebRTCClient_InitiateWebRTCConnection_Request\x1a\x30.CWebRTCClient_InitiateWebRTCConnection_Response\x12\x9e\x01\n#AcknowledgeUpdatedRemoteDescription\x12:.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x1a;.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response2\xdf\x01\n\x19WebRTCClientNotifications\x12Y\n\x1cNotifyWebRTCSessionConnected\x12,.CWebRTC_WebRTCSessionConnected_Notification\x1a\x0b.NoResponse\x12g\n#NotifyWebRTCUpdateRemoteDescription\x12\x33.CWebRTC_WebRTCUpdateRemoteDescription_Notification\x1a\x0b.NoResponse2\xae\x06\n\tVoiceChat\x12z\n\x19UpdateVoiceChatWebRTCData\x12-.CVoiceChat_UpdateVoiceChatWebRTCData_Request\x1a..CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12z\n\x19UploadClientVoiceChatLogs\x12-.CVoiceChat_UploadClientVoiceChatLogs_Request\x1a..CVoiceChat_UploadClientVoiceChatLogs_Response\x12\x46\n\x0eLeaveVoiceChat\x12\x0f.NotImplemented\x1a#.CVoiceChat_LeaveVoiceChat_Response\x12h\n\x13RequestOneOnOneChat\x12\'.CVoiceChat_RequestOneOnOneChat_Request\x1a(.CVoiceChat_RequestOneOnOneChat_Response\x12\x65\n\x12\x41nswerOneOnOneChat\x12&.CVoiceChat_AnswerOneOnOneChat_Request\x1a\'.CVoiceChat_AnswerOneOnOneChat_Response\x12\\\n\x0f\x45ndOneOnOneChat\x12#.CVoiceChat_EndOneOnOneChat_Request\x1a$.CVoiceChat_EndOneOnOneChat_Response\x12\x62\n\x11LeaveOneOnOneChat\x12%.CVoiceChat_LeaveOneOnOneChat_Request\x1a&.CVoiceChat_LeaveOneOnOneChat_Response2\xed\x04\n\x0fVoiceChatClient\x12V\n\x19NotifyUserJoinedVoiceChat\x12,.CVoiceChat_UserJoinedVoiceChat_Notification\x1a\x0b.NoResponse\x12R\n\x17NotifyUserLeftVoiceChat\x12*.CVoiceChat_UserLeftVoiceChat_Notification\x1a\x0b.NoResponse\x12L\n\x14NotifyVoiceChatEnded\x12\'.CVoiceChat_VoiceChatEnded_Notification\x1a\x0b.NoResponse\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12S\n\x19NotifyAllUsersVoiceStatus\x12).CVoiceChat_AllMembersStatus_Notification\x1a\x0b.NoResponse\x12Z\n\x1bNotifyOneOnOneChatRequested\x12..CVoiceChat_OneOnOneChatRequested_Notification\x1a\x0b.NoResponse\x12_\n\x1aNotifyOneOnOneChatResponse\x12\x34.CVoiceChat_OneOnOneChatRequestResponse_Notification\x1a\x0b.NoResponse2\xa2\x14\n\x07SteamTV\x12T\n\x16\x43reateBroadcastChannel\x12\x0f.NotImplemented\x1a).CSteamTV_CreateBroadcastChannel_Response\x12R\n\x15GetBroadcastChannelID\x12\x0f.NotImplemented\x1a(.CSteamTV_GetBroadcastChannelID_Response\x12\\\n\x1aSetBroadcastChannelProfile\x12\x0f.NotImplemented\x1a-.CSteamTV_SetBroadcastChannelProfile_Response\x12\\\n\x1aGetBroadcastChannelProfile\x12\x0f.NotImplemented\x1a-.CSteamTV_GetBroadcastChannelProfile_Response\x12X\n\x18SetBroadcastChannelImage\x12\x0f.NotImplemented\x1a+.CSteamTV_SetBroadcastChannelImage_Response\x12Z\n\x19GetBroadcastChannelImages\x12\x0f.NotImplemented\x1a,.CSteamTV_GetBroadcastChannelImages_Response\x12\x64\n\x1eSetBroadcastChannelLinkRegions\x12\x0f.NotImplemented\x1a\x31.CSteamTV_SetBroadcastChannelLinkRegions_Response\x12X\n\x18GetBroadcastChannelLinks\x12\x0f.NotImplemented\x1a+.CSteamTV_GetBroadcastChannelLinks_Response\x12\x66\n\x1fGetBroadcastChannelBroadcasters\x12\x0f.NotImplemented\x1a\x32.CSteamTV_GetBroadcastChannelBroadcasters_Response\x12N\n\x13GetFollowedChannels\x12\x0f.NotImplemented\x1a&.CSteamTV_GetFollowedChannels_Response\x12R\n\x15GetSubscribedChannels\x12\x0f.NotImplemented\x1a(.CSteamTV_GetSubscribedChannels_Response\x12Z\n\x19GetBroadcastChannelStatus\x12\x0f.NotImplemented\x1a,.CSteamTV_GetBroadcastChannelStatus_Response\x12T\n\x16\x46ollowBroadcastChannel\x12\x0f.NotImplemented\x1a).CSteamTV_FollowBroadcastChannel_Response\x12Z\n\x19SubscribeBroadcastChannel\x12\x0f.NotImplemented\x1a,.CSteamTV_SubscribeBroadcastChannel_Response\x12X\n\x18GetBroadcastChannelClips\x12\x0f.NotImplemented\x1a+.CSteamTV_GetBroadcastChannelClips_Response\x12T\n\x16ReportBroadcastChannel\x12\x0f.NotImplemented\x1a).CSteamTV_ReportBroadcastChannel_Response\x12\x64\n\x1eGetBroadcastChannelInteraction\x12\x0f.NotImplemented\x1a\x31.CSteamTV_GetBroadcastChannelInteraction_Response\x12\x38\n\x08GetGames\x12\x0f.NotImplemented\x1a\x1b.CSteamTV_GetGames_Response\x12>\n\x0bGetChannels\x12\x0f.NotImplemented\x1a\x1e.CSteamTV_GetChannels_Response\x12I\n\nAddChatBan\x12\x1c.CSteamTV_AddChatBan_Request\x1a\x1d.CSteamTV_AddChatBan_Response\x12>\n\x0bGetChatBans\x12\x0f.NotImplemented\x1a\x1e.CSteamTV_GetChatBans_Response\x12[\n\x10\x41\x64\x64\x43hatModerator\x12\".CSteamTV_AddChatModerator_Request\x1a#.CSteamTV_AddChatModerator_Response\x12^\n\x11GetChatModerators\x12#.CSteamTV_GetChatModerators_Request\x1a$.CSteamTV_GetChatModerators_Response\x12<\n\nAddWordBan\x12\x0f.NotImplemented\x1a\x1d.CSteamTV_AddWordBan_Response\x12>\n\x0bGetWordBans\x12\x0f.NotImplemented\x1a\x1e.CSteamTV_GetWordBans_Response\x12\x43\n\x08JoinChat\x12\x1a.CSteamTV_JoinChat_Request\x1a\x1b.CSteamTV_JoinChat_Response\x12\x34\n\x06Search\x12\x0f.NotImplemented\x1a\x19.CSteamTV_Search_Response\x12T\n\x16GetSteamTVUserSettings\x12\x0f.NotImplemented\x1a).CSteamTV_GetSteamTVUserSettings_Response\x12T\n\x16SetSteamTVUserSettings\x12\x0f.NotImplemented\x1a).CSteamTV_SetSteamTVUserSettings_Response\x12T\n\x16GetMyBroadcastChannels\x12\x0f.NotImplemented\x1a).CSteamTV_GetMyBroadcastChannels_Response\x12N\n\x13GetHomePageContents\x12\x0f.NotImplemented\x1a&.CSteamTV_GetHomePageContents_Response2\xfa\x02\n\x0b\x46riendsList\x12Z\n\rGetCategories\x12#.CFriendsList_GetCategories_Request\x1a$.CFriendsList_GetCategories_Response\x12]\n\x0eGetFriendsList\x12$.CFriendsList_GetFriendsList_Request\x1a%.CFriendsList_GetFriendsList_Response\x12W\n\x0cGetFavorites\x12\".CFriendsList_GetFavorites_Request\x1a#.CFriendsList_GetFavorites_Response\x12W\n\x0cSetFavorites\x12\".CFriendsList_SetFavorites_Request\x1a#.CFriendsList_SetFavorites_Response2a\n\x11\x46riendsListClient\x12L\n\x10\x46\x61voritesChanged\x12+.CFriendsList_FavoritesChanged_Notification\x1a\x0b.NoResponse2f\n\x04\x43lan\x12^\n\x13RespondToClanInvite\x12\".CClan_RespondToClanInvite_Request\x1a#.CClan_RespondToClanInvite_Response2W\n\x11\x45xperimentService\x12\x42\n\"ReportProductImpressionsFromClient\x12\x0f.NotImplemented\x1a\x0b.NoResponseB\x03\x90\x01\x01')
+  serialized_pb=_b('\n!steammessages_webui_friends.proto\x1a steammessages_unified_base.proto\x1a\x18steammessages_base.proto\x1a(steammessages_clientserver_friends.proto\"\x82\x01\n1CHelpRequestLogs_UploadUserApplicationLog_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x10\n\x08log_type\x18\x02 \x01(\t\x12\x16\n\x0eversion_string\x18\x03 \x01(\t\x12\x14\n\x0clog_contents\x18\x04 \x01(\t\"@\n2CHelpRequestLogs_UploadUserApplicationLog_Response\x12\n\n\x02id\x18\x01 \x01(\x04\"n\n\x1e\x43MsgClientAppMinutesPlayedData\x12L\n\x0eminutes_played\x18\x01 \x03(\x0b\x32\x34.CMsgClientAppMinutesPlayedData_AppMinutesPlayedData\"n\n3CMsgClientAppMinutesPlayedData_AppMinutesPlayedData\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x05\x12\x16\n\x0elast_two_weeks\x18\x03 \x01(\x05\">\n\x1a\x43\x43ommunity_GetApps_Request\x12\x0e\n\x06\x61ppids\x18\x01 \x03(\x05\x12\x10\n\x08language\x18\x02 \x01(\r\"B\n\x1b\x43\x43ommunity_GetApps_Response\x12#\n\x04\x61pps\x18\x01 \x03(\x0b\x32\x15.CCDDBAppDetailCommon\"T\n1CCommunity_GetAppRichPresenceLocalization_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12\x10\n\x08language\x18\x02 \x01(\t\"\x97\x01\n2CCommunity_GetAppRichPresenceLocalization_Response\x12\r\n\x05\x61ppid\x18\x01 \x01(\x05\x12R\n\x0btoken_lists\x18\x02 \x03(\x0b\x32=.CCommunity_GetAppRichPresenceLocalization_Response_TokenList\"W\n8CCommunity_GetAppRichPresenceLocalization_Response_Token\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x9b\x01\n<CCommunity_GetAppRichPresenceLocalization_Response_TokenList\x12\x10\n\x08language\x18\x01 \x01(\t\x12I\n\x06tokens\x18\x02 \x03(\x0b\x32\x39.CCommunity_GetAppRichPresenceLocalization_Response_Token\"\x9d\x02\n#CCommunity_GetCommentThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x05 \x01(\x06\x12\r\n\x05start\x18\x06 \x01(\x05\x12\r\n\x05\x63ount\x18\x07 \x01(\x05\x12\x10\n\x08upvoters\x18\x08 \x01(\x05\x12\x17\n\x0finclude_deleted\x18\t \x01(\x08\x12\x12\n\ngidcomment\x18\n \x01(\x06\x12\x13\n\x0btime_oldest\x18\x0b \x01(\r\x12\x14\n\x0coldest_first\x18\x0c \x01(\x08\"\xf6\x01\n\x12\x43\x43ommunity_Comment\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x0f\n\x07steamid\x18\x02 \x01(\x06\x12\x11\n\ttimestamp\x18\x03 \x01(\r\x12\x0c\n\x04text\x18\x04 \x01(\t\x12\x0f\n\x07upvotes\x18\x05 \x01(\x05\x12\x0e\n\x06hidden\x18\x06 \x01(\x08\x12\x16\n\x0ehidden_by_user\x18\x07 \x01(\x08\x12\x0f\n\x07\x64\x65leted\x18\x08 \x01(\x08\x12!\n\tipaddress\x18\t \x01(\x0b\x32\x0e.CMsgIPAddress\x12\x14\n\x0ctotal_hidden\x18\n \x01(\x05\x12\x17\n\x0fupvoted_by_user\x18\x0b \x01(\x08\"\x88\x03\n$CCommunity_GetCommentThread_Response\x12%\n\x08\x63omments\x18\x01 \x03(\x0b\x32\x13.CCommunity_Comment\x12-\n\x10\x64\x65leted_comments\x18\x02 \x03(\x0b\x32\x13.CCommunity_Comment\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x04 \x01(\x06\x12\r\n\x05start\x18\x05 \x01(\x05\x12\r\n\x05\x63ount\x18\x06 \x01(\x05\x12\x13\n\x0btotal_count\x18\x07 \x01(\x05\x12\x0f\n\x07upvotes\x18\x08 \x01(\x05\x12\x10\n\x08upvoters\x18\t \x03(\r\x12\x17\n\x0fuser_subscribed\x18\n \x01(\x08\x12\x14\n\x0cuser_upvoted\x18\x0b \x01(\x08\x12\x18\n\x10\x61nswer_commentid\x18\x0c \x01(\x06\x12\x14\n\x0c\x61nswer_actor\x18\r \x01(\r\x12\x19\n\x11\x61nswer_actor_rank\x18\x0e \x01(\x05\x12\x10\n\x08\x63\x61n_post\x18\x0f \x01(\x08\"\xc7\x01\n&CCommunity_PostCommentToThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x0c\n\x04text\x18\x06 \x01(\t\x12\x18\n\x10gidparentcomment\x18\x07 \x01(\x06\x12\x1e\n\x16suppress_notifications\x18\x08 \x01(\x08\"v\n\'CCommunity_PostCommentToThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x06\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x06\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\x0f\n\x07upvotes\x18\x04 \x01(\x05\"\xa9\x01\n*CCommunity_DeleteCommentFromThread_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x1b\n\x13\x63omment_thread_type\x18\x02 \x01(\r\x12\x12\n\ngidfeature\x18\x03 \x01(\x06\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x06\x12\x12\n\ngidcomment\x18\x05 \x01(\x06\x12\x10\n\x08undelete\x18\x06 \x01(\x08\"-\n+CCommunity_DeleteCommentFromThread_Response\"\xc0\x01\n$CCommunity_RateCommentThread_Request\x12\x19\n\x11\x63ommentthreadtype\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x12\n\ngidfeature\x18\x03 \x01(\x04\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x04\x12\x12\n\ngidcomment\x18\x05 \x01(\x04\x12\x0f\n\x07rate_up\x18\x06 \x01(\x08\x12\x1e\n\x16suppress_notifications\x18\x07 \x01(\x08\"\x89\x01\n%CCommunity_RateCommentThread_Response\x12\x12\n\ngidcomment\x18\x01 \x01(\x04\x12\x17\n\x0f\x63ommentthreadid\x18\x02 \x01(\x04\x12\r\n\x05\x63ount\x18\x03 \x01(\r\x12\x0f\n\x07upvotes\x18\x04 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x05 \x01(\x08\"\xaa\x01\n*CCommunity_GetCommentThreadRatings_Request\x12\x19\n\x11\x63ommentthreadtype\x18\x01 \x01(\t\x12\x0f\n\x07steamid\x18\x02 \x01(\x04\x12\x12\n\ngidfeature\x18\x03 \x01(\x04\x12\x13\n\x0bgidfeature2\x18\x04 \x01(\x04\x12\x12\n\ngidcomment\x18\x05 \x01(\x04\x12\x13\n\x0bmax_results\x18\x06 \x01(\r\"\x9c\x01\n+CCommunity_GetCommentThreadRatings_Response\x12\x17\n\x0f\x63ommentthreadid\x18\x01 \x01(\x04\x12\x12\n\ngidcomment\x18\x02 \x01(\x04\x12\x0f\n\x07upvotes\x18\x03 \x01(\r\x12\x13\n\x0bhas_upvoted\x18\x04 \x01(\x08\x12\x1a\n\x12upvoter_accountids\x18\x05 \x03(\r\"R\n\'CCommunity_RateClanAnnouncement_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\x12\x0f\n\x07vote_up\x18\x02 \x01(\x08\"*\n(CCommunity_RateClanAnnouncement_Response\"K\n1CCommunity_GetClanAnnouncementVoteForUser_Request\x12\x16\n\x0e\x61nnouncementid\x18\x01 \x01(\x04\"Z\n2CCommunity_GetClanAnnouncementVoteForUser_Response\x12\x10\n\x08voted_up\x18\x01 \x01(\x08\x12\x12\n\nvoted_down\x18\x02 \x01(\x08\"/\n\x0c\x43\x41ppPriority\x12\x10\n\x08priority\x18\x01 \x01(\r\x12\r\n\x05\x61ppid\x18\x02 \x03(\r\"\xd8\x02\n*CCommunity_GetUserPartnerEventNews_Request\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12\x1a\n\x12rtime32_start_time\x18\x03 \x01(\r\x12\x18\n\x10rtime32_end_time\x18\x04 \x01(\r\x12\x1b\n\x13language_preference\x18\x05 \x03(\r\x12M\n\x11\x66ilter_event_type\x18\x06 \x03(\x05\x42\x32\x82\xb5\x18.enum; suggested type: ECommunityWordFilterType\x12\x17\n\x0f\x66ilter_to_appid\x18\x07 \x01(\x08\x12\x1f\n\x08\x61pp_list\x18\x08 \x03(\x0b\x32\r.CAppPriority\x12\x16\n\x0b\x63ount_after\x18\t \x01(\r:\x01\x30\x12\x17\n\x0c\x63ount_before\x18\n \x01(\r:\x01\x30\"W\n+CCommunity_GetUserPartnerEventNews_Response\x12(\n\x07results\x18\x01 \x03(\x0b\x32\x17.CClanMatchEventByRange\"k\n\'CCommunity_GetBestEventsForUser_Request\x12\x1a\n\x12include_steam_blog\x18\x01 \x01(\x08\x12$\n\x1c\x66ilter_to_played_within_days\x18\x02 \x01(\r\"\xc3\x01\n\x1d\x43\x43ommunity_PartnerEventResult\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\x18\n\x10\x61nnouncement_gid\x18\x03 \x01(\x06\x12\r\n\x05\x61ppid\x18\x04 \x01(\r\x12\x19\n\x11possible_takeover\x18\x05 \x01(\x08\x12 \n\x15rtime32_last_modified\x18\x06 \x01(\r:\x01\x30\x12\x19\n\x11user_app_priority\x18\x07 \x01(\x05\"[\n(CCommunity_GetBestEventsForUser_Response\x12/\n\x07results\x18\x01 \x03(\x0b\x32\x1e.CCommunity_PartnerEventResult\"8\n6CCommunity_ClearUserPartnerEventsAppPriorities_Request\"9\n7CCommunity_ClearUserPartnerEventsAppPriorities_Response\"O\n#CCommunity_PartnerEventsAppPriority\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x19\n\x11user_app_priority\x18\x02 \x01(\x05\"6\n4CCommunity_GetUserPartnerEventsAppPriorities_Request\"q\n5CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x38\n\npriorities\x18\x01 \x03(\x0b\x32$.CCommunity_PartnerEventsAppPriority\"G\n6CCommunity_ClearSinglePartnerEventsAppPriority_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"9\n7CCommunity_ClearSinglePartnerEventsAppPriority_Response\"?\n.CCommunity_PartnerEventsShowMoreForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"1\n/CCommunity_PartnerEventsShowMoreForApp_Response\"?\n.CCommunity_PartnerEventsShowLessForApp_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\"1\n/CCommunity_PartnerEventsShowLessForApp_Response\"\x81\x01\n+CCommunity_MarkPartnerEventsForUser_Request\x12R\n\x08markings\x18\x01 \x03(\x0b\x32@.CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\"\xdd\x01\n?CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12P\n\x10\x64isplay_location\x18\x03 \x01(\x05\x42\x36\x82\xb5\x18\x32\x65num; suggested type: EPartnerEventDisplayLocation\x12\x12\n\nmark_shown\x18\x04 \x01(\x08\x12\x11\n\tmark_read\x18\x05 \x01(\x08\".\n,CCommunity_MarkPartnerEventsForUser_Response\"y\n*CProductImpressionsFromClient_Notification\x12K\n\x0bimpressions\x18\x01 \x03(\x0b\x32\x36.CProductImpressionsFromClient_Notification_Impression\"\xa9\x01\n5CProductImpressionsFromClient_Notification_Impression\x12H\n\x04type\x18\x01 \x01(\x05\x42:\x82\xb5\x18\x36\x65num; suggested type: EProductImpressionFromClientType\x12\r\n\x05\x61ppid\x18\x02 \x01(\r\x12\x17\n\x0fnum_impressions\x18\x03 \x01(\r\"P\n\x14\x43\x46riendsListCategory\x12\x0f\n\x07groupid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x19\n\x11\x61\x63\x63ountid_members\x18\x03 \x03(\r\"$\n\"CFriendsList_GetCategories_Request\"P\n#CFriendsList_GetCategories_Response\x12)\n\ncategories\x18\x01 \x03(\x0b\x32\x15.CFriendsListCategory\"U\n\x19\x43\x46riendsListFavoriteEntry\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x0e\n\x06\x63lanid\x18\x02 \x01(\r\x12\x15\n\rchat_group_id\x18\x03 \x01(\x04\"#\n!CFriendsList_GetFavorites_Request\"S\n\"CFriendsList_GetFavorites_Response\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"R\n!CFriendsList_SetFavorites_Request\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"$\n\"CFriendsList_SetFavorites_Response\"[\n*CFriendsList_FavoritesChanged_Notification\x12-\n\tfavorites\x18\x01 \x03(\x0b\x32\x1a.CFriendsListFavoriteEntry\"%\n#CFriendsList_GetFriendsList_Request\"S\n$CFriendsList_GetFriendsList_Response\x12+\n\x0b\x66riendslist\x18\x01 \x01(\x0b\x32\x16.CMsgClientFriendsList\"c\n(CMsgClientUCMEnumerateUserPublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x12\n\nsort_order\x18\x03 \x01(\r\"\xb9\x01\n0CMsgClientUCMEnumerateUserPublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12Z\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x41.CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"]\n@CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\x98\x01\n)CMsgClientUCMEnumerateUserSubscribedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12\x14\n\tlist_type\x18\x03 \x01(\r:\x01\x31\x12\x1d\n\x12matching_file_type\x18\x04 \x01(\r:\x01\x30\x12\x11\n\x05\x63ount\x18\x05 \x01(\r:\x02\x35\x30\"\xbc\x01\n1CMsgClientUCMEnumerateUserSubscribedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\\\n\x10subscribed_files\x18\x02 \x03(\x0b\x32\x42.CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"}\nACMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x1d\n\x12rtime32_subscribed\x18\x02 \x01(\x07:\x01\x30\"N\n!CMsgClientUCMPublishedFileDeleted\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\r\"\x97\x01\n!CMsgClientWorkshopItemInfoRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x19\n\x11last_time_updated\x18\x02 \x01(\r\x12G\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32/.CMsgClientWorkshopItemInfoRequest_WorkshopItem\"a\n.CMsgClientWorkshopItemInfoRequest_WorkshopItem\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\"\xb2\x01\n\"CMsgClientWorkshopItemInfoResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12\x13\n\x0bupdate_time\x18\x02 \x01(\r\x12L\n\x0eworkshop_items\x18\x03 \x03(\x0b\x32\x34.CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo\x12\x15\n\rprivate_items\x18\x04 \x03(\x06\"\x8e\x01\n3CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x14\n\x0ctime_updated\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x06\x12\x11\n\tis_legacy\x18\x04 \x01(\x08\"\x94\x01\n%CMsgClientUCMGetPublishedFilesForUser\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x18\n\x10\x63reator_steam_id\x18\x02 \x01(\x06\x12\x15\n\rrequired_tags\x18\x03 \x03(\t\x12\x15\n\rexcluded_tags\x18\x04 \x03(\t\x12\x13\n\x0bstart_index\x18\x05 \x01(\r\"\xb3\x01\n-CMsgClientUCMGetPublishedFilesForUserResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12W\n\x0fpublished_files\x18\x02 \x03(\x0b\x32>.CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"Z\n=CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\"\xb7\x01\n\x1e\x43MsgCREEnumeratePublishedFiles\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x12\n\nquery_type\x18\x02 \x01(\x05\x12\x13\n\x0bstart_index\x18\x03 \x01(\r\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\r\x12\r\n\x05\x63ount\x18\x05 \x01(\r\x12\x0c\n\x04tags\x18\x06 \x03(\t\x12\x11\n\tuser_tags\x18\x07 \x03(\t\x12\x1e\n\x12matching_file_type\x18\x08 \x01(\r:\x02\x31\x33\"\xa5\x01\n&CMsgCREEnumeratePublishedFilesResponse\x12\x12\n\x07\x65result\x18\x01 \x01(\x05:\x01\x32\x12P\n\x0fpublished_files\x18\x02 \x03(\x0b\x32\x37.CMsgCREEnumeratePublishedFilesResponse_PublishedFileId\x12\x15\n\rtotal_results\x18\x03 \x01(\r\"\x9d\x01\n6CMsgCREEnumeratePublishedFilesResponse_PublishedFileId\x12\x19\n\x11published_file_id\x18\x01 \x01(\x06\x12\x11\n\tvotes_for\x18\x02 \x01(\x05\x12\x15\n\rvotes_against\x18\x03 \x01(\x05\x12\x0f\n\x07reports\x18\x04 \x01(\x05\x12\r\n\x05score\x18\x05 \x01(\x02\"r\n\x18\x43MsgGameServerPingSample\x12\r\n\x05my_ip\x18\x01 \x01(\x07\x12\x11\n\tgs_app_id\x18\x02 \x01(\x05\x12\x34\n\ngs_samples\x18\x03 \x03(\x0b\x32 .CMsgGameServerPingSample_Sample\"^\n\x1f\x43MsgGameServerPingSample_Sample\x12\n\n\x02ip\x18\x01 \x01(\x07\x12\x13\n\x0b\x61vg_ping_ms\x18\x02 \x01(\r\x12\x1a\n\x12stddev_ping_ms_x10\x18\x03 \x01(\r\"D\n!CClan_RespondToClanInvite_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x0e\n\x06\x61\x63\x63\x65pt\x18\x02 \x01(\x08\"$\n\"CClan_RespondToClanInvite_Response\"A\n&CVoiceChat_RequestOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"?\n\'CVoiceChat_RequestOneOnOneChat_Response\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"^\n-CVoiceChat_OneOnOneChatRequested_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\"p\n%CVoiceChat_AnswerOneOnOneChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"(\n&CVoiceChat_AnswerOneOnOneChat_Response\"~\n3CVoiceChat_OneOnOneChatRequestResponse_Notification\x12\x14\n\x0cvoicechat_id\x18\x01 \x01(\x06\x12\x17\n\x0fsteamid_partner\x18\x02 \x01(\x06\x12\x18\n\x10\x61\x63\x63\x65pted_request\x18\x03 \x01(\x08\"=\n\"CVoiceChat_EndOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\"%\n#CVoiceChat_EndOneOnOneChat_Response\"U\n$CVoiceChat_LeaveOneOnOneChat_Request\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x14\n\x0cvoice_chatid\x18\x02 \x01(\x06\"\'\n%CVoiceChat_LeaveOneOnOneChat_Response\"\xdd\x01\n+CVoiceChat_UserJoinedVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xe0\x01\n\'CVoiceChat_UserVoiceStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x1e\n\x16user_muted_mic_locally\x18\x03 \x01(\x08\x12!\n\x19user_muted_output_locally\x18\x04 \x01(\x08\x12#\n\x1buser_has_no_mic_for_session\x18\x05 \x01(\x08\x12!\n\x19user_webaudio_sample_rate\x18\x06 \x01(\x05\"y\n(CVoiceChat_AllMembersStatus_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x37\n\x05users\x18\x02 \x03(\x0b\x32(.CVoiceChat_UserVoiceStatus_Notification\"\x88\x02\n,CVoiceChat_UpdateVoiceChatWebRTCData_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x18\n\x10ip_webrtc_server\x18\x02 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x03 \x01(\r\x12\x18\n\x10ip_webrtc_client\x18\x04 \x01(\r\x12\x1a\n\x12port_webrtc_client\x18\x05 \x01(\r\x12\x1e\n\x16ssrc_my_sending_stream\x18\x06 \x01(\r\x12\x12\n\nuser_agent\x18\x07 \x01(\t\x12\"\n\x1ahas_audio_worklets_support\x18\x08 \x01(\x08\"O\n-CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12\x1e\n\x16send_client_voice_logs\x18\x01 \x01(\x08\"i\n,CVoiceChat_UploadClientVoiceChatLogs_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12#\n\x1b\x63lient_voice_logs_new_lines\x18\x02 \x01(\t\"/\n-CVoiceChat_UploadClientVoiceChatLogs_Response\"9\n!CVoiceChat_LeaveVoiceChat_Request\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\"$\n\"CVoiceChat_LeaveVoiceChat_Response\"\xdb\x01\n)CVoiceChat_UserLeftVoiceChat_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12\x14\n\x0cuser_steamid\x18\x02 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x03 \x01(\x04\x12 \n\x18one_on_one_steamid_lower\x18\x04 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x05 \x01(\x06\x12\x15\n\rchat_group_id\x18\x06 \x01(\x04\x12\x16\n\x0euser_sessionid\x18\x07 \x01(\r\"\xaa\x01\n&CVoiceChat_VoiceChatEnded_Notification\x12\x14\n\x0cvoice_chatid\x18\x01 \x01(\x06\x12 \n\x18one_on_one_steamid_lower\x18\x02 \x01(\x06\x12!\n\x19one_on_one_steamid_higher\x18\x03 \x01(\x06\x12\x0e\n\x06\x63hatid\x18\x04 \x01(\x04\x12\x15\n\rchat_group_id\x18\x05 \x01(\x04\"=\n.CWebRTCClient_InitiateWebRTCConnection_Request\x12\x0b\n\x03sdp\x18\x01 \x01(\t\"M\n/CWebRTCClient_InitiateWebRTCConnection_Response\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\"\x8b\x01\n+CWebRTC_WebRTCSessionConnected_Notification\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\tclient_ip\x18\x02 \x01(\r\x12\x13\n\x0b\x63lient_port\x18\x03 \x01(\r\x12\x11\n\tserver_ip\x18\x04 \x01(\r\x12\x13\n\x0bserver_port\x18\x05 \x01(\r\"\xde\x01\n2CWebRTC_WebRTCUpdateRemoteDescription_Notification\x12\x1a\n\x12remote_description\x18\x01 \x01(\t\x12\"\n\x1aremote_description_version\x18\x02 \x01(\x04\x12h\n\x13ssrcs_to_accountids\x18\x03 \x03(\x0b\x32K.CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\"m\nJCWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping\x12\x0c\n\x04ssrc\x18\x01 \x01(\r\x12\x11\n\taccountid\x18\x02 \x01(\r\"\xdb\x01\n9CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x12\x18\n\x10ip_webrtc_server\x18\x01 \x01(\r\x12\x1a\n\x12port_webrtc_server\x18\x02 \x01(\r\x12 \n\x18ip_webrtc_session_client\x18\x03 \x01(\r\x12\"\n\x1aport_webrtc_session_client\x18\x04 \x01(\r\x12\"\n\x1aremote_description_version\x18\x05 \x01(\x04\"<\n:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response\"\'\n%CMobilePerAccount_GetSettings_Request\"\xec\x01\n&CMobilePerAccount_GetSettings_Response\x12\x14\n\x0chas_settings\x18\x04 \x01(\x08\x12\x17\n\x0f\x61llow_sale_push\x18\x02 \x01(\x08\x12\x1b\n\x13\x61llow_wishlist_push\x18\x03 \x01(\x08\x12\x1f\n\x17\x63hat_notification_level\x18\x05 \x01(\r\x12\x1a\n\x12notify_direct_chat\x18\x06 \x01(\x08\x12\x19\n\x11notify_group_chat\x18\x07 \x01(\x08\x12\x1e\n\x10\x61llow_event_push\x18\x08 \x01(\x08:\x04true\"\xd5\x01\n%CMobilePerAccount_SetSettings_Request\x12\x17\n\x0f\x61llow_sale_push\x18\x02 \x01(\x08\x12\x1b\n\x13\x61llow_wishlist_push\x18\x03 \x01(\x08\x12\x1f\n\x17\x63hat_notification_level\x18\x04 \x01(\r\x12\x1a\n\x12notify_direct_chat\x18\x05 \x01(\x08\x12\x19\n\x11notify_group_chat\x18\x06 \x01(\x08\x12\x1e\n\x10\x61llow_event_push\x18\x07 \x01(\x08:\x04true\"(\n&CMobilePerAccount_SetSettings_Response\"\x84\x02\n*CMobileDevice_RegisterMobileDevice_Request\x12\x10\n\x08\x64\x65viceid\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x14\n\x0cpush_enabled\x18\x03 \x01(\x08\x12\x13\n\x0b\x61pp_version\x18\x04 \x01(\t\x12\x12\n\nos_version\x18\x05 \x01(\t\x12\x14\n\x0c\x64\x65vice_model\x18\x06 \x01(\t\x12#\n\x1btwofactor_device_identifier\x18\x07 \x01(\t\x12\x38\n\nmobile_app\x18\x08 \x01(\x05\x42$\x82\xb5\x18 enum; suggested type: EMobileApp\"F\n+CMobileDevice_RegisterMobileDevice_Response\x12\x17\n\x0funique_deviceid\x18\x02 \x01(\r\"E\n1CMobileDevice_DeregisterMobileDevice_Notification\x12\x10\n\x08\x64\x65viceid\x18\x01 \x01(\t\"\x0e\n\x0cUnknownProto2\x97\x01\n\x0fHelpRequestLogs\x12\x83\x01\n\x18UploadUserApplicationLog\x12\x32.CHelpRequestLogs_UploadUserApplicationLog_Request\x1a\x33.CHelpRequestLogs_UploadUserApplicationLog_Response2\x9e\x10\n\tCommunity\x12\x44\n\x07GetApps\x12\x1b.CCommunity_GetApps_Request\x1a\x1c.CCommunity_GetApps_Response\x12\x89\x01\n\x1eGetAppRichPresenceLocalization\x12\x32.CCommunity_GetAppRichPresenceLocalization_Request\x1a\x33.CCommunity_GetAppRichPresenceLocalization_Response\x12_\n\x10GetCommentThread\x12$.CCommunity_GetCommentThread_Request\x1a%.CCommunity_GetCommentThread_Response\x12h\n\x13PostCommentToThread\x12\'.CCommunity_PostCommentToThread_Request\x1a(.CCommunity_PostCommentToThread_Response\x12t\n\x17\x44\x65leteCommentFromThread\x12+.CCommunity_DeleteCommentFromThread_Request\x1a,.CCommunity_DeleteCommentFromThread_Response\x12\x62\n\x11RateCommentThread\x12%.CCommunity_RateCommentThread_Request\x1a&.CCommunity_RateCommentThread_Response\x12t\n\x17GetCommentThreadRatings\x12+.CCommunity_GetCommentThreadRatings_Request\x1a,.CCommunity_GetCommentThreadRatings_Response\x12k\n\x14RateClanAnnouncement\x12(.CCommunity_RateClanAnnouncement_Request\x1a).CCommunity_RateClanAnnouncement_Response\x12\x89\x01\n\x1eGetClanAnnouncementVoteForUser\x12\x32.CCommunity_GetClanAnnouncementVoteForUser_Request\x1a\x33.CCommunity_GetClanAnnouncementVoteForUser_Response\x12t\n\x17GetUserPartnerEventNews\x12+.CCommunity_GetUserPartnerEventNews_Request\x1a,.CCommunity_GetUserPartnerEventNews_Response\x12k\n\x14GetBestEventsForUser\x12(.CCommunity_GetBestEventsForUser_Request\x1a).CCommunity_GetBestEventsForUser_Response\x12w\n\x18MarkPartnerEventsForUser\x12,.CCommunity_MarkPartnerEventsForUser_Request\x1a-.CCommunity_MarkPartnerEventsForUser_Response\x12\x80\x01\n\x1bPartnerEventsShowMoreForApp\x12/.CCommunity_PartnerEventsShowMoreForApp_Request\x1a\x30.CCommunity_PartnerEventsShowMoreForApp_Response\x12\x80\x01\n\x1bPartnerEventsShowLessForApp\x12/.CCommunity_PartnerEventsShowLessForApp_Request\x1a\x30.CCommunity_PartnerEventsShowLessForApp_Response\x12\x98\x01\n#ClearUserPartnerEventsAppPriorities\x12\x37.CCommunity_ClearUserPartnerEventsAppPriorities_Request\x1a\x38.CCommunity_ClearUserPartnerEventsAppPriorities_Response\x12\x92\x01\n!GetUserPartnerEventsAppPriorities\x12\x35.CCommunity_GetUserPartnerEventsAppPriorities_Request\x1a\x36.CCommunity_GetUserPartnerEventsAppPriorities_Response\x12\x98\x01\n#ClearSinglePartnerEventsAppPriority\x12\x37.CCommunity_ClearSinglePartnerEventsAppPriority_Request\x1a\x38.CCommunity_ClearSinglePartnerEventsAppPriority_Response2U\n\x11\x45xperimentService\x12@\n\"ReportProductImpressionsFromClient\x12\r.UnknownProto\x1a\x0b.NoResponse2\xfa\x02\n\x0b\x46riendsList\x12Z\n\rGetCategories\x12#.CFriendsList_GetCategories_Request\x1a$.CFriendsList_GetCategories_Response\x12]\n\x0eGetFriendsList\x12$.CFriendsList_GetFriendsList_Request\x1a%.CFriendsList_GetFriendsList_Response\x12W\n\x0cGetFavorites\x12\".CFriendsList_GetFavorites_Request\x1a#.CFriendsList_GetFavorites_Response\x12W\n\x0cSetFavorites\x12\".CFriendsList_SetFavorites_Request\x1a#.CFriendsList_SetFavorites_Response2a\n\x11\x46riendsListClient\x12L\n\x10\x46\x61voritesChanged\x12+.CFriendsList_FavoritesChanged_Notification\x1a\x0b.NoResponse2f\n\x04\x43lan\x12^\n\x13RespondToClanInvite\x12\".CClan_RespondToClanInvite_Request\x1a#.CClan_RespondToClanInvite_Response2\xc1\x06\n\tVoiceChat\x12z\n\x19UpdateVoiceChatWebRTCData\x12-.CVoiceChat_UpdateVoiceChatWebRTCData_Request\x1a..CVoiceChat_UpdateVoiceChatWebRTCData_Response\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12z\n\x19UploadClientVoiceChatLogs\x12-.CVoiceChat_UploadClientVoiceChatLogs_Request\x1a..CVoiceChat_UploadClientVoiceChatLogs_Response\x12Y\n\x0eLeaveVoiceChat\x12\".CVoiceChat_LeaveVoiceChat_Request\x1a#.CVoiceChat_LeaveVoiceChat_Response\x12h\n\x13RequestOneOnOneChat\x12\'.CVoiceChat_RequestOneOnOneChat_Request\x1a(.CVoiceChat_RequestOneOnOneChat_Response\x12\x65\n\x12\x41nswerOneOnOneChat\x12&.CVoiceChat_AnswerOneOnOneChat_Request\x1a\'.CVoiceChat_AnswerOneOnOneChat_Response\x12\\\n\x0f\x45ndOneOnOneChat\x12#.CVoiceChat_EndOneOnOneChat_Request\x1a$.CVoiceChat_EndOneOnOneChat_Response\x12\x62\n\x11LeaveOneOnOneChat\x12%.CVoiceChat_LeaveOneOnOneChat_Request\x1a&.CVoiceChat_LeaveOneOnOneChat_Response2\xed\x04\n\x0fVoiceChatClient\x12V\n\x19NotifyUserJoinedVoiceChat\x12,.CVoiceChat_UserJoinedVoiceChat_Notification\x1a\x0b.NoResponse\x12R\n\x17NotifyUserLeftVoiceChat\x12*.CVoiceChat_UserLeftVoiceChat_Notification\x1a\x0b.NoResponse\x12L\n\x14NotifyVoiceChatEnded\x12\'.CVoiceChat_VoiceChatEnded_Notification\x1a\x0b.NoResponse\x12N\n\x15NotifyUserVoiceStatus\x12(.CVoiceChat_UserVoiceStatus_Notification\x1a\x0b.NoResponse\x12S\n\x19NotifyAllUsersVoiceStatus\x12).CVoiceChat_AllMembersStatus_Notification\x1a\x0b.NoResponse\x12Z\n\x1bNotifyOneOnOneChatRequested\x12..CVoiceChat_OneOnOneChatRequested_Notification\x1a\x0b.NoResponse\x12_\n\x1aNotifyOneOnOneChatResponse\x12\x34.CVoiceChat_OneOnOneChatRequestResponse_Notification\x1a\x0b.NoResponse2\xae\x02\n\x0cWebRTCClient\x12}\n\x18InitiateWebRTCConnection\x12/.CWebRTCClient_InitiateWebRTCConnection_Request\x1a\x30.CWebRTCClient_InitiateWebRTCConnection_Response\x12\x9e\x01\n#AcknowledgeUpdatedRemoteDescription\x12:.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request\x1a;.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response2\xdf\x01\n\x19WebRTCClientNotifications\x12Y\n\x1cNotifyWebRTCSessionConnected\x12,.CWebRTC_WebRTCSessionConnected_Notification\x1a\x0b.NoResponse\x12g\n#NotifyWebRTCUpdateRemoteDescription\x12\x33.CWebRTC_WebRTCUpdateRemoteDescription_Notification\x1a\x0b.NoResponse2\xd2\x01\n\x10MobilePerAccount\x12^\n\x0bGetSettings\x12&.CMobilePerAccount_GetSettings_Request\x1a\'.CMobilePerAccount_GetSettings_Response\x12^\n\x0bSetSettings\x12&.CMobilePerAccount_SetSettings_Request\x1a\'.CMobilePerAccount_SetSettings_Response2\xdc\x01\n\x0cMobileDevice\x12q\n\x14RegisterMobileDevice\x12+.CMobileDevice_RegisterMobileDevice_Request\x1a,.CMobileDevice_RegisterMobileDevice_Response\x12Y\n\x16\x44\x65registerMobileDevice\x12\x32.CMobileDevice_DeregisterMobileDevice_Notification\x1a\x0b.NoResponseB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,steammessages__base__pb2.DESCRIPTOR,steammessages__clientserver__friends__pb2.DESCRIPTOR,])
 
 
+
+
+_CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_REQUEST = _descriptor.Descriptor(
+  name='CHelpRequestLogs_UploadUserApplicationLog_Request',
+  full_name='CHelpRequestLogs_UploadUserApplicationLog_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CHelpRequestLogs_UploadUserApplicationLog_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='log_type', full_name='CHelpRequestLogs_UploadUserApplicationLog_Request.log_type', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='version_string', full_name='CHelpRequestLogs_UploadUserApplicationLog_Request.version_string', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='log_contents', full_name='CHelpRequestLogs_UploadUserApplicationLog_Request.log_contents', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=140,
+  serialized_end=270,
+)
+
+
+_CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_RESPONSE = _descriptor.Descriptor(
+  name='CHelpRequestLogs_UploadUserApplicationLog_Response',
+  full_name='CHelpRequestLogs_UploadUserApplicationLog_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='CHelpRequestLogs_UploadUserApplicationLog_Response.id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=272,
+  serialized_end=336,
+)
+
+
+_CMSGCLIENTAPPMINUTESPLAYEDDATA = _descriptor.Descriptor(
+  name='CMsgClientAppMinutesPlayedData',
+  full_name='CMsgClientAppMinutesPlayedData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='minutes_played', full_name='CMsgClientAppMinutesPlayedData.minutes_played', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=338,
+  serialized_end=448,
+)
+
+
+_CMSGCLIENTAPPMINUTESPLAYEDDATA_APPMINUTESPLAYEDDATA = _descriptor.Descriptor(
+  name='CMsgClientAppMinutesPlayedData_AppMinutesPlayedData',
+  full_name='CMsgClientAppMinutesPlayedData_AppMinutesPlayedData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientAppMinutesPlayedData_AppMinutesPlayedData.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='forever', full_name='CMsgClientAppMinutesPlayedData_AppMinutesPlayedData.forever', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='last_two_weeks', full_name='CMsgClientAppMinutesPlayedData_AppMinutesPlayedData.last_two_weeks', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=450,
+  serialized_end=560,
+)
 
 
 _CCOMMUNITY_GETAPPS_REQUEST = _descriptor.Descriptor(
@@ -65,8 +224,8 @@ _CCOMMUNITY_GETAPPS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=139,
-  serialized_end=201,
+  serialized_start=562,
+  serialized_end=624,
 )
 
 
@@ -96,8 +255,8 @@ _CCOMMUNITY_GETAPPS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=203,
-  serialized_end=269,
+  serialized_start=626,
+  serialized_end=692,
 )
 
 
@@ -134,8 +293,8 @@ _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=271,
-  serialized_end=355,
+  serialized_start=694,
+  serialized_end=778,
 )
 
 
@@ -172,8 +331,8 @@ _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=358,
-  serialized_end=509,
+  serialized_start=781,
+  serialized_end=932,
 )
 
 
@@ -210,8 +369,8 @@ _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKEN = _descriptor.Descript
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=511,
-  serialized_end=598,
+  serialized_start=934,
+  serialized_end=1021,
 )
 
 
@@ -248,8 +407,116 @@ _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKENLIST = _descriptor.Desc
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=601,
-  serialized_end=756,
+  serialized_start=1024,
+  serialized_end=1179,
+)
+
+
+_CCOMMUNITY_GETCOMMENTTHREAD_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_GetCommentThread_Request',
+  full_name='CCommunity_GetCommentThread_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CCommunity_GetCommentThread_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='comment_thread_type', full_name='CCommunity_GetCommentThread_Request.comment_thread_type', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature', full_name='CCommunity_GetCommentThread_Request.gidfeature', index=2,
+      number=3, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature2', full_name='CCommunity_GetCommentThread_Request.gidfeature2', index=3,
+      number=4, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='commentthreadid', full_name='CCommunity_GetCommentThread_Request.commentthreadid', index=4,
+      number=5, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start', full_name='CCommunity_GetCommentThread_Request.start', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='CCommunity_GetCommentThread_Request.count', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='upvoters', full_name='CCommunity_GetCommentThread_Request.upvoters', index=7,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='include_deleted', full_name='CCommunity_GetCommentThread_Request.include_deleted', index=8,
+      number=9, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidcomment', full_name='CCommunity_GetCommentThread_Request.gidcomment', index=9,
+      number=10, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_oldest', full_name='CCommunity_GetCommentThread_Request.time_oldest', index=10,
+      number=11, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='oldest_first', full_name='CCommunity_GetCommentThread_Request.oldest_first', index=11,
+      number=12, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1182,
+  serialized_end=1467,
 )
 
 
@@ -349,8 +616,8 @@ _CCOMMUNITY_COMMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=759,
-  serialized_end=1005,
+  serialized_start=1470,
+  serialized_end=1716,
 )
 
 
@@ -478,8 +745,81 @@ _CCOMMUNITY_GETCOMMENTTHREAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1008,
-  serialized_end=1400,
+  serialized_start=1719,
+  serialized_end=2111,
+)
+
+
+_CCOMMUNITY_POSTCOMMENTTOTHREAD_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_PostCommentToThread_Request',
+  full_name='CCommunity_PostCommentToThread_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CCommunity_PostCommentToThread_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='comment_thread_type', full_name='CCommunity_PostCommentToThread_Request.comment_thread_type', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature', full_name='CCommunity_PostCommentToThread_Request.gidfeature', index=2,
+      number=3, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature2', full_name='CCommunity_PostCommentToThread_Request.gidfeature2', index=3,
+      number=4, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='text', full_name='CCommunity_PostCommentToThread_Request.text', index=4,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidparentcomment', full_name='CCommunity_PostCommentToThread_Request.gidparentcomment', index=5,
+      number=7, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='suppress_notifications', full_name='CCommunity_PostCommentToThread_Request.suppress_notifications', index=6,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2114,
+  serialized_end=2313,
 )
 
 
@@ -530,8 +870,74 @@ _CCOMMUNITY_POSTCOMMENTTOTHREAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1402,
-  serialized_end=1520,
+  serialized_start=2315,
+  serialized_end=2433,
+)
+
+
+_CCOMMUNITY_DELETECOMMENTFROMTHREAD_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_DeleteCommentFromThread_Request',
+  full_name='CCommunity_DeleteCommentFromThread_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CCommunity_DeleteCommentFromThread_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='comment_thread_type', full_name='CCommunity_DeleteCommentFromThread_Request.comment_thread_type', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature', full_name='CCommunity_DeleteCommentFromThread_Request.gidfeature', index=2,
+      number=3, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature2', full_name='CCommunity_DeleteCommentFromThread_Request.gidfeature2', index=3,
+      number=4, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidcomment', full_name='CCommunity_DeleteCommentFromThread_Request.gidcomment', index=4,
+      number=5, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='undelete', full_name='CCommunity_DeleteCommentFromThread_Request.undelete', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2436,
+  serialized_end=2605,
 )
 
 
@@ -554,8 +960,81 @@ _CCOMMUNITY_DELETECOMMENTFROMTHREAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1522,
-  serialized_end=1567,
+  serialized_start=2607,
+  serialized_end=2652,
+)
+
+
+_CCOMMUNITY_RATECOMMENTTHREAD_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_RateCommentThread_Request',
+  full_name='CCommunity_RateCommentThread_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='commentthreadtype', full_name='CCommunity_RateCommentThread_Request.commentthreadtype', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CCommunity_RateCommentThread_Request.steamid', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature', full_name='CCommunity_RateCommentThread_Request.gidfeature', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature2', full_name='CCommunity_RateCommentThread_Request.gidfeature2', index=3,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidcomment', full_name='CCommunity_RateCommentThread_Request.gidcomment', index=4,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rate_up', full_name='CCommunity_RateCommentThread_Request.rate_up', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='suppress_notifications', full_name='CCommunity_RateCommentThread_Request.suppress_notifications', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2655,
+  serialized_end=2847,
 )
 
 
@@ -613,8 +1092,74 @@ _CCOMMUNITY_RATECOMMENTTHREAD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1570,
-  serialized_end=1707,
+  serialized_start=2850,
+  serialized_end=2987,
+)
+
+
+_CCOMMUNITY_GETCOMMENTTHREADRATINGS_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_GetCommentThreadRatings_Request',
+  full_name='CCommunity_GetCommentThreadRatings_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='commentthreadtype', full_name='CCommunity_GetCommentThreadRatings_Request.commentthreadtype', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CCommunity_GetCommentThreadRatings_Request.steamid', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature', full_name='CCommunity_GetCommentThreadRatings_Request.gidfeature', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidfeature2', full_name='CCommunity_GetCommentThreadRatings_Request.gidfeature2', index=3,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gidcomment', full_name='CCommunity_GetCommentThreadRatings_Request.gidcomment', index=4,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='max_results', full_name='CCommunity_GetCommentThreadRatings_Request.max_results', index=5,
+      number=6, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2990,
+  serialized_end=3160,
 )
 
 
@@ -672,8 +1217,8 @@ _CCOMMUNITY_GETCOMMENTTHREADRATINGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1710,
-  serialized_end=1866,
+  serialized_start=3163,
+  serialized_end=3319,
 )
 
 
@@ -698,13 +1243,6 @@ _CCOMMUNITY_RATECLANANNOUNCEMENT_REQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='clan_accountid', full_name='CCommunity_RateClanAnnouncement_Request.clan_accountid', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -717,8 +1255,8 @@ _CCOMMUNITY_RATECLANANNOUNCEMENT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1868,
-  serialized_end=1974,
+  serialized_start=3321,
+  serialized_end=3403,
 )
 
 
@@ -741,8 +1279,8 @@ _CCOMMUNITY_RATECLANANNOUNCEMENT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1976,
-  serialized_end=2018,
+  serialized_start=3405,
+  serialized_end=3447,
 )
 
 
@@ -772,8 +1310,8 @@ _CCOMMUNITY_GETCLANANNOUNCEMENTVOTEFORUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2020,
-  serialized_end=2095,
+  serialized_start=3449,
+  serialized_end=3524,
 )
 
 
@@ -810,84 +1348,8 @@ _CCOMMUNITY_GETCLANANNOUNCEMENTVOTEFORUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2097,
-  serialized_end=2187,
-)
-
-
-_CCOMMUNITY_GETAVATARHISTORY_RESPONSE = _descriptor.Descriptor(
-  name='CCommunity_GetAvatarHistory_Response',
-  full_name='CCommunity_GetAvatarHistory_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='avatars', full_name='CCommunity_GetAvatarHistory_Response.avatars', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2189,
-  serialized_end=2294,
-)
-
-
-_CCOMMUNITY_GETAVATARHISTORY_RESPONSE_AVATARDATA = _descriptor.Descriptor(
-  name='CCommunity_GetAvatarHistory_Response_AvatarData',
-  full_name='CCommunity_GetAvatarHistory_Response_AvatarData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='avatar_sha1', full_name='CCommunity_GetAvatarHistory_Response_AvatarData.avatar_sha1', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='user_uploaded', full_name='CCommunity_GetAvatarHistory_Response_AvatarData.user_uploaded', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='CCommunity_GetAvatarHistory_Response_AvatarData.timestamp', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2296,
-  serialized_end=2408,
+  serialized_start=3526,
+  serialized_end=3616,
 )
 
 
@@ -924,8 +1386,102 @@ _CAPPPRIORITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2410,
-  serialized_end=2457,
+  serialized_start=3618,
+  serialized_end=3665,
+)
+
+
+_CCOMMUNITY_GETUSERPARTNEREVENTNEWS_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_GetUserPartnerEventNews_Request',
+  full_name='CCommunity_GetUserPartnerEventNews_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='count', full_name='CCommunity_GetUserPartnerEventNews_Request.count', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='offset', full_name='CCommunity_GetUserPartnerEventNews_Request.offset', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rtime32_start_time', full_name='CCommunity_GetUserPartnerEventNews_Request.rtime32_start_time', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rtime32_end_time', full_name='CCommunity_GetUserPartnerEventNews_Request.rtime32_end_time', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language_preference', full_name='CCommunity_GetUserPartnerEventNews_Request.language_preference', index=4,
+      number=5, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='filter_event_type', full_name='CCommunity_GetUserPartnerEventNews_Request.filter_event_type', index=5,
+      number=6, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=_b('\202\265\030.enum; suggested type: ECommunityWordFilterType'), file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='filter_to_appid', full_name='CCommunity_GetUserPartnerEventNews_Request.filter_to_appid', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_list', full_name='CCommunity_GetUserPartnerEventNews_Request.app_list', index=7,
+      number=8, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count_after', full_name='CCommunity_GetUserPartnerEventNews_Request.count_after', index=8,
+      number=9, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count_before', full_name='CCommunity_GetUserPartnerEventNews_Request.count_before', index=9,
+      number=10, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3668,
+  serialized_end=4012,
 )
 
 
@@ -955,8 +1511,46 @@ _CCOMMUNITY_GETUSERPARTNEREVENTNEWS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2459,
-  serialized_end=2546,
+  serialized_start=4014,
+  serialized_end=4101,
+)
+
+
+_CCOMMUNITY_GETBESTEVENTSFORUSER_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_GetBestEventsForUser_Request',
+  full_name='CCommunity_GetBestEventsForUser_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='include_steam_blog', full_name='CCommunity_GetBestEventsForUser_Request.include_steam_blog', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='filter_to_played_within_days', full_name='CCommunity_GetBestEventsForUser_Request.filter_to_played_within_days', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4103,
+  serialized_end=4210,
 )
 
 
@@ -1028,8 +1622,8 @@ _CCOMMUNITY_PARTNEREVENTRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2549,
-  serialized_end=2744,
+  serialized_start=4213,
+  serialized_end=4408,
 )
 
 
@@ -1059,8 +1653,32 @@ _CCOMMUNITY_GETBESTEVENTSFORUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2746,
-  serialized_end=2837,
+  serialized_start=4410,
+  serialized_end=4501,
+)
+
+
+_CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_ClearUserPartnerEventsAppPriorities_Request',
+  full_name='CCommunity_ClearUserPartnerEventsAppPriorities_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4503,
+  serialized_end=4559,
 )
 
 
@@ -1083,8 +1701,8 @@ _CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2839,
-  serialized_end=2896,
+  serialized_start=4561,
+  serialized_end=4618,
 )
 
 
@@ -1121,8 +1739,32 @@ _CCOMMUNITY_PARTNEREVENTSAPPPRIORITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2898,
-  serialized_end=2977,
+  serialized_start=4620,
+  serialized_end=4699,
+)
+
+
+_CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_GetUserPartnerEventsAppPriorities_Request',
+  full_name='CCommunity_GetUserPartnerEventsAppPriorities_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4701,
+  serialized_end=4755,
 )
 
 
@@ -1152,8 +1794,39 @@ _CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2979,
-  serialized_end=3092,
+  serialized_start=4757,
+  serialized_end=4870,
+)
+
+
+_CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_ClearSinglePartnerEventsAppPriority_Request',
+  full_name='CCommunity_ClearSinglePartnerEventsAppPriority_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCommunity_ClearSinglePartnerEventsAppPriority_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4872,
+  serialized_end=4943,
 )
 
 
@@ -1176,8 +1849,39 @@ _CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_RESPONSE = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3094,
-  serialized_end=3151,
+  serialized_start=4945,
+  serialized_end=5002,
+)
+
+
+_CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_PartnerEventsShowMoreForApp_Request',
+  full_name='CCommunity_PartnerEventsShowMoreForApp_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCommunity_PartnerEventsShowMoreForApp_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5004,
+  serialized_end=5067,
 )
 
 
@@ -1200,8 +1904,39 @@ _CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3153,
-  serialized_end=3202,
+  serialized_start=5069,
+  serialized_end=5118,
+)
+
+
+_CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_REQUEST = _descriptor.Descriptor(
+  name='CCommunity_PartnerEventsShowLessForApp_Request',
+  full_name='CCommunity_PartnerEventsShowLessForApp_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appid', full_name='CCommunity_PartnerEventsShowLessForApp_Request.appid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5120,
+  serialized_end=5183,
 )
 
 
@@ -1224,8 +1959,8 @@ _CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3204,
-  serialized_end=3253,
+  serialized_start=5185,
+  serialized_end=5234,
 )
 
 
@@ -1255,8 +1990,8 @@ _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3256,
-  serialized_end=3385,
+  serialized_start=5237,
+  serialized_end=5366,
 )
 
 
@@ -1287,7 +2022,7 @@ _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST_PARTNEREVENTMARKING = _descriptor.D
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\202\265\030\004enum'), file=DESCRIPTOR),
+      serialized_options=_b('\202\265\0302enum; suggested type: EPartnerEventDisplayLocation'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='mark_shown', full_name='CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking.mark_shown', index=3,
       number=4, type=8, cpp_type=7, label=1,
@@ -1314,8 +2049,8 @@ _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST_PARTNEREVENTMARKING = _descriptor.D
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3388,
-  serialized_end=3563,
+  serialized_start=5369,
+  serialized_end=5590,
 )
 
 
@@ -1338,20 +2073,20 @@ _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3565,
-  serialized_end=3611,
+  serialized_start=5592,
+  serialized_end=5638,
 )
 
 
-_CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE = _descriptor.Descriptor(
-  name='CCommunity_GetUserPartnerEventViewStatus_Response',
-  full_name='CCommunity_GetUserPartnerEventViewStatus_Response',
+_CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION = _descriptor.Descriptor(
+  name='CProductImpressionsFromClient_Notification',
+  full_name='CProductImpressionsFromClient_Notification',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='events', full_name='CCommunity_GetUserPartnerEventViewStatus_Response.events', index=0,
+      name='impressions', full_name='CProductImpressionsFromClient_Notification.impressions', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1369,46 +2104,39 @@ _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3614,
-  serialized_end=3746,
+  serialized_start=5640,
+  serialized_end=5761,
 )
 
 
-_CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE_PARTNEREVENT = _descriptor.Descriptor(
-  name='CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent',
-  full_name='CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent',
+_CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION = _descriptor.Descriptor(
+  name='CProductImpressionsFromClient_Notification_Impression',
+  full_name='CProductImpressionsFromClient_Notification_Impression',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='event_gid', full_name='CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.event_gid', index=0,
-      number=1, type=6, cpp_type=4, label=1,
+      name='type', full_name='CProductImpressionsFromClient_Notification_Impression.type', index=0,
+      number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\202\265\0306enum; suggested type: EProductImpressionFromClientType'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='last_shown_time', full_name='CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.last_shown_time', index=1,
+      name='appid', full_name='CProductImpressionsFromClient_Notification_Impression.appid', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='last_read_time', full_name='CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.last_read_time', index=2,
+      name='num_impressions', full_name='CProductImpressionsFromClient_Notification_Impression.num_impressions', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='clan_account_id', full_name='CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent.clan_account_id', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1421,111 +2149,135 @@ _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE_PARTNEREVENT = _descriptor.De
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3749,
-  serialized_end=3906,
+  serialized_start=5764,
+  serialized_end=5933,
 )
 
 
-_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST = _descriptor.Descriptor(
-  name='CWebRTCClient_InitiateWebRTCConnection_Request',
-  full_name='CWebRTCClient_InitiateWebRTCConnection_Request',
+_CFRIENDSLISTCATEGORY = _descriptor.Descriptor(
+  name='CFriendsListCategory',
+  full_name='CFriendsListCategory',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='sdp', full_name='CWebRTCClient_InitiateWebRTCConnection_Request.sdp', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3908,
-  serialized_end=3969,
-)
-
-
-_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE = _descriptor.Descriptor(
-  name='CWebRTCClient_InitiateWebRTCConnection_Response',
-  full_name='CWebRTCClient_InitiateWebRTCConnection_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='remote_description', full_name='CWebRTCClient_InitiateWebRTCConnection_Response.remote_description', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3971,
-  serialized_end=4048,
-)
-
-
-_CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION = _descriptor.Descriptor(
-  name='CWebRTC_WebRTCSessionConnected_Notification',
-  full_name='CWebRTC_WebRTCSessionConnected_Notification',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ssrc', full_name='CWebRTC_WebRTCSessionConnected_Notification.ssrc', index=0,
+      name='groupid', full_name='CFriendsListCategory.groupid', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='client_ip', full_name='CWebRTC_WebRTCSessionConnected_Notification.client_ip', index=1,
+      name='name', full_name='CFriendsListCategory.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='accountid_members', full_name='CFriendsListCategory.accountid_members', index=2,
+      number=3, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5935,
+  serialized_end=6015,
+)
+
+
+_CFRIENDSLIST_GETCATEGORIES_REQUEST = _descriptor.Descriptor(
+  name='CFriendsList_GetCategories_Request',
+  full_name='CFriendsList_GetCategories_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6017,
+  serialized_end=6053,
+)
+
+
+_CFRIENDSLIST_GETCATEGORIES_RESPONSE = _descriptor.Descriptor(
+  name='CFriendsList_GetCategories_Response',
+  full_name='CFriendsList_GetCategories_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='categories', full_name='CFriendsList_GetCategories_Response.categories', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6055,
+  serialized_end=6135,
+)
+
+
+_CFRIENDSLISTFAVORITEENTRY = _descriptor.Descriptor(
+  name='CFriendsListFavoriteEntry',
+  full_name='CFriendsListFavoriteEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='accountid', full_name='CFriendsListFavoriteEntry.accountid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='clanid', full_name='CFriendsListFavoriteEntry.clanid', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='client_port', full_name='CWebRTC_WebRTCSessionConnected_Notification.client_port', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='server_ip', full_name='CWebRTC_WebRTCSessionConnected_Notification.server_ip', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='server_port', full_name='CWebRTC_WebRTCSessionConnected_Notification.server_port', index=4,
-      number=5, type=13, cpp_type=3, label=1,
+      name='chat_group_id', full_name='CFriendsListFavoriteEntry.chat_group_id', index=2,
+      number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1542,34 +2294,531 @@ _CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4051,
-  serialized_end=4190,
+  serialized_start=6137,
+  serialized_end=6222,
 )
 
 
-_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION = _descriptor.Descriptor(
-  name='CWebRTC_WebRTCUpdateRemoteDescription_Notification',
-  full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification',
+_CFRIENDSLIST_GETFAVORITES_REQUEST = _descriptor.Descriptor(
+  name='CFriendsList_GetFavorites_Request',
+  full_name='CFriendsList_GetFavorites_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6224,
+  serialized_end=6259,
+)
+
+
+_CFRIENDSLIST_GETFAVORITES_RESPONSE = _descriptor.Descriptor(
+  name='CFriendsList_GetFavorites_Response',
+  full_name='CFriendsList_GetFavorites_Response',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='remote_description', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification.remote_description', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='favorites', full_name='CFriendsList_GetFavorites_Response.favorites', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6261,
+  serialized_end=6344,
+)
+
+
+_CFRIENDSLIST_SETFAVORITES_REQUEST = _descriptor.Descriptor(
+  name='CFriendsList_SetFavorites_Request',
+  full_name='CFriendsList_SetFavorites_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='remote_description_version', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification.remote_description_version', index=1,
-      number=2, type=4, cpp_type=4, label=1,
+      name='favorites', full_name='CFriendsList_SetFavorites_Request.favorites', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6346,
+  serialized_end=6428,
+)
+
+
+_CFRIENDSLIST_SETFAVORITES_RESPONSE = _descriptor.Descriptor(
+  name='CFriendsList_SetFavorites_Response',
+  full_name='CFriendsList_SetFavorites_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6430,
+  serialized_end=6466,
+)
+
+
+_CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION = _descriptor.Descriptor(
+  name='CFriendsList_FavoritesChanged_Notification',
+  full_name='CFriendsList_FavoritesChanged_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='favorites', full_name='CFriendsList_FavoritesChanged_Notification.favorites', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6468,
+  serialized_end=6559,
+)
+
+
+_CFRIENDSLIST_GETFRIENDSLIST_REQUEST = _descriptor.Descriptor(
+  name='CFriendsList_GetFriendsList_Request',
+  full_name='CFriendsList_GetFriendsList_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6561,
+  serialized_end=6598,
+)
+
+
+_CFRIENDSLIST_GETFRIENDSLIST_RESPONSE = _descriptor.Descriptor(
+  name='CFriendsList_GetFriendsList_Response',
+  full_name='CFriendsList_GetFriendsList_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='friendslist', full_name='CFriendsList_GetFriendsList_Response.friendslist', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6600,
+  serialized_end=6683,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILES = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserPublishedFiles',
+  full_name='CMsgClientUCMEnumerateUserPublishedFiles',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMEnumerateUserPublishedFiles.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ssrcs_to_accountids', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification.ssrcs_to_accountids', index=2,
+      name='start_index', full_name='CMsgClientUCMEnumerateUserPublishedFiles.start_index', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sort_order', full_name='CMsgClientUCMEnumerateUserPublishedFiles.sort_order', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6685,
+  serialized_end=6784,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserPublishedFilesResponse',
+  full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='published_files', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse.published_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6787,
+  serialized_end=6972,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId',
+  full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6974,
+  serialized_end=7067,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILES = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserSubscribedFiles',
+  full_name='CMsgClientUCMEnumerateUserSubscribedFiles',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_index', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.start_index', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='list_type', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.list_type', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='matching_file_type', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.matching_file_type', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='CMsgClientUCMEnumerateUserSubscribedFiles.count', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=50,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7070,
+  serialized_end=7222,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserSubscribedFilesResponse',
+  full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='subscribed_files', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse.subscribed_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7225,
+  serialized_end=7413,
+)
+
+
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId',
+  full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rtime32_subscribed', full_name='CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId.rtime32_subscribed', index=1,
+      number=2, type=7, cpp_type=3, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7415,
+  serialized_end=7540,
+)
+
+
+_CMSGCLIENTUCMPUBLISHEDFILEDELETED = _descriptor.Descriptor(
+  name='CMsgClientUCMPublishedFileDeleted',
+  full_name='CMsgClientUCMPublishedFileDeleted',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMPublishedFileDeleted.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMPublishedFileDeleted.app_id', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7542,
+  serialized_end=7620,
+)
+
+
+_CMSGCLIENTWORKSHOPITEMINFOREQUEST = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoRequest',
+  full_name='CMsgClientWorkshopItemInfoRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientWorkshopItemInfoRequest.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='last_time_updated', full_name='CMsgClientWorkshopItemInfoRequest.last_time_updated', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='workshop_items', full_name='CMsgClientWorkshopItemInfoRequest.workshop_items', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1587,27 +2836,27 @@ _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4193,
-  serialized_end=4415,
+  serialized_start=7623,
+  serialized_end=7774,
 )
 
 
-_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING = _descriptor.Descriptor(
-  name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping',
-  full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping',
+_CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoRequest_WorkshopItem',
+  full_name='CMsgClientWorkshopItemInfoRequest_WorkshopItem',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ssrc', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping.ssrc', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      name='published_file_id', full_name='CMsgClientWorkshopItemInfoRequest_WorkshopItem.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='accountid', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping.accountid', index=1,
+      name='time_updated', full_name='CMsgClientWorkshopItemInfoRequest_WorkshopItem.time_updated', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1625,49 +2874,354 @@ _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING = _d
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4417,
-  serialized_end=4526,
+  serialized_start=7776,
+  serialized_end=7873,
 )
 
 
-_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST = _descriptor.Descriptor(
-  name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request',
-  full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request',
+_CMSGCLIENTWORKSHOPITEMINFORESPONSE = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoResponse',
+  full_name='CMsgClientWorkshopItemInfoResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ip_webrtc_server', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.ip_webrtc_server', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      name='eresult', full_name='CMsgClientWorkshopItemInfoResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='port_webrtc_server', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.port_webrtc_server', index=1,
+      name='update_time', full_name='CMsgClientWorkshopItemInfoResponse.update_time', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ip_webrtc_session_client', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.ip_webrtc_session_client', index=2,
+      name='workshop_items', full_name='CMsgClientWorkshopItemInfoResponse.workshop_items', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='private_items', full_name='CMsgClientWorkshopItemInfoResponse.private_items', index=3,
+      number=4, type=6, cpp_type=4, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7876,
+  serialized_end=8054,
+)
+
+
+_CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO = _descriptor.Descriptor(
+  name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo',
+  full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_updated', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.time_updated', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manifest_id', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.manifest_id', index=2,
+      number=3, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_legacy', full_name='CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo.is_legacy', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8057,
+  serialized_end=8199,
+)
+
+
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSER = _descriptor.Descriptor(
+  name='CMsgClientUCMGetPublishedFilesForUser',
+  full_name='CMsgClientUCMGetPublishedFilesForUser',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgClientUCMGetPublishedFilesForUser.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='creator_steam_id', full_name='CMsgClientUCMGetPublishedFilesForUser.creator_steam_id', index=1,
+      number=2, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='required_tags', full_name='CMsgClientUCMGetPublishedFilesForUser.required_tags', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='excluded_tags', full_name='CMsgClientUCMGetPublishedFilesForUser.excluded_tags', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_index', full_name='CMsgClientUCMGetPublishedFilesForUser.start_index', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8202,
+  serialized_end=8350,
+)
+
+
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE = _descriptor.Descriptor(
+  name='CMsgClientUCMGetPublishedFilesForUserResponse',
+  full_name='CMsgClientUCMGetPublishedFilesForUserResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgClientUCMGetPublishedFilesForUserResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='published_files', full_name='CMsgClientUCMGetPublishedFilesForUserResponse.published_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgClientUCMGetPublishedFilesForUserResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8353,
+  serialized_end=8532,
+)
+
+
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId',
+  full_name='CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8534,
+  serialized_end=8624,
+)
+
+
+_CMSGCREENUMERATEPUBLISHEDFILES = _descriptor.Descriptor(
+  name='CMsgCREEnumeratePublishedFiles',
+  full_name='CMsgCREEnumeratePublishedFiles',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CMsgCREEnumeratePublishedFiles.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='query_type', full_name='CMsgCREEnumeratePublishedFiles.query_type', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_index', full_name='CMsgCREEnumeratePublishedFiles.start_index', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='port_webrtc_session_client', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.port_webrtc_session_client', index=3,
+      name='days', full_name='CMsgCREEnumeratePublishedFiles.days', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_description_version', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.remote_description_version', index=4,
-      number=5, type=4, cpp_type=4, label=1,
+      name='count', full_name='CMsgCREEnumeratePublishedFiles.count', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tags', full_name='CMsgCREEnumeratePublishedFiles.tags', index=5,
+      number=6, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_tags', full_name='CMsgCREEnumeratePublishedFiles.user_tags', index=6,
+      number=7, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='matching_file_type', full_name='CMsgCREEnumeratePublishedFiles.matching_file_type', index=7,
+      number=8, type=13, cpp_type=3, label=1,
+      has_default_value=True, default_value=13,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8627,
+  serialized_end=8810,
+)
+
+
+_CMSGCREENUMERATEPUBLISHEDFILESRESPONSE = _descriptor.Descriptor(
+  name='CMsgCREEnumeratePublishedFilesResponse',
+  full_name='CMsgCREEnumeratePublishedFilesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eresult', full_name='CMsgCREEnumeratePublishedFilesResponse.eresult', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=2,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='published_files', full_name='CMsgCREEnumeratePublishedFilesResponse.published_files', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_results', full_name='CMsgCREEnumeratePublishedFilesResponse.total_results', index=2,
+      number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1684,14 +3238,201 @@ _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4529,
-  serialized_end=4748,
+  serialized_start=8813,
+  serialized_end=8978,
 )
 
 
-_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE = _descriptor.Descriptor(
-  name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response',
-  full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response',
+_CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID = _descriptor.Descriptor(
+  name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId',
+  full_name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='published_file_id', full_name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId.published_file_id', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='votes_for', full_name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId.votes_for', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='votes_against', full_name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId.votes_against', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reports', full_name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId.reports', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='score', full_name='CMsgCREEnumeratePublishedFilesResponse_PublishedFileId.score', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8981,
+  serialized_end=9138,
+)
+
+
+_CMSGGAMESERVERPINGSAMPLE = _descriptor.Descriptor(
+  name='CMsgGameServerPingSample',
+  full_name='CMsgGameServerPingSample',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='my_ip', full_name='CMsgGameServerPingSample.my_ip', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gs_app_id', full_name='CMsgGameServerPingSample.gs_app_id', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gs_samples', full_name='CMsgGameServerPingSample.gs_samples', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9140,
+  serialized_end=9254,
+)
+
+
+_CMSGGAMESERVERPINGSAMPLE_SAMPLE = _descriptor.Descriptor(
+  name='CMsgGameServerPingSample_Sample',
+  full_name='CMsgGameServerPingSample_Sample',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='CMsgGameServerPingSample_Sample.ip', index=0,
+      number=1, type=7, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='avg_ping_ms', full_name='CMsgGameServerPingSample_Sample.avg_ping_ms', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='stddev_ping_ms_x10', full_name='CMsgGameServerPingSample_Sample.stddev_ping_ms_x10', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9256,
+  serialized_end=9350,
+)
+
+
+_CCLAN_RESPONDTOCLANINVITE_REQUEST = _descriptor.Descriptor(
+  name='CClan_RespondToClanInvite_Request',
+  full_name='CClan_RespondToClanInvite_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CClan_RespondToClanInvite_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='accept', full_name='CClan_RespondToClanInvite_Request.accept', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9352,
+  serialized_end=9420,
+)
+
+
+_CCLAN_RESPONDTOCLANINVITE_RESPONSE = _descriptor.Descriptor(
+  name='CClan_RespondToClanInvite_Response',
+  full_name='CClan_RespondToClanInvite_Response',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -1708,8 +3449,8 @@ _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE = _descriptor.Descri
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4750,
-  serialized_end=4810,
+  serialized_start=9422,
+  serialized_end=9458,
 )
 
 
@@ -1739,8 +3480,8 @@ _CVOICECHAT_REQUESTONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4812,
-  serialized_end=4877,
+  serialized_start=9460,
+  serialized_end=9525,
 )
 
 
@@ -1770,8 +3511,8 @@ _CVOICECHAT_REQUESTONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4879,
-  serialized_end=4942,
+  serialized_start=9527,
+  serialized_end=9590,
 )
 
 
@@ -1808,8 +3549,8 @@ _CVOICECHAT_ONEONONECHATREQUESTED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4944,
-  serialized_end=5038,
+  serialized_start=9592,
+  serialized_end=9686,
 )
 
 
@@ -1853,8 +3594,8 @@ _CVOICECHAT_ANSWERONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5040,
-  serialized_end=5152,
+  serialized_start=9688,
+  serialized_end=9800,
 )
 
 
@@ -1877,8 +3618,8 @@ _CVOICECHAT_ANSWERONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5154,
-  serialized_end=5194,
+  serialized_start=9802,
+  serialized_end=9842,
 )
 
 
@@ -1922,8 +3663,8 @@ _CVOICECHAT_ONEONONECHATREQUESTRESPONSE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5196,
-  serialized_end=5322,
+  serialized_start=9844,
+  serialized_end=9970,
 )
 
 
@@ -1953,8 +3694,8 @@ _CVOICECHAT_ENDONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5324,
-  serialized_end=5385,
+  serialized_start=9972,
+  serialized_end=10033,
 )
 
 
@@ -1977,8 +3718,8 @@ _CVOICECHAT_ENDONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5387,
-  serialized_end=5424,
+  serialized_start=10035,
+  serialized_end=10072,
 )
 
 
@@ -2015,8 +3756,8 @@ _CVOICECHAT_LEAVEONEONONECHAT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5426,
-  serialized_end=5511,
+  serialized_start=10074,
+  serialized_end=10159,
 )
 
 
@@ -2039,8 +3780,8 @@ _CVOICECHAT_LEAVEONEONONECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5513,
-  serialized_end=5552,
+  serialized_start=10161,
+  serialized_end=10200,
 )
 
 
@@ -2112,8 +3853,8 @@ _CVOICECHAT_USERJOINEDVOICECHAT_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5555,
-  serialized_end=5776,
+  serialized_start=10203,
+  serialized_end=10424,
 )
 
 
@@ -2178,8 +3919,8 @@ _CVOICECHAT_USERVOICESTATUS_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5779,
-  serialized_end=6003,
+  serialized_start=10427,
+  serialized_end=10651,
 )
 
 
@@ -2216,8 +3957,8 @@ _CVOICECHAT_ALLMEMBERSSTATUS_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6005,
-  serialized_end=6126,
+  serialized_start=10653,
+  serialized_end=10774,
 )
 
 
@@ -2296,8 +4037,8 @@ _CVOICECHAT_UPDATEVOICECHATWEBRTCDATA_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6129,
-  serialized_end=6393,
+  serialized_start=10777,
+  serialized_end=11041,
 )
 
 
@@ -2327,8 +4068,8 @@ _CVOICECHAT_UPDATEVOICECHATWEBRTCDATA_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6395,
-  serialized_end=6474,
+  serialized_start=11043,
+  serialized_end=11122,
 )
 
 
@@ -2365,8 +4106,8 @@ _CVOICECHAT_UPLOADCLIENTVOICECHATLOGS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6476,
-  serialized_end=6581,
+  serialized_start=11124,
+  serialized_end=11229,
 )
 
 
@@ -2389,8 +4130,39 @@ _CVOICECHAT_UPLOADCLIENTVOICECHATLOGS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6583,
-  serialized_end=6630,
+  serialized_start=11231,
+  serialized_end=11278,
+)
+
+
+_CVOICECHAT_LEAVEVOICECHAT_REQUEST = _descriptor.Descriptor(
+  name='CVoiceChat_LeaveVoiceChat_Request',
+  full_name='CVoiceChat_LeaveVoiceChat_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='voice_chatid', full_name='CVoiceChat_LeaveVoiceChat_Request.voice_chatid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11280,
+  serialized_end=11337,
 )
 
 
@@ -2413,8 +4185,8 @@ _CVOICECHAT_LEAVEVOICECHAT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6632,
-  serialized_end=6668,
+  serialized_start=11339,
+  serialized_end=11375,
 )
 
 
@@ -2486,8 +4258,8 @@ _CVOICECHAT_USERLEFTVOICECHAT_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6671,
-  serialized_end=6890,
+  serialized_start=11378,
+  serialized_end=11597,
 )
 
 
@@ -2545,214 +4317,20 @@ _CVOICECHAT_VOICECHATENDED_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6893,
-  serialized_end=7063,
+  serialized_start=11600,
+  serialized_end=11770,
 )
 
 
-_CSTEAMTV_CREATEBROADCASTCHANNEL_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_CreateBroadcastChannel_Response',
-  full_name='CSteamTV_CreateBroadcastChannel_Response',
+_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST = _descriptor.Descriptor(
+  name='CWebRTCClient_InitiateWebRTCConnection_Request',
+  full_name='CWebRTCClient_InitiateWebRTCConnection_Request',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='CSteamTV_CreateBroadcastChannel_Response.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7065,
-  serialized_end=7137,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELID_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelID_Response',
-  full_name='CSteamTV_GetBroadcastChannelID_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='CSteamTV_GetBroadcastChannelID_Response.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='unique_name', full_name='CSteamTV_GetBroadcastChannelID_Response.unique_name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='steamid', full_name='CSteamTV_GetBroadcastChannelID_Response.steamid', index=2,
-      number=3, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7139,
-  serialized_end=7248,
-)
-
-
-_CSTEAMTV_SETBROADCASTCHANNELPROFILE_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_SetBroadcastChannelProfile_Response',
-  full_name='CSteamTV_SetBroadcastChannelProfile_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7250,
-  serialized_end=7296,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELPROFILE_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelProfile_Response',
-  full_name='CSteamTV_GetBroadcastChannelProfile_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='unique_name', full_name='CSteamTV_GetBroadcastChannelProfile_Response.unique_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='owner_steamid', full_name='CSteamTV_GetBroadcastChannelProfile_Response.owner_steamid', index=1,
-      number=2, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='CSteamTV_GetBroadcastChannelProfile_Response.name', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='language', full_name='CSteamTV_GetBroadcastChannelProfile_Response.language', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='headline', full_name='CSteamTV_GetBroadcastChannelProfile_Response.headline', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='summary', full_name='CSteamTV_GetBroadcastChannelProfile_Response.summary', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='schedule', full_name='CSteamTV_GetBroadcastChannelProfile_Response.schedule', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='rules', full_name='CSteamTV_GetBroadcastChannelProfile_Response.rules', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='panels', full_name='CSteamTV_GetBroadcastChannelProfile_Response.panels', index=8,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_partnered', full_name='CSteamTV_GetBroadcastChannelProfile_Response.is_partnered', index=9,
-      number=10, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7299,
-  serialized_end=7527,
-)
-
-
-_CSTEAMTV_SETBROADCASTCHANNELIMAGE_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_SetBroadcastChannelImage_Response',
-  full_name='CSteamTV_SetBroadcastChannelImage_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='replace_image_hash', full_name='CSteamTV_SetBroadcastChannelImage_Response.replace_image_hash', index=0,
+      name='sdp', full_name='CWebRTCClient_InitiateWebRTCConnection_Request.sdp', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2770,70 +4348,25 @@ _CSTEAMTV_SETBROADCASTCHANNELIMAGE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7529,
-  serialized_end=7601,
+  serialized_start=11772,
+  serialized_end=11833,
 )
 
 
-_CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelImages_Response',
-  full_name='CSteamTV_GetBroadcastChannelImages_Response',
+_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE = _descriptor.Descriptor(
+  name='CWebRTCClient_InitiateWebRTCConnection_Response',
+  full_name='CWebRTCClient_InitiateWebRTCConnection_Response',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='images', full_name='CSteamTV_GetBroadcastChannelImages_Response.images', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7603,
-  serialized_end=7717,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE_IMAGES = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelImages_Response_Images',
-  full_name='CSteamTV_GetBroadcastChannelImages_Response_Images',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='image_type', full_name='CSteamTV_GetBroadcastChannelImages_Response_Images.image_type', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=_b('\202\265\030\004enum'), file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='image_path', full_name='CSteamTV_GetBroadcastChannelImages_Response_Images.image_path', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='remote_description', full_name='CWebRTCClient_InitiateWebRTCConnection_Response.remote_description', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='image_index', full_name='CSteamTV_GetBroadcastChannelImages_Response_Images.image_index', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -2846,1730 +4379,49 @@ _CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE_IMAGES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7719,
-  serialized_end=7842,
+  serialized_start=11835,
+  serialized_end=11912,
 )
 
 
-_CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelLinks_Response',
-  full_name='CSteamTV_GetBroadcastChannelLinks_Response',
+_CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION = _descriptor.Descriptor(
+  name='CWebRTC_WebRTCSessionConnected_Notification',
+  full_name='CWebRTC_WebRTCSessionConnected_Notification',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='links', full_name='CSteamTV_GetBroadcastChannelLinks_Response.links', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7844,
-  serialized_end=7954,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE_LINKS = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelLinks_Response_Links',
-  full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='link_index', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.link_index', index=0,
+      name='ssrc', full_name='CWebRTC_WebRTCSessionConnected_Notification.ssrc', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='url', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.url', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='link_description', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.link_description', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='left', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.left', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='top', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.top', index=4,
-      number=5, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='width', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.width', index=5,
-      number=6, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='height', full_name='CSteamTV_GetBroadcastChannelLinks_Response_Links.height', index=6,
-      number=7, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7957,
-  serialized_end=8124,
-)
-
-
-_CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_REQUEST_LINKS = _descriptor.Descriptor(
-  name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links',
-  full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='link_index', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.link_index', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='url', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.url', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='link_description', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.link_description', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='left', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.left', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='top', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.top', index=4,
-      number=5, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='width', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.width', index=5,
-      number=6, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='height', full_name='CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.height', index=6,
-      number=7, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=8127,
-  serialized_end=8299,
-)
-
-
-_CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_SetBroadcastChannelLinkRegions_Response',
-  full_name='CSteamTV_SetBroadcastChannelLinkRegions_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=8301,
-  serialized_end=8351,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELSTATUS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelStatus_Response',
-  full_name='CSteamTV_GetBroadcastChannelStatus_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='is_live', full_name='CSteamTV_GetBroadcastChannelStatus_Response.is_live', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_disabled', full_name='CSteamTV_GetBroadcastChannelStatus_Response.is_disabled', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='CSteamTV_GetBroadcastChannelStatus_Response.appid', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='viewers', full_name='CSteamTV_GetBroadcastChannelStatus_Response.viewers', index=3,
-      number=4, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='views', full_name='CSteamTV_GetBroadcastChannelStatus_Response.views', index=4,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='broadcaster_steamid', full_name='CSteamTV_GetBroadcastChannelStatus_Response.broadcaster_steamid', index=5,
-      number=6, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='thumbnail_url', full_name='CSteamTV_GetBroadcastChannelStatus_Response.thumbnail_url', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='followers', full_name='CSteamTV_GetBroadcastChannelStatus_Response.followers', index=7,
-      number=8, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='subscribers', full_name='CSteamTV_GetBroadcastChannelStatus_Response.subscribers', index=8,
-      number=9, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='unique_name', full_name='CSteamTV_GetBroadcastChannelStatus_Response.unique_name', index=9,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='broadcast_session_id', full_name='CSteamTV_GetBroadcastChannelStatus_Response.broadcast_session_id', index=10,
-      number=11, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=8354,
-  serialized_end=8627,
-)
-
-
-_GETBROADCASTCHANNELENTRY = _descriptor.Descriptor(
-  name='GetBroadcastChannelEntry',
-  full_name='GetBroadcastChannelEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='GetBroadcastChannelEntry.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='unique_name', full_name='GetBroadcastChannelEntry.unique_name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='GetBroadcastChannelEntry.name', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='GetBroadcastChannelEntry.appid', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='viewers', full_name='GetBroadcastChannelEntry.viewers', index=4,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='views', full_name='GetBroadcastChannelEntry.views', index=5,
-      number=6, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='thumbnail_url', full_name='GetBroadcastChannelEntry.thumbnail_url', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='followers', full_name='GetBroadcastChannelEntry.followers', index=7,
-      number=8, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='headline', full_name='GetBroadcastChannelEntry.headline', index=8,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='avatar_url', full_name='GetBroadcastChannelEntry.avatar_url', index=9,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='broadcaster_steamid', full_name='GetBroadcastChannelEntry.broadcaster_steamid', index=10,
-      number=11, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='subscribers', full_name='GetBroadcastChannelEntry.subscribers', index=11,
-      number=12, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='background_url', full_name='GetBroadcastChannelEntry.background_url', index=12,
-      number=13, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_featured', full_name='GetBroadcastChannelEntry.is_featured', index=13,
-      number=14, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_disabled', full_name='GetBroadcastChannelEntry.is_disabled', index=14,
-      number=15, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_live', full_name='GetBroadcastChannelEntry.is_live', index=15,
-      number=16, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='language', full_name='GetBroadcastChannelEntry.language', index=16,
-      number=17, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='reports', full_name='GetBroadcastChannelEntry.reports', index=17,
-      number=18, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_partnered', full_name='GetBroadcastChannelEntry.is_partnered', index=18,
-      number=19, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=8630,
-  serialized_end=9038,
-)
-
-
-_CSTEAMTV_GETFOLLOWEDCHANNELS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetFollowedChannels_Response',
-  full_name='CSteamTV_GetFollowedChannels_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetFollowedChannels_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9040,
-  serialized_end=9123,
-)
-
-
-_CSTEAMTV_GETSUBSCRIBEDCHANNELS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetSubscribedChannels_Response',
-  full_name='CSteamTV_GetSubscribedChannels_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetSubscribedChannels_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9125,
-  serialized_end=9210,
-)
-
-
-_CSTEAMTV_FOLLOWBROADCASTCHANNEL_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_FollowBroadcastChannel_Response',
-  full_name='CSteamTV_FollowBroadcastChannel_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='is_followed', full_name='CSteamTV_FollowBroadcastChannel_Response.is_followed', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9212,
-  serialized_end=9275,
-)
-
-
-_CSTEAMTV_SUBSCRIBEBROADCASTCHANNEL_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_SubscribeBroadcastChannel_Response',
-  full_name='CSteamTV_SubscribeBroadcastChannel_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='is_subscribed', full_name='CSteamTV_SubscribeBroadcastChannel_Response.is_subscribed', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9277,
-  serialized_end=9345,
-)
-
-
-_CSTEAMTV_REPORTBROADCASTCHANNEL_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_ReportBroadcastChannel_Response',
-  full_name='CSteamTV_ReportBroadcastChannel_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9347,
-  serialized_end=9389,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELINTERACTION_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelInteraction_Response',
-  full_name='CSteamTV_GetBroadcastChannelInteraction_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='is_followed', full_name='CSteamTV_GetBroadcastChannelInteraction_Response.is_followed', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='is_subscribed', full_name='CSteamTV_GetBroadcastChannelInteraction_Response.is_subscribed', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9391,
-  serialized_end=9485,
-)
-
-
-_CSTEAMTV_GAME = _descriptor.Descriptor(
-  name='CSteamTV_Game',
-  full_name='CSteamTV_Game',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='CSteamTV_Game.appid', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='CSteamTV_Game.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='image', full_name='CSteamTV_Game.image', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='viewers', full_name='CSteamTV_Game.viewers', index=3,
-      number=4, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='channels', full_name='CSteamTV_Game.channels', index=4,
-      number=5, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='release_date', full_name='CSteamTV_Game.release_date', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='developer', full_name='CSteamTV_Game.developer', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='publisher', full_name='CSteamTV_Game.publisher', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9488,
-  serialized_end=9669,
-)
-
-
-_CSTEAMTV_GETGAMES_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetGames_Response',
-  full_name='CSteamTV_GetGames_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetGames_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9671,
-  serialized_end=9732,
-)
-
-
-_CSTEAMTV_GETCHANNELS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetChannels_Response',
-  full_name='CSteamTV_GetChannels_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetChannels_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9734,
-  serialized_end=9809,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelBroadcasters_Response',
-  full_name='CSteamTV_GetBroadcastChannelBroadcasters_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcasters', full_name='CSteamTV_GetBroadcastChannelBroadcasters_Response.broadcasters', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9812,
-  serialized_end=9949,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE_BROADCASTER = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster',
-  full_name='CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='steamid', full_name='CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.steamid', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='rtmp_token', full_name='CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.rtmp_token', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9951,
-  serialized_end=10065,
-)
-
-
-_CSTEAMTV_CHATBAN = _descriptor.Descriptor(
-  name='CSteamTV_ChatBan',
-  full_name='CSteamTV_ChatBan',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='issuer_steamid', full_name='CSteamTV_ChatBan.issuer_steamid', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='chatter_steamid', full_name='CSteamTV_ChatBan.chatter_steamid', index=1,
-      number=2, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='time_expires', full_name='CSteamTV_ChatBan.time_expires', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='permanent', full_name='CSteamTV_ChatBan.permanent', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='CSteamTV_ChatBan.name', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10067,
-  serialized_end=10189,
-)
-
-
-_CSTEAMTV_ADDCHATBAN_REQUEST = _descriptor.Descriptor(
-  name='CSteamTV_AddChatBan_Request',
-  full_name='CSteamTV_AddChatBan_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='CSteamTV_AddChatBan_Request.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='chatter_steamid', full_name='CSteamTV_AddChatBan_Request.chatter_steamid', index=1,
-      number=2, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='duration', full_name='CSteamTV_AddChatBan_Request.duration', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='permanent', full_name='CSteamTV_AddChatBan_Request.permanent', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='undo', full_name='CSteamTV_AddChatBan_Request.undo', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10192,
-  serialized_end=10327,
-)
-
-
-_CSTEAMTV_ADDCHATBAN_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_AddChatBan_Response',
-  full_name='CSteamTV_AddChatBan_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10329,
-  serialized_end=10359,
-)
-
-
-_CSTEAMTV_GETCHATBANS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetChatBans_Response',
-  full_name='CSteamTV_GetChatBans_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetChatBans_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10361,
-  serialized_end=10428,
-)
-
-
-_CSTEAMTV_ADDCHATMODERATOR_REQUEST = _descriptor.Descriptor(
-  name='CSteamTV_AddChatModerator_Request',
-  full_name='CSteamTV_AddChatModerator_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='CSteamTV_AddChatModerator_Request.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='moderator_steamid', full_name='CSteamTV_AddChatModerator_Request.moderator_steamid', index=1,
-      number=2, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='undo', full_name='CSteamTV_AddChatModerator_Request.undo', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10430,
-  serialized_end=10536,
-)
-
-
-_CSTEAMTV_ADDCHATMODERATOR_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_AddChatModerator_Response',
-  full_name='CSteamTV_AddChatModerator_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10538,
-  serialized_end=10574,
-)
-
-
-_CSTEAMTV_GETCHATMODERATORS_REQUEST = _descriptor.Descriptor(
-  name='CSteamTV_GetChatModerators_Request',
-  full_name='CSteamTV_GetChatModerators_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='CSteamTV_GetChatModerators_Request.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10576,
-  serialized_end=10642,
-)
-
-
-_CSTEAMTV_CHATMODERATOR = _descriptor.Descriptor(
-  name='CSteamTV_ChatModerator',
-  full_name='CSteamTV_ChatModerator',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='steamid', full_name='CSteamTV_ChatModerator.steamid', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='CSteamTV_ChatModerator.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10644,
-  serialized_end=10699,
-)
-
-
-_CSTEAMTV_GETCHATMODERATORS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetChatModerators_Response',
-  full_name='CSteamTV_GetChatModerators_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetChatModerators_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10701,
-  serialized_end=10780,
-)
-
-
-_CSTEAMTV_ADDWORDBAN_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_AddWordBan_Response',
-  full_name='CSteamTV_AddWordBan_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10782,
-  serialized_end=10812,
-)
-
-
-_CSTEAMTV_GETWORDBANS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetWordBans_Response',
-  full_name='CSteamTV_GetWordBans_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetWordBans_Response.results', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10814,
-  serialized_end=10862,
-)
-
-
-_CSTEAMTV_JOINCHAT_REQUEST = _descriptor.Descriptor(
-  name='CSteamTV_JoinChat_Request',
-  full_name='CSteamTV_JoinChat_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_channel_id', full_name='CSteamTV_JoinChat_Request.broadcast_channel_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10864,
-  serialized_end=10921,
-)
-
-
-_CSTEAMTV_JOINCHAT_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_JoinChat_Response',
-  full_name='CSteamTV_JoinChat_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='chat_id', full_name='CSteamTV_JoinChat_Response.chat_id', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='view_url_template', full_name='CSteamTV_JoinChat_Response.view_url_template', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='flair_group_ids', full_name='CSteamTV_JoinChat_Response.flair_group_ids', index=2,
-      number=3, type=4, cpp_type=4, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=10923,
-  serialized_end=11020,
-)
-
-
-_CSTEAMTV_SEARCH_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_Search_Response',
-  full_name='CSteamTV_Search_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_Search_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11022,
-  serialized_end=11092,
-)
-
-
-_CSTEAMTV_GETSTEAMTVUSERSETTINGS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetSteamTVUserSettings_Response',
-  full_name='CSteamTV_GetSteamTVUserSettings_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='stream_live_email', full_name='CSteamTV_GetSteamTVUserSettings_Response.stream_live_email', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='stream_live_notification', full_name='CSteamTV_GetSteamTVUserSettings_Response.stream_live_notification', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11094,
-  serialized_end=11197,
-)
-
-
-_CSTEAMTV_SETSTEAMTVUSERSETTINGS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_SetSteamTVUserSettings_Response',
-  full_name='CSteamTV_SetSteamTVUserSettings_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11199,
-  serialized_end=11241,
-)
-
-
-_CSTEAMTV_GETMYBROADCASTCHANNELS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetMyBroadcastChannels_Response',
-  full_name='CSteamTV_GetMyBroadcastChannels_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='results', full_name='CSteamTV_GetMyBroadcastChannels_Response.results', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11243,
-  serialized_end=11329,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_TAKEOVER = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_Takeover',
-  full_name='CSteamTV_HomePageTemplate_Takeover',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcasts', full_name='CSteamTV_HomePageTemplate_Takeover.broadcasts', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11331,
-  serialized_end=11414,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_SINGLEGAME = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_SingleGame',
-  full_name='CSteamTV_HomePageTemplate_SingleGame',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcasts', full_name='CSteamTV_HomePageTemplate_SingleGame.broadcasts', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='CSteamTV_HomePageTemplate_SingleGame.appid', index=1,
+      name='client_ip', full_name='CWebRTC_WebRTCSessionConnected_Notification.client_ip', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_SingleGame.title', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11416,
-  serialized_end=11531,
-)
-
-
-_GAMELISTENTRY = _descriptor.Descriptor(
-  name='GameListEntry',
-  full_name='GameListEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='GameListEntry.appid', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      name='client_port', full_name='CWebRTC_WebRTCSessionConnected_Notification.client_port', index=2,
+      number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='game_name', full_name='GameListEntry.game_name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='server_ip', full_name='CWebRTC_WebRTCSessionConnected_Notification.server_ip', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='broadcast', full_name='GameListEntry.broadcast', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11533,
-  serialized_end=11628,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_GAMELIST = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_GameList',
-  full_name='CSteamTV_HomePageTemplate_GameList',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='entries', full_name='CSteamTV_HomePageTemplate_GameList.entries', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_GameList.title', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11630,
-  serialized_end=11714,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_QUICKEXPLORE = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_QuickExplore',
-  full_name='CSteamTV_HomePageTemplate_QuickExplore',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcasts', full_name='CSteamTV_HomePageTemplate_QuickExplore.broadcasts', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_QuickExplore.title', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11716,
-  serialized_end=11818,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_CONVEYORBELT = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_ConveyorBelt',
-  full_name='CSteamTV_HomePageTemplate_ConveyorBelt',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcasts', full_name='CSteamTV_HomePageTemplate_ConveyorBelt.broadcasts', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_ConveyorBelt.title', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=11820,
-  serialized_end=11922,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_WATCHPARTY = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_WatchParty',
-  full_name='CSteamTV_HomePageTemplate_WatchParty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast', full_name='CSteamTV_HomePageTemplate_WatchParty.broadcast', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_WatchParty.title', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='chat_group_id', full_name='CSteamTV_HomePageTemplate_WatchParty.chat_group_id', index=2,
-      number=3, type=4, cpp_type=4, label=1,
+      name='server_port', full_name='CWebRTC_WebRTCSessionConnected_Notification.server_port', index=4,
+      number=5, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -4586,448 +4438,486 @@ _CSTEAMTV_HOMEPAGETEMPLATE_WATCHPARTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11924,
-  serialized_end=12046,
+  serialized_start=11915,
+  serialized_end=12054,
 )
 
 
-_CSTEAMTV_HOMEPAGETEMPLATE_DEVELOPER = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_Developer',
-  full_name='CSteamTV_HomePageTemplate_Developer',
+_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION = _descriptor.Descriptor(
+  name='CWebRTC_WebRTCUpdateRemoteDescription_Notification',
+  full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='broadcast', full_name='CSteamTV_HomePageTemplate_Developer.broadcast', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_Developer.title', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=12048,
-  serialized_end=12146,
-)
-
-
-_CSTEAMTV_HOMEPAGETEMPLATE_EVENT = _descriptor.Descriptor(
-  name='CSteamTV_HomePageTemplate_Event',
-  full_name='CSteamTV_HomePageTemplate_Event',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='title', full_name='CSteamTV_HomePageTemplate_Event.title', index=0,
+      name='remote_description', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification.remote_description', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=12148,
-  serialized_end=12196,
-)
-
-
-_CSTEAMTV_HOMEPAGECONTENTROW = _descriptor.Descriptor(
-  name='CSteamTV_HomePageContentRow',
-  full_name='CSteamTV_HomePageContentRow',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='template_type', full_name='CSteamTV_HomePageContentRow.template_type', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=_b('\202\265\030\004enum'), file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='takeover', full_name='CSteamTV_HomePageContentRow.takeover', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='single_game', full_name='CSteamTV_HomePageContentRow.single_game', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='game_list', full_name='CSteamTV_HomePageContentRow.game_list', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='quick_explore', full_name='CSteamTV_HomePageContentRow.quick_explore', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='conveyor_belt', full_name='CSteamTV_HomePageContentRow.conveyor_belt', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='watch_party', full_name='CSteamTV_HomePageContentRow.watch_party', index=6,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='developer', full_name='CSteamTV_HomePageContentRow.developer', index=7,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='event', full_name='CSteamTV_HomePageContentRow.event', index=8,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=12199,
-  serialized_end=12726,
-)
-
-
-_CSTEAMTV_GETHOMEPAGECONTENTS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetHomePageContents_Response',
-  full_name='CSteamTV_GetHomePageContents_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='rows', full_name='CSteamTV_GetHomePageContents_Response.rows', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=12728,
-  serialized_end=12811,
-)
-
-
-_CSTEAMTV_BROADCASTCLIPINFO = _descriptor.Descriptor(
-  name='CSteamTV_BroadcastClipInfo',
-  full_name='CSteamTV_BroadcastClipInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='broadcast_clip_id', full_name='CSteamTV_BroadcastClipInfo.broadcast_clip_id', index=0,
-      number=1, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='channel_id', full_name='CSteamTV_BroadcastClipInfo.channel_id', index=1,
+      name='remote_description_version', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification.remote_description_version', index=1,
       number=2, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='app_id', full_name='CSteamTV_BroadcastClipInfo.app_id', index=2,
+      name='ssrcs_to_accountids', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification.ssrcs_to_accountids', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12057,
+  serialized_end=12279,
+)
+
+
+_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING = _descriptor.Descriptor(
+  name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping',
+  full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ssrc', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping.ssrc', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='accountid', full_name='CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping.accountid', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12281,
+  serialized_end=12390,
+)
+
+
+_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST = _descriptor.Descriptor(
+  name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request',
+  full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ip_webrtc_server', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.ip_webrtc_server', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='port_webrtc_server', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.port_webrtc_server', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip_webrtc_session_client', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.ip_webrtc_session_client', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='broadcaster_steamid', full_name='CSteamTV_BroadcastClipInfo.broadcaster_steamid', index=3,
-      number=4, type=6, cpp_type=4, label=1,
+      name='port_webrtc_session_client', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.port_webrtc_session_client', index=3,
+      number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='creator_steamid', full_name='CSteamTV_BroadcastClipInfo.creator_steamid', index=4,
-      number=5, type=6, cpp_type=4, label=1,
+      name='remote_description_version', full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request.remote_description_version', index=4,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12393,
+  serialized_end=12612,
+)
+
+
+_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE = _descriptor.Descriptor(
+  name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response',
+  full_name='CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12614,
+  serialized_end=12674,
+)
+
+
+_CMOBILEPERACCOUNT_GETSETTINGS_REQUEST = _descriptor.Descriptor(
+  name='CMobilePerAccount_GetSettings_Request',
+  full_name='CMobilePerAccount_GetSettings_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12676,
+  serialized_end=12715,
+)
+
+
+_CMOBILEPERACCOUNT_GETSETTINGS_RESPONSE = _descriptor.Descriptor(
+  name='CMobilePerAccount_GetSettings_Response',
+  full_name='CMobilePerAccount_GetSettings_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='has_settings', full_name='CMobilePerAccount_GetSettings_Response.has_settings', index=0,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='allow_sale_push', full_name='CMobilePerAccount_GetSettings_Response.allow_sale_push', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='allow_wishlist_push', full_name='CMobilePerAccount_GetSettings_Response.allow_wishlist_push', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chat_notification_level', full_name='CMobilePerAccount_GetSettings_Response.chat_notification_level', index=3,
+      number=5, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_description', full_name='CSteamTV_BroadcastClipInfo.video_description', index=5,
+      name='notify_direct_chat', full_name='CMobilePerAccount_GetSettings_Response.notify_direct_chat', index=4,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='notify_group_chat', full_name='CMobilePerAccount_GetSettings_Response.notify_group_chat', index=5,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='allow_event_push', full_name='CMobilePerAccount_GetSettings_Response.allow_event_push', index=6,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=True,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12718,
+  serialized_end=12954,
+)
+
+
+_CMOBILEPERACCOUNT_SETSETTINGS_REQUEST = _descriptor.Descriptor(
+  name='CMobilePerAccount_SetSettings_Request',
+  full_name='CMobilePerAccount_SetSettings_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='allow_sale_push', full_name='CMobilePerAccount_SetSettings_Request.allow_sale_push', index=0,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='allow_wishlist_push', full_name='CMobilePerAccount_SetSettings_Request.allow_wishlist_push', index=1,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chat_notification_level', full_name='CMobilePerAccount_SetSettings_Request.chat_notification_level', index=2,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='notify_direct_chat', full_name='CMobilePerAccount_SetSettings_Request.notify_direct_chat', index=3,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='notify_group_chat', full_name='CMobilePerAccount_SetSettings_Request.notify_group_chat', index=4,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='allow_event_push', full_name='CMobilePerAccount_SetSettings_Request.allow_event_push', index=5,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=True,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12957,
+  serialized_end=13170,
+)
+
+
+_CMOBILEPERACCOUNT_SETSETTINGS_RESPONSE = _descriptor.Descriptor(
+  name='CMobilePerAccount_SetSettings_Response',
+  full_name='CMobilePerAccount_SetSettings_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13172,
+  serialized_end=13212,
+)
+
+
+_CMOBILEDEVICE_REGISTERMOBILEDEVICE_REQUEST = _descriptor.Descriptor(
+  name='CMobileDevice_RegisterMobileDevice_Request',
+  full_name='CMobileDevice_RegisterMobileDevice_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='deviceid', full_name='CMobileDevice_RegisterMobileDevice_Request.deviceid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='CMobileDevice_RegisterMobileDevice_Request.language', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='push_enabled', full_name='CMobileDevice_RegisterMobileDevice_Request.push_enabled', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_version', full_name='CMobileDevice_RegisterMobileDevice_Request.app_version', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='os_version', full_name='CMobileDevice_RegisterMobileDevice_Request.os_version', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='device_model', full_name='CMobileDevice_RegisterMobileDevice_Request.device_model', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='live_time', full_name='CSteamTV_BroadcastClipInfo.live_time', index=6,
-      number=7, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='length_ms', full_name='CSteamTV_BroadcastClipInfo.length_ms', index=7,
-      number=8, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='thumbnail_path', full_name='CSteamTV_BroadcastClipInfo.thumbnail_path', index=8,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=12814,
-  serialized_end=13048,
-)
-
-
-_CSTEAMTV_GETBROADCASTCHANNELCLIPS_RESPONSE = _descriptor.Descriptor(
-  name='CSteamTV_GetBroadcastChannelClips_Response',
-  full_name='CSteamTV_GetBroadcastChannelClips_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='clips', full_name='CSteamTV_GetBroadcastChannelClips_Response.clips', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='thumbnail_host', full_name='CSteamTV_GetBroadcastChannelClips_Response.thumbnail_host', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13050,
-  serialized_end=13162,
-)
-
-
-_CFRIENDSLISTCATEGORY = _descriptor.Descriptor(
-  name='CFriendsListCategory',
-  full_name='CFriendsListCategory',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='groupid', full_name='CFriendsListCategory.groupid', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='CFriendsListCategory.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='twofactor_device_identifier', full_name='CMobileDevice_RegisterMobileDevice_Request.twofactor_device_identifier', index=6,
+      number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='accountid_members', full_name='CFriendsListCategory.accountid_members', index=2,
-      number=3, type=13, cpp_type=3, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13164,
-  serialized_end=13244,
-)
-
-
-_CFRIENDSLIST_GETCATEGORIES_REQUEST = _descriptor.Descriptor(
-  name='CFriendsList_GetCategories_Request',
-  full_name='CFriendsList_GetCategories_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13246,
-  serialized_end=13282,
-)
-
-
-_CFRIENDSLIST_GETCATEGORIES_RESPONSE = _descriptor.Descriptor(
-  name='CFriendsList_GetCategories_Response',
-  full_name='CFriendsList_GetCategories_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='categories', full_name='CFriendsList_GetCategories_Response.categories', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13284,
-  serialized_end=13364,
-)
-
-
-_CFRIENDSLISTFAVORITEENTRY = _descriptor.Descriptor(
-  name='CFriendsListFavoriteEntry',
-  full_name='CFriendsListFavoriteEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='accountid', full_name='CFriendsListFavoriteEntry.accountid', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      name='mobile_app', full_name='CMobileDevice_RegisterMobileDevice_Request.mobile_app', index=7,
+      number=8, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\202\265\030 enum; suggested type: EMobileApp'), file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13215,
+  serialized_end=13475,
+)
+
+
+_CMOBILEDEVICE_REGISTERMOBILEDEVICE_RESPONSE = _descriptor.Descriptor(
+  name='CMobileDevice_RegisterMobileDevice_Response',
+  full_name='CMobileDevice_RegisterMobileDevice_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='clanid', full_name='CFriendsListFavoriteEntry.clanid', index=1,
+      name='unique_deviceid', full_name='CMobileDevice_RegisterMobileDevice_Response.unique_deviceid', index=0,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13477,
+  serialized_end=13547,
+)
+
+
+_CMOBILEDEVICE_DEREGISTERMOBILEDEVICE_NOTIFICATION = _descriptor.Descriptor(
+  name='CMobileDevice_DeregisterMobileDevice_Notification',
+  full_name='CMobileDevice_DeregisterMobileDevice_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='chat_group_id', full_name='CFriendsListFavoriteEntry.chat_group_id', index=2,
-      number=3, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
+      name='deviceid', full_name='CMobileDevice_DeregisterMobileDevice_Notification.deviceid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -5043,14 +4933,14 @@ _CFRIENDSLISTFAVORITEENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13366,
-  serialized_end=13451,
+  serialized_start=13549,
+  serialized_end=13618,
 )
 
 
-_CFRIENDSLIST_GETFAVORITES_REQUEST = _descriptor.Descriptor(
-  name='CFriendsList_GetFavorites_Request',
-  full_name='CFriendsList_GetFavorites_Request',
+_UNKNOWNPROTO = _descriptor.Descriptor(
+  name='UnknownProto',
+  full_name='UnknownProto',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -5067,434 +4957,116 @@ _CFRIENDSLIST_GETFAVORITES_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13453,
-  serialized_end=13488,
+  serialized_start=13620,
+  serialized_end=13634,
 )
 
-
-_CFRIENDSLIST_GETFAVORITES_RESPONSE = _descriptor.Descriptor(
-  name='CFriendsList_GetFavorites_Response',
-  full_name='CFriendsList_GetFavorites_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='favorites', full_name='CFriendsList_GetFavorites_Response.favorites', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13490,
-  serialized_end=13573,
-)
-
-
-_CFRIENDSLIST_SETFAVORITES_REQUEST = _descriptor.Descriptor(
-  name='CFriendsList_SetFavorites_Request',
-  full_name='CFriendsList_SetFavorites_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='favorites', full_name='CFriendsList_SetFavorites_Request.favorites', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13575,
-  serialized_end=13657,
-)
-
-
-_CFRIENDSLIST_SETFAVORITES_RESPONSE = _descriptor.Descriptor(
-  name='CFriendsList_SetFavorites_Response',
-  full_name='CFriendsList_SetFavorites_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13659,
-  serialized_end=13695,
-)
-
-
-_CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION = _descriptor.Descriptor(
-  name='CFriendsList_FavoritesChanged_Notification',
-  full_name='CFriendsList_FavoritesChanged_Notification',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='favorites', full_name='CFriendsList_FavoritesChanged_Notification.favorites', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13697,
-  serialized_end=13788,
-)
-
-
-_CFRIENDSLIST_GETFRIENDSLIST_REQUEST = _descriptor.Descriptor(
-  name='CFriendsList_GetFriendsList_Request',
-  full_name='CFriendsList_GetFriendsList_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13790,
-  serialized_end=13827,
-)
-
-
-_CFRIENDSLIST_GETFRIENDSLIST_RESPONSE = _descriptor.Descriptor(
-  name='CFriendsList_GetFriendsList_Response',
-  full_name='CFriendsList_GetFriendsList_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='friendslist', full_name='CFriendsList_GetFriendsList_Response.friendslist', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13829,
-  serialized_end=13912,
-)
-
-
-_CCLAN_RESPONDTOCLANINVITE_REQUEST = _descriptor.Descriptor(
-  name='CClan_RespondToClanInvite_Request',
-  full_name='CClan_RespondToClanInvite_Request',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='steamid', full_name='CClan_RespondToClanInvite_Request.steamid', index=0,
-      number=1, type=6, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='accept', full_name='CClan_RespondToClanInvite_Request.accept', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13914,
-  serialized_end=13982,
-)
-
-
-_CCLAN_RESPONDTOCLANINVITE_RESPONSE = _descriptor.Descriptor(
-  name='CClan_RespondToClanInvite_Response',
-  full_name='CClan_RespondToClanInvite_Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=13984,
-  serialized_end=14020,
-)
-
-
-_CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION = _descriptor.Descriptor(
-  name='CProductImpressionsFromClient_Notification',
-  full_name='CProductImpressionsFromClient_Notification',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='impressions', full_name='CProductImpressionsFromClient_Notification.impressions', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=14022,
-  serialized_end=14143,
-)
-
-
-_CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION = _descriptor.Descriptor(
-  name='CProductImpressionsFromClient_Notification_Impression',
-  full_name='CProductImpressionsFromClient_Notification_Impression',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='CProductImpressionsFromClient_Notification_Impression.type', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=_b('\202\265\030\004enum'), file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='appid', full_name='CProductImpressionsFromClient_Notification_Impression.appid', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='num_impressions', full_name='CProductImpressionsFromClient_Notification_Impression.num_impressions', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=14145,
-  serialized_end=14264,
-)
-
-
-_NOTIMPLEMENTED = _descriptor.Descriptor(
-  name='NotImplemented',
-  full_name='NotImplemented',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=14266,
-  serialized_end=14282,
-)
-
+_CMSGCLIENTAPPMINUTESPLAYEDDATA.fields_by_name['minutes_played'].message_type = _CMSGCLIENTAPPMINUTESPLAYEDDATA_APPMINUTESPLAYEDDATA
 _CCOMMUNITY_GETAPPS_RESPONSE.fields_by_name['apps'].message_type = steammessages__base__pb2._CCDDBAPPDETAILCOMMON
 _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE.fields_by_name['token_lists'].message_type = _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKENLIST
 _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKENLIST.fields_by_name['tokens'].message_type = _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKEN
 _CCOMMUNITY_COMMENT.fields_by_name['ipaddress'].message_type = steammessages__base__pb2._CMSGIPADDRESS
 _CCOMMUNITY_GETCOMMENTTHREAD_RESPONSE.fields_by_name['comments'].message_type = _CCOMMUNITY_COMMENT
 _CCOMMUNITY_GETCOMMENTTHREAD_RESPONSE.fields_by_name['deleted_comments'].message_type = _CCOMMUNITY_COMMENT
-_CCOMMUNITY_GETAVATARHISTORY_RESPONSE.fields_by_name['avatars'].message_type = _CCOMMUNITY_GETAVATARHISTORY_RESPONSE_AVATARDATA
+_CCOMMUNITY_GETUSERPARTNEREVENTNEWS_REQUEST.fields_by_name['app_list'].message_type = _CAPPPRIORITY
 _CCOMMUNITY_GETUSERPARTNEREVENTNEWS_RESPONSE.fields_by_name['results'].message_type = steammessages__base__pb2._CCLANMATCHEVENTBYRANGE
 _CCOMMUNITY_GETBESTEVENTSFORUSER_RESPONSE.fields_by_name['results'].message_type = _CCOMMUNITY_PARTNEREVENTRESULT
 _CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE.fields_by_name['priorities'].message_type = _CCOMMUNITY_PARTNEREVENTSAPPPRIORITY
 _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST.fields_by_name['markings'].message_type = _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST_PARTNEREVENTMARKING
-_CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE.fields_by_name['events'].message_type = _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE_PARTNEREVENT
-_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION.fields_by_name['ssrcs_to_accountids'].message_type = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING
-_CVOICECHAT_ALLMEMBERSSTATUS_NOTIFICATION.fields_by_name['users'].message_type = _CVOICECHAT_USERVOICESTATUS_NOTIFICATION
-_CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE.fields_by_name['images'].message_type = _CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE_IMAGES
-_CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE.fields_by_name['links'].message_type = _CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE_LINKS
-_CSTEAMTV_GETFOLLOWEDCHANNELS_RESPONSE.fields_by_name['results'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_GETSUBSCRIBEDCHANNELS_RESPONSE.fields_by_name['results'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_GAME.fields_by_name['channels'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_GETGAMES_RESPONSE.fields_by_name['results'].message_type = _CSTEAMTV_GAME
-_CSTEAMTV_GETCHANNELS_RESPONSE.fields_by_name['results'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE.fields_by_name['broadcasters'].message_type = _CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE_BROADCASTER
-_CSTEAMTV_GETCHATBANS_RESPONSE.fields_by_name['results'].message_type = _CSTEAMTV_CHATBAN
-_CSTEAMTV_GETCHATMODERATORS_RESPONSE.fields_by_name['results'].message_type = _CSTEAMTV_CHATMODERATOR
-_CSTEAMTV_SEARCH_RESPONSE.fields_by_name['results'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_GETMYBROADCASTCHANNELS_RESPONSE.fields_by_name['results'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_TAKEOVER.fields_by_name['broadcasts'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_SINGLEGAME.fields_by_name['broadcasts'].message_type = _GETBROADCASTCHANNELENTRY
-_GAMELISTENTRY.fields_by_name['broadcast'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_GAMELIST.fields_by_name['entries'].message_type = _GAMELISTENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_QUICKEXPLORE.fields_by_name['broadcasts'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_CONVEYORBELT.fields_by_name['broadcasts'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_WATCHPARTY.fields_by_name['broadcast'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGETEMPLATE_DEVELOPER.fields_by_name['broadcast'].message_type = _GETBROADCASTCHANNELENTRY
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['takeover'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_TAKEOVER
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['single_game'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_SINGLEGAME
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['game_list'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_GAMELIST
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['quick_explore'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_QUICKEXPLORE
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['conveyor_belt'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_CONVEYORBELT
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['watch_party'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_WATCHPARTY
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['developer'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_DEVELOPER
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['event'].message_type = _CSTEAMTV_HOMEPAGETEMPLATE_EVENT
-_CSTEAMTV_GETHOMEPAGECONTENTS_RESPONSE.fields_by_name['rows'].message_type = _CSTEAMTV_HOMEPAGECONTENTROW
-_CSTEAMTV_GETBROADCASTCHANNELCLIPS_RESPONSE.fields_by_name['clips'].message_type = _CSTEAMTV_BROADCASTCLIPINFO
+_CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION.fields_by_name['impressions'].message_type = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION
 _CFRIENDSLIST_GETCATEGORIES_RESPONSE.fields_by_name['categories'].message_type = _CFRIENDSLISTCATEGORY
 _CFRIENDSLIST_GETFAVORITES_RESPONSE.fields_by_name['favorites'].message_type = _CFRIENDSLISTFAVORITEENTRY
 _CFRIENDSLIST_SETFAVORITES_REQUEST.fields_by_name['favorites'].message_type = _CFRIENDSLISTFAVORITEENTRY
 _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION.fields_by_name['favorites'].message_type = _CFRIENDSLISTFAVORITEENTRY
 _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE.fields_by_name['friendslist'].message_type = steammessages__clientserver__friends__pb2._CMSGCLIENTFRIENDSLIST
-_CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION.fields_by_name['impressions'].message_type = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION
+_CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE.fields_by_name['published_files'].message_type = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+_CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE.fields_by_name['subscribed_files'].message_type = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID
+_CMSGCLIENTWORKSHOPITEMINFOREQUEST.fields_by_name['workshop_items'].message_type = _CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM
+_CMSGCLIENTWORKSHOPITEMINFORESPONSE.fields_by_name['workshop_items'].message_type = _CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO
+_CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE.fields_by_name['published_files'].message_type = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID
+_CMSGCREENUMERATEPUBLISHEDFILESRESPONSE.fields_by_name['published_files'].message_type = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+_CMSGGAMESERVERPINGSAMPLE.fields_by_name['gs_samples'].message_type = _CMSGGAMESERVERPINGSAMPLE_SAMPLE
+_CVOICECHAT_ALLMEMBERSSTATUS_NOTIFICATION.fields_by_name['users'].message_type = _CVOICECHAT_USERVOICESTATUS_NOTIFICATION
+_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION.fields_by_name['ssrcs_to_accountids'].message_type = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING
+DESCRIPTOR.message_types_by_name['CHelpRequestLogs_UploadUserApplicationLog_Request'] = _CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_REQUEST
+DESCRIPTOR.message_types_by_name['CHelpRequestLogs_UploadUserApplicationLog_Response'] = _CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_RESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientAppMinutesPlayedData'] = _CMSGCLIENTAPPMINUTESPLAYEDDATA
+DESCRIPTOR.message_types_by_name['CMsgClientAppMinutesPlayedData_AppMinutesPlayedData'] = _CMSGCLIENTAPPMINUTESPLAYEDDATA_APPMINUTESPLAYEDDATA
 DESCRIPTOR.message_types_by_name['CCommunity_GetApps_Request'] = _CCOMMUNITY_GETAPPS_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_GetApps_Response'] = _CCOMMUNITY_GETAPPS_RESPONSE
 DESCRIPTOR.message_types_by_name['CCommunity_GetAppRichPresenceLocalization_Request'] = _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_GetAppRichPresenceLocalization_Response'] = _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE
 DESCRIPTOR.message_types_by_name['CCommunity_GetAppRichPresenceLocalization_Response_Token'] = _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKEN
 DESCRIPTOR.message_types_by_name['CCommunity_GetAppRichPresenceLocalization_Response_TokenList'] = _CCOMMUNITY_GETAPPRICHPRESENCELOCALIZATION_RESPONSE_TOKENLIST
+DESCRIPTOR.message_types_by_name['CCommunity_GetCommentThread_Request'] = _CCOMMUNITY_GETCOMMENTTHREAD_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_Comment'] = _CCOMMUNITY_COMMENT
 DESCRIPTOR.message_types_by_name['CCommunity_GetCommentThread_Response'] = _CCOMMUNITY_GETCOMMENTTHREAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_PostCommentToThread_Request'] = _CCOMMUNITY_POSTCOMMENTTOTHREAD_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_PostCommentToThread_Response'] = _CCOMMUNITY_POSTCOMMENTTOTHREAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_DeleteCommentFromThread_Request'] = _CCOMMUNITY_DELETECOMMENTFROMTHREAD_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_DeleteCommentFromThread_Response'] = _CCOMMUNITY_DELETECOMMENTFROMTHREAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_RateCommentThread_Request'] = _CCOMMUNITY_RATECOMMENTTHREAD_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_RateCommentThread_Response'] = _CCOMMUNITY_RATECOMMENTTHREAD_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_GetCommentThreadRatings_Request'] = _CCOMMUNITY_GETCOMMENTTHREADRATINGS_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_GetCommentThreadRatings_Response'] = _CCOMMUNITY_GETCOMMENTTHREADRATINGS_RESPONSE
 DESCRIPTOR.message_types_by_name['CCommunity_RateClanAnnouncement_Request'] = _CCOMMUNITY_RATECLANANNOUNCEMENT_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_RateClanAnnouncement_Response'] = _CCOMMUNITY_RATECLANANNOUNCEMENT_RESPONSE
 DESCRIPTOR.message_types_by_name['CCommunity_GetClanAnnouncementVoteForUser_Request'] = _CCOMMUNITY_GETCLANANNOUNCEMENTVOTEFORUSER_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_GetClanAnnouncementVoteForUser_Response'] = _CCOMMUNITY_GETCLANANNOUNCEMENTVOTEFORUSER_RESPONSE
-DESCRIPTOR.message_types_by_name['CCommunity_GetAvatarHistory_Response'] = _CCOMMUNITY_GETAVATARHISTORY_RESPONSE
-DESCRIPTOR.message_types_by_name['CCommunity_GetAvatarHistory_Response_AvatarData'] = _CCOMMUNITY_GETAVATARHISTORY_RESPONSE_AVATARDATA
 DESCRIPTOR.message_types_by_name['CAppPriority'] = _CAPPPRIORITY
+DESCRIPTOR.message_types_by_name['CCommunity_GetUserPartnerEventNews_Request'] = _CCOMMUNITY_GETUSERPARTNEREVENTNEWS_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_GetUserPartnerEventNews_Response'] = _CCOMMUNITY_GETUSERPARTNEREVENTNEWS_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_GetBestEventsForUser_Request'] = _CCOMMUNITY_GETBESTEVENTSFORUSER_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_PartnerEventResult'] = _CCOMMUNITY_PARTNEREVENTRESULT
 DESCRIPTOR.message_types_by_name['CCommunity_GetBestEventsForUser_Response'] = _CCOMMUNITY_GETBESTEVENTSFORUSER_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_ClearUserPartnerEventsAppPriorities_Request'] = _CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_ClearUserPartnerEventsAppPriorities_Response'] = _CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE
 DESCRIPTOR.message_types_by_name['CCommunity_PartnerEventsAppPriority'] = _CCOMMUNITY_PARTNEREVENTSAPPPRIORITY
+DESCRIPTOR.message_types_by_name['CCommunity_GetUserPartnerEventsAppPriorities_Request'] = _CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_GetUserPartnerEventsAppPriorities_Response'] = _CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_ClearSinglePartnerEventsAppPriority_Request'] = _CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_ClearSinglePartnerEventsAppPriority_Response'] = _CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_PartnerEventsShowMoreForApp_Request'] = _CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_PartnerEventsShowMoreForApp_Response'] = _CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_RESPONSE
+DESCRIPTOR.message_types_by_name['CCommunity_PartnerEventsShowLessForApp_Request'] = _CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_PartnerEventsShowLessForApp_Response'] = _CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_RESPONSE
 DESCRIPTOR.message_types_by_name['CCommunity_MarkPartnerEventsForUser_Request'] = _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST
 DESCRIPTOR.message_types_by_name['CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking'] = _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST_PARTNEREVENTMARKING
 DESCRIPTOR.message_types_by_name['CCommunity_MarkPartnerEventsForUser_Response'] = _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_RESPONSE
-DESCRIPTOR.message_types_by_name['CCommunity_GetUserPartnerEventViewStatus_Response'] = _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE
-DESCRIPTOR.message_types_by_name['CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent'] = _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE_PARTNEREVENT
-DESCRIPTOR.message_types_by_name['CWebRTCClient_InitiateWebRTCConnection_Request'] = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST
-DESCRIPTOR.message_types_by_name['CWebRTCClient_InitiateWebRTCConnection_Response'] = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE
-DESCRIPTOR.message_types_by_name['CWebRTC_WebRTCSessionConnected_Notification'] = _CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION
-DESCRIPTOR.message_types_by_name['CWebRTC_WebRTCUpdateRemoteDescription_Notification'] = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION
-DESCRIPTOR.message_types_by_name['CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping'] = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING
-DESCRIPTOR.message_types_by_name['CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request'] = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST
-DESCRIPTOR.message_types_by_name['CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response'] = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE
+DESCRIPTOR.message_types_by_name['CProductImpressionsFromClient_Notification'] = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CProductImpressionsFromClient_Notification_Impression'] = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION
+DESCRIPTOR.message_types_by_name['CFriendsListCategory'] = _CFRIENDSLISTCATEGORY
+DESCRIPTOR.message_types_by_name['CFriendsList_GetCategories_Request'] = _CFRIENDSLIST_GETCATEGORIES_REQUEST
+DESCRIPTOR.message_types_by_name['CFriendsList_GetCategories_Response'] = _CFRIENDSLIST_GETCATEGORIES_RESPONSE
+DESCRIPTOR.message_types_by_name['CFriendsListFavoriteEntry'] = _CFRIENDSLISTFAVORITEENTRY
+DESCRIPTOR.message_types_by_name['CFriendsList_GetFavorites_Request'] = _CFRIENDSLIST_GETFAVORITES_REQUEST
+DESCRIPTOR.message_types_by_name['CFriendsList_GetFavorites_Response'] = _CFRIENDSLIST_GETFAVORITES_RESPONSE
+DESCRIPTOR.message_types_by_name['CFriendsList_SetFavorites_Request'] = _CFRIENDSLIST_SETFAVORITES_REQUEST
+DESCRIPTOR.message_types_by_name['CFriendsList_SetFavorites_Response'] = _CFRIENDSLIST_SETFAVORITES_RESPONSE
+DESCRIPTOR.message_types_by_name['CFriendsList_FavoritesChanged_Notification'] = _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CFriendsList_GetFriendsList_Request'] = _CFRIENDSLIST_GETFRIENDSLIST_REQUEST
+DESCRIPTOR.message_types_by_name['CFriendsList_GetFriendsList_Response'] = _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserPublishedFiles'] = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILES
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserPublishedFilesResponse'] = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId'] = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserSubscribedFiles'] = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILES
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserSubscribedFilesResponse'] = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId'] = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID
+DESCRIPTOR.message_types_by_name['CMsgClientUCMPublishedFileDeleted'] = _CMSGCLIENTUCMPUBLISHEDFILEDELETED
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoRequest'] = _CMSGCLIENTWORKSHOPITEMINFOREQUEST
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoRequest_WorkshopItem'] = _CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoResponse'] = _CMSGCLIENTWORKSHOPITEMINFORESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo'] = _CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO
+DESCRIPTOR.message_types_by_name['CMsgClientUCMGetPublishedFilesForUser'] = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSER
+DESCRIPTOR.message_types_by_name['CMsgClientUCMGetPublishedFilesForUserResponse'] = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId'] = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID
+DESCRIPTOR.message_types_by_name['CMsgCREEnumeratePublishedFiles'] = _CMSGCREENUMERATEPUBLISHEDFILES
+DESCRIPTOR.message_types_by_name['CMsgCREEnumeratePublishedFilesResponse'] = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE
+DESCRIPTOR.message_types_by_name['CMsgCREEnumeratePublishedFilesResponse_PublishedFileId'] = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID
+DESCRIPTOR.message_types_by_name['CMsgGameServerPingSample'] = _CMSGGAMESERVERPINGSAMPLE
+DESCRIPTOR.message_types_by_name['CMsgGameServerPingSample_Sample'] = _CMSGGAMESERVERPINGSAMPLE_SAMPLE
+DESCRIPTOR.message_types_by_name['CClan_RespondToClanInvite_Request'] = _CCLAN_RESPONDTOCLANINVITE_REQUEST
+DESCRIPTOR.message_types_by_name['CClan_RespondToClanInvite_Response'] = _CCLAN_RESPONDTOCLANINVITE_RESPONSE
 DESCRIPTOR.message_types_by_name['CVoiceChat_RequestOneOnOneChat_Request'] = _CVOICECHAT_REQUESTONEONONECHAT_REQUEST
 DESCRIPTOR.message_types_by_name['CVoiceChat_RequestOneOnOneChat_Response'] = _CVOICECHAT_REQUESTONEONONECHAT_RESPONSE
 DESCRIPTOR.message_types_by_name['CVoiceChat_OneOnOneChatRequested_Notification'] = _CVOICECHAT_ONEONONECHATREQUESTED_NOTIFICATION
@@ -5512,80 +5084,54 @@ DESCRIPTOR.message_types_by_name['CVoiceChat_UpdateVoiceChatWebRTCData_Request']
 DESCRIPTOR.message_types_by_name['CVoiceChat_UpdateVoiceChatWebRTCData_Response'] = _CVOICECHAT_UPDATEVOICECHATWEBRTCDATA_RESPONSE
 DESCRIPTOR.message_types_by_name['CVoiceChat_UploadClientVoiceChatLogs_Request'] = _CVOICECHAT_UPLOADCLIENTVOICECHATLOGS_REQUEST
 DESCRIPTOR.message_types_by_name['CVoiceChat_UploadClientVoiceChatLogs_Response'] = _CVOICECHAT_UPLOADCLIENTVOICECHATLOGS_RESPONSE
+DESCRIPTOR.message_types_by_name['CVoiceChat_LeaveVoiceChat_Request'] = _CVOICECHAT_LEAVEVOICECHAT_REQUEST
 DESCRIPTOR.message_types_by_name['CVoiceChat_LeaveVoiceChat_Response'] = _CVOICECHAT_LEAVEVOICECHAT_RESPONSE
 DESCRIPTOR.message_types_by_name['CVoiceChat_UserLeftVoiceChat_Notification'] = _CVOICECHAT_USERLEFTVOICECHAT_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CVoiceChat_VoiceChatEnded_Notification'] = _CVOICECHAT_VOICECHATENDED_NOTIFICATION
-DESCRIPTOR.message_types_by_name['CSteamTV_CreateBroadcastChannel_Response'] = _CSTEAMTV_CREATEBROADCASTCHANNEL_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelID_Response'] = _CSTEAMTV_GETBROADCASTCHANNELID_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_SetBroadcastChannelProfile_Response'] = _CSTEAMTV_SETBROADCASTCHANNELPROFILE_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelProfile_Response'] = _CSTEAMTV_GETBROADCASTCHANNELPROFILE_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_SetBroadcastChannelImage_Response'] = _CSTEAMTV_SETBROADCASTCHANNELIMAGE_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelImages_Response'] = _CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelImages_Response_Images'] = _CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE_IMAGES
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelLinks_Response'] = _CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelLinks_Response_Links'] = _CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE_LINKS
-DESCRIPTOR.message_types_by_name['CSteamTV_SetBroadcastChannelLinkRegions_Request_Links'] = _CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_REQUEST_LINKS
-DESCRIPTOR.message_types_by_name['CSteamTV_SetBroadcastChannelLinkRegions_Response'] = _CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelStatus_Response'] = _CSTEAMTV_GETBROADCASTCHANNELSTATUS_RESPONSE
-DESCRIPTOR.message_types_by_name['GetBroadcastChannelEntry'] = _GETBROADCASTCHANNELENTRY
-DESCRIPTOR.message_types_by_name['CSteamTV_GetFollowedChannels_Response'] = _CSTEAMTV_GETFOLLOWEDCHANNELS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetSubscribedChannels_Response'] = _CSTEAMTV_GETSUBSCRIBEDCHANNELS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_FollowBroadcastChannel_Response'] = _CSTEAMTV_FOLLOWBROADCASTCHANNEL_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_SubscribeBroadcastChannel_Response'] = _CSTEAMTV_SUBSCRIBEBROADCASTCHANNEL_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_ReportBroadcastChannel_Response'] = _CSTEAMTV_REPORTBROADCASTCHANNEL_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelInteraction_Response'] = _CSTEAMTV_GETBROADCASTCHANNELINTERACTION_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_Game'] = _CSTEAMTV_GAME
-DESCRIPTOR.message_types_by_name['CSteamTV_GetGames_Response'] = _CSTEAMTV_GETGAMES_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetChannels_Response'] = _CSTEAMTV_GETCHANNELS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelBroadcasters_Response'] = _CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster'] = _CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE_BROADCASTER
-DESCRIPTOR.message_types_by_name['CSteamTV_ChatBan'] = _CSTEAMTV_CHATBAN
-DESCRIPTOR.message_types_by_name['CSteamTV_AddChatBan_Request'] = _CSTEAMTV_ADDCHATBAN_REQUEST
-DESCRIPTOR.message_types_by_name['CSteamTV_AddChatBan_Response'] = _CSTEAMTV_ADDCHATBAN_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetChatBans_Response'] = _CSTEAMTV_GETCHATBANS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_AddChatModerator_Request'] = _CSTEAMTV_ADDCHATMODERATOR_REQUEST
-DESCRIPTOR.message_types_by_name['CSteamTV_AddChatModerator_Response'] = _CSTEAMTV_ADDCHATMODERATOR_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetChatModerators_Request'] = _CSTEAMTV_GETCHATMODERATORS_REQUEST
-DESCRIPTOR.message_types_by_name['CSteamTV_ChatModerator'] = _CSTEAMTV_CHATMODERATOR
-DESCRIPTOR.message_types_by_name['CSteamTV_GetChatModerators_Response'] = _CSTEAMTV_GETCHATMODERATORS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_AddWordBan_Response'] = _CSTEAMTV_ADDWORDBAN_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetWordBans_Response'] = _CSTEAMTV_GETWORDBANS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_JoinChat_Request'] = _CSTEAMTV_JOINCHAT_REQUEST
-DESCRIPTOR.message_types_by_name['CSteamTV_JoinChat_Response'] = _CSTEAMTV_JOINCHAT_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_Search_Response'] = _CSTEAMTV_SEARCH_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetSteamTVUserSettings_Response'] = _CSTEAMTV_GETSTEAMTVUSERSETTINGS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_SetSteamTVUserSettings_Response'] = _CSTEAMTV_SETSTEAMTVUSERSETTINGS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_GetMyBroadcastChannels_Response'] = _CSTEAMTV_GETMYBROADCASTCHANNELS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_Takeover'] = _CSTEAMTV_HOMEPAGETEMPLATE_TAKEOVER
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_SingleGame'] = _CSTEAMTV_HOMEPAGETEMPLATE_SINGLEGAME
-DESCRIPTOR.message_types_by_name['GameListEntry'] = _GAMELISTENTRY
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_GameList'] = _CSTEAMTV_HOMEPAGETEMPLATE_GAMELIST
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_QuickExplore'] = _CSTEAMTV_HOMEPAGETEMPLATE_QUICKEXPLORE
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_ConveyorBelt'] = _CSTEAMTV_HOMEPAGETEMPLATE_CONVEYORBELT
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_WatchParty'] = _CSTEAMTV_HOMEPAGETEMPLATE_WATCHPARTY
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_Developer'] = _CSTEAMTV_HOMEPAGETEMPLATE_DEVELOPER
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageTemplate_Event'] = _CSTEAMTV_HOMEPAGETEMPLATE_EVENT
-DESCRIPTOR.message_types_by_name['CSteamTV_HomePageContentRow'] = _CSTEAMTV_HOMEPAGECONTENTROW
-DESCRIPTOR.message_types_by_name['CSteamTV_GetHomePageContents_Response'] = _CSTEAMTV_GETHOMEPAGECONTENTS_RESPONSE
-DESCRIPTOR.message_types_by_name['CSteamTV_BroadcastClipInfo'] = _CSTEAMTV_BROADCASTCLIPINFO
-DESCRIPTOR.message_types_by_name['CSteamTV_GetBroadcastChannelClips_Response'] = _CSTEAMTV_GETBROADCASTCHANNELCLIPS_RESPONSE
-DESCRIPTOR.message_types_by_name['CFriendsListCategory'] = _CFRIENDSLISTCATEGORY
-DESCRIPTOR.message_types_by_name['CFriendsList_GetCategories_Request'] = _CFRIENDSLIST_GETCATEGORIES_REQUEST
-DESCRIPTOR.message_types_by_name['CFriendsList_GetCategories_Response'] = _CFRIENDSLIST_GETCATEGORIES_RESPONSE
-DESCRIPTOR.message_types_by_name['CFriendsListFavoriteEntry'] = _CFRIENDSLISTFAVORITEENTRY
-DESCRIPTOR.message_types_by_name['CFriendsList_GetFavorites_Request'] = _CFRIENDSLIST_GETFAVORITES_REQUEST
-DESCRIPTOR.message_types_by_name['CFriendsList_GetFavorites_Response'] = _CFRIENDSLIST_GETFAVORITES_RESPONSE
-DESCRIPTOR.message_types_by_name['CFriendsList_SetFavorites_Request'] = _CFRIENDSLIST_SETFAVORITES_REQUEST
-DESCRIPTOR.message_types_by_name['CFriendsList_SetFavorites_Response'] = _CFRIENDSLIST_SETFAVORITES_RESPONSE
-DESCRIPTOR.message_types_by_name['CFriendsList_FavoritesChanged_Notification'] = _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION
-DESCRIPTOR.message_types_by_name['CFriendsList_GetFriendsList_Request'] = _CFRIENDSLIST_GETFRIENDSLIST_REQUEST
-DESCRIPTOR.message_types_by_name['CFriendsList_GetFriendsList_Response'] = _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE
-DESCRIPTOR.message_types_by_name['CClan_RespondToClanInvite_Request'] = _CCLAN_RESPONDTOCLANINVITE_REQUEST
-DESCRIPTOR.message_types_by_name['CClan_RespondToClanInvite_Response'] = _CCLAN_RESPONDTOCLANINVITE_RESPONSE
-DESCRIPTOR.message_types_by_name['CProductImpressionsFromClient_Notification'] = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION
-DESCRIPTOR.message_types_by_name['CProductImpressionsFromClient_Notification_Impression'] = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION
-DESCRIPTOR.message_types_by_name['NotImplemented'] = _NOTIMPLEMENTED
+DESCRIPTOR.message_types_by_name['CWebRTCClient_InitiateWebRTCConnection_Request'] = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST
+DESCRIPTOR.message_types_by_name['CWebRTCClient_InitiateWebRTCConnection_Response'] = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE
+DESCRIPTOR.message_types_by_name['CWebRTC_WebRTCSessionConnected_Notification'] = _CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CWebRTC_WebRTCUpdateRemoteDescription_Notification'] = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping'] = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING
+DESCRIPTOR.message_types_by_name['CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request'] = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST
+DESCRIPTOR.message_types_by_name['CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response'] = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE
+DESCRIPTOR.message_types_by_name['CMobilePerAccount_GetSettings_Request'] = _CMOBILEPERACCOUNT_GETSETTINGS_REQUEST
+DESCRIPTOR.message_types_by_name['CMobilePerAccount_GetSettings_Response'] = _CMOBILEPERACCOUNT_GETSETTINGS_RESPONSE
+DESCRIPTOR.message_types_by_name['CMobilePerAccount_SetSettings_Request'] = _CMOBILEPERACCOUNT_SETSETTINGS_REQUEST
+DESCRIPTOR.message_types_by_name['CMobilePerAccount_SetSettings_Response'] = _CMOBILEPERACCOUNT_SETSETTINGS_RESPONSE
+DESCRIPTOR.message_types_by_name['CMobileDevice_RegisterMobileDevice_Request'] = _CMOBILEDEVICE_REGISTERMOBILEDEVICE_REQUEST
+DESCRIPTOR.message_types_by_name['CMobileDevice_RegisterMobileDevice_Response'] = _CMOBILEDEVICE_REGISTERMOBILEDEVICE_RESPONSE
+DESCRIPTOR.message_types_by_name['CMobileDevice_DeregisterMobileDevice_Notification'] = _CMOBILEDEVICE_DEREGISTERMOBILEDEVICE_NOTIFICATION
+DESCRIPTOR.message_types_by_name['UnknownProto'] = _UNKNOWNPROTO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+CHelpRequestLogs_UploadUserApplicationLog_Request = _reflection.GeneratedProtocolMessageType('CHelpRequestLogs_UploadUserApplicationLog_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CHelpRequestLogs_UploadUserApplicationLog_Request)
+  ))
+_sym_db.RegisterMessage(CHelpRequestLogs_UploadUserApplicationLog_Request)
+
+CHelpRequestLogs_UploadUserApplicationLog_Response = _reflection.GeneratedProtocolMessageType('CHelpRequestLogs_UploadUserApplicationLog_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_RESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CHelpRequestLogs_UploadUserApplicationLog_Response)
+  ))
+_sym_db.RegisterMessage(CHelpRequestLogs_UploadUserApplicationLog_Response)
+
+CMsgClientAppMinutesPlayedData = _reflection.GeneratedProtocolMessageType('CMsgClientAppMinutesPlayedData', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTAPPMINUTESPLAYEDDATA,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientAppMinutesPlayedData)
+  ))
+_sym_db.RegisterMessage(CMsgClientAppMinutesPlayedData)
+
+CMsgClientAppMinutesPlayedData_AppMinutesPlayedData = _reflection.GeneratedProtocolMessageType('CMsgClientAppMinutesPlayedData_AppMinutesPlayedData', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTAPPMINUTESPLAYEDDATA_APPMINUTESPLAYEDDATA,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientAppMinutesPlayedData_AppMinutesPlayedData)
+  ))
+_sym_db.RegisterMessage(CMsgClientAppMinutesPlayedData_AppMinutesPlayedData)
 
 CCommunity_GetApps_Request = _reflection.GeneratedProtocolMessageType('CCommunity_GetApps_Request', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_GETAPPS_REQUEST,
@@ -5629,6 +5175,13 @@ CCommunity_GetAppRichPresenceLocalization_Response_TokenList = _reflection.Gener
   ))
 _sym_db.RegisterMessage(CCommunity_GetAppRichPresenceLocalization_Response_TokenList)
 
+CCommunity_GetCommentThread_Request = _reflection.GeneratedProtocolMessageType('CCommunity_GetCommentThread_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_GETCOMMENTTHREAD_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_GetCommentThread_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_GetCommentThread_Request)
+
 CCommunity_Comment = _reflection.GeneratedProtocolMessageType('CCommunity_Comment', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_COMMENT,
   __module__ = 'steammessages_webui_friends_pb2'
@@ -5643,12 +5196,26 @@ CCommunity_GetCommentThread_Response = _reflection.GeneratedProtocolMessageType(
   ))
 _sym_db.RegisterMessage(CCommunity_GetCommentThread_Response)
 
+CCommunity_PostCommentToThread_Request = _reflection.GeneratedProtocolMessageType('CCommunity_PostCommentToThread_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_POSTCOMMENTTOTHREAD_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_PostCommentToThread_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_PostCommentToThread_Request)
+
 CCommunity_PostCommentToThread_Response = _reflection.GeneratedProtocolMessageType('CCommunity_PostCommentToThread_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_POSTCOMMENTTOTHREAD_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
   # @@protoc_insertion_point(class_scope:CCommunity_PostCommentToThread_Response)
   ))
 _sym_db.RegisterMessage(CCommunity_PostCommentToThread_Response)
+
+CCommunity_DeleteCommentFromThread_Request = _reflection.GeneratedProtocolMessageType('CCommunity_DeleteCommentFromThread_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_DELETECOMMENTFROMTHREAD_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_DeleteCommentFromThread_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_DeleteCommentFromThread_Request)
 
 CCommunity_DeleteCommentFromThread_Response = _reflection.GeneratedProtocolMessageType('CCommunity_DeleteCommentFromThread_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_DELETECOMMENTFROMTHREAD_RESPONSE,
@@ -5657,12 +5224,26 @@ CCommunity_DeleteCommentFromThread_Response = _reflection.GeneratedProtocolMessa
   ))
 _sym_db.RegisterMessage(CCommunity_DeleteCommentFromThread_Response)
 
+CCommunity_RateCommentThread_Request = _reflection.GeneratedProtocolMessageType('CCommunity_RateCommentThread_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_RATECOMMENTTHREAD_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_RateCommentThread_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_RateCommentThread_Request)
+
 CCommunity_RateCommentThread_Response = _reflection.GeneratedProtocolMessageType('CCommunity_RateCommentThread_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_RATECOMMENTTHREAD_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
   # @@protoc_insertion_point(class_scope:CCommunity_RateCommentThread_Response)
   ))
 _sym_db.RegisterMessage(CCommunity_RateCommentThread_Response)
+
+CCommunity_GetCommentThreadRatings_Request = _reflection.GeneratedProtocolMessageType('CCommunity_GetCommentThreadRatings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_GETCOMMENTTHREADRATINGS_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_GetCommentThreadRatings_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_GetCommentThreadRatings_Request)
 
 CCommunity_GetCommentThreadRatings_Response = _reflection.GeneratedProtocolMessageType('CCommunity_GetCommentThreadRatings_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_GETCOMMENTTHREADRATINGS_RESPONSE,
@@ -5699,20 +5280,6 @@ CCommunity_GetClanAnnouncementVoteForUser_Response = _reflection.GeneratedProtoc
   ))
 _sym_db.RegisterMessage(CCommunity_GetClanAnnouncementVoteForUser_Response)
 
-CCommunity_GetAvatarHistory_Response = _reflection.GeneratedProtocolMessageType('CCommunity_GetAvatarHistory_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CCOMMUNITY_GETAVATARHISTORY_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CCommunity_GetAvatarHistory_Response)
-  ))
-_sym_db.RegisterMessage(CCommunity_GetAvatarHistory_Response)
-
-CCommunity_GetAvatarHistory_Response_AvatarData = _reflection.GeneratedProtocolMessageType('CCommunity_GetAvatarHistory_Response_AvatarData', (_message.Message,), dict(
-  DESCRIPTOR = _CCOMMUNITY_GETAVATARHISTORY_RESPONSE_AVATARDATA,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CCommunity_GetAvatarHistory_Response_AvatarData)
-  ))
-_sym_db.RegisterMessage(CCommunity_GetAvatarHistory_Response_AvatarData)
-
 CAppPriority = _reflection.GeneratedProtocolMessageType('CAppPriority', (_message.Message,), dict(
   DESCRIPTOR = _CAPPPRIORITY,
   __module__ = 'steammessages_webui_friends_pb2'
@@ -5720,12 +5287,26 @@ CAppPriority = _reflection.GeneratedProtocolMessageType('CAppPriority', (_messag
   ))
 _sym_db.RegisterMessage(CAppPriority)
 
+CCommunity_GetUserPartnerEventNews_Request = _reflection.GeneratedProtocolMessageType('CCommunity_GetUserPartnerEventNews_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_GETUSERPARTNEREVENTNEWS_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_GetUserPartnerEventNews_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_GetUserPartnerEventNews_Request)
+
 CCommunity_GetUserPartnerEventNews_Response = _reflection.GeneratedProtocolMessageType('CCommunity_GetUserPartnerEventNews_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_GETUSERPARTNEREVENTNEWS_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
   # @@protoc_insertion_point(class_scope:CCommunity_GetUserPartnerEventNews_Response)
   ))
 _sym_db.RegisterMessage(CCommunity_GetUserPartnerEventNews_Response)
+
+CCommunity_GetBestEventsForUser_Request = _reflection.GeneratedProtocolMessageType('CCommunity_GetBestEventsForUser_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_GETBESTEVENTSFORUSER_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_GetBestEventsForUser_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_GetBestEventsForUser_Request)
 
 CCommunity_PartnerEventResult = _reflection.GeneratedProtocolMessageType('CCommunity_PartnerEventResult', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_PARTNEREVENTRESULT,
@@ -5741,6 +5322,13 @@ CCommunity_GetBestEventsForUser_Response = _reflection.GeneratedProtocolMessageT
   ))
 _sym_db.RegisterMessage(CCommunity_GetBestEventsForUser_Response)
 
+CCommunity_ClearUserPartnerEventsAppPriorities_Request = _reflection.GeneratedProtocolMessageType('CCommunity_ClearUserPartnerEventsAppPriorities_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_ClearUserPartnerEventsAppPriorities_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_ClearUserPartnerEventsAppPriorities_Request)
+
 CCommunity_ClearUserPartnerEventsAppPriorities_Response = _reflection.GeneratedProtocolMessageType('CCommunity_ClearUserPartnerEventsAppPriorities_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
@@ -5755,12 +5343,26 @@ CCommunity_PartnerEventsAppPriority = _reflection.GeneratedProtocolMessageType('
   ))
 _sym_db.RegisterMessage(CCommunity_PartnerEventsAppPriority)
 
+CCommunity_GetUserPartnerEventsAppPriorities_Request = _reflection.GeneratedProtocolMessageType('CCommunity_GetUserPartnerEventsAppPriorities_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_GetUserPartnerEventsAppPriorities_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_GetUserPartnerEventsAppPriorities_Request)
+
 CCommunity_GetUserPartnerEventsAppPriorities_Response = _reflection.GeneratedProtocolMessageType('CCommunity_GetUserPartnerEventsAppPriorities_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
   # @@protoc_insertion_point(class_scope:CCommunity_GetUserPartnerEventsAppPriorities_Response)
   ))
 _sym_db.RegisterMessage(CCommunity_GetUserPartnerEventsAppPriorities_Response)
+
+CCommunity_ClearSinglePartnerEventsAppPriority_Request = _reflection.GeneratedProtocolMessageType('CCommunity_ClearSinglePartnerEventsAppPriority_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_ClearSinglePartnerEventsAppPriority_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_ClearSinglePartnerEventsAppPriority_Request)
 
 CCommunity_ClearSinglePartnerEventsAppPriority_Response = _reflection.GeneratedProtocolMessageType('CCommunity_ClearSinglePartnerEventsAppPriority_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_RESPONSE,
@@ -5769,12 +5371,26 @@ CCommunity_ClearSinglePartnerEventsAppPriority_Response = _reflection.GeneratedP
   ))
 _sym_db.RegisterMessage(CCommunity_ClearSinglePartnerEventsAppPriority_Response)
 
+CCommunity_PartnerEventsShowMoreForApp_Request = _reflection.GeneratedProtocolMessageType('CCommunity_PartnerEventsShowMoreForApp_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_PartnerEventsShowMoreForApp_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_PartnerEventsShowMoreForApp_Request)
+
 CCommunity_PartnerEventsShowMoreForApp_Response = _reflection.GeneratedProtocolMessageType('CCommunity_PartnerEventsShowMoreForApp_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
   # @@protoc_insertion_point(class_scope:CCommunity_PartnerEventsShowMoreForApp_Response)
   ))
 _sym_db.RegisterMessage(CCommunity_PartnerEventsShowMoreForApp_Response)
+
+CCommunity_PartnerEventsShowLessForApp_Request = _reflection.GeneratedProtocolMessageType('CCommunity_PartnerEventsShowLessForApp_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CCommunity_PartnerEventsShowLessForApp_Request)
+  ))
+_sym_db.RegisterMessage(CCommunity_PartnerEventsShowLessForApp_Request)
 
 CCommunity_PartnerEventsShowLessForApp_Response = _reflection.GeneratedProtocolMessageType('CCommunity_PartnerEventsShowLessForApp_Response', (_message.Message,), dict(
   DESCRIPTOR = _CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_RESPONSE,
@@ -5804,68 +5420,243 @@ CCommunity_MarkPartnerEventsForUser_Response = _reflection.GeneratedProtocolMess
   ))
 _sym_db.RegisterMessage(CCommunity_MarkPartnerEventsForUser_Response)
 
-CCommunity_GetUserPartnerEventViewStatus_Response = _reflection.GeneratedProtocolMessageType('CCommunity_GetUserPartnerEventViewStatus_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE,
+CProductImpressionsFromClient_Notification = _reflection.GeneratedProtocolMessageType('CProductImpressionsFromClient_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CCommunity_GetUserPartnerEventViewStatus_Response)
+  # @@protoc_insertion_point(class_scope:CProductImpressionsFromClient_Notification)
   ))
-_sym_db.RegisterMessage(CCommunity_GetUserPartnerEventViewStatus_Response)
+_sym_db.RegisterMessage(CProductImpressionsFromClient_Notification)
 
-CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent = _reflection.GeneratedProtocolMessageType('CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE_PARTNEREVENT,
+CProductImpressionsFromClient_Notification_Impression = _reflection.GeneratedProtocolMessageType('CProductImpressionsFromClient_Notification_Impression', (_message.Message,), dict(
+  DESCRIPTOR = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent)
+  # @@protoc_insertion_point(class_scope:CProductImpressionsFromClient_Notification_Impression)
   ))
-_sym_db.RegisterMessage(CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent)
+_sym_db.RegisterMessage(CProductImpressionsFromClient_Notification_Impression)
 
-CWebRTCClient_InitiateWebRTCConnection_Request = _reflection.GeneratedProtocolMessageType('CWebRTCClient_InitiateWebRTCConnection_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST,
+CFriendsListCategory = _reflection.GeneratedProtocolMessageType('CFriendsListCategory', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLISTCATEGORY,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTCClient_InitiateWebRTCConnection_Request)
+  # @@protoc_insertion_point(class_scope:CFriendsListCategory)
   ))
-_sym_db.RegisterMessage(CWebRTCClient_InitiateWebRTCConnection_Request)
+_sym_db.RegisterMessage(CFriendsListCategory)
 
-CWebRTCClient_InitiateWebRTCConnection_Response = _reflection.GeneratedProtocolMessageType('CWebRTCClient_InitiateWebRTCConnection_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE,
+CFriendsList_GetCategories_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_GetCategories_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_GETCATEGORIES_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTCClient_InitiateWebRTCConnection_Response)
+  # @@protoc_insertion_point(class_scope:CFriendsList_GetCategories_Request)
   ))
-_sym_db.RegisterMessage(CWebRTCClient_InitiateWebRTCConnection_Response)
+_sym_db.RegisterMessage(CFriendsList_GetCategories_Request)
 
-CWebRTC_WebRTCSessionConnected_Notification = _reflection.GeneratedProtocolMessageType('CWebRTC_WebRTCSessionConnected_Notification', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION,
+CFriendsList_GetCategories_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_GetCategories_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_GETCATEGORIES_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTC_WebRTCSessionConnected_Notification)
+  # @@protoc_insertion_point(class_scope:CFriendsList_GetCategories_Response)
   ))
-_sym_db.RegisterMessage(CWebRTC_WebRTCSessionConnected_Notification)
+_sym_db.RegisterMessage(CFriendsList_GetCategories_Response)
 
-CWebRTC_WebRTCUpdateRemoteDescription_Notification = _reflection.GeneratedProtocolMessageType('CWebRTC_WebRTCUpdateRemoteDescription_Notification', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION,
+CFriendsListFavoriteEntry = _reflection.GeneratedProtocolMessageType('CFriendsListFavoriteEntry', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLISTFAVORITEENTRY,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTC_WebRTCUpdateRemoteDescription_Notification)
+  # @@protoc_insertion_point(class_scope:CFriendsListFavoriteEntry)
   ))
-_sym_db.RegisterMessage(CWebRTC_WebRTCUpdateRemoteDescription_Notification)
+_sym_db.RegisterMessage(CFriendsListFavoriteEntry)
 
-CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping = _reflection.GeneratedProtocolMessageType('CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING,
+CFriendsList_GetFavorites_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFavorites_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_GETFAVORITES_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping)
+  # @@protoc_insertion_point(class_scope:CFriendsList_GetFavorites_Request)
   ))
-_sym_db.RegisterMessage(CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping)
+_sym_db.RegisterMessage(CFriendsList_GetFavorites_Request)
 
-CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request = _reflection.GeneratedProtocolMessageType('CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST,
+CFriendsList_GetFavorites_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFavorites_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_GETFAVORITES_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request)
+  # @@protoc_insertion_point(class_scope:CFriendsList_GetFavorites_Response)
   ))
-_sym_db.RegisterMessage(CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request)
+_sym_db.RegisterMessage(CFriendsList_GetFavorites_Response)
 
-CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response = _reflection.GeneratedProtocolMessageType('CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE,
+CFriendsList_SetFavorites_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_SetFavorites_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_SETFAVORITES_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response)
+  # @@protoc_insertion_point(class_scope:CFriendsList_SetFavorites_Request)
   ))
-_sym_db.RegisterMessage(CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response)
+_sym_db.RegisterMessage(CFriendsList_SetFavorites_Request)
+
+CFriendsList_SetFavorites_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_SetFavorites_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_SETFAVORITES_RESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendsList_SetFavorites_Response)
+  ))
+_sym_db.RegisterMessage(CFriendsList_SetFavorites_Response)
+
+CFriendsList_FavoritesChanged_Notification = _reflection.GeneratedProtocolMessageType('CFriendsList_FavoritesChanged_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendsList_FavoritesChanged_Notification)
+  ))
+_sym_db.RegisterMessage(CFriendsList_FavoritesChanged_Notification)
+
+CFriendsList_GetFriendsList_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFriendsList_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_GETFRIENDSLIST_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendsList_GetFriendsList_Request)
+  ))
+_sym_db.RegisterMessage(CFriendsList_GetFriendsList_Request)
+
+CFriendsList_GetFriendsList_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFriendsList_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendsList_GetFriendsList_Response)
+  ))
+_sym_db.RegisterMessage(CFriendsList_GetFriendsList_Response)
+
+CMsgClientUCMEnumerateUserPublishedFiles = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserPublishedFiles', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILES,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserPublishedFiles)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserPublishedFiles)
+
+CMsgClientUCMEnumerateUserPublishedFilesResponse = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserPublishedFilesResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserPublishedFilesResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserPublishedFilesResponse)
+
+CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId)
+
+CMsgClientUCMEnumerateUserSubscribedFiles = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserSubscribedFiles', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILES,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserSubscribedFiles)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserSubscribedFiles)
+
+CMsgClientUCMEnumerateUserSubscribedFilesResponse = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserSubscribedFilesResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserSubscribedFilesResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserSubscribedFilesResponse)
+
+CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMENUMERATEUSERSUBSCRIBEDFILESRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId)
+
+CMsgClientUCMPublishedFileDeleted = _reflection.GeneratedProtocolMessageType('CMsgClientUCMPublishedFileDeleted', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMPUBLISHEDFILEDELETED,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMPublishedFileDeleted)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMPublishedFileDeleted)
+
+CMsgClientWorkshopItemInfoRequest = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFOREQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoRequest)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoRequest)
+
+CMsgClientWorkshopItemInfoRequest_WorkshopItem = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoRequest_WorkshopItem', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFOREQUEST_WORKSHOPITEM,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoRequest_WorkshopItem)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoRequest_WorkshopItem)
+
+CMsgClientWorkshopItemInfoResponse = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFORESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoResponse)
+
+CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo = _reflection.GeneratedProtocolMessageType('CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTWORKSHOPITEMINFORESPONSE_WORKSHOPITEMINFO,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo)
+  ))
+_sym_db.RegisterMessage(CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo)
+
+CMsgClientUCMGetPublishedFilesForUser = _reflection.GeneratedProtocolMessageType('CMsgClientUCMGetPublishedFilesForUser', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSER,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMGetPublishedFilesForUser)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMGetPublishedFilesForUser)
+
+CMsgClientUCMGetPublishedFilesForUserResponse = _reflection.GeneratedProtocolMessageType('CMsgClientUCMGetPublishedFilesForUserResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMGetPublishedFilesForUserResponse)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMGetPublishedFilesForUserResponse)
+
+CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCLIENTUCMGETPUBLISHEDFILESFORUSERRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId)
+
+CMsgCREEnumeratePublishedFiles = _reflection.GeneratedProtocolMessageType('CMsgCREEnumeratePublishedFiles', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCREENUMERATEPUBLISHEDFILES,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgCREEnumeratePublishedFiles)
+  ))
+_sym_db.RegisterMessage(CMsgCREEnumeratePublishedFiles)
+
+CMsgCREEnumeratePublishedFilesResponse = _reflection.GeneratedProtocolMessageType('CMsgCREEnumeratePublishedFilesResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgCREEnumeratePublishedFilesResponse)
+  ))
+_sym_db.RegisterMessage(CMsgCREEnumeratePublishedFilesResponse)
+
+CMsgCREEnumeratePublishedFilesResponse_PublishedFileId = _reflection.GeneratedProtocolMessageType('CMsgCREEnumeratePublishedFilesResponse_PublishedFileId', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGCREENUMERATEPUBLISHEDFILESRESPONSE_PUBLISHEDFILEID,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgCREEnumeratePublishedFilesResponse_PublishedFileId)
+  ))
+_sym_db.RegisterMessage(CMsgCREEnumeratePublishedFilesResponse_PublishedFileId)
+
+CMsgGameServerPingSample = _reflection.GeneratedProtocolMessageType('CMsgGameServerPingSample', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGGAMESERVERPINGSAMPLE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgGameServerPingSample)
+  ))
+_sym_db.RegisterMessage(CMsgGameServerPingSample)
+
+CMsgGameServerPingSample_Sample = _reflection.GeneratedProtocolMessageType('CMsgGameServerPingSample_Sample', (_message.Message,), dict(
+  DESCRIPTOR = _CMSGGAMESERVERPINGSAMPLE_SAMPLE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CMsgGameServerPingSample_Sample)
+  ))
+_sym_db.RegisterMessage(CMsgGameServerPingSample_Sample)
+
+CClan_RespondToClanInvite_Request = _reflection.GeneratedProtocolMessageType('CClan_RespondToClanInvite_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CCLAN_RESPONDTOCLANINVITE_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CClan_RespondToClanInvite_Request)
+  ))
+_sym_db.RegisterMessage(CClan_RespondToClanInvite_Request)
+
+CClan_RespondToClanInvite_Response = _reflection.GeneratedProtocolMessageType('CClan_RespondToClanInvite_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CCLAN_RESPONDTOCLANINVITE_RESPONSE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CClan_RespondToClanInvite_Response)
+  ))
+_sym_db.RegisterMessage(CClan_RespondToClanInvite_Response)
 
 CVoiceChat_RequestOneOnOneChat_Request = _reflection.GeneratedProtocolMessageType('CVoiceChat_RequestOneOnOneChat_Request', (_message.Message,), dict(
   DESCRIPTOR = _CVOICECHAT_REQUESTONEONONECHAT_REQUEST,
@@ -5986,6 +5777,13 @@ CVoiceChat_UploadClientVoiceChatLogs_Response = _reflection.GeneratedProtocolMes
   ))
 _sym_db.RegisterMessage(CVoiceChat_UploadClientVoiceChatLogs_Response)
 
+CVoiceChat_LeaveVoiceChat_Request = _reflection.GeneratedProtocolMessageType('CVoiceChat_LeaveVoiceChat_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CVOICECHAT_LEAVEVOICECHAT_REQUEST,
+  __module__ = 'steammessages_webui_friends_pb2'
+  # @@protoc_insertion_point(class_scope:CVoiceChat_LeaveVoiceChat_Request)
+  ))
+_sym_db.RegisterMessage(CVoiceChat_LeaveVoiceChat_Request)
+
 CVoiceChat_LeaveVoiceChat_Response = _reflection.GeneratedProtocolMessageType('CVoiceChat_LeaveVoiceChat_Response', (_message.Message,), dict(
   DESCRIPTOR = _CVOICECHAT_LEAVEVOICECHAT_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
@@ -6007,511 +5805,150 @@ CVoiceChat_VoiceChatEnded_Notification = _reflection.GeneratedProtocolMessageTyp
   ))
 _sym_db.RegisterMessage(CVoiceChat_VoiceChatEnded_Notification)
 
-CSteamTV_CreateBroadcastChannel_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_CreateBroadcastChannel_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_CREATEBROADCASTCHANNEL_RESPONSE,
+CWebRTCClient_InitiateWebRTCConnection_Request = _reflection.GeneratedProtocolMessageType('CWebRTCClient_InitiateWebRTCConnection_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_CreateBroadcastChannel_Response)
+  # @@protoc_insertion_point(class_scope:CWebRTCClient_InitiateWebRTCConnection_Request)
   ))
-_sym_db.RegisterMessage(CSteamTV_CreateBroadcastChannel_Response)
+_sym_db.RegisterMessage(CWebRTCClient_InitiateWebRTCConnection_Request)
 
-CSteamTV_GetBroadcastChannelID_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelID_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELID_RESPONSE,
+CWebRTCClient_InitiateWebRTCConnection_Response = _reflection.GeneratedProtocolMessageType('CWebRTCClient_InitiateWebRTCConnection_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelID_Response)
+  # @@protoc_insertion_point(class_scope:CWebRTCClient_InitiateWebRTCConnection_Response)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelID_Response)
+_sym_db.RegisterMessage(CWebRTCClient_InitiateWebRTCConnection_Response)
 
-CSteamTV_SetBroadcastChannelProfile_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_SetBroadcastChannelProfile_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SETBROADCASTCHANNELPROFILE_RESPONSE,
+CWebRTC_WebRTCSessionConnected_Notification = _reflection.GeneratedProtocolMessageType('CWebRTC_WebRTCSessionConnected_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_SetBroadcastChannelProfile_Response)
+  # @@protoc_insertion_point(class_scope:CWebRTC_WebRTCSessionConnected_Notification)
   ))
-_sym_db.RegisterMessage(CSteamTV_SetBroadcastChannelProfile_Response)
+_sym_db.RegisterMessage(CWebRTC_WebRTCSessionConnected_Notification)
 
-CSteamTV_GetBroadcastChannelProfile_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelProfile_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELPROFILE_RESPONSE,
+CWebRTC_WebRTCUpdateRemoteDescription_Notification = _reflection.GeneratedProtocolMessageType('CWebRTC_WebRTCUpdateRemoteDescription_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelProfile_Response)
+  # @@protoc_insertion_point(class_scope:CWebRTC_WebRTCUpdateRemoteDescription_Notification)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelProfile_Response)
+_sym_db.RegisterMessage(CWebRTC_WebRTCUpdateRemoteDescription_Notification)
 
-CSteamTV_SetBroadcastChannelImage_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_SetBroadcastChannelImage_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SETBROADCASTCHANNELIMAGE_RESPONSE,
+CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping = _reflection.GeneratedProtocolMessageType('CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION_CSSRCTOACCOUNTIDMAPPING,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_SetBroadcastChannelImage_Response)
+  # @@protoc_insertion_point(class_scope:CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping)
   ))
-_sym_db.RegisterMessage(CSteamTV_SetBroadcastChannelImage_Response)
+_sym_db.RegisterMessage(CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping)
 
-CSteamTV_GetBroadcastChannelImages_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelImages_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE,
+CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request = _reflection.GeneratedProtocolMessageType('CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelImages_Response)
+  # @@protoc_insertion_point(class_scope:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelImages_Response)
+_sym_db.RegisterMessage(CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request)
 
-CSteamTV_GetBroadcastChannelImages_Response_Images = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelImages_Response_Images', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE_IMAGES,
+CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response = _reflection.GeneratedProtocolMessageType('CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelImages_Response_Images)
+  # @@protoc_insertion_point(class_scope:CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelImages_Response_Images)
+_sym_db.RegisterMessage(CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response)
 
-CSteamTV_GetBroadcastChannelLinks_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelLinks_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE,
+CMobilePerAccount_GetSettings_Request = _reflection.GeneratedProtocolMessageType('CMobilePerAccount_GetSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEPERACCOUNT_GETSETTINGS_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelLinks_Response)
+  # @@protoc_insertion_point(class_scope:CMobilePerAccount_GetSettings_Request)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelLinks_Response)
+_sym_db.RegisterMessage(CMobilePerAccount_GetSettings_Request)
 
-CSteamTV_GetBroadcastChannelLinks_Response_Links = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelLinks_Response_Links', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE_LINKS,
+CMobilePerAccount_GetSettings_Response = _reflection.GeneratedProtocolMessageType('CMobilePerAccount_GetSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEPERACCOUNT_GETSETTINGS_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelLinks_Response_Links)
+  # @@protoc_insertion_point(class_scope:CMobilePerAccount_GetSettings_Response)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelLinks_Response_Links)
+_sym_db.RegisterMessage(CMobilePerAccount_GetSettings_Response)
 
-CSteamTV_SetBroadcastChannelLinkRegions_Request_Links = _reflection.GeneratedProtocolMessageType('CSteamTV_SetBroadcastChannelLinkRegions_Request_Links', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_REQUEST_LINKS,
+CMobilePerAccount_SetSettings_Request = _reflection.GeneratedProtocolMessageType('CMobilePerAccount_SetSettings_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEPERACCOUNT_SETSETTINGS_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_SetBroadcastChannelLinkRegions_Request_Links)
+  # @@protoc_insertion_point(class_scope:CMobilePerAccount_SetSettings_Request)
   ))
-_sym_db.RegisterMessage(CSteamTV_SetBroadcastChannelLinkRegions_Request_Links)
+_sym_db.RegisterMessage(CMobilePerAccount_SetSettings_Request)
 
-CSteamTV_SetBroadcastChannelLinkRegions_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_SetBroadcastChannelLinkRegions_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_RESPONSE,
+CMobilePerAccount_SetSettings_Response = _reflection.GeneratedProtocolMessageType('CMobilePerAccount_SetSettings_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEPERACCOUNT_SETSETTINGS_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_SetBroadcastChannelLinkRegions_Response)
+  # @@protoc_insertion_point(class_scope:CMobilePerAccount_SetSettings_Response)
   ))
-_sym_db.RegisterMessage(CSteamTV_SetBroadcastChannelLinkRegions_Response)
+_sym_db.RegisterMessage(CMobilePerAccount_SetSettings_Response)
 
-CSteamTV_GetBroadcastChannelStatus_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelStatus_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELSTATUS_RESPONSE,
+CMobileDevice_RegisterMobileDevice_Request = _reflection.GeneratedProtocolMessageType('CMobileDevice_RegisterMobileDevice_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEDEVICE_REGISTERMOBILEDEVICE_REQUEST,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelStatus_Response)
+  # @@protoc_insertion_point(class_scope:CMobileDevice_RegisterMobileDevice_Request)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelStatus_Response)
+_sym_db.RegisterMessage(CMobileDevice_RegisterMobileDevice_Request)
 
-GetBroadcastChannelEntry = _reflection.GeneratedProtocolMessageType('GetBroadcastChannelEntry', (_message.Message,), dict(
-  DESCRIPTOR = _GETBROADCASTCHANNELENTRY,
+CMobileDevice_RegisterMobileDevice_Response = _reflection.GeneratedProtocolMessageType('CMobileDevice_RegisterMobileDevice_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEDEVICE_REGISTERMOBILEDEVICE_RESPONSE,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:GetBroadcastChannelEntry)
+  # @@protoc_insertion_point(class_scope:CMobileDevice_RegisterMobileDevice_Response)
   ))
-_sym_db.RegisterMessage(GetBroadcastChannelEntry)
+_sym_db.RegisterMessage(CMobileDevice_RegisterMobileDevice_Response)
 
-CSteamTV_GetFollowedChannels_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetFollowedChannels_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETFOLLOWEDCHANNELS_RESPONSE,
+CMobileDevice_DeregisterMobileDevice_Notification = _reflection.GeneratedProtocolMessageType('CMobileDevice_DeregisterMobileDevice_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CMOBILEDEVICE_DEREGISTERMOBILEDEVICE_NOTIFICATION,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetFollowedChannels_Response)
+  # @@protoc_insertion_point(class_scope:CMobileDevice_DeregisterMobileDevice_Notification)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetFollowedChannels_Response)
+_sym_db.RegisterMessage(CMobileDevice_DeregisterMobileDevice_Notification)
 
-CSteamTV_GetSubscribedChannels_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetSubscribedChannels_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETSUBSCRIBEDCHANNELS_RESPONSE,
+UnknownProto = _reflection.GeneratedProtocolMessageType('UnknownProto', (_message.Message,), dict(
+  DESCRIPTOR = _UNKNOWNPROTO,
   __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetSubscribedChannels_Response)
+  # @@protoc_insertion_point(class_scope:UnknownProto)
   ))
-_sym_db.RegisterMessage(CSteamTV_GetSubscribedChannels_Response)
-
-CSteamTV_FollowBroadcastChannel_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_FollowBroadcastChannel_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_FOLLOWBROADCASTCHANNEL_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_FollowBroadcastChannel_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_FollowBroadcastChannel_Response)
-
-CSteamTV_SubscribeBroadcastChannel_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_SubscribeBroadcastChannel_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SUBSCRIBEBROADCASTCHANNEL_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_SubscribeBroadcastChannel_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_SubscribeBroadcastChannel_Response)
-
-CSteamTV_ReportBroadcastChannel_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_ReportBroadcastChannel_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_REPORTBROADCASTCHANNEL_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_ReportBroadcastChannel_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_ReportBroadcastChannel_Response)
-
-CSteamTV_GetBroadcastChannelInteraction_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelInteraction_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELINTERACTION_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelInteraction_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelInteraction_Response)
-
-CSteamTV_Game = _reflection.GeneratedProtocolMessageType('CSteamTV_Game', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GAME,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_Game)
-  ))
-_sym_db.RegisterMessage(CSteamTV_Game)
-
-CSteamTV_GetGames_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetGames_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETGAMES_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetGames_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetGames_Response)
-
-CSteamTV_GetChannels_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetChannels_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETCHANNELS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetChannels_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetChannels_Response)
-
-CSteamTV_GetBroadcastChannelBroadcasters_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelBroadcasters_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelBroadcasters_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelBroadcasters_Response)
-
-CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE_BROADCASTER,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster)
-
-CSteamTV_ChatBan = _reflection.GeneratedProtocolMessageType('CSteamTV_ChatBan', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_CHATBAN,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_ChatBan)
-  ))
-_sym_db.RegisterMessage(CSteamTV_ChatBan)
-
-CSteamTV_AddChatBan_Request = _reflection.GeneratedProtocolMessageType('CSteamTV_AddChatBan_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_ADDCHATBAN_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_AddChatBan_Request)
-  ))
-_sym_db.RegisterMessage(CSteamTV_AddChatBan_Request)
-
-CSteamTV_AddChatBan_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_AddChatBan_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_ADDCHATBAN_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_AddChatBan_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_AddChatBan_Response)
-
-CSteamTV_GetChatBans_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetChatBans_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETCHATBANS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetChatBans_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetChatBans_Response)
-
-CSteamTV_AddChatModerator_Request = _reflection.GeneratedProtocolMessageType('CSteamTV_AddChatModerator_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_ADDCHATMODERATOR_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_AddChatModerator_Request)
-  ))
-_sym_db.RegisterMessage(CSteamTV_AddChatModerator_Request)
-
-CSteamTV_AddChatModerator_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_AddChatModerator_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_ADDCHATMODERATOR_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_AddChatModerator_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_AddChatModerator_Response)
-
-CSteamTV_GetChatModerators_Request = _reflection.GeneratedProtocolMessageType('CSteamTV_GetChatModerators_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETCHATMODERATORS_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetChatModerators_Request)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetChatModerators_Request)
-
-CSteamTV_ChatModerator = _reflection.GeneratedProtocolMessageType('CSteamTV_ChatModerator', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_CHATMODERATOR,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_ChatModerator)
-  ))
-_sym_db.RegisterMessage(CSteamTV_ChatModerator)
-
-CSteamTV_GetChatModerators_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetChatModerators_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETCHATMODERATORS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetChatModerators_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetChatModerators_Response)
-
-CSteamTV_AddWordBan_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_AddWordBan_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_ADDWORDBAN_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_AddWordBan_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_AddWordBan_Response)
-
-CSteamTV_GetWordBans_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetWordBans_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETWORDBANS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetWordBans_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetWordBans_Response)
-
-CSteamTV_JoinChat_Request = _reflection.GeneratedProtocolMessageType('CSteamTV_JoinChat_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_JOINCHAT_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_JoinChat_Request)
-  ))
-_sym_db.RegisterMessage(CSteamTV_JoinChat_Request)
-
-CSteamTV_JoinChat_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_JoinChat_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_JOINCHAT_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_JoinChat_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_JoinChat_Response)
-
-CSteamTV_Search_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_Search_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SEARCH_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_Search_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_Search_Response)
-
-CSteamTV_GetSteamTVUserSettings_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetSteamTVUserSettings_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETSTEAMTVUSERSETTINGS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetSteamTVUserSettings_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetSteamTVUserSettings_Response)
-
-CSteamTV_SetSteamTVUserSettings_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_SetSteamTVUserSettings_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_SETSTEAMTVUSERSETTINGS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_SetSteamTVUserSettings_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_SetSteamTVUserSettings_Response)
-
-CSteamTV_GetMyBroadcastChannels_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetMyBroadcastChannels_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETMYBROADCASTCHANNELS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetMyBroadcastChannels_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetMyBroadcastChannels_Response)
-
-CSteamTV_HomePageTemplate_Takeover = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_Takeover', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_TAKEOVER,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_Takeover)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_Takeover)
-
-CSteamTV_HomePageTemplate_SingleGame = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_SingleGame', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_SINGLEGAME,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_SingleGame)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_SingleGame)
-
-GameListEntry = _reflection.GeneratedProtocolMessageType('GameListEntry', (_message.Message,), dict(
-  DESCRIPTOR = _GAMELISTENTRY,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:GameListEntry)
-  ))
-_sym_db.RegisterMessage(GameListEntry)
-
-CSteamTV_HomePageTemplate_GameList = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_GameList', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_GAMELIST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_GameList)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_GameList)
-
-CSteamTV_HomePageTemplate_QuickExplore = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_QuickExplore', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_QUICKEXPLORE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_QuickExplore)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_QuickExplore)
-
-CSteamTV_HomePageTemplate_ConveyorBelt = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_ConveyorBelt', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_CONVEYORBELT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_ConveyorBelt)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_ConveyorBelt)
-
-CSteamTV_HomePageTemplate_WatchParty = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_WatchParty', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_WATCHPARTY,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_WatchParty)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_WatchParty)
-
-CSteamTV_HomePageTemplate_Developer = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_Developer', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_DEVELOPER,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_Developer)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_Developer)
-
-CSteamTV_HomePageTemplate_Event = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageTemplate_Event', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGETEMPLATE_EVENT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageTemplate_Event)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageTemplate_Event)
-
-CSteamTV_HomePageContentRow = _reflection.GeneratedProtocolMessageType('CSteamTV_HomePageContentRow', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_HOMEPAGECONTENTROW,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_HomePageContentRow)
-  ))
-_sym_db.RegisterMessage(CSteamTV_HomePageContentRow)
-
-CSteamTV_GetHomePageContents_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetHomePageContents_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETHOMEPAGECONTENTS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetHomePageContents_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetHomePageContents_Response)
-
-CSteamTV_BroadcastClipInfo = _reflection.GeneratedProtocolMessageType('CSteamTV_BroadcastClipInfo', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_BROADCASTCLIPINFO,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_BroadcastClipInfo)
-  ))
-_sym_db.RegisterMessage(CSteamTV_BroadcastClipInfo)
-
-CSteamTV_GetBroadcastChannelClips_Response = _reflection.GeneratedProtocolMessageType('CSteamTV_GetBroadcastChannelClips_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CSTEAMTV_GETBROADCASTCHANNELCLIPS_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CSteamTV_GetBroadcastChannelClips_Response)
-  ))
-_sym_db.RegisterMessage(CSteamTV_GetBroadcastChannelClips_Response)
-
-CFriendsListCategory = _reflection.GeneratedProtocolMessageType('CFriendsListCategory', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLISTCATEGORY,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsListCategory)
-  ))
-_sym_db.RegisterMessage(CFriendsListCategory)
-
-CFriendsList_GetCategories_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_GetCategories_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_GETCATEGORIES_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_GetCategories_Request)
-  ))
-_sym_db.RegisterMessage(CFriendsList_GetCategories_Request)
-
-CFriendsList_GetCategories_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_GetCategories_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_GETCATEGORIES_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_GetCategories_Response)
-  ))
-_sym_db.RegisterMessage(CFriendsList_GetCategories_Response)
-
-CFriendsListFavoriteEntry = _reflection.GeneratedProtocolMessageType('CFriendsListFavoriteEntry', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLISTFAVORITEENTRY,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsListFavoriteEntry)
-  ))
-_sym_db.RegisterMessage(CFriendsListFavoriteEntry)
-
-CFriendsList_GetFavorites_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFavorites_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_GETFAVORITES_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_GetFavorites_Request)
-  ))
-_sym_db.RegisterMessage(CFriendsList_GetFavorites_Request)
-
-CFriendsList_GetFavorites_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFavorites_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_GETFAVORITES_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_GetFavorites_Response)
-  ))
-_sym_db.RegisterMessage(CFriendsList_GetFavorites_Response)
-
-CFriendsList_SetFavorites_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_SetFavorites_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_SETFAVORITES_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_SetFavorites_Request)
-  ))
-_sym_db.RegisterMessage(CFriendsList_SetFavorites_Request)
-
-CFriendsList_SetFavorites_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_SetFavorites_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_SETFAVORITES_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_SetFavorites_Response)
-  ))
-_sym_db.RegisterMessage(CFriendsList_SetFavorites_Response)
-
-CFriendsList_FavoritesChanged_Notification = _reflection.GeneratedProtocolMessageType('CFriendsList_FavoritesChanged_Notification', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_FavoritesChanged_Notification)
-  ))
-_sym_db.RegisterMessage(CFriendsList_FavoritesChanged_Notification)
-
-CFriendsList_GetFriendsList_Request = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFriendsList_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_GETFRIENDSLIST_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_GetFriendsList_Request)
-  ))
-_sym_db.RegisterMessage(CFriendsList_GetFriendsList_Request)
-
-CFriendsList_GetFriendsList_Response = _reflection.GeneratedProtocolMessageType('CFriendsList_GetFriendsList_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CFRIENDSLIST_GETFRIENDSLIST_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CFriendsList_GetFriendsList_Response)
-  ))
-_sym_db.RegisterMessage(CFriendsList_GetFriendsList_Response)
-
-CClan_RespondToClanInvite_Request = _reflection.GeneratedProtocolMessageType('CClan_RespondToClanInvite_Request', (_message.Message,), dict(
-  DESCRIPTOR = _CCLAN_RESPONDTOCLANINVITE_REQUEST,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CClan_RespondToClanInvite_Request)
-  ))
-_sym_db.RegisterMessage(CClan_RespondToClanInvite_Request)
-
-CClan_RespondToClanInvite_Response = _reflection.GeneratedProtocolMessageType('CClan_RespondToClanInvite_Response', (_message.Message,), dict(
-  DESCRIPTOR = _CCLAN_RESPONDTOCLANINVITE_RESPONSE,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CClan_RespondToClanInvite_Response)
-  ))
-_sym_db.RegisterMessage(CClan_RespondToClanInvite_Response)
-
-CProductImpressionsFromClient_Notification = _reflection.GeneratedProtocolMessageType('CProductImpressionsFromClient_Notification', (_message.Message,), dict(
-  DESCRIPTOR = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CProductImpressionsFromClient_Notification)
-  ))
-_sym_db.RegisterMessage(CProductImpressionsFromClient_Notification)
-
-CProductImpressionsFromClient_Notification_Impression = _reflection.GeneratedProtocolMessageType('CProductImpressionsFromClient_Notification_Impression', (_message.Message,), dict(
-  DESCRIPTOR = _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:CProductImpressionsFromClient_Notification_Impression)
-  ))
-_sym_db.RegisterMessage(CProductImpressionsFromClient_Notification_Impression)
-
-NotImplemented = _reflection.GeneratedProtocolMessageType('NotImplemented', (_message.Message,), dict(
-  DESCRIPTOR = _NOTIMPLEMENTED,
-  __module__ = 'steammessages_webui_friends_pb2'
-  # @@protoc_insertion_point(class_scope:NotImplemented)
-  ))
-_sym_db.RegisterMessage(NotImplemented)
+_sym_db.RegisterMessage(UnknownProto)
 
 
 DESCRIPTOR._options = None
+_CCOMMUNITY_GETUSERPARTNEREVENTNEWS_REQUEST.fields_by_name['filter_event_type']._options = None
 _CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST_PARTNEREVENTMARKING.fields_by_name['display_location']._options = None
-_CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE_IMAGES.fields_by_name['image_type']._options = None
-_CSTEAMTV_HOMEPAGECONTENTROW.fields_by_name['template_type']._options = None
 _CPRODUCTIMPRESSIONSFROMCLIENT_NOTIFICATION_IMPRESSION.fields_by_name['type']._options = None
+_CMOBILEDEVICE_REGISTERMOBILEDEVICE_REQUEST.fields_by_name['mobile_app']._options = None
+
+_HELPREQUESTLOGS = _descriptor.ServiceDescriptor(
+  name='HelpRequestLogs',
+  full_name='HelpRequestLogs',
+  file=DESCRIPTOR,
+  index=0,
+  serialized_options=None,
+  serialized_start=13637,
+  serialized_end=13788,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='UploadUserApplicationLog',
+    full_name='HelpRequestLogs.UploadUserApplicationLog',
+    index=0,
+    containing_service=None,
+    input_type=_CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_REQUEST,
+    output_type=_CHELPREQUESTLOGS_UPLOADUSERAPPLICATIONLOG_RESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_HELPREQUESTLOGS)
+
+DESCRIPTOR.services_by_name['HelpRequestLogs'] = _HELPREQUESTLOGS
+
 
 _COMMUNITY = _descriptor.ServiceDescriptor(
   name='Community',
   full_name='Community',
   file=DESCRIPTOR,
-  index=0,
+  index=1,
   serialized_options=None,
-  serialized_start=14285,
-  serialized_end=16178,
+  serialized_start=13791,
+  serialized_end=15869,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetApps',
@@ -6536,7 +5973,7 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
     full_name='Community.GetCommentThread',
     index=2,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_GETCOMMENTTHREAD_REQUEST,
     output_type=_CCOMMUNITY_GETCOMMENTTHREAD_RESPONSE,
     serialized_options=None,
   ),
@@ -6545,7 +5982,7 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
     full_name='Community.PostCommentToThread',
     index=3,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_POSTCOMMENTTOTHREAD_REQUEST,
     output_type=_CCOMMUNITY_POSTCOMMENTTOTHREAD_RESPONSE,
     serialized_options=None,
   ),
@@ -6554,7 +5991,7 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
     full_name='Community.DeleteCommentFromThread',
     index=4,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_DELETECOMMENTFROMTHREAD_REQUEST,
     output_type=_CCOMMUNITY_DELETECOMMENTFROMTHREAD_RESPONSE,
     serialized_options=None,
   ),
@@ -6563,7 +6000,7 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
     full_name='Community.RateCommentThread',
     index=5,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_RATECOMMENTTHREAD_REQUEST,
     output_type=_CCOMMUNITY_RATECOMMENTTHREAD_RESPONSE,
     serialized_options=None,
   ),
@@ -6572,7 +6009,7 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
     full_name='Community.GetCommentThreadRatings',
     index=6,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_GETCOMMENTTHREADRATINGS_REQUEST,
     output_type=_CCOMMUNITY_GETCOMMENTTHREADRATINGS_RESPONSE,
     serialized_options=None,
   ),
@@ -6595,92 +6032,74 @@ _COMMUNITY = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='GetAvatarHistory',
-    full_name='Community.GetAvatarHistory',
-    index=9,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CCOMMUNITY_GETAVATARHISTORY_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
     name='GetUserPartnerEventNews',
     full_name='Community.GetUserPartnerEventNews',
-    index=10,
+    index=9,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_GETUSERPARTNEREVENTNEWS_REQUEST,
     output_type=_CCOMMUNITY_GETUSERPARTNEREVENTNEWS_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='GetBestEventsForUser',
     full_name='Community.GetBestEventsForUser',
-    index=11,
+    index=10,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_GETBESTEVENTSFORUSER_REQUEST,
     output_type=_CCOMMUNITY_GETBESTEVENTSFORUSER_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='MarkPartnerEventsForUser',
     full_name='Community.MarkPartnerEventsForUser',
-    index=12,
+    index=11,
     containing_service=None,
     input_type=_CCOMMUNITY_MARKPARTNEREVENTSFORUSER_REQUEST,
     output_type=_CCOMMUNITY_MARKPARTNEREVENTSFORUSER_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='GetUserPartnerEventViewStatus',
-    full_name='Community.GetUserPartnerEventViewStatus',
-    index=13,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CCOMMUNITY_GETUSERPARTNEREVENTVIEWSTATUS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
     name='PartnerEventsShowMoreForApp',
     full_name='Community.PartnerEventsShowMoreForApp',
-    index=14,
+    index=12,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_REQUEST,
     output_type=_CCOMMUNITY_PARTNEREVENTSSHOWMOREFORAPP_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='PartnerEventsShowLessForApp',
     full_name='Community.PartnerEventsShowLessForApp',
-    index=15,
+    index=13,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_REQUEST,
     output_type=_CCOMMUNITY_PARTNEREVENTSSHOWLESSFORAPP_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='ClearUserPartnerEventsAppPriorities',
     full_name='Community.ClearUserPartnerEventsAppPriorities',
-    index=16,
+    index=14,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_REQUEST,
     output_type=_CCOMMUNITY_CLEARUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='GetUserPartnerEventsAppPriorities',
     full_name='Community.GetUserPartnerEventsAppPriorities',
-    index=17,
+    index=15,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_REQUEST,
     output_type=_CCOMMUNITY_GETUSERPARTNEREVENTSAPPPRIORITIES_RESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='ClearSinglePartnerEventsAppPriority',
     full_name='Community.ClearSinglePartnerEventsAppPriority',
-    index=18,
+    index=16,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_REQUEST,
     output_type=_CCOMMUNITY_CLEARSINGLEPARTNEREVENTSAPPPRIORITY_RESPONSE,
     serialized_options=None,
   ),
@@ -6690,80 +6109,137 @@ _sym_db.RegisterServiceDescriptor(_COMMUNITY)
 DESCRIPTOR.services_by_name['Community'] = _COMMUNITY
 
 
-_WEBRTCCLIENT = _descriptor.ServiceDescriptor(
-  name='WebRTCClient',
-  full_name='WebRTCClient',
-  file=DESCRIPTOR,
-  index=1,
-  serialized_options=None,
-  serialized_start=16181,
-  serialized_end=16483,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='InitiateWebRTCConnection',
-    full_name='WebRTCClient.InitiateWebRTCConnection',
-    index=0,
-    containing_service=None,
-    input_type=_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST,
-    output_type=_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='AcknowledgeUpdatedRemoteDescription',
-    full_name='WebRTCClient.AcknowledgeUpdatedRemoteDescription',
-    index=1,
-    containing_service=None,
-    input_type=_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST,
-    output_type=_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE,
-    serialized_options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_WEBRTCCLIENT)
-
-DESCRIPTOR.services_by_name['WebRTCClient'] = _WEBRTCCLIENT
-
-
-_WEBRTCCLIENTNOTIFICATIONS = _descriptor.ServiceDescriptor(
-  name='WebRTCClientNotifications',
-  full_name='WebRTCClientNotifications',
+_EXPERIMENTSERVICE = _descriptor.ServiceDescriptor(
+  name='ExperimentService',
+  full_name='ExperimentService',
   file=DESCRIPTOR,
   index=2,
   serialized_options=None,
-  serialized_start=16486,
-  serialized_end=16709,
+  serialized_start=15871,
+  serialized_end=15956,
   methods=[
   _descriptor.MethodDescriptor(
-    name='NotifyWebRTCSessionConnected',
-    full_name='WebRTCClientNotifications.NotifyWebRTCSessionConnected',
+    name='ReportProductImpressionsFromClient',
+    full_name='ExperimentService.ReportProductImpressionsFromClient',
     index=0,
     containing_service=None,
-    input_type=_CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION,
-    output_type=steammessages__unified__base__pb2._NORESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='NotifyWebRTCUpdateRemoteDescription',
-    full_name='WebRTCClientNotifications.NotifyWebRTCUpdateRemoteDescription',
-    index=1,
-    containing_service=None,
-    input_type=_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION,
+    input_type=_UNKNOWNPROTO,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     serialized_options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_WEBRTCCLIENTNOTIFICATIONS)
+_sym_db.RegisterServiceDescriptor(_EXPERIMENTSERVICE)
 
-DESCRIPTOR.services_by_name['WebRTCClientNotifications'] = _WEBRTCCLIENTNOTIFICATIONS
+DESCRIPTOR.services_by_name['ExperimentService'] = _EXPERIMENTSERVICE
+
+
+_FRIENDSLIST = _descriptor.ServiceDescriptor(
+  name='FriendsList',
+  full_name='FriendsList',
+  file=DESCRIPTOR,
+  index=3,
+  serialized_options=None,
+  serialized_start=15959,
+  serialized_end=16337,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='GetCategories',
+    full_name='FriendsList.GetCategories',
+    index=0,
+    containing_service=None,
+    input_type=_CFRIENDSLIST_GETCATEGORIES_REQUEST,
+    output_type=_CFRIENDSLIST_GETCATEGORIES_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetFriendsList',
+    full_name='FriendsList.GetFriendsList',
+    index=1,
+    containing_service=None,
+    input_type=_CFRIENDSLIST_GETFRIENDSLIST_REQUEST,
+    output_type=_CFRIENDSLIST_GETFRIENDSLIST_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetFavorites',
+    full_name='FriendsList.GetFavorites',
+    index=2,
+    containing_service=None,
+    input_type=_CFRIENDSLIST_GETFAVORITES_REQUEST,
+    output_type=_CFRIENDSLIST_GETFAVORITES_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetFavorites',
+    full_name='FriendsList.SetFavorites',
+    index=3,
+    containing_service=None,
+    input_type=_CFRIENDSLIST_SETFAVORITES_REQUEST,
+    output_type=_CFRIENDSLIST_SETFAVORITES_RESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_FRIENDSLIST)
+
+DESCRIPTOR.services_by_name['FriendsList'] = _FRIENDSLIST
+
+
+_FRIENDSLISTCLIENT = _descriptor.ServiceDescriptor(
+  name='FriendsListClient',
+  full_name='FriendsListClient',
+  file=DESCRIPTOR,
+  index=4,
+  serialized_options=None,
+  serialized_start=16339,
+  serialized_end=16436,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='FavoritesChanged',
+    full_name='FriendsListClient.FavoritesChanged',
+    index=0,
+    containing_service=None,
+    input_type=_CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_FRIENDSLISTCLIENT)
+
+DESCRIPTOR.services_by_name['FriendsListClient'] = _FRIENDSLISTCLIENT
+
+
+_CLAN = _descriptor.ServiceDescriptor(
+  name='Clan',
+  full_name='Clan',
+  file=DESCRIPTOR,
+  index=5,
+  serialized_options=None,
+  serialized_start=16438,
+  serialized_end=16540,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='RespondToClanInvite',
+    full_name='Clan.RespondToClanInvite',
+    index=0,
+    containing_service=None,
+    input_type=_CCLAN_RESPONDTOCLANINVITE_REQUEST,
+    output_type=_CCLAN_RESPONDTOCLANINVITE_RESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_CLAN)
+
+DESCRIPTOR.services_by_name['Clan'] = _CLAN
 
 
 _VOICECHAT = _descriptor.ServiceDescriptor(
   name='VoiceChat',
   full_name='VoiceChat',
   file=DESCRIPTOR,
-  index=3,
+  index=6,
   serialized_options=None,
-  serialized_start=16712,
-  serialized_end=17526,
+  serialized_start=16543,
+  serialized_end=17376,
   methods=[
   _descriptor.MethodDescriptor(
     name='UpdateVoiceChatWebRTCData',
@@ -6797,7 +6273,7 @@ _VOICECHAT = _descriptor.ServiceDescriptor(
     full_name='VoiceChat.LeaveVoiceChat',
     index=3,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CVOICECHAT_LEAVEVOICECHAT_REQUEST,
     output_type=_CVOICECHAT_LEAVEVOICECHAT_RESPONSE,
     serialized_options=None,
   ),
@@ -6847,10 +6323,10 @@ _VOICECHATCLIENT = _descriptor.ServiceDescriptor(
   name='VoiceChatClient',
   full_name='VoiceChatClient',
   file=DESCRIPTOR,
-  index=4,
+  index=7,
   serialized_options=None,
-  serialized_start=17529,
-  serialized_end=18150,
+  serialized_start=17379,
+  serialized_end=18000,
   methods=[
   _descriptor.MethodDescriptor(
     name='NotifyUserJoinedVoiceChat',
@@ -6921,421 +6397,147 @@ _sym_db.RegisterServiceDescriptor(_VOICECHATCLIENT)
 DESCRIPTOR.services_by_name['VoiceChatClient'] = _VOICECHATCLIENT
 
 
-_STEAMTV = _descriptor.ServiceDescriptor(
-  name='SteamTV',
-  full_name='SteamTV',
-  file=DESCRIPTOR,
-  index=5,
-  serialized_options=None,
-  serialized_start=18153,
-  serialized_end=20747,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='CreateBroadcastChannel',
-    full_name='SteamTV.CreateBroadcastChannel',
-    index=0,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_CREATEBROADCASTCHANNEL_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelID',
-    full_name='SteamTV.GetBroadcastChannelID',
-    index=1,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELID_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SetBroadcastChannelProfile',
-    full_name='SteamTV.SetBroadcastChannelProfile',
-    index=2,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_SETBROADCASTCHANNELPROFILE_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelProfile',
-    full_name='SteamTV.GetBroadcastChannelProfile',
-    index=3,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELPROFILE_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SetBroadcastChannelImage',
-    full_name='SteamTV.SetBroadcastChannelImage',
-    index=4,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_SETBROADCASTCHANNELIMAGE_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelImages',
-    full_name='SteamTV.GetBroadcastChannelImages',
-    index=5,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELIMAGES_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SetBroadcastChannelLinkRegions',
-    full_name='SteamTV.SetBroadcastChannelLinkRegions',
-    index=6,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_SETBROADCASTCHANNELLINKREGIONS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelLinks',
-    full_name='SteamTV.GetBroadcastChannelLinks',
-    index=7,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELLINKS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelBroadcasters',
-    full_name='SteamTV.GetBroadcastChannelBroadcasters',
-    index=8,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELBROADCASTERS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetFollowedChannels',
-    full_name='SteamTV.GetFollowedChannels',
-    index=9,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETFOLLOWEDCHANNELS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetSubscribedChannels',
-    full_name='SteamTV.GetSubscribedChannels',
-    index=10,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETSUBSCRIBEDCHANNELS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelStatus',
-    full_name='SteamTV.GetBroadcastChannelStatus',
-    index=11,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELSTATUS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='FollowBroadcastChannel',
-    full_name='SteamTV.FollowBroadcastChannel',
-    index=12,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_FOLLOWBROADCASTCHANNEL_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SubscribeBroadcastChannel',
-    full_name='SteamTV.SubscribeBroadcastChannel',
-    index=13,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_SUBSCRIBEBROADCASTCHANNEL_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelClips',
-    full_name='SteamTV.GetBroadcastChannelClips',
-    index=14,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELCLIPS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='ReportBroadcastChannel',
-    full_name='SteamTV.ReportBroadcastChannel',
-    index=15,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_REPORTBROADCASTCHANNEL_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetBroadcastChannelInteraction',
-    full_name='SteamTV.GetBroadcastChannelInteraction',
-    index=16,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETBROADCASTCHANNELINTERACTION_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetGames',
-    full_name='SteamTV.GetGames',
-    index=17,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETGAMES_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetChannels',
-    full_name='SteamTV.GetChannels',
-    index=18,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETCHANNELS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='AddChatBan',
-    full_name='SteamTV.AddChatBan',
-    index=19,
-    containing_service=None,
-    input_type=_CSTEAMTV_ADDCHATBAN_REQUEST,
-    output_type=_CSTEAMTV_ADDCHATBAN_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetChatBans',
-    full_name='SteamTV.GetChatBans',
-    index=20,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETCHATBANS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='AddChatModerator',
-    full_name='SteamTV.AddChatModerator',
-    index=21,
-    containing_service=None,
-    input_type=_CSTEAMTV_ADDCHATMODERATOR_REQUEST,
-    output_type=_CSTEAMTV_ADDCHATMODERATOR_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetChatModerators',
-    full_name='SteamTV.GetChatModerators',
-    index=22,
-    containing_service=None,
-    input_type=_CSTEAMTV_GETCHATMODERATORS_REQUEST,
-    output_type=_CSTEAMTV_GETCHATMODERATORS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='AddWordBan',
-    full_name='SteamTV.AddWordBan',
-    index=23,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_ADDWORDBAN_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetWordBans',
-    full_name='SteamTV.GetWordBans',
-    index=24,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETWORDBANS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='JoinChat',
-    full_name='SteamTV.JoinChat',
-    index=25,
-    containing_service=None,
-    input_type=_CSTEAMTV_JOINCHAT_REQUEST,
-    output_type=_CSTEAMTV_JOINCHAT_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Search',
-    full_name='SteamTV.Search',
-    index=26,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_SEARCH_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetSteamTVUserSettings',
-    full_name='SteamTV.GetSteamTVUserSettings',
-    index=27,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETSTEAMTVUSERSETTINGS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SetSteamTVUserSettings',
-    full_name='SteamTV.SetSteamTVUserSettings',
-    index=28,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_SETSTEAMTVUSERSETTINGS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetMyBroadcastChannels',
-    full_name='SteamTV.GetMyBroadcastChannels',
-    index=29,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETMYBROADCASTCHANNELS_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetHomePageContents',
-    full_name='SteamTV.GetHomePageContents',
-    index=30,
-    containing_service=None,
-    input_type=_NOTIMPLEMENTED,
-    output_type=_CSTEAMTV_GETHOMEPAGECONTENTS_RESPONSE,
-    serialized_options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_STEAMTV)
-
-DESCRIPTOR.services_by_name['SteamTV'] = _STEAMTV
-
-
-_FRIENDSLIST = _descriptor.ServiceDescriptor(
-  name='FriendsList',
-  full_name='FriendsList',
-  file=DESCRIPTOR,
-  index=6,
-  serialized_options=None,
-  serialized_start=20750,
-  serialized_end=21128,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='GetCategories',
-    full_name='FriendsList.GetCategories',
-    index=0,
-    containing_service=None,
-    input_type=_CFRIENDSLIST_GETCATEGORIES_REQUEST,
-    output_type=_CFRIENDSLIST_GETCATEGORIES_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetFriendsList',
-    full_name='FriendsList.GetFriendsList',
-    index=1,
-    containing_service=None,
-    input_type=_CFRIENDSLIST_GETFRIENDSLIST_REQUEST,
-    output_type=_CFRIENDSLIST_GETFRIENDSLIST_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetFavorites',
-    full_name='FriendsList.GetFavorites',
-    index=2,
-    containing_service=None,
-    input_type=_CFRIENDSLIST_GETFAVORITES_REQUEST,
-    output_type=_CFRIENDSLIST_GETFAVORITES_RESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SetFavorites',
-    full_name='FriendsList.SetFavorites',
-    index=3,
-    containing_service=None,
-    input_type=_CFRIENDSLIST_SETFAVORITES_REQUEST,
-    output_type=_CFRIENDSLIST_SETFAVORITES_RESPONSE,
-    serialized_options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_FRIENDSLIST)
-
-DESCRIPTOR.services_by_name['FriendsList'] = _FRIENDSLIST
-
-
-_FRIENDSLISTCLIENT = _descriptor.ServiceDescriptor(
-  name='FriendsListClient',
-  full_name='FriendsListClient',
-  file=DESCRIPTOR,
-  index=7,
-  serialized_options=None,
-  serialized_start=21130,
-  serialized_end=21227,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='FavoritesChanged',
-    full_name='FriendsListClient.FavoritesChanged',
-    index=0,
-    containing_service=None,
-    input_type=_CFRIENDSLIST_FAVORITESCHANGED_NOTIFICATION,
-    output_type=steammessages__unified__base__pb2._NORESPONSE,
-    serialized_options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_FRIENDSLISTCLIENT)
-
-DESCRIPTOR.services_by_name['FriendsListClient'] = _FRIENDSLISTCLIENT
-
-
-_CLAN = _descriptor.ServiceDescriptor(
-  name='Clan',
-  full_name='Clan',
+_WEBRTCCLIENT = _descriptor.ServiceDescriptor(
+  name='WebRTCClient',
+  full_name='WebRTCClient',
   file=DESCRIPTOR,
   index=8,
   serialized_options=None,
-  serialized_start=21229,
-  serialized_end=21331,
+  serialized_start=18003,
+  serialized_end=18305,
   methods=[
   _descriptor.MethodDescriptor(
-    name='RespondToClanInvite',
-    full_name='Clan.RespondToClanInvite',
+    name='InitiateWebRTCConnection',
+    full_name='WebRTCClient.InitiateWebRTCConnection',
     index=0,
     containing_service=None,
-    input_type=_CCLAN_RESPONDTOCLANINVITE_REQUEST,
-    output_type=_CCLAN_RESPONDTOCLANINVITE_RESPONSE,
+    input_type=_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_REQUEST,
+    output_type=_CWEBRTCCLIENT_INITIATEWEBRTCCONNECTION_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AcknowledgeUpdatedRemoteDescription',
+    full_name='WebRTCClient.AcknowledgeUpdatedRemoteDescription',
+    index=1,
+    containing_service=None,
+    input_type=_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_REQUEST,
+    output_type=_CWEBRTCCLIENT_ACKNOWLEDGEUPDATEDREMOTEDESCRIPTION_RESPONSE,
     serialized_options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_CLAN)
+_sym_db.RegisterServiceDescriptor(_WEBRTCCLIENT)
 
-DESCRIPTOR.services_by_name['Clan'] = _CLAN
+DESCRIPTOR.services_by_name['WebRTCClient'] = _WEBRTCCLIENT
 
 
-_EXPERIMENTSERVICE = _descriptor.ServiceDescriptor(
-  name='ExperimentService',
-  full_name='ExperimentService',
+_WEBRTCCLIENTNOTIFICATIONS = _descriptor.ServiceDescriptor(
+  name='WebRTCClientNotifications',
+  full_name='WebRTCClientNotifications',
   file=DESCRIPTOR,
   index=9,
   serialized_options=None,
-  serialized_start=21333,
-  serialized_end=21420,
+  serialized_start=18308,
+  serialized_end=18531,
   methods=[
   _descriptor.MethodDescriptor(
-    name='ReportProductImpressionsFromClient',
-    full_name='ExperimentService.ReportProductImpressionsFromClient',
+    name='NotifyWebRTCSessionConnected',
+    full_name='WebRTCClientNotifications.NotifyWebRTCSessionConnected',
     index=0,
     containing_service=None,
-    input_type=_NOTIMPLEMENTED,
+    input_type=_CWEBRTC_WEBRTCSESSIONCONNECTED_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='NotifyWebRTCUpdateRemoteDescription',
+    full_name='WebRTCClientNotifications.NotifyWebRTCUpdateRemoteDescription',
+    index=1,
+    containing_service=None,
+    input_type=_CWEBRTC_WEBRTCUPDATEREMOTEDESCRIPTION_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     serialized_options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_EXPERIMENTSERVICE)
+_sym_db.RegisterServiceDescriptor(_WEBRTCCLIENTNOTIFICATIONS)
 
-DESCRIPTOR.services_by_name['ExperimentService'] = _EXPERIMENTSERVICE
+DESCRIPTOR.services_by_name['WebRTCClientNotifications'] = _WEBRTCCLIENTNOTIFICATIONS
+
+
+_MOBILEPERACCOUNT = _descriptor.ServiceDescriptor(
+  name='MobilePerAccount',
+  full_name='MobilePerAccount',
+  file=DESCRIPTOR,
+  index=10,
+  serialized_options=None,
+  serialized_start=18534,
+  serialized_end=18744,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='GetSettings',
+    full_name='MobilePerAccount.GetSettings',
+    index=0,
+    containing_service=None,
+    input_type=_CMOBILEPERACCOUNT_GETSETTINGS_REQUEST,
+    output_type=_CMOBILEPERACCOUNT_GETSETTINGS_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetSettings',
+    full_name='MobilePerAccount.SetSettings',
+    index=1,
+    containing_service=None,
+    input_type=_CMOBILEPERACCOUNT_SETSETTINGS_REQUEST,
+    output_type=_CMOBILEPERACCOUNT_SETSETTINGS_RESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_MOBILEPERACCOUNT)
+
+DESCRIPTOR.services_by_name['MobilePerAccount'] = _MOBILEPERACCOUNT
+
+
+_MOBILEDEVICE = _descriptor.ServiceDescriptor(
+  name='MobileDevice',
+  full_name='MobileDevice',
+  file=DESCRIPTOR,
+  index=11,
+  serialized_options=None,
+  serialized_start=18747,
+  serialized_end=18967,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='RegisterMobileDevice',
+    full_name='MobileDevice.RegisterMobileDevice',
+    index=0,
+    containing_service=None,
+    input_type=_CMOBILEDEVICE_REGISTERMOBILEDEVICE_REQUEST,
+    output_type=_CMOBILEDEVICE_REGISTERMOBILEDEVICE_RESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='DeregisterMobileDevice',
+    full_name='MobileDevice.DeregisterMobileDevice',
+    index=1,
+    containing_service=None,
+    input_type=_CMOBILEDEVICE_DEREGISTERMOBILEDEVICE_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_MOBILEDEVICE)
+
+DESCRIPTOR.services_by_name['MobileDevice'] = _MOBILEDEVICE
+
+HelpRequestLogs = service_reflection.GeneratedServiceType('HelpRequestLogs', (_service.Service,), dict(
+  DESCRIPTOR = _HELPREQUESTLOGS,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+HelpRequestLogs_Stub = service_reflection.GeneratedServiceStubType('HelpRequestLogs_Stub', (HelpRequestLogs,), dict(
+  DESCRIPTOR = _HELPREQUESTLOGS,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
 
 Community = service_reflection.GeneratedServiceType('Community', (_service.Service,), dict(
   DESCRIPTOR = _COMMUNITY,
@@ -7348,57 +6550,13 @@ Community_Stub = service_reflection.GeneratedServiceStubType('Community_Stub', (
   ))
 
 
-WebRTCClient = service_reflection.GeneratedServiceType('WebRTCClient', (_service.Service,), dict(
-  DESCRIPTOR = _WEBRTCCLIENT,
+ExperimentService = service_reflection.GeneratedServiceType('ExperimentService', (_service.Service,), dict(
+  DESCRIPTOR = _EXPERIMENTSERVICE,
   __module__ = 'steammessages_webui_friends_pb2'
   ))
 
-WebRTCClient_Stub = service_reflection.GeneratedServiceStubType('WebRTCClient_Stub', (WebRTCClient,), dict(
-  DESCRIPTOR = _WEBRTCCLIENT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-
-WebRTCClientNotifications = service_reflection.GeneratedServiceType('WebRTCClientNotifications', (_service.Service,), dict(
-  DESCRIPTOR = _WEBRTCCLIENTNOTIFICATIONS,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-WebRTCClientNotifications_Stub = service_reflection.GeneratedServiceStubType('WebRTCClientNotifications_Stub', (WebRTCClientNotifications,), dict(
-  DESCRIPTOR = _WEBRTCCLIENTNOTIFICATIONS,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-
-VoiceChat = service_reflection.GeneratedServiceType('VoiceChat', (_service.Service,), dict(
-  DESCRIPTOR = _VOICECHAT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-VoiceChat_Stub = service_reflection.GeneratedServiceStubType('VoiceChat_Stub', (VoiceChat,), dict(
-  DESCRIPTOR = _VOICECHAT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-
-VoiceChatClient = service_reflection.GeneratedServiceType('VoiceChatClient', (_service.Service,), dict(
-  DESCRIPTOR = _VOICECHATCLIENT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-VoiceChatClient_Stub = service_reflection.GeneratedServiceStubType('VoiceChatClient_Stub', (VoiceChatClient,), dict(
-  DESCRIPTOR = _VOICECHATCLIENT,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-
-SteamTV = service_reflection.GeneratedServiceType('SteamTV', (_service.Service,), dict(
-  DESCRIPTOR = _STEAMTV,
-  __module__ = 'steammessages_webui_friends_pb2'
-  ))
-
-SteamTV_Stub = service_reflection.GeneratedServiceStubType('SteamTV_Stub', (SteamTV,), dict(
-  DESCRIPTOR = _STEAMTV,
+ExperimentService_Stub = service_reflection.GeneratedServiceStubType('ExperimentService_Stub', (ExperimentService,), dict(
+  DESCRIPTOR = _EXPERIMENTSERVICE,
   __module__ = 'steammessages_webui_friends_pb2'
   ))
 
@@ -7436,13 +6594,68 @@ Clan_Stub = service_reflection.GeneratedServiceStubType('Clan_Stub', (Clan,), di
   ))
 
 
-ExperimentService = service_reflection.GeneratedServiceType('ExperimentService', (_service.Service,), dict(
-  DESCRIPTOR = _EXPERIMENTSERVICE,
+VoiceChat = service_reflection.GeneratedServiceType('VoiceChat', (_service.Service,), dict(
+  DESCRIPTOR = _VOICECHAT,
   __module__ = 'steammessages_webui_friends_pb2'
   ))
 
-ExperimentService_Stub = service_reflection.GeneratedServiceStubType('ExperimentService_Stub', (ExperimentService,), dict(
-  DESCRIPTOR = _EXPERIMENTSERVICE,
+VoiceChat_Stub = service_reflection.GeneratedServiceStubType('VoiceChat_Stub', (VoiceChat,), dict(
+  DESCRIPTOR = _VOICECHAT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+
+VoiceChatClient = service_reflection.GeneratedServiceType('VoiceChatClient', (_service.Service,), dict(
+  DESCRIPTOR = _VOICECHATCLIENT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+VoiceChatClient_Stub = service_reflection.GeneratedServiceStubType('VoiceChatClient_Stub', (VoiceChatClient,), dict(
+  DESCRIPTOR = _VOICECHATCLIENT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+
+WebRTCClient = service_reflection.GeneratedServiceType('WebRTCClient', (_service.Service,), dict(
+  DESCRIPTOR = _WEBRTCCLIENT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+WebRTCClient_Stub = service_reflection.GeneratedServiceStubType('WebRTCClient_Stub', (WebRTCClient,), dict(
+  DESCRIPTOR = _WEBRTCCLIENT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+
+WebRTCClientNotifications = service_reflection.GeneratedServiceType('WebRTCClientNotifications', (_service.Service,), dict(
+  DESCRIPTOR = _WEBRTCCLIENTNOTIFICATIONS,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+WebRTCClientNotifications_Stub = service_reflection.GeneratedServiceStubType('WebRTCClientNotifications_Stub', (WebRTCClientNotifications,), dict(
+  DESCRIPTOR = _WEBRTCCLIENTNOTIFICATIONS,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+
+MobilePerAccount = service_reflection.GeneratedServiceType('MobilePerAccount', (_service.Service,), dict(
+  DESCRIPTOR = _MOBILEPERACCOUNT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+MobilePerAccount_Stub = service_reflection.GeneratedServiceStubType('MobilePerAccount_Stub', (MobilePerAccount,), dict(
+  DESCRIPTOR = _MOBILEPERACCOUNT,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+
+MobileDevice = service_reflection.GeneratedServiceType('MobileDevice', (_service.Service,), dict(
+  DESCRIPTOR = _MOBILEDEVICE,
+  __module__ = 'steammessages_webui_friends_pb2'
+  ))
+
+MobileDevice_Stub = service_reflection.GeneratedServiceStubType('MobileDevice_Stub', (MobileDevice,), dict(
+  DESCRIPTOR = _MOBILEDEVICE,
   __module__ = 'steammessages_webui_friends_pb2'
   ))
 

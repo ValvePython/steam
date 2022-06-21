@@ -1,5 +1,14 @@
 # Change notes
 
+## 2.0.0
+
+This release brings breaking changes
+
+### steam.client
+
+- Add `steam.monkey` module for applying gevent monkey patches
+- Removed monkey patching by default. See `steam.monkey` for details
+
 ## 1.0.0
 
 This release brings breaking changes

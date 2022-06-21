@@ -11,6 +11,7 @@ API Reference
     steam.game_servers
     steam.globalid
     steam.guard
+    steam.monkey
     steam.steamid
     steam.webapi
     steam.webauth

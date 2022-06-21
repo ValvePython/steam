@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n!steammessages_datapublisher.proto\x1a steammessages_unified_base.proto\"\xfd\x03\n9CDataPublisher_ClientContentCorruptionReport_Notification\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x64\x65potid\x18\x02 \x01(\r\x12\x39\n\x0f\x64ownload_source\x18\x03 \x01(\tB \x82\xb5\x18\x1chost name of download source\x12.\n\x08objectid\x18\x04 \x01(\tB\x1c\x82\xb5\x18\x18\x43hunk SHA or Manifest ID\x12\"\n\x06\x63\x65llid\x18\x05 \x01(\rB\x12\x82\xb5\x18\x0e\x43lient Cell ID\x12>\n\x0bis_manifest\x18\x06 \x01(\x08\x42)\x82\xb5\x18%The object is a manifest, not a chunk\x12-\n\x0bobject_size\x18\x07 \x01(\x04\x42\x18\x82\xb5\x18\x14object size in bytes\x12\x37\n\x0f\x63orruption_type\x18\x08 \x01(\rB\x1e\x82\xb5\x18\x1aSee EContentCorruptionType\x12-\n\nused_https\x18\t \x01(\x08\x42\x19\x82\xb5\x18\x15the request was HTTPS\x12:\n\x11oc_proxy_detected\x18\n \x01(\x08\x42\x1f\x82\xb5\x18\x1b\x64\x65tected an OpenCache proxy\"c\n(CValveHWSurvey_GetSurveySchedule_Request\x12\x17\n\x0fsurveydatetoken\x18\x01 \x01(\t\x12\x1e\n\x16surveydatetokenversion\x18\x02 \x01(\x06\"d\n)CValveHWSurvey_GetSurveySchedule_Response\x12\x17\n\x0fsurveydatetoken\x18\x01 \x01(\r\x12\x1e\n\x16surveydatetokenversion\x18\x02 \x01(\x06\x32\xa2\x01\n\rDataPublisher\x12h\n\x1d\x43lientContentCorruptionReport\x12:.CDataPublisher_ClientContentCorruptionReport_Notification\x1a\x0b.NoResponse\x1a\'\x82\xb5\x18#Data Publisher (DP) server services2\xac\x01\n\rValveHWSurvey\x12\x87\x01\n\x11GetSurveySchedule\x12).CValveHWSurvey_GetSurveySchedule_Request\x1a*.CValveHWSurvey_GetSurveySchedule_Response\"\x1b\x82\xb5\x18\x17Should I run the survey\x1a\x11\x82\xb5\x18\rValveHWSurveyB\x03\x90\x01\x01')
+  serialized_pb=_b('\n!steammessages_datapublisher.proto\x1a steammessages_unified_base.proto\"\xfd\x03\n9CDataPublisher_ClientContentCorruptionReport_Notification\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x64\x65potid\x18\x02 \x01(\r\x12\x39\n\x0f\x64ownload_source\x18\x03 \x01(\tB \x82\xb5\x18\x1chost name of download source\x12.\n\x08objectid\x18\x04 \x01(\tB\x1c\x82\xb5\x18\x18\x43hunk SHA or Manifest ID\x12\"\n\x06\x63\x65llid\x18\x05 \x01(\rB\x12\x82\xb5\x18\x0e\x43lient Cell ID\x12>\n\x0bis_manifest\x18\x06 \x01(\x08\x42)\x82\xb5\x18%The object is a manifest, not a chunk\x12-\n\x0bobject_size\x18\x07 \x01(\x04\x42\x18\x82\xb5\x18\x14object size in bytes\x12\x37\n\x0f\x63orruption_type\x18\x08 \x01(\rB\x1e\x82\xb5\x18\x1aSee EContentCorruptionType\x12-\n\nused_https\x18\t \x01(\x08\x42\x19\x82\xb5\x18\x15the request was HTTPS\x12:\n\x11oc_proxy_detected\x18\n \x01(\x08\x42\x1f\x82\xb5\x18\x1b\x64\x65tected an OpenCache proxy\"\xd0\x04\n.CDataPublisher_ClientUpdateAppJob_Notification\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x11\n\tdepot_ids\x18\x02 \x03(\r\x12\x11\n\tapp_state\x18\x03 \x01(\r\x12\x15\n\rjob_app_error\x18\x04 \x01(\r\x12\x15\n\rerror_details\x18\x05 \x01(\t\x12\x14\n\x0cjob_duration\x18\x06 \x01(\r\x12\x1f\n\x17\x66iles_validation_failed\x18\x07 \x01(\r\x12\x1c\n\x14job_bytes_downloaded\x18\x08 \x01(\x04\x12\x18\n\x10job_bytes_staged\x18\t \x01(\x04\x12\x16\n\x0e\x62ytes_comitted\x18\n \x01(\x04\x12\x17\n\x0fstart_app_state\x18\x0b \x01(\r\x12\x18\n\x10stats_machine_id\x18\x0c \x01(\x06\x12\x13\n\x0b\x62ranch_name\x18\r \x01(\t\x12\x1e\n\x16total_bytes_downloaded\x18\x0e \x01(\x04\x12\x1a\n\x12total_bytes_staged\x18\x0f \x01(\x04\x12\x1c\n\x14total_bytes_restored\x18\x10 \x01(\x04\x12\x13\n\x0bis_borrowed\x18\x11 \x01(\x08\x12\x17\n\x0fis_free_weekend\x18\x12 \x01(\x08\x12\x1a\n\x12total_bytes_legacy\x18\x13 \x01(\x04\x12\x1b\n\x13total_bytes_patched\x18\x14 \x01(\x04\x12\x19\n\x11total_bytes_saved\x18\x15 \x01(\x04\x12\x0f\n\x07\x63\x65ll_id\x18\x16 \x01(\r\"c\n(CValveHWSurvey_GetSurveySchedule_Request\x12\x17\n\x0fsurveydatetoken\x18\x01 \x01(\t\x12\x1e\n\x16surveydatetokenversion\x18\x02 \x01(\x06\"d\n)CValveHWSurvey_GetSurveySchedule_Response\x12\x17\n\x0fsurveydatetoken\x18\x01 \x01(\r\x12\x1e\n\x16surveydatetokenversion\x18\x02 \x01(\x06\x32\xfc\x01\n\rDataPublisher\x12h\n\x1d\x43lientContentCorruptionReport\x12:.CDataPublisher_ClientContentCorruptionReport_Notification\x1a\x0b.NoResponse\x12X\n\x18\x43lientUpdateAppJobReport\x12/.CDataPublisher_ClientUpdateAppJob_Notification\x1a\x0b.NoResponse\x1a\'\x82\xb5\x18#Data Publisher (DP) server services2\xac\x01\n\rValveHWSurvey\x12\x87\x01\n\x11GetSurveySchedule\x12).CValveHWSurvey_GetSurveySchedule_Request\x1a*.CValveHWSurvey_GetSurveySchedule_Response\"\x1b\x82\xb5\x18\x17Should I run the survey\x1a\x11\x82\xb5\x18\rValveHWSurveyB\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -124,6 +124,184 @@ _CDATAPUBLISHER_CLIENTCONTENTCORRUPTIONREPORT_NOTIFICATION = _descriptor.Descrip
 )
 
 
+_CDATAPUBLISHER_CLIENTUPDATEAPPJOB_NOTIFICATION = _descriptor.Descriptor(
+  name='CDataPublisher_ClientUpdateAppJob_Notification',
+  full_name='CDataPublisher_ClientUpdateAppJob_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CDataPublisher_ClientUpdateAppJob_Notification.app_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='depot_ids', full_name='CDataPublisher_ClientUpdateAppJob_Notification.depot_ids', index=1,
+      number=2, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_state', full_name='CDataPublisher_ClientUpdateAppJob_Notification.app_state', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='job_app_error', full_name='CDataPublisher_ClientUpdateAppJob_Notification.job_app_error', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='error_details', full_name='CDataPublisher_ClientUpdateAppJob_Notification.error_details', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='job_duration', full_name='CDataPublisher_ClientUpdateAppJob_Notification.job_duration', index=5,
+      number=6, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='files_validation_failed', full_name='CDataPublisher_ClientUpdateAppJob_Notification.files_validation_failed', index=6,
+      number=7, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='job_bytes_downloaded', full_name='CDataPublisher_ClientUpdateAppJob_Notification.job_bytes_downloaded', index=7,
+      number=8, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='job_bytes_staged', full_name='CDataPublisher_ClientUpdateAppJob_Notification.job_bytes_staged', index=8,
+      number=9, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bytes_comitted', full_name='CDataPublisher_ClientUpdateAppJob_Notification.bytes_comitted', index=9,
+      number=10, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='start_app_state', full_name='CDataPublisher_ClientUpdateAppJob_Notification.start_app_state', index=10,
+      number=11, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='stats_machine_id', full_name='CDataPublisher_ClientUpdateAppJob_Notification.stats_machine_id', index=11,
+      number=12, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='branch_name', full_name='CDataPublisher_ClientUpdateAppJob_Notification.branch_name', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_bytes_downloaded', full_name='CDataPublisher_ClientUpdateAppJob_Notification.total_bytes_downloaded', index=13,
+      number=14, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_bytes_staged', full_name='CDataPublisher_ClientUpdateAppJob_Notification.total_bytes_staged', index=14,
+      number=15, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_bytes_restored', full_name='CDataPublisher_ClientUpdateAppJob_Notification.total_bytes_restored', index=15,
+      number=16, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_borrowed', full_name='CDataPublisher_ClientUpdateAppJob_Notification.is_borrowed', index=16,
+      number=17, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_free_weekend', full_name='CDataPublisher_ClientUpdateAppJob_Notification.is_free_weekend', index=17,
+      number=18, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_bytes_legacy', full_name='CDataPublisher_ClientUpdateAppJob_Notification.total_bytes_legacy', index=18,
+      number=19, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_bytes_patched', full_name='CDataPublisher_ClientUpdateAppJob_Notification.total_bytes_patched', index=19,
+      number=20, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_bytes_saved', full_name='CDataPublisher_ClientUpdateAppJob_Notification.total_bytes_saved', index=20,
+      number=21, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cell_id', full_name='CDataPublisher_ClientUpdateAppJob_Notification.cell_id', index=21,
+      number=22, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=584,
+  serialized_end=1176,
+)
+
+
 _CVALVEHWSURVEY_GETSURVEYSCHEDULE_REQUEST = _descriptor.Descriptor(
   name='CValveHWSurvey_GetSurveySchedule_Request',
   full_name='CValveHWSurvey_GetSurveySchedule_Request',
@@ -157,8 +335,8 @@ _CVALVEHWSURVEY_GETSURVEYSCHEDULE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=583,
-  serialized_end=682,
+  serialized_start=1178,
+  serialized_end=1277,
 )
 
 
@@ -195,11 +373,12 @@ _CVALVEHWSURVEY_GETSURVEYSCHEDULE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=684,
-  serialized_end=784,
+  serialized_start=1279,
+  serialized_end=1379,
 )
 
 DESCRIPTOR.message_types_by_name['CDataPublisher_ClientContentCorruptionReport_Notification'] = _CDATAPUBLISHER_CLIENTCONTENTCORRUPTIONREPORT_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CDataPublisher_ClientUpdateAppJob_Notification'] = _CDATAPUBLISHER_CLIENTUPDATEAPPJOB_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CValveHWSurvey_GetSurveySchedule_Request'] = _CVALVEHWSURVEY_GETSURVEYSCHEDULE_REQUEST
 DESCRIPTOR.message_types_by_name['CValveHWSurvey_GetSurveySchedule_Response'] = _CVALVEHWSURVEY_GETSURVEYSCHEDULE_RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -210,6 +389,13 @@ CDataPublisher_ClientContentCorruptionReport_Notification = _reflection.Generate
   # @@protoc_insertion_point(class_scope:CDataPublisher_ClientContentCorruptionReport_Notification)
   ))
 _sym_db.RegisterMessage(CDataPublisher_ClientContentCorruptionReport_Notification)
+
+CDataPublisher_ClientUpdateAppJob_Notification = _reflection.GeneratedProtocolMessageType('CDataPublisher_ClientUpdateAppJob_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CDATAPUBLISHER_CLIENTUPDATEAPPJOB_NOTIFICATION,
+  __module__ = 'steammessages_datapublisher_pb2'
+  # @@protoc_insertion_point(class_scope:CDataPublisher_ClientUpdateAppJob_Notification)
+  ))
+_sym_db.RegisterMessage(CDataPublisher_ClientUpdateAppJob_Notification)
 
 CValveHWSurvey_GetSurveySchedule_Request = _reflection.GeneratedProtocolMessageType('CValveHWSurvey_GetSurveySchedule_Request', (_message.Message,), dict(
   DESCRIPTOR = _CVALVEHWSURVEY_GETSURVEYSCHEDULE_REQUEST,
@@ -242,8 +428,8 @@ _DATAPUBLISHER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030#Data Publisher (DP) server services'),
-  serialized_start=787,
-  serialized_end=949,
+  serialized_start=1382,
+  serialized_end=1634,
   methods=[
   _descriptor.MethodDescriptor(
     name='ClientContentCorruptionReport',
@@ -251,6 +437,15 @@ _DATAPUBLISHER = _descriptor.ServiceDescriptor(
     index=0,
     containing_service=None,
     input_type=_CDATAPUBLISHER_CLIENTCONTENTCORRUPTIONREPORT_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ClientUpdateAppJobReport',
+    full_name='DataPublisher.ClientUpdateAppJobReport',
+    index=1,
+    containing_service=None,
+    input_type=_CDATAPUBLISHER_CLIENTUPDATEAPPJOB_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     serialized_options=None,
   ),
@@ -266,8 +461,8 @@ _VALVEHWSURVEY = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=_b('\202\265\030\rValveHWSurvey'),
-  serialized_start=952,
-  serialized_end=1124,
+  serialized_start=1637,
+  serialized_end=1809,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetSurveySchedule',

@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('H\001\220\001\001\200\265\030\001'),
-  serialized_pb=_b('\n\x18steammessages_base.proto\x1a google/protobuf/descriptor.proto\"1\n\rCMsgIPAddress\x12\x0c\n\x02v4\x18\x01 \x01(\x07H\x00\x12\x0c\n\x02v6\x18\x02 \x01(\x0cH\x00\x42\x04\n\x02ip\"R\n\x13\x43MsgIPAddressBucket\x12+\n\x13original_ip_address\x18\x01 \x01(\x0b\x32\x0e.CMsgIPAddress\x12\x0e\n\x06\x62ucket\x18\x02 \x01(\x06\"\xa1\x05\n\x12\x43MsgProtoBufHeader\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10\x63lient_sessionid\x18\x02 \x01(\x05\x12\x15\n\rrouting_appid\x18\x03 \x01(\r\x12*\n\x0cjobid_source\x18\n \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12*\n\x0cjobid_target\x18\x0b \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x17\n\x0ftarget_job_name\x18\x0c \x01(\t\x12\x0f\n\x07seq_num\x18\x18 \x01(\x05\x12\x12\n\x07\x65result\x18\r \x01(\x05:\x01\x32\x12\x15\n\rerror_message\x18\x0e \x01(\t\x12\x1a\n\x12\x61uth_account_flags\x18\x10 \x01(\r\x12\x14\n\x0ctoken_source\x18\x16 \x01(\r\x12\x1b\n\x13\x61\x64min_spoofing_user\x18\x17 \x01(\x08\x12\x1a\n\x0ftransport_error\x18\x11 \x01(\x05:\x01\x31\x12\'\n\tmessageid\x18\x12 \x01(\x04:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x1a\n\x12publisher_group_id\x18\x13 \x01(\r\x12\r\n\x05sysid\x18\x14 \x01(\r\x12\x11\n\ttrace_tag\x18\x15 \x01(\x04\x12\x15\n\rwebapi_key_id\x18\x19 \x01(\r\x12\x1f\n\x17is_from_external_source\x18\x1a \x01(\x08\x12\x18\n\x10\x66orward_to_sysid\x18\x1b \x03(\r\x12\x10\n\x08\x63m_sysid\x18\x1c \x01(\r\x12\x10\n\x08wg_token\x18\x1e \x01(\t\x12\x18\n\rlauncher_type\x18\x1f \x01(\r:\x01\x30\x12\x10\n\x05realm\x18  \x01(\r:\x01\x30\x12\x0c\n\x02ip\x18\x0f \x01(\rH\x00\x12\x0f\n\x05ip_v6\x18\x1d \x01(\x0cH\x00\x42\t\n\x07ip_addr\"8\n\tCMsgMulti\x12\x15\n\rsize_unzipped\x18\x01 \x01(\r\x12\x14\n\x0cmessage_body\x18\x02 \x01(\x0c\"+\n\x13\x43MsgProtobufWrapped\x12\x14\n\x0cmessage_body\x18\x01 \x01(\x0c\"\x8f\x01\n\x0e\x43MsgAuthTicket\x12\x0e\n\x06\x65state\x18\x01 \x01(\r\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x0e\n\x06gameid\x18\x04 \x01(\x06\x12\x14\n\x0ch_steam_pipe\x18\x05 \x01(\r\x12\x12\n\nticket_crc\x18\x06 \x01(\r\x12\x0e\n\x06ticket\x18\x07 \x01(\x0c\"\xf6\x01\n\x14\x43\x43\x44\x44\x42\x41ppDetailCommon\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x0c\n\x04logo\x18\x04 \x01(\t\x12\x12\n\nlogo_small\x18\x05 \x01(\t\x12\x0c\n\x04tool\x18\x06 \x01(\x08\x12\x0c\n\x04\x64\x65mo\x18\x07 \x01(\x08\x12\r\n\x05media\x18\x08 \x01(\x08\x12\x1f\n\x17\x63ommunity_visible_stats\x18\t \x01(\x08\x12\x15\n\rfriendly_name\x18\n \x01(\t\x12\x13\n\x0bpropagation\x18\x0b \x01(\t\x12\x19\n\x11has_adult_content\x18\x0c \x01(\x08\"\x8f\x03\n\rCMsgAppRights\x12\x11\n\tedit_info\x18\x01 \x01(\x08\x12\x0f\n\x07publish\x18\x02 \x01(\x08\x12\x17\n\x0fview_error_data\x18\x03 \x01(\x08\x12\x10\n\x08\x64ownload\x18\x04 \x01(\x08\x12\x15\n\rupload_cdkeys\x18\x05 \x01(\x08\x12\x17\n\x0fgenerate_cdkeys\x18\x06 \x01(\x08\x12\x17\n\x0fview_financials\x18\x07 \x01(\x08\x12\x12\n\nmanage_ceg\x18\x08 \x01(\x08\x12\x16\n\x0emanage_signing\x18\t \x01(\x08\x12\x15\n\rmanage_cdkeys\x18\n \x01(\x08\x12\x16\n\x0e\x65\x64it_marketing\x18\x0b \x01(\x08\x12\x17\n\x0f\x65\x63onomy_support\x18\x0c \x01(\x08\x12\"\n\x1a\x65\x63onomy_support_supervisor\x18\r \x01(\x08\x12\x16\n\x0emanage_pricing\x18\x0e \x01(\x08\x12\x16\n\x0e\x62roadcast_live\x18\x0f \x01(\x08\x12\x1e\n\x16view_marketing_traffic\x18\x10 \x01(\x08\"\xf1\x02\n\x13\x43\x43uratorPreferences\x12\x1b\n\x13supported_languages\x18\x01 \x01(\r\x12\x18\n\x10platform_windows\x18\x02 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x03 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x04 \x01(\x08\x12\x12\n\nvr_content\x18\x05 \x01(\x08\x12\x1e\n\x16\x61\x64ult_content_violence\x18\x06 \x01(\x08\x12\x19\n\x11\x61\x64ult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x16\n\x0etagids_curated\x18\t \x03(\r\x12\x17\n\x0ftagids_filtered\x18\n \x03(\r\x12\x15\n\rwebsite_title\x18\x0b \x01(\t\x12\x13\n\x0bwebsite_url\x18\x0c \x01(\t\x12\x16\n\x0e\x64iscussion_url\x18\r \x01(\t\x12\x16\n\x0eshow_broadcast\x18\x0e \x01(\x08\"@\n\x12\x43LocalizationToken\x12\x10\n\x08language\x18\x01 \x01(\r\x12\x18\n\x10localized_string\x18\x02 \x01(\t\"\xec\x01\n\x17\x43\x43lanEventUserNewsTuple\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\x18\n\x10\x61nnouncement_gid\x18\x03 \x01(\x06\x12\x13\n\x0brtime_start\x18\x04 \x01(\r\x12\x11\n\trtime_end\x18\x05 \x01(\r\x12\x16\n\x0epriority_score\x18\x06 \x01(\r\x12\x0c\n\x04type\x18\x07 \x01(\r\x12\x18\n\x10\x63lamp_range_slot\x18\x08 \x01(\r\x12\r\n\x05\x61ppid\x18\t \x01(\r\x12\x1d\n\x15rtime32_last_modified\x18\n \x01(\r\"\x80\x01\n\x16\x43\x43lanMatchEventByRange\x12\x14\n\x0crtime_before\x18\x01 \x01(\r\x12\x13\n\x0brtime_after\x18\x02 \x01(\r\x12\x11\n\tqualified\x18\x03 \x01(\r\x12(\n\x06\x65vents\x18\x04 \x03(\x0b\x32\x18.CClanEventUserNewsTuple\"\xb3\x02\n\x1f\x43\x43ommunity_ClanAnnouncementInfo\x12\x0b\n\x03gid\x18\x01 \x01(\x04\x12\x0e\n\x06\x63lanid\x18\x02 \x01(\x04\x12\x10\n\x08posterid\x18\x03 \x01(\x04\x12\x10\n\x08headline\x18\x04 \x01(\t\x12\x10\n\x08posttime\x18\x05 \x01(\r\x12\x12\n\nupdatetime\x18\x06 \x01(\r\x12\x0c\n\x04\x62ody\x18\x07 \x01(\t\x12\x14\n\x0c\x63ommentcount\x18\x08 \x01(\x05\x12\x0c\n\x04tags\x18\t \x03(\t\x12\x10\n\x08language\x18\n \x01(\x05\x12\x0e\n\x06hidden\x18\x0b \x01(\x08\x12\x16\n\x0e\x66orum_topic_id\x18\x0c \x01(\x06\x12\x11\n\tevent_gid\x18\r \x01(\x06\x12\x13\n\x0bvoteupcount\x18\x0e \x01(\x05\x12\x15\n\rvotedowncount\x18\x0f \x01(\x05\"\xc7\x05\n\x0e\x43\x43lanEventData\x12\x0b\n\x03gid\x18\x01 \x01(\x06\x12\x14\n\x0c\x63lan_steamid\x18\x02 \x01(\x06\x12\x12\n\nevent_name\x18\x03 \x01(\t\x12;\n\nevent_type\x18\x04 \x01(\x0e\x32\x14.EProtoClanEventType:\x11k_EClanOtherEvent\x12\r\n\x05\x61ppid\x18\x05 \x01(\r\x12\x16\n\x0eserver_address\x18\x06 \x01(\t\x12\x17\n\x0fserver_password\x18\x07 \x01(\t\x12\x1a\n\x12rtime32_start_time\x18\x08 \x01(\r\x12\x18\n\x10rtime32_end_time\x18\t \x01(\r\x12\x15\n\rcomment_count\x18\n \x01(\x05\x12\x17\n\x0f\x63reator_steamid\x18\x0b \x01(\x06\x12\x1b\n\x13last_update_steamid\x18\x0c \x01(\x06\x12\x13\n\x0b\x65vent_notes\x18\r \x01(\t\x12\x10\n\x08jsondata\x18\x0e \x01(\t\x12;\n\x11\x61nnouncement_body\x18\x0f \x01(\x0b\x32 .CCommunity_ClanAnnouncementInfo\x12\x11\n\tpublished\x18\x10 \x01(\x08\x12\x0e\n\x06hidden\x18\x11 \x01(\x08\x12 \n\x18rtime32_visibility_start\x18\x12 \x01(\r\x12\x1e\n\x16rtime32_visibility_end\x18\x13 \x01(\r\x12\x1d\n\x15\x62roadcaster_accountid\x18\x14 \x01(\r\x12\x16\n\x0e\x66ollower_count\x18\x15 \x01(\r\x12\x14\n\x0cignore_count\x18\x16 \x01(\r\x12\x16\n\x0e\x66orum_topic_id\x18\x17 \x01(\x06\x12\x1d\n\x15rtime32_last_modified\x18\x18 \x01(\r\x12\x15\n\rnews_post_gid\x18\x19 \x01(\x06\x12\x1a\n\x12rtime_mod_reviewed\x18\x1a \x01(\r\"\xc7\x01\n\x10\x43\x42illing_Address\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\x12\x10\n\x08\x61\x64\x64ress1\x18\x03 \x01(\t\x12\x10\n\x08\x61\x64\x64ress2\x18\x04 \x01(\t\x12\x0c\n\x04\x63ity\x18\x05 \x01(\t\x12\x10\n\x08us_state\x18\x06 \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x07 \x01(\t\x12\x10\n\x08postcode\x18\x08 \x01(\t\x12\x11\n\tzip_plus4\x18\t \x01(\x05\x12\r\n\x05phone\x18\n \x01(\t*\xeb\x07\n\x13\x45ProtoClanEventType\x12\x15\n\x11k_EClanOtherEvent\x10\x01\x12\x14\n\x10k_EClanGameEvent\x10\x02\x12\x15\n\x11k_EClanPartyEvent\x10\x03\x12\x17\n\x13k_EClanMeetingEvent\x10\x04\x12\x1c\n\x18k_EClanSpecialCauseEvent\x10\x05\x12\x1c\n\x18k_EClanMusicAndArtsEvent\x10\x06\x12\x16\n\x12k_EClanSportsEvent\x10\x07\x12\x14\n\x10k_EClanTripEvent\x10\x08\x12\x14\n\x10k_EClanChatEvent\x10\t\x12\x1b\n\x17k_EClanGameReleaseEvent\x10\n\x12\x19\n\x15k_EClanBroadcastEvent\x10\x0b\x12\x1b\n\x17k_EClanSmallUpdateEvent\x10\x0c\x12&\n\"k_EClanPreAnnounceMajorUpdateEvent\x10\r\x12\x1b\n\x17k_EClanMajorUpdateEvent\x10\x0e\x12\x1a\n\x16k_EClanDLCReleaseEvent\x10\x0f\x12\x1d\n\x19k_EClanFutureReleaseEvent\x10\x10\x12&\n\"k_EClanESportTournamentStreamEvent\x10\x11\x12\x19\n\x15k_EClanDevStreamEvent\x10\x12\x12\x1c\n\x18k_EClanFamousStreamEvent\x10\x13\x12\x19\n\x15k_EClanGameSalesEvent\x10\x14\x12\x1d\n\x19k_EClanGameItemSalesEvent\x10\x15\x12\x1d\n\x19k_EClanInGameBonusXPEvent\x10\x16\x12\x1a\n\x16k_EClanInGameLootEvent\x10\x17\x12\x1b\n\x17k_EClanInGamePerksEvent\x10\x18\x12\x1f\n\x1bk_EClanInGameChallengeEvent\x10\x19\x12\x1d\n\x19k_EClanInGameContestEvent\x10\x1a\x12\x13\n\x0fk_EClanIRLEvent\x10\x1b\x12\x14\n\x10k_EClanNewsEvent\x10\x1c\x12\x1b\n\x17k_EClanBetaReleaseEvent\x10\x1d\x12$\n k_EClanInGameContentReleaseEvent\x10\x1e\x12\x14\n\x10k_EClanFreeTrial\x10\x1f\x12\x18\n\x14k_EClanSeasonRelease\x10 \x12\x17\n\x13k_EClanSeasonUpdate\x10!\x12\x19\n\x15k_EClanCrosspostEvent\x10\"\x12\x1d\n\x19k_EClanInGameEventGeneral\x10#*\x81\x01\n\x1cPartnerEventNotificationType\x12\x11\n\rk_EEventStart\x10\x00\x12\x1a\n\x16k_EEventBroadcastStart\x10\x01\x12\x16\n\x12k_EEventMatchStart\x10\x02\x12\x1a\n\x16k_EEventPartnerMaxType\x10\x03:A\n\x12msgpool_soft_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd0\x86\x03 \x01(\x05:\x02\x33\x32:B\n\x12msgpool_hard_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd1\x86\x03 \x01(\x05:\x03\x33\x38\x34:C\n\x14\x66orce_php_generation\x12\x1c.google.protobuf.FileOptions\x18\xd0\x86\x03 \x01(\x08:\x05\x66\x61lse:H\n\x18php_output_always_number\x12\x1d.google.protobuf.FieldOptions\x18\xe4\x86\x03 \x01(\x08:\x05\x66\x61lseB\tH\x01\x90\x01\x01\x80\xb5\x18\x01')
+  serialized_pb=_b('\n\x18steammessages_base.proto\x1a google/protobuf/descriptor.proto\"1\n\rCMsgIPAddress\x12\x0c\n\x02v4\x18\x01 \x01(\x07H\x00\x12\x0c\n\x02v6\x18\x02 \x01(\x0cH\x00\x42\x04\n\x02ip\"R\n\x13\x43MsgIPAddressBucket\x12+\n\x13original_ip_address\x18\x01 \x01(\x0b\x32\x0e.CMsgIPAddress\x12\x0e\n\x06\x62ucket\x18\x02 \x01(\x06\"\xa1\x05\n\x12\x43MsgProtoBufHeader\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10\x63lient_sessionid\x18\x02 \x01(\x05\x12\x15\n\rrouting_appid\x18\x03 \x01(\r\x12*\n\x0cjobid_source\x18\n \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12*\n\x0cjobid_target\x18\x0b \x01(\x06:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x17\n\x0ftarget_job_name\x18\x0c \x01(\t\x12\x0f\n\x07seq_num\x18\x18 \x01(\x05\x12\x12\n\x07\x65result\x18\r \x01(\x05:\x01\x32\x12\x15\n\rerror_message\x18\x0e \x01(\t\x12\x1a\n\x12\x61uth_account_flags\x18\x10 \x01(\r\x12\x14\n\x0ctoken_source\x18\x16 \x01(\r\x12\x1b\n\x13\x61\x64min_spoofing_user\x18\x17 \x01(\x08\x12\x1a\n\x0ftransport_error\x18\x11 \x01(\x05:\x01\x31\x12\'\n\tmessageid\x18\x12 \x01(\x04:\x14\x31\x38\x34\x34\x36\x37\x34\x34\x30\x37\x33\x37\x30\x39\x35\x35\x31\x36\x31\x35\x12\x1a\n\x12publisher_group_id\x18\x13 \x01(\r\x12\r\n\x05sysid\x18\x14 \x01(\r\x12\x11\n\ttrace_tag\x18\x15 \x01(\x04\x12\x15\n\rwebapi_key_id\x18\x19 \x01(\r\x12\x1f\n\x17is_from_external_source\x18\x1a \x01(\x08\x12\x18\n\x10\x66orward_to_sysid\x18\x1b \x03(\r\x12\x10\n\x08\x63m_sysid\x18\x1c \x01(\r\x12\x10\n\x08wg_token\x18\x1e \x01(\t\x12\x18\n\rlauncher_type\x18\x1f \x01(\r:\x01\x30\x12\x10\n\x05realm\x18  \x01(\r:\x01\x30\x12\x0c\n\x02ip\x18\x0f \x01(\rH\x00\x12\x0f\n\x05ip_v6\x18\x1d \x01(\x0cH\x00\x42\t\n\x07ip_addr\"8\n\tCMsgMulti\x12\x15\n\rsize_unzipped\x18\x01 \x01(\r\x12\x14\n\x0cmessage_body\x18\x02 \x01(\x0c\"+\n\x13\x43MsgProtobufWrapped\x12\x14\n\x0cmessage_body\x18\x01 \x01(\x0c\"\x8f\x01\n\x0e\x43MsgAuthTicket\x12\x0e\n\x06\x65state\x18\x01 \x01(\r\x12\x12\n\x07\x65result\x18\x02 \x01(\r:\x01\x32\x12\x0f\n\x07steamid\x18\x03 \x01(\x06\x12\x0e\n\x06gameid\x18\x04 \x01(\x06\x12\x14\n\x0ch_steam_pipe\x18\x05 \x01(\r\x12\x12\n\nticket_crc\x18\x06 \x01(\r\x12\x0e\n\x06ticket\x18\x07 \x01(\x0c\"\x99\x02\n\x14\x43\x43\x44\x44\x42\x41ppDetailCommon\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04icon\x18\x03 \x01(\t\x12\x0c\n\x04logo\x18\x04 \x01(\t\x12\x12\n\nlogo_small\x18\x05 \x01(\t\x12\x0c\n\x04tool\x18\x06 \x01(\x08\x12\x0c\n\x04\x64\x65mo\x18\x07 \x01(\x08\x12\r\n\x05media\x18\x08 \x01(\x08\x12\x1f\n\x17\x63ommunity_visible_stats\x18\t \x01(\x08\x12\x15\n\rfriendly_name\x18\n \x01(\t\x12\x13\n\x0bpropagation\x18\x0b \x01(\t\x12\x19\n\x11has_adult_content\x18\x0c \x01(\x08\x12!\n\x19is_visible_in_steam_china\x18\r \x01(\x08\"\xb3\x03\n\rCMsgAppRights\x12\x11\n\tedit_info\x18\x01 \x01(\x08\x12\x0f\n\x07publish\x18\x02 \x01(\x08\x12\x17\n\x0fview_error_data\x18\x03 \x01(\x08\x12\x10\n\x08\x64ownload\x18\x04 \x01(\x08\x12\x15\n\rupload_cdkeys\x18\x05 \x01(\x08\x12\x17\n\x0fgenerate_cdkeys\x18\x06 \x01(\x08\x12\x17\n\x0fview_financials\x18\x07 \x01(\x08\x12\x12\n\nmanage_ceg\x18\x08 \x01(\x08\x12\x16\n\x0emanage_signing\x18\t \x01(\x08\x12\x15\n\rmanage_cdkeys\x18\n \x01(\x08\x12\x16\n\x0e\x65\x64it_marketing\x18\x0b \x01(\x08\x12\x17\n\x0f\x65\x63onomy_support\x18\x0c \x01(\x08\x12\"\n\x1a\x65\x63onomy_support_supervisor\x18\r \x01(\x08\x12\x16\n\x0emanage_pricing\x18\x0e \x01(\x08\x12\x16\n\x0e\x62roadcast_live\x18\x0f \x01(\x08\x12\x1e\n\x16view_marketing_traffic\x18\x10 \x01(\x08\x12\"\n\x1a\x65\x64it_store_display_content\x18\x11 \x01(\x08\"\xf1\x02\n\x13\x43\x43uratorPreferences\x12\x1b\n\x13supported_languages\x18\x01 \x01(\r\x12\x18\n\x10platform_windows\x18\x02 \x01(\x08\x12\x14\n\x0cplatform_mac\x18\x03 \x01(\x08\x12\x16\n\x0eplatform_linux\x18\x04 \x01(\x08\x12\x12\n\nvr_content\x18\x05 \x01(\x08\x12\x1e\n\x16\x61\x64ult_content_violence\x18\x06 \x01(\x08\x12\x19\n\x11\x61\x64ult_content_sex\x18\x07 \x01(\x08\x12\x19\n\x11timestamp_updated\x18\x08 \x01(\r\x12\x16\n\x0etagids_curated\x18\t \x03(\r\x12\x17\n\x0ftagids_filtered\x18\n \x03(\r\x12\x15\n\rwebsite_title\x18\x0b \x01(\t\x12\x13\n\x0bwebsite_url\x18\x0c \x01(\t\x12\x16\n\x0e\x64iscussion_url\x18\r \x01(\t\x12\x16\n\x0eshow_broadcast\x18\x0e \x01(\x08\"@\n\x12\x43LocalizationToken\x12\x10\n\x08language\x18\x01 \x01(\r\x12\x18\n\x10localized_string\x18\x02 \x01(\t\"\xec\x01\n\x17\x43\x43lanEventUserNewsTuple\x12\x0e\n\x06\x63lanid\x18\x01 \x01(\r\x12\x11\n\tevent_gid\x18\x02 \x01(\x06\x12\x18\n\x10\x61nnouncement_gid\x18\x03 \x01(\x06\x12\x13\n\x0brtime_start\x18\x04 \x01(\r\x12\x11\n\trtime_end\x18\x05 \x01(\r\x12\x16\n\x0epriority_score\x18\x06 \x01(\r\x12\x0c\n\x04type\x18\x07 \x01(\r\x12\x18\n\x10\x63lamp_range_slot\x18\x08 \x01(\r\x12\r\n\x05\x61ppid\x18\t \x01(\r\x12\x1d\n\x15rtime32_last_modified\x18\n \x01(\r\"\x80\x01\n\x16\x43\x43lanMatchEventByRange\x12\x14\n\x0crtime_before\x18\x01 \x01(\r\x12\x13\n\x0brtime_after\x18\x02 \x01(\r\x12\x11\n\tqualified\x18\x03 \x01(\r\x12(\n\x06\x65vents\x18\x04 \x03(\x0b\x32\x18.CClanEventUserNewsTuple\"\xb3\x02\n\x1f\x43\x43ommunity_ClanAnnouncementInfo\x12\x0b\n\x03gid\x18\x01 \x01(\x04\x12\x0e\n\x06\x63lanid\x18\x02 \x01(\x04\x12\x10\n\x08posterid\x18\x03 \x01(\x04\x12\x10\n\x08headline\x18\x04 \x01(\t\x12\x10\n\x08posttime\x18\x05 \x01(\r\x12\x12\n\nupdatetime\x18\x06 \x01(\r\x12\x0c\n\x04\x62ody\x18\x07 \x01(\t\x12\x14\n\x0c\x63ommentcount\x18\x08 \x01(\x05\x12\x0c\n\x04tags\x18\t \x03(\t\x12\x10\n\x08language\x18\n \x01(\x05\x12\x0e\n\x06hidden\x18\x0b \x01(\x08\x12\x16\n\x0e\x66orum_topic_id\x18\x0c \x01(\x06\x12\x11\n\tevent_gid\x18\r \x01(\x06\x12\x13\n\x0bvoteupcount\x18\x0e \x01(\x05\x12\x15\n\rvotedowncount\x18\x0f \x01(\x05\"\xa6\x06\n\x0e\x43\x43lanEventData\x12\x0b\n\x03gid\x18\x01 \x01(\x06\x12\x14\n\x0c\x63lan_steamid\x18\x02 \x01(\x06\x12\x12\n\nevent_name\x18\x03 \x01(\t\x12;\n\nevent_type\x18\x04 \x01(\x0e\x32\x14.EProtoClanEventType:\x11k_EClanOtherEvent\x12\r\n\x05\x61ppid\x18\x05 \x01(\r\x12\x16\n\x0eserver_address\x18\x06 \x01(\t\x12\x17\n\x0fserver_password\x18\x07 \x01(\t\x12\x1a\n\x12rtime32_start_time\x18\x08 \x01(\r\x12\x18\n\x10rtime32_end_time\x18\t \x01(\r\x12\x15\n\rcomment_count\x18\n \x01(\x05\x12\x17\n\x0f\x63reator_steamid\x18\x0b \x01(\x06\x12\x1b\n\x13last_update_steamid\x18\x0c \x01(\x06\x12\x13\n\x0b\x65vent_notes\x18\r \x01(\t\x12\x10\n\x08jsondata\x18\x0e \x01(\t\x12;\n\x11\x61nnouncement_body\x18\x0f \x01(\x0b\x32 .CCommunity_ClanAnnouncementInfo\x12\x11\n\tpublished\x18\x10 \x01(\x08\x12\x0e\n\x06hidden\x18\x11 \x01(\x08\x12 \n\x18rtime32_visibility_start\x18\x12 \x01(\r\x12\x1e\n\x16rtime32_visibility_end\x18\x13 \x01(\r\x12\x1d\n\x15\x62roadcaster_accountid\x18\x14 \x01(\r\x12\x16\n\x0e\x66ollower_count\x18\x15 \x01(\r\x12\x14\n\x0cignore_count\x18\x16 \x01(\r\x12\x16\n\x0e\x66orum_topic_id\x18\x17 \x01(\x06\x12\x1d\n\x15rtime32_last_modified\x18\x18 \x01(\r\x12\x15\n\rnews_post_gid\x18\x19 \x01(\x06\x12\x1a\n\x12rtime_mod_reviewed\x18\x1a \x01(\r\x12\x1a\n\x12\x66\x65\x61tured_app_tagid\x18\x1b \x01(\r\x12\x19\n\x11referenced_appids\x18\x1c \x03(\r\x12\x10\n\x08\x62uild_id\x18\x1d \x01(\r\x12\x14\n\x0c\x62uild_branch\x18\x1e \x01(\t\"\xc7\x01\n\x10\x43\x42illing_Address\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\x12\x10\n\x08\x61\x64\x64ress1\x18\x03 \x01(\t\x12\x10\n\x08\x61\x64\x64ress2\x18\x04 \x01(\t\x12\x0c\n\x04\x63ity\x18\x05 \x01(\t\x12\x10\n\x08us_state\x18\x06 \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x07 \x01(\t\x12\x10\n\x08postcode\x18\x08 \x01(\t\x12\x11\n\tzip_plus4\x18\t \x01(\x05\x12\r\n\x05phone\x18\n \x01(\t\"\xdb\x01\n\x19\x43PackageReservationStatus\x12\x11\n\tpackageid\x18\x01 \x01(\r\x12\x19\n\x11reservation_state\x18\x02 \x01(\x05\x12\x16\n\x0equeue_position\x18\x03 \x01(\x05\x12\x18\n\x10total_queue_size\x18\x04 \x01(\x05\x12 \n\x18reservation_country_code\x18\x05 \x01(\t\x12\x0f\n\x07\x65xpired\x18\x06 \x01(\x08\x12\x14\n\x0ctime_expires\x18\x07 \x01(\r\x12\x15\n\rtime_reserved\x18\x08 \x01(\r*\xeb\x07\n\x13\x45ProtoClanEventType\x12\x15\n\x11k_EClanOtherEvent\x10\x01\x12\x14\n\x10k_EClanGameEvent\x10\x02\x12\x15\n\x11k_EClanPartyEvent\x10\x03\x12\x17\n\x13k_EClanMeetingEvent\x10\x04\x12\x1c\n\x18k_EClanSpecialCauseEvent\x10\x05\x12\x1c\n\x18k_EClanMusicAndArtsEvent\x10\x06\x12\x16\n\x12k_EClanSportsEvent\x10\x07\x12\x14\n\x10k_EClanTripEvent\x10\x08\x12\x14\n\x10k_EClanChatEvent\x10\t\x12\x1b\n\x17k_EClanGameReleaseEvent\x10\n\x12\x19\n\x15k_EClanBroadcastEvent\x10\x0b\x12\x1b\n\x17k_EClanSmallUpdateEvent\x10\x0c\x12&\n\"k_EClanPreAnnounceMajorUpdateEvent\x10\r\x12\x1b\n\x17k_EClanMajorUpdateEvent\x10\x0e\x12\x1a\n\x16k_EClanDLCReleaseEvent\x10\x0f\x12\x1d\n\x19k_EClanFutureReleaseEvent\x10\x10\x12&\n\"k_EClanESportTournamentStreamEvent\x10\x11\x12\x19\n\x15k_EClanDevStreamEvent\x10\x12\x12\x1c\n\x18k_EClanFamousStreamEvent\x10\x13\x12\x19\n\x15k_EClanGameSalesEvent\x10\x14\x12\x1d\n\x19k_EClanGameItemSalesEvent\x10\x15\x12\x1d\n\x19k_EClanInGameBonusXPEvent\x10\x16\x12\x1a\n\x16k_EClanInGameLootEvent\x10\x17\x12\x1b\n\x17k_EClanInGamePerksEvent\x10\x18\x12\x1f\n\x1bk_EClanInGameChallengeEvent\x10\x19\x12\x1d\n\x19k_EClanInGameContestEvent\x10\x1a\x12\x13\n\x0fk_EClanIRLEvent\x10\x1b\x12\x14\n\x10k_EClanNewsEvent\x10\x1c\x12\x1b\n\x17k_EClanBetaReleaseEvent\x10\x1d\x12$\n k_EClanInGameContentReleaseEvent\x10\x1e\x12\x14\n\x10k_EClanFreeTrial\x10\x1f\x12\x18\n\x14k_EClanSeasonRelease\x10 \x12\x17\n\x13k_EClanSeasonUpdate\x10!\x12\x19\n\x15k_EClanCrosspostEvent\x10\"\x12\x1d\n\x19k_EClanInGameEventGeneral\x10#*\x81\x01\n\x1cPartnerEventNotificationType\x12\x11\n\rk_EEventStart\x10\x00\x12\x1a\n\x16k_EEventBroadcastStart\x10\x01\x12\x16\n\x12k_EEventMatchStart\x10\x02\x12\x1a\n\x16k_EEventPartnerMaxType\x10\x03:A\n\x12msgpool_soft_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd0\x86\x03 \x01(\x05:\x02\x33\x32:B\n\x12msgpool_hard_limit\x12\x1f.google.protobuf.MessageOptions\x18\xd1\x86\x03 \x01(\x05:\x03\x33\x38\x34:C\n\x14\x66orce_php_generation\x12\x1c.google.protobuf.FileOptions\x18\xd0\x86\x03 \x01(\x08:\x05\x66\x61lse:H\n\x18php_output_always_number\x12\x1d.google.protobuf.FieldOptions\x18\xe4\x86\x03 \x01(\x08:\x05\x66\x61lseB\tH\x01\x90\x01\x01\x80\xb5\x18\x01')
   ,
   dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 
@@ -175,8 +175,8 @@ _EPROTOCLANEVENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3808,
-  serialized_end=4811,
+  serialized_start=4196,
+  serialized_end=5199,
 )
 _sym_db.RegisterEnumDescriptor(_EPROTOCLANEVENTTYPE)
 
@@ -206,8 +206,8 @@ _PARTNEREVENTNOTIFICATIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4814,
-  serialized_end=4943,
+  serialized_start=5202,
+  serialized_end=5331,
 )
 _sym_db.RegisterEnumDescriptor(_PARTNEREVENTNOTIFICATIONTYPE)
 
@@ -807,6 +807,13 @@ _CCDDBAPPDETAILCOMMON = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_visible_in_steam_china', full_name='CCDDBAppDetailCommon.is_visible_in_steam_china', index=12,
+      number=13, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -820,7 +827,7 @@ _CCDDBAPPDETAILCOMMON = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1123,
-  serialized_end=1369,
+  serialized_end=1404,
 )
 
 
@@ -943,6 +950,13 @@ _CMSGAPPRIGHTS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='edit_store_display_content', full_name='CMsgAppRights.edit_store_display_content', index=16,
+      number=17, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -955,8 +969,8 @@ _CMSGAPPRIGHTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1372,
-  serialized_end=1771,
+  serialized_start=1407,
+  serialized_end=1842,
 )
 
 
@@ -1077,8 +1091,8 @@ _CCURATORPREFERENCES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1774,
-  serialized_end=2143,
+  serialized_start=1845,
+  serialized_end=2214,
 )
 
 
@@ -1115,8 +1129,8 @@ _CLOCALIZATIONTOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2145,
-  serialized_end=2209,
+  serialized_start=2216,
+  serialized_end=2280,
 )
 
 
@@ -1209,8 +1223,8 @@ _CCLANEVENTUSERNEWSTUPLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2212,
-  serialized_end=2448,
+  serialized_start=2283,
+  serialized_end=2519,
 )
 
 
@@ -1261,8 +1275,8 @@ _CCLANMATCHEVENTBYRANGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2451,
-  serialized_end=2579,
+  serialized_start=2522,
+  serialized_end=2650,
 )
 
 
@@ -1390,8 +1404,8 @@ _CCOMMUNITY_CLANANNOUNCEMENTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2582,
-  serialized_end=2889,
+  serialized_start=2653,
+  serialized_end=2960,
 )
 
 
@@ -1584,6 +1598,34 @@ _CCLANEVENTDATA = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='featured_app_tagid', full_name='CClanEventData.featured_app_tagid', index=26,
+      number=27, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='referenced_appids', full_name='CClanEventData.referenced_appids', index=27,
+      number=28, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='build_id', full_name='CClanEventData.build_id', index=28,
+      number=29, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='build_branch', full_name='CClanEventData.build_branch', index=29,
+      number=30, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1596,8 +1638,8 @@ _CCLANEVENTDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2892,
-  serialized_end=3603,
+  serialized_start=2963,
+  serialized_end=3769,
 )
 
 
@@ -1690,8 +1732,88 @@ _CBILLING_ADDRESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3606,
-  serialized_end=3805,
+  serialized_start=3772,
+  serialized_end=3971,
+)
+
+
+_CPACKAGERESERVATIONSTATUS = _descriptor.Descriptor(
+  name='CPackageReservationStatus',
+  full_name='CPackageReservationStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='packageid', full_name='CPackageReservationStatus.packageid', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reservation_state', full_name='CPackageReservationStatus.reservation_state', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='queue_position', full_name='CPackageReservationStatus.queue_position', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_queue_size', full_name='CPackageReservationStatus.total_queue_size', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reservation_country_code', full_name='CPackageReservationStatus.reservation_country_code', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='expired', full_name='CPackageReservationStatus.expired', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_expires', full_name='CPackageReservationStatus.time_expires', index=6,
+      number=7, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='time_reserved', full_name='CPackageReservationStatus.time_reserved', index=7,
+      number=8, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3974,
+  serialized_end=4193,
 )
 
 _CMSGIPADDRESS.oneofs_by_name['ip'].fields.append(
@@ -1725,6 +1847,7 @@ DESCRIPTOR.message_types_by_name['CClanMatchEventByRange'] = _CCLANMATCHEVENTBYR
 DESCRIPTOR.message_types_by_name['CCommunity_ClanAnnouncementInfo'] = _CCOMMUNITY_CLANANNOUNCEMENTINFO
 DESCRIPTOR.message_types_by_name['CClanEventData'] = _CCLANEVENTDATA
 DESCRIPTOR.message_types_by_name['CBilling_Address'] = _CBILLING_ADDRESS
+DESCRIPTOR.message_types_by_name['CPackageReservationStatus'] = _CPACKAGERESERVATIONSTATUS
 DESCRIPTOR.enum_types_by_name['EProtoClanEventType'] = _EPROTOCLANEVENTTYPE
 DESCRIPTOR.enum_types_by_name['PartnerEventNotificationType'] = _PARTNEREVENTNOTIFICATIONTYPE
 DESCRIPTOR.extensions_by_name['msgpool_soft_limit'] = msgpool_soft_limit
@@ -1837,6 +1960,13 @@ CBilling_Address = _reflection.GeneratedProtocolMessageType('CBilling_Address', 
   # @@protoc_insertion_point(class_scope:CBilling_Address)
   ))
 _sym_db.RegisterMessage(CBilling_Address)
+
+CPackageReservationStatus = _reflection.GeneratedProtocolMessageType('CPackageReservationStatus', (_message.Message,), dict(
+  DESCRIPTOR = _CPACKAGERESERVATIONSTATUS,
+  __module__ = 'steammessages_base_pb2'
+  # @@protoc_insertion_point(class_scope:CPackageReservationStatus)
+  ))
+_sym_db.RegisterMessage(CPackageReservationStatus)
 
 google_dot_protobuf_dot_descriptor__pb2.MessageOptions.RegisterExtension(msgpool_soft_limit)
 google_dot_protobuf_dot_descriptor__pb2.MessageOptions.RegisterExtension(msgpool_hard_limit)

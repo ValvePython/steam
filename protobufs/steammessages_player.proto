@@ -1,12 +1,35 @@
 syntax = "proto2";
 import "steammessages_unified_base.proto";
+import "enums.proto";
 
 option py_generic_services = true;
+
+enum EProfileCustomizationStyle {
+	k_EProfileCustomizationStyleDefault = 0;
+	k_EProfileCustomizationStyleSelected = 1;
+	k_EProfileCustomizationStyleRarest = 2;
+	k_EProfileCustomizationStyleMostRecent = 3;
+	k_EProfileCustomizationStyleRandom = 4;
+	k_EProfileCustomizationStyleHighestRated = 5;
+}
+
+enum EAgreementType {
+	k_EAgreementType_Invalid = -1;
+	k_EAgreementType_GlobalSSA = 0;
+	k_EAgreementType_ChinaSSA = 1;
+}
 
 enum ENotificationSetting {
 	k_ENotificationSettingNotifyUseDefault = 0;
 	k_ENotificationSettingAlways = 1;
 	k_ENotificationSettingNever = 2;
+}
+
+enum ETextFilterSetting {
+	k_ETextFilterSettingSteamLabOptedOut = 0;
+	k_ETextFilterSettingEnabled = 1;
+	k_ETextFilterSettingEnabledAllowProfanity = 2;
+	k_ETextFilterSettingDisabled = 3;
 }
 
 message CPlayer_GetMutualFriendsForIncomingInvites_Request {
@@ -27,6 +50,7 @@ message CPlayer_GetOwnedGames_Request {
 	optional bool include_played_free_games = 3 [(description) = "Free games are excluded by default.  If this is set, free games the user has played will be returned."];
 	repeated uint32 appids_filter = 4 [(description) = "if set, restricts result set to the passed in apps"];
 	optional bool include_free_sub = 5 [(description) = "Some games are in the free sub, which are excluded by default."];
+	optional bool skip_unvetted_apps = 6 [default = true, (description) = "if set, skip unvetted store apps"];
 }
 
 message CPlayer_GetOwnedGames_Response {
@@ -147,6 +171,8 @@ message ProfileItem {
 	optional uint32 item_class = 9;
 	optional string movie_webm = 10 [(description) = "URL to webm, if any"];
 	optional string movie_mp4 = 11 [(description) = "URL to mp4, if any"];
+	optional string movie_webm_small = 13 [(description) = "URL to small webm, if any"];
+	optional string movie_mp4_small = 14 [(description) = "URL to small mp4, if any"];
 	optional uint32 equipped_flags = 12 [(description) = "Special flags set when equipped (EProfileItemEquippedFlag)"];
 }
 
@@ -252,6 +278,7 @@ message CPlayer_GetEmoticonList_Response {
 		optional uint32 time_last_used = 3;
 		optional uint32 use_count = 4;
 		optional uint32 time_received = 5;
+		optional uint32 appid = 6;
 	}
 
 	repeated .CPlayer_GetEmoticonList_Response.Emoticon emoticons = 1;
@@ -274,6 +301,136 @@ message CPlayer_GetAchievementsProgress_Response {
 	}
 
 	repeated .CPlayer_GetAchievementsProgress_Response.AchievementProgress achievement_progress = 1;
+}
+
+message CPlayer_GetFavoriteBadge_Request {
+	optional uint64 steamid = 1;
+}
+
+message CPlayer_GetFavoriteBadge_Response {
+	optional bool has_favorite_badge = 1;
+	optional uint32 badgeid = 2;
+	optional uint64 communityitemid = 3;
+	optional uint32 item_type = 4;
+	optional uint32 border_color = 5;
+	optional uint32 appid = 6;
+	optional uint32 level = 7;
+}
+
+message CPlayer_SetFavoriteBadge_Request {
+	optional uint64 communityitemid = 1;
+	optional uint32 badgeid = 2;
+}
+
+message CPlayer_SetFavoriteBadge_Response {
+}
+
+message CPlayer_GetProfileCustomization_Request {
+	optional fixed64 steamid = 1;
+	optional bool include_inactive_customizations = 2;
+	optional bool include_purchased_customizations = 3;
+}
+
+message ProfileCustomizationSlot {
+	optional uint32 slot = 1;
+	optional uint32 appid = 2;
+	optional uint64 publishedfileid = 3;
+	optional uint64 item_assetid = 4;
+	optional uint64 item_contextid = 5;
+	optional string notes = 6;
+	optional string title = 7;
+	optional uint32 accountid = 8;
+	optional uint32 badgeid = 9;
+	optional uint32 border_color = 10;
+	optional uint64 item_classid = 11;
+	optional uint64 item_instanceid = 12;
+	optional .EBanContentCheckResult ban_check_result = 13 [default = k_EBanContentCheckResult_NotScanned];
+}
+
+message ProfileCustomization {
+	optional .EProfileCustomizationType customization_type = 1 [default = k_EProfileCustomizationTypeInvalid];
+	optional bool large = 2;
+	repeated .ProfileCustomizationSlot slots = 3;
+	optional bool active = 4;
+	optional .EProfileCustomizationStyle customization_style = 5 [default = k_EProfileCustomizationStyleDefault];
+	optional uint64 purchaseid = 6;
+	optional uint32 level = 7;
+}
+
+message ProfileTheme {
+	optional string theme_id = 1;
+	optional string title = 2;
+}
+
+message ProfilePreferences {
+	optional bool hide_profile_awards = 1;
+}
+
+message CPlayer_GetProfileCustomization_Response {
+	message PurchasedCustomization {
+		optional uint64 purchaseid = 1;
+		optional .EProfileCustomizationType customization_type = 2 [default = k_EProfileCustomizationTypeInvalid];
+		optional uint32 level = 3;
+	}
+
+	repeated .ProfileCustomization customizations = 1;
+	optional uint32 slots_available = 2;
+	optional .ProfileTheme profile_theme = 3;
+	repeated .CPlayer_GetProfileCustomization_Response.PurchasedCustomization purchased_customizations = 4;
+	optional .ProfilePreferences profile_preferences = 5;
+}
+
+message CPlayer_GetPurchasedProfileCustomizations_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CPlayer_GetPurchasedProfileCustomizations_Response {
+	message PurchasedCustomization {
+		optional uint64 purchaseid = 1;
+		optional .EProfileCustomizationType customization_type = 2 [default = k_EProfileCustomizationTypeInvalid];
+	}
+
+	repeated .CPlayer_GetPurchasedProfileCustomizations_Response.PurchasedCustomization purchased_customizations = 1;
+}
+
+message CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response {
+	message PurchasedCustomization {
+		optional .EProfileCustomizationType customization_type = 1 [default = k_EProfileCustomizationTypeInvalid];
+		optional uint32 count = 2;
+	}
+
+	message UpgradedCustomization {
+		optional .EProfileCustomizationType customization_type = 1 [default = k_EProfileCustomizationTypeInvalid];
+		optional uint32 level = 2;
+	}
+
+	repeated .CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response.PurchasedCustomization purchased_customizations = 1;
+	repeated .CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response.UpgradedCustomization upgraded_customizations = 2;
+}
+
+message CPlayer_GetProfileThemesAvailable_Request {
+}
+
+message CPlayer_GetProfileThemesAvailable_Response {
+	repeated .ProfileTheme profile_themes = 1;
+}
+
+message CPlayer_SetProfileTheme_Request {
+	optional string theme_id = 1;
+}
+
+message CPlayer_SetProfileTheme_Response {
+}
+
+message CPlayer_SetProfilePreferences_Request {
+	optional .ProfilePreferences profile_preferences = 1;
+}
+
+message CPlayer_SetProfilePreferences_Response {
 }
 
 message CPlayer_PostStatusToFriends_Request {
@@ -330,6 +487,8 @@ message CPlayer_GetLastPlayedTimes_Response {
 }
 
 message CPlayer_AcceptSSA_Request {
+	optional .EAgreementType agreement_type = 1 [default = k_EAgreementType_Invalid];
+	optional uint32 time_signed_utc = 2;
 }
 
 message CPlayer_AcceptSSA_Response {
@@ -407,6 +566,9 @@ message CPlayer_CommunityPreferences {
 	optional bool hide_adult_content_violence = 1 [default = true];
 	optional bool hide_adult_content_sex = 2 [default = true];
 	optional bool parenthesize_nicknames = 4 [default = false];
+	optional .ETextFilterSetting text_filter_setting = 5 [default = k_ETextFilterSettingSteamLabOptedOut];
+	optional bool text_filter_ignore_friends = 6 [default = true];
+	optional uint32 text_filter_words_revision = 7;
 	optional uint32 timestamp_updated = 3;
 }
 
@@ -419,6 +581,19 @@ message CPlayer_SetCommunityPreferences_Request {
 }
 
 message CPlayer_SetCommunityPreferences_Response {
+}
+
+message CPlayer_GetTextFilterWords_Request {
+}
+
+message CPlayer_TextFilterWords {
+	repeated string text_filter_custom_banned_words = 1;
+	repeated string text_filter_custom_clean_words = 2;
+	optional uint32 text_filter_words_revision = 3;
+}
+
+message CPlayer_GetTextFilterWords_Response {
+	optional .CPlayer_TextFilterWords words = 1;
 }
 
 message CPlayer_GetNewSteamAnnouncementState_Request {
@@ -468,6 +643,8 @@ message CPlayer_GetDurationControl_Response {
 	optional bool is_steamchina_account = 4;
 	optional bool is_age_verified = 5;
 	optional uint32 seconds_allowed_today = 6;
+	optional bool age_verification_pending = 7;
+	optional bool block_minors = 8;
 }
 
 message CPlayer_LastPlayedTimes_Notification {
@@ -494,6 +671,10 @@ message CPlayer_NewSteamAnnouncementState_Notification {
 
 message CPlayer_CommunityPreferencesChanged_Notification {
 	optional .CPlayer_CommunityPreferences preferences = 1;
+}
+
+message CPlayer_TextFilterWordsChanged_Notification {
+	optional .CPlayer_TextFilterWords words = 1;
 }
 
 message CPlayer_PerFriendPreferencesChanged_Notification {
@@ -584,6 +765,38 @@ service Player {
 		option (method_description) = "Gets the achievement completion stats for the specified list of apps.";
 	}
 
+	rpc GetFavoriteBadge (.CPlayer_GetFavoriteBadge_Request) returns (.CPlayer_GetFavoriteBadge_Response) {
+		option (method_description) = "Gets the badge the user has set as their favorite";
+	}
+
+	rpc SetFavoriteBadge (.CPlayer_SetFavoriteBadge_Request) returns (.CPlayer_SetFavoriteBadge_Response) {
+		option (method_description) = "Sets the badge  as the users favorite";
+	}
+
+	rpc GetProfileCustomization (.CPlayer_GetProfileCustomization_Request) returns (.CPlayer_GetProfileCustomization_Response) {
+		option (method_description) = "Returns the customizations (if any) for a profile";
+	}
+
+	rpc GetPurchasedProfileCustomizations (.CPlayer_GetPurchasedProfileCustomizations_Request) returns (.CPlayer_GetPurchasedProfileCustomizations_Response) {
+		option (method_description) = "Returns the purchased profile customizations";
+	}
+
+	rpc GetPurchasedAndUpgradedProfileCustomizations (.CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request) returns (.CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response) {
+		option (method_description) = "Returns the purchased and upgraded profile customizations";
+	}
+
+	rpc GetProfileThemesAvailable (.CPlayer_GetProfileThemesAvailable_Request) returns (.CPlayer_GetProfileThemesAvailable_Response) {
+		option (method_description) = "Gets themes available for the user.";
+	}
+
+	rpc SetProfileTheme (.CPlayer_SetProfileTheme_Request) returns (.CPlayer_SetProfileTheme_Response) {
+		option (method_description) = "Selects a theme for the profile";
+	}
+
+	rpc SetProfilePreferences (.CPlayer_SetProfilePreferences_Request) returns (.CPlayer_SetProfilePreferences_Response) {
+		option (method_description) = "Sets profile preferences";
+	}
+
 	rpc PostStatusToFriends (.CPlayer_PostStatusToFriends_Request) returns (.CPlayer_PostStatusToFriends_Response) {
 		option (method_description) = "Posts custom status text into the blotter";
 	}
@@ -636,6 +849,10 @@ service Player {
 		option (method_description) = "Sets the player's community preferences";
 	}
 
+	rpc GetTextFilterWords (.CPlayer_GetTextFilterWords_Request) returns (.CPlayer_GetTextFilterWords_Response) {
+		option (method_description) = "Get the custom text filtering dictionary for this user";
+	}
+
 	rpc GetNewSteamAnnouncementState (.CPlayer_GetNewSteamAnnouncementState_Request) returns (.CPlayer_GetNewSteamAnnouncementState_Response) {
 		option (method_description) = "Calculates and returns what to display for UI that renders new steam announcement available";
 	}
@@ -675,6 +892,10 @@ service PlayerClient {
 
 	rpc NotifyCommunityPreferencesChanged (.CPlayer_CommunityPreferencesChanged_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that their community preferences have changed";
+	}
+
+	rpc NotifyTextFilterWordsChanged (.CPlayer_TextFilterWordsChanged_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that their text filtering dictionary has changed";
 	}
 
 	rpc NotifyPerFriendPreferencesChanged (.CPlayer_PerFriendPreferencesChanged_Notification) returns (.NoResponse) {

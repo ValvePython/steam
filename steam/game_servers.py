@@ -142,8 +142,11 @@ def _u(data):
 
 
 class StructReader(_StructReader):
-    def read_cstring(self):
-        return _u(super(StructReader, self).read_cstring())
+    def read_cstring(self, binary=False):
+        raw = super(StructReader, self).read_cstring()
+        if binary:
+            return raw
+        return _u(raw)
 
 
 class MSRegion(IntEnum):
@@ -242,7 +245,7 @@ def _handle_a2s_response(sock):
         sock.settimeout(0.3)
         return _handle_a2s_multi_packet_response(sock, packet)
     else:
-        raise RuntimeError("Invalid reponse header - %d" % header)
+        raise RuntimeError("Invalid response header - %d" % header)
 
 
 def _handle_a2s_multi_packet_response(sock, packet):
@@ -305,7 +308,7 @@ def _unpack_multipacket_header(payload_offset, packet):
         raise RuntimeError("Unexpected payload_offset - %d" % payload_offset)
 
 
-def a2s_info(server_addr, timeout=2, force_goldsrc=False):
+def a2s_info(server_addr, timeout=2, force_goldsrc=False, challenge=0):
     """Get information from a server
 
     .. note::
@@ -320,6 +323,8 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     :type  force_goldsrc: :class:`bool`
     :param timeout: (optional) timeout in seconds
     :type  timeout: float
+    :param challenge: (optional) optionally supply a challenge in accordance to a2s protocol changes from December 2020
+    :type challenge: int
     :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a dict with information or `None` on timeout
     :rtype: :class:`dict`
@@ -329,7 +334,11 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     ss.settimeout(timeout)
 
     # request server info
-    ss.send(_pack('<lc', -1, b'T') + b'Source Engine Query\x00')
+    payload = _pack('<lc', -1, b'T') + b'Source Engine Query\x00'
+    if challenge not in (-1, 0): # If a valid challenge was supplied, append it to the payload
+        payload += _pack('<i', challenge)
+
+    ss.send(payload)
     start = _time()
 
     # handle response(s)
@@ -359,8 +368,8 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
     header, = data.unpack('<4xc')
 
     # invalid header
-    if header not in b'mI':
-        raise RuntimeError("Invalid reponse header - %s" % repr(header))
+    if header not in b'mIA':
+        raise RuntimeError("Invalid response header - %s" % repr(header))
     # GoldSrc response
     elif header == b'm':
         info = {
@@ -445,6 +454,13 @@ def a2s_info(server_addr, timeout=2, force_goldsrc=False):
             if edf & 0x01:
                 info['game_id'], = data.unpack('<Q')
                 info['app_id'] = info['game_id'] & 0xFFFFFF
+    # Challenge response
+    elif header == b'A':
+        if challenge not in (-1, 0):
+            raise RuntimeError("Invalid response header for request containing challenge answer - %s" % repr(header))
+
+        challenge = data.unpack('<l')
+        return a2s_info(server_addr = server_addr, timeout = timeout, force_goldsrc = force_goldsrc, challenge = challenge[0])
 
     return info
 
@@ -495,7 +511,7 @@ def a2s_players(server_addr, timeout=2, challenge=0):
     header, num_players = data.unpack('<4xcB')
 
     if header != b'D':
-        raise RuntimeError("Invalid reponse header - %s" % repr(header))
+        raise RuntimeError("Invalid response header - %s" % repr(header))
 
     players = []
 
@@ -513,7 +529,7 @@ def a2s_players(server_addr, timeout=2, challenge=0):
     return players
 
 
-def a2s_rules(server_addr, timeout=2, challenge=0):
+def a2s_rules(server_addr, timeout=2, challenge=0, binary=False):
     """Get rules from server
 
     :param server_addr: (ip, port) for the server
@@ -522,9 +538,11 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     :type  timeout: float
     :param challenge: (optional) challenge number
     :type  challenge: int
+    :param binary: (optional) return rules as raw bytes
+    :type  binary: bool
     :raises: :class:`RuntimeError`, :class:`socket.timeout`
     :returns: a list of rules
-    :rtype: :class:`list`
+    :rtype: :class:`dict`
     """
     ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     ss.connect(server_addr)
@@ -553,18 +571,19 @@ def a2s_rules(server_addr, timeout=2, challenge=0):
     header, num_rules = data.unpack('<4xcH')
 
     if header != b'E':
-        raise RuntimeError("Invalid reponse header - %s" % repr(header))
+        raise RuntimeError("Invalid response header - %s" % repr(header))
 
     rules = {}
 
     while len(rules) != num_rules:
-        name = data.read_cstring()
-        value = data.read_cstring()
+        name = data.read_cstring(binary=binary)
+        value = data.read_cstring(binary=binary)
 
-        if _re_match(r'^\-?[0-9]+$', value):
-            value = int(value)
-        elif _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
-            value = float(value)
+        if not binary:
+            if _re_match(r'^\-?[0-9]+$', value):
+                value = int(value)
+            elif _re_match(r'^\-?[0-9]+\.[0-9]+$', value):
+                value = float(value)
 
         rules[name] = value
 

@@ -1,31 +1,56 @@
 """Utility package with various useful functions
 """
+import six
+from six.moves import xrange as _range
+import sys
+
+if six.PY2 and sys.platform == 'win32':
+    import win_inet_pton
+
 import weakref
 import struct
 import socket
-import sys
-from six.moves import xrange as _range
 
 
-def ip_from_int(ip):
-    """Convert IP to :py:class:`int`
+def ip4_from_int(ip):
+    """Convert :py:class:`int` to IPv4 string
 
-    :param ip: IP in dot-decimal notation
-    :type ip: str
-    :rtype: int
-    """
-    return socket.inet_ntoa(struct.pack(">L", ip))
-
-def ip_to_int(ip):
-    """Convert :py:class:`int` to IP
-
-    :param ip: int representing an IP
+    :param ip: int representing an IPv4
     :type ip: int
     :return: IP in dot-decimal notation
     :rtype: str
     """
+    return socket.inet_ntoa(struct.pack(">L", ip))
+
+def ip4_to_int(ip):
+    """Convert IPv4 string to :py:class:`int`
+
+    :param ip: IPv4 in dot-decimal notation
+    :type ip: str
+    :rtype: int
+    """
     return struct.unpack(">L", socket.inet_aton(ip))[0]
 
+ip_to_int = ip4_to_int
+ip_from_int = ip4_from_int
+
+def ip6_from_bytes(ip):
+    """Convert :py:class:`bytes` to IPv6 string
+
+    :param ip: IPv6 in dot-decimal notation
+    :type ip: bytes
+    :rtype: str
+    """
+    return socket.inet_ntop(socket.AF_INET6, ip)
+
+def ip6_to_bytes(ip):
+    """Convert IPv6 string to :py:class:`bytes`
+
+    :param ip: IPv6 in dot-decimal notation
+    :type ip: str
+    :rtype: bytes
+    """
+    return socket.inet_pton(socket.AF_INET6, ip)
 
 
 def chunks(arr, size):

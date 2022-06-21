@@ -36,7 +36,7 @@ Install latest release version from PYPI:
 .. code:: bash
 
     # with SteamClient dependecies
-    pip install -U steam[client]
+    pip install -U 'steam[client]'
 
     # without (only when using parts that do no rely on gevent, and protobufs)
     pip install -U steam
@@ -46,12 +46,12 @@ Installing directly from ``github`` repository:
 .. code:: bash
 
     # cutting edge from master
-    pip install git+https://github.com/ValvePython/steam#egg=steam
+    pip install 'git+https://github.com/ValvePython/steam#egg=steam'
 
     # specific version tag (e.g. v1.0.0)
-    pip install git+https://github.com/ValvePython/steam@v1.0.0#egg=steam[client]
+    pip install 'git+https://github.com/ValvePython/steam@v1.0.0#egg=steam[client]'
     # without SteamClient extras
-    pip install git+https://github.com/ValvePython/steam@v1.0.0#egg=steam
+    pip install 'git+https://github.com/ValvePython/steam@v1.0.0#egg=steam'
 
 Vagrant
 -------
@@ -93,18 +93,18 @@ To run for specific version, setup a virtual environment
 Contact
 -------
 
-IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.net/#steamkit>`_)
+IRC: irc.libera.chat / #steamre (`join via webchat <https://web.libera.chat/#steamre>`_)
 
 
 .. _Steam: https://store.steampowered.com/
 
-.. |pypi| image:: https://img.shields.io/github/tag/valvepython/steam.svg?label=release&color=green&logo=steam
+.. |pypi| image:: https://img.shields.io/pypi/v/steam.svg?label=pypi&color=green
     :target: https://pypi.python.org/pypi/steam
     :alt: Latest version released on PyPi
 
-.. |latest| image:: https://img.shields.io/github/tag-pre/valvepython/steam.svg?label=latest&logo=steam
+.. |latest| image:: https://img.shields.io/github/v/tag/ValvePython/steam?include_prereleases&sort=semver&label=release
    :target: https://github.com/ValvePython/steam/releases
-   :alt: GitHub Releases
+   :alt: Latest release on Github
 
 .. |pypipy| image:: https://img.shields.io/pypi/pyversions/steam.svg?label=%20&logo=python&logoColor=white
     :alt: PyPI - Python Version
@@ -113,8 +113,8 @@ IRC: irc.freenode.net / #steamkit (`join via webchat <https://webchat.freenode.n
     :target: https://pypi.python.org/pypi/steam
     :alt: MIT License
 
-.. |coverage| image:: https://scrutinizer-ci.com/g/ValvePython/steam/badges/coverage.png?b=master
-    :target: https://scrutinizer-ci.com/g/ValvePython/steam/?branch=master
+.. |coverage| image:: https://img.shields.io/coveralls/ValvePython/steam/master.svg?style=flat
+    :target: https://coveralls.io/r/ValvePython/steam?branch=master
     :alt: Test coverage
 
 .. |sonar_maintainability| image:: https://sonarcloud.io/api/project_badges/measure?project=ValvePython_steam&metric=sqale_rating

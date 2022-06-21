@@ -61,7 +61,6 @@ from getpass import getpass
 import six
 import requests
 
-from steam import webapi
 from steam.steamid import SteamID
 from steam.utils.web import make_requests_session, generate_session_id
 from steam.core.crypto import rsa_publickey, pkcs1v15_encrypt
@@ -116,7 +115,7 @@ class WebAuth(BrowserRequests):
                                      timeout=15,
                                      data={
                                          'username': username,
-                                         'donotchache': int(time() * 1000),
+                                         'donotcache': int(time() * 1000),
                                          },
                                      ).json()
         except requests.exceptions.RequestException as e:
@@ -183,11 +182,10 @@ class WebAuth(BrowserRequests):
 
         if password:
             self.password = password
+        elif self.password:
+            password = self.password
         else:
-            if self.password:
-                password = self.password
-            else:
-                raise LoginIncorrect("password is not specified")
+            raise LoginIncorrect("password is not specified")
 
         if not captcha and self.captcha_code:
             captcha = self.captcha_code
@@ -229,6 +227,8 @@ class WebAuth(BrowserRequests):
                 raise EmailCodeRequired(resp['message'])
             elif resp.get('requires_twofactor', False):
                 raise TwoFactorCodeRequired(resp['message'])
+            elif 'too many login failures' in resp.get('message', ''):
+                raise TooManyLoginFailures(resp['message'])
             else:
                 self.password = ''
                 raise LoginIncorrect(resp['message'])
@@ -326,6 +326,68 @@ class MobileWebAuth(WebAuth):
         self.steam_id = SteamID(data['steamid'])
         self.oauth_token = data['oauth_token']
 
+    def oauth_login(self, oauth_token='', steam_id='', language='english'):
+        """Attempts a mobile authenticator login using an oauth token, which can be obtained from a previously logged-in
+        `MobileWebAuth`
+
+        :param oauth_token: oauth token string, if it wasn't provided on instance init
+        :type  oauth_token: :class:`str`
+        :param steam_id: `SteamID` of the account to log into, if it wasn't provided on instance init
+        :type  steam_id: :class:`str` or :class:`SteamID`
+        :param language: select language for steam web pages (sets language cookie)
+        :type  language: :class:`str`
+        :return: a session on success and :class:`None` otherwise
+        :rtype: :class:`requests.Session`, :class:`None`
+        :raises HTTPError: any problem with http request, timeouts, 5xx, 4xx etc
+        :raises LoginIncorrect: Invalid token or SteamID
+        """
+        if oauth_token:
+            self.oauth_token = oauth_token
+        elif self.oauth_token:
+            oauth_token = self.oauth_token
+        else:
+            raise LoginIncorrect('token is not specified')
+
+        if steam_id:
+            self.steam_id = SteamID(steam_id)
+        elif not self.steam_id:
+            raise LoginIncorrect('steam_id is not specified')
+
+        steam_id = self.steam_id.as_64
+
+        data = {
+            'access_token': oauth_token
+        }
+
+        try:
+            resp = self.session.post('https://api.steampowered.com/IMobileAuthService/GetWGToken/v0001', data=data)
+        except requests.exceptions.RequestException as e:
+            raise HTTPError(str(e))
+
+        try:
+            resp_data = resp.json()['response']
+        except json.decoder.JSONDecodeError as e:
+            if 'Please verify your <pre>key=</pre> parameter.' in resp.text:
+                raise LoginIncorrect('invalid token')
+            else:
+                raise e
+
+        self.session_id = generate_session_id()
+
+        for domain in ['store.steampowered.com', 'help.steampowered.com', 'steamcommunity.com']:
+            self.session.cookies.set('birthtime', '-3333', domain=domain)
+            self.session.cookies.set('sessionid', self.session_id, domain=domain)
+            self.session.cookies.set('mobileClientVersion', '0 (2.1.3)', domain=domain)
+            self.session.cookies.set('mobileClient', 'android', domain=domain)
+            self.session.cookies.set('steamLogin', str(steam_id) + "%7C%7C" + resp_data['token'], domain=domain)
+            self.session.cookies.set('steamLoginSecure', str(steam_id) + "%7C%7C" + resp_data['token_secure'],
+                                     domain=domain, secure=True)
+            self.session.cookies.set('Steam_Language', language, domain=domain)
+
+        self.logged_on = True
+
+        return self.session
+
 
 class WebAuthException(Exception):
     pass
@@ -346,4 +408,7 @@ class EmailCodeRequired(WebAuthException):
     pass
 
 class TwoFactorCodeRequired(WebAuthException):
+    pass
+
+class TooManyLoginFailures(WebAuthException):
     pass

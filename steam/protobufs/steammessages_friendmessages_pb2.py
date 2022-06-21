@@ -4,6 +4,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -23,10 +24,40 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\"steammessages_friendmessages.proto\x1a steammessages_unified_base.proto\"\xf1\x05\n)CFriendMessages_GetRecentMessages_Request\x12\x10\n\x08steamid1\x18\x01 \x01(\x06\x12\x10\n\x08steamid2\x18\x02 \x01(\x06\x12L\n\x05\x63ount\x18\x03 \x01(\rB=\x82\xb5\x18\x39If non-zero, cap the number of recent messages to return.\x12s\n\x18most_recent_conversation\x18\x04 \x01(\x08\x42Q\x82\xb5\x18MGrab the block of chat from the most recent conversation (a ~5 minute period)\x12\xa9\x01\n\x12rtime32_start_time\x18\x05 \x01(\x07\x42\x8c\x01\x82\xb5\x18\x87\x01If non-zero, return only messages with timestamps greater or equal to this. If zero, we only return messages from a recent time cutoff.\x12\x45\n\rbbcode_format\x18\x06 \x01(\x08\x42.\x82\xb5\x18*Return the results with bbcode formatting.\x12\x84\x01\n\rstart_ordinal\x18\x07 \x01(\rBm\x82\xb5\x18iCombined with start time, only messages after this ordinal are returned (dedupes messages in same second)\x12M\n\ttime_last\x18\x08 \x01(\rB:\x82\xb5\x18\x36if present/non-zero, return only messages before this.\x12\x14\n\x0cordinal_last\x18\t \x01(\r\"\x9d\x02\n*CFriendMessages_GetRecentMessages_Response\x12~\n\x08messages\x18\x01 \x03(\x0b\x32\x39.CFriendMessages_GetRecentMessages_Response.FriendMessageB1\x82\xb5\x18-Array of messages, returned newest to oldest.\x12\x16\n\x0emore_available\x18\x04 \x01(\x08\x1aW\n\rFriendMessage\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x11\n\ttimestamp\x18\x02 \x01(\r\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0f\n\x07ordinal\x18\x04 \x01(\r\"\xdf\x02\n1CFriendsMessages_GetActiveMessageSessions_Request\x12\x7f\n\x11lastmessage_since\x18\x01 \x01(\rBd\x82\xb5\x18`return only session information where a chat message has been sent since this time (for polling)\x12\xa8\x01\n\x1bonly_sessions_with_messages\x18\x02 \x01(\x08\x42\x82\x01\x82\xb5\x18~If non-zero, return only message sessions that have messages since our message cutoff. If zero, we return all active sessions.\"\xfc\x02\n2CFriendsMessages_GetActiveMessageSessions_Response\x12\x62\n\x10message_sessions\x18\x01 \x03(\x0b\x32H.CFriendsMessages_GetActiveMessageSessions_Response.FriendMessageSession\x12i\n\ttimestamp\x18\x02 \x01(\rBV\x82\xb5\x18RThis should be passed in the next request as lastmessage_since to poll for updates\x1aw\n\x14\x46riendMessageSession\x12\x18\n\x10\x61\x63\x63ountid_friend\x18\x01 \x01(\r\x12\x14\n\x0clast_message\x18\x02 \x01(\r\x12\x11\n\tlast_view\x18\x03 \x01(\r\x12\x1c\n\x14unread_message_count\x18\x04 \x01(\r\"\xc2\x01\n#CFriendMessages_SendMessage_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x17\n\x0f\x63ontains_bbcode\x18\x04 \x01(\x08\x12\x16\n\x0e\x65\x63ho_to_sender\x18\x05 \x01(\x08\x12\x14\n\x0clow_priority\x18\x06 \x01(\x08\x12\x19\n\x11\x63lient_message_id\x18\x08 \x01(\t\"\x8c\x01\n$CFriendMessages_SendMessage_Response\x12\x18\n\x10modified_message\x18\x01 \x01(\t\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\x12\x1f\n\x17message_without_bb_code\x18\x04 \x01(\t\"U\n\'CFriendMessages_AckMessage_Notification\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x11\n\ttimestamp\x18\x02 \x01(\r\"<\n)CFriendMessages_IsInFriendsUIBeta_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"e\n*CFriendMessages_IsInFriendsUIBeta_Response\x12\x1b\n\x13online_in_friendsui\x18\x01 \x01(\x08\x12\x1a\n\x12has_used_friendsui\x18\x02 \x01(\x08\"\x86\x02\n,CFriendMessages_IncomingMessage_Notification\x12\x16\n\x0esteamid_friend\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x1c\n\x14\x66rom_limited_account\x18\x03 \x01(\x08\x12\x0f\n\x07message\x18\x04 \x01(\t\x12 \n\x18rtime32_server_timestamp\x18\x05 \x01(\x07\x12\x0f\n\x07ordinal\x18\x06 \x01(\r\x12\x12\n\nlocal_echo\x18\x07 \x01(\x08\x12\x19\n\x11message_no_bbcode\x18\x08 \x01(\t\x12\x14\n\x0clow_priority\x18\t \x01(\x08\x32\x8c\x07\n\x0e\x46riendMessages\x12\xa5\x01\n\x11GetRecentMessages\x12*.CFriendMessages_GetRecentMessages_Request\x1a+.CFriendMessages_GetRecentMessages_Response\"7\x82\xb5\x18\x33Get a log of recent chat messages between two users\x12\xc0\x01\n\x18GetActiveMessageSessions\x12\x32.CFriendsMessages_GetActiveMessageSessions_Request\x1a\x33.CFriendsMessages_GetActiveMessageSessions_Response\";\x82\xb5\x18\x37Get information about recent offline messages and chats\x12\x7f\n\x0bSendMessage\x12$.CFriendMessages_SendMessage_Request\x1a%.CFriendMessages_SendMessage_Response\"#\x82\xb5\x18\x1fSend a chat message to a friend\x12\x8c\x01\n\nAckMessage\x12(.CFriendMessages_AckMessage_Notification\x1a\x0b.NoResponse\"G\x82\xb5\x18\x43\x41\x63knowledge that we have seen the most recent message from a friend\x12\x9b\x01\n\x11IsInFriendsUIBeta\x12*.CFriendMessages_IsInFriendsUIBeta_Request\x1a+.CFriendMessages_IsInFriendsUIBeta_Response\"-\x82\xb5\x18)See if a friend is in the friendsui beta.\x1a\x61\x82\xb5\x18]A service for relaying and logging friend messages (user-to-user chats and offline messaging)2\xa0\x02\n\x14\x46riendMessagesClient\x12r\n\x0fIncomingMessage\x12-.CFriendMessages_IncomingMessage_Notification\x1a\x0b.NoResponse\"#\x82\xb5\x18\x1fNew chat message from a friend.\x12\x8d\x01\n\x14NotifyAckMessageEcho\x12(.CFriendMessages_AckMessage_Notification\x1a\x0b.NoResponse\">\x82\xb5\x18:A session acked an unread message, echo to other sessions.\x1a\x04\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
+  serialized_pb=_b('\n\"steammessages_friendmessages.proto\x1a steammessages_unified_base.proto\"\xf1\x05\n)CFriendMessages_GetRecentMessages_Request\x12\x10\n\x08steamid1\x18\x01 \x01(\x06\x12\x10\n\x08steamid2\x18\x02 \x01(\x06\x12L\n\x05\x63ount\x18\x03 \x01(\rB=\x82\xb5\x18\x39If non-zero, cap the number of recent messages to return.\x12s\n\x18most_recent_conversation\x18\x04 \x01(\x08\x42Q\x82\xb5\x18MGrab the block of chat from the most recent conversation (a ~5 minute period)\x12\xa9\x01\n\x12rtime32_start_time\x18\x05 \x01(\x07\x42\x8c\x01\x82\xb5\x18\x87\x01If non-zero, return only messages with timestamps greater or equal to this. If zero, we only return messages from a recent time cutoff.\x12\x45\n\rbbcode_format\x18\x06 \x01(\x08\x42.\x82\xb5\x18*Return the results with bbcode formatting.\x12\x84\x01\n\rstart_ordinal\x18\x07 \x01(\rBm\x82\xb5\x18iCombined with start time, only messages after this ordinal are returned (dedupes messages in same second)\x12M\n\ttime_last\x18\x08 \x01(\rB:\x82\xb5\x18\x36if present/non-zero, return only messages before this.\x12\x14\n\x0cordinal_last\x18\t \x01(\r\"\x82\x04\n*CFriendMessages_GetRecentMessages_Response\x12~\n\x08messages\x18\x01 \x03(\x0b\x32\x39.CFriendMessages_GetRecentMessages_Response.FriendMessageB1\x82\xb5\x18-Array of messages, returned newest to oldest.\x12\x16\n\x0emore_available\x18\x04 \x01(\x08\x1a\xbb\x02\n\rFriendMessage\x12\x11\n\taccountid\x18\x01 \x01(\r\x12\x11\n\ttimestamp\x18\x02 \x01(\r\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0f\n\x07ordinal\x18\x04 \x01(\r\x12\\\n\treactions\x18\x05 \x03(\x0b\x32I.CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction\x1a\x83\x01\n\x0fMessageReaction\x12L\n\rreaction_type\x18\x01 \x01(\x0e\x32\x15.EMessageReactionType:\x1ek_EMessageReactionType_Invalid\x12\x10\n\x08reaction\x18\x02 \x01(\t\x12\x10\n\x08reactors\x18\x03 \x03(\r\"\xdf\x02\n1CFriendsMessages_GetActiveMessageSessions_Request\x12\x7f\n\x11lastmessage_since\x18\x01 \x01(\rBd\x82\xb5\x18`return only session information where a chat message has been sent since this time (for polling)\x12\xa8\x01\n\x1bonly_sessions_with_messages\x18\x02 \x01(\x08\x42\x82\x01\x82\xb5\x18~If non-zero, return only message sessions that have messages since our message cutoff. If zero, we return all active sessions.\"\xfc\x02\n2CFriendsMessages_GetActiveMessageSessions_Response\x12\x62\n\x10message_sessions\x18\x01 \x03(\x0b\x32H.CFriendsMessages_GetActiveMessageSessions_Response.FriendMessageSession\x12i\n\ttimestamp\x18\x02 \x01(\rBV\x82\xb5\x18RThis should be passed in the next request as lastmessage_since to poll for updates\x1aw\n\x14\x46riendMessageSession\x12\x18\n\x10\x61\x63\x63ountid_friend\x18\x01 \x01(\r\x12\x14\n\x0clast_message\x18\x02 \x01(\r\x12\x11\n\tlast_view\x18\x03 \x01(\r\x12\x1c\n\x14unread_message_count\x18\x04 \x01(\r\"\xc2\x01\n#CFriendMessages_SendMessage_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x17\n\x0f\x63ontains_bbcode\x18\x04 \x01(\x08\x12\x16\n\x0e\x65\x63ho_to_sender\x18\x05 \x01(\x08\x12\x14\n\x0clow_priority\x18\x06 \x01(\x08\x12\x19\n\x11\x63lient_message_id\x18\x08 \x01(\t\"\x8c\x01\n$CFriendMessages_SendMessage_Response\x12\x18\n\x10modified_message\x18\x01 \x01(\t\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\x12\x1f\n\x17message_without_bb_code\x18\x04 \x01(\t\"U\n\'CFriendMessages_AckMessage_Notification\x12\x17\n\x0fsteamid_partner\x18\x01 \x01(\x06\x12\x11\n\ttimestamp\x18\x02 \x01(\r\"<\n)CFriendMessages_IsInFriendsUIBeta_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\"e\n*CFriendMessages_IsInFriendsUIBeta_Response\x12\x1b\n\x13online_in_friendsui\x18\x01 \x01(\x08\x12\x1a\n\x12has_used_friendsui\x18\x02 \x01(\x08\"\xdb\x01\n-CFriendMessages_UpdateMessageReaction_Request\x12\x0f\n\x07steamid\x18\x01 \x01(\x06\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\x12L\n\rreaction_type\x18\x04 \x01(\x0e\x32\x15.EMessageReactionType:\x1ek_EMessageReactionType_Invalid\x12\x10\n\x08reaction\x18\x05 \x01(\t\x12\x0e\n\x06is_add\x18\x06 \x01(\x08\"B\n.CFriendMessages_UpdateMessageReaction_Response\x12\x10\n\x08reactors\x18\x01 \x03(\r\"\x86\x02\n,CFriendMessages_IncomingMessage_Notification\x12\x16\n\x0esteamid_friend\x18\x01 \x01(\x06\x12\x17\n\x0f\x63hat_entry_type\x18\x02 \x01(\x05\x12\x1c\n\x14\x66rom_limited_account\x18\x03 \x01(\x08\x12\x0f\n\x07message\x18\x04 \x01(\t\x12 \n\x18rtime32_server_timestamp\x18\x05 \x01(\x07\x12\x0f\n\x07ordinal\x18\x06 \x01(\r\x12\x12\n\nlocal_echo\x18\x07 \x01(\x08\x12\x19\n\x11message_no_bbcode\x18\x08 \x01(\t\x12\x14\n\x0clow_priority\x18\t \x01(\x08\"\xf2\x01\n,CFriendMessages_MessageReaction_Notification\x12\x16\n\x0esteamid_friend\x18\x01 \x01(\x06\x12\x18\n\x10server_timestamp\x18\x02 \x01(\r\x12\x0f\n\x07ordinal\x18\x03 \x01(\r\x12\x0f\n\x07reactor\x18\x04 \x01(\x06\x12L\n\rreaction_type\x18\x05 \x01(\x0e\x32\x15.EMessageReactionType:\x1ek_EMessageReactionType_Invalid\x12\x10\n\x08reaction\x18\x06 \x01(\t\x12\x0e\n\x06is_add\x18\x07 \x01(\x08*\x83\x01\n\x14\x45MessageReactionType\x12\"\n\x1ek_EMessageReactionType_Invalid\x10\x00\x12#\n\x1fk_EMessageReactionType_Emoticon\x10\x01\x12\"\n\x1ek_EMessageReactionType_Sticker\x10\x02\x32\xbd\x08\n\x0e\x46riendMessages\x12\xa5\x01\n\x11GetRecentMessages\x12*.CFriendMessages_GetRecentMessages_Request\x1a+.CFriendMessages_GetRecentMessages_Response\"7\x82\xb5\x18\x33Get a log of recent chat messages between two users\x12\xc0\x01\n\x18GetActiveMessageSessions\x12\x32.CFriendsMessages_GetActiveMessageSessions_Request\x1a\x33.CFriendsMessages_GetActiveMessageSessions_Response\";\x82\xb5\x18\x37Get information about recent offline messages and chats\x12\x7f\n\x0bSendMessage\x12$.CFriendMessages_SendMessage_Request\x1a%.CFriendMessages_SendMessage_Response\"#\x82\xb5\x18\x1fSend a chat message to a friend\x12\x8c\x01\n\nAckMessage\x12(.CFriendMessages_AckMessage_Notification\x1a\x0b.NoResponse\"G\x82\xb5\x18\x43\x41\x63knowledge that we have seen the most recent message from a friend\x12\x9b\x01\n\x11IsInFriendsUIBeta\x12*.CFriendMessages_IsInFriendsUIBeta_Request\x1a+.CFriendMessages_IsInFriendsUIBeta_Response\"-\x82\xb5\x18)See if a friend is in the friendsui beta.\x12\xae\x01\n\x15UpdateMessageReaction\x12..CFriendMessages_UpdateMessageReaction_Request\x1a/.CFriendMessages_UpdateMessageReaction_Response\"4\x82\xb5\x18\x30\x41\x64\x64s/removes a reaction to/from a friend message\x1a\x61\x82\xb5\x18]A service for relaying and logging friend messages (user-to-user chats and offline messaging)2\x98\x03\n\x14\x46riendMessagesClient\x12r\n\x0fIncomingMessage\x12-.CFriendMessages_IncomingMessage_Notification\x1a\x0b.NoResponse\"#\x82\xb5\x18\x1fNew chat message from a friend.\x12\x8d\x01\n\x14NotifyAckMessageEcho\x12(.CFriendMessages_AckMessage_Notification\x1a\x0b.NoResponse\">\x82\xb5\x18:A session acked an unread message, echo to other sessions.\x12v\n\x0fMessageReaction\x12-.CFriendMessages_MessageReaction_Notification\x1a\x0b.NoResponse\"\'\x82\xb5\x18#New message reaction from a friend.\x1a\x04\xc0\xb5\x18\x02\x42\x03\x90\x01\x01')
   ,
   dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
 
+_EMESSAGEREACTIONTYPE = _descriptor.EnumDescriptor(
+  name='EMessageReactionType',
+  full_name='EMessageReactionType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='k_EMessageReactionType_Invalid', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EMessageReactionType_Emoticon', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='k_EMessageReactionType_Sticker', index=2, number=2,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=3475,
+  serialized_end=3606,
+)
+_sym_db.RegisterEnumDescriptor(_EMESSAGEREACTIONTYPE)
+
+EMessageReactionType = enum_type_wrapper.EnumTypeWrapper(_EMESSAGEREACTIONTYPE)
+k_EMessageReactionType_Invalid = 0
+k_EMessageReactionType_Emoticon = 1
+k_EMessageReactionType_Sticker = 2
 
 
 
@@ -117,6 +148,50 @@ _CFRIENDMESSAGES_GETRECENTMESSAGES_REQUEST = _descriptor.Descriptor(
 )
 
 
+_CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE_MESSAGEREACTION = _descriptor.Descriptor(
+  name='MessageReaction',
+  full_name='CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='reaction_type', full_name='CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction.reaction_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reaction', full_name='CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction.reaction', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reactors', full_name='CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction.reactors', index=2,
+      number=3, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1212,
+  serialized_end=1343,
+)
+
 _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE = _descriptor.Descriptor(
   name='FriendMessage',
   full_name='CFriendMessages_GetRecentMessages_Response.FriendMessage',
@@ -152,10 +227,17 @@ _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE = _descriptor.Descript
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reactions', full_name='CFriendMessages_GetRecentMessages_Response.FriendMessage.reactions', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE_MESSAGEREACTION, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -164,8 +246,8 @@ _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE = _descriptor.Descript
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1027,
-  serialized_end=1114,
+  serialized_start=1028,
+  serialized_end=1343,
 )
 
 _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE = _descriptor.Descriptor(
@@ -202,7 +284,7 @@ _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=829,
-  serialized_end=1114,
+  serialized_end=1343,
 )
 
 
@@ -239,8 +321,8 @@ _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1117,
-  serialized_end=1468,
+  serialized_start=1346,
+  serialized_end=1697,
 )
 
 
@@ -291,8 +373,8 @@ _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE_FRIENDMESSAGESESSION = _desc
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1732,
-  serialized_end=1851,
+  serialized_start=1961,
+  serialized_end=2080,
 )
 
 _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE = _descriptor.Descriptor(
@@ -328,8 +410,8 @@ _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1471,
-  serialized_end=1851,
+  serialized_start=1700,
+  serialized_end=2080,
 )
 
 
@@ -401,8 +483,8 @@ _CFRIENDMESSAGES_SENDMESSAGE_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1854,
-  serialized_end=2048,
+  serialized_start=2083,
+  serialized_end=2277,
 )
 
 
@@ -453,8 +535,8 @@ _CFRIENDMESSAGES_SENDMESSAGE_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2051,
-  serialized_end=2191,
+  serialized_start=2280,
+  serialized_end=2420,
 )
 
 
@@ -491,8 +573,8 @@ _CFRIENDMESSAGES_ACKMESSAGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2193,
-  serialized_end=2278,
+  serialized_start=2422,
+  serialized_end=2507,
 )
 
 
@@ -522,8 +604,8 @@ _CFRIENDMESSAGES_ISINFRIENDSUIBETA_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2280,
-  serialized_end=2340,
+  serialized_start=2509,
+  serialized_end=2569,
 )
 
 
@@ -560,8 +642,105 @@ _CFRIENDMESSAGES_ISINFRIENDSUIBETA_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2342,
-  serialized_end=2443,
+  serialized_start=2571,
+  serialized_end=2672,
+)
+
+
+_CFRIENDMESSAGES_UPDATEMESSAGEREACTION_REQUEST = _descriptor.Descriptor(
+  name='CFriendMessages_UpdateMessageReaction_Request',
+  full_name='CFriendMessages_UpdateMessageReaction_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid', full_name='CFriendMessages_UpdateMessageReaction_Request.steamid', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='server_timestamp', full_name='CFriendMessages_UpdateMessageReaction_Request.server_timestamp', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ordinal', full_name='CFriendMessages_UpdateMessageReaction_Request.ordinal', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reaction_type', full_name='CFriendMessages_UpdateMessageReaction_Request.reaction_type', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reaction', full_name='CFriendMessages_UpdateMessageReaction_Request.reaction', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_add', full_name='CFriendMessages_UpdateMessageReaction_Request.is_add', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2675,
+  serialized_end=2894,
+)
+
+
+_CFRIENDMESSAGES_UPDATEMESSAGEREACTION_RESPONSE = _descriptor.Descriptor(
+  name='CFriendMessages_UpdateMessageReaction_Response',
+  full_name='CFriendMessages_UpdateMessageReaction_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='reactors', full_name='CFriendMessages_UpdateMessageReaction_Response.reactors', index=0,
+      number=1, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2896,
+  serialized_end=2962,
 )
 
 
@@ -647,14 +826,92 @@ _CFRIENDMESSAGES_INCOMINGMESSAGE_NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2446,
-  serialized_end=2708,
+  serialized_start=2965,
+  serialized_end=3227,
 )
 
+
+_CFRIENDMESSAGES_MESSAGEREACTION_NOTIFICATION = _descriptor.Descriptor(
+  name='CFriendMessages_MessageReaction_Notification',
+  full_name='CFriendMessages_MessageReaction_Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='steamid_friend', full_name='CFriendMessages_MessageReaction_Notification.steamid_friend', index=0,
+      number=1, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='server_timestamp', full_name='CFriendMessages_MessageReaction_Notification.server_timestamp', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ordinal', full_name='CFriendMessages_MessageReaction_Notification.ordinal', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reactor', full_name='CFriendMessages_MessageReaction_Notification.reactor', index=3,
+      number=4, type=6, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reaction_type', full_name='CFriendMessages_MessageReaction_Notification.reaction_type', index=4,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=True, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reaction', full_name='CFriendMessages_MessageReaction_Notification.reaction', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='is_add', full_name='CFriendMessages_MessageReaction_Notification.is_add', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3230,
+  serialized_end=3472,
+)
+
+_CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE_MESSAGEREACTION.fields_by_name['reaction_type'].enum_type = _EMESSAGEREACTIONTYPE
+_CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE_MESSAGEREACTION.containing_type = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE
+_CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE.fields_by_name['reactions'].message_type = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE_MESSAGEREACTION
 _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE.containing_type = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE
 _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE.fields_by_name['messages'].message_type = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE
 _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE_FRIENDMESSAGESESSION.containing_type = _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE
 _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE.fields_by_name['message_sessions'].message_type = _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_RESPONSE_FRIENDMESSAGESESSION
+_CFRIENDMESSAGES_UPDATEMESSAGEREACTION_REQUEST.fields_by_name['reaction_type'].enum_type = _EMESSAGEREACTIONTYPE
+_CFRIENDMESSAGES_MESSAGEREACTION_NOTIFICATION.fields_by_name['reaction_type'].enum_type = _EMESSAGEREACTIONTYPE
 DESCRIPTOR.message_types_by_name['CFriendMessages_GetRecentMessages_Request'] = _CFRIENDMESSAGES_GETRECENTMESSAGES_REQUEST
 DESCRIPTOR.message_types_by_name['CFriendMessages_GetRecentMessages_Response'] = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE
 DESCRIPTOR.message_types_by_name['CFriendsMessages_GetActiveMessageSessions_Request'] = _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_REQUEST
@@ -664,7 +921,11 @@ DESCRIPTOR.message_types_by_name['CFriendMessages_SendMessage_Response'] = _CFRI
 DESCRIPTOR.message_types_by_name['CFriendMessages_AckMessage_Notification'] = _CFRIENDMESSAGES_ACKMESSAGE_NOTIFICATION
 DESCRIPTOR.message_types_by_name['CFriendMessages_IsInFriendsUIBeta_Request'] = _CFRIENDMESSAGES_ISINFRIENDSUIBETA_REQUEST
 DESCRIPTOR.message_types_by_name['CFriendMessages_IsInFriendsUIBeta_Response'] = _CFRIENDMESSAGES_ISINFRIENDSUIBETA_RESPONSE
+DESCRIPTOR.message_types_by_name['CFriendMessages_UpdateMessageReaction_Request'] = _CFRIENDMESSAGES_UPDATEMESSAGEREACTION_REQUEST
+DESCRIPTOR.message_types_by_name['CFriendMessages_UpdateMessageReaction_Response'] = _CFRIENDMESSAGES_UPDATEMESSAGEREACTION_RESPONSE
 DESCRIPTOR.message_types_by_name['CFriendMessages_IncomingMessage_Notification'] = _CFRIENDMESSAGES_INCOMINGMESSAGE_NOTIFICATION
+DESCRIPTOR.message_types_by_name['CFriendMessages_MessageReaction_Notification'] = _CFRIENDMESSAGES_MESSAGEREACTION_NOTIFICATION
+DESCRIPTOR.enum_types_by_name['EMessageReactionType'] = _EMESSAGEREACTIONTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CFriendMessages_GetRecentMessages_Request = _reflection.GeneratedProtocolMessageType('CFriendMessages_GetRecentMessages_Request', (_message.Message,), dict(
@@ -677,6 +938,13 @@ _sym_db.RegisterMessage(CFriendMessages_GetRecentMessages_Request)
 CFriendMessages_GetRecentMessages_Response = _reflection.GeneratedProtocolMessageType('CFriendMessages_GetRecentMessages_Response', (_message.Message,), dict(
 
   FriendMessage = _reflection.GeneratedProtocolMessageType('FriendMessage', (_message.Message,), dict(
+
+    MessageReaction = _reflection.GeneratedProtocolMessageType('MessageReaction', (_message.Message,), dict(
+      DESCRIPTOR = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE_MESSAGEREACTION,
+      __module__ = 'steammessages_friendmessages_pb2'
+      # @@protoc_insertion_point(class_scope:CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction)
+      ))
+    ,
     DESCRIPTOR = _CFRIENDMESSAGES_GETRECENTMESSAGES_RESPONSE_FRIENDMESSAGE,
     __module__ = 'steammessages_friendmessages_pb2'
     # @@protoc_insertion_point(class_scope:CFriendMessages_GetRecentMessages_Response.FriendMessage)
@@ -688,6 +956,7 @@ CFriendMessages_GetRecentMessages_Response = _reflection.GeneratedProtocolMessag
   ))
 _sym_db.RegisterMessage(CFriendMessages_GetRecentMessages_Response)
 _sym_db.RegisterMessage(CFriendMessages_GetRecentMessages_Response.FriendMessage)
+_sym_db.RegisterMessage(CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction)
 
 CFriendsMessages_GetActiveMessageSessions_Request = _reflection.GeneratedProtocolMessageType('CFriendsMessages_GetActiveMessageSessions_Request', (_message.Message,), dict(
   DESCRIPTOR = _CFRIENDSMESSAGES_GETACTIVEMESSAGESESSIONS_REQUEST,
@@ -746,12 +1015,33 @@ CFriendMessages_IsInFriendsUIBeta_Response = _reflection.GeneratedProtocolMessag
   ))
 _sym_db.RegisterMessage(CFriendMessages_IsInFriendsUIBeta_Response)
 
+CFriendMessages_UpdateMessageReaction_Request = _reflection.GeneratedProtocolMessageType('CFriendMessages_UpdateMessageReaction_Request', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDMESSAGES_UPDATEMESSAGEREACTION_REQUEST,
+  __module__ = 'steammessages_friendmessages_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendMessages_UpdateMessageReaction_Request)
+  ))
+_sym_db.RegisterMessage(CFriendMessages_UpdateMessageReaction_Request)
+
+CFriendMessages_UpdateMessageReaction_Response = _reflection.GeneratedProtocolMessageType('CFriendMessages_UpdateMessageReaction_Response', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDMESSAGES_UPDATEMESSAGEREACTION_RESPONSE,
+  __module__ = 'steammessages_friendmessages_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendMessages_UpdateMessageReaction_Response)
+  ))
+_sym_db.RegisterMessage(CFriendMessages_UpdateMessageReaction_Response)
+
 CFriendMessages_IncomingMessage_Notification = _reflection.GeneratedProtocolMessageType('CFriendMessages_IncomingMessage_Notification', (_message.Message,), dict(
   DESCRIPTOR = _CFRIENDMESSAGES_INCOMINGMESSAGE_NOTIFICATION,
   __module__ = 'steammessages_friendmessages_pb2'
   # @@protoc_insertion_point(class_scope:CFriendMessages_IncomingMessage_Notification)
   ))
 _sym_db.RegisterMessage(CFriendMessages_IncomingMessage_Notification)
+
+CFriendMessages_MessageReaction_Notification = _reflection.GeneratedProtocolMessageType('CFriendMessages_MessageReaction_Notification', (_message.Message,), dict(
+  DESCRIPTOR = _CFRIENDMESSAGES_MESSAGEREACTION_NOTIFICATION,
+  __module__ = 'steammessages_friendmessages_pb2'
+  # @@protoc_insertion_point(class_scope:CFriendMessages_MessageReaction_Notification)
+  ))
+_sym_db.RegisterMessage(CFriendMessages_MessageReaction_Notification)
 
 
 DESCRIPTOR._options = None
@@ -772,8 +1062,8 @@ _FRIENDMESSAGES = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030]A service for relaying and logging friend messages (user-to-user chats and offline messaging)'),
-  serialized_start=2711,
-  serialized_end=3619,
+  serialized_start=3609,
+  serialized_end=4694,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetRecentMessages',
@@ -820,6 +1110,15 @@ _FRIENDMESSAGES = _descriptor.ServiceDescriptor(
     output_type=_CFRIENDMESSAGES_ISINFRIENDSUIBETA_RESPONSE,
     serialized_options=_b('\202\265\030)See if a friend is in the friendsui beta.'),
   ),
+  _descriptor.MethodDescriptor(
+    name='UpdateMessageReaction',
+    full_name='FriendMessages.UpdateMessageReaction',
+    index=5,
+    containing_service=None,
+    input_type=_CFRIENDMESSAGES_UPDATEMESSAGEREACTION_REQUEST,
+    output_type=_CFRIENDMESSAGES_UPDATEMESSAGEREACTION_RESPONSE,
+    serialized_options=_b('\202\265\0300Adds/removes a reaction to/from a friend message'),
+  ),
 ])
 _sym_db.RegisterServiceDescriptor(_FRIENDMESSAGES)
 
@@ -832,8 +1131,8 @@ _FRIENDMESSAGESCLIENT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=_b('\300\265\030\002'),
-  serialized_start=3622,
-  serialized_end=3910,
+  serialized_start=4697,
+  serialized_end=5105,
   methods=[
   _descriptor.MethodDescriptor(
     name='IncomingMessage',
@@ -852,6 +1151,15 @@ _FRIENDMESSAGESCLIENT = _descriptor.ServiceDescriptor(
     input_type=_CFRIENDMESSAGES_ACKMESSAGE_NOTIFICATION,
     output_type=steammessages__unified__base__pb2._NORESPONSE,
     serialized_options=_b('\202\265\030:A session acked an unread message, echo to other sessions.'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='MessageReaction',
+    full_name='FriendMessagesClient.MessageReaction',
+    index=2,
+    containing_service=None,
+    input_type=_CFRIENDMESSAGES_MESSAGEREACTION_NOTIFICATION,
+    output_type=steammessages__unified__base__pb2._NORESPONSE,
+    serialized_options=_b('\202\265\030#New message reaction from a friend.'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_FRIENDMESSAGESCLIENT)

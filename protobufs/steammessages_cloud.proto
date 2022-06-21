@@ -1,5 +1,7 @@
 syntax = "proto2";
 import "steammessages_unified_base.proto";
+import "enums.proto";
+import "steammessages_client_objects.proto";
 
 option py_generic_services = true;
 
@@ -20,6 +22,7 @@ message CCloud_BeginHTTPUpload_Request {
 	repeated string platforms_to_sync = 6 [(description) = "Array of string specifying which platforms to sync; value values: all, Windows, MacOS, linux, Switch, iPhoneOS, Android."];
 	repeated string request_headers_names = 7 [(description) = "Names for headers you'll want to set on your upload request. May be left blank."];
 	repeated string request_headers_values = 8 [(description) = "Values for headers you'll want to set on your upload request. The number of names must equal the number of values."];
+	optional uint64 upload_batch_id = 9 [(description) = "ID of this batch returned by prior BeginAppUploadBatch call."];
 }
 
 message CCloud_BeginHTTPUpload_Response {
@@ -44,6 +47,39 @@ message CCloud_CommitHTTPUpload_Request {
 }
 
 message CCloud_CommitHTTPUpload_Response {
+	optional bool file_committed = 1 [(description) = "True if the file was successfully committed, false otherwise."];
+}
+
+message CCloud_BeginUGCUpload_Request {
+	optional uint32 appid = 1 [(description) = "App ID this UGC belongs to."];
+	optional uint32 file_size = 2 [(description) = "File size in bytes."];
+	optional string filename = 3 [(description) = "Name of the file."];
+	optional string file_sha = 4 [(description) = "Hex string (40 digits) representing the SHA1 digest of the file."];
+	optional string content_type = 5 [(description) = "MIME content type of the file"];
+}
+
+message CCloud_BeginUGCUpload_Response {
+	message HTTPHeaders {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional .EPublishedFileStorageSystem storage_system = 1 [default = k_EPublishedFileStorageSystemInvalid, (description) = "UGC Storage system chosen for this file"];
+	optional fixed64 ugcid = 2 [(description) = "UGC ID of the uploaded file."];
+	optional fixed32 timestamp = 3 [(description) = "Server timestamp of file."];
+	optional string url_host = 4 [(description) = "Host name of server to which file should be uploaded via HTTP PUT."];
+	optional string url_path = 5 [(description) = "Relative path on server to which file should be uploaded."];
+	optional bool use_https = 6 [(description) = "If true, use https, otherwise use http."];
+	repeated .CCloud_BeginUGCUpload_Response.HTTPHeaders request_headers = 7 [(description) = "Name-value pairs to be sent in HTTP PUT request."];
+}
+
+message CCloud_CommitUGCUpload_Request {
+	optional bool transfer_succeeded = 1 [(description) = "True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginUGCUpload), false if a failure occurred."];
+	optional uint32 appid = 2 [(description) = "App ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginUGCUpload."];
+	optional fixed64 ugcid = 3 [(description) = "UGC ID of the uploaded file."];
+}
+
+message CCloud_CommitUGCUpload_Response {
 	optional bool file_committed = 1 [(description) = "True if the file was successfully committed, false otherwise."];
 }
 
@@ -84,6 +120,7 @@ message CCloud_EnumerateUserFiles_Response {
 message CCloud_Delete_Request {
 	optional string filename = 1;
 	optional uint32 appid = 2 [(description) = "App ID the file belongs to."];
+	optional uint64 upload_batch_id = 3 [(description) = "ID of this batch returned by prior BeginAppUploadBatch call."];
 }
 
 message CCloud_Delete_Response {
@@ -122,6 +159,34 @@ message CCloud_ExternalStorageTransferReport_Notification {
 	optional bool ipv6_remote = 12;
 }
 
+message CCloud_BeginAppUploadBatch_Request {
+	optional uint32 appid = 1 [(description) = "App ID for this batch is for."];
+	optional string machine_name = 2 [(description) = "Client machine name (may be user's alias)."];
+	repeated string files_to_upload = 3 [(description) = "Filenames of files to upload in this batch"];
+	repeated string files_to_delete = 4 [(description) = "Filenames of files to delete in this batch"];
+	optional uint64 client_id = 5 [(description) = "Client ID number"];
+}
+
+message CCloud_BeginAppUploadBatch_Response {
+	optional uint64 batch_id = 1 [(description) = "ID of this batch."];
+	optional uint64 app_change_number = 4 [(description) = "New App Change Number"];
+}
+
+message CCloud_CompleteAppUploadBatch_Notification {
+	optional uint32 appid = 1 [(description) = "App ID for this batch is for."];
+	optional uint64 batch_id = 2 [(description) = "ID of this batch."];
+	optional uint32 batch_eresult = 3 [(description) = "result of this batch."];
+}
+
+message CCloud_CompleteAppUploadBatch_Request {
+	optional uint32 appid = 1 [(description) = "App ID for this batch is for."];
+	optional uint64 batch_id = 2 [(description) = "ID of this batch."];
+	optional uint32 batch_eresult = 3 [(description) = "result of this batch."];
+}
+
+message CCloud_CompleteAppUploadBatch_Response {
+}
+
 message CCloud_ClientBeginFileUpload_Request {
 	optional uint32 appid = 1 [(description) = "App ID for which the file is being uploaded."];
 	optional uint32 file_size = 2 [(description) = "file size as transmitted and stored in Cloud."];
@@ -133,7 +198,8 @@ message CCloud_ClientBeginFileUpload_Request {
 	optional uint32 cell_id = 9 [(description) = "Client's cell ID so we can pick storage location."];
 	optional bool can_encrypt = 10 [(description) = "if true, client can encrypt the file before uploading it"];
 	optional bool is_shared_file = 11 [(description) = "if true, this is going to be UGC or a screenshot or some other shared file"];
-	optional uint32 realm = 12 [(description) = "Steam Realm"];
+	optional uint32 deprecated_realm = 12 [(description) = "unused"];
+	optional uint64 upload_batch_id = 13 [(description) = "ID of this batch."];
 }
 
 message ClientCloudFileUploadBlockDetails {
@@ -198,6 +264,7 @@ message CCloud_ClientDeleteFile_Request {
 	optional uint32 appid = 1 [(description) = "App ID for which the file is being deleted."];
 	optional string filename = 2 [(description) = "Filename of file."];
 	optional bool is_explicit_delete = 3 [(description) = "If true, this is a 'delete'; if false, it is a 'forget'"];
+	optional uint64 upload_batch_id = 4 [(description) = "ID of this batch."];
 }
 
 message CCloud_ClientDeleteFile_Response {
@@ -221,6 +288,70 @@ message CCloud_EnumerateUserApps_Response {
 	repeated .CCloud_EnumerateUserApps_Response.Apps apps = 1;
 }
 
+message CCloud_GetAppFileChangelist_Request {
+	optional uint32 appid = 1 [(description) = "App ID"];
+	optional uint64 synced_change_number = 2 [(description) = "Change Number to which local machine was last successfully synced"];
+}
+
+message CCloud_AppFileInfo {
+	optional string file_name = 1 [(description) = "unqualified filename"];
+	optional bytes sha_file = 2 [(description) = "SHA of file"];
+	optional uint64 time_stamp = 3 [(description) = "server timestamp of last modification"];
+	optional uint32 raw_file_size = 4 [(description) = "size of raw file"];
+	optional .ECloudStoragePersistState persist_state = 5 [default = k_ECloudStoragePersistStatePersisted, (description) = "current persist state of the file"];
+	optional uint32 platforms_to_sync = 6 [(description) = "ERemoteStoragePlatform bits"];
+	optional uint32 path_prefix_index = 7 [(description) = "index into string table of path prefixes"];
+	optional uint32 machine_name_index = 8 [(description) = "what machine last modified this file"];
+}
+
+message CCloud_GetAppFileChangelist_Response {
+	optional uint64 current_change_number = 1 [(description) = "Change Number current on server"];
+	repeated .CCloud_AppFileInfo files = 2 [(description) = "List of files; may be the full list of extant/deleted files, or just a delta from the client list"];
+	optional bool is_only_delta = 3 [(description) = "If true, 'files' omits any files that have not changed since client's change ID"];
+	repeated string path_prefixes = 4 [(description) = "string table of path prefixes"];
+	repeated string machine_names = 5 [(description) = "string table of machine names"];
+}
+
+message CCloud_AppSessionSuspend_Request {
+	optional uint32 appid = 1;
+	optional uint64 client_id = 2;
+	optional string machine_name = 3;
+	optional bool cloud_sync_completed = 4;
+}
+
+message CCloud_AppSessionSuspend_Response {
+}
+
+message CCloud_AppSessionResume_Request {
+	optional uint32 appid = 1;
+	optional uint64 client_id = 2;
+}
+
+message CCloud_AppSessionResume_Response {
+}
+
+message CCloud_AppLaunchIntent_Request {
+	optional uint32 appid = 1;
+	optional uint64 client_id = 2;
+	optional string machine_name = 3;
+	optional bool ignore_pending_operations = 4;
+}
+
+message CCloud_AppLaunchIntent_Response {
+	repeated .CCloud_PendingRemoteOperation pending_remote_operations = 1 [(description) = "pending remote operations you should be aware of"];
+}
+
+message CCloud_AppExitSyncDone_Notification {
+	optional uint32 appid = 1;
+	optional uint64 client_id = 2;
+	optional bool uploads_completed = 3;
+}
+
+message CCloud_AppCloudStateChange_Notification {
+	optional uint32 appid = 1 [(description) = "App which has had a change in cloud state"];
+	optional uint64 app_change_number = 2 [(description) = "New App Change Number"];
+}
+
 service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
 
@@ -234,6 +365,14 @@ service Cloud {
 
 	rpc CommitHTTPUpload (.CCloud_CommitHTTPUpload_Request) returns (.CCloud_CommitHTTPUpload_Response) {
 		option (method_description) = "Commits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.";
+	}
+
+	rpc BeginUGCUpload (.CCloud_BeginUGCUpload_Request) returns (.CCloud_BeginUGCUpload_Response) {
+		option (method_description) = "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.";
+	}
+
+	rpc CommitUGCUpload (.CCloud_CommitUGCUpload_Request) returns (.CCloud_CommitUGCUpload_Response) {
+		option (method_description) = "Commits a file upload initiated by BeginUGCUpload and transferred via HTTP PUT.";
 	}
 
 	rpc GetFileDetails (.CCloud_GetFileDetails_Request) returns (.CCloud_GetFileDetails_Response) {
@@ -260,6 +399,18 @@ service Cloud {
 		option (method_description) = "Reports the result of an external Cloud storage transfer.";
 	}
 
+	rpc BeginAppUploadBatch (.CCloud_BeginAppUploadBatch_Request) returns (.CCloud_BeginAppUploadBatch_Response) {
+		option (method_description) = "Indicate a batch of files that will be uploaded / deleted for an app.";
+	}
+
+	rpc CompleteAppUploadBatch (.CCloud_CompleteAppUploadBatch_Notification) returns (.NoResponse) {
+		option (method_description) = "Indicate that the batch is complete or being stopped for some other reason.";
+	}
+
+	rpc CompleteAppUploadBatchBlocking (.CCloud_CompleteAppUploadBatch_Request) returns (.CCloud_CompleteAppUploadBatch_Response) {
+		option (method_description) = "Indicate that the batch is complete or being stopped for some other reason.";
+	}
+
 	rpc ClientBeginFileUpload (.CCloud_ClientBeginFileUpload_Request) returns (.CCloud_ClientBeginFileUpload_Response) {
 		option (method_description) = "Initiate an upload to Cloud.";
 	}
@@ -282,5 +433,34 @@ service Cloud {
 
 	rpc EnumerateUserApps (.CCloud_EnumerateUserApps_Request) returns (.CCloud_EnumerateUserApps_Response) {
 		option (method_description) = "Enumerates apps stroing cloud files for a user.";
+	}
+
+	rpc GetAppFileChangelist (.CCloud_GetAppFileChangelist_Request) returns (.CCloud_GetAppFileChangelist_Response) {
+		option (method_description) = "Get a list of Cloud file changes for an app given a starting Change Number.";
+	}
+
+	rpc SuspendAppSession (.CCloud_AppSessionSuspend_Request) returns (.CCloud_AppSessionSuspend_Response) {
+		option (method_description) = "An app session is being suspended";
+	}
+
+	rpc ResumeAppSession (.CCloud_AppSessionResume_Request) returns (.CCloud_AppSessionResume_Response) {
+		option (method_description) = "An app session is being resumed";
+	}
+
+	rpc SignalAppLaunchIntent (.CCloud_AppLaunchIntent_Request) returns (.CCloud_AppLaunchIntent_Response) {
+		option (method_description) = "Client intends to launch an app";
+	}
+
+	rpc SignalAppExitSyncDone (.CCloud_AppExitSyncDone_Notification) returns (.NoResponse) {
+		option (method_description) = "Client is done trying to sync after a game session";
+	}
+}
+
+service CloudClient {
+	option (service_description) = "Client notifications for Steam cloud events";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
+	rpc NotifyAppStateChange (.CCloud_AppCloudStateChange_Notification) returns (.NoResponse) {
+		option (method_description) = "Cloud state for the given app has changed.";
 	}
 }

@@ -5,6 +5,7 @@ option optimize_for = SPEED;
 option py_generic_services = false;
 
 message CMsgClientHeartBeat {
+	optional bool send_reply = 1;
 }
 
 message CMsgClientServerTimestampRequest {
@@ -77,6 +78,7 @@ message CMsgClientLogon {
 	optional string web_logon_nonce = 103;
 	optional int32 priority_reason = 104;
 	optional .CMsgClientSecret embedded_client_secret = 105;
+	optional bool disable_partner_autogrants = 106;
 }
 
 message CMsgClientLogonResponse {
@@ -92,7 +94,7 @@ message CMsgClientLogonResponse {
 	optional int32 eresult_extended = 10;
 	optional string webapi_authenticate_user_nonce = 11;
 	optional uint32 cell_id_ping_threshold = 12;
-	optional bool use_pics = 13;
+	optional bool deprecated_use_pics = 13;
 	optional string vanity_url = 14;
 	optional .CMsgIPAddress public_ip = 15;
 	optional fixed64 client_supplied_steamid = 20;
@@ -104,6 +106,7 @@ message CMsgClientLogonResponse {
 	optional int32 ogs_data_report_time_window = 26;
 	optional uint64 client_instance_id = 27;
 	optional bool force_client_update_check = 28;
+	optional string agreement_session_url = 29;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {

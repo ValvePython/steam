@@ -1,0 +1,77 @@
+syntax = "proto2";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+message CContentServerDirectory_GetServersForSteamPipe_Request {
+	optional uint32 cell_id = 1 [(description) = "client Cell ID"];
+	optional uint32 max_servers = 2 [default = 20, (description) = "max servers in response list"];
+	optional string ip_override = 3 [(description) = "client IP address"];
+	optional int32 launcher_type = 4 [default = 0, (description) = "launcher type"];
+	optional string ipv6_public = 5 [(description) = "client public ipv6 address if it knows it"];
+}
+
+message CContentServerDirectory_ServerInfo {
+	optional string type = 1;
+	optional int32 source_id = 2;
+	optional int32 cell_id = 3;
+	optional int32 load = 4;
+	optional float weighted_load = 5;
+	optional int32 num_entries_in_client_list = 6;
+	optional bool steam_china_only = 7;
+	optional string host = 8;
+	optional string vhost = 9;
+	optional bool use_as_proxy = 10;
+	optional string proxy_request_path_template = 11;
+	optional string https_support = 12;
+	repeated uint32 allowed_app_ids = 13;
+	optional bool preferred_server = 14;
+}
+
+message CContentServerDirectory_GetServersForSteamPipe_Response {
+	repeated .CContentServerDirectory_ServerInfo servers = 1;
+}
+
+message CContentServerDirectory_GetDepotPatchInfo_Request {
+	optional uint32 appid = 1;
+	optional uint32 depotid = 2;
+	optional uint64 source_manifestid = 3;
+	optional uint64 target_manifestid = 4;
+}
+
+message CContentServerDirectory_GetDepotPatchInfo_Response {
+	optional bool is_available = 1;
+	optional uint64 patch_size = 2;
+	optional uint64 patched_chunks_size = 3;
+}
+
+message CContentServerDirectory_GetClientUpdateHosts_Request {
+	optional string cached_signature = 1;
+}
+
+message CContentServerDirectory_GetClientUpdateHosts_Response {
+	optional string hosts_kv = 1;
+	optional uint64 valid_until_time = 2;
+	optional string ip_country = 3;
+}
+
+message CContentServerDirectory_GetManifestRequestCode_Request {
+	optional uint32 app_id = 1;
+	optional uint32 depot_id = 2;
+	optional uint64 manifest_id = 3;
+	optional string app_branch = 4;
+	optional string branch_password_hash = 5;
+}
+
+message CContentServerDirectory_GetManifestRequestCode_Response {
+	optional uint64 manifest_request_code = 1;
+}
+
+service ContentServerDirectory {
+	option (service_description) = "Content Server and CDN directory";
+
+	rpc GetServersForSteamPipe (.CContentServerDirectory_GetServersForSteamPipe_Request) returns (.CContentServerDirectory_GetServersForSteamPipe_Response);
+	rpc GetDepotPatchInfo (.CContentServerDirectory_GetDepotPatchInfo_Request) returns (.CContentServerDirectory_GetDepotPatchInfo_Response);
+	rpc GetClientUpdateHosts (.CContentServerDirectory_GetClientUpdateHosts_Request) returns (.CContentServerDirectory_GetClientUpdateHosts_Response);
+	rpc GetManifestRequestCode (.CContentServerDirectory_GetManifestRequestCode_Request) returns (.CContentServerDirectory_GetManifestRequestCode_Response);
+}

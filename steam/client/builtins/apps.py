@@ -1,8 +1,8 @@
+from binascii import hexlify
 import vdf
 from steam.enums import EResult, EServerType
 from steam.enums.emsg import EMsg
 from steam.core.msg import MsgProto
-from steam.utils import ip_from_int
 from steam.utils.proto import proto_fill_from_dict
 
 
@@ -41,13 +41,19 @@ class Apps(object):
         else:
             return EResult(resp.eresult)
 
-    def get_product_info(self, apps=[], packages=[], timeout=15):
+    def get_product_info(self, apps=[], packages=[], meta_data_only=False, raw=False, auto_access_tokens=True, timeout=15):
         """Get product info for apps and packages
 
         :param apps: items in the list should be either just ``app_id``, or :class:`dict`
-        :type apps: :class:`list`
+        :type  apps: :class:`list`
         :param packages: items in the list should be either just ``package_id``, or :class:`dict`
-        :type packages: :class:`list`
+        :type  packages: :class:`list`
+        :param meta_data_only: only meta data will be returned in the reponse (e.g. change number, missing_token, sha1)
+        :type  meta_data_only: :class:`bool`
+        :param raw: Data buffer for each app is returned as bytes in its' original form. Apps buffer is text VDF, and package buffer is binary VDF
+        :type  raw: :class:`bool`
+        :param auto_access_token: automatically request and fill access tokens
+        :type  auto_access_token: :class:`bool`
         :return: dict with ``apps`` and ``packages`` containing their info, see example below
         :rtype: :class:`dict`, :class:`None`
 
@@ -90,11 +96,21 @@ class Apps(object):
         if not apps and not packages:
             return
 
+        if auto_access_tokens:
+            tokens = self.get_access_tokens(app_ids=list(map(lambda app: app['appid'] if isinstance(app, dict) else app, apps)),
+                                            package_ids=list(map(lambda pkg: pkg['packageid'] if isinstance(pkg, dict) else pkg, packages))
+                                            )
+        else:
+            tokens = None
+
         message = MsgProto(EMsg.ClientPICSProductInfoRequest)
 
         for app in apps:
                 app_info = message.body.apps.add()
-                app_info.only_public = False
+
+                if tokens:
+                    app_info.access_token = tokens['apps'].get(app['appid'] if isinstance(app, dict) else app, 0)
+
                 if isinstance(app, dict):
                         proto_fill_from_dict(app_info, app)
                 else:
@@ -102,12 +118,18 @@ class Apps(object):
 
         for package in packages:
                 package_info = message.body.packages.add()
+
+                if tokens:
+                    package_info.access_token = tokens['packages'].get(package['packageid'] if isinstance(package, dict) else package, 0)
+
                 if isinstance(package, dict):
                         proto_fill_from_dict(package_info, package)
                 else:
                         package_info.packageid = package
 
-        message.body.meta_data_only = False
+        message.body.meta_data_only = meta_data_only
+        message.body.num_prev_failed = 0
+        message.body.supports_package_tokens = 1
 
         job_id = self.send_job(message)
 
@@ -119,11 +141,32 @@ class Apps(object):
             chunk = chunk[0].body
 
             for app in chunk.apps:
-                data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
+                if app.buffer and not raw:
+                    data['apps'][app.appid] = vdf.loads(app.buffer[:-1].decode('utf-8', 'replace'))['appinfo']
+                else:
+                    data['apps'][app.appid] = {}
+
                 data['apps'][app.appid]['_missing_token'] = app.missing_token
+                data['apps'][app.appid]['_change_number'] = app.change_number
+                data['apps'][app.appid]['_sha'] = hexlify(app.sha).decode('ascii')
+                data['apps'][app.appid]['_size'] = app.size
+
+                if app.buffer and raw:
+                    data['apps'][app.appid]['_buffer'] = app.buffer
+
             for pkg in chunk.packages:
-                data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:]).get(str(pkg.packageid), {})
+                if pkg.buffer and not raw:
+                    data['packages'][pkg.packageid] = vdf.binary_loads(pkg.buffer[4:]).get(str(pkg.packageid), {})
+                else:
+                    data['packages'][pkg.packageid] = {}
+
                 data['packages'][pkg.packageid]['_missing_token'] = pkg.missing_token
+                data['packages'][pkg.packageid]['_change_number'] = pkg.change_number
+                data['packages'][pkg.packageid]['_sha'] = hexlify(pkg.sha).decode('ascii')
+                data['packages'][pkg.packageid]['_size'] = pkg.size
+
+                if pkg.buffer and raw:
+                    data['packages'][pkg.packageid]['_buffer'] = pkg.buffer
 
             if not chunk.response_pending:
                 break
@@ -163,7 +206,7 @@ class Apps(object):
                                       {'app_id': app_id},
                                       timeout=10
                                       )
-    
+
     def get_encrypted_app_ticket(self, app_id, userdata):
         """Gets the encrypted app ticket
         :param app_id: app id
@@ -246,7 +289,7 @@ class Apps(object):
 
         if resp:
             return {'apps': dict(map(lambda app: (app.appid, app.access_token), resp.app_access_tokens)),
-                    'packages': dict(map(lambda pkg: (pkg.appid, pkg.access_token), resp.package_access_tokens)),
+                    'packages': dict(map(lambda pkg: (pkg.packageid, pkg.access_token), resp.package_access_tokens)),
                     }
 
     def register_product_key(self, key):

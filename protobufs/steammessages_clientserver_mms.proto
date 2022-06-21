@@ -1,0 +1,229 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+enum EMMSLobbyStatus {
+	k_EMMSLobbyStatusInvalid = 0;
+	k_EMMSLobbyStatusExists = 1;
+	k_EMMSLobbyStatusDoesNotExist = 2;
+	k_EMMSLobbyStatusNotAMember = 3;
+}
+
+message CMsgClientMMSSetRatelimitPolicyOnClient {
+	optional uint32 app_id = 1;
+	optional bool enable_rate_limits = 2;
+	optional int32 seconds_per_message = 3;
+	optional int32 milliseconds_per_data_update = 4;
+}
+
+message CMsgClientMMSCreateLobby {
+	optional uint32 app_id = 1;
+	optional int32 max_members = 2;
+	optional int32 lobby_type = 3;
+	optional int32 lobby_flags = 4;
+	optional uint32 cell_id = 5;
+	optional uint32 deprecated_public_ip = 6;
+	optional bytes metadata = 7;
+	optional string persona_name_owner = 8;
+	optional .CMsgIPAddress public_ip = 9;
+}
+
+message CMsgClientMMSCreateLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSJoinLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional string persona_name = 3;
+}
+
+message CMsgClientMMSJoinLobbyResponse {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+		optional bytes metadata = 3;
+	}
+
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 chat_room_enter_response = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional fixed64 steam_id_owner = 7;
+	optional bytes metadata = 8;
+	repeated .CMsgClientMMSJoinLobbyResponse.Member members = 9;
+}
+
+message CMsgClientMMSLeaveLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+}
+
+message CMsgClientMMSLeaveLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSGetLobbyList {
+	message Filter {
+		optional string key = 1;
+		optional string value = 2;
+		optional int32 comparision = 3;
+		optional int32 filter_type = 4;
+	}
+
+	optional uint32 app_id = 1;
+	optional int32 num_lobbies_requested = 3;
+	optional uint32 cell_id = 4;
+	optional uint32 deprecated_public_ip = 5;
+	repeated .CMsgClientMMSGetLobbyList.Filter filters = 6;
+	optional .CMsgIPAddress public_ip = 7;
+}
+
+message CMsgClientMMSGetLobbyListResponse {
+	message Lobby {
+		optional fixed64 steam_id = 1;
+		optional int32 max_members = 2;
+		optional int32 lobby_type = 3;
+		optional int32 lobby_flags = 4;
+		optional bytes metadata = 5;
+		optional int32 num_members = 6;
+		optional float distance = 7;
+		optional int64 weight = 8;
+	}
+
+	optional uint32 app_id = 1;
+	optional int32 eresult = 3 [default = 2];
+	repeated .CMsgClientMMSGetLobbyListResponse.Lobby lobbies = 4;
+}
+
+message CMsgClientMMSSetLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_member = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional bytes metadata = 7;
+}
+
+message CMsgClientMMSSetLobbyDataResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSGetLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+}
+
+message CMsgClientMMSLobbyData {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+		optional bytes metadata = 3;
+	}
+
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 num_members = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional fixed64 steam_id_owner = 7;
+	optional bytes metadata = 8;
+	repeated .CMsgClientMMSLobbyData.Member members = 9;
+	optional uint32 lobby_cellid = 10;
+	optional bool owner_should_accept_changes = 11;
+}
+
+message CMsgClientMMSSendLobbyChatMsg {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_target = 3;
+	optional bytes lobby_message = 4;
+}
+
+message CMsgClientMMSLobbyChatMsg {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_sender = 3;
+	optional bytes lobby_message = 4;
+}
+
+message CMsgClientMMSSetLobbyOwner {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_new_owner = 3;
+}
+
+message CMsgClientMMSSetLobbyOwnerResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3 [default = 2];
+}
+
+message CMsgClientMMSSetLobbyLinked {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_lobby2 = 3;
+}
+
+message CMsgClientMMSSetLobbyGameServer {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional uint32 deprecated_game_server_ip = 3;
+	optional uint32 game_server_port = 4;
+	optional fixed64 game_server_steam_id = 5;
+	optional .CMsgIPAddress game_server_ip = 6;
+}
+
+message CMsgClientMMSLobbyGameServerSet {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional uint32 deprecated_game_server_ip = 3;
+	optional uint32 game_server_port = 4;
+	optional fixed64 game_server_steam_id = 5;
+	optional .CMsgIPAddress game_server_ip = 6;
+}
+
+message CMsgClientMMSUserJoinedLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user = 3;
+	optional string persona_name = 4;
+}
+
+message CMsgClientMMSUserLeftLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user = 3;
+	optional string persona_name = 4;
+}
+
+message CMsgClientMMSInviteToLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user_invited = 3;
+}
+
+message CMsgClientMMSGetLobbyStatus {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional bool claim_membership = 3;
+	optional bool claim_ownership = 4;
+}
+
+message CMsgClientMMSGetLobbyStatusResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional .EMMSLobbyStatus lobby_status = 3 [default = k_EMMSLobbyStatusInvalid];
+}

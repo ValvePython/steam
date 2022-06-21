@@ -38,7 +38,7 @@ class User(object):
 
     def __handle_message_incoming2(self, msg):
         # new chat
-        if msg.body.chat_entry_type == EChatEntryType.ChatMsg:
+        if msg.body.chat_entry_type == EChatEntryType.ChatMsg and not msg.body.local_echo:
             user = self.get_user(msg.body.steamid_friend)
             self.emit("chat_message", user, msg.body.message)
 
@@ -114,7 +114,7 @@ class User(object):
             self._user_cache[steam_id] = suser
 
             if fetch_persona_state:
-                self.request_persona_state([steam_id])
+                suser.refresh(wait=False)
 
         return suser
 

@@ -4,6 +4,27 @@ import "steammessages_unified_base.proto";
 import "steammessages_base.proto";
 import "steammessages_clientserver_friends.proto";
 
+message CHelpRequestLogs_UploadUserApplicationLog_Request {
+	optional uint32 appid = 1;
+	optional string log_type = 2;
+	optional string version_string = 3;
+	optional string log_contents = 4;
+}
+
+message CHelpRequestLogs_UploadUserApplicationLog_Response {
+	optional uint64 id = 1;
+}
+
+message CMsgClientAppMinutesPlayedData {
+	repeated .CMsgClientAppMinutesPlayedData_AppMinutesPlayedData minutes_played = 1;
+}
+
+message CMsgClientAppMinutesPlayedData_AppMinutesPlayedData {
+	optional uint32 app_id = 1;
+	optional int32 forever = 2;
+	optional int32 last_two_weeks = 3;
+}
+
 message CCommunity_GetApps_Request {
 	repeated int32 appids = 1;
 	optional uint32 language = 2;
@@ -31,6 +52,21 @@ message CCommunity_GetAppRichPresenceLocalization_Response_Token {
 message CCommunity_GetAppRichPresenceLocalization_Response_TokenList {
 	optional string language = 1;
 	repeated .CCommunity_GetAppRichPresenceLocalization_Response_Token tokens = 2;
+}
+
+message CCommunity_GetCommentThread_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 comment_thread_type = 2;
+	optional fixed64 gidfeature = 3;
+	optional fixed64 gidfeature2 = 4;
+	optional fixed64 commentthreadid = 5;
+	optional int32 start = 6;
+	optional int32 count = 7;
+	optional int32 upvoters = 8;
+	optional bool include_deleted = 9;
+	optional fixed64 gidcomment = 10;
+	optional uint32 time_oldest = 11;
+	optional bool oldest_first = 12;
 }
 
 message CCommunity_Comment {
@@ -65,6 +101,16 @@ message CCommunity_GetCommentThread_Response {
 	optional bool can_post = 15;
 }
 
+message CCommunity_PostCommentToThread_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 comment_thread_type = 2;
+	optional fixed64 gidfeature = 3;
+	optional fixed64 gidfeature2 = 4;
+	optional string text = 6;
+	optional fixed64 gidparentcomment = 7;
+	optional bool suppress_notifications = 8;
+}
+
 message CCommunity_PostCommentToThread_Response {
 	optional fixed64 gidcomment = 1;
 	optional fixed64 commentthreadid = 2;
@@ -72,7 +118,26 @@ message CCommunity_PostCommentToThread_Response {
 	optional int32 upvotes = 4;
 }
 
+message CCommunity_DeleteCommentFromThread_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 comment_thread_type = 2;
+	optional fixed64 gidfeature = 3;
+	optional fixed64 gidfeature2 = 4;
+	optional fixed64 gidcomment = 5;
+	optional bool undelete = 6;
+}
+
 message CCommunity_DeleteCommentFromThread_Response {
+}
+
+message CCommunity_RateCommentThread_Request {
+	optional string commentthreadtype = 1;
+	optional uint64 steamid = 2;
+	optional uint64 gidfeature = 3;
+	optional uint64 gidfeature2 = 4;
+	optional uint64 gidcomment = 5;
+	optional bool rate_up = 6;
+	optional bool suppress_notifications = 7;
 }
 
 message CCommunity_RateCommentThread_Response {
@@ -81,6 +146,15 @@ message CCommunity_RateCommentThread_Response {
 	optional uint32 count = 3;
 	optional uint32 upvotes = 4;
 	optional bool has_upvoted = 5;
+}
+
+message CCommunity_GetCommentThreadRatings_Request {
+	optional string commentthreadtype = 1;
+	optional uint64 steamid = 2;
+	optional uint64 gidfeature = 3;
+	optional uint64 gidfeature2 = 4;
+	optional uint64 gidcomment = 5;
+	optional uint32 max_results = 6;
 }
 
 message CCommunity_GetCommentThreadRatings_Response {
@@ -94,7 +168,6 @@ message CCommunity_GetCommentThreadRatings_Response {
 message CCommunity_RateClanAnnouncement_Request {
 	optional uint64 announcementid = 1;
 	optional bool vote_up = 2;
-	optional uint32 clan_accountid = 3;
 }
 
 message CCommunity_RateClanAnnouncement_Response {
@@ -109,23 +182,31 @@ message CCommunity_GetClanAnnouncementVoteForUser_Response {
 	optional bool voted_down = 2;
 }
 
-message CCommunity_GetAvatarHistory_Response {
-	repeated .CCommunity_GetAvatarHistory_Response_AvatarData avatars = 1;
-}
-
-message CCommunity_GetAvatarHistory_Response_AvatarData {
-	optional string avatar_sha1 = 1;
-	optional bool user_uploaded = 2;
-	optional uint32 timestamp = 3;
-}
-
 message CAppPriority {
 	optional uint32 priority = 1;
 	repeated uint32 appid = 2;
 }
 
+message CCommunity_GetUserPartnerEventNews_Request {
+	optional uint32 count = 1;
+	optional uint32 offset = 2;
+	optional uint32 rtime32_start_time = 3;
+	optional uint32 rtime32_end_time = 4;
+	repeated uint32 language_preference = 5;
+	repeated int32 filter_event_type = 6 [(description) = "enum; suggested type: ECommunityWordFilterType"];
+	optional bool filter_to_appid = 7;
+	repeated .CAppPriority app_list = 8;
+	optional uint32 count_after = 9 [default = 0];
+	optional uint32 count_before = 10 [default = 0];
+}
+
 message CCommunity_GetUserPartnerEventNews_Response {
 	repeated .CClanMatchEventByRange results = 1;
+}
+
+message CCommunity_GetBestEventsForUser_Request {
+	optional bool include_steam_blog = 1;
+	optional uint32 filter_to_played_within_days = 2;
 }
 
 message CCommunity_PartnerEventResult {
@@ -142,6 +223,9 @@ message CCommunity_GetBestEventsForUser_Response {
 	repeated .CCommunity_PartnerEventResult results = 1;
 }
 
+message CCommunity_ClearUserPartnerEventsAppPriorities_Request {
+}
+
 message CCommunity_ClearUserPartnerEventsAppPriorities_Response {
 }
 
@@ -150,14 +234,29 @@ message CCommunity_PartnerEventsAppPriority {
 	optional int32 user_app_priority = 2;
 }
 
+message CCommunity_GetUserPartnerEventsAppPriorities_Request {
+}
+
 message CCommunity_GetUserPartnerEventsAppPriorities_Response {
 	repeated .CCommunity_PartnerEventsAppPriority priorities = 1;
+}
+
+message CCommunity_ClearSinglePartnerEventsAppPriority_Request {
+	optional uint32 appid = 1;
 }
 
 message CCommunity_ClearSinglePartnerEventsAppPriority_Response {
 }
 
+message CCommunity_PartnerEventsShowMoreForApp_Request {
+	optional uint32 appid = 1;
+}
+
 message CCommunity_PartnerEventsShowMoreForApp_Response {
+}
+
+message CCommunity_PartnerEventsShowLessForApp_Request {
+	optional uint32 appid = 1;
 }
 
 message CCommunity_PartnerEventsShowLessForApp_Response {
@@ -170,7 +269,7 @@ message CCommunity_MarkPartnerEventsForUser_Request {
 message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking {
 	optional uint32 clanid = 1;
 	optional fixed64 event_gid = 2;
-	optional int32 display_location = 3 [(description) = "enum"];
+	optional int32 display_location = 3 [(description) = "enum; suggested type: EPartnerEventDisplayLocation"];
 	optional bool mark_shown = 4;
 	optional bool mark_read = 5;
 }
@@ -178,53 +277,186 @@ message CCommunity_MarkPartnerEventsForUser_Request_PartnerEventMarking {
 message CCommunity_MarkPartnerEventsForUser_Response {
 }
 
-message CCommunity_GetUserPartnerEventViewStatus_Response {
-	repeated .CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent events = 1;
+message CProductImpressionsFromClient_Notification {
+	repeated .CProductImpressionsFromClient_Notification_Impression impressions = 1;
 }
 
-message CCommunity_GetUserPartnerEventViewStatus_Response_PartnerEvent {
-	optional fixed64 event_gid = 1;
-	optional uint32 last_shown_time = 2;
-	optional uint32 last_read_time = 3;
-	optional uint32 clan_account_id = 4;
+message CProductImpressionsFromClient_Notification_Impression {
+	optional int32 type = 1 [(description) = "enum; suggested type: EProductImpressionFromClientType"];
+	optional uint32 appid = 2;
+	optional uint32 num_impressions = 3;
 }
 
-message CWebRTCClient_InitiateWebRTCConnection_Request {
-	optional string sdp = 1;
+message CFriendsListCategory {
+	optional uint32 groupid = 1;
+	optional string name = 2;
+	repeated uint32 accountid_members = 3;
 }
 
-message CWebRTCClient_InitiateWebRTCConnection_Response {
-	optional string remote_description = 1;
+message CFriendsList_GetCategories_Request {
 }
 
-message CWebRTC_WebRTCSessionConnected_Notification {
-	optional uint32 ssrc = 1;
-	optional uint32 client_ip = 2;
-	optional uint32 client_port = 3;
-	optional uint32 server_ip = 4;
-	optional uint32 server_port = 5;
+message CFriendsList_GetCategories_Response {
+	repeated .CFriendsListCategory categories = 1;
 }
 
-message CWebRTC_WebRTCUpdateRemoteDescription_Notification {
-	optional string remote_description = 1;
-	optional uint64 remote_description_version = 2;
-	repeated .CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping ssrcs_to_accountids = 3;
+message CFriendsListFavoriteEntry {
+	optional uint32 accountid = 1;
+	optional uint32 clanid = 2;
+	optional uint64 chat_group_id = 3;
 }
 
-message CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping {
-	optional uint32 ssrc = 1;
-	optional uint32 accountid = 2;
+message CFriendsList_GetFavorites_Request {
 }
 
-message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request {
-	optional uint32 ip_webrtc_server = 1;
-	optional uint32 port_webrtc_server = 2;
-	optional uint32 ip_webrtc_session_client = 3;
-	optional uint32 port_webrtc_session_client = 4;
-	optional uint64 remote_description_version = 5;
+message CFriendsList_GetFavorites_Response {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
 }
 
-message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response {
+message CFriendsList_SetFavorites_Request {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsList_SetFavorites_Response {
+}
+
+message CFriendsList_FavoritesChanged_Notification {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsList_GetFriendsList_Request {
+}
+
+message CFriendsList_GetFriendsList_Response {
+	optional .CMsgClientFriendsList friendslist = 1;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 sort_order = 3;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 list_type = 3 [default = 1];
+	optional uint32 matching_file_type = 4 [default = 0];
+	optional uint32 count = 5 [default = 50];
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId subscribed_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+	optional fixed32 rtime32_subscribed = 2 [default = 0];
+}
+
+message CMsgClientUCMPublishedFileDeleted {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
+message CMsgClientWorkshopItemInfoRequest {
+	optional uint32 app_id = 1;
+	optional uint32 last_time_updated = 2;
+	repeated .CMsgClientWorkshopItemInfoRequest_WorkshopItem workshop_items = 3;
+}
+
+message CMsgClientWorkshopItemInfoRequest_WorkshopItem {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+}
+
+message CMsgClientWorkshopItemInfoResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 update_time = 2;
+	repeated .CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo workshop_items = 3;
+	repeated fixed64 private_items = 4;
+}
+
+message CMsgClientWorkshopItemInfoResponse_WorkshopItemInfo {
+	optional fixed64 published_file_id = 1;
+	optional uint32 time_updated = 2;
+	optional fixed64 manifest_id = 3;
+	optional bool is_legacy = 4;
+}
+
+message CMsgClientUCMGetPublishedFilesForUser {
+	optional uint32 app_id = 1;
+	optional fixed64 creator_steam_id = 2;
+	repeated string required_tags = 3;
+	repeated string excluded_tags = 4;
+	optional uint32 start_index = 5;
+}
+
+message CMsgClientUCMGetPublishedFilesForUserResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMGetPublishedFilesForUserResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgCREEnumeratePublishedFiles {
+	optional uint32 app_id = 1;
+	optional int32 query_type = 2;
+	optional uint32 start_index = 3;
+	optional uint32 days = 4;
+	optional uint32 count = 5;
+	repeated string tags = 6;
+	repeated string user_tags = 7;
+	optional uint32 matching_file_type = 8 [default = 13];
+}
+
+message CMsgCREEnumeratePublishedFilesResponse {
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCREEnumeratePublishedFilesResponse_PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgCREEnumeratePublishedFilesResponse_PublishedFileId {
+	optional fixed64 published_file_id = 1;
+	optional int32 votes_for = 2;
+	optional int32 votes_against = 3;
+	optional int32 reports = 4;
+	optional float score = 5;
+}
+
+message CMsgGameServerPingSample {
+	optional fixed32 my_ip = 1;
+	optional int32 gs_app_id = 2;
+	repeated .CMsgGameServerPingSample_Sample gs_samples = 3;
+}
+
+message CMsgGameServerPingSample_Sample {
+	optional fixed32 ip = 1;
+	optional uint32 avg_ping_ms = 2;
+	optional uint32 stddev_ping_ms_x10 = 3;
+}
+
+message CClan_RespondToClanInvite_Request {
+	optional fixed64 steamid = 1;
+	optional bool accept = 2;
+}
+
+message CClan_RespondToClanInvite_Response {
 }
 
 message CVoiceChat_RequestOneOnOneChat_Request {
@@ -317,6 +549,10 @@ message CVoiceChat_UploadClientVoiceChatLogs_Request {
 message CVoiceChat_UploadClientVoiceChatLogs_Response {
 }
 
+message CVoiceChat_LeaveVoiceChat_Request {
+	optional fixed64 voice_chatid = 1;
+}
+
 message CVoiceChat_LeaveVoiceChat_Response {
 }
 
@@ -338,469 +574,117 @@ message CVoiceChat_VoiceChatEnded_Notification {
 	optional uint64 chat_group_id = 5;
 }
 
-message CSteamTV_CreateBroadcastChannel_Response {
-	optional fixed64 broadcast_channel_id = 1;
+message CWebRTCClient_InitiateWebRTCConnection_Request {
+	optional string sdp = 1;
 }
 
-message CSteamTV_GetBroadcastChannelID_Response {
-	optional fixed64 broadcast_channel_id = 1;
-	optional string unique_name = 2;
-	optional fixed64 steamid = 3;
+message CWebRTCClient_InitiateWebRTCConnection_Response {
+	optional string remote_description = 1;
 }
 
-message CSteamTV_SetBroadcastChannelProfile_Response {
+message CWebRTC_WebRTCSessionConnected_Notification {
+	optional uint32 ssrc = 1;
+	optional uint32 client_ip = 2;
+	optional uint32 client_port = 3;
+	optional uint32 server_ip = 4;
+	optional uint32 server_port = 5;
 }
 
-message CSteamTV_GetBroadcastChannelProfile_Response {
-	optional string unique_name = 1;
-	optional fixed64 owner_steamid = 2;
-	optional string name = 3;
-	optional string language = 4;
-	optional string headline = 5;
-	optional string summary = 6;
-	optional string schedule = 7;
-	optional string rules = 8;
-	optional string panels = 9;
-	optional bool is_partnered = 10;
+message CWebRTC_WebRTCUpdateRemoteDescription_Notification {
+	optional string remote_description = 1;
+	optional uint64 remote_description_version = 2;
+	repeated .CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping ssrcs_to_accountids = 3;
 }
 
-message CSteamTV_SetBroadcastChannelImage_Response {
-	optional string replace_image_hash = 1;
+message CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping {
+	optional uint32 ssrc = 1;
+	optional uint32 accountid = 2;
 }
 
-message CSteamTV_GetBroadcastChannelImages_Response {
-	repeated .CSteamTV_GetBroadcastChannelImages_Response_Images images = 1;
+message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request {
+	optional uint32 ip_webrtc_server = 1;
+	optional uint32 port_webrtc_server = 2;
+	optional uint32 ip_webrtc_session_client = 3;
+	optional uint32 port_webrtc_session_client = 4;
+	optional uint64 remote_description_version = 5;
 }
 
-message CSteamTV_GetBroadcastChannelImages_Response_Images {
-	optional int32 image_type = 1 [(description) = "enum"];
-	optional string image_path = 2;
-	optional uint32 image_index = 3;
+message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response {
 }
 
-message CSteamTV_GetBroadcastChannelLinks_Response {
-	repeated .CSteamTV_GetBroadcastChannelLinks_Response_Links links = 1;
+message CMobilePerAccount_GetSettings_Request {
 }
 
-message CSteamTV_GetBroadcastChannelLinks_Response_Links {
-	optional uint32 link_index = 1;
-	optional string url = 2;
-	optional string link_description = 3;
-	optional uint32 left = 4;
-	optional uint32 top = 5;
-	optional uint32 width = 6;
-	optional uint32 height = 7;
+message CMobilePerAccount_GetSettings_Response {
+	optional bool has_settings = 4;
+	optional bool allow_sale_push = 2;
+	optional bool allow_wishlist_push = 3;
+	optional uint32 chat_notification_level = 5;
+	optional bool notify_direct_chat = 6;
+	optional bool notify_group_chat = 7;
+	optional bool allow_event_push = 8 [default = true];
 }
 
-message CSteamTV_SetBroadcastChannelLinkRegions_Request_Links {
-	optional uint32 link_index = 1;
-	optional string url = 2;
-	optional string link_description = 3;
-	optional uint32 left = 4;
-	optional uint32 top = 5;
-	optional uint32 width = 6;
-	optional uint32 height = 7;
+message CMobilePerAccount_SetSettings_Request {
+	optional bool allow_sale_push = 2;
+	optional bool allow_wishlist_push = 3;
+	optional uint32 chat_notification_level = 4;
+	optional bool notify_direct_chat = 5;
+	optional bool notify_group_chat = 6;
+	optional bool allow_event_push = 7 [default = true];
 }
 
-message CSteamTV_SetBroadcastChannelLinkRegions_Response {
+message CMobilePerAccount_SetSettings_Response {
 }
 
-message CSteamTV_GetBroadcastChannelStatus_Response {
-	optional bool is_live = 1;
-	optional bool is_disabled = 2;
-	optional uint32 appid = 3;
-	optional uint64 viewers = 4;
-	optional uint64 views = 5;
-	optional fixed64 broadcaster_steamid = 6;
-	optional string thumbnail_url = 7;
-	optional uint64 followers = 8;
-	optional uint64 subscribers = 9;
-	optional string unique_name = 10;
-	optional uint64 broadcast_session_id = 11;
+message CMobileDevice_RegisterMobileDevice_Request {
+	optional string deviceid = 1;
+	optional string language = 2;
+	optional bool push_enabled = 3;
+	optional string app_version = 4;
+	optional string os_version = 5;
+	optional string device_model = 6;
+	optional string twofactor_device_identifier = 7;
+	optional int32 mobile_app = 8 [(description) = "enum; suggested type: EMobileApp"];
 }
 
-message GetBroadcastChannelEntry {
-	optional fixed64 broadcast_channel_id = 1;
-	optional string unique_name = 2;
-	optional string name = 3;
-	optional uint32 appid = 4;
-	optional uint64 viewers = 5;
-	optional uint64 views = 6;
-	optional string thumbnail_url = 7;
-	optional uint64 followers = 8;
-	optional string headline = 9;
-	optional string avatar_url = 10;
-	optional fixed64 broadcaster_steamid = 11;
-	optional uint64 subscribers = 12;
-	optional string background_url = 13;
-	optional bool is_featured = 14;
-	optional bool is_disabled = 15;
-	optional bool is_live = 16;
-	optional string language = 17;
-	optional uint32 reports = 18;
-	optional bool is_partnered = 19;
+message CMobileDevice_RegisterMobileDevice_Response {
+	optional uint32 unique_deviceid = 2;
 }
 
-message CSteamTV_GetFollowedChannels_Response {
-	repeated .GetBroadcastChannelEntry results = 1;
+message CMobileDevice_DeregisterMobileDevice_Notification {
+	optional string deviceid = 1;
 }
 
-message CSteamTV_GetSubscribedChannels_Response {
-	repeated .GetBroadcastChannelEntry results = 1;
+message UnknownProto {
 }
 
-message CSteamTV_FollowBroadcastChannel_Response {
-	optional bool is_followed = 1;
-}
-
-message CSteamTV_SubscribeBroadcastChannel_Response {
-	optional bool is_subscribed = 1;
-}
-
-message CSteamTV_ReportBroadcastChannel_Response {
-}
-
-message CSteamTV_GetBroadcastChannelInteraction_Response {
-	optional bool is_followed = 1;
-	optional bool is_subscribed = 2;
-}
-
-message CSteamTV_Game {
-	optional uint32 appid = 1;
-	optional string name = 2;
-	optional string image = 3;
-	optional uint64 viewers = 4;
-	repeated .GetBroadcastChannelEntry channels = 5;
-	optional string release_date = 6;
-	optional string developer = 7;
-	optional string publisher = 8;
-}
-
-message CSteamTV_GetGames_Response {
-	repeated .CSteamTV_Game results = 1;
-}
-
-message CSteamTV_GetChannels_Response {
-	repeated .GetBroadcastChannelEntry results = 1;
-}
-
-message CSteamTV_GetBroadcastChannelBroadcasters_Response {
-	repeated .CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster broadcasters = 1;
-}
-
-message CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster {
-	optional fixed64 steamid = 1;
-	optional string name = 2;
-	optional string rtmp_token = 3;
-}
-
-message CSteamTV_ChatBan {
-	optional fixed64 issuer_steamid = 1;
-	optional fixed64 chatter_steamid = 2;
-	optional string time_expires = 3;
-	optional bool permanent = 4;
-	optional string name = 5;
-}
-
-message CSteamTV_AddChatBan_Request {
-	optional fixed64 broadcast_channel_id = 1;
-	optional fixed64 chatter_steamid = 2;
-	optional uint32 duration = 3;
-	optional bool permanent = 4;
-	optional bool undo = 5;
-}
-
-message CSteamTV_AddChatBan_Response {
-}
-
-message CSteamTV_GetChatBans_Response {
-	repeated .CSteamTV_ChatBan results = 1;
-}
-
-message CSteamTV_AddChatModerator_Request {
-	optional fixed64 broadcast_channel_id = 1;
-	optional fixed64 moderator_steamid = 2;
-	optional bool undo = 3;
-}
-
-message CSteamTV_AddChatModerator_Response {
-}
-
-message CSteamTV_GetChatModerators_Request {
-	optional fixed64 broadcast_channel_id = 1;
-}
-
-message CSteamTV_ChatModerator {
-	optional fixed64 steamid = 1;
-	optional string name = 2;
-}
-
-message CSteamTV_GetChatModerators_Response {
-	repeated .CSteamTV_ChatModerator results = 1;
-}
-
-message CSteamTV_AddWordBan_Response {
-}
-
-message CSteamTV_GetWordBans_Response {
-	repeated string results = 1;
-}
-
-message CSteamTV_JoinChat_Request {
-	optional fixed64 broadcast_channel_id = 1;
-}
-
-message CSteamTV_JoinChat_Response {
-	optional fixed64 chat_id = 1;
-	optional string view_url_template = 2;
-	repeated uint64 flair_group_ids = 3;
-}
-
-message CSteamTV_Search_Response {
-	repeated .GetBroadcastChannelEntry results = 1;
-}
-
-message CSteamTV_GetSteamTVUserSettings_Response {
-	optional bool stream_live_email = 1;
-	optional bool stream_live_notification = 2;
-}
-
-message CSteamTV_SetSteamTVUserSettings_Response {
-}
-
-message CSteamTV_GetMyBroadcastChannels_Response {
-	repeated .GetBroadcastChannelEntry results = 1;
-}
-
-message CSteamTV_HomePageTemplate_Takeover {
-	repeated .GetBroadcastChannelEntry broadcasts = 1;
-}
-
-message CSteamTV_HomePageTemplate_SingleGame {
-	repeated .GetBroadcastChannelEntry broadcasts = 1;
-	optional uint32 appid = 2;
-	optional string title = 3;
-}
-
-message GameListEntry {
-	optional uint32 appid = 1;
-	optional string game_name = 2;
-	optional .GetBroadcastChannelEntry broadcast = 3;
-}
-
-message CSteamTV_HomePageTemplate_GameList {
-	repeated .GameListEntry entries = 1;
-	optional string title = 2;
-}
-
-message CSteamTV_HomePageTemplate_QuickExplore {
-	repeated .GetBroadcastChannelEntry broadcasts = 1;
-	optional string title = 2;
-}
-
-message CSteamTV_HomePageTemplate_ConveyorBelt {
-	repeated .GetBroadcastChannelEntry broadcasts = 1;
-	optional string title = 2;
-}
-
-message CSteamTV_HomePageTemplate_WatchParty {
-	optional .GetBroadcastChannelEntry broadcast = 1;
-	optional string title = 2;
-	optional uint64 chat_group_id = 3;
-}
-
-message CSteamTV_HomePageTemplate_Developer {
-	optional .GetBroadcastChannelEntry broadcast = 1;
-	optional string title = 2;
-}
-
-message CSteamTV_HomePageTemplate_Event {
-	optional string title = 1;
-}
-
-message CSteamTV_HomePageContentRow {
-	optional int32 template_type = 1 [(description) = "enum"];
-	optional .CSteamTV_HomePageTemplate_Takeover takeover = 2;
-	optional .CSteamTV_HomePageTemplate_SingleGame single_game = 3;
-	optional .CSteamTV_HomePageTemplate_GameList game_list = 4;
-	optional .CSteamTV_HomePageTemplate_QuickExplore quick_explore = 5;
-	optional .CSteamTV_HomePageTemplate_ConveyorBelt conveyor_belt = 6;
-	optional .CSteamTV_HomePageTemplate_WatchParty watch_party = 7;
-	optional .CSteamTV_HomePageTemplate_Developer developer = 8;
-	optional .CSteamTV_HomePageTemplate_Event event = 9;
-}
-
-message CSteamTV_GetHomePageContents_Response {
-	repeated .CSteamTV_HomePageContentRow rows = 1;
-}
-
-message CSteamTV_BroadcastClipInfo {
-	optional uint64 broadcast_clip_id = 1;
-	optional uint64 channel_id = 2;
-	optional uint32 app_id = 3;
-	optional fixed64 broadcaster_steamid = 4;
-	optional fixed64 creator_steamid = 5;
-	optional string video_description = 6;
-	optional uint32 live_time = 7;
-	optional uint32 length_ms = 8;
-	optional string thumbnail_path = 9;
-}
-
-message CSteamTV_GetBroadcastChannelClips_Response {
-	repeated .CSteamTV_BroadcastClipInfo clips = 1;
-	optional string thumbnail_host = 2;
-}
-
-message CFriendsListCategory {
-	optional uint32 groupid = 1;
-	optional string name = 2;
-	repeated uint32 accountid_members = 3;
-}
-
-message CFriendsList_GetCategories_Request {
-}
-
-message CFriendsList_GetCategories_Response {
-	repeated .CFriendsListCategory categories = 1;
-}
-
-message CFriendsListFavoriteEntry {
-	optional uint32 accountid = 1;
-	optional uint32 clanid = 2;
-	optional uint64 chat_group_id = 3;
-}
-
-message CFriendsList_GetFavorites_Request {
-}
-
-message CFriendsList_GetFavorites_Response {
-	repeated .CFriendsListFavoriteEntry favorites = 1;
-}
-
-message CFriendsList_SetFavorites_Request {
-	repeated .CFriendsListFavoriteEntry favorites = 1;
-}
-
-message CFriendsList_SetFavorites_Response {
-}
-
-message CFriendsList_FavoritesChanged_Notification {
-	repeated .CFriendsListFavoriteEntry favorites = 1;
-}
-
-message CFriendsList_GetFriendsList_Request {
-}
-
-message CFriendsList_GetFriendsList_Response {
-	optional .CMsgClientFriendsList friendslist = 1;
-}
-
-message CClan_RespondToClanInvite_Request {
-	optional fixed64 steamid = 1;
-	optional bool accept = 2;
-}
-
-message CClan_RespondToClanInvite_Response {
-}
-
-message CProductImpressionsFromClient_Notification {
-	repeated .CProductImpressionsFromClient_Notification_Impression impressions = 1;
-}
-
-message CProductImpressionsFromClient_Notification_Impression {
-	optional int32 type = 1 [(description) = "enum"];
-	optional uint32 appid = 2;
-	optional uint32 num_impressions = 3;
-}
-
-message NotImplemented {
+service HelpRequestLogs {
+	rpc UploadUserApplicationLog (.CHelpRequestLogs_UploadUserApplicationLog_Request) returns (.CHelpRequestLogs_UploadUserApplicationLog_Response);
 }
 
 service Community {
 	rpc GetApps (.CCommunity_GetApps_Request) returns (.CCommunity_GetApps_Response);
 	rpc GetAppRichPresenceLocalization (.CCommunity_GetAppRichPresenceLocalization_Request) returns (.CCommunity_GetAppRichPresenceLocalization_Response);
-	rpc GetCommentThread (.NotImplemented) returns (.CCommunity_GetCommentThread_Response);
-	rpc PostCommentToThread (.NotImplemented) returns (.CCommunity_PostCommentToThread_Response);
-	rpc DeleteCommentFromThread (.NotImplemented) returns (.CCommunity_DeleteCommentFromThread_Response);
-	rpc RateCommentThread (.NotImplemented) returns (.CCommunity_RateCommentThread_Response);
-	rpc GetCommentThreadRatings (.NotImplemented) returns (.CCommunity_GetCommentThreadRatings_Response);
+	rpc GetCommentThread (.CCommunity_GetCommentThread_Request) returns (.CCommunity_GetCommentThread_Response);
+	rpc PostCommentToThread (.CCommunity_PostCommentToThread_Request) returns (.CCommunity_PostCommentToThread_Response);
+	rpc DeleteCommentFromThread (.CCommunity_DeleteCommentFromThread_Request) returns (.CCommunity_DeleteCommentFromThread_Response);
+	rpc RateCommentThread (.CCommunity_RateCommentThread_Request) returns (.CCommunity_RateCommentThread_Response);
+	rpc GetCommentThreadRatings (.CCommunity_GetCommentThreadRatings_Request) returns (.CCommunity_GetCommentThreadRatings_Response);
 	rpc RateClanAnnouncement (.CCommunity_RateClanAnnouncement_Request) returns (.CCommunity_RateClanAnnouncement_Response);
 	rpc GetClanAnnouncementVoteForUser (.CCommunity_GetClanAnnouncementVoteForUser_Request) returns (.CCommunity_GetClanAnnouncementVoteForUser_Response);
-	rpc GetAvatarHistory (.NotImplemented) returns (.CCommunity_GetAvatarHistory_Response);
-	rpc GetUserPartnerEventNews (.NotImplemented) returns (.CCommunity_GetUserPartnerEventNews_Response);
-	rpc GetBestEventsForUser (.NotImplemented) returns (.CCommunity_GetBestEventsForUser_Response);
+	rpc GetUserPartnerEventNews (.CCommunity_GetUserPartnerEventNews_Request) returns (.CCommunity_GetUserPartnerEventNews_Response);
+	rpc GetBestEventsForUser (.CCommunity_GetBestEventsForUser_Request) returns (.CCommunity_GetBestEventsForUser_Response);
 	rpc MarkPartnerEventsForUser (.CCommunity_MarkPartnerEventsForUser_Request) returns (.CCommunity_MarkPartnerEventsForUser_Response);
-	rpc GetUserPartnerEventViewStatus (.NotImplemented) returns (.CCommunity_GetUserPartnerEventViewStatus_Response);
-	rpc PartnerEventsShowMoreForApp (.NotImplemented) returns (.CCommunity_PartnerEventsShowMoreForApp_Response);
-	rpc PartnerEventsShowLessForApp (.NotImplemented) returns (.CCommunity_PartnerEventsShowLessForApp_Response);
-	rpc ClearUserPartnerEventsAppPriorities (.NotImplemented) returns (.CCommunity_ClearUserPartnerEventsAppPriorities_Response);
-	rpc GetUserPartnerEventsAppPriorities (.NotImplemented) returns (.CCommunity_GetUserPartnerEventsAppPriorities_Response);
-	rpc ClearSinglePartnerEventsAppPriority (.NotImplemented) returns (.CCommunity_ClearSinglePartnerEventsAppPriority_Response);
+	rpc PartnerEventsShowMoreForApp (.CCommunity_PartnerEventsShowMoreForApp_Request) returns (.CCommunity_PartnerEventsShowMoreForApp_Response);
+	rpc PartnerEventsShowLessForApp (.CCommunity_PartnerEventsShowLessForApp_Request) returns (.CCommunity_PartnerEventsShowLessForApp_Response);
+	rpc ClearUserPartnerEventsAppPriorities (.CCommunity_ClearUserPartnerEventsAppPriorities_Request) returns (.CCommunity_ClearUserPartnerEventsAppPriorities_Response);
+	rpc GetUserPartnerEventsAppPriorities (.CCommunity_GetUserPartnerEventsAppPriorities_Request) returns (.CCommunity_GetUserPartnerEventsAppPriorities_Response);
+	rpc ClearSinglePartnerEventsAppPriority (.CCommunity_ClearSinglePartnerEventsAppPriority_Request) returns (.CCommunity_ClearSinglePartnerEventsAppPriority_Response);
 }
 
-service WebRTCClient {
-	rpc InitiateWebRTCConnection (.CWebRTCClient_InitiateWebRTCConnection_Request) returns (.CWebRTCClient_InitiateWebRTCConnection_Response);
-	rpc AcknowledgeUpdatedRemoteDescription (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request) returns (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response);
-}
-
-service WebRTCClientNotifications {
-	rpc NotifyWebRTCSessionConnected (.CWebRTC_WebRTCSessionConnected_Notification) returns (.NoResponse);
-	rpc NotifyWebRTCUpdateRemoteDescription (.CWebRTC_WebRTCUpdateRemoteDescription_Notification) returns (.NoResponse);
-}
-
-service VoiceChat {
-	rpc UpdateVoiceChatWebRTCData (.CVoiceChat_UpdateVoiceChatWebRTCData_Request) returns (.CVoiceChat_UpdateVoiceChatWebRTCData_Response);
-	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
-	rpc UploadClientVoiceChatLogs (.CVoiceChat_UploadClientVoiceChatLogs_Request) returns (.CVoiceChat_UploadClientVoiceChatLogs_Response);
-	rpc LeaveVoiceChat (.NotImplemented) returns (.CVoiceChat_LeaveVoiceChat_Response);
-	rpc RequestOneOnOneChat (.CVoiceChat_RequestOneOnOneChat_Request) returns (.CVoiceChat_RequestOneOnOneChat_Response);
-	rpc AnswerOneOnOneChat (.CVoiceChat_AnswerOneOnOneChat_Request) returns (.CVoiceChat_AnswerOneOnOneChat_Response);
-	rpc EndOneOnOneChat (.CVoiceChat_EndOneOnOneChat_Request) returns (.CVoiceChat_EndOneOnOneChat_Response);
-	rpc LeaveOneOnOneChat (.CVoiceChat_LeaveOneOnOneChat_Request) returns (.CVoiceChat_LeaveOneOnOneChat_Response);
-}
-
-service VoiceChatClient {
-	rpc NotifyUserJoinedVoiceChat (.CVoiceChat_UserJoinedVoiceChat_Notification) returns (.NoResponse);
-	rpc NotifyUserLeftVoiceChat (.CVoiceChat_UserLeftVoiceChat_Notification) returns (.NoResponse);
-	rpc NotifyVoiceChatEnded (.CVoiceChat_VoiceChatEnded_Notification) returns (.NoResponse);
-	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
-	rpc NotifyAllUsersVoiceStatus (.CVoiceChat_AllMembersStatus_Notification) returns (.NoResponse);
-	rpc NotifyOneOnOneChatRequested (.CVoiceChat_OneOnOneChatRequested_Notification) returns (.NoResponse);
-	rpc NotifyOneOnOneChatResponse (.CVoiceChat_OneOnOneChatRequestResponse_Notification) returns (.NoResponse);
-}
-
-service SteamTV {
-	rpc CreateBroadcastChannel (.NotImplemented) returns (.CSteamTV_CreateBroadcastChannel_Response);
-	rpc GetBroadcastChannelID (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelID_Response);
-	rpc SetBroadcastChannelProfile (.NotImplemented) returns (.CSteamTV_SetBroadcastChannelProfile_Response);
-	rpc GetBroadcastChannelProfile (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelProfile_Response);
-	rpc SetBroadcastChannelImage (.NotImplemented) returns (.CSteamTV_SetBroadcastChannelImage_Response);
-	rpc GetBroadcastChannelImages (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelImages_Response);
-	rpc SetBroadcastChannelLinkRegions (.NotImplemented) returns (.CSteamTV_SetBroadcastChannelLinkRegions_Response);
-	rpc GetBroadcastChannelLinks (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelLinks_Response);
-	rpc GetBroadcastChannelBroadcasters (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelBroadcasters_Response);
-	rpc GetFollowedChannels (.NotImplemented) returns (.CSteamTV_GetFollowedChannels_Response);
-	rpc GetSubscribedChannels (.NotImplemented) returns (.CSteamTV_GetSubscribedChannels_Response);
-	rpc GetBroadcastChannelStatus (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelStatus_Response);
-	rpc FollowBroadcastChannel (.NotImplemented) returns (.CSteamTV_FollowBroadcastChannel_Response);
-	rpc SubscribeBroadcastChannel (.NotImplemented) returns (.CSteamTV_SubscribeBroadcastChannel_Response);
-	rpc GetBroadcastChannelClips (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelClips_Response);
-	rpc ReportBroadcastChannel (.NotImplemented) returns (.CSteamTV_ReportBroadcastChannel_Response);
-	rpc GetBroadcastChannelInteraction (.NotImplemented) returns (.CSteamTV_GetBroadcastChannelInteraction_Response);
-	rpc GetGames (.NotImplemented) returns (.CSteamTV_GetGames_Response);
-	rpc GetChannels (.NotImplemented) returns (.CSteamTV_GetChannels_Response);
-	rpc AddChatBan (.CSteamTV_AddChatBan_Request) returns (.CSteamTV_AddChatBan_Response);
-	rpc GetChatBans (.NotImplemented) returns (.CSteamTV_GetChatBans_Response);
-	rpc AddChatModerator (.CSteamTV_AddChatModerator_Request) returns (.CSteamTV_AddChatModerator_Response);
-	rpc GetChatModerators (.CSteamTV_GetChatModerators_Request) returns (.CSteamTV_GetChatModerators_Response);
-	rpc AddWordBan (.NotImplemented) returns (.CSteamTV_AddWordBan_Response);
-	rpc GetWordBans (.NotImplemented) returns (.CSteamTV_GetWordBans_Response);
-	rpc JoinChat (.CSteamTV_JoinChat_Request) returns (.CSteamTV_JoinChat_Response);
-	rpc Search (.NotImplemented) returns (.CSteamTV_Search_Response);
-	rpc GetSteamTVUserSettings (.NotImplemented) returns (.CSteamTV_GetSteamTVUserSettings_Response);
-	rpc SetSteamTVUserSettings (.NotImplemented) returns (.CSteamTV_SetSteamTVUserSettings_Response);
-	rpc GetMyBroadcastChannels (.NotImplemented) returns (.CSteamTV_GetMyBroadcastChannels_Response);
-	rpc GetHomePageContents (.NotImplemented) returns (.CSteamTV_GetHomePageContents_Response);
+service ExperimentService {
+	rpc ReportProductImpressionsFromClient (.UnknownProto) returns (.NoResponse);
 }
 
 service FriendsList {
@@ -818,7 +702,44 @@ service Clan {
 	rpc RespondToClanInvite (.CClan_RespondToClanInvite_Request) returns (.CClan_RespondToClanInvite_Response);
 }
 
-service ExperimentService {
-	rpc ReportProductImpressionsFromClient (.NotImplemented) returns (.NoResponse);
+service VoiceChat {
+	rpc UpdateVoiceChatWebRTCData (.CVoiceChat_UpdateVoiceChatWebRTCData_Request) returns (.CVoiceChat_UpdateVoiceChatWebRTCData_Response);
+	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
+	rpc UploadClientVoiceChatLogs (.CVoiceChat_UploadClientVoiceChatLogs_Request) returns (.CVoiceChat_UploadClientVoiceChatLogs_Response);
+	rpc LeaveVoiceChat (.CVoiceChat_LeaveVoiceChat_Request) returns (.CVoiceChat_LeaveVoiceChat_Response);
+	rpc RequestOneOnOneChat (.CVoiceChat_RequestOneOnOneChat_Request) returns (.CVoiceChat_RequestOneOnOneChat_Response);
+	rpc AnswerOneOnOneChat (.CVoiceChat_AnswerOneOnOneChat_Request) returns (.CVoiceChat_AnswerOneOnOneChat_Response);
+	rpc EndOneOnOneChat (.CVoiceChat_EndOneOnOneChat_Request) returns (.CVoiceChat_EndOneOnOneChat_Response);
+	rpc LeaveOneOnOneChat (.CVoiceChat_LeaveOneOnOneChat_Request) returns (.CVoiceChat_LeaveOneOnOneChat_Response);
+}
+
+service VoiceChatClient {
+	rpc NotifyUserJoinedVoiceChat (.CVoiceChat_UserJoinedVoiceChat_Notification) returns (.NoResponse);
+	rpc NotifyUserLeftVoiceChat (.CVoiceChat_UserLeftVoiceChat_Notification) returns (.NoResponse);
+	rpc NotifyVoiceChatEnded (.CVoiceChat_VoiceChatEnded_Notification) returns (.NoResponse);
+	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
+	rpc NotifyAllUsersVoiceStatus (.CVoiceChat_AllMembersStatus_Notification) returns (.NoResponse);
+	rpc NotifyOneOnOneChatRequested (.CVoiceChat_OneOnOneChatRequested_Notification) returns (.NoResponse);
+	rpc NotifyOneOnOneChatResponse (.CVoiceChat_OneOnOneChatRequestResponse_Notification) returns (.NoResponse);
+}
+
+service WebRTCClient {
+	rpc InitiateWebRTCConnection (.CWebRTCClient_InitiateWebRTCConnection_Request) returns (.CWebRTCClient_InitiateWebRTCConnection_Response);
+	rpc AcknowledgeUpdatedRemoteDescription (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request) returns (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response);
+}
+
+service WebRTCClientNotifications {
+	rpc NotifyWebRTCSessionConnected (.CWebRTC_WebRTCSessionConnected_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCUpdateRemoteDescription (.CWebRTC_WebRTCUpdateRemoteDescription_Notification) returns (.NoResponse);
+}
+
+service MobilePerAccount {
+	rpc GetSettings (.CMobilePerAccount_GetSettings_Request) returns (.CMobilePerAccount_GetSettings_Response);
+	rpc SetSettings (.CMobilePerAccount_SetSettings_Request) returns (.CMobilePerAccount_SetSettings_Response);
+}
+
+service MobileDevice {
+	rpc RegisterMobileDevice (.CMobileDevice_RegisterMobileDevice_Request) returns (.CMobileDevice_RegisterMobileDevice_Response);
+	rpc DeregisterMobileDevice (.CMobileDevice_DeregisterMobileDevice_Notification) returns (.NoResponse);
 }
 

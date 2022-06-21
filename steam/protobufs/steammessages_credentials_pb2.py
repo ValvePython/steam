@@ -16,6 +16,7 @@ _sym_db = _symbol_database.Default()
 
 
 import steam.protobufs.steammessages_unified_base_pb2 as steammessages__unified__base__pb2
+import steam.protobufs.steammessages_base_pb2 as steammessages__base__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=_b('\220\001\001'),
-  serialized_pb=_b('\n\x1fsteammessages_credentials.proto\x1a steammessages_unified_base.proto\"q\n*CCredentials_TestAvailablePassword_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x1b\n\x13sha_digest_password\x18\x02 \x01(\x0c\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x03 \x01(\t\"?\n+CCredentials_TestAvailablePassword_Response\x12\x10\n\x08is_valid\x18\x03 \x01(\x08\"\xef\x02\n)CCredentials_GetSteamGuardDetails_Request\x12u\n\x1binclude_new_authentications\x18\x01 \x01(\x08:\x04trueBJ\x82\xb5\x18\x46Whether or not to populate the newauthentication field in the response\x12\x95\x01\n\twebcookie\x18\x02 \x01(\tB\x81\x01\x82\xb5\x18}The user\'s Steam Guard machine auth cookie. If present, it\'ll be used to get the user\'s machine ID instead of the AM session.\x12 \n\x18timestamp_minimum_wanted\x18\x03 \x01(\x07\x12\x11\n\tipaddress\x18\x04 \x01(\x05\"\x84\t\n*CCredentials_GetSteamGuardDetails_Response\x12\x1d\n\x15is_steamguard_enabled\x18\x01 \x01(\x08\x12$\n\x1ctimestamp_steamguard_enabled\x18\x02 \x01(\x07\x12\x63\n\x1c\x64\x65precated_newauthentication\x18\x03 \x03(\x0b\x32=.CCredentials_GetSteamGuardDetails_Response.NewAuthentication\x12*\n\"deprecated_machine_name_userchosen\x18\x04 \x01(\t\x12\x37\n/deprecated_timestamp_machine_steamguard_enabled\x18\x05 \x01(\x07\x12\x43\n;deprecated_authentication_exists_from_geoloc_before_mintime\x18\x06 \x01(\x08\x12\x1d\n\x15\x64\x65precated_machine_id\x18\x07 \x01(\x04\x12M\n\x0csession_data\x18\x08 \x03(\x0b\x32\x37.CCredentials_GetSteamGuardDetails_Response.SessionData\x12\x1c\n\x14is_twofactor_enabled\x18\t \x01(\x08\x12#\n\x1btimestamp_twofactor_enabled\x18\n \x01(\x07\x12\x19\n\x11is_phone_verified\x18\x0b \x01(\x08\x1a\xc3\x01\n\x11NewAuthentication\x12$\n\x1ctimestamp_steamguard_enabled\x18\x01 \x01(\x07\x12\x15\n\ris_web_cookie\x18\x02 \x01(\x08\x12\x11\n\tipaddress\x18\x03 \x01(\x05\x12\x13\n\x0bgeoloc_info\x18\x04 \x01(\t\x12\x15\n\ris_remembered\x18\x05 \x01(\x08\x12\"\n\x1amachine_name_user_supplied\x18\x06 \x01(\t\x12\x0e\n\x06status\x18\x07 \x01(\x05\x1a\xef\x02\n\x0bSessionData\x12\x12\n\nmachine_id\x18\x01 \x01(\x04\x12\x1f\n\x17machine_name_userchosen\x18\x02 \x01(\t\x12,\n$timestamp_machine_steamguard_enabled\x18\x03 \x01(\x07\x12\x38\n0authentication_exists_from_geoloc_before_mintime\x18\x04 \x01(\x08\x12X\n\x11newauthentication\x18\x05 \x03(\x0b\x32=.CCredentials_GetSteamGuardDetails_Response.NewAuthentication\x12\x39\n1authentication_exists_from_same_ip_before_mintime\x18\x06 \x01(\x08\x12\x13\n\x0bpublic_ipv4\x18\x07 \x01(\r\x12\x19\n\x11public_ip_address\x18\x08 \x01(\t\"d\n1CCredentials_NewMachineNotificationDialog_Request\x12\x13\n\x0bis_approved\x18\x01 \x01(\x08\x12\x1a\n\x12is_wizard_complete\x18\x02 \x01(\x08\"4\n2CCredentials_NewMachineNotificationDialog_Response\";\n)CCredentials_ValidateEmailAddress_Request\x12\x0e\n\x06stoken\x18\x01 \x01(\t\"C\n*CCredentials_ValidateEmailAddress_Response\x12\x15\n\rwas_validated\x18\x01 \x01(\x08\"_\n-CCredentials_SteamGuardPhishingReport_Request\x12\x14\n\x0cparam_string\x18\x01 \x01(\t\x12\x18\n\x10ipaddress_actual\x18\x02 \x01(\r\"\xb3\x02\n.CCredentials_SteamGuardPhishingReport_Response\x12\x1e\n\x16ipaddress_loginattempt\x18\x01 \x01(\r\x12 \n\x18\x63ountryname_loginattempt\x18\x02 \x01(\t\x12\x1e\n\x16statename_loginattempt\x18\x03 \x01(\t\x12\x1d\n\x15\x63ityname_loginattempt\x18\x04 \x01(\t\x12\x18\n\x10ipaddress_actual\x18\x05 \x01(\r\x12\x1a\n\x12\x63ountryname_actual\x18\x06 \x01(\t\x12\x18\n\x10statename_actual\x18\x07 \x01(\t\x12\x17\n\x0f\x63ityname_actual\x18\x08 \x01(\t\x12\x17\n\x0fsteamguard_code\x18\t \x01(\t\"J\n-CCredentials_LastCredentialChangeTime_Request\x12\x19\n\x11user_changes_only\x18\x01 \x01(\x08\"\xa4\x01\n.CCredentials_LastCredentialChangeTime_Response\x12&\n\x1etimestamp_last_password_change\x18\x01 \x01(\x07\x12#\n\x1btimestamp_last_email_change\x18\x02 \x01(\x07\x12%\n\x1dtimestamp_last_password_reset\x18\x03 \x01(\x07\"+\n)CCredentials_GetAccountAuthSecret_Request\"O\n*CCredentials_GetAccountAuthSecret_Response\x12\x11\n\tsecret_id\x18\x01 \x01(\x05\x12\x0e\n\x06secret\x18\x02 \x01(\x0c\x32\xed\x08\n\x0b\x43redentials\x12\x8e\x01\n\x15TestAvailablePassword\x12+.CCredentials_TestAvailablePassword_Request\x1a,.CCredentials_TestAvailablePassword_Response\"\x1a\x82\xb5\x18\x16TestAvailablePassword.\x12\x8a\x01\n\x14GetSteamGuardDetails\x12*.CCredentials_GetSteamGuardDetails_Request\x1a+.CCredentials_GetSteamGuardDetails_Response\"\x19\x82\xb5\x18\x15GetSteamGuardDetails.\x12\xb6\x01\n\"NewMachineNotificationDialogResult\x12\x32.CCredentials_NewMachineNotificationDialog_Request\x1a\x33.CCredentials_NewMachineNotificationDialog_Response\"\'\x82\xb5\x18#NewMachineNotificationDialogResult.\x12\x9c\x01\n\x14ValidateEmailAddress\x12*.CCredentials_ValidateEmailAddress_Request\x1a+.CCredentials_ValidateEmailAddress_Response\"+\x82\xb5\x18\'Validate an email address given a token\x12\x99\x01\n\x18SteamGuardPhishingReport\x12..CCredentials_SteamGuardPhishingReport_Request\x1a/.CCredentials_SteamGuardPhishingReport_Response\"\x1c\x82\xb5\x18\x18SteamGuardPhishingReport\x12\xa6\x01\n\x1eGetCredentialChangeTimeDetails\x12..CCredentials_LastCredentialChangeTime_Request\x1a/.CCredentials_LastCredentialChangeTime_Response\"#\x82\xb5\x18\x1fGetCredentialChangeTimeDetails.\x12\x89\x01\n\x14GetAccountAuthSecret\x12*.CCredentials_GetAccountAuthSecret_Request\x1a+.CCredentials_GetAccountAuthSecret_Response\"\x18\x82\xb5\x18\x14GetAccountAuthSecret\x1a\x17\x82\xb5\x18\x13\x43redentials serviceB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x1fsteammessages_credentials.proto\x1a steammessages_unified_base.proto\x1a\x18steammessages_base.proto\"q\n*CCredentials_TestAvailablePassword_Request\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x1b\n\x13sha_digest_password\x18\x02 \x01(\x0c\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x03 \x01(\t\"?\n+CCredentials_TestAvailablePassword_Response\x12\x10\n\x08is_valid\x18\x03 \x01(\x08\"\x9e\x03\n)CCredentials_GetSteamGuardDetails_Request\x12u\n\x1binclude_new_authentications\x18\x01 \x01(\x08:\x04trueBJ\x82\xb5\x18\x46Whether or not to populate the newauthentication field in the response\x12\x95\x01\n\twebcookie\x18\x02 \x01(\tB\x81\x01\x82\xb5\x18}The user\'s Steam Guard machine auth cookie. If present, it\'ll be used to get the user\'s machine ID instead of the AM session.\x12 \n\x18timestamp_minimum_wanted\x18\x03 \x01(\x07\x12\x1c\n\x14\x64\x65precated_ipaddress\x18\x04 \x01(\x05\x12\"\n\nip_address\x18\x05 \x01(\x0b\x32\x0e.CMsgIPAddress\"\xb3\t\n*CCredentials_GetSteamGuardDetails_Response\x12\x1d\n\x15is_steamguard_enabled\x18\x01 \x01(\x08\x12$\n\x1ctimestamp_steamguard_enabled\x18\x02 \x01(\x07\x12\x63\n\x1c\x64\x65precated_newauthentication\x18\x03 \x03(\x0b\x32=.CCredentials_GetSteamGuardDetails_Response.NewAuthentication\x12*\n\"deprecated_machine_name_userchosen\x18\x04 \x01(\t\x12\x37\n/deprecated_timestamp_machine_steamguard_enabled\x18\x05 \x01(\x07\x12\x43\n;deprecated_authentication_exists_from_geoloc_before_mintime\x18\x06 \x01(\x08\x12\x1d\n\x15\x64\x65precated_machine_id\x18\x07 \x01(\x04\x12M\n\x0csession_data\x18\x08 \x03(\x0b\x32\x37.CCredentials_GetSteamGuardDetails_Response.SessionData\x12\x1c\n\x14is_twofactor_enabled\x18\t \x01(\x08\x12#\n\x1btimestamp_twofactor_enabled\x18\n \x01(\x07\x12\x19\n\x11is_phone_verified\x18\x0b \x01(\x08\x1a\xf2\x01\n\x11NewAuthentication\x12$\n\x1ctimestamp_steamguard_enabled\x18\x01 \x01(\x07\x12\x15\n\ris_web_cookie\x18\x02 \x01(\x08\x12\x1c\n\x14\x64\x65precated_ipaddress\x18\x03 \x01(\x05\x12\x13\n\x0bgeoloc_info\x18\x04 \x01(\t\x12\x15\n\ris_remembered\x18\x05 \x01(\x08\x12\"\n\x1amachine_name_user_supplied\x18\x06 \x01(\t\x12\x0e\n\x06status\x18\x07 \x01(\x05\x12\"\n\nip_address\x18\x08 \x01(\x0b\x32\x0e.CMsgIPAddress\x1a\xef\x02\n\x0bSessionData\x12\x12\n\nmachine_id\x18\x01 \x01(\x04\x12\x1f\n\x17machine_name_userchosen\x18\x02 \x01(\t\x12,\n$timestamp_machine_steamguard_enabled\x18\x03 \x01(\x07\x12\x38\n0authentication_exists_from_geoloc_before_mintime\x18\x04 \x01(\x08\x12X\n\x11newauthentication\x18\x05 \x03(\x0b\x32=.CCredentials_GetSteamGuardDetails_Response.NewAuthentication\x12\x39\n1authentication_exists_from_same_ip_before_mintime\x18\x06 \x01(\x08\x12\x13\n\x0bpublic_ipv4\x18\x07 \x01(\r\x12\x19\n\x11public_ip_address\x18\x08 \x01(\t\"d\n1CCredentials_NewMachineNotificationDialog_Request\x12\x13\n\x0bis_approved\x18\x01 \x01(\x08\x12\x1a\n\x12is_wizard_complete\x18\x02 \x01(\x08\"4\n2CCredentials_NewMachineNotificationDialog_Response\";\n)CCredentials_ValidateEmailAddress_Request\x12\x0e\n\x06stoken\x18\x01 \x01(\t\"C\n*CCredentials_ValidateEmailAddress_Response\x12\x15\n\rwas_validated\x18\x01 \x01(\x08\"_\n-CCredentials_SteamGuardPhishingReport_Request\x12\x14\n\x0cparam_string\x18\x01 \x01(\t\x12\x18\n\x10ipaddress_actual\x18\x02 \x01(\t\"\xb3\x02\n.CCredentials_SteamGuardPhishingReport_Response\x12\x1e\n\x16ipaddress_loginattempt\x18\x01 \x01(\t\x12 \n\x18\x63ountryname_loginattempt\x18\x02 \x01(\t\x12\x1e\n\x16statename_loginattempt\x18\x03 \x01(\t\x12\x1d\n\x15\x63ityname_loginattempt\x18\x04 \x01(\t\x12\x18\n\x10ipaddress_actual\x18\x05 \x01(\t\x12\x1a\n\x12\x63ountryname_actual\x18\x06 \x01(\t\x12\x18\n\x10statename_actual\x18\x07 \x01(\t\x12\x17\n\x0f\x63ityname_actual\x18\x08 \x01(\t\x12\x17\n\x0fsteamguard_code\x18\t \x01(\t\"J\n-CCredentials_LastCredentialChangeTime_Request\x12\x19\n\x11user_changes_only\x18\x01 \x01(\x08\"\xa4\x01\n.CCredentials_LastCredentialChangeTime_Response\x12&\n\x1etimestamp_last_password_change\x18\x01 \x01(\x07\x12#\n\x1btimestamp_last_email_change\x18\x02 \x01(\x07\x12%\n\x1dtimestamp_last_password_reset\x18\x03 \x01(\x07\"+\n)CCredentials_GetAccountAuthSecret_Request\"O\n*CCredentials_GetAccountAuthSecret_Response\x12\x11\n\tsecret_id\x18\x01 \x01(\x05\x12\x0e\n\x06secret\x18\x02 \x01(\x0c\x32\xed\x08\n\x0b\x43redentials\x12\x8e\x01\n\x15TestAvailablePassword\x12+.CCredentials_TestAvailablePassword_Request\x1a,.CCredentials_TestAvailablePassword_Response\"\x1a\x82\xb5\x18\x16TestAvailablePassword.\x12\x8a\x01\n\x14GetSteamGuardDetails\x12*.CCredentials_GetSteamGuardDetails_Request\x1a+.CCredentials_GetSteamGuardDetails_Response\"\x19\x82\xb5\x18\x15GetSteamGuardDetails.\x12\xb6\x01\n\"NewMachineNotificationDialogResult\x12\x32.CCredentials_NewMachineNotificationDialog_Request\x1a\x33.CCredentials_NewMachineNotificationDialog_Response\"\'\x82\xb5\x18#NewMachineNotificationDialogResult.\x12\x9c\x01\n\x14ValidateEmailAddress\x12*.CCredentials_ValidateEmailAddress_Request\x1a+.CCredentials_ValidateEmailAddress_Response\"+\x82\xb5\x18\'Validate an email address given a token\x12\x99\x01\n\x18SteamGuardPhishingReport\x12..CCredentials_SteamGuardPhishingReport_Request\x1a/.CCredentials_SteamGuardPhishingReport_Response\"\x1c\x82\xb5\x18\x18SteamGuardPhishingReport\x12\xa6\x01\n\x1eGetCredentialChangeTimeDetails\x12..CCredentials_LastCredentialChangeTime_Request\x1a/.CCredentials_LastCredentialChangeTime_Response\"#\x82\xb5\x18\x1fGetCredentialChangeTimeDetails.\x12\x89\x01\n\x14GetAccountAuthSecret\x12*.CCredentials_GetAccountAuthSecret_Request\x1a+.CCredentials_GetAccountAuthSecret_Response\"\x18\x82\xb5\x18\x14GetAccountAuthSecret\x1a\x17\x82\xb5\x18\x13\x43redentials serviceB\x03\x90\x01\x01')
   ,
-  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,])
+  dependencies=[steammessages__unified__base__pb2.DESCRIPTOR,steammessages__base__pb2.DESCRIPTOR,])
 
 
 
@@ -70,8 +71,8 @@ _CCREDENTIALS_TESTAVAILABLEPASSWORD_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=69,
-  serialized_end=182,
+  serialized_start=95,
+  serialized_end=208,
 )
 
 
@@ -101,8 +102,8 @@ _CCREDENTIALS_TESTAVAILABLEPASSWORD_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=184,
-  serialized_end=247,
+  serialized_start=210,
+  serialized_end=273,
 )
 
 
@@ -135,9 +136,16 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_REQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ipaddress', full_name='CCredentials_GetSteamGuardDetails_Request.ipaddress', index=3,
+      name='deprecated_ipaddress', full_name='CCredentials_GetSteamGuardDetails_Request.deprecated_ipaddress', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip_address', full_name='CCredentials_GetSteamGuardDetails_Request.ip_address', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -153,8 +161,8 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=250,
-  serialized_end=617,
+  serialized_start=276,
+  serialized_end=690,
 )
 
 
@@ -180,7 +188,7 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_NEWAUTHENTICATION = _descriptor.Desc
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ipaddress', full_name='CCredentials_GetSteamGuardDetails_Response.NewAuthentication.ipaddress', index=2,
+      name='deprecated_ipaddress', full_name='CCredentials_GetSteamGuardDetails_Response.NewAuthentication.deprecated_ipaddress', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -214,6 +222,13 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_NEWAUTHENTICATION = _descriptor.Desc
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip_address', full_name='CCredentials_GetSteamGuardDetails_Response.NewAuthentication.ip_address', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -226,8 +241,8 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_NEWAUTHENTICATION = _descriptor.Desc
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1211,
-  serialized_end=1406,
+  serialized_start=1284,
+  serialized_end=1526,
 )
 
 _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_SESSIONDATA = _descriptor.Descriptor(
@@ -305,8 +320,8 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_SESSIONDATA = _descriptor.Descriptor
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1409,
-  serialized_end=1776,
+  serialized_start=1529,
+  serialized_end=1896,
 )
 
 _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE = _descriptor.Descriptor(
@@ -405,8 +420,8 @@ _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=620,
-  serialized_end=1776,
+  serialized_start=693,
+  serialized_end=1896,
 )
 
 
@@ -443,8 +458,8 @@ _CCREDENTIALS_NEWMACHINENOTIFICATIONDIALOG_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1778,
-  serialized_end=1878,
+  serialized_start=1898,
+  serialized_end=1998,
 )
 
 
@@ -467,8 +482,8 @@ _CCREDENTIALS_NEWMACHINENOTIFICATIONDIALOG_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1880,
-  serialized_end=1932,
+  serialized_start=2000,
+  serialized_end=2052,
 )
 
 
@@ -498,8 +513,8 @@ _CCREDENTIALS_VALIDATEEMAILADDRESS_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1934,
-  serialized_end=1993,
+  serialized_start=2054,
+  serialized_end=2113,
 )
 
 
@@ -529,8 +544,8 @@ _CCREDENTIALS_VALIDATEEMAILADDRESS_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1995,
-  serialized_end=2062,
+  serialized_start=2115,
+  serialized_end=2182,
 )
 
 
@@ -550,8 +565,8 @@ _CCREDENTIALS_STEAMGUARDPHISHINGREPORT_REQUEST = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ipaddress_actual', full_name='CCredentials_SteamGuardPhishingReport_Request.ipaddress_actual', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -567,8 +582,8 @@ _CCREDENTIALS_STEAMGUARDPHISHINGREPORT_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2064,
-  serialized_end=2159,
+  serialized_start=2184,
+  serialized_end=2279,
 )
 
 
@@ -581,8 +596,8 @@ _CCREDENTIALS_STEAMGUARDPHISHINGREPORT_RESPONSE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='ipaddress_loginattempt', full_name='CCredentials_SteamGuardPhishingReport_Response.ipaddress_loginattempt', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -609,8 +624,8 @@ _CCREDENTIALS_STEAMGUARDPHISHINGREPORT_RESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ipaddress_actual', full_name='CCredentials_SteamGuardPhishingReport_Response.ipaddress_actual', index=4,
-      number=5, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -654,8 +669,8 @@ _CCREDENTIALS_STEAMGUARDPHISHINGREPORT_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2162,
-  serialized_end=2469,
+  serialized_start=2282,
+  serialized_end=2589,
 )
 
 
@@ -685,8 +700,8 @@ _CCREDENTIALS_LASTCREDENTIALCHANGETIME_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2471,
-  serialized_end=2545,
+  serialized_start=2591,
+  serialized_end=2665,
 )
 
 
@@ -730,8 +745,8 @@ _CCREDENTIALS_LASTCREDENTIALCHANGETIME_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2548,
-  serialized_end=2712,
+  serialized_start=2668,
+  serialized_end=2832,
 )
 
 
@@ -754,8 +769,8 @@ _CCREDENTIALS_GETACCOUNTAUTHSECRET_REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2714,
-  serialized_end=2757,
+  serialized_start=2834,
+  serialized_end=2877,
 )
 
 
@@ -792,10 +807,12 @@ _CCREDENTIALS_GETACCOUNTAUTHSECRET_RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2759,
-  serialized_end=2838,
+  serialized_start=2879,
+  serialized_end=2958,
 )
 
+_CCREDENTIALS_GETSTEAMGUARDDETAILS_REQUEST.fields_by_name['ip_address'].message_type = steammessages__base__pb2._CMSGIPADDRESS
+_CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_NEWAUTHENTICATION.fields_by_name['ip_address'].message_type = steammessages__base__pb2._CMSGIPADDRESS
 _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_NEWAUTHENTICATION.containing_type = _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE
 _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_SESSIONDATA.fields_by_name['newauthentication'].message_type = _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_NEWAUTHENTICATION
 _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE_SESSIONDATA.containing_type = _CCREDENTIALS_GETSTEAMGUARDDETAILS_RESPONSE
@@ -942,8 +959,8 @@ _CREDENTIALS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\202\265\030\023Credentials service'),
-  serialized_start=2841,
-  serialized_end=3974,
+  serialized_start=2961,
+  serialized_end=4094,
   methods=[
   _descriptor.MethodDescriptor(
     name='TestAvailablePassword',

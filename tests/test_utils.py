@@ -5,21 +5,32 @@ import steam.utils.web as uweb
 import requests
 from steam.protobufs.test_messages_pb2 import ComplexProtoMessage
 
-proto_mask = 0x80000000
-
 class Util_Functions(unittest.TestCase):
-    def test_ip_from_int(self):
-        self.assertEqual('0.0.0.0', ut.ip_from_int(0))
-        self.assertEqual('12.34.56.78', ut.ip_from_int(203569230))
-        self.assertEqual('255.255.255.255', ut.ip_from_int(4294967295))
+    def test_ip4_from_int(self):
+        self.assertEqual('0.0.0.0',         ut.ip4_from_int(0))
+        self.assertEqual('12.34.56.78',     ut.ip4_from_int(203569230))
+        self.assertEqual('255.255.255.255', ut.ip4_from_int(4294967295))
 
-    def test_ip_to_int(self):
-        self.assertEqual(ut.ip_to_int('0.0.0.0'), 0)
-        self.assertEqual(ut.ip_to_int('12.34.56.78'), 203569230)
-        self.assertEqual(ut.ip_to_int('255.255.255.255'), 4294967295)
+    def test_ip4_to_int(self):
+        self.assertEqual(ut.ip4_to_int('0.0.0.0'),         0)
+        self.assertEqual(ut.ip4_to_int('12.34.56.78'),     203569230)
+        self.assertEqual(ut.ip4_to_int('255.255.255.255'), 4294967295)
+
+    def test_ip6_from_bytes(self):
+        self.assertEqual('::1',                               ut.ip6_from_bytes(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'))
+        self.assertEqual('1:2:3:4:5:6:7:8',                   ut.ip6_from_bytes(b'\x00\x01\x00\x02\x00\x03\x00\x04\x00\x05\x00\x06\x00\x07\x00\x08'))
+        self.assertEqual('1234:5678:9abc:def0:0:dead:beef:1', ut.ip6_from_bytes(b'\x12\x34\x56\x78\x9a\xbc\xde\xf0\x00\x00\xde\xad\xbe\xef\x00\x01'))
+
+    def test_ip6_to_bytes(self):
+        self.assertEqual(ut.ip6_to_bytes('::1'),                               b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01')
+        self.assertEqual(ut.ip6_to_bytes('1:2:3:4:5:6:7:8'),                   b'\x00\x01\x00\x02\x00\x03\x00\x04\x00\x05\x00\x06\x00\x07\x00\x08')
+        self.assertEqual(ut.ip6_to_bytes('1234:5678:9abc:def0:0:dead:beef:1'), b'\x12\x34\x56\x78\x9a\xbc\xde\xf0\x00\x00\xde\xad\xbe\xef\x00\x01')
 
     def test_make_requests_session(self):
         self.assertIsInstance(uweb.make_requests_session(), requests.Session)
+
+
+proto_mask = 0x80000000
 
 class Util_Proto_Functions(unittest.TestCase):
     def test_is_proto(self):

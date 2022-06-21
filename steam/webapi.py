@@ -1,7 +1,7 @@
 """
 WebAPI provides a thin wrapper over `Steam's Web API <https://developer.valvesoftware.com/wiki/Steam_Web_API>`_
 
-It is very fiendly to exploration and prototyping when using ``ipython``, ``notebooks`` or similar.
+It is very friendly to exploration and prototyping when using ``ipython``, ``notebooks`` or similar.
 The ``key`` will determine what WebAPI interfaces and methods are available.
 
 .. note::

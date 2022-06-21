@@ -1,9 +1,11 @@
+import struct
 import json
 import sys
 import re
 import requests
 from steam.enums.base import SteamIntEnum
 from steam.enums import EType, EUniverse, EInstanceFlag
+from steam.core.crypto import md5_hash
 from steam.utils.web import make_requests_session
 
 if sys.version_info < (3,):
@@ -35,6 +37,7 @@ _icode_custom    = "bcdfghjkmnpqrtvw"
 _icode_all_valid = _icode_hex + _icode_custom
 _icode_map       = dict(zip(_icode_hex,    _icode_custom))
 _icode_map_inv   = dict(zip(_icode_custom, _icode_hex   ))
+_csgofrcode_chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
 
 class SteamID(intBase):
@@ -77,6 +80,14 @@ class SteamID(intBase):
 
     @property
     def id(self):
+        """
+        :return: account id
+        :rtype: :class:`int`
+        """
+        return int(self) & 0xFFffFFff
+
+    @property
+    def account_id(self):
         """
         :return: account id
         :rtype: :class:`int`
@@ -198,6 +209,40 @@ class SteamID(intBase):
             return invite_code
 
     @property
+    def as_csgo_friend_code(self):
+        """
+        :return: CS:GO Friend code (e.g. ``AEBJA-ABDC``)
+        :rtype: :class:`str`
+        """
+        if self.type != EType.Individual or not self.is_valid():
+            return
+
+        h = b'CSGO' + struct.pack('>L', self.account_id)
+        h, = struct.unpack('<L', md5_hash(h[::-1])[:4])
+        steamid = self.as_64
+        result = 0
+
+        for i in range(8):
+            id_nib = (steamid >> (i * 4)) & 0xF
+            hash_nib = (h >> i) & 0x1
+            a = (result << 4) | id_nib
+
+            result = ((result >> 28) << 32) | a
+            result = ((result >> 31) << 32) | ((a << 1) | hash_nib)
+
+        result, = struct.unpack('<Q', struct.pack('>Q', result))
+        code = ''
+
+        for i in range(13):
+            if i in (4, 9):
+                code += '-'
+
+            code += _csgofrcode_chars[result & 31]
+            result = result >> 5
+
+        return code[5:]
+
+    @property
     def invite_url(self):
         """
         :return: e.g ``https://s.team/p/cv-dgb``
@@ -289,10 +334,10 @@ def make_steam64(id=0, *args, **kwargs):
                 universe = EUniverse.Public
             # 64 bit
             elif value < 2**64:
-                accountid = value & 0xFFFFFFFF
-                instance = (value >> 32) & 0xFFFFF
-                etype = (value >> 52) & 0xF
-                universe = (value >> 56) & 0xFF
+                accountid = int(value & 0xFFFFFFFF)
+                instance = int((value >> 32) & 0xFFFFF)
+                etype = int((value >> 52) & 0xF)
+                universe = int((value >> 56) & 0xFF)
             # invalid account id
             else:
                 accountid = 0
@@ -413,7 +458,7 @@ def steam3_to_tuple(value):
 
     return (steam32, etype, universe, instance)
 
-def invite_code_to_tuple(code, universe=EUniverse.Public):
+def from_invite_code(code, universe=EUniverse.Public):
     """
     Invites urls can be generated at https://steamcommunity.com/my/friends/add
 
@@ -441,7 +486,45 @@ def invite_code_to_tuple(code, universe=EUniverse.Public):
     accountid = int(re.sub("["+_icode_custom+"]", repl_mapper, code), 16)
 
     if 0 < accountid < 2**32:
-        return (accountid, EType(1), EUniverse(universe), 1)
+        return SteamID(accountid, EType.Individual, EUniverse(universe), 1)
+
+SteamID.from_invite_code = staticmethod(from_invite_code)
+
+def from_csgo_friend_code(code, universe=EUniverse.Public):
+    """
+    Takes CS:GO friend code and returns SteamID
+
+    :param code: CS:GO friend code (e.g. ``AEBJA-ABDC``)
+    :type  code: :class:`str`
+    :param universe: Steam universe (default: ``Public``)
+    :type  universe: :class:`EType`
+    :return: SteamID instance
+    :rtype: :class:`.SteamID` or :class:`None`
+    """
+    if not re.match(r'^['+_csgofrcode_chars+'\-]{10}$', code):
+        return None
+
+    code = ('AAAA-' + code).replace('-', '')
+    result = 0
+
+    for i in range(13):
+        index = _csgofrcode_chars.find(code[i])
+        if index == -1:
+            return None
+        result = result | (index << 5 * i)
+
+    result, = struct.unpack('<Q', struct.pack('>Q', result))
+    accountid = 0
+
+    for i in range(8):
+        result = result >> 1
+        id_nib = result & 0xF
+        result = result >> 4
+        accountid = (accountid << 4) | id_nib
+
+    return SteamID(accountid, EType.Individual, EUniverse(universe), 1)
+
+SteamID.from_csgo_friend_code = staticmethod(from_csgo_friend_code)
 
 def steam64_from_url(url, http_timeout=30):
     """
@@ -514,7 +597,7 @@ def from_url(url, http_timeout=30):
 
     """
 
-    steam64 = steam64_from_url(url)
+    steam64 = steam64_from_url(url, http_timeout)
 
     if steam64:
         return SteamID(steam64)

@@ -3,6 +3,12 @@ import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
 
+enum EMessageReactionType {
+	k_EMessageReactionType_Invalid = 0;
+	k_EMessageReactionType_Emoticon = 1;
+	k_EMessageReactionType_Sticker = 2;
+}
+
 message CFriendMessages_GetRecentMessages_Request {
 	optional fixed64 steamid1 = 1;
 	optional fixed64 steamid2 = 2;
@@ -17,10 +23,17 @@ message CFriendMessages_GetRecentMessages_Request {
 
 message CFriendMessages_GetRecentMessages_Response {
 	message FriendMessage {
+		message MessageReaction {
+			optional .EMessageReactionType reaction_type = 1 [default = k_EMessageReactionType_Invalid];
+			optional string reaction = 2;
+			repeated uint32 reactors = 3;
+		}
+
 		optional uint32 accountid = 1;
 		optional uint32 timestamp = 2;
 		optional string message = 3;
 		optional uint32 ordinal = 4;
+		repeated .CFriendMessages_GetRecentMessages_Response.FriendMessage.MessageReaction reactions = 5;
 	}
 
 	repeated .CFriendMessages_GetRecentMessages_Response.FriendMessage messages = 1 [(description) = "Array of messages, returned newest to oldest."];
@@ -75,6 +88,19 @@ message CFriendMessages_IsInFriendsUIBeta_Response {
 	optional bool has_used_friendsui = 2;
 }
 
+message CFriendMessages_UpdateMessageReaction_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+	optional .EMessageReactionType reaction_type = 4 [default = k_EMessageReactionType_Invalid];
+	optional string reaction = 5;
+	optional bool is_add = 6;
+}
+
+message CFriendMessages_UpdateMessageReaction_Response {
+	repeated uint32 reactors = 1;
+}
+
 message CFriendMessages_IncomingMessage_Notification {
 	optional fixed64 steamid_friend = 1;
 	optional int32 chat_entry_type = 2;
@@ -85,6 +111,16 @@ message CFriendMessages_IncomingMessage_Notification {
 	optional bool local_echo = 7;
 	optional string message_no_bbcode = 8;
 	optional bool low_priority = 9;
+}
+
+message CFriendMessages_MessageReaction_Notification {
+	optional fixed64 steamid_friend = 1;
+	optional uint32 server_timestamp = 2;
+	optional uint32 ordinal = 3;
+	optional fixed64 reactor = 4;
+	optional .EMessageReactionType reaction_type = 5 [default = k_EMessageReactionType_Invalid];
+	optional string reaction = 6;
+	optional bool is_add = 7;
 }
 
 service FriendMessages {
@@ -109,6 +145,10 @@ service FriendMessages {
 	rpc IsInFriendsUIBeta (.CFriendMessages_IsInFriendsUIBeta_Request) returns (.CFriendMessages_IsInFriendsUIBeta_Response) {
 		option (method_description) = "See if a friend is in the friendsui beta.";
 	}
+
+	rpc UpdateMessageReaction (.CFriendMessages_UpdateMessageReaction_Request) returns (.CFriendMessages_UpdateMessageReaction_Response) {
+		option (method_description) = "Adds/removes a reaction to/from a friend message";
+	}
 }
 
 service FriendMessagesClient {
@@ -120,5 +160,9 @@ service FriendMessagesClient {
 
 	rpc NotifyAckMessageEcho (.CFriendMessages_AckMessage_Notification) returns (.NoResponse) {
 		option (method_description) = "A session acked an unread message, echo to other sessions.";
+	}
+
+	rpc MessageReaction (.CFriendMessages_MessageReaction_Notification) returns (.NoResponse) {
+		option (method_description) = "New message reaction from a friend.";
 	}
 }

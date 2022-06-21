@@ -1,0 +1,71 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+message CMsgClientLBSSetScore {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 score = 3;
+	optional bytes details = 4;
+	optional int32 upload_score_method = 5;
+}
+
+message CMsgClientLBSSetScoreResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 leaderboard_entry_count = 2;
+	optional bool score_changed = 3;
+	optional int32 global_rank_previous = 4;
+	optional int32 global_rank_new = 5;
+}
+
+message CMsgClientLBSSetUGC {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional fixed64 ugc_id = 3;
+}
+
+message CMsgClientLBSSetUGCResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientLBSFindOrCreateLB {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_sort_method = 2;
+	optional int32 leaderboard_display_type = 3;
+	optional bool create_if_not_found = 4;
+	optional string leaderboard_name = 5;
+}
+
+message CMsgClientLBSFindOrCreateLBResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 leaderboard_id = 2;
+	optional int32 leaderboard_entry_count = 3;
+	optional int32 leaderboard_sort_method = 4 [default = 0];
+	optional int32 leaderboard_display_type = 5 [default = 0];
+	optional string leaderboard_name = 6;
+}
+
+message CMsgClientLBSGetLBEntries {
+	optional int32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 range_start = 3;
+	optional int32 range_end = 4;
+	optional int32 leaderboard_data_request = 5;
+	repeated fixed64 steamids = 6;
+}
+
+message CMsgClientLBSGetLBEntriesResponse {
+	message Entry {
+		optional fixed64 steam_id_user = 1;
+		optional int32 global_rank = 2;
+		optional int32 score = 3;
+		optional bytes details = 4;
+		optional fixed64 ugc_id = 5;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	optional int32 leaderboard_entry_count = 2;
+	repeated .CMsgClientLBSGetLBEntriesResponse.Entry entries = 3;
+}

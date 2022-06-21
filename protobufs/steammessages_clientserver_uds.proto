@@ -1,0 +1,105 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+message CMsgClientUDSP2PSessionStarted {
+	optional fixed64 steamid_remote = 1;
+	optional int32 appid = 2;
+}
+
+message CMsgClientUDSP2PSessionEnded {
+	optional fixed64 steamid_remote = 1;
+	optional int32 appid = 2;
+	optional int32 session_length_sec = 3;
+	optional int32 session_error = 4;
+	optional int32 nattype = 5;
+	optional int32 bytes_recv = 6;
+	optional int32 bytes_sent = 7;
+	optional int32 bytes_sent_relay = 8;
+	optional int32 bytes_recv_relay = 9;
+	optional int32 time_to_connect_ms = 10;
+}
+
+message CMsgClientGetClientDetails {
+}
+
+message CMsgClientGetClientDetailsResponse {
+	message Game {
+		optional uint32 appid = 1;
+		optional string extra_info = 2;
+		optional uint32 time_running_sec = 3;
+	}
+
+	optional uint32 package_version = 1;
+	optional uint32 protocol_version = 8;
+	optional string os = 2;
+	optional string machine_name = 3;
+	optional string ip_public = 4;
+	optional string ip_private = 5;
+	optional uint64 bytes_available = 7;
+	repeated .CMsgClientGetClientDetailsResponse.Game games_running = 6;
+}
+
+message CMsgClientGetClientAppList {
+	optional bool media = 1;
+	optional bool tools = 2;
+	optional bool games = 3;
+	optional bool only_installed = 4;
+	optional bool only_changing = 5;
+	optional bool comics = 6;
+}
+
+message CMsgClientGetClientAppListResponse {
+	message App {
+		message DLC {
+			optional uint32 appid = 1;
+			optional bool installed = 2;
+		}
+
+		optional uint32 appid = 1;
+		optional string category = 2;
+		optional string app_type = 10;
+		optional bool favorite = 3;
+		optional bool installed = 4;
+		optional bool auto_update = 5;
+		optional uint64 bytes_downloaded = 6;
+		optional uint64 bytes_needed = 7;
+		optional uint32 bytes_download_rate = 8;
+		optional bool download_paused = 11;
+		optional uint32 num_downloading = 12;
+		optional uint32 num_paused = 13;
+		optional bool changing = 14;
+		optional bool available_on_platform = 15;
+		repeated .CMsgClientGetClientAppListResponse.App.DLC dlcs = 9;
+	}
+
+	repeated .CMsgClientGetClientAppListResponse.App apps = 1;
+	optional uint64 bytes_available = 2;
+}
+
+message CMsgClientInstallClientApp {
+	optional uint32 appid = 1;
+}
+
+message CMsgClientInstallClientAppResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgClientUninstallClientApp {
+	optional uint32 appid = 1;
+}
+
+message CMsgClientUninstallClientAppResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgClientSetClientAppUpdateState {
+	optional uint32 appid = 1;
+	optional bool update = 2;
+}
+
+message CMsgClientSetClientAppUpdateStateResponse {
+	optional uint32 result = 1;
+}

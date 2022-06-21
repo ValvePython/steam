@@ -44,6 +44,23 @@ Once authenticator is enabled all you need is the secrets to generate codes.
 You can obtain the authenticator secrets from an Android device using
 :func:`extract_secrets_from_android_rooted`. See the function docstring for
 details on what is required for it to work.
+
+Format of ``secrets.json`` file:
+
+.. code:: json
+
+    {
+        "account_name": "<username>",               # account username
+        "identity_secret": "<base64 encoded>",      # unknown
+        "revocation_code": "R51234",                # revocation code
+        "secret_1": "<base54 encoded>",             # unknown
+        "serial_number": "1111222333344445555",     # serial number
+        "server_time": "1600000000",                # creation timestamp
+        "shared_secret": "<base65 encoded>",        # secret used for code generation
+        "status": 1,                                # status, 1 = token active
+        "token_gid": "a1a1a1a1a1a1a1a1",            # token gid
+        "uri": "otpauth://totp/Steam:<username>?secret=<base32 encoded shared seceret>&issuer=Steam"
+    }
 """
 import json
 import subprocess
@@ -148,8 +165,8 @@ class SteamAuthenticator(object):
             if resp is None:
                 raise SteamAuthenticatorError("Failed. Request timeout")
             if resp.header.eresult != EResult.OK:
-                raise SteamAuthenticatorError("Failed: %s (%s)" % str(resp.header.error_message,
-                                                                      repr(resp.header.eresult)))
+                raise SteamAuthenticatorError("Failed: %s (%s)" % (resp.header.error_message,
+                                                                   repr(resp.header.eresult)))
 
             resp = proto_to_dict(resp.body)
 
@@ -301,88 +318,145 @@ class SteamAuthenticator(object):
     def add_phone_number(self, phone_number):
         """Add phone number to account
 
-        Then confirm it via :meth:`confirm_phone_number()`
+        Steps:
+
+        1. Call :meth:`add_phone_number()` then check ``email_confirmation`` key in the response
+
+           i. On ``True``, user needs to click link in email, then step 2
+           ii. On ``False``, SMS code is sent,  go to step 3
+
+        2. Confirm email via :meth:`confirm_email()`, SMS code is sent
+        3. Finalize phone number with SMS code :meth:`confirm_phone_number(sms_code)`
 
         :param phone_number: phone number with country code
         :type  phone_number: :class:`str`
-        :return: success (returns ``False`` on request fail/timeout)
-        :rtype: :class:`bool`
+        :return: see example below
+        :rtype: :class:`dict`
+
+        .. code:: python
+
+            {'success': True,
+             'email_confirmation': True,
+             'error_text': '',
+             'fatal': False}
         """
         sess = self._get_web_session()
 
         try:
             resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
-                            data={
-                                'op': 'add_phone_number',
-                                'arg': phone_number,
-                                'checkfortos': 0,
-                                'skipvoip': 0,
-                                'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
-                                },
-                            timeout=15).json()
+                             data={
+                                 'op': 'add_phone_number',
+                                 'arg': phone_number,
+                                 'checkfortos': 0,
+                                 'skipvoip': 0,
+                                 'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                 },
+                             timeout=15).json()
         except:
-            return False
+            return {'success': False}
 
-        return (resp or {}).get('success', False)
+        return resp
+
+    def confirm_email(self):
+        """Confirm email confirmation. See :meth:`add_phone_number()`
+
+        .. note::
+            If ``email_confirmation`` is ``True``, then user hasn't clicked the link yet.
+
+        :return: see example below
+        :rtype: :class:`dict`
+
+        .. code:: python
+
+            {'success': True,
+             'email_confirmation': True,
+             'error_text': '',
+             'fatal': False}
+        """
+        sess = self._get_web_session()
+
+        try:
+            resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
+                             data={
+                                 'op': 'email_confirmation',
+                                 'arg': '',
+                                 'checkfortos': 1,
+                                 'skipvoip': 1,
+                                 'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                 },
+                             timeout=15).json()
+        except:
+            return {'fatal': True, 'success': False}
+
+        return resp
 
     def confirm_phone_number(self, sms_code):
-        """Confirm phone number with the recieved SMS code
+        """Confirm phone number with the recieved SMS code. See :meth:`add_phone_number()`
 
         :param sms_code: sms code
         :type  sms_code: :class:`str`
-        :return: success (returns ``False`` on request fail/timeout)
-        :rtype: :class:`bool`
+        :return: see example below
+        :rtype: :class:`dict`
+
+        .. code:: python
+
+            {'success': True,
+             'error_text': '',
+             'fatal': False}
         """
         sess = self._get_web_session()
 
         try:
             resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
-                            data={
-                                'op': 'check_sms_code',
-                                'arg': sms_code,
-                                'checkfortos': 1,
-                                'skipvoip': 1,
-                                'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
-                                },
-                            timeout=15).json()
+                             data={
+                                 'op': 'check_sms_code',
+                                 'arg': sms_code,
+                                 'checkfortos': 1,
+                                 'skipvoip': 1,
+                                 'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                 },
+                             timeout=15).json()
         except:
-            return False
+            return {'success': False}
 
-        return (resp or {}).get('success', False)
+        return resp
 
     def has_phone_number(self):
         """Check whether the account has a verified phone number
 
-        :return: result
-        :rtype: :class:`bool` or :class:`None`
+        :return: see example below
+        :rtype: :class:`dict`
 
-        .. note::
-            Retruns `None` if the web requests fails for any reason
+        .. code:: python
+
+            {'success': True,
+             'has_phone': True,
+             'error_text': '',
+             'fatal': False}
         """
         sess = self._get_web_session()
 
         try:
             resp = sess.post('https://steamcommunity.com/steamguard/phoneajax',
-                            data={
-                                'op': 'has_phone',
-                                'arg': '0',
-                                'checkfortos': 0,
-                                'skipvoip': 1,
-                                'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
-                                },
-                            timeout=15).json()
+                             data={
+                                 'op': 'has_phone',
+                                 'arg': '0',
+                                 'checkfortos': 0,
+                                 'skipvoip': 1,
+                                 'sessionid': sess.cookies.get('sessionid', domain='steamcommunity.com'),
+                                 },
+                             timeout=15).json()
         except:
-            raise
+            return {'success': False}
 
-        if resp['success'] == True:
-            return resp['has_phone']
+        return resp
 
     def validate_phone_number(self, phone_number):
         """Test whether phone number is valid for Steam
 
         :param phone_number: phone number with country code
         :type  phone_number: :class:`str`
-        :return: see example output below
+        :return: see example below
         :rtype: :class:`dict`
 
         .. code:: python
@@ -404,7 +478,7 @@ class SteamAuthenticator(object):
                              allow_redirects=False,
                              timeout=15).json()
         except:
-            resp = {}
+            resp = {'success': False}
 
         return resp
 

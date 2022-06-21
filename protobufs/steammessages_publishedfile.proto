@@ -1,5 +1,6 @@
 syntax = "proto2";
 import "steammessages_unified_base.proto";
+import "enums.proto";
 
 option py_generic_services = true;
 
@@ -95,6 +96,7 @@ message PublishedFileDetails {
 	message Tag {
 		optional string tag = 1;
 		optional bool adminonly = 2;
+		optional string display_name = 3;
 	}
 
 	message Preview {
@@ -212,6 +214,7 @@ message PublishedFileDetails {
 	optional .EPublishedFileRevision revision = 68 [default = k_EPublishedFileRevision_Default, (description) = "The revision of the data returned, usually k_EPublishedFileRevision_Latest, but can be another revision/snapshot depending on the caller."];
 	repeated .EPublishedFileRevision available_revisions = 69 [(description) = "Available revisions"];
 	repeated .PublishedFileDetails.Reaction reactions = 70 [(description) = "Reactions to this item"];
+	optional .EBanContentCheckResult ban_text_check_result = 71 [default = k_EBanContentCheckResult_NotScanned];
 }
 
 message CPublishedFile_GetDetails_Response {
@@ -225,7 +228,7 @@ message CPublishedFile_GetItemInfo_Request {
 		optional .EPublishedFileRevision desired_revision = 3 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 	}
 
-	optional uint32 app_id = 1;
+	optional uint32 appid = 1;
 	optional uint32 last_time_updated = 2;
 	repeated .CPublishedFile_GetItemInfo_Request.WorkshopItem workshop_items = 3;
 }
@@ -282,6 +285,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
 	optional bool strip_description_bbcode = 32 [(description) = "Strips BBCode from descriptions."];
 	optional bool return_reactions = 35 [default = false, (description) = "If true, then reactions to items will be returned."];
+	optional uint32 startindex_override = 25 [(description) = "Backwards compatible for the client."];
 	optional .EPublishedFileRevision desired_revision = 33 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
 }
 
@@ -385,6 +389,11 @@ message CPublishedFile_QueryFiles_Request {
 		repeated string tags = 1;
 	}
 
+	message DateRange {
+		optional uint32 timestamp_start = 1 [(description) = "(Optional) Include items with the relevant date field after this value."];
+		optional uint32 timestamp_end = 2 [(description) = "(Optional) Include items with the relevant date field before this value."];
+	}
+
 	optional uint32 query_type = 1 [(description) = "enumeration EPublishedFileQueryType in clientenums.h"];
 	optional uint32 page = 2 [(description) = "Current page"];
 	optional string cursor = 39 [(description) = "Cursor to paginate through the results (set to '*' for the first request).  Prefer this over using the page parameter, as it will allow you to do deep pagination.  When used, the page parameter will be ignored."];
@@ -405,6 +414,8 @@ message CPublishedFile_QueryFiles_Request {
 	optional int32 language = 33 [default = 0, (description) = "Language to search in and also what gets returned. Defaults to English."];
 	repeated .CPublishedFile_QueryFiles_Request.KVTag required_kv_tags = 34 [(description) = "Required key-value tags to match on."];
 	repeated .CPublishedFile_QueryFiles_Request.TagGroup taggroups = 42 [(description) = "(Optional) At least one of the tags must be present on a published file to satisfy the query."];
+	optional .CPublishedFile_QueryFiles_Request.DateRange date_range_created = 44 [(description) = "(Optional) Filter to items created within this range."];
+	optional .CPublishedFile_QueryFiles_Request.DateRange date_range_updated = 45 [(description) = "(Optional) Filter to items updated within this range."];
 	optional bool totalonly = 16 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool ids_only = 35 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 17 [(description) = "Return vote data"];
@@ -524,6 +535,23 @@ message CPublishedFile_GetUserVoteSummary_Response {
 	}
 
 	repeated .CPublishedFile_GetUserVoteSummary_Response.VoteSummary summaries = 1;
+}
+
+message CPublishedFile_GetItemChanges_Request {
+	optional uint32 appid = 1;
+	optional uint32 last_time_updated = 2;
+	optional uint32 num_items_max = 3;
+}
+
+message CPublishedFile_GetItemChanges_Response {
+	message WorkshopItemInfo {
+		optional fixed64 published_file_id = 1;
+		optional uint32 time_updated = 2;
+		optional fixed64 manifest_id = 3;
+	}
+
+	optional uint32 update_time = 1;
+	repeated .CPublishedFile_GetItemChanges_Response.WorkshopItemInfo workshop_items = 2;
 }
 
 message CPublishedFile_FileSubscribed_Notification {
@@ -646,6 +674,10 @@ service PublishedFile {
 
 	rpc GetUserVoteSummary (.CPublishedFile_GetUserVoteSummary_Request) returns (.CPublishedFile_GetUserVoteSummary_Response) {
 		option (method_description) = "Get user vote summary";
+	}
+
+	rpc GetItemChanges (.CPublishedFile_GetItemChanges_Request) returns (.CPublishedFile_GetItemChanges_Response) {
+		option (method_description) = "Get list of updated items since given date";
 	}
 }
 

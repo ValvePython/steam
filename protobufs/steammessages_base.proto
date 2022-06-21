@@ -139,6 +139,7 @@ message CCDDBAppDetailCommon {
 	optional string friendly_name = 10;
 	optional string propagation = 11;
 	optional bool has_adult_content = 12;
+	optional bool is_visible_in_steam_china = 13;
 }
 
 message CMsgAppRights {
@@ -158,6 +159,7 @@ message CMsgAppRights {
 	optional bool manage_pricing = 14;
 	optional bool broadcast_live = 15;
 	optional bool view_marketing_traffic = 16;
+	optional bool edit_store_display_content = 17;
 }
 
 message CCuratorPreferences {
@@ -247,6 +249,10 @@ message CClanEventData {
 	optional uint32 rtime32_last_modified = 24;
 	optional fixed64 news_post_gid = 25;
 	optional uint32 rtime_mod_reviewed = 26;
+	optional uint32 featured_app_tagid = 27;
+	repeated uint32 referenced_appids = 28;
+	optional uint32 build_id = 29;
+	optional string build_branch = 30;
 }
 
 message CBilling_Address {
@@ -260,4 +266,15 @@ message CBilling_Address {
 	optional string postcode = 8;
 	optional int32 zip_plus4 = 9;
 	optional string phone = 10;
+}
+
+message CPackageReservationStatus {
+	optional uint32 packageid = 1;
+	optional int32 reservation_state = 2;
+	optional int32 queue_position = 3;
+	optional int32 total_queue_size = 4;
+	optional string reservation_country_code = 5;
+	optional bool expired = 6;
+	optional uint32 time_expires = 7;
+	optional uint32 time_reserved = 8;
 }

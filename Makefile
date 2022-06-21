@@ -24,15 +24,21 @@ export HELPBODY
 help:
 	@echo "$$HELPBODY"
 
-init: init_docs
-	pip install -r requirements.txt
+init:
+	pip install -r dev_requirements.txt
 
 init_docs:
 	pip install sphinx==1.8.5 sphinx_rtd_theme
 
+COVOPTS = --cov-config .coveragerc --cov=steam
+
+ifeq ($(NOCOV), 1)
+	COVOPTS =
+endif
+
 test:
 	coverage erase
-	PYTHONHASHSEED=0 pytest --cov=steam tests
+	PYTHONHASHSEED=0 pytest --tb=short $(COVOPTS) tests
 
 webauth_gen:
 	rm -f vcr/webauth*
@@ -61,7 +67,7 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt || exit 0
-	mv protobufs/friends.proto protobufs/steammessages_webui_friends.steamclient.proto
+	mv protobufs/friends_mobile.proto protobufs/steammessages_webui_friends.steamclient.proto
 	sed -i 's/CCommunity_ClanAnnouncementInfo/xCCommunity_ClanAnnouncementInfo/' protobufs/steammessages_webui_friends.steamclient.proto
 	sed -i 's/CMsgClientSecret/xCMsgClientSecret/' protobufs/steammessages_webui_friends.steamclient.proto
 	sed -i '1s/^/option py_generic_services = true\;\n/' protobufs/steammessages_webui_friends.steamclient.proto
@@ -81,4 +87,10 @@ pb_compile:
 pb_clear:
 	rm -f ./protobufs/*.proto ./steam/protobufs/*_pb2.py
 
-pb_update: pb_fetch pb_compile
+pb_services:
+	grep -B 99999 MARK_SERVICE_START steam/core/msg/unified.py > steam/core/msg/unified.py.tmp
+	grep '^service' protobufs/*.proto | tr '/.:' ' ' | awk '{ printf("    %-35s '\''steam.protobufs.%s_pb2'\'',\n", "'\''" $$5 "'\'':", $$2) }' >> steam/core/msg/unified.py.tmp
+	grep -A 99999 MARK_SERVICE_END steam/core/msg/unified.py >> steam/core/msg/unified.py.tmp
+	mv steam/core/msg/unified.py.tmp steam/core/msg/unified.py
+
+pb_update: pb_fetch pb_compile pb_services

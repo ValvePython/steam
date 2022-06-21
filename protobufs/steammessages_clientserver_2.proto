@@ -4,282 +4,6 @@ import "steammessages_base.proto";
 option optimize_for = SPEED;
 option py_generic_services = false;
 
-message CMsgClientUCMAddScreenshot {
-	message Tag {
-		optional string tag_name = 1;
-		optional string tag_value = 2;
-	}
-
-	optional uint32 appid = 1;
-	optional string filename = 2;
-	optional string thumbname = 3;
-	optional string vr_filename = 14;
-	optional fixed32 rtime32_created = 4;
-	optional uint32 width = 5;
-	optional uint32 height = 6;
-	optional uint32 permissions = 7;
-	optional string caption = 8;
-	optional string shortcut_name = 9;
-	repeated .CMsgClientUCMAddScreenshot.Tag tag = 10;
-	repeated fixed64 tagged_steamid = 11;
-	optional bool spoiler_tag = 12;
-	repeated uint64 tagged_publishedfileid = 13;
-}
-
-message CMsgClientUCMAddScreenshotResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 screenshotid = 2 [default = 18446744073709551615];
-}
-
-message CMsgClientUCMDeleteScreenshot {
-	optional fixed64 screenshotid = 1 [default = 18446744073709551615];
-}
-
-message CMsgClientUCMDeleteScreenshotResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
-message CMsgClientUCMPublishFile {
-	optional uint32 app_id = 1;
-	optional string file_name = 2;
-	optional string preview_file_name = 3;
-	optional uint32 consumer_app_id = 4;
-	optional string title = 5;
-	optional string description = 6;
-	repeated string tags = 8;
-	optional bool workshop_file = 9;
-	optional int32 visibility = 10;
-	optional uint32 file_type = 11;
-	optional string url = 12;
-	optional uint32 video_provider = 13;
-	optional string video_account_name = 14;
-	optional string video_identifier = 15;
-	optional bool in_progress = 16;
-}
-
-message CMsgClientUCMPublishFileResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 published_file_id = 2 [default = 18446744073709551615];
-	optional bool needs_workshop_legal_agreement_acceptance = 3 [default = false];
-}
-
-message CMsgClientUCMUpdatePublishedFile {
-	message KeyValueTag {
-		optional string key = 1;
-		optional string value = 2;
-	}
-
-	message AdditionalPreview {
-		optional string original_file_name = 1;
-		optional string internal_file_name = 2;
-		optional string videoid = 3;
-		optional uint32 preview_type = 4;
-		optional int32 update_index = 5 [default = -1];
-	}
-
-	optional uint32 app_id = 1;
-	optional fixed64 published_file_id = 2;
-	optional string file_name = 3;
-	optional string preview_file_name = 4;
-	optional string title = 5;
-	optional string description = 6;
-	repeated string tags = 7;
-	optional int32 visibility = 8;
-	optional bool update_file = 9;
-	optional bool update_preview_file = 10;
-	optional bool update_title = 11;
-	optional bool update_description = 12;
-	optional bool update_tags = 13;
-	optional bool update_visibility = 14;
-	optional string change_description = 15;
-	optional bool update_url = 16;
-	optional string url = 17;
-	optional bool update_content_manifest = 18;
-	optional fixed64 content_manifest = 19;
-	optional string metadata = 20;
-	optional bool update_metadata = 21;
-	optional int32 language = 22 [default = 0];
-	repeated string removed_kvtags = 23;
-	repeated .CMsgClientUCMUpdatePublishedFile.KeyValueTag kvtags = 24;
-	repeated .CMsgClientUCMUpdatePublishedFile.AdditionalPreview previews = 25;
-	repeated int32 previews_to_remove = 26;
-	optional bool clear_in_progress = 27;
-	optional bool remove_all_kvtags = 28;
-}
-
-message CMsgClientUCMUpdatePublishedFileResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional bool needs_workshop_legal_agreement_acceptance = 2 [default = false];
-}
-
-message CMsgClientUCMDeletePublishedFile {
-	optional fixed64 published_file_id = 1;
-	optional uint32 app_id = 2;
-}
-
-message CMsgClientUCMDeletePublishedFileResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
-message CMsgClientUCMEnumerateUserPublishedFiles {
-	optional uint32 app_id = 1;
-	optional uint32 start_index = 2;
-	optional uint32 sort_order = 3;
-}
-
-message CMsgClientUCMEnumerateUserPublishedFilesResponse {
-	message PublishedFileId {
-		optional fixed64 published_file_id = 1;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	repeated .CMsgClientUCMEnumerateUserPublishedFilesResponse.PublishedFileId published_files = 2;
-	optional uint32 total_results = 3;
-}
-
-message CMsgClientUCMEnumerateUserSubscribedFiles {
-	optional uint32 app_id = 1;
-	optional uint32 start_index = 2;
-	optional uint32 list_type = 3 [default = 1];
-	optional uint32 matching_file_type = 4 [default = 0];
-	optional uint32 count = 5 [default = 50];
-}
-
-message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
-	message PublishedFileId {
-		optional fixed64 published_file_id = 1;
-		optional fixed32 rtime32_subscribed = 2 [default = 0];
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId subscribed_files = 2;
-	optional uint32 total_results = 3;
-}
-
-message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
-	optional uint32 app_id = 1;
-	optional uint32 start_index = 2;
-	optional fixed32 start_time = 3;
-	optional uint32 desired_revision = 4 [default = 0];
-}
-
-message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
-	message PublishedFileId {
-		optional fixed64 published_file_id = 1;
-		optional fixed32 rtime32_subscribed = 2 [default = 0];
-		optional uint32 appid = 3;
-		optional fixed64 file_hcontent = 4;
-		optional uint32 file_size = 5;
-		optional fixed32 rtime32_last_updated = 6;
-		optional bool is_depot_content = 7;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	repeated .CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId subscribed_files = 2;
-	optional uint32 total_results = 3;
-}
-
-message CMsgClientUCMPublishedFileUpdated {
-	optional fixed64 published_file_id = 1;
-	optional uint32 app_id = 2;
-	optional uint32 time_updated = 3;
-	optional fixed64 hcontent = 4;
-	optional fixed32 file_size = 5;
-	optional bool is_depot_content = 6;
-	optional uint32 revision = 7;
-}
-
-message CMsgClientWorkshopItemChangesRequest {
-	optional uint32 app_id = 1;
-	optional uint32 last_time_updated = 2;
-	optional uint32 num_items_needed = 3;
-}
-
-message CMsgClientWorkshopItemChangesResponse {
-	message WorkshopItemInfo {
-		optional fixed64 published_file_id = 1;
-		optional uint32 time_updated = 2;
-		optional fixed64 manifest_id = 3;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 update_time = 2;
-	repeated .CMsgClientWorkshopItemChangesResponse.WorkshopItemInfo workshop_items = 5;
-}
-
-message CMsgClientWorkshopItemInfoRequest {
-	message WorkshopItem {
-		optional fixed64 published_file_id = 1;
-		optional uint32 time_updated = 2;
-	}
-
-	optional uint32 app_id = 1;
-	optional uint32 last_time_updated = 2;
-	repeated .CMsgClientWorkshopItemInfoRequest.WorkshopItem workshop_items = 3;
-}
-
-message CMsgClientWorkshopItemInfoResponse {
-	message WorkshopItemInfo {
-		optional fixed64 published_file_id = 1;
-		optional uint32 time_updated = 2;
-		optional fixed64 manifest_id = 3;
-		optional bool is_legacy = 4;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 update_time = 2;
-	repeated .CMsgClientWorkshopItemInfoResponse.WorkshopItemInfo workshop_items = 3;
-	repeated fixed64 private_items = 4;
-}
-
-message CMsgClientUCMGetPublishedFilesForUser {
-	optional uint32 app_id = 1;
-	optional fixed64 creator_steam_id = 2;
-	repeated string required_tags = 3;
-	repeated string excluded_tags = 4;
-	optional uint32 start_index = 5;
-}
-
-message CMsgClientUCMGetPublishedFilesForUserResponse {
-	message PublishedFileId {
-		optional fixed64 published_file_id = 1;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	repeated .CMsgClientUCMGetPublishedFilesForUserResponse.PublishedFileId published_files = 2;
-	optional uint32 total_results = 3;
-}
-
-message CMsgClientUCMSetUserPublishedFileAction {
-	optional fixed64 published_file_id = 1;
-	optional uint32 app_id = 2;
-	optional int32 action = 3;
-}
-
-message CMsgClientUCMSetUserPublishedFileActionResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
-message CMsgClientUCMEnumeratePublishedFilesByUserAction {
-	optional uint32 app_id = 1;
-	optional uint32 start_index = 2;
-	optional int32 action = 3;
-}
-
-message CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
-	message PublishedFileId {
-		optional fixed64 published_file_id = 1;
-		optional fixed32 rtime_time_stamp = 2 [default = 0];
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	repeated .CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.PublishedFileId published_files = 2;
-	optional uint32 total_results = 3;
-}
-
-message CMsgClientScreenshotsChanged {
-}
-
 message CMsgClientUpdateUserGameInfo {
 	optional fixed64 steamid_idgs = 1;
 	optional fixed64 gameid = 2;
@@ -461,12 +185,14 @@ message CMsgClientGetDepotDecryptionKeyResponse {
 message CMsgClientCheckAppBetaPassword {
 	optional uint32 app_id = 1;
 	optional string betapassword = 2;
+	optional int32 language = 3;
 }
 
 message CMsgClientCheckAppBetaPasswordResponse {
 	message BetaPassword {
 		optional string betaname = 1;
 		optional string betapassword = 2;
+		optional string betadescription = 3;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -529,6 +255,7 @@ message CMsgDownloadRateStatistics {
 	optional uint32 cell_id = 1;
 	repeated .CMsgDownloadRateStatistics.StatsInfo stats = 2;
 	optional uint32 throttling_kbps = 3;
+	optional uint32 steam_realm = 4;
 }
 
 message CMsgClientRequestAccountData {
@@ -571,69 +298,6 @@ message CMsgClientUGSGetGlobalStatsResponse {
 	repeated .CMsgClientUGSGetGlobalStatsResponse.Day days = 4;
 }
 
-message CMsgGameServerData {
-	message Player {
-		optional fixed64 steam_id = 1;
-	}
-
-	optional fixed64 steam_id_gs = 1;
-	optional uint32 deprecated_ip = 2;
-	optional uint32 query_port = 3;
-	optional uint32 game_port = 4;
-	optional uint32 sourcetv_port = 5;
-	optional string name = 22;
-	optional .CMsgIPAddress game_ip_address = 23;
-	optional uint32 app_id = 6;
-	optional string gamedir = 7;
-	optional string version = 8;
-	optional string product = 9;
-	optional string region = 10;
-	repeated .CMsgGameServerData.Player players = 11;
-	optional uint32 max_players = 12;
-	optional uint32 bot_count = 13;
-	optional bool password = 14;
-	optional bool secure = 15;
-	optional bool dedicated = 16;
-	optional string os = 17;
-	optional string game_data = 18;
-	optional uint32 game_data_version = 19;
-	optional string game_type = 20;
-	optional string map = 21;
-}
-
-message CMsgGameServerRemove {
-	optional fixed64 steam_id = 1;
-	optional uint32 deprecated_ip = 2;
-	optional uint32 query_port = 3;
-	optional .CMsgIPAddress ip = 4;
-}
-
-message CMsgClientGMSServerQuery {
-	optional uint32 app_id = 1;
-	optional uint32 geo_location_ip = 2;
-	optional uint32 region_code = 3;
-	optional string filter_text = 4;
-	optional uint32 max_servers = 5;
-}
-
-message CMsgGMSClientServerQueryResponse {
-	message Server {
-		optional uint32 deprecated_server_ip = 1;
-		optional uint32 server_port = 2;
-		optional uint32 auth_players = 3;
-		optional .CMsgIPAddress server_ip = 4;
-	}
-
-	repeated .CMsgGMSClientServerQueryResponse.Server servers = 1;
-	optional string error = 2;
-}
-
-message CMsgGameServerOutOfDate {
-	optional fixed64 steam_id_gs = 1;
-	optional bool reject = 2;
-	optional string message = 3;
-}
-
 message CMsgClientRedeemGuestPass {
 	optional fixed64 guest_pass_id = 1;
 }
@@ -664,28 +328,6 @@ message CMsgClientOGSReportBug {
 	optional uint64 sessionid = 1;
 	optional string bugtext = 2;
 	optional bytes screenshot = 3;
-}
-
-message CMsgGSAssociateWithClan {
-	optional fixed64 steam_id_clan = 1;
-}
-
-message CMsgGSAssociateWithClanResponse {
-	optional fixed64 steam_id_clan = 1;
-	optional uint32 eresult = 2 [default = 2];
-}
-
-message CMsgGSComputeNewPlayerCompatibility {
-	optional fixed64 steam_id_candidate = 1;
-}
-
-message CMsgGSComputeNewPlayerCompatibilityResponse {
-	optional fixed64 steam_id_candidate = 1;
-	optional uint32 eresult = 2 [default = 2];
-	optional bool is_clan_member = 3;
-	optional int32 ct_dont_like_you = 4;
-	optional int32 ct_you_dont_like = 5;
-	optional int32 ct_clanmembers_dont_like_you = 6;
 }
 
 message CMsgClientSentLogs {
@@ -907,18 +549,6 @@ message CMsgCREGetUserPublishedItemVoteDetailsResponse {
 
 	optional int32 eresult = 1 [default = 2];
 	repeated .CMsgCREGetUserPublishedItemVoteDetailsResponse.UserItemVoteDetail user_item_vote_details = 2;
-}
-
-message CMsgGameServerPingSample {
-	message Sample {
-		optional fixed32 ip = 1;
-		optional uint32 avg_ping_ms = 2;
-		optional uint32 stddev_ping_ms_x10 = 3;
-	}
-
-	optional fixed32 my_ip = 1;
-	optional int32 gs_app_id = 2;
-	repeated .CMsgGameServerPingSample.Sample gs_samples = 3;
 }
 
 message CMsgFSGetFollowerCount {

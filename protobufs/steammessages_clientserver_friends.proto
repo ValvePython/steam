@@ -151,6 +151,9 @@ message CMsgClientPersonaState {
 		optional uint32 watching_broadcast_appid = 75;
 		optional uint32 watching_broadcast_viewers = 76;
 		optional string watching_broadcast_title = 77;
+		optional bool is_community_banned = 78;
+		optional bool player_name_pending_review = 79;
+		optional bool avatar_pending_review = 80;
 	}
 
 	optional uint32 status_flags = 1;
@@ -232,6 +235,7 @@ message CMsgClientEmoticonList {
 		optional uint32 time_last_used = 3;
 		optional uint32 use_count = 4;
 		optional uint32 time_received = 5;
+		optional uint32 appid = 6;
 	}
 
 	message Sticker {
@@ -239,6 +243,8 @@ message CMsgClientEmoticonList {
 		optional int32 count = 2;
 		optional uint32 time_received = 3;
 		optional uint32 appid = 4;
+		optional uint32 time_last_used = 5;
+		optional uint32 use_count = 6;
 	}
 
 	message Effect {

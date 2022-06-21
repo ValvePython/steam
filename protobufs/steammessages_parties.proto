@@ -1,0 +1,94 @@
+syntax = "proto2";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+message CParties_JoinParty_Request {
+	optional fixed64 steamid = 1;
+	optional uint64 beacon_id = 2;
+}
+
+message CParties_JoinParty_Response {
+	optional uint64 beacon_id = 1;
+	optional string connect_string = 2;
+}
+
+message CParties_BeaconLocation {
+	optional uint32 location_type = 1;
+	optional uint64 location_id = 2;
+}
+
+message CParties_CreateBeacon_Request {
+	optional uint32 appid = 1;
+	optional uint32 num_open_slots = 2;
+	repeated .CParties_BeaconLocation locations = 3;
+	optional string connect_string = 4;
+	optional string metadata = 5;
+}
+
+message CParties_CreateBeacon_Response {
+	optional uint64 beacon_id = 1;
+}
+
+message CParties_OnReservationCompleted_Request {
+	optional uint64 beacon_id = 1;
+	optional fixed64 user_steamid = 2;
+}
+
+message CParties_OnReservationCompleted_Response {
+	optional uint64 beacon_id = 1;
+}
+
+message CParties_CancelReservation_Request {
+	optional uint64 beacon_id = 1;
+	optional fixed64 user_steamid = 2;
+}
+
+message CParties_CancelReservation_Response {
+	optional uint64 beacon_id = 1;
+}
+
+message CParties_ChangeNumOpenSlots_Request {
+	optional uint64 beacon_id = 1;
+	optional uint32 num_open_slots = 2;
+}
+
+message CParties_ChangeNumOpenSlots_Response {
+	optional uint64 beacon_id = 1;
+}
+
+message CParties_DestroyBeacon_Request {
+	optional uint64 beacon_id = 1;
+}
+
+message CParties_DestroyBeacon_Response {
+	optional uint64 beacon_id = 1;
+}
+
+service Parties {
+	option (service_description) = "Party-related services";
+
+	rpc JoinParty (.CParties_JoinParty_Request) returns (.CParties_JoinParty_Response) {
+		option (method_description) = "Request to join a Party via the given Beacon ID. If successful, will be given the necessary 'connect' string.";
+	}
+
+	rpc CreateBeacon (.CParties_CreateBeacon_Request) returns (.CParties_CreateBeacon_Response) {
+		option (method_description) = "Create a Beacon to attract people to your Party.";
+	}
+
+	rpc OnReservationCompleted (.CParties_OnReservationCompleted_Request) returns (.CParties_OnReservationCompleted_Response) {
+		option (method_description) = "Notify Steam that a user with a reservation has successfully joined.";
+	}
+
+	rpc CancelReservation (.CParties_CancelReservation_Request) returns (.CParties_CancelReservation_Response) {
+		option (method_description) = "Notify Steam that a user with a reservation either never showed up, or has left the party.";
+	}
+
+	rpc ChangeNumOpenSlots (.CParties_ChangeNumOpenSlots_Request) returns (.CParties_ChangeNumOpenSlots_Response) {
+		option (method_description) = "Change the number of open slots";
+	}
+
+	rpc DestroyBeacon (.CParties_DestroyBeacon_Request) returns (.CParties_DestroyBeacon_Response) {
+		option (method_description) = "Delete the Beacon.";
+	}
+}

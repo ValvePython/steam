@@ -75,13 +75,14 @@ class SteamLeaderboard(object):
     display_type = ELeaderboardDisplayType.NONE    #: :class:`steam.enums.common.ELeaderboardDisplayType`
     data_request = ELeaderboardDataRequest.Global  #: :class:`steam.enums.common.ELeaderboardDataRequest`
 
-    def __init__(self, steam, app_id, name, data):
+    def __init__(self, steam, app_id, name, data=None):
         self._steam = steam
         self.app_id = app_id
 
-        for field in data.DESCRIPTOR.fields:
-            if field.name.startswith('leaderboard_'):
-                self.__dict__[field.name.replace('leaderboard_', '')] = getattr(data, field.name)
+        if data is not None:
+            for field in data.DESCRIPTOR.fields:
+                if field.name.startswith('leaderboard_'):
+                    self.__dict__[field.name.replace('leaderboard_', '')] = getattr(data, field.name)
 
         self.sort_method = ELeaderboardSortMethod(self.sort_method)
         self.display_type = ELeaderboardDisplayType(self.display_type)

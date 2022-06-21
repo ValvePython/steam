@@ -1,5 +1,14 @@
+
+# Docs:  https://coverage.readthedocs.org/en/latest/config.html
+
 [run]
 concurrency = gevent
 omit =
     steam/protobufs/*
     steam/enums/*
+
+branch = False
+
+# If True, stores relative file paths in data file (needed for Github Actions).
+# Using this parameter requires coverage>=5.0
+relative_files = True

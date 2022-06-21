@@ -1,0 +1,13 @@
+
+-r requirements.txt
+
+vcrpy==2.0.1
+PyYAML>=5.4
+mock==1.3.0
+
+coverage>=5.0; python_version == '2.7' or python_version >= '3.5'
+pytest-cov>=2.7.0; python_version == '2.7' or python_version >= '3.5'
+
+# coveralls 2.0 has removed support for Python 2.7 and 3.4
+git+https://github.com/andy-maier/coveralls-python.git@andy/add-py27#egg=coveralls; python_version == '2.7'
+coveralls>=2.1.2; python_version >= '3.5'

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question in the discussion section
+    url: https://github.com/ValvePython/steam/discussions
+    about: Please ask and answer questions here.
+  - name: Ask a question via IRC (libera.chat)
+    url: https://web.libera.chat/#steamre
+    about: Please ask and answer questions here.

@@ -1,0 +1,81 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = false;
+
+message CMsgClientGetUserStats {
+	optional fixed64 game_id = 1;
+	optional uint32 crc_stats = 2;
+	optional int32 schema_local_version = 3;
+	optional fixed64 steam_id_for_user = 4;
+}
+
+message CMsgClientGetUserStatsResponse {
+	message Stats {
+		optional uint32 stat_id = 1;
+		optional uint32 stat_value = 2;
+	}
+
+	message Achievement_Blocks {
+		optional uint32 achievement_id = 1;
+		repeated fixed32 unlock_time = 2;
+	}
+
+	optional fixed64 game_id = 1;
+	optional int32 eresult = 2 [default = 2];
+	optional uint32 crc_stats = 3;
+	optional bytes schema = 4;
+	repeated .CMsgClientGetUserStatsResponse.Stats stats = 5;
+	repeated .CMsgClientGetUserStatsResponse.Achievement_Blocks achievement_blocks = 6;
+}
+
+message CMsgClientStoreUserStatsResponse {
+	message Stats_Failed_Validation {
+		optional uint32 stat_id = 1;
+		optional uint32 reverted_stat_value = 2;
+	}
+
+	optional fixed64 game_id = 1;
+	optional int32 eresult = 2 [default = 2];
+	optional uint32 crc_stats = 3;
+	repeated .CMsgClientStoreUserStatsResponse.Stats_Failed_Validation stats_failed_validation = 4;
+	optional bool stats_out_of_date = 5;
+}
+
+message CMsgClientStoreUserStats2 {
+	message Stats {
+		optional uint32 stat_id = 1;
+		optional uint32 stat_value = 2;
+	}
+
+	optional fixed64 game_id = 1;
+	optional fixed64 settor_steam_id = 2;
+	optional fixed64 settee_steam_id = 3;
+	optional uint32 crc_stats = 4;
+	optional bool explicit_reset = 5;
+	repeated .CMsgClientStoreUserStats2.Stats stats = 6;
+}
+
+message CMsgClientStatsUpdated {
+	message Updated_Stats {
+		optional uint32 stat_id = 1;
+		optional uint32 stat_value = 2;
+	}
+
+	optional fixed64 steam_id = 1;
+	optional fixed64 game_id = 2;
+	optional uint32 crc_stats = 3;
+	repeated .CMsgClientStatsUpdated.Updated_Stats updated_stats = 4;
+}
+
+message CMsgClientStoreUserStats {
+	message Stats_To_Store {
+		optional uint32 stat_id = 1;
+		optional uint32 stat_value = 2;
+	}
+
+	optional fixed64 game_id = 1;
+	optional bool explicit_reset = 2;
+	repeated .CMsgClientStoreUserStats.Stats_To_Store stats_to_store = 3;
+}

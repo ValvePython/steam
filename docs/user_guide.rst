@@ -153,6 +153,10 @@ SteamClient
 ``gevent`` based implementation for interacting with the Steam network.
 The library comes with some Steam client features implemented, see :doc:`api/steam.client` for more details.
 
+.. warning::
+    :class:`.SteamClient` no longer applies gevent monkey patches by default.
+    See :mod:`steam.monkey` for details how make stdlib gevent cooperative.
+
 CLI example
 -----------
 
@@ -217,6 +221,38 @@ Alternatively, a callback can be registered to handle the response event every t
     # OR
     client.on(EMsg.ClientAddFriendResponse, handle_add_response)
 
+
+Logging
+-------
+
+It is often useful to see the message that are coming in and going on.
+Here is how to enable debug logging to the console.
+
+.. code:: python
+
+    import logging
+    logging.basicConfig(format='[%(asctime)s] %(levelname)s %(name)s: %(message)s', level=logging.DEBUG)
+
+For more complicated :mod:`logging` configurations, consult the python documentation.
+
+By default the :class:`.SteamClient` will not log the contents of messages.
+To enable that simply set :attr:`.SteamClient.verbose_debug` to ``True`` on your :class:`.SteamClient` instance.
+
+.. code:: python
+
+    client = SteamClient()
+    client.verbose_debug = True
+
+When there are multiple instances, they will all log under the same logger name.
+We can override the default logger instances with new one and give it a different name.
+
+.. code:: python
+
+    client1 = SteamClient()
+    client2 = SteamClient()
+
+    client1._LOG = logging.getLogger("SC#1")
+    client2._LOG = logging.getLogger("SC#2")
 
 Web Authentication
 ==================

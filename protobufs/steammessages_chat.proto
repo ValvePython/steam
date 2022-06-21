@@ -43,6 +43,12 @@ enum EChatRoomServerMessage {
 	k_EChatRoomServerMsg_AppCustom = 11;
 }
 
+enum EChatRoomMessageReactionType {
+	k_EChatRoomMessageReactionType_Invalid = 0;
+	k_EChatRoomMessageReactionType_Emoticon = 1;
+	k_EChatRoomMessageReactionType_Sticker = 2;
+}
+
 enum EChatRoomMemberStateChange {
 	k_EChatRoomMemberStateChange_Invalid = 0;
 	k_EChatRoomMemberStateChange_Joined = 1;
@@ -115,6 +121,7 @@ message CChatRoomGroupHeaderState {
 	optional uint64 watching_broadcast_channel_id = 23;
 	optional uint64 active_minigame_id = 24;
 	optional string avatar_ugc_url = 25;
+	optional bool disabled = 26;
 }
 
 message CChatRoomMember {
@@ -469,12 +476,20 @@ message ServerMessage {
 
 message CChatRoom_GetMessageHistory_Response {
 	message ChatMessage {
+		message MessageReaction {
+			optional .EChatRoomMessageReactionType reaction_type = 1 [default = k_EChatRoomMessageReactionType_Invalid];
+			optional string reaction = 2;
+			optional uint32 num_reactors = 3;
+			optional bool has_user_reacted = 4;
+		}
+
 		optional uint32 sender = 1;
 		optional uint32 server_timestamp = 2;
 		optional string message = 3;
 		optional uint32 ordinal = 4;
 		optional .ServerMessage server_message = 5;
 		optional bool deleted = 6;
+		repeated .CChatRoom_GetMessageHistory_Response.ChatMessage.MessageReaction reactions = 7;
 	}
 
 	repeated .CChatRoom_GetMessageHistory_Response.ChatMessage messages = 1;
@@ -506,6 +521,7 @@ message CChatRoom_GetChatRoomGroupSummary_Response {
 	optional uint64 watching_broadcast_channel_id = 19;
 	optional uint64 active_minigame_id = 20;
 	optional string avatar_ugc_url = 21;
+	optional bool disabled = 22;
 }
 
 message CChatRoomSummaryPair {
@@ -715,6 +731,34 @@ message CChatRoom_SearchMembers_Response {
 	optional uint32 status_flags = 2;
 }
 
+message CChatRoom_UpdateMessageReaction_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional uint32 server_timestamp = 3;
+	optional uint32 ordinal = 4;
+	optional .EChatRoomMessageReactionType reaction_type = 5 [default = k_EChatRoomMessageReactionType_Invalid];
+	optional string reaction = 6;
+	optional bool is_add = 7;
+}
+
+message CChatRoom_UpdateMessageReaction_Response {
+	optional uint32 num_reactors = 1;
+}
+
+message CChatRoom_GetMessageReactionReactors_Request {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional uint32 server_timestamp = 3;
+	optional uint32 ordinal = 4;
+	optional .EChatRoomMessageReactionType reaction_type = 5 [default = k_EChatRoomMessageReactionType_Invalid];
+	optional string reaction = 6;
+	optional uint32 limit = 7;
+}
+
+message CChatRoom_GetMessageReactionReactors_Response {
+	repeated uint32 reactors = 1;
+}
+
 message CClanChatRooms_GetClanChatRoomInfo_Request {
 	optional fixed64 steamid = 1;
 	optional bool autocreate = 2 [default = true, (description) = "Create a default chat room if none has been created before."];
@@ -824,6 +868,17 @@ message CChatRoomClient_MemberListViewUpdated_Notification {
 	optional uint32 status_flags = 5;
 	optional .CChatRoomMemberSummaryCounts member_summary = 6;
 	repeated .CMsgClientPersonaState.Friend subscribed_personas = 7;
+}
+
+message CChatRoom_MessageReaction_Notification {
+	optional uint64 chat_group_id = 1;
+	optional uint64 chat_id = 2;
+	optional uint32 server_timestamp = 3;
+	optional uint32 ordinal = 4;
+	optional fixed64 reactor = 5;
+	optional .EChatRoomMessageReactionType reaction_type = 6 [default = k_EChatRoomMessageReactionType_Invalid];
+	optional string reaction = 7;
+	optional bool is_add = 8;
 }
 
 message CChatUsability_ClientUsabilityMetrics_Notification {
@@ -1137,6 +1192,14 @@ service ChatRoom {
 	rpc SearchMembers (.CChatRoom_SearchMembers_Request) returns (.CChatRoom_SearchMembers_Response) {
 		option (method_description) = "Search chat room members by name.";
 	}
+
+	rpc UpdateMessageReaction (.CChatRoom_UpdateMessageReaction_Request) returns (.CChatRoom_UpdateMessageReaction_Response) {
+		option (method_description) = "Adds/removes a reaction to/from a chat room message";
+	}
+
+	rpc GetMessageReactionReactors (.CChatRoom_GetMessageReactionReactors_Request) returns (.CChatRoom_GetMessageReactionReactors_Response) {
+		option (method_description) = "Fetches a list of reactors for a specified reaction";
+	}
 }
 
 service ClanChatRooms {
@@ -1193,6 +1256,10 @@ service ChatRoomClient {
 
 	rpc NotifyMemberListViewUpdated (.CChatRoomClient_MemberListViewUpdated_Notification) returns (.NoResponse) {
 		option (method_description) = "The list of members for a chat room with virtualized member list has changed on the server (or client requested)";
+	}
+
+	rpc NotifyMessageReaction (.CChatRoom_MessageReaction_Notification) returns (.NoResponse) {
+		option (method_description) = "New message reaction";
 	}
 }
 
