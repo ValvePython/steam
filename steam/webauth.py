@@ -65,8 +65,6 @@ from steam.steamid import SteamID
 from steam.utils.web import make_requests_session, generate_session_id
 from steam.core.crypto import rsa_publickey, pkcs1v15_encrypt
 
-from steam.webrequests import BrowserRequests
-
 if six.PY2:
     intBase = long
     _cli_input = raw_input
@@ -75,7 +73,7 @@ else:
     _cli_input = input
 
 
-class WebAuth(BrowserRequests):
+class WebAuth(object):
     key = None
     logged_on = False    #: whether authentication has been completed successfully
     session = None      #: :class:`requests.Session` (with auth cookies after auth is completed)
@@ -86,7 +84,6 @@ class WebAuth(BrowserRequests):
 
     def __init__(self, username, password=''):
         self.__dict__.update(locals())
-        super().__init__()
         self.session = make_requests_session()
         self._session_setup()
 
