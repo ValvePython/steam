@@ -498,7 +498,7 @@ class CMServerList(object):
             return False
 
         serverlist = resp['response']['serverlist']
-        self._LOG.debug("Recieved %d servers from WebAPI" % len(serverlist))
+        self._LOG.debug("Received %d servers from WebAPI" % len(serverlist))
 
         def str_to_tuple(serveraddr):
             ip, port = serveraddr.split(':')
