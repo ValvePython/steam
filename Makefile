@@ -61,10 +61,7 @@ clean:
 dist: clean
 	python setup.py sdist
 
-register:
-	python setup.py register -r pypi
-
-upload: dist register
+upload: dist
 	twine upload -r pypi dist/*
 
 pb_fetch:
