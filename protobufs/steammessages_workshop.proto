@@ -1,0 +1,24 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+message CWorkshop_GetEULAStatus_Request {
+	optional uint32 appid = 1;
+}
+
+message CWorkshop_GetEULAStatus_Response {
+	optional uint32 version = 1;
+	optional uint32 timestamp_action = 2;
+	optional bool accepted = 3;
+	optional bool needs_action = 4;
+}
+
+service Workshop {
+	option (service_description) = "A service to access published file data";
+
+	rpc GetEULAStatus (.CWorkshop_GetEULAStatus_Request) returns (.CWorkshop_GetEULAStatus_Response) {
+		option (method_description) = "Retrieve the status of the user's EULA acceptance.";
+	}
+}

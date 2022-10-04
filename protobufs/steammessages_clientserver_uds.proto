@@ -33,13 +33,14 @@ message CMsgClientGetClientDetailsResponse {
 	}
 
 	optional uint32 package_version = 1;
-	optional uint32 protocol_version = 8;
 	optional string os = 2;
 	optional string machine_name = 3;
 	optional string ip_public = 4;
 	optional string ip_private = 5;
-	optional uint64 bytes_available = 7;
 	repeated .CMsgClientGetClientDetailsResponse.Game games_running = 6;
+	optional uint64 bytes_available = 7;
+	optional uint32 protocol_version = 8;
+	optional uint32 clientcomm_version = 9;
 }
 
 message CMsgClientGetClientAppList {
@@ -49,6 +50,7 @@ message CMsgClientGetClientAppList {
 	optional bool only_installed = 4;
 	optional bool only_changing = 5;
 	optional bool comics = 6;
+	optional bool include_client_info = 7;
 }
 
 message CMsgClientGetClientAppListResponse {
@@ -65,18 +67,28 @@ message CMsgClientGetClientAppListResponse {
 		optional bool installed = 4;
 		optional bool auto_update = 5;
 		optional uint64 bytes_downloaded = 6;
-		optional uint64 bytes_needed = 7;
+		optional uint64 bytes_to_download = 7;
 		optional uint32 bytes_download_rate = 8;
+		repeated .CMsgClientGetClientAppListResponse.App.DLC dlcs = 9;
 		optional bool download_paused = 11;
 		optional uint32 num_downloading = 12;
 		optional uint32 num_paused = 13;
 		optional bool changing = 14;
 		optional bool available_on_platform = 15;
-		repeated .CMsgClientGetClientAppListResponse.App.DLC dlcs = 9;
+		optional uint64 bytes_staged = 16;
+		optional uint64 bytes_to_stage = 17;
+		optional uint64 bytes_required = 18;
+		optional uint32 source_buildid = 19;
+		optional uint32 target_buildid = 20;
+		optional uint32 estimated_seconds_remaining = 21;
+		optional int32 queue_position = 22;
+		optional bool uninstalling = 23;
+		optional uint32 rt_time_scheduled = 24;
 	}
 
 	repeated .CMsgClientGetClientAppListResponse.App apps = 1;
 	optional uint64 bytes_available = 2;
+	optional .CMsgClientGetClientDetailsResponse client_info = 3;
 }
 
 message CMsgClientInstallClientApp {
@@ -101,5 +113,13 @@ message CMsgClientSetClientAppUpdateState {
 }
 
 message CMsgClientSetClientAppUpdateStateResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgClientEnableOrDisableDownloads {
+	optional bool enable = 1;
+}
+
+message CMsgClientEnableOrDisableDownloadsResponse {
 	optional uint32 result = 1;
 }

@@ -1,4 +1,5 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
@@ -31,6 +32,7 @@ message CTwoFactor_AddAuthenticator_Request {
 	optional string device_identifier = 5 [(description) = "Authenticator identifier"];
 	optional string sms_phone_id = 6 [(description) = "ID of phone to use for SMS verification"];
 	repeated string http_headers = 7 [(description) = "HTTP headers alternating by K/V"];
+	optional uint32 version = 8 [default = 1, (description) = "What the version of our token should be"];
 }
 
 message CTwoFactor_AddAuthenticator_Response {
@@ -44,6 +46,7 @@ message CTwoFactor_AddAuthenticator_Response {
 	optional bytes identity_secret = 8 [(description) = "Secret used for identity attestation (e.g., for eventing)"];
 	optional bytes secret_1 = 9 [(description) = "Spare shared secret"];
 	optional int32 status = 10 [(description) = "Result code"];
+	optional string phone_number_hint = 11 [(description) = "a portion of the phone number the SMS code was sent to"];
 }
 
 message CTwoFactor_SendEmail_Request {
@@ -61,6 +64,7 @@ message CTwoFactor_FinalizeAddAuthenticator_Request {
 	optional uint64 authenticator_time = 3 [(description) = "Current authenticator time"];
 	optional string activation_code = 4 [(description) = "Activation code from out-of-band message"];
 	repeated string http_headers = 5 [(description) = "HTTP headers alternating by K/V"];
+	optional bool validate_sms_code = 6 [(description) = "When finalizing with an SMS code, pass the request on to the PhoneService to update its state too."];
 }
 
 message CTwoFactor_FinalizeAddAuthenticator_Response {
@@ -68,6 +72,15 @@ message CTwoFactor_FinalizeAddAuthenticator_Response {
 	optional bool want_more = 2 [(description) = "True if want more tries"];
 	optional uint64 server_time = 3 [(description) = "Current server time"];
 	optional int32 status = 4 [(description) = "Result code"];
+}
+
+message CTwoFactor_UpdateTokenVersion_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 version = 2 [(description) = "What the version of our token should be"];
+	optional bytes signature = 3 [(description) = "HMAC digest over user's private key"];
+}
+
+message CTwoFactor_UpdateTokenVersion_Response {
 }
 
 message CTwoFactor_RemoveAuthenticator_Request {
@@ -106,6 +119,38 @@ message CTwoFactor_ValidateToken_Response {
 	optional bool valid = 1 [(description) = "result of validation"];
 }
 
+message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
+}
+
+message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response {
+	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
+}
+
+message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
+	optional string sms_code = 1 [(description) = "Code from SMS"];
+	optional bool generate_new_token = 2 [(description) = "Generate new token (instead of removing old one)"];
+}
+
+message CRemoveAuthenticatorViaChallengeContinue_Replacement_Token {
+	optional bytes shared_secret = 1 [(description) = "Shared secret between server and authenticator"];
+	optional fixed64 serial_number = 2 [(description) = "Authenticator serial number (unique per token)"];
+	optional string revocation_code = 3 [(description) = "code used to revoke authenticator"];
+	optional string uri = 4 [(description) = "URI for QR code generation"];
+	optional uint64 server_time = 5 [(description) = "Current server time"];
+	optional string account_name = 6 [(description) = "Account name to display on token client"];
+	optional string token_gid = 7 [(description) = "Token GID assigned by server"];
+	optional bytes identity_secret = 8 [(description) = "Secret used for identity attestation (e.g., for eventing)"];
+	optional bytes secret_1 = 9 [(description) = "Spare shared secret"];
+	optional int32 status = 10 [(description) = "Result code"];
+	optional uint32 steamguard_scheme = 11 [(description) = "Type of Steam Guard to use once token is removed"];
+	optional fixed64 steamid = 12 [(description) = "steamid that owns the secret"];
+}
+
+message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response {
+	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
+	optional .CRemoveAuthenticatorViaChallengeContinue_Replacement_Token replacement_token = 2 [(description) = "Fresh secret to install"];
+}
+
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
 
@@ -125,6 +170,10 @@ service TwoFactor {
 		option (method_description) = "Finalize two-factor authentication addition to the logged-in account";
 	}
 
+	rpc UpdateTokenVersion (.CTwoFactor_UpdateTokenVersion_Request) returns (.CTwoFactor_UpdateTokenVersion_Response) {
+		option (method_description) = "Update the version for my token";
+	}
+
 	rpc RemoveAuthenticator (.CTwoFactor_RemoveAuthenticator_Request) returns (.CTwoFactor_RemoveAuthenticator_Response) {
 		option (method_description) = "Remove two-factor authentication addition from the logged-in account";
 	}
@@ -139,5 +188,13 @@ service TwoFactor {
 
 	rpc ValidateToken (.CTwoFactor_ValidateToken_Request) returns (.CTwoFactor_ValidateToken_Response) {
 		option (method_description) = "Validate (and consume) a token";
+	}
+
+	rpc RemoveAuthenticatorViaChallengeStart (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response) {
+		option (method_description) = "Start challenge-based authenticator removal";
+	}
+
+	rpc RemoveAuthenticatorViaChallengeContinue (.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response) {
+		option (method_description) = "Continue challenge-based authenticator removal";
 	}
 }

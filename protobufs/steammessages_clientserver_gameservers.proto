@@ -12,6 +12,7 @@ message CMsgGSServerType {
 	optional string game_dir = 5;
 	optional string game_version = 6;
 	optional uint32 game_query_port = 7;
+	optional uint32 game_port_local = 10;
 	optional bytes sdr_logon = 8;
 	optional fixed32 fake_ip = 9;
 }
@@ -48,7 +49,6 @@ message CMsgGameServerData {
 	}
 
 	optional uint32 revision = 24;
-	optional fixed64 steam_id_gs = 1;
 	optional uint32 query_port = 3;
 	optional uint32 game_port = 4;
 	optional uint32 spectator_port = 5;
@@ -56,6 +56,7 @@ message CMsgGameServerData {
 	optional string game_description = 29;
 	optional string spectator_server_name = 27;
 	optional fixed32 fake_ip = 28;
+	optional string sdr_ping_location = 30;
 	optional uint32 app_id = 6;
 	optional string gamedir = 7;
 	optional string version = 8;
@@ -97,6 +98,7 @@ message CMsgGMSClientServerQueryResponse {
 		optional uint32 players = 8;
 		optional uint32 game_port = 9;
 		optional fixed32 sdr_popid = 10;
+		optional string sdr_ping_location = 32;
 		optional uint32 flags = 11;
 		optional uint32 app_id = 12;
 		optional uint32 max_players = 13;

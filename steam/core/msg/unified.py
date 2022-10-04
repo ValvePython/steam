@@ -2,6 +2,9 @@ import re
 from importlib import import_module
 
 service_lookup = {  # MARK_SERVICE_START
+    'Authentication':                   'steam.protobufs.steammessages_auth_pb2',
+    'AuthenticationSupport':            'steam.protobufs.steammessages_auth_pb2',
+    'CloudGaming':                      'steam.protobufs.steammessages_auth_pb2',
     'Broadcast':                        'steam.protobufs.steammessages_broadcast_pb2',
     'BroadcastClient':                  'steam.protobufs.steammessages_broadcast_pb2',
     'Chat':                             'steam.protobufs.steammessages_chat_pb2',
@@ -24,10 +27,12 @@ service_lookup = {  # MARK_SERVICE_START
     'GameNotifications':                'steam.protobufs.steammessages_gamenotifications_pb2',
     'GameNotificationsClient':          'steam.protobufs.steammessages_gamenotifications_pb2',
     'GameServers':                      'steam.protobufs.steammessages_gameservers_pb2',
+    'GameServerClient':                 'steam.protobufs.steammessages_gameservers_pb2',
     'Inventory':                        'steam.protobufs.steammessages_inventory_pb2',
     'InventoryClient':                  'steam.protobufs.steammessages_inventory_pb2',
     'CommunityLinkFilter':              'steam.protobufs.steammessages_linkfilter_pb2',
     'LobbyMatchmakingLegacy':           'steam.protobufs.steammessages_lobbymatchmaking_pb2',
+    'MarketingMessages':                'steam.protobufs.steammessages_marketingmessages_pb2',
     'EconMarket':                       'steam.protobufs.steammessages_market_pb2',
     'Offline':                          'steam.protobufs.steammessages_offline_pb2',
     'Parental':                         'steam.protobufs.steammessages_parental_pb2',
@@ -45,6 +50,9 @@ service_lookup = {  # MARK_SERVICE_START
     'Shader':                           'steam.protobufs.steammessages_shader_pb2',
     'SiteManagerClient':                'steam.protobufs.steammessages_site_license_pb2',
     'SiteLicense':                      'steam.protobufs.steammessages_site_license_pb2',
+    'STAR':                             'steam.protobufs.steammessages_star_pb2',
+    'SteamTV':                          'steam.protobufs.steammessages_steamtv_pb2',
+    'StoreBrowse':                      'steam.protobufs.steammessages_storebrowse_pb2',
     'Store':                            'steam.protobufs.steammessages_store_pb2',
     'StoreClient':                      'steam.protobufs.steammessages_store_pb2',
     'TimedTrial':                       'steam.protobufs.steammessages_timedtrial_pb2',
@@ -69,6 +77,7 @@ service_lookup = {  # MARK_SERVICE_START
     'WebRTCClientNotifications':        'steam.protobufs.steammessages_webui_friends_pb2',
     'MobilePerAccount':                 'steam.protobufs.steammessages_webui_friends_pb2',
     'MobileDevice':                     'steam.protobufs.steammessages_webui_friends_pb2',
+    'Workshop':                         'steam.protobufs.steammessages_workshop_pb2',
 }  # MARK_SERVICE_END
 
 method_lookup = {}

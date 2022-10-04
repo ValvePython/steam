@@ -104,6 +104,8 @@ enum EStreamControlMessage {
 	k_EStreamControlSetInputTemporarilyDisabled = 133;
 	k_EStreamControlSetQualityOverride = 134;
 	k_EStreamControlSetBitrateOverride = 135;
+	k_EStreamControlShowOnScreenKeyboard = 136;
+	k_EStreamControlControllerConfigMsg = 137;
 }
 
 enum EStreamVersion {
@@ -141,6 +143,14 @@ enum EStreamQualityPreference {
 enum EStreamBitrate {
 	k_EStreamBitrateAutodetect = -1;
 	k_EStreamBitrateUnlimited = 0;
+}
+
+enum EStreamColorspace {
+	k_EStreamColorspace_Unknown = 0;
+	k_EStreamColorspace_BT601 = 1;
+	k_EStreamColorspace_BT601_Full = 2;
+	k_EStreamColorspace_BT709 = 3;
+	k_EStreamColorspace_BT709_Full = 4;
 }
 
 enum EStreamP2PScope {
@@ -283,6 +293,14 @@ enum ELogFileType {
 	k_ELogFileSystemDebug = 2;
 }
 
+enum EStreamControllerConfigMsg {
+	k_EStreamControllerConfigMsg_RequestConfigsForApp = 0;
+	k_EStreamControllerConfigMsg_ConfigResponse = 1;
+	k_EStreamControllerConfigMsg_PersonalizationResponse = 2;
+	k_EStreamControllerConfigMsg_ActiveConfigChange = 3;
+	k_EStreamControllerConfigMsg_RequestActiveConfig = 4;
+}
+
 message CDiscoveryPingRequest {
 	optional uint32 sequence = 1;
 	optional uint32 packet_size_requested = 2;
@@ -356,6 +374,8 @@ message CStreamingClientCaps {
 	optional bool disable_amd_hardware_encoding = 9;
 	optional bool disable_nvidia_hardware_encoding = 10;
 	optional int32 form_factor = 11;
+	optional bool has_on_screen_keyboard = 12;
+	repeated .EStreamColorspace supported_colorspaces = 13;
 }
 
 message CStreamingClientConfig {
@@ -398,6 +418,7 @@ message CNegotiatedConfig {
 	repeated .CStreamVideoMode available_video_modes = 4;
 	optional bool enable_remote_hid = 5;
 	optional bool enable_touch_input = 6;
+	optional bool disable_client_cursor = 7;
 }
 
 message CNegotiationInitMsg {
@@ -685,6 +706,7 @@ message CSetSpectatorModeMsg {
 
 message CRemoteHIDMsg {
 	optional bytes data = 1;
+	optional bool active_input = 2;
 }
 
 message CTouchConfigActiveMsg {
@@ -764,6 +786,9 @@ message CSetQualityOverrideMsg {
 
 message CSetBitrateOverrideMsg {
 	optional int32 value = 1;
+}
+
+message CShowOnScreenKeyboardMsg {
 }
 
 message CStreamDataLostMsg {
@@ -854,4 +879,40 @@ message CTransportSignalMsg {
 
 	optional .CTransportSignalMsg.WebRTCMessage webrtc = 1;
 	repeated bytes sdr = 2;
+}
+
+message CControllerConfigMsg {
+	message ControllerConfigResponse {
+		optional uint32 appid = 1;
+		optional string configURL = 2;
+		optional uint32 controllerType = 3;
+		optional string controllerData = 4;
+		optional uint32 selectionOrder = 5;
+		optional bool actionBlock = 6;
+	}
+
+	message ControllerPersonalizationResponse {
+		optional string personalizationData = 1;
+	}
+
+	message ControllerActiveConfigChangeResponse {
+		optional string configURL = 2;
+		optional uint32 controllerType = 3;
+		optional string controllerData = 4;
+		optional uint32 selectionOrder = 5;
+	}
+
+	message ControllerActiveConfigMsg {
+		optional uint32 appid = 1;
+		optional string configURL = 2;
+		optional uint32 controllerType = 3;
+		optional string controllerData = 4;
+	}
+
+	required .EStreamControllerConfigMsg type = 1 [default = k_EStreamControllerConfigMsg_RequestConfigsForApp];
+	optional string controllerPath = 2;
+	optional uint32 appid = 3;
+	optional .CControllerConfigMsg.ControllerPersonalizationResponse personalizationResponse = 4;
+	repeated .CControllerConfigMsg.ControllerConfigResponse configResponse = 6;
+	optional .CControllerConfigMsg.ControllerActiveConfigMsg activeConfigChangeMsg = 7;
 }

@@ -1,12 +1,77 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
+import "enums.proto";
 
 option py_generic_services = true;
+
+enum EStoreDiscoveryQueueType {
+	k_EStoreDiscoveryQueueTypeNew = 0;
+	k_EStoreDiscoveryQueueTypeComingSoon = 1;
+	k_EStoreDiscoveryQueueTypeRecommended = 2;
+	k_EStoreDiscoveryQueueTypeEveryNewRelease = 3;
+	k_EStoreDiscoveryQueueTypeMLRecommender = 5;
+	k_EStoreDiscoveryQueueTypeWishlistOnSale = 6;
+	k_EStoreDiscoveryQueueTypeDLC = 7;
+	k_EStoreDiscoveryQueueTypeDLCOnSale = 8;
+	k_EStoreDiscoveryQueueTypeRecommendedComingSoon = 9;
+	k_EStoreDiscoveryQueueTypeRecommendedFree = 10;
+	k_EStoreDiscoveryQueueTypeRecommendedOnSale = 11;
+	k_EStoreDiscoveryQueueTypeRecommendedDemos = 12;
+	k_EStoreDiscoveryQueueTypeDLCNewReleases = 13;
+	k_EStoreDiscoveryQueueTypeDLCTopSellers = 14;
+	k_EStoreDiscoveryQueueTypeMAX = 15;
+}
+
+enum EPlaytestStatus {
+	k_ETesterStatusNone = 0;
+	k_ETesterStatusPending = 1;
+	k_ETesterStatusInvited = 2;
+	k_ETesterStatusGranted = 3;
+}
 
 enum EUserReviewScorePreference {
 	k_EUserReviewScorePreference_Unset = 0;
 	k_EUserReviewScorePreference_IncludeAll = 1;
 	k_EUserReviewScorePreference_ExcludeBombs = 2;
+}
+
+message CStore_RegisterCDKey_Request {
+	optional string activation_code = 1 [(description) = "Key string to register on the logged in user's account"];
+	optional int32 purchase_platform = 2 [(description) = "EPurchasePlatform for platform of request"];
+	optional bool is_request_from_client = 3 [(description) = "True if the request was initiated from inside the Steam client"];
+}
+
+message CStore_PurchaseReceiptInfo {
+	message LineItem {
+		optional uint32 packageid = 1;
+		optional uint32 appid = 2;
+		optional string line_item_description = 3;
+	}
+
+	optional uint64 transactionid = 1;
+	optional uint32 packageid = 2;
+	optional uint32 purchase_status = 3;
+	optional uint32 result_detail = 4;
+	optional uint32 transaction_time = 5;
+	optional uint32 payment_method = 6;
+	optional uint64 base_price = 7;
+	optional uint64 total_discount = 8;
+	optional uint64 tax = 9;
+	optional uint64 shipping = 10;
+	optional uint32 currency_code = 11;
+	optional string country_code = 12;
+	optional string error_headline = 13;
+	optional string error_string = 14;
+	optional string error_link_text = 15;
+	optional string error_link_url = 16;
+	optional uint32 error_appid = 17;
+	repeated .CStore_PurchaseReceiptInfo.LineItem line_items = 18;
+}
+
+message CStore_RegisterCDKey_Response {
+	optional int32 purchase_result_details = 1 [(description) = "EPurchaseResultDetails from key activation"];
+	optional .CStore_PurchaseReceiptInfo purchase_receipt_info = 2 [(description) = "Purchase receipt info"];
 }
 
 message CStore_GetMostPopularTags_Request {
@@ -32,16 +97,102 @@ message CStore_GetLocalizedNameForTags_Response {
 		optional uint32 tagid = 1;
 		optional string english_name = 2;
 		optional string name = 3;
+		optional string normalized_name = 4 [(description) = "english_name, lowercase, with homoglyphs replaced and spaces and some punctuation removed."];
 	}
 
 	repeated .CStore_GetLocalizedNameForTags_Response.Tag tags = 1;
+}
+
+message CStoreDiscoveryQueueSettings {
+	optional bool os_win = 4;
+	optional bool os_mac = 5;
+	optional bool os_linux = 6;
+	optional bool full_controller_support = 7;
+	optional bool native_steam_controller = 8;
+	optional bool include_coming_soon = 9;
+	repeated uint32 excluded_tagids = 10 [(description) = "Don't return any games with these tags."];
+	optional bool exclude_early_access = 11;
+	optional bool exclude_videos = 12;
+	optional bool exclude_software = 13;
+	optional bool exclude_dlc = 14;
+	optional bool exclude_soundtracks = 15;
+	repeated uint32 featured_tagids = 16 [(description) = "Must be marked with one of these featured tagids (for sale pages and events)"];
+}
+
+message CStore_GetDiscoveryQueue_Request {
+	optional .EStoreDiscoveryQueueType queue_type = 1 [default = k_EStoreDiscoveryQueueTypeNew];
+	optional string country_code = 2;
+	optional bool rebuild_queue = 3;
+	optional bool settings_changed = 4;
+	optional .CStoreDiscoveryQueueSettings settings = 5;
+	optional bool rebuild_queue_if_stale = 6;
+	optional bool ignore_user_preferences = 8;
+	optional bool no_experimental_results = 9;
+	optional uint32 experimental_cohort = 10;
+	optional bool debug_get_solr_query = 11;
+}
+
+message CStore_GetDiscoveryQueue_Response {
+	repeated uint32 appids = 1;
+	optional string country_code = 2;
+	optional .CStoreDiscoveryQueueSettings settings = 3;
+	optional int32 skipped = 4;
+	optional bool exhausted = 5;
+	optional uint32 experimental_cohort = 6;
+	optional string debug_solr_query = 7;
+}
+
+message CStore_GetDiscoveryQueueSettings_Request {
+	optional .EStoreDiscoveryQueueType queue_type = 1 [default = k_EStoreDiscoveryQueueTypeNew];
+}
+
+message CStore_GetDiscoveryQueueSettings_Response {
+	optional string country_code = 1;
+	optional .CStoreDiscoveryQueueSettings settings = 2;
+}
+
+message CStore_SkipDiscoveryQueueItem_Request {
+	optional .EStoreDiscoveryQueueType queue_type = 1 [default = k_EStoreDiscoveryQueueTypeNew];
+	optional uint32 appid = 2;
+}
+
+message CStore_SkipDiscoveryQueueItem_Response {
+}
+
+message CStore_GetUserGameInterestState_Request {
+	optional uint32 appid = 1;
+	optional uint32 store_appid = 2;
+	optional uint32 beta_appid = 3;
+}
+
+message CStore_GetUserGameInterestState_Response {
+	message InQueue {
+		optional .EStoreDiscoveryQueueType type = 1 [default = k_EStoreDiscoveryQueueTypeNew];
+		optional bool skipped = 2;
+		optional int32 items_remaining = 3;
+		optional uint32 next_appid = 4;
+		optional uint32 experimental_cohort = 5;
+	}
+
+	optional bool owned = 1;
+	optional bool wishlist = 2;
+	optional bool ignored = 3;
+	optional bool following = 4;
+	repeated .EStoreDiscoveryQueueType in_queues = 5;
+	repeated .EStoreDiscoveryQueueType queues_with_skip = 6 [(description) = "Discovery queue types where the user has skipped this game."];
+	repeated int32 queue_items_remaining = 7 [(description) = "# of items remaining in the discovery queue - matches the same order as in_queues"];
+	repeated uint32 queue_items_next_appid = 8 [(description) = "the next appid in the queue - matches the same order as in_queues"];
+	optional bool temporarily_owned = 9 [(description) = "The user owns the game temporarily, eg a rental or free weekend"];
+	repeated .CStore_GetUserGameInterestState_Response.InQueue queues = 10;
+	optional int32 ignored_reason = 11 [(description) = "The ERecommendationIgnoreReason why the user ignored the app"];
+	optional .EPlaytestStatus beta_status = 12 [default = k_ETesterStatusNone, (description) = "User interest or membership in the playtest for this app if any"];
 }
 
 message CStore_GetStorePreferences_Request {
 }
 
 message CStore_UserPreferences {
-	optional uint32 primary_language = 1;
+	optional int32 primary_language = 1;
 	optional uint32 secondary_languages = 2;
 	optional bool platform_windows = 3;
 	optional bool platform_mac = 4;
@@ -52,6 +203,7 @@ message CStore_UserPreferences {
 	optional bool hide_store_broadcast = 9;
 	optional .EUserReviewScorePreference review_score_preference = 10 [default = k_EUserReviewScorePreference_Unset];
 	optional int32 timestamp_content_descriptor_preferences_updated = 11;
+	optional .EProvideDeckFeedbackPreference provide_deck_feedback = 12 [default = k_EProvideDeckFeedbackPreference_Unset];
 }
 
 message CStore_UserTagPreferences {
@@ -79,6 +231,39 @@ message CStore_GetStorePreferences_Response {
 	optional .CStore_UserContentDescriptorPreferences content_descriptor_preferences = 3;
 }
 
+message CStore_GetTrendingAppsAmongFriends_Request {
+	optional uint32 num_apps = 1;
+	optional uint32 num_top_friends = 2;
+}
+
+message CStore_GetTrendingAppsAmongFriends_Response {
+	message TrendingAppData {
+		optional uint32 appid = 1;
+		repeated uint64 steamids_top_friends = 2;
+		optional uint32 total_friends = 3;
+	}
+
+	repeated .CStore_GetTrendingAppsAmongFriends_Response.TrendingAppData trending_apps = 1;
+}
+
+message CSteamDeckCompatibility_SetFeedback_Request {
+	optional uint32 appid = 1;
+	optional .ESteamDeckCompatibilityFeedback feedback = 2 [default = k_ESteamDeckCompatibilityFeedback_Unset];
+}
+
+message CSteamDeckCompatibility_SetFeedback_Response {
+}
+
+message CSteamDeckCompatibility_ShouldPrompt_Request {
+	optional uint32 appid = 1;
+}
+
+message CSteamDeckCompatibility_ShouldPrompt_Response {
+	optional bool prompt = 1;
+	optional bool feedback_eligible = 2;
+	optional .ESteamDeckCompatibilityFeedback existing_feedback = 3 [default = k_ESteamDeckCompatibilityFeedback_Unset];
+}
+
 message CStore_StorePreferencesChanged_Notification {
 	optional .CStore_UserPreferences preferences = 1;
 	optional .CStore_UserTagPreferences tag_preferences = 2;
@@ -88,6 +273,10 @@ message CStore_StorePreferencesChanged_Notification {
 service Store {
 	option (service_description) = "A service to access store data.";
 
+	rpc RegisterCDKey (.CStore_RegisterCDKey_Request) returns (.CStore_RegisterCDKey_Response) {
+		option (method_description) = "Registers a CD key with Steam on the logged in user's account";
+	}
+
 	rpc GetMostPopularTags (.CStore_GetMostPopularTags_Request) returns (.CStore_GetMostPopularTags_Response) {
 		option (method_description) = "Get all whitelisted tags, with localized names.";
 	}
@@ -96,8 +285,36 @@ service Store {
 		option (method_description) = "Gets tag names in a different language";
 	}
 
+	rpc GetDiscoveryQueue (.CStore_GetDiscoveryQueue_Request) returns (.CStore_GetDiscoveryQueue_Response) {
+		option (method_description) = "Get a list of games for the user to explore on the store.";
+	}
+
+	rpc GetDiscoveryQueueSettings (.CStore_GetDiscoveryQueueSettings_Request) returns (.CStore_GetDiscoveryQueueSettings_Response) {
+		option (method_description) = "Get the settings that were used to generate a user's discovery queue.";
+	}
+
+	rpc SkipDiscoveryQueueItem (.CStore_SkipDiscoveryQueueItem_Request) returns (.CStore_SkipDiscoveryQueueItem_Response) {
+		option (method_description) = "Skip an item in the user's queue.";
+	}
+
+	rpc GetUserGameInterestState (.CStore_GetUserGameInterestState_Request) returns (.CStore_GetUserGameInterestState_Response) {
+		option (method_description) = "Get information about a user's relationship to a game - ownership, wishlist, discovery queue state, etc.";
+	}
+
 	rpc GetStorePreferences (.CStore_GetStorePreferences_Request) returns (.CStore_GetStorePreferences_Response) {
 		option (method_description) = "Returns the desired ratings board and maximum rating to show on the store";
+	}
+
+	rpc GetTrendingAppsAmongFriends (.CStore_GetTrendingAppsAmongFriends_Request) returns (.CStore_GetTrendingAppsAmongFriends_Response) {
+		option (method_description) = "Get trending apps among friends";
+	}
+
+	rpc SetCompatibilityFeedback (.CSteamDeckCompatibility_SetFeedback_Request) returns (.CSteamDeckCompatibility_SetFeedback_Response) {
+		option (method_description) = "Upserts user feedback regarding the published Steam Deck Compatibility rating for a game";
+	}
+
+	rpc ShouldPromptForCompatibilityFeedback (.CSteamDeckCompatibility_ShouldPrompt_Request) returns (.CSteamDeckCompatibility_ShouldPrompt_Response) {
+		option (method_description) = "Returns whether we should ask the user if the compatibility rating is correct";
 	}
 }
 

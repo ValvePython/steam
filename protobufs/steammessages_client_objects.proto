@@ -12,10 +12,49 @@ enum ECloudPendingRemoteOperation {
 	k_ECloudPendingRemoteOperationAppSessionSuspended = 4;
 }
 
+enum ESteamDeckKeyboardLayout {
+	k_ESteamDeckKeyboardLayout_QWERTY = 0;
+	k_ESteamDeckKeyboardLayout_Bulgarian = 1;
+	k_ESteamDeckKeyboardLayout_Chinese_Simplified = 2;
+	k_ESteamDeckKeyboardLayout_Chinese_Traditional = 3;
+	k_ESteamDeckKeyboardLayout_Czech = 4;
+	k_ESteamDeckKeyboardLayout_Danish = 5;
+	k_ESteamDeckKeyboardLayout_Finnish = 6;
+	k_ESteamDeckKeyboardLayout_French = 7;
+	k_ESteamDeckKeyboardLayout_German = 8;
+	k_ESteamDeckKeyboardLayout_Greek = 9;
+	k_ESteamDeckKeyboardLayout_Hungarian = 10;
+	k_ESteamDeckKeyboardLayout_Italian = 11;
+	k_ESteamDeckKeyboardLayout_Japanese = 12;
+	k_ESteamDeckKeyboardLayout_Korean = 13;
+	k_ESteamDeckKeyboardLayout_Norwegian = 14;
+	k_ESteamDeckKeyboardLayout_Polish = 15;
+	k_ESteamDeckKeyboardLayout_Portuguese = 16;
+	k_ESteamDeckKeyboardLayout_Romanian = 17;
+	k_ESteamDeckKeyboardLayout_Russian = 18;
+	k_ESteamDeckKeyboardLayout_Spanish = 19;
+	k_ESteamDeckKeyboardLayout_Swedish = 20;
+	k_ESteamDeckKeyboardLayout_Thai = 21;
+	k_ESteamDeckKeyboardLayout_Turkish_F = 22;
+	k_ESteamDeckKeyboardLayout_Turkish_Q = 23;
+	k_ESteamDeckKeyboardLayout_Ukrainian = 24;
+	k_ESteamDeckKeyboardLayout_Vietnamese = 25;
+	k_ESteamDeckKeyboardLayout_QWERTY_International = 26;
+	k_ESteamDeckKeyboardLayout_Dvorak = 27;
+	k_ESteamDeckKeyboardLayout_Colemak = 28;
+	k_ESteamDeckKeyboardLayout_Bulgarian_Phonetic_Traditional = 29;
+	k_ESteamDeckKeyboardLayout_Bulgarian_Phonetic = 30;
+	k_ESteamDeckKeyboardLayout_Chinese_Traditional_Bopomofo = 31;
+	k_ESteamDeckKeyboardLayout_Chinese_Traditional_Cangjie = 32;
+	k_ESteamDeckKeyboardLayout_Japanese_Kana = 33;
+	k_ESteamDeckKeyboardLayout_Chinese_Traditional_Quick = 34;
+}
+
 message SteamMessagesClientIClientForcedEnumDependencies {
 	optional .EBluetoothDeviceType a = 1 [default = k_BluetoothDeviceType_Invalid];
 	optional .EStorageBlockContentType b = 2 [default = k_EStorageBlockContentType_Invalid];
 	optional .EStorageBlockFileSystemType c = 3 [default = k_EStorageBlockFileSystemType_Invalid];
+	optional .ESDCardFormatStage d = 4 [default = k_ESDCardFormatStage_Invalid];
 }
 
 message CMsgNetworkDeviceIP4Address {
@@ -140,6 +179,7 @@ message CMsgStorageDevicesData {
 
 	repeated .CMsgStorageDevicesData.Drive drives = 1;
 	repeated .CMsgStorageDevicesData.BlockDevice block_devices = 2;
+	optional bool is_unmount_supported = 3;
 }
 
 message CCloud_PendingRemoteOperation {
@@ -173,12 +213,13 @@ message CMsgBluetoothDevicesData {
 		optional int32 strength_raw = 8;
 	}
 
+	message Manager {
+		optional bool is_bluetooth_enabled = 1;
+	}
+
 	repeated .CMsgBluetoothDevicesData.Adapter adapters = 1;
 	repeated .CMsgBluetoothDevicesData.Device devices = 2;
-}
-
-message CMsgBluetoothSettings {
-	optional bool is_enabled = 1;
+	optional .CMsgBluetoothDevicesData.Manager manager = 3;
 }
 
 message CMsgSystemPerfDiagnosticEntry {
@@ -186,11 +227,306 @@ message CMsgSystemPerfDiagnosticEntry {
 	optional string value = 2;
 }
 
+message CMsgSystemPerfNetworkInterface {
+	optional string name = 1;
+	optional double timestamp = 2;
+	optional int64 tx_bytes_total = 3;
+	optional int64 rx_bytes_total = 4;
+	optional int32 tx_bytes_per_sec = 5;
+	optional int32 rx_bytes_per_sec = 6;
+}
+
 message CMsgSystemPerfDiagnosticInfo {
 	repeated .CMsgSystemPerfDiagnosticEntry entries = 1;
+	repeated .CMsgSystemPerfNetworkInterface interfaces = 2;
+	optional float battery_temp_c = 3;
+}
+
+message CMsgSystemPerfLimits {
+	optional int32 cpu_governor_manual_min_mhz = 1;
+	optional int32 cpu_governor_manual_max_mhz = 2;
+	optional int32 fsr_sharpness_min = 3;
+	optional int32 fsr_sharpness_max = 4;
+	optional int32 gpu_performance_manual_min_mhz = 5;
+	optional int32 gpu_performance_manual_max_mhz = 6;
+	optional bool perf_overlay_is_standalone = 7;
+	optional bool is_dynamic_vrs_available = 8;
+	optional bool is_manual_display_refresh_rate_available = 9;
+	repeated .EGPUPerformanceLevel gpu_performance_levels_available = 10;
+	optional int32 display_refresh_manual_hz_min = 11;
+	optional int32 display_refresh_manual_hz_max = 12;
+	repeated int32 fps_limit_options = 13;
+	optional int32 tdp_limit_min = 14;
+	optional int32 tdp_limit_max = 15;
+	optional bool is_nis_supported = 16;
+	optional int32 nis_sharpness_min = 17;
+	optional int32 nis_sharpness_max = 18;
+}
+
+message CMsgSystemPerfSettingsGlobal {
+	optional float diagnostic_update_rate = 1;
+	optional .ESystemServiceState system_trace_service_state = 2 [default = k_ESystemServiceState_Unavailable];
+	optional .ESystemServiceState graphics_profiling_service_state = 3 [default = k_ESystemServiceState_Unavailable];
+	optional .ESystemServiceState perf_overlay_service_state = 4 [default = k_ESystemServiceState_Unavailable];
+	optional .EGraphicsPerfOverlayLevel perf_overlay_level = 5 [default = k_EGraphicsPerfOverlayLevel_Hidden];
+	optional bool is_show_perf_overlay_over_steam_enabled = 6;
+	optional bool is_advanced_settings_enabled = 7;
+}
+
+message CMsgSystemPerfSettingsPerApp {
+	optional int32 gpu_performance_manual_mhz = 1;
+	optional int32 fps_limit = 2;
+	optional bool is_variable_resolution_enabled = 3;
+	optional bool is_dynamic_refresh_rate_enabled = 4;
+	optional int32 tdp_limit = 5;
+	optional .ECPUGovernor cpu_governor = 6 [default = k_ECPUGovernor_Invalid];
+	optional int32 cpu_governor_manual_mhz = 7;
+	optional int32 scaling_filter = 8;
+	optional int32 fsr_sharpness = 9;
+	optional bool is_fps_limit_enabled = 10;
+	optional bool is_tdp_limit_enabled = 11;
+	optional bool is_low_latency_mode_enabled = 12;
+	optional int32 display_refresh_manual_hz = 13;
+	optional bool is_game_perf_profile_enabled = 14;
+	optional .EGPUPerformanceLevel gpu_performance_level = 15 [default = k_EGPUPerformanceLevel_Invalid];
+	optional int32 nis_sharpness = 16;
 }
 
 message CMsgSystemPerfSettings {
+	optional .CMsgSystemPerfSettingsGlobal global = 1;
+	optional .CMsgSystemPerfSettingsPerApp per_app = 2;
+}
+
+message CMsgSystemPerfSettingsV1 {
 	optional float diagnostic_update_rate = 1;
-	optional bool is_shark_mode = 2;
+	optional .ESystemServiceState system_trace_service_state = 2 [default = k_ESystemServiceState_Unavailable];
+	optional .ESystemServiceState graphics_profiling_service_state = 3 [default = k_ESystemServiceState_Unavailable];
+	optional .ESystemServiceState perf_overlay_service_state = 4 [default = k_ESystemServiceState_Unavailable];
+	optional .EGraphicsPerfOverlayLevel perf_overlay_level = 5 [default = k_EGraphicsPerfOverlayLevel_Hidden];
+	optional .EGPUPerformanceLevel gpu_performance_level = 6 [default = k_EGPUPerformanceLevel_Invalid];
+	optional int32 gpu_performance_manual_mhz = 7;
+	optional int32 fps_limit = 8;
+	optional bool is_variable_resolution_enabled = 9;
+	optional bool is_dynamic_refresh_rate_enabled = 10;
+	optional int32 tdp_limit = 11;
+	optional .ECPUGovernor cpu_governor = 12 [default = k_ECPUGovernor_Invalid];
+	optional int32 cpu_governor_manual_mhz = 13;
+	optional int32 scaling_filter = 14;
+	optional int32 fsr_sharpness = 15;
+	optional bool is_fps_limit_enabled = 16;
+	optional bool is_tdp_limit_enabled = 17;
+	optional bool is_show_perf_overlay_over_steam_enabled = 18;
+	optional bool is_low_latency_mode_enabled = 19;
+	optional int32 display_refresh_manual_hz = 20;
+	optional bool is_game_perf_profile_enabled = 21;
+}
+
+message CMsgSystemPerfState {
+	optional .CMsgSystemPerfLimits limits = 1;
+	optional .CMsgSystemPerfSettings settings = 2;
+	optional uint64 current_game_id = 3;
+	optional uint64 active_profile_game_id = 4;
+}
+
+message CMsgSystemPerfUpdateSettings {
+	optional uint64 gameid = 1;
+
+	oneof update {
+		bool reset_to_default = 2;
+		.CMsgSystemPerfSettings settings_delta = 3;
+	}
+}
+
+message CMsgSystemDockUpdateState {
+	optional .EUpdaterState state = 1 [default = k_EUpdaterState_Invalid];
+	optional fixed32 rtime_last_checked = 2;
+	optional string version_current = 3;
+	optional string version_available = 4;
+	optional float stage_progress = 5;
+	optional fixed32 rtime_estimated_completion = 6;
+}
+
+message CMsgSystemDockState {
+	optional .CMsgSystemDockUpdateState update_state = 1;
+}
+
+message CMsgSystemDockUpdateFirmware {
+	optional bool check_only = 1;
+}
+
+message CMsgSystemAudioVolume {
+	message ChannelEntry {
+		optional .ESystemAudioChannel echannel = 1 [default = k_SystemAudioChannel_Invalid];
+		optional float volume = 2;
+	}
+
+	repeated .CMsgSystemAudioVolume.ChannelEntry entries = 1;
+	optional bool is_muted = 2;
+}
+
+message CMsgSystemAudioManagerObject {
+	optional uint32 id = 1;
+	optional fixed32 rtime_last_update = 2;
+}
+
+message CMsgSystemAudioManagerDevice {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional string name = 2;
+	optional string nick = 3;
+	optional string description = 4;
+	optional string api = 5;
+}
+
+message CMsgSystemAudioManagerNode {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional uint32 device_id = 2;
+	optional string name = 3;
+	optional string nick = 4;
+	optional string description = 5;
+	optional .ESystemAudioDirection edirection = 6 [default = k_SystemAudioDirection_Invalid];
+	optional .CMsgSystemAudioVolume volume = 7;
+}
+
+message CMsgSystemAudioManagerPort {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional uint32 node_id = 3;
+	optional string name = 4;
+	optional string alias = 5;
+	optional .ESystemAudioPortType etype = 6 [default = k_SystemAudioPortType_Invalid];
+	optional .ESystemAudioPortDirection edirection = 7 [default = k_SystemAudioPortDirection_Invalid];
+	optional bool is_physical = 8;
+	optional bool is_terminal = 9;
+	optional bool is_control = 10;
+	optional bool is_monitor = 11;
+}
+
+message CMsgSystemAudioManagerLink {
+	optional .CMsgSystemAudioManagerObject base = 1;
+	optional uint32 output_node_id = 2;
+	optional uint32 output_port_id = 3;
+	optional uint32 input_node_id = 4;
+	optional uint32 input_port_id = 5;
+}
+
+message CMsgSystemAudioManagerStateHW {
+	repeated .CMsgSystemAudioManagerDevice devices = 1;
+	repeated .CMsgSystemAudioManagerNode nodes = 2;
+	repeated .CMsgSystemAudioManagerPort ports = 3;
+	repeated .CMsgSystemAudioManagerLink links = 4;
+}
+
+message CMsgSystemAudioManagerState {
+	optional fixed32 rtime_filter = 1;
+	optional int32 counter = 2;
+	optional .CMsgSystemAudioManagerStateHW hw = 3;
+}
+
+message CMsgSystemAudioManagerUpdateSomething {
+	optional int32 counter = 1;
+}
+
+message CMsgSystemManagerSettings {
+	optional float idle_backlight_dim_battery_seconds = 1;
+	optional float idle_backlight_dim_ac_seconds = 2;
+	optional float idle_suspend_battery_seconds = 3;
+	optional float idle_suspend_ac_seconds = 4;
+	optional bool idle_suspend_supressed = 5;
+	optional bool is_adaptive_brightness_available = 6;
+	optional bool display_adaptive_brightness_enabled = 7;
+	optional bool is_display_colorprofile_available = 8;
+	optional .EColorProfile display_colorprofile = 9 [default = k_EColorProfile_Invalid];
+	optional bool display_nightmode_enabled = 10;
+	optional float display_nightmode_tintstrength = 11;
+	optional float display_nightmode_maxhue = 12;
+	optional float display_nightmode_maxsat = 13;
+	optional float display_nightmode_uiexp = 14;
+	optional float display_nightmode_blend = 15;
+	optional bool display_nightmode_reset = 16;
+	optional bool display_nightmode_schedule_enabled = 17;
+	optional float display_nightmode_schedule_starttime = 18;
+	optional float display_nightmode_schedule_endtime = 19;
+	optional bool display_diagnostics_enabled = 20;
+	optional float als_lux_latest = 21;
+	optional float als_lux_median = 22;
+	optional float display_brightness_linear = 23;
+	optional float display_brightness_adaptivemin = 24;
+	optional float display_brightness_adaptivemax = 25;
+	optional bool is_wifi_powersave_enabled = 26;
+	optional bool is_fan_control_available = 27;
+	optional .ESystemFanControlMode fan_control_mode = 28 [default = k_SystemFanControlMode_Invalid];
+}
+
+message CMsgSelectOSBranchParams {
+	optional .EOSBranch branch = 1 [default = k_EOSBranch_Unknown];
+}
+
+message CMsgSystemUpdateProgress {
+	optional float stage_progress = 1;
+	optional int64 stage_size_bytes = 2;
+	optional fixed32 rtime_estimated_completion = 3;
+}
+
+message CMsgSystemUpdateCheckResult {
+	optional .EUpdaterType type = 1 [default = k_EUpdaterType_Invalid];
+	optional uint32 eresult = 2 [default = 2];
+	optional fixed32 rtime_checked = 3;
+	optional bool available = 4;
+	optional string version = 5;
+}
+
+message CMsgSystemUpdateApplyParams {
+	repeated .EUpdaterType apply_types = 1;
+}
+
+message CMsgSystemUpdateApplyResult {
+	optional .EUpdaterType type = 1 [default = k_EUpdaterType_Invalid];
+	optional uint32 eresult = 2 [default = 2];
+	optional bool requires_client_restart = 3 [default = false];
+	optional bool requires_system_restart = 4 [default = false];
+}
+
+message CMsgSystemUpdateState {
+	optional .EUpdaterState state = 1 [default = k_EUpdaterState_Invalid];
+	optional .CMsgSystemUpdateProgress progress = 2;
+	repeated .CMsgSystemUpdateCheckResult update_check_results = 3;
+	repeated .CMsgSystemUpdateApplyResult update_apply_results = 4;
+}
+
+message CMsgAchievementChange {
+	optional uint32 appid = 1;
+}
+
+message CMsgCellList {
+	message Cell {
+		optional uint32 cell_id = 1;
+		optional string loc_name = 2;
+	}
+
+	repeated .CMsgCellList.Cell cells = 1;
+}
+
+message CMsgShortcutInfo {
+	optional uint32 appid = 1;
+	optional string exe = 2;
+	optional string start_dir = 3;
+	optional string icon = 4;
+	optional string path = 5;
+	optional string args = 6;
+	optional string app_name = 7;
+	optional uint32 override_appid = 8;
+	optional string flatpak_appid = 9;
+	repeated string tags = 10;
+	optional bool is_remote = 11;
+	optional bool is_hidden = 12;
+	optional bool is_temporary = 13;
+	optional bool is_openvr = 14;
+	optional bool allow_desktop_config = 15;
+	optional bool allow_overlay = 16;
+	optional uint32 rt_last_played_time = 17;
+	optional bool is_devkit_shortcut = 18;
+	optional string devkit_gameid = 19;
+}
+
+message CMsgShortcutAppIds {
+	repeated uint32 appids = 1;
 }

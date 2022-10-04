@@ -20,6 +20,8 @@ Available commands:
 
 endef
 
+SHELL := /bin/bash
+
 export HELPBODY
 help:
 	@echo "$$HELPBODY"
@@ -67,16 +69,18 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt || exit 0
-	mv protobufs/friends_mobile.proto protobufs/steammessages_webui_friends.steamclient.proto
-	sed -i 's/CCommunity_ClanAnnouncementInfo/xCCommunity_ClanAnnouncementInfo/' protobufs/steammessages_webui_friends.steamclient.proto
-	sed -i 's/CMsgClientSecret/xCMsgClientSecret/' protobufs/steammessages_webui_friends.steamclient.proto
-	sed -i '1s/^/option py_generic_services = true\;\n/' protobufs/steammessages_webui_friends.steamclient.proto
-	rename -v '.proto' '.proto.notouch' protobufs/{steammessages_physicalgoods,gc,test_messages}.proto
-	rename -v '.steamclient' '' protobufs/*.proto
+	for FN in protobufs/{steammessages_{physicalgoods,webui_friends},gc,test_messages}.proto; do \
+		mv "$${FN}" "$${FN}.notouch"; \
+	done;
+	for FN in protobufs/*.steamclient.proto; do \
+		mv "$${FN}" "$${FN/.steamclient.proto/.proto}"; \
+	done;
 	sed -i '1s/^/syntax = "proto2"\;\n/' protobufs/*.proto
 	sed -i 's/cc_generic_services/py_generic_services/' protobufs/*.proto
 	sed -i 's/\.steamclient\.proto/.proto/' protobufs/*.proto
-	rename -v '.notouch' '' protobufs/*.proto.notouch
+	for FN in protobufs/*.proto.notouch; do \
+		mv "$${FN}" "$${FN%.notouch}"; \
+	done;
 
 pb_compile:
 	for filepath in ./protobufs/*.proto; do \

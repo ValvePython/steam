@@ -1,0 +1,326 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+import "steammessages_unified_base.proto";
+import "enums_productinfo.proto";
+import "enums.proto";
+
+option py_generic_services = true;
+
+enum EStoreItemType {
+	k_EStoreItemType_Invalid = -1;
+	k_EStoreItemType_App = 0;
+	k_EStoreItemType_Package = 1;
+	k_EStoreItemType_Bundle = 2;
+	k_EStoreItemType_Mtx = 3;
+}
+
+enum EStoreAppType {
+	k_EStoreAppType_Game = 0;
+	k_EStoreAppType_Demo = 1;
+	k_EStoreAppType_Mod = 2;
+	k_EStoreAppType_Movie = 3;
+	k_EStoreAppType_DLC = 4;
+	k_EStoreAppType_Guide = 5;
+	k_EStoreAppType_Software = 6;
+	k_EStoreAppType_Video = 7;
+	k_EStoreAppType_Series = 8;
+	k_EStoreAppType_Episode = 9;
+	k_EStoreAppType_Hardware = 10;
+	k_EStoreAppType_Music = 11;
+	k_EStoreAppType_Beta = 12;
+	k_EStoreAppType_Tool = 13;
+	k_EStoreAppType_Advertising = 14;
+}
+
+enum EUserReviewScore {
+	k_EUserReviewScore_None = 0;
+	k_EUserReviewScore_OverwhelminglyNegative = 1;
+	k_EUserReviewScore_VeryNegative = 2;
+	k_EUserReviewScore_Negative = 3;
+	k_EUserReviewScore_MostlyNegative = 4;
+	k_EUserReviewScore_Mixed = 5;
+	k_EUserReviewScore_MostlyPositive = 6;
+	k_EUserReviewScore_Positive = 7;
+	k_EUserReviewScore_VeryPositive = 8;
+	k_EUserReviewScore_OverwhelminglyPositive = 9;
+}
+
+enum EStoreCategoryType {
+	k_EStoreCategoryType_Category = 0;
+	k_EStoreCategoryType_SupportedPlayers = 1;
+	k_EStoreCategoryType_Feature = 2;
+	k_EStoreCategoryType_ControllerSupport = 3;
+	k_EStoreCategoryType_CloudGaming = 4;
+	k_EStoreCategoryType_MAX = 5;
+}
+
+message StoreItemID {
+	optional uint32 appid = 1;
+	optional uint32 packageid = 2;
+	optional uint32 bundleid = 3;
+}
+
+message StoreBrowseContext {
+	optional string language = 1;
+	optional int32 elanguage = 2 [(description) = "ELanguage"];
+	optional string country_code = 3 [(description) = "2-character country code; required"];
+	optional int32 steam_realm = 4 [(description) = "ESteamRealm"];
+}
+
+message StoreBrowseItemDataRequest {
+	optional bool include_assets = 1;
+	optional bool include_release = 2;
+	optional bool include_platforms = 3;
+	optional bool include_all_purchase_options = 4;
+	optional bool include_screenshots = 5;
+	optional bool include_trailers = 6;
+	optional bool include_ratings = 7;
+	optional int32 include_tag_count = 8 [(description) = "Count of tags to return, as tagids.  Maximum 20."];
+	optional bool include_reviews = 9;
+	optional bool include_basic_info = 10 [(description) = "Include short description, publisher, developers"];
+	optional bool include_supported_languages = 11 [(description) = "includes the games support for languages: supported, full_audio, subtitles"];
+}
+
+message CStoreBrowse_GetItems_Request {
+	repeated .StoreItemID ids = 1;
+	optional .StoreBrowseContext context = 2;
+	optional .StoreBrowseItemDataRequest data_request = 3;
+}
+
+message StoreGameRating {
+	optional string type = 1 [(description) = "'esrb', 'pegi', ..."];
+	optional string rating = 2 [(description) = "'t' for teen, 'm' for mature, ..."];
+	repeated string descriptors = 3 [(description) = "Additional descriptors like 'Intense Violence', 'Strong Language',..."];
+	optional string interactive_elements = 4 [(description) = "ESRB-specific"];
+	optional int32 required_age = 10 [(description) = "Age in years.  Store pages will prompt with an age gate"];
+	optional bool use_age_gate = 11;
+	optional string image_url = 20 [(description) = "An image corresponding to the rating."];
+	optional string image_target = 21 [(description) = "URL where the image should link for more information."];
+}
+
+message StoreItem {
+	message RelatedItems {
+		optional uint32 parent_appid = 1 [(description) = "For DLC, Demos, etc, this is the main app."];
+	}
+
+	message Categories {
+		repeated uint32 supported_player_categoryids = 2 [(description) = "Categories like Single Player, Multiplayer, MMO"];
+		repeated uint32 feature_categoryids = 3 [(description) = "Categories indicating supported features like Steam Cloud, VAC, Achievements, etc"];
+		repeated uint32 controller_categoryids = 4 [(description) = "Categories indicating controller support and full controller support."];
+	}
+
+	message Reviews {
+		message StoreReviewSummary {
+			optional uint32 review_count = 1;
+			optional int32 percent_positive = 2 [(description) = "0-100"];
+			optional .EUserReviewScore review_score = 3 [default = k_EUserReviewScore_None];
+			optional string review_score_label = 4 [(description) = "A string like 'Mixed', 'Negative', 'Overwhelmingly Positive'"];
+		}
+
+		optional .StoreItem.Reviews.StoreReviewSummary summary_filtered = 1 [(description) = "Review summary with review bombs removed (if any).  Always present (if include_reviews set in request)"];
+		optional .StoreItem.Reviews.StoreReviewSummary summary_unfiltered = 2 [(description) = "Review summary with review bombs included.  Only present if there are review bombs."];
+	}
+
+	message BasicInfo {
+		message CreatorHomeLink {
+			optional string name = 1;
+			optional uint32 creator_clan_account_id = 2 [(description) = "Optioanl field indicating this name is associated this the creator home via the clan account id"];
+		}
+
+		optional string short_description = 1;
+		repeated .StoreItem.BasicInfo.CreatorHomeLink publishers = 2;
+		repeated .StoreItem.BasicInfo.CreatorHomeLink developers = 3;
+		repeated .StoreItem.BasicInfo.CreatorHomeLink franchises = 4;
+		optional string capsule_headline = 5 [(description) = "A custom string specified by the partner for display on or around a capsule on the store, e.g. 'Just Updated!'"];
+	}
+
+	message Tag {
+		optional uint32 tagid = 1;
+		optional uint32 weight = 2;
+	}
+
+	message Assets {
+		optional string asset_url_format = 1 [(description) = "Format for URLs, should substitute the capsule name for ${FILENAME} in the URL."];
+		optional string main_capsule = 2;
+		optional string small_capsule = 3;
+		optional string header = 4 [(description) = "Equivalent to GetConstantRatioHeaderImage in PHP; apps will always have this, packages and bundles may not."];
+		optional string package_header = 5 [(description) = "A wider header used on package/bundle pages.  Not set for apps."];
+		optional string page_background = 6;
+		optional string hero_capsule = 7 [(description) = "374x448"];
+		optional string hero_capsule_2x = 8 [(description) = "748x896 version of hero capsule."];
+		optional string library_capsule = 9 [(description) = "300x450 - tall library asset"];
+		optional string library_capsule_2x = 10 [(description) = "600x900 - tall library asset"];
+		optional string library_hero = 11 [(description) = "960x310 or 1920x620 - library detail background asset"];
+		optional string library_hero_2x = 12 [(description) = "1920x620 or 3840x1240 - library detail background asset"];
+		optional string community_icon = 13 [(description) = "32x32 jpg uploading via steamworks under community assets"];
+	}
+
+	message ReleaseInfo {
+		optional uint32 steam_release_date = 1 [(description) = "The date this item first released on the Steam store.  For Early Access graduates, this is their graduation day."];
+		optional uint32 original_release_date = 2 [(description) = "Optional; the date this item first released elsewhere, typically back catalog items."];
+		optional uint32 original_steam_release_date = 3 [(description) = "For Early Access graduates, the date the game first appeared on Steam."];
+		optional bool is_coming_soon = 4 [(description) = "Is the app coming soon?  This flag should be preferred to doing time comparisons against steam_release_date."];
+		optional bool is_preload = 5 [(description) = "Can the app be preloaded?  Only applies to Coming Soon titles."];
+		optional string custom_release_date_message = 6 [(description) = "Custom release date string.  steam_release_date will be unset if this is set."];
+		optional bool is_abridged_release_date = 7 [(description) = "Release date should be displayed as month-year only.  steam_release_date is the last day of the month."];
+		optional string coming_soon_display = 8 [(description) = "One of 'date_full', 'date_month', 'date_quarter', 'date_year', 'text_comingsoon', 'text_tba'"];
+		optional bool is_early_access = 10;
+		optional uint32 mac_release_date = 20;
+		optional uint32 linux_release_date = 21;
+	}
+
+	message Platforms {
+		message VRSupport {
+			optional bool vrhmd = 1;
+			optional bool vrhmd_only = 2;
+			optional bool htc_vive = 40;
+			optional bool oculus_rift = 41;
+			optional bool windows_mr = 42;
+			optional bool valve_index = 43;
+		}
+
+		optional bool windows = 1;
+		optional bool mac = 2;
+		optional bool steamos_linux = 3;
+		optional .StoreItem.Platforms.VRSupport vr_support = 10;
+		optional .ESteamDeckCompatibilityCategory steam_deck_compat_category = 11 [default = k_ESteamDeckCompatibilityCategory_Unknown];
+	}
+
+	message PurchaseOption {
+		message Discount {
+			optional int64 discount_amount = 1;
+			optional string discount_description = 2;
+			optional uint32 discount_end_date = 3;
+		}
+
+		optional int32 packageid = 1;
+		optional int32 bundleid = 2;
+		optional string purchase_option_name = 3 [(description) = "The name of the package or bundle"];
+		optional int64 final_price_in_cents = 5 [(description) = "Always set.  Includes any applicable non user-specific discounts."];
+		optional int64 original_price_in_cents = 6 [(description) = "If discounted, this is the price the item would normally cost."];
+		optional int64 user_final_price_in_cents = 7;
+		optional string formatted_final_price = 8 [(description) = "Always set.  Formatted with currency symbol and decimal, like '$10.00'."];
+		optional string formatted_original_price = 9;
+		optional int32 discount_pct = 10 [(description) = "If discounted, calculated from final price and original price."];
+		optional int32 user_discount_pct = 11;
+		optional int32 bundle_discount_pct = 12 [(description) = "If this is a bundle, the savings from buying the bundle.  If no bundle items are on active discount, this will be the same as discount_pct."];
+		repeated .StoreItem.PurchaseOption.Discount active_discounts = 20 [(description) = "Discounts included in discounted_price_in_cents."];
+		repeated .StoreItem.PurchaseOption.Discount user_active_discounts = 21 [(description) = "Additional discounts included in user_discounted_price_in_cents."];
+		repeated .StoreItem.PurchaseOption.Discount inactive_discounts = 22 [(description) = "Additional user-specific discounts that do not apply to the current user."];
+		optional bool user_can_purchase = 30;
+		optional bool user_can_purchase_as_gift = 31;
+		optional bool is_commercial_license = 40 [(description) = "This is a commercial license"];
+		optional bool should_suppress_discount_pct = 41 [(description) = "Don't show the discount percentage on a store capsule for this item."];
+	}
+
+	message Screenshots {
+		message Screenshot {
+			optional string filename = 1 [(description) = "Path to file on media CDN.  Can access sized version by appending to SHA: '.1920x1080', '.600x338', '.116x65'"];
+			optional int32 ordinal = 2 [(description) = "Screenshots should be displayed in order of ascending ordinal; they are returned in-order but client may need to merge all_ages and mature_content_screenshots."];
+		}
+
+		repeated .StoreItem.Screenshots.Screenshot all_ages_screenshots = 2 [(description) = "Screenshots suitable for all ages."];
+		repeated .StoreItem.Screenshots.Screenshot mature_content_screenshots = 3 [(description) = "Screenshots that may contain mature content; these should only be shown after verifying age (age gate)."];
+	}
+
+	message Trailers {
+		message VideoSource {
+			optional string filename = 1 [(description) = "Substitute into trailer_url_format"];
+			optional string type = 2 [(description) = "'video/webm' or 'video/mp4'; can just put this directly in to a <source> tag."];
+		}
+
+		message Trailer {
+			optional string trailer_name = 1;
+			optional string trailer_url_format = 2 [(description) = "Format for URLs, should substitute filename for ${FILENAME} in the URL."];
+			repeated .StoreItem.Trailers.VideoSource trailer_480p = 3;
+			repeated .StoreItem.Trailers.VideoSource trailer_max = 4;
+			repeated .StoreItem.Trailers.VideoSource microtrailer = 5;
+			optional string screenshot_medium = 10 [(description) = "293x165px.  Use trailer_url_format."];
+			optional string screenshot_full = 11 [(description) = "Same size as trailer_max.  Use trailer_url_format."];
+			optional int32 trailer_base_id = 12 [(description) = "Trailer ID.  For localized trailers, this will be the original trailer's ID"];
+		}
+
+		repeated .StoreItem.Trailers.Trailer highlights = 1 [(description) = "Primary trailers for this app"];
+		repeated .StoreItem.Trailers.Trailer other_trailers = 2 [(description) = "Additional trailers; on the app page, these are shown after screenshots (highlights shown before)"];
+	}
+
+	message SupportedLanguage {
+		optional int32 elanguage = 1 [(description) = "ELanguage"];
+		optional bool supported = 2;
+		optional bool full_audio = 3;
+		optional bool subtitles = 4;
+	}
+
+	message FreeWeekend {
+		optional uint32 start_time = 1 [(description) = "When the free weekend starts."];
+		optional uint32 end_time = 2 [(description) = "When the free weekend ends."];
+		optional string text = 3 [(description) = "Text to show as a description of the free weekend."];
+	}
+
+	optional .EStoreItemType item_type = 1 [default = k_EStoreItemType_Invalid];
+	optional uint32 id = 2;
+	optional uint32 success = 3 [(description) = "EResult of this lookup action"];
+	optional bool visible = 4;
+	optional bool unvailable_for_country_restriction = 5 [(description) = "Indicates this app is visible in other regions, but not the requested reagion"];
+	optional string name = 6;
+	optional string store_url_path = 7 [(description) = "The URL of this item's store page, to be appended to STORE_BASE_URL."];
+	optional uint32 appid = 9 [(description) = "If this is an app, or a single-app package, the steamworks appid."];
+	optional .EStoreAppType type = 10 [default = k_EStoreAppType_Game, (description) = "Type of app (Game, Software, Music).  For packages/bundles, this will be the most interesting type (eg Game + Soundtrack bundle will have type Game)"];
+	repeated .EStoreAppType included_types = 11 [(description) = "For packages/bundles, all types of included items"];
+	repeated uint32 included_appids = 12 [(description) = "For packages/bundles, all included appids"];
+	optional bool is_free = 13;
+	optional bool is_early_access = 14;
+	optional .StoreItem.RelatedItems related_items = 15;
+	repeated .EContentDescriptorID content_descriptorids = 20;
+	repeated uint32 tagids = 21;
+	optional .StoreItem.Categories categories = 22;
+	optional .StoreItem.Reviews reviews = 23;
+	optional .StoreItem.BasicInfo basic_info = 24;
+	repeated .StoreItem.Tag tags = 25;
+	optional .StoreItem.Assets assets = 30;
+	optional .StoreItem.ReleaseInfo release = 31;
+	optional .StoreItem.Platforms platforms = 32;
+	optional .StoreGameRating game_rating = 33 [(description) = "Local ratings agency information, like ESRB or PEGI"];
+	optional .StoreItem.PurchaseOption best_purchase_option = 40 [(description) = "The cheapest way for the user to acquire this app or package (may be a bundle)."];
+	repeated .StoreItem.PurchaseOption purchase_options = 41 [(description) = "Different ways to buy this app or packages (packages can be purchased directly, but may also be included in bundles)."];
+	repeated .StoreItem.PurchaseOption accessories = 42 [(description) = "Additional packages or bundles associated with an app, but that do not contain the app."];
+	optional .StoreItem.Screenshots screenshots = 50;
+	optional .StoreItem.Trailers trailers = 51;
+	repeated .StoreItem.SupportedLanguage supported_languages = 52;
+	optional string store_url_path_override = 53 [(description) = "Navigate to this URL (relative to store home) when the store capsule for this item is clicked, instead of the default /app/... URL. Used by advertising apps that point to a sale page."];
+	optional .StoreItem.FreeWeekend free_weekend = 54 [(description) = "Information about a free weekend offer."];
+}
+
+message CStoreBrowse_GetItems_Response {
+	repeated .StoreItem store_items = 1;
+}
+
+message CStoreBrowse_GetStoreCategories_Request {
+	optional string language = 1;
+	optional int32 elanguage = 2 [default = -1, (description) = "ELanguage"];
+}
+
+message CStoreBrowse_GetStoreCategories_Response {
+	message Category {
+		optional uint32 categoryid = 1;
+		optional .EStoreCategoryType type = 2 [default = k_EStoreCategoryType_Category];
+		optional string internal_name = 3;
+		optional string display_name = 4;
+		optional string image_url = 5 [(description) = "Append to STORE_CDN_URL"];
+		optional bool show_in_search = 6 [(description) = "Indicates this category can link to search results showing all items in category."];
+	}
+
+	repeated .CStoreBrowse_GetStoreCategories_Response.Category categories = 1;
+}
+
+service StoreBrowse {
+	option (service_description) = "APIs for accessing store item data";
+
+	rpc GetItems (.CStoreBrowse_GetItems_Request) returns (.CStoreBrowse_GetItems_Response) {
+		option (method_description) = "Get information about items on the store";
+	}
+
+	rpc GetStoreCategories (.CStoreBrowse_GetStoreCategories_Request) returns (.CStoreBrowse_GetStoreCategories_Response) {
+		option (method_description) = "Get category definitions for store.  This is a public-facing API (as compared to StoreCatalog.GetCategories, which is intended for PHP)";
+	}
+}

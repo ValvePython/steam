@@ -1,15 +1,19 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
+import "offline_ticket.proto";
 
 option py_generic_services = true;
 
 message COffline_GetOfflineLogonTicket_Request {
 	optional uint32 priority = 1;
+	optional bool perform_encryption = 2;
 }
 
 message COffline_GetOfflineLogonTicket_Response {
 	optional bytes serialized_ticket = 1;
 	optional bytes signature = 2;
+	optional .Offline_Ticket encrypted_ticket = 3;
 }
 
 message COffline_GetUnsignedOfflineLogonTicket_Request {
