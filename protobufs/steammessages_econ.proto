@@ -1,33 +1,38 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
 
-message CEcon_GetTradeOfferAccessToken_Request {
-	optional bool generate_new_token = 1;
-}
-
-message CEcon_GetTradeOfferAccessToken_Response {
-	optional string trade_offer_access_token = 1;
-}
-
-message CEcon_ClientGetItemShopOverlayAuthURL_Request {
-	optional string return_url = 1;
-}
-
-message CEcon_ClientGetItemShopOverlayAuthURL_Response {
-	optional string url = 1;
-}
-
-message CEcon_GetAssetClassInfo_Request {
-	message Class {
-		optional uint64 classid = 1;
-		optional uint64 instanceid = 2;
+message CEcon_GetInventoryItemsWithDescriptions_Request {
+	message FilterOptions {
+		repeated uint64 assetids = 1;
+		repeated uint32 currencyids = 2;
+		optional bool tradable_only = 3;
+		optional bool marketable_only = 4;
 	}
 
-	optional string language = 1;
+	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
-	repeated .CEcon_GetAssetClassInfo_Request.Class classes = 3;
+	optional uint64 contextid = 3;
+	optional bool get_descriptions = 4;
+	optional bool for_trade_offer_verification = 10;
+	optional string language = 5;
+	optional .CEcon_GetInventoryItemsWithDescriptions_Request.FilterOptions filters = 6;
+	optional uint64 start_assetid = 8;
+	optional int32 count = 9;
+}
+
+message CEcon_Asset {
+	optional uint32 appid = 1;
+	optional uint64 contextid = 2;
+	optional uint64 assetid = 3;
+	optional uint64 classid = 4;
+	optional uint64 instanceid = 5;
+	optional uint32 currencyid = 6 [(description) = "Set currencyid if it's a currency, assetid for an item"];
+	optional int64 amount = 7;
+	optional bool missing = 8;
+	optional int64 est_usd = 9;
 }
 
 message CEconItem_DescriptionLine {
@@ -84,12 +89,52 @@ message CEconItem_Tag {
 	optional string color = 6 [(description) = "The color to use when displaying the tag to the user"];
 }
 
+message CEcon_GetInventoryItemsWithDescriptions_Response {
+	repeated .CEcon_Asset assets = 1;
+	repeated .CEconItem_Description descriptions = 2;
+	repeated .CEcon_Asset missing_assets = 3 [(description) = "This list of assets in the original list we could not find in the users inventory"];
+	optional bool more_items = 4;
+	optional uint64 last_assetid = 5;
+	optional uint32 total_inventory_count = 6;
+}
+
+message CEcon_GetTradeOfferAccessToken_Request {
+	optional bool generate_new_token = 1;
+}
+
+message CEcon_GetTradeOfferAccessToken_Response {
+	optional string trade_offer_access_token = 1;
+}
+
+message CEcon_ClientGetItemShopOverlayAuthURL_Request {
+	optional string return_url = 1;
+}
+
+message CEcon_ClientGetItemShopOverlayAuthURL_Response {
+	optional string url = 1;
+}
+
+message CEcon_GetAssetClassInfo_Request {
+	message Class {
+		optional uint64 classid = 1;
+		optional uint64 instanceid = 2;
+	}
+
+	optional string language = 1;
+	optional uint32 appid = 2;
+	repeated .CEcon_GetAssetClassInfo_Request.Class classes = 3;
+}
+
 message CEcon_GetAssetClassInfo_Response {
 	repeated .CEconItem_Description descriptions = 1;
 }
 
 service Econ {
 	option (service_description) = "A service that provides communication with the econ servers";
+
+	rpc GetInventoryItemsWithDescriptions (.CEcon_GetInventoryItemsWithDescriptions_Request) returns (.CEcon_GetInventoryItemsWithDescriptions_Response) {
+		option (method_description) = "Gets a set of items from a users inventory, along with descriptions";
+	}
 
 	rpc GetTradeOfferAccessToken (.CEcon_GetTradeOfferAccessToken_Request) returns (.CEcon_GetTradeOfferAccessToken_Response) {
 		option (method_description) = "Get the user's trade offer access token";

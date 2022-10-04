@@ -1,4 +1,5 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 
 option py_generic_services = true;

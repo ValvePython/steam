@@ -1,0 +1,14 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option py_generic_services = true;
+option (force_php_generation) = true;
+
+enum EContentDescriptorID {
+	k_EContentDescriptor_FrequentNudityOrSexualContent = 1;
+	k_EContentDescriptor_FrequentViolenceOrGore = 2;
+	k_EContentDescriptor_StrongSexualContent = 3;
+	k_EContentDescriptor_UNUSED_4 = 4;
+	k_EContentDescriptor_AnyMatureContent = 5;
+}

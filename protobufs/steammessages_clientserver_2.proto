@@ -700,6 +700,7 @@ message CMsgClientServiceCall {
 	optional bytes callparameter = 8;
 	optional bool ping_only = 9;
 	optional uint32 max_outstanding_calls = 10;
+	optional uint32 app_id = 11;
 }
 
 message CMsgClientServiceModule {

@@ -1,4 +1,5 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
@@ -43,6 +44,29 @@ message CUserAccount_GetAvailableValveDiscountPromotions_Response {
 	repeated .CUserAccount_GetAvailableValveDiscountPromotions_Response.ValveDiscountPromotionDetails promotions = 1;
 }
 
+message CUserAccount_GetClientWalletDetails_Request {
+	optional bool include_balance_in_usd = 1;
+	optional int32 wallet_region = 2 [default = 1];
+	optional bool include_formatted_balance = 3;
+}
+
+message CUserAccount_GetWalletDetails_Response {
+	optional bool has_wallet = 1;
+	optional string user_country_code = 2;
+	optional string wallet_country_code = 3;
+	optional string wallet_state = 4;
+	optional int64 balance = 5;
+	optional int64 delayed_balance = 6;
+	optional int32 currency_code = 7;
+	optional uint32 time_most_recent_txn = 8;
+	optional uint64 most_recent_txnid = 9;
+	optional int64 balance_in_usd = 10;
+	optional int64 delayed_balance_in_usd = 11;
+	optional bool has_wallet_in_other_regions = 12;
+	repeated int32 other_regions = 13;
+	optional string formatted_balance = 14;
+}
+
 message CUserAccount_GetAccountLinkStatus_Request {
 }
 
@@ -57,6 +81,14 @@ message CUserAccount_CancelLicenseForApp_Request {
 }
 
 message CUserAccount_CancelLicenseForApp_Response {
+}
+
+message CUserAccount_GetUserCountry_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CUserAccount_GetUserCountry_Response {
+	optional string country = 1;
 }
 
 message CUserAccount_CreateFriendInviteToken_Request {
@@ -160,12 +192,20 @@ service UserAccount {
 		option (method_description) = "Gets the available promotional discounts available to the user";
 	}
 
+	rpc GetClientWalletDetails (.CUserAccount_GetClientWalletDetails_Request) returns (.CUserAccount_GetWalletDetails_Response) {
+		option (method_description) = "Returns balance and details about any users wallet";
+	}
+
 	rpc GetAccountLinkStatus (.CUserAccount_GetAccountLinkStatus_Request) returns (.CUserAccount_GetAccountLinkStatus_Response) {
 		option (method_description) = "Fetches account link status";
 	}
 
 	rpc CancelLicenseForApp (.CUserAccount_CancelLicenseForApp_Request) returns (.CUserAccount_CancelLicenseForApp_Response) {
 		option (method_description) = "Cancels a free license for a user";
+	}
+
+	rpc GetUserCountry (.CUserAccount_GetUserCountry_Request) returns (.CUserAccount_GetUserCountry_Response) {
+		option (method_description) = "Get the country code associated with the passed steamid (only available for logged-in user or support)";
 	}
 
 	rpc CreateFriendInviteToken (.CUserAccount_CreateFriendInviteToken_Request) returns (.CUserAccount_CreateFriendInviteToken_Response) {

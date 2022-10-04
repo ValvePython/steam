@@ -1,4 +1,5 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
@@ -53,6 +54,9 @@ message CShader_GetStaleBucket_Response {
 	optional uint64 bucketid = 1;
 	optional uint32 appid = 2;
 	optional uint64 manifestid = 3;
+	optional string gpu_desc = 4;
+	optional string driver_desc = 5;
+	optional bytes depot_encryption_key = 6;
 }
 
 message CShader_ReportExternalBuild_Request {

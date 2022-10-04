@@ -112,11 +112,19 @@ message CMsgClientGamesPlayed {
 		optional uint32 vr_hmd_runtime = 22;
 		optional .CMsgIPAddress game_ip_address = 23;
 		optional uint32 controller_connection_type = 24 [default = 0];
+		optional int32 game_os_platform = 25;
+		optional uint32 game_build_id = 26;
+		optional uint32 compat_tool_id = 27 [default = 0];
+		optional string compat_tool_cmd = 28;
+		optional uint32 compat_tool_build_id = 29;
+		optional string beta_name = 30;
+		optional uint32 dlc_context = 31;
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
 	optional uint32 client_os_type = 2;
 	optional uint32 cloud_gaming_platform = 3;
+	optional bool recent_reauthentication = 4;
 }
 
 message CMsgGSApprove {
@@ -231,6 +239,10 @@ message CMsgClientConnectionStats {
 		optional uint32 seconds_running = 5;
 		optional uint32 msec_tologonthistime = 6;
 		optional uint32 count_bad_cms = 7;
+		optional bool no_udp_connectivity = 8;
+		optional bool no_tcp_connectivity = 9;
+		optional bool no_websocket_443_connectivity = 10;
+		optional bool no_websocket_non_443_connectivity = 11;
 	}
 
 	message Stats_UDP {

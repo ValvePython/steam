@@ -1,0 +1,382 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+import "steammessages_unified_base.proto";
+import "enums.proto";
+
+option py_generic_services = true;
+
+enum EAuthTokenPlatformType {
+	k_EAuthTokenPlatformType_Unknown = 0;
+	k_EAuthTokenPlatformType_SteamClient = 1;
+	k_EAuthTokenPlatformType_WebBrowser = 2;
+	k_EAuthTokenPlatformType_MobileApp = 3;
+}
+
+enum EAuthSessionGuardType {
+	k_EAuthSessionGuardType_Unknown = 0;
+	k_EAuthSessionGuardType_None = 1;
+	k_EAuthSessionGuardType_EmailCode = 2;
+	k_EAuthSessionGuardType_DeviceCode = 3;
+	k_EAuthSessionGuardType_DeviceConfirmation = 4;
+	k_EAuthSessionGuardType_EmailConfirmation = 5;
+	k_EAuthSessionGuardType_MachineToken = 6;
+}
+
+enum EAuthSessionSecurityHistory {
+	k_EAuthSessionSecurityHistory_Invalid = 0;
+	k_EAuthSessionSecurityHistory_UsedPreviously = 1;
+	k_EAuthSessionSecurityHistory_NoPriorHistory = 2;
+}
+
+enum EAuthTokenRevokeAction {
+	k_EAuthTokenRevokeLogout = 0;
+	k_EAuthTokenRevokePermanent = 1;
+	k_EAuthTokenRevokeReplaced = 2;
+	k_EAuthTokenRevokeSupport = 3;
+}
+
+enum EAuthTokenState {
+	k_EAuthTokenState_Invalid = 0;
+	k_EAuthTokenState_New = 1;
+	k_EAuthTokenState_Confirmed = 2;
+	k_EAuthTokenState_Issued = 3;
+	k_EAuthTokenState_Denied = 4;
+	k_EAuthTokenState_LoggedOut = 5;
+	k_EAuthTokenState_Revoked = 99;
+}
+
+message CAuthentication_GetPasswordRSAPublicKey_Request {
+	optional string account_name = 1 [(description) = "user-provided account name to get an RSA key for"];
+}
+
+message CAuthentication_GetPasswordRSAPublicKey_Response {
+	optional string publickey_mod = 1 [(description) = "the public key modulus"];
+	optional string publickey_exp = 2 [(description) = "the public key exponent"];
+	optional uint64 timestamp = 3 [(description) = "the timestamp the key was generated"];
+}
+
+message CAuthentication_DeviceDetails {
+	optional string device_friendly_name = 1 [(description) = "User-supplied, or client-supplied, friendly name of device"];
+	optional .EAuthTokenPlatformType platform_type = 2 [default = k_EAuthTokenPlatformType_Unknown, (description) = "EAuthTokenPlatformType, claimed, of device"];
+	optional int32 os_type = 3 [(description) = "EOSType, claimed, of authorized device"];
+	optional uint32 gaming_device_type = 4 [(description) = "EGamingDeviceType, claimed, of authorized device for steam client-type devices"];
+}
+
+message CAuthentication_BeginAuthSessionViaQR_Request {
+	optional string device_friendly_name = 1;
+	optional .EAuthTokenPlatformType platform_type = 2 [default = k_EAuthTokenPlatformType_Unknown];
+	optional .CAuthentication_DeviceDetails device_details = 3 [(description) = "User-supplied details about the device attempting to sign in"];
+}
+
+message CAuthentication_AllowedConfirmation {
+	optional .EAuthSessionGuardType confirmation_type = 1 [default = k_EAuthSessionGuardType_Unknown, (description) = "authentication can proceed with this confirmation type"];
+	optional string associated_message = 2 [(description) = "message to be interpreted depending on the confirmation type. for email confirmation, this might be the redacted email address to which email was sent."];
+}
+
+message CAuthentication_BeginAuthSessionViaQR_Response {
+	optional uint64 client_id = 1 [(description) = "unique identifier of requestor, also used for routing, portion of QR code"];
+	optional string challenge_url = 2 [(description) = "URL based on client ID, which will be rendered as QR code"];
+	optional bytes request_id = 3 [(description) = "unique request ID to be presented by requestor at poll time - must not be rendered in QR"];
+	optional float interval = 4 [(description) = "refresh interval with which requestor should call PollAuthSessionStatus"];
+	repeated .CAuthentication_AllowedConfirmation allowed_confirmations = 5 [(description) = "the confirmation types that will be able to confirm the request"];
+	optional int32 version = 6 [(description) = "version of the QR data"];
+}
+
+message CAuthentication_BeginAuthSessionViaCredentials_Request {
+	optional string device_friendly_name = 1;
+	optional string account_name = 2;
+	optional string encrypted_password = 3 [(description) = "password, RSA encrypted client side"];
+	optional uint64 encryption_timestamp = 4 [(description) = "timestamp to map to a key - STime"];
+	optional bool remember_login = 5 [(description) = "deprecated"];
+	optional .EAuthTokenPlatformType platform_type = 6 [default = k_EAuthTokenPlatformType_Unknown];
+	optional .ESessionPersistence persistence = 7 [default = k_ESessionPersistence_Persistent, (description) = "whether we are requesting a persistent or an ephemeral session"];
+	optional string website_id = 8 [default = "Unknown", (description) = "(EMachineAuthWebDomain) identifier of client requesting auth"];
+	optional .CAuthentication_DeviceDetails device_details = 9 [(description) = "User-supplied details about the device attempting to sign in"];
+	optional string guard_data = 10 [(description) = "steam guard data for client login"];
+}
+
+message CAuthentication_BeginAuthSessionViaCredentials_Response {
+	optional uint64 client_id = 1 [(description) = "unique identifier of requestor, also used for routing"];
+	optional bytes request_id = 2 [(description) = "unique request ID to be presented by requestor at poll time - must not be transferred or displayed"];
+	optional float interval = 3 [(description) = "refresh interval with which requestor should call PollAuthSessionStatus"];
+	repeated .CAuthentication_AllowedConfirmation allowed_confirmations = 4 [(description) = "the confirmation types that will be able to confirm the request"];
+	optional uint64 steamid = 5 [(description) = "steamid of the account logging in - will only be included if the credentials were correct"];
+	optional string weak_token = 6 [(description) = "partial-authentication token - limited lifetime and scope, included only if credentials were valid"];
+}
+
+message CAuthentication_PollAuthSessionStatus_Request {
+	optional uint64 client_id = 1;
+	optional bytes request_id = 2;
+	optional fixed64 token_to_revoke = 3 [(description) = "If this is set to a token owned by this user, that token will be retired"];
+}
+
+message CAuthentication_PollAuthSessionStatus_Response {
+	optional uint64 new_client_id = 1 [(description) = "if challenge is old, this is the new client id"];
+	optional string new_challenge_url = 2 [(description) = "if challenge is old, this is the new challenge ID to re-render for mobile confirmation"];
+	optional string refresh_token = 3 [(description) = "if login has been confirmed, this is the requestor's new refresh token"];
+	optional string access_token = 4 [(description) = "if login has been confirmed, this is a new token subordinate to refresh_token"];
+	optional bool had_remote_interaction = 5 [(description) = "whether or not the auth session appears to have had remote interaction from a potential confirmer"];
+	optional string account_name = 6 [(description) = "account name of authenticating account, for use by UI layer"];
+	optional string new_guard_data = 7 [(description) = "if login has been confirmed, may contain remembered machine ID for future login"];
+}
+
+message CAuthentication_GetAuthSessionInfo_Request {
+	optional uint64 client_id = 1 [(description) = "client ID from scanned QR Code, used for routing"];
+}
+
+message CAuthentication_GetAuthSessionInfo_Response {
+	optional string ip = 1 [(description) = "IP address of requestor"];
+	optional string geoloc = 2 [(description) = "geoloc info of requestor"];
+	optional string city = 3 [(description) = "city of requestor"];
+	optional string state = 4 [(description) = "state of requestor"];
+	optional string country = 5 [(description) = "country of requestor"];
+	optional .EAuthTokenPlatformType platform_type = 6 [default = k_EAuthTokenPlatformType_Unknown, (description) = "platform type of requestor"];
+	optional string device_friendly_name = 7 [(description) = "name of requestor device"];
+	optional int32 version = 8 [(description) = "version field"];
+	optional .EAuthSessionSecurityHistory login_history = 9 [default = k_EAuthSessionSecurityHistory_Invalid, (description) = "whether the ip has previuously been used on the account successfully"];
+	optional bool requestor_location_mismatch = 10 [(description) = "whether the requestor location matches this requests location"];
+	optional bool high_usage_login = 11 [(description) = "whether this login has seen high usage recently"];
+	optional .ESessionPersistence requested_persistence = 12 [default = k_ESessionPersistence_Invalid, (description) = "session persistence requestor has indicated they want"];
+}
+
+message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request {
+	optional int32 version = 1 [(description) = "version field"];
+	optional uint64 client_id = 2 [(description) = "pending client ID, from scanned QR Code"];
+	optional fixed64 steamid = 3 [(description) = "user who wants to login"];
+	optional bytes signature = 4 [(description) = "HMAC digest over {version,client_id,steamid} via user's private key"];
+	optional bool confirm = 5 [default = false, (description) = "Whether to confirm the login (true) or deny the login (false)"];
+	optional .ESessionPersistence persistence = 6 [default = k_ESessionPersistence_Persistent, (description) = "whether we are requesting a persistent or an ephemeral session"];
+}
+
+message CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response {
+}
+
+message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
+	optional uint64 client_id = 1 [(description) = "pending client ID, from initialized session"];
+	optional fixed64 steamid = 2 [(description) = "user who wants to login"];
+	optional string code = 3 [(description) = "confirmation code"];
+	optional .EAuthSessionGuardType code_type = 4 [default = k_EAuthSessionGuardType_Unknown, (description) = "type of confirmation code"];
+}
+
+message CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response {
+}
+
+message CAuthentication_AccessToken_GenerateForApp_Request {
+	optional string refresh_token = 1;
+	optional fixed64 steamid = 2;
+}
+
+message CAuthentication_AccessToken_GenerateForApp_Response {
+	optional string access_token = 1;
+}
+
+message CAuthentication_RefreshToken_Enumerate_Request {
+}
+
+message CAuthentication_RefreshToken_Enumerate_Response {
+	message TokenUsageEvent {
+		optional uint32 time = 1 [(description) = "Approximate time of history event (may be deliberately fuzzed or omitted)"];
+		optional .CMsgIPAddress ip = 2 [(description) = "IP at which event was observed"];
+		optional string locale = 3 [(description) = "city/location name, if known"];
+	}
+
+	message RefreshTokenDescription {
+		optional fixed64 token_id = 1 [(description) = "Persistent token/device identifier"];
+		optional string token_description = 2 [(description) = "client-supplied friendly name for the device"];
+		optional uint32 time_updated = 3;
+		optional .EAuthTokenPlatformType platform_type = 4 [default = k_EAuthTokenPlatformType_Unknown, (description) = "gross platform type (mobile/client/browser)"];
+		optional bool logged_in = 5 [(description) = "If true, this token is currently valid. False indicates it is a machine token - ok for steamguard if you know the credential"];
+		optional uint32 os_platform = 6 [(description) = "EPlatformType - rough classification of device OS, if known"];
+		optional uint32 auth_type = 7 [(description) = "EAuthTokenGuardType - device authorization mechanism, if known"];
+		optional uint32 gaming_device_type = 8 [(description) = "EGamingDeviceType - classify console/PC/SteamDeck, if known; applies only for Steam Client devices"];
+		optional .CAuthentication_RefreshToken_Enumerate_Response.TokenUsageEvent first_seen = 9 [(description) = "Information about original authorization event"];
+		optional .CAuthentication_RefreshToken_Enumerate_Response.TokenUsageEvent last_seen = 10 [(description) = "Information about most-recently seen, if known for this device"];
+	}
+
+	repeated .CAuthentication_RefreshToken_Enumerate_Response.RefreshTokenDescription refresh_tokens = 1;
+	optional fixed64 requesting_token = 2;
+}
+
+message CAuthentication_GetAuthSessionsForAccount_Request {
+}
+
+message CAuthentication_GetAuthSessionsForAccount_Response {
+	repeated uint64 client_ids = 1 [(description) = "unique identifier of requestor, also used for routing"];
+}
+
+message CAuthentication_MigrateMobileSession_Request {
+	optional fixed64 steamid = 1 [(description) = "Steam ID of the user to migrate"];
+	optional string token = 2 [(description) = "WG Token to migrate"];
+	optional string signature = 3 [(description) = "Signature over the wg token using the user's 2FA token"];
+}
+
+message CAuthentication_MigrateMobileSession_Response {
+	optional string refresh_token = 1;
+	optional string access_token = 2;
+}
+
+message CAuthentication_RefreshToken_Revoke_Request {
+	optional fixed64 token_id = 1;
+	optional fixed64 steamid = 2 [(description) = "Token holder if an admin action on behalf of another user"];
+	optional .EAuthTokenRevokeAction revoke_action = 3 [default = k_EAuthTokenRevokePermanent, (description) = "Select between logout and logout-and-forget-machine"];
+	optional bytes signature = 4 [(description) = "required signature over token_id"];
+}
+
+message CAuthentication_RefreshToken_Revoke_Response {
+}
+
+message CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
+	optional fixed64 steamid = 1 [(description) = "SteamID of the account to query (required)"];
+	optional bool include_revoked_tokens = 2 [(description) = "Includes tokens that are revoked or expired in the query"];
+}
+
+message CSupportRefreshTokenDescription {
+	optional fixed64 token_id = 1;
+	optional string token_description = 2;
+	optional uint32 time_updated = 3;
+	optional .EAuthTokenPlatformType platform_type = 4 [default = k_EAuthTokenPlatformType_Unknown];
+	optional .EAuthTokenState token_state = 5 [default = k_EAuthTokenState_Invalid];
+	optional fixed64 owner_steamid = 6;
+}
+
+message CAuthenticationSupport_QueryRefreshTokensByAccount_Response {
+	repeated .CSupportRefreshTokenDescription refresh_tokens = 1;
+}
+
+message CAuthenticationSupport_QueryRefreshTokenByID_Request {
+	optional fixed64 token_id = 1 [(description) = "Token ID of the token to look up (required)"];
+}
+
+message CAuthenticationSupport_QueryRefreshTokenByID_Response {
+	repeated .CSupportRefreshTokenDescription refresh_tokens = 1;
+}
+
+message CAuthenticationSupport_RevokeToken_Request {
+	optional fixed64 token_id = 1 [(description) = "Token ID of the token to revoke (required)"];
+}
+
+message CAuthenticationSupport_RevokeToken_Response {
+}
+
+message CAuthenticationSupport_GetTokenHistory_Request {
+	optional fixed64 token_id = 1 [(description) = "Token ID of the token to get history for (required)"];
+}
+
+message CSupportRefreshTokenAudit {
+	optional int32 action = 1;
+	optional uint32 time = 2;
+	optional .CMsgIPAddress ip = 3;
+	optional fixed64 actor = 4;
+}
+
+message CAuthenticationSupport_GetTokenHistory_Response {
+	repeated .CSupportRefreshTokenAudit history = 1;
+}
+
+message CCloudGaming_CreateNonce_Request {
+	optional string platform = 1;
+	optional uint32 appid = 2;
+}
+
+message CCloudGaming_CreateNonce_Response {
+	optional string nonce = 1;
+	optional uint32 expiry = 2;
+}
+
+message CCloudGaming_GetTimeRemaining_Request {
+	optional string platform = 1;
+	repeated uint32 appid_list = 2;
+}
+
+message CCloudGaming_TimeRemaining {
+	optional uint32 appid = 1;
+	optional uint32 minutes_remaining = 2;
+}
+
+message CCloudGaming_GetTimeRemaining_Response {
+	repeated .CCloudGaming_TimeRemaining entries = 2;
+}
+
+service Authentication {
+	option (service_description) = "Authentication Service";
+
+	rpc GetPasswordRSAPublicKey (.CAuthentication_GetPasswordRSAPublicKey_Request) returns (.CAuthentication_GetPasswordRSAPublicKey_Response) {
+		option (method_description) = "Fetches RSA public key to use to encrypt passwords for a given account name";
+	}
+
+	rpc BeginAuthSessionViaQR (.CAuthentication_BeginAuthSessionViaQR_Request) returns (.CAuthentication_BeginAuthSessionViaQR_Response) {
+		option (method_description) = "start authentication process";
+	}
+
+	rpc BeginAuthSessionViaCredentials (.CAuthentication_BeginAuthSessionViaCredentials_Request) returns (.CAuthentication_BeginAuthSessionViaCredentials_Response) {
+		option (method_description) = "start authentication process";
+	}
+
+	rpc PollAuthSessionStatus (.CAuthentication_PollAuthSessionStatus_Request) returns (.CAuthentication_PollAuthSessionStatus_Response) {
+		option (method_description) = "poll during authentication process";
+	}
+
+	rpc GetAuthSessionInfo (.CAuthentication_GetAuthSessionInfo_Request) returns (.CAuthentication_GetAuthSessionInfo_Response) {
+		option (method_description) = "get metadata of specific auth session, this will also implicitly bind the calling account";
+	}
+
+	rpc UpdateAuthSessionWithMobileConfirmation (.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request) returns (.CAuthentication_UpdateAuthSessionWithMobileConfirmation_Response) {
+		option (method_description) = "approve an authentication session via mobile 2fa";
+	}
+
+	rpc UpdateAuthSessionWithSteamGuardCode (.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request) returns (.CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response) {
+		option (method_description) = "approve an authentication session via steam guard code";
+	}
+
+	rpc GenerateAccessTokenForApp (.CAuthentication_AccessToken_GenerateForApp_Request) returns (.CAuthentication_AccessToken_GenerateForApp_Response) {
+		option (method_description) = "Given a refresh token for a client app audience (e.g. desktop client / mobile client), generate an access token";
+	}
+
+	rpc EnumerateTokens (.CAuthentication_RefreshToken_Enumerate_Request) returns (.CAuthentication_RefreshToken_Enumerate_Response) {
+		option (method_description) = "Enumerate durable (refresh) tokens for the given subject account";
+	}
+
+	rpc GetAuthSessionsForAccount (.CAuthentication_GetAuthSessionsForAccount_Request) returns (.CAuthentication_GetAuthSessionsForAccount_Response) {
+		option (method_description) = "Gets all active auth sessions for an account for reference by the mobile app";
+	}
+
+	rpc MigrateMobileSession (.CAuthentication_MigrateMobileSession_Request) returns (.CAuthentication_MigrateMobileSession_Response) {
+		option (method_description) = "Migrates a WG token to an access and refresh token using a signature generated with the user's 2FA secret";
+	}
+
+	rpc RevokeRefreshToken (.CAuthentication_RefreshToken_Revoke_Request) returns (.CAuthentication_RefreshToken_Revoke_Response) {
+		option (method_description) = "Mark the given refresh token as revoked";
+	}
+}
+
+service AuthenticationSupport {
+	option (service_description) = "Authentication Support Service";
+
+	rpc QueryRefreshTokensByAccount (.CAuthenticationSupport_QueryRefreshTokensByAccount_Request) returns (.CAuthenticationSupport_QueryRefreshTokensByAccount_Response) {
+		option (method_description) = "Asks the server for a list of refresh tokens associated with an account";
+	}
+
+	rpc QueryRefreshTokenByID (.CAuthenticationSupport_QueryRefreshTokenByID_Request) returns (.CAuthenticationSupport_QueryRefreshTokenByID_Response) {
+		option (method_description) = "Asks the server for a list of refresh tokens associated with an account";
+	}
+
+	rpc RevokeToken (.CAuthenticationSupport_RevokeToken_Request) returns (.CAuthenticationSupport_RevokeToken_Response) {
+		option (method_description) = "Revokes a user's auth token";
+	}
+
+	rpc GetTokenHistory (.CAuthenticationSupport_GetTokenHistory_Request) returns (.CAuthenticationSupport_GetTokenHistory_Response) {
+		option (method_description) = "Gets the audit history for a user's auth token";
+	}
+}
+
+service CloudGaming {
+	option (service_description) = "Methods for Steam cloud gaming operations";
+
+	rpc CreateNonce (.CCloudGaming_CreateNonce_Request) returns (.CCloudGaming_CreateNonce_Response) {
+		option (method_description) = "Create a nonce for a cloud gaming service session";
+	}
+
+	rpc GetTimeRemaining (.CCloudGaming_GetTimeRemaining_Request) returns (.CCloudGaming_GetTimeRemaining_Response) {
+		option (method_description) = "Get the amount of streaming time remaining for a set of apps";
+	}
+}

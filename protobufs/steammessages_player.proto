@@ -1,4 +1,5 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 import "enums.proto";
 
@@ -51,6 +52,8 @@ message CPlayer_GetOwnedGames_Request {
 	repeated uint32 appids_filter = 4 [(description) = "if set, restricts result set to the passed in apps"];
 	optional bool include_free_sub = 5 [(description) = "Some games are in the free sub, which are excluded by default."];
 	optional bool skip_unvetted_apps = 6 [default = true, (description) = "if set, skip unvetted store apps"];
+	optional string language = 7 [(description) = "Will return appinfo in this language"];
+	optional bool include_extended_appinfo = 8 [(description) = "true if we want even more details (capsule, sortas, and capabilities) about each game.  include_appinfo must also be true."];
 }
 
 message CPlayer_GetOwnedGames_Response {
@@ -60,11 +63,16 @@ message CPlayer_GetOwnedGames_Response {
 		optional int32 playtime_2weeks = 3;
 		optional int32 playtime_forever = 4;
 		optional string img_icon_url = 5;
-		optional string img_logo_url = 6;
 		optional bool has_community_visible_stats = 7;
 		optional int32 playtime_windows_forever = 8;
 		optional int32 playtime_mac_forever = 9;
 		optional int32 playtime_linux_forever = 10;
+		optional uint32 rtime_last_played = 11;
+		optional string capsule_filename = 12;
+		optional string sort_as = 13;
+		optional bool has_workshop = 14;
+		optional bool has_market = 15;
+		optional bool has_dlc = 16;
 	}
 
 	optional uint32 game_count = 1;
@@ -106,37 +114,6 @@ message CPlayer_GetFriendsGameplayInfo_Response {
 	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo played_ever = 4;
 	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo owns = 5;
 	repeated .CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo in_wishlist = 6;
-}
-
-message CPlayer_GetFriendsAppsActivity_Request {
-	optional string news_language = 1 [(description) = "Language for which to query about news items (for the being_discussed results). DEPRECATED AND UNUSED."];
-	optional uint32 request_flags = 2 [(description) = "Flags describing the request; see EGetFriendsAppsActivityFlags"];
-}
-
-message CPlayer_GetFriendsAppsActivity_Response {
-	message FriendPlayTime {
-		optional fixed64 steamid = 1;
-		optional uint32 minutes_played_this_week = 2 [(description) = "Minutes this friend played the game (from the enclosing structure) this week."];
-		optional uint32 minutes_played_two_weeks = 3 [(description) = "Minutes this friend played the game (from the enclosing structure) in the past 2 weeks."];
-		optional uint32 minutes_played_forever = 4 [(description) = "Minutes this friend played the game (from the enclosing structure) all time."];
-		optional uint32 event_count = 5 [(description) = "Number of events involving this user & app. (Only set for results in being_discussed.) DEPRECATED AND UNUSED."];
-	}
-
-	message AppFriendsInfo {
-		optional uint32 appid = 1;
-		repeated .CPlayer_GetFriendsAppsActivity_Response.FriendPlayTime friends = 2 [(description) = "Friends (w/ playtime) that meet a specific criteria -- e.g. for trending, only includes friends w/ more playtime this week."];
-		optional uint32 display_order = 3 [(description) = "Index indicating the order in which this app should be displayed, relative to other apps in the same response."];
-	}
-
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo trending = 1 [(description) = "Apps that friends have played more this week than last, with list of friends who've played more this week"];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo recent_purchases = 2 [(description) = "Apps friends have played in the past two weeks for which the user recently acquired a license"];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo unowned = 3 [(description) = "Apps friends have played in the past two weeks for which the user has no license"];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo popular = 4 [(description) = "Apps friends have played in the past two weeks, for which the user has a license, sorted by count"];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo dont_forget = 5 [(description) = "Apps friends have played in the past two weeks which the user has neither purchased nor played in the past two weeks"];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo being_discussed = 6 [(description) = "Owned apps that friends have posted status or screenshots for in the past two weeks. DEPRECATED AND UNUSED."];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo new_to_group = 7 [(description) = "Owned apps that none of your friends had played prior to 2 weeks."];
-	repeated .CPlayer_GetFriendsAppsActivity_Response.AppFriendsInfo returned_to_group = 8 [(description) = "Owned apps that friends hadn't played for a while, but are again."];
-	optional uint32 active_friend_count = 9 [default = 0, (description) = "Number of friends with non-trivial activity in the past two weeks."];
 }
 
 message CPlayer_GetGameBadgeLevels_Request {
@@ -235,8 +212,25 @@ message CPlayer_SetAnimatedAvatar_Request {
 message CPlayer_SetAnimatedAvatar_Response {
 }
 
+message CPlayer_GetSteamDeckKeyboardSkin_Request {
+	optional fixed64 steamid = 1 [(description) = "The player we're asking about"];
+	optional string language = 2;
+}
+
+message CPlayer_GetSteamDeckKeyboardSkin_Response {
+	optional .ProfileItem steam_deck_keyboard_skin = 1;
+}
+
+message CPlayer_SetSteamDeckKeyboardSkin_Request {
+	optional uint64 communityitemid = 1;
+}
+
+message CPlayer_SetSteamDeckKeyboardSkin_Response {
+}
+
 message CPlayer_GetProfileItemsOwned_Request {
 	optional string language = 1;
+	repeated .ECommunityItemClass filters = 2;
 }
 
 message CPlayer_GetProfileItemsOwned_Response {
@@ -245,6 +239,7 @@ message CPlayer_GetProfileItemsOwned_Response {
 	repeated .ProfileItem avatar_frames = 3;
 	repeated .ProfileItem animated_avatars = 4;
 	repeated .ProfileItem profile_modifiers = 5;
+	repeated .ProfileItem steam_deck_keyboard_skins = 6;
 }
 
 message CPlayer_GetProfileItemsEquipped_Request {
@@ -258,6 +253,7 @@ message CPlayer_GetProfileItemsEquipped_Response {
 	optional .ProfileItem avatar_frame = 3;
 	optional .ProfileItem animated_avatar = 4;
 	optional .ProfileItem profile_modifier = 5;
+	optional .ProfileItem steam_deck_keyboard_skin = 6;
 }
 
 message CPlayer_SetEquippedProfileItemFlags_Request {
@@ -486,6 +482,15 @@ message CPlayer_GetLastPlayedTimes_Response {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
 }
 
+message CPlayer_GetTimeSSAAccepted_Request {
+}
+
+message CPlayer_GetTimeSSAAccepted_Response {
+	optional uint32 time_ssa_accepted = 1;
+	optional uint32 time_ssa_updated = 2;
+	optional uint32 time_chinassa_accepted = 3;
+}
+
 message CPlayer_AcceptSSA_Request {
 	optional .EAgreementType agreement_type = 1 [default = k_EAgreementType_Invalid];
 	optional uint32 time_signed_utc = 2;
@@ -705,10 +710,6 @@ service Player {
 		option (method_description) = "Get a list of friends who are playing, have played, own, or want a game";
 	}
 
-	rpc GetFriendsAppsActivity (.CPlayer_GetFriendsAppsActivity_Request) returns (.CPlayer_GetFriendsAppsActivity_Response) {
-		option (method_description) = "Get lists of apps friends are active in, in a variety of ways";
-	}
-
 	rpc GetGameBadgeLevels (.CPlayer_GetGameBadgeLevels_Request) returns (.CPlayer_GetGameBadgeLevels_Response) {
 		option (method_description) = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil";
 	}
@@ -743,6 +744,14 @@ service Player {
 
 	rpc SetAnimatedAvatar (.CPlayer_SetAnimatedAvatar_Request) returns (.CPlayer_SetAnimatedAvatar_Response) {
 		option (method_description) = "Sets the user's animated avatar for their profile";
+	}
+
+	rpc GetSteamDeckKeyboardSkin (.CPlayer_GetSteamDeckKeyboardSkin_Request) returns (.CPlayer_GetSteamDeckKeyboardSkin_Response) {
+		option (method_description) = "Gets which Steam Deck keyboard skin is active for a specific user";
+	}
+
+	rpc SetSteamDeckKeyboardSkin (.CPlayer_SetSteamDeckKeyboardSkin_Request) returns (.CPlayer_SetSteamDeckKeyboardSkin_Response) {
+		option (method_description) = "Sets the user's current Steam Deck keyboard skin";
 	}
 
 	rpc GetProfileItemsOwned (.CPlayer_GetProfileItemsOwned_Request) returns (.CPlayer_GetProfileItemsOwned_Response) {
@@ -811,6 +820,10 @@ service Player {
 
 	rpc ClientGetLastPlayedTimes (.CPlayer_GetLastPlayedTimes_Request) returns (.CPlayer_GetLastPlayedTimes_Response) {
 		option (method_description) = "Gets the last-played times for the account";
+	}
+
+	rpc GetTimeSSAAccepted (.CPlayer_GetTimeSSAAccepted_Request) returns (.CPlayer_GetTimeSSAAccepted_Response) {
+		option (method_description) = "Gets the time when the user accepted the SSA";
 	}
 
 	rpc AcceptSSA (.CPlayer_AcceptSSA_Request) returns (.CPlayer_AcceptSSA_Response) {

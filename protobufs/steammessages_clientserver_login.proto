@@ -25,6 +25,10 @@ message CMsgClientSecret {
 	optional bytes hmac = 5;
 }
 
+message CMsgClientHello {
+	optional uint32 protocol_version = 1;
+}
+
 message CMsgClientLogon {
 	optional uint32 protocol_version = 1;
 	optional uint32 deprecated_obfustucated_private_ip = 2;
@@ -79,12 +83,14 @@ message CMsgClientLogon {
 	optional int32 priority_reason = 104;
 	optional .CMsgClientSecret embedded_client_secret = 105;
 	optional bool disable_partner_autogrants = 106;
+	optional bool is_steam_deck = 107;
+	optional string access_token = 108;
 }
 
 message CMsgClientLogonResponse {
 	optional int32 eresult = 1 [default = 2];
-	optional int32 out_of_game_heartbeat_seconds = 2;
-	optional int32 in_game_heartbeat_seconds = 3;
+	optional int32 legacy_out_of_game_heartbeat_seconds = 2;
+	optional int32 heartbeat_seconds = 3;
 	optional uint32 deprecated_public_ip = 4;
 	optional fixed32 rtime32_server_time = 5;
 	optional uint32 account_flags = 6;
@@ -107,6 +113,7 @@ message CMsgClientLogonResponse {
 	optional uint64 client_instance_id = 27;
 	optional bool force_client_update_check = 28;
 	optional string agreement_session_url = 29;
+	optional uint64 token_id = 30;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {

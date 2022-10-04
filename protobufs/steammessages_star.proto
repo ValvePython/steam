@@ -1,0 +1,65 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+enum E_STAR_GlyphWriteResult {
+	k_E_STAR_GlyphWriteResult_Success = 0;
+	k_E_STAR_GlyphWriteResult_InvalidMessage = 1;
+	k_E_STAR_GlyphWriteResult_InvalidJSON = 2;
+	k_E_STAR_GlyphWriteResult_SQLError = 3;
+}
+
+message CSTAR_KeyValueQuery {
+	optional string key = 1 [(description) = "key to search for in JSON path format (SQL subset)"];
+	optional string value = 2 [(description) = "the value to compare against (the JSON value will be compared for equality as a string)"];
+}
+
+message CSTAR_GlyphQueryParams {
+	optional uint64 bundle_id = 1 [(description) = "if provided, Bundle ID is used instead of the other query parameters (much faster SQL query)"];
+	repeated .CSTAR_KeyValueQuery queries = 2 [(description) = "key value queries"];
+}
+
+message CSTAR_ReadGlyphData_Request {
+	optional .CSTAR_GlyphQueryParams query_params = 1 [(description) = "parameters to identify the glyphs to read from SQL"];
+	optional string last_modified_time_lower_limit = 2 [(description) = "if provided, only return glyphs modified more recently than this timestamp  (RFC 3339 UTC format)"];
+}
+
+message CSTAR_GlyphData {
+	optional bytes glyph_guid = 1 [(description) = "GUID uniquely identifying this glyph"];
+	optional string glyph_last_modified = 2 [(description) = "timestamp of when this glyph was last modified (RFC 3339 UTC format)"];
+	optional string glyph_json_data = 3 [(description) = "JSON encoded glyph data"];
+}
+
+message CSTAR_WriteGlyphData_Request {
+	optional uint64 bundle_id = 1 [(description) = "the Bundle ID of the glyphs to be written"];
+	repeated .CSTAR_GlyphData glyph_data = 2 [(description) = "one or more items of glyph data to write"];
+}
+
+message CSTAR_Request {
+	optional .CSTAR_ReadGlyphData_Request read_glyph_data = 1;
+	optional .CSTAR_WriteGlyphData_Request write_glyph_data = 2;
+}
+
+message CSTAR_ReadGlyphData_Response {
+	optional uint64 bundle_id = 1 [(description) = "the Bundle ID of the returned glyphs; the client should send this back to optimize subsequent queries"];
+	repeated .CSTAR_GlyphData glyph_data = 2 [(description) = "zero or more items of returned glyph data"];
+}
+
+message CSTAR_WriteGlyphData_Response {
+	repeated .E_STAR_GlyphWriteResult result = 1 [(description) = "write result for each item of glyph data"];
+}
+
+message CSTAR_Response {
+	optional .CSTAR_ReadGlyphData_Response read_glyph_data = 1;
+	optional .CSTAR_WriteGlyphData_Response write_glyph_data = 2;
+}
+
+service STAR {
+	option (service_description) = "service for reading/writing STAR data";
+
+	rpc ProcessMessage (.CSTAR_Request) returns (.CSTAR_Response) {
+		option (method_description) = "processes a generic message";
+	}
+}

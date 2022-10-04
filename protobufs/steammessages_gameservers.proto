@@ -1,4 +1,5 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 
 option py_generic_services = true;
@@ -50,6 +51,78 @@ message CGameServers_GetServerIPsBySteamID_Request {
 	repeated fixed64 server_steamids = 1;
 }
 
+message CGameServers_QueryByFakeIP_Request {
+	enum EQueryType {
+		Query_Invalid = 0;
+		Query_Ping = 1;
+		Query_Players = 2;
+		Query_Rules = 3;
+	}
+
+	optional uint32 fake_ip = 1 [(description) = "FakeIP of server to query."];
+	optional uint32 fake_port = 2 [(description) = "Fake port of server to query."];
+	optional uint32 app_id = 3 [(description) = "AppID to use.  Each AppID has its own FakeIP address."];
+	optional .CGameServers_QueryByFakeIP_Request.EQueryType query_type = 4 [default = Query_Invalid, (description) = "What type of query?"];
+}
+
+message CMsgGameServerPingQueryData {
+	optional .CMsgIPAddress server_ip = 1;
+	optional uint32 query_port = 2;
+	optional uint32 game_port = 3;
+	optional uint32 spectator_port = 4;
+	optional string spectator_server_name = 5;
+	optional string server_name = 6;
+	optional fixed64 steamid = 7;
+	optional uint32 app_id = 8;
+	optional string gamedir = 9;
+	optional string map = 10;
+	optional string game_description = 11;
+	optional string gametype = 12;
+	optional uint32 num_players = 13;
+	optional uint32 max_players = 14;
+	optional uint32 num_bots = 15;
+	optional bool password = 16;
+	optional bool secure = 17;
+	optional bool dedicated = 18;
+	optional string version = 19;
+	optional fixed32 sdr_popid = 20;
+	optional string sdr_location_string = 21;
+}
+
+message CMsgGameServerPlayersQueryData {
+	message Player {
+		optional string name = 1;
+		optional uint32 score = 2;
+		optional uint32 time_played = 3;
+	}
+
+	repeated .CMsgGameServerPlayersQueryData.Player players = 1;
+}
+
+message CMsgGameServerRulesQueryData {
+	message Rule {
+		optional string rule = 1;
+		optional string value = 2;
+	}
+
+	repeated .CMsgGameServerRulesQueryData.Rule rules = 1;
+}
+
+message CGameServers_GameServerQuery_Response {
+	optional .CMsgGameServerPingQueryData ping_data = 1;
+	optional .CMsgGameServerPlayersQueryData players_data = 2;
+	optional .CMsgGameServerRulesQueryData rules_data = 3;
+}
+
+message GameServerClient_QueryServerData_Request {
+}
+
+message GameServerClient_QueryServerData_Response {
+	optional .CMsgGameServerPingQueryData ping_data = 1;
+	optional .CMsgGameServerPlayersQueryData players_data = 2;
+	optional .CMsgGameServerRulesQueryData rules_data = 3;
+}
+
 service GameServers {
 	option (service_description) = "A service for searching and managing game servers.";
 
@@ -63,5 +136,18 @@ service GameServers {
 
 	rpc GetServerIPsBySteamID (.CGameServers_GetServerIPsBySteamID_Request) returns (.CGameServers_IPsWithSteamIDs_Response) {
 		option (method_description) = "Gets a list of server IP addresses given a list of SteamIDs";
+	}
+
+	rpc QueryByFakeIP (.CGameServers_QueryByFakeIP_Request) returns (.CGameServers_GameServerQuery_Response) {
+		option (method_description) = "Perform a query on a specific server by FakeIP";
+	}
+}
+
+service GameServerClient {
+	option (service_description) = "Service methods exposed by GameServer Steam clients";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+
+	rpc QueryServerData (.GameServerClient_QueryServerData_Request) returns (.GameServerClient_QueryServerData_Response) {
+		option (method_description) = "Steam is asking a gameserver for its data";
 	}
 }

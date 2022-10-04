@@ -1,0 +1,203 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+import "steammessages_unified_base.proto";
+import "steammessages_storebrowse.proto";
+
+option py_generic_services = true;
+
+enum EMarketingMessageType {
+	k_EMarketingMessageInvalid = 0;
+	k_EMarketingMessageNowAvailable = 1;
+	k_EMarketingMessageWeekendDeal = 2;
+	k_EMarketingMessagePrePurchase = 3;
+	k_EMarketingMessagePlayNow = 4;
+	k_EMarketingMessagePreloadNow = 5;
+	k_EMarketingMessageGeneral = 6;
+	k_EMarketingMessageDemoQuit = 7;
+	k_EMarketingMessageGifting = 8;
+	k_EMarketingMessageEJsKorner = 9;
+}
+
+enum EMarketingMessageVisibility {
+	k_EMarketingMessageVisibleBeta = 1;
+	k_EMarketingMessageVisiblePublic = 2;
+}
+
+enum EMarketingMessageAssociationType {
+	k_EMarketingMessageNoAssociation = 0;
+	k_EMarketingMessageAppAssociation = 1;
+	k_EMarketingMessageSubscriptionAssociation = 2;
+	k_EMarketingMessagePublisherAssociation = 3;
+	k_EMarketingMessageGenreAssociation = 4;
+	k_EMarketingMessageBundleAssociation = 5;
+}
+
+enum EMarketingMessageLookupType {
+	k_EMarketingMessageLookupInvalid = 0;
+	k_EMarketingMessageLookupByGID = 1;
+	k_EMarketingMessageLookupActive = 2;
+	k_EMarketingMessageLookupByTitleWithType = 3;
+	k_EMarketingMessageLookupByGIDList = 4;
+}
+
+message CMarketingMessages_GetActiveMarketingMessages_Request {
+	optional string country = 1;
+}
+
+message CMarketingMessageProto {
+	optional fixed64 gid = 1;
+	optional string title = 2;
+	optional .EMarketingMessageType type = 3 [default = k_EMarketingMessageInvalid];
+	optional .EMarketingMessageVisibility visibility = 4 [default = k_EMarketingMessageVisibleBeta];
+	optional uint32 priority = 5;
+	optional .EMarketingMessageAssociationType association_type = 6 [default = k_EMarketingMessageNoAssociation];
+	optional uint32 associated_id = 7;
+	optional string associated_name = 8;
+	optional uint32 start_date = 9;
+	optional uint32 end_date = 10;
+	optional string country_allow = 11;
+	optional string country_deny = 12;
+	optional bool ownership_restrictions_overridden = 13;
+	optional uint32 must_own_appid = 14;
+	optional uint32 must_not_own_appid = 15;
+	optional uint32 must_own_packageid = 16;
+	optional uint32 must_not_own_packageid = 17;
+	optional uint32 must_have_launched_appid = 18;
+	optional string additional_restrictions = 19;
+	optional string template_type = 20;
+	optional string template_vars = 21;
+	optional uint32 flags = 22;
+	optional string creator_name = 23;
+}
+
+message CMarketingMessages_GetActiveMarketingMessages_Response {
+	repeated .CMarketingMessageProto messages = 1;
+	optional uint32 time_next_message_age = 2;
+}
+
+message CMarketingMessages_GetMarketingMessagesForUser_Request {
+	optional bool include_seen_messages = 1;
+	optional string country_code = 2;
+	optional int32 elanguage = 3;
+	optional int32 operating_system = 4 [(description) = "EOSType from client"];
+	optional int32 client_package_version = 5;
+	optional .StoreBrowseContext context = 6 [(description) = "Optional, server can fill in from country code/language if not set"];
+	optional .StoreBrowseItemDataRequest data_request = 7 [(description) = "If passed, item data will be returned"];
+}
+
+message CDisplayMarketingMessage {
+	optional fixed64 gid = 1;
+	optional string title = 2;
+	optional .EMarketingMessageType type = 3 [default = k_EMarketingMessageInvalid];
+	optional .StoreItemID associated_item_id = 4;
+	optional .StoreItem associated_item = 5;
+	optional string associated_name = 6;
+	optional string template_type = 10;
+	optional string template_vars_json = 11;
+}
+
+message CMarketingMessages_GetMarketingMessagesForUser_Response {
+	message MarketingMessageForUser {
+		optional bool already_seen = 1;
+		optional .CDisplayMarketingMessage message = 2;
+	}
+
+	repeated .CMarketingMessages_GetMarketingMessagesForUser_Response.MarketingMessageForUser messages = 1;
+}
+
+message CMarketingMessages_GetDisplayMarketingMessage_Request {
+	optional fixed64 gid = 1;
+	optional .StoreBrowseContext context = 2;
+	optional .StoreBrowseItemDataRequest data_request = 3 [(description) = "If passed, item data will be returned"];
+}
+
+message CMarketingMessages_GetDisplayMarketingMessage_Response {
+	optional .CDisplayMarketingMessage message = 1;
+}
+
+message CMarketingMessages_MarkMessageSeen_Notification {
+	optional fixed64 gid = 1;
+}
+
+message CMarketingMessages_GetMarketingMessage_Request {
+	optional fixed64 gid = 1;
+}
+
+message CMarketingMessages_GetMarketingMessage_Response {
+	optional .CMarketingMessageProto message = 1;
+}
+
+message CMarketingMessages_CreateMarketingMessage_Request {
+	optional .CMarketingMessageProto message = 1;
+}
+
+message CMarketingMessages_CreateMarketingMessage_Response {
+	optional fixed64 gid = 1;
+}
+
+message CMarketingMessages_UpdateMarketingMessage_Request {
+	optional fixed64 gid = 1;
+	optional .CMarketingMessageProto message = 2;
+}
+
+message CMarketingMessages_UpdateMarketingMessage_Response {
+}
+
+message CMarketingMessages_DeleteMarketingMessage_Request {
+	optional fixed64 gid = 1;
+}
+
+message CMarketingMessages_DeleteMarketingMessage_Response {
+}
+
+message CMarketingMessages_FindMarketingMessages_Request {
+	optional .EMarketingMessageLookupType lookup_type = 1 [default = k_EMarketingMessageLookupInvalid];
+	optional fixed64 gid = 2;
+	optional .EMarketingMessageType message_type = 3 [default = k_EMarketingMessageInvalid];
+	repeated fixed64 gidlist = 4;
+	optional string title = 5;
+}
+
+message CMarketingMessages_FindMarketingMessages_Response {
+	repeated .CMarketingMessageProto messages = 1;
+}
+
+service MarketingMessages {
+	option (service_description) = "Marketing message data (\"Steam News\" updates at client startup).";
+
+	rpc GetActiveMarketingMessages (.CMarketingMessages_GetActiveMarketingMessages_Request) returns (.CMarketingMessages_GetActiveMarketingMessages_Response) {
+		option (method_description) = "Get a list of active marketing messages.";
+	}
+
+	rpc GetMarketingMessagesForUser (.CMarketingMessages_GetMarketingMessagesForUser_Request) returns (.CMarketingMessages_GetMarketingMessagesForUser_Response) {
+		option (method_description) = "Get a list of active marketing messages filtered for a specific user.";
+	}
+
+	rpc GetDisplayMarketingMessage (.CMarketingMessages_GetDisplayMarketingMessage_Request) returns (.CMarketingMessages_GetDisplayMarketingMessage_Response) {
+		option (method_description) = "Get a single marketing message, cacheable.";
+	}
+
+	rpc MarkMessageSeen (.CMarketingMessages_MarkMessageSeen_Notification) returns (.NoResponse) {
+		option (method_description) = "Mark that a user has viewed a message (so we won't show it again)'.";
+	}
+
+	rpc GetMarketingMessage (.CMarketingMessages_GetMarketingMessage_Request) returns (.CMarketingMessages_GetMarketingMessage_Response) {
+		option (method_description) = "Get a single marketing message.  Admin account needed for non-active messages";
+	}
+
+	rpc CreateMarketingMessage (.CMarketingMessages_CreateMarketingMessage_Request) returns (.CMarketingMessages_CreateMarketingMessage_Response) {
+		option (method_description) = "Create a new marketing message.";
+	}
+
+	rpc UpdateMarketingMessage (.CMarketingMessages_UpdateMarketingMessage_Request) returns (.CMarketingMessages_UpdateMarketingMessage_Response) {
+		option (method_description) = "Modify a marketing message.";
+	}
+
+	rpc DeleteMarketingMessage (.CMarketingMessages_DeleteMarketingMessage_Request) returns (.CMarketingMessages_DeleteMarketingMessage_Response) {
+		option (method_description) = "Delete a marketing message.";
+	}
+
+	rpc FindMarketingMessages (.CMarketingMessages_FindMarketingMessages_Request) returns (.CMarketingMessages_FindMarketingMessages_Response) {
+		option (method_description) = "Search for marketing messages by name, type, etc.";
+	}
+}

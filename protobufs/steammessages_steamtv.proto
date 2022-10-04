@@ -1,0 +1,631 @@
+syntax = "proto2";
+import "steammessages_base.proto";
+import "steammessages_unified_base.proto";
+
+option py_generic_services = true;
+
+enum EBroadcastImageType {
+	k_EBroadcastImageType_None = 0;
+	k_EBroadcastImageType_Offline = 1;
+	k_EBroadcastImageType_Standby = 2;
+	k_EBroadcastImageType_Avatar = 3;
+	k_EBroadcastImageType_Summary = 4;
+	k_EBroadcastImageType_Background = 5;
+	k_EBroadcastImageType_Emoticon = 6;
+}
+
+enum EGetGamesAlgorithm {
+	k_EGetGamesAlgorithm_Default = 1;
+	k_EGetGamesAlgorithm_MostPlayed = 2;
+	k_EGetGamesAlgorithm_PopularNew = 3;
+}
+
+enum EGetChannelsAlgorithm {
+	k_EGetChannelsAlgorithm_Default = 1;
+	k_EGetChannelsAlgorithm_Friends = 2;
+	k_EGetChannelsAlgorithm_Featured = 3;
+	k_EGetChannelsAlgorithm_Developer = 4;
+	k_EGetChannelsAlgorithm_Following = 5;
+}
+
+enum ESteamTVContentTemplate {
+	k_ESteamTVContentTemplate_Invalid = 0;
+	k_ESteamTVContentTemplate_Takeover = 1;
+	k_ESteamTVContentTemplate_SingleGame = 2;
+	k_ESteamTVContentTemplate_GameList = 3;
+	k_ESteamTVContentTemplate_QuickExplore = 4;
+	k_ESteamTVContentTemplate_ConveyorBelt = 5;
+	k_ESteamTVContentTemplate_WatchParty = 6;
+	k_ESteamTVContentTemplate_Developer = 7;
+	k_ESteamTVContentTemplate_Event = 8;
+}
+
+message CSteamTV_CreateBroadcastChannel_Request {
+	optional string unique_name = 1 [(description) = "Unique short broadcast channel name, part of Steam.TV URL"];
+}
+
+message CSteamTV_CreateBroadcastChannel_Response {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID or 0"];
+}
+
+message CSteamTV_GetBroadcastChannelID_Request {
+	optional string unique_name = 1 [(description) = "Channel short name)"];
+}
+
+message CSteamTV_GetBroadcastChannelID_Response {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID or 0"];
+	optional string unique_name = 2 [(description) = "Broadcast channel name"];
+	optional fixed64 steamid = 3 [(description) = "Broadcast channel owner"];
+}
+
+message CSteamTV_SetBroadcastChannelProfile_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+	optional string name = 2 [(description) = "long channel name"];
+	optional string language = 3 [(description) = "primary channel language (Steam shortname)"];
+	optional string headline = 4 [(description) = "short channel desciption"];
+	optional string summary = 5 [(description) = "long channel desciption"];
+	optional string avatar_hash = 6 [(description) = "community avatar hash"];
+	optional string schedule = 7 [(description) = "broadcast channel schedule"];
+	optional string rules = 8 [(description) = "broadcast channel rules"];
+	optional string panels = 9 [(description) = "JSON data representing the channel panel layout"];
+}
+
+message CSteamTV_SetBroadcastChannelProfile_Response {
+}
+
+message CSteamTV_GetBroadcastChannelProfile_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+}
+
+message CSteamTV_GetBroadcastChannelProfile_Response {
+	optional string unique_name = 1 [(description) = "Unique short broadcast channel name, part of Steam.TV URL"];
+	optional fixed64 owner_steamid = 2 [(description) = "Broadcast channel owner"];
+	optional string name = 3 [(description) = "long channel name"];
+	optional string language = 4 [(description) = "primary channel language (Steam shortname)"];
+	optional string headline = 5 [(description) = "short channel description"];
+	optional string summary = 6 [(description) = "long channel description"];
+	optional string schedule = 7 [(description) = "broadcast channel schedule"];
+	optional string rules = 8 [(description) = "broadcast channel rules"];
+	optional string panels = 9 [(description) = "JSON data representing the channel panel layout"];
+	optional bool is_partnered = 10;
+}
+
+message CSteamTV_SetBroadcastChannelImage_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+	optional .EBroadcastImageType image_type = 2 [default = k_EBroadcastImageType_None, (description) = "EBroadcastImage"];
+	optional uint32 image_index = 3 [(description) = "Index of the image (for supporting multiple uploads of the same type"];
+	optional uint32 image_width = 4 [(description) = "width in pixels"];
+	optional uint32 image_height = 5 [(description) = "height in pixels"];
+	optional uint32 file_size = 6 [(description) = "in bytes"];
+	optional string file_extension = 7 [(description) = "eg .jpg"];
+	optional string file_hash = 8 [(description) = "image SHA"];
+	optional bool undo = 9 [(description) = "indicates this is a delete request"];
+}
+
+message CSteamTV_SetBroadcastChannelImage_Response {
+	optional string replace_image_hash = 1 [(description) = "set if caller should remove previous SHA file from cache"];
+}
+
+message CSteamTV_GetBroadcastChannelImages_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+	repeated .EBroadcastImageType image_types = 2 [(description) = "list of EBroadcastImage"];
+}
+
+message CSteamTV_GetBroadcastChannelImages_Response {
+	message Images {
+		optional .EBroadcastImageType image_type = 1 [default = k_EBroadcastImageType_None, (description) = "Type of the image"];
+		optional string image_path = 2 [(description) = "Path to the uploaded image"];
+		optional uint32 image_index = 3 [(description) = "Index of the image"];
+	}
+
+	repeated .CSteamTV_GetBroadcastChannelImages_Response.Images images = 1;
+}
+
+message CSteamTV_SetBroadcastChannelLinkRegions_Request {
+	message Links {
+		optional uint32 link_index = 1 [(description) = "Index of the link (lower number has higher priority)"];
+		optional string url = 2 [(description) = "URL "];
+		optional string link_description = 3 [(description) = "URL description that will show in the link region"];
+		optional uint32 left = 4 [(description) = "Left X position in 100th of a % of the video width"];
+		optional uint32 top = 5 [(description) = "Top Y position in 100th of a % of the video height"];
+		optional uint32 width = 6 [(description) = "Region Width in 100th of a % of the video width"];
+		optional uint32 height = 7 [(description) = "Region Height in 100th of a % of the video height"];
+	}
+
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+	repeated .CSteamTV_SetBroadcastChannelLinkRegions_Request.Links links = 2;
+}
+
+message CSteamTV_SetBroadcastChannelLinkRegions_Response {
+}
+
+message CSteamTV_GetBroadcastChannelLinks_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+}
+
+message CSteamTV_GetBroadcastChannelLinks_Response {
+	message Links {
+		optional uint32 link_index = 1 [(description) = "Index of the link (lower number has higher priority)"];
+		optional string url = 2 [(description) = "URL "];
+		optional string link_description = 3 [(description) = "URL description that will show in the link region"];
+		optional uint32 left = 4 [(description) = "Left X position in 100th of a % of the video width"];
+		optional uint32 top = 5 [(description) = "Top Y position in 100th of a % of the video height"];
+		optional uint32 width = 6 [(description) = "Region Width in 100th of a % of the video width"];
+		optional uint32 height = 7 [(description) = "Region Height in 100th of a % of the video height"];
+	}
+
+	repeated .CSteamTV_GetBroadcastChannelLinks_Response.Links links = 1;
+}
+
+message CSteamTV_GetBroadcastChannelBroadcasters_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+}
+
+message CSteamTV_GetBroadcastChannelBroadcasters_Response {
+	message Broadcaster {
+		optional fixed64 steamid = 1 [(description) = "Broadcaster Steam ID"];
+		optional string name = 2 [(description) = "Broadcaster name"];
+		optional string rtmp_token = 3 [(description) = "Broadcaster upload token"];
+	}
+
+	repeated .CSteamTV_GetBroadcastChannelBroadcasters_Response.Broadcaster broadcasters = 1;
+}
+
+message CSteamTV_GetFollowedChannels_Request {
+}
+
+message GetBroadcastChannelEntry {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID or 0"];
+	optional string unique_name = 2 [(description) = "Unique broadcast channel name for URL"];
+	optional string name = 3 [(description) = "Long broadcast channel name"];
+	optional uint32 appid = 4 [(description) = "The game ID the requested broadcaster is playing"];
+	optional uint64 viewers = 5 [(description) = "Number of viewers currently watching"];
+	optional uint64 views = 6 [(description) = "Number of total views of this channel"];
+	optional string thumbnail_url = 7 [(description) = "Current thumbnail URL"];
+	optional uint64 followers = 8 [(description) = "Number of followers of this channel"];
+	optional string headline = 9 [(description) = "short channel description"];
+	optional string avatar_url = 10 [(description) = "community avatar url"];
+	optional fixed64 broadcaster_steamid = 11 [(description) = "Current broadcaster streaming"];
+	optional uint64 subscribers = 12 [(description) = "Number of subscribers of this channel"];
+	optional string background_url = 13 [(description) = "Background image url"];
+	optional bool is_featured = 14 [(description) = "Whether the channel is featured"];
+	optional bool is_disabled = 15 [(description) = "Whether the channel is disabled"];
+	optional bool is_live = 16 [(description) = "Whether the channel is streaming"];
+	optional string language = 17 [(description) = "The language the stream is in"];
+	optional uint32 reports = 18 [(description) = "The number of reports the channel has"];
+	optional bool is_partnered = 19;
+}
+
+message CSteamTV_GetFollowedChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1 [(description) = "The list of broadcasters"];
+}
+
+message CSteamTV_GetSubscribedChannels_Request {
+}
+
+message CSteamTV_GetSubscribedChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1 [(description) = "The list of broadcasters"];
+}
+
+message CSteamTV_GetBroadcastChannelStatus_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+}
+
+message CSteamTV_GetBroadcastChannelStatus_Response {
+	optional bool is_live = 1 [(description) = "Indicates whether the channel is streaming"];
+	optional bool is_disabled = 2 [(description) = "Indicates whether the channel has been disabled"];
+	optional uint32 appid = 3 [(description) = "The game ID the requested broadcaster is playing"];
+	optional uint64 viewers = 4 [(description) = "Number of viewers currently watching"];
+	optional uint64 views = 5 [(description) = "Number of total views of this channel"];
+	optional fixed64 broadcaster_steamid = 6 [(description) = "Current broadcaster streaming"];
+	optional string thumbnail_url = 7 [(description) = "Current thumbnail URL"];
+	optional uint64 followers = 8 [(description) = "Number of followers of this channel"];
+	optional uint64 subscribers = 9 [(description) = "Number of subscribers of this channel"];
+	optional string unique_name = 10;
+	optional uint64 broadcast_session_id = 11;
+}
+
+message CSteamTV_FollowBroadcastChannel_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+	optional bool undo = 2 [(description) = "Indicates this is an unfollow request"];
+}
+
+message CSteamTV_FollowBroadcastChannel_Response {
+	optional bool is_followed = 1 [(description) = "Whether the user is now following"];
+}
+
+message CSteamTV_SubscribeBroadcastChannel_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+}
+
+message CSteamTV_SubscribeBroadcastChannel_Response {
+	optional bool is_subscribed = 1 [(description) = "Whether the user is now subscribed"];
+}
+
+message CSteamTV_GetBroadcastChannelClips_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_BroadcastClipInfo {
+	optional uint64 broadcast_clip_id = 1 [(description) = "broadcast clip ID"];
+	optional uint64 channel_id = 2 [(description) = "Broadcast Channel ID"];
+	optional uint32 app_id = 3 [(description) = "App ID stream is tagged with"];
+	optional fixed64 broadcaster_steamid = 4 [(description) = "Broadcaster SteamID"];
+	optional fixed64 creator_steamid = 5 [(description) = "Clip-maker SteamID"];
+	optional string video_description = 6 [(description) = "Short name or description of this clip"];
+	optional uint32 live_time = 7 [(description) = "GMT time clip was broadcasted live"];
+	optional uint32 length_ms = 8 [(description) = "length of video in MS"];
+	optional string thumbnail_path = 9 [(description) = "relative path for thumbnail URL on host"];
+}
+
+message CSteamTV_GetBroadcastChannelClips_Response {
+	repeated .CSteamTV_BroadcastClipInfo clips = 1;
+	optional string thumbnail_host = 2;
+}
+
+message CSteamTV_ReportBroadcastChannel_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+	optional string reason = 2 [(description) = "The reason for the report"];
+}
+
+message CSteamTV_ReportBroadcastChannel_Response {
+}
+
+message CSteamTV_GetBroadcastChannelInteraction_Request {
+	optional fixed64 broadcast_channel_id = 1 [(description) = "Broadcast channel ID"];
+}
+
+message CSteamTV_GetBroadcastChannelInteraction_Response {
+	optional bool is_followed = 1 [(description) = "Whether the user has followed this channel"];
+	optional bool is_subscribed = 2 [(description) = "Whether the user has subscribed to this channel"];
+}
+
+message CSteamTV_GetGames_Request {
+	optional uint32 appid = 1 [(description) = "The ID for the game"];
+	optional .EGetGamesAlgorithm algorithm = 2 [default = k_EGetGamesAlgorithm_Default, (description) = "The algorithm to use when picking games to return"];
+	optional uint32 count = 3 [(description) = "The maximum number of results to return"];
+}
+
+message CSteamTV_Game {
+	optional uint32 appid = 1 [(description) = "The ID for the game"];
+	optional string name = 2 [(description) = "The name for the game"];
+	optional string image = 3 [(description) = "The image for the game"];
+	optional uint64 viewers = 4 [(description) = "Number of people watching this game"];
+	repeated .GetBroadcastChannelEntry channels = 5 [(description) = "Live channels streaming this game"];
+	optional string release_date = 6;
+	optional string developer = 7;
+	optional string publisher = 8;
+}
+
+message CSteamTV_GetGames_Response {
+	repeated .CSteamTV_Game results = 1 [(description) = "The list of games"];
+}
+
+message CSteamTV_GetChannels_Request {
+	optional .EGetChannelsAlgorithm algorithm = 1 [default = k_EGetChannelsAlgorithm_Default, (description) = "The algorithm to use when picking channels to return"];
+	optional uint32 count = 2 [(description) = "The maximum number of results to return"];
+	optional uint32 appid = 3 [(description) = "Filter results to only this appid"];
+}
+
+message CSteamTV_GetChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1 [(description) = "The list of featured broadcasters"];
+}
+
+message CSteamTV_AddChatBan_Request {
+	optional fixed64 broadcast_channel_id = 1;
+	optional fixed64 chatter_steamid = 2;
+	optional uint32 duration = 3;
+	optional bool permanent = 4;
+	optional bool undo = 5;
+}
+
+message CSteamTV_AddChatBan_Response {
+}
+
+message CSteamTV_GetChatBans_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_ChatBan {
+	optional fixed64 issuer_steamid = 1;
+	optional fixed64 chatter_steamid = 2;
+	optional string time_expires = 3;
+	optional bool permanent = 4;
+	optional string name = 5;
+}
+
+message CSteamTV_GetChatBans_Response {
+	repeated .CSteamTV_ChatBan results = 1 [(description) = "The list of bans"];
+}
+
+message CSteamTV_AddChatModerator_Request {
+	optional fixed64 broadcast_channel_id = 1;
+	optional fixed64 moderator_steamid = 2;
+	optional bool undo = 3;
+}
+
+message CSteamTV_AddChatModerator_Response {
+}
+
+message CSteamTV_GetChatModerators_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_ChatModerator {
+	optional fixed64 steamid = 1;
+	optional string name = 2;
+}
+
+message CSteamTV_GetChatModerators_Response {
+	repeated .CSteamTV_ChatModerator results = 1 [(description) = "The list of moderators"];
+}
+
+message CSteamTV_AddWordBan_Request {
+	optional fixed64 broadcast_channel_id = 1;
+	optional string word = 2;
+	optional bool undo = 3;
+}
+
+message CSteamTV_AddWordBan_Response {
+}
+
+message CSteamTV_GetWordBans_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_GetWordBans_Response {
+	repeated string results = 1 [(description) = "The list of banned words"];
+}
+
+message CSteamTV_JoinChat_Request {
+	optional fixed64 broadcast_channel_id = 1;
+}
+
+message CSteamTV_JoinChat_Response {
+	optional fixed64 chat_id = 1;
+	optional string view_url_template = 2;
+	repeated uint64 flair_group_ids = 3;
+}
+
+message CSteamTV_Search_Request {
+	optional string term = 1;
+}
+
+message CSteamTV_Search_Response {
+	repeated .GetBroadcastChannelEntry results = 1 [(description) = "The list of broadcasters"];
+}
+
+message CSteamTV_GetSteamTVUserSettings_Request {
+}
+
+message CSteamTV_GetSteamTVUserSettings_Response {
+	optional bool stream_live_email = 1 [(description) = "Send email when followed stream starts"];
+	optional bool stream_live_notification = 2 [(description) = "Send Steam notification when followed stream starts"];
+}
+
+message CSteamTV_SetSteamTVUserSettings_Request {
+	optional bool stream_live_email = 1 [(description) = "Send email when followed stream starts"];
+	optional bool stream_live_notification = 2 [(description) = "Send Steam notification when followed stream starts"];
+}
+
+message CSteamTV_SetSteamTVUserSettings_Response {
+}
+
+message CSteamTV_GetMyBroadcastChannels_Request {
+}
+
+message CSteamTV_GetMyBroadcastChannels_Response {
+	repeated .GetBroadcastChannelEntry results = 1 [(description) = "The list of broadcasters"];
+}
+
+message CSteamTV_GetHomePageContents_Request {
+}
+
+message CSteamTV_HomePageTemplate_Takeover {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+}
+
+message CSteamTV_HomePageTemplate_SingleGame {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+	optional uint32 appid = 2;
+	optional string title = 3;
+}
+
+message GameListEntry {
+	optional uint32 appid = 1;
+	optional string game_name = 2;
+	optional .GetBroadcastChannelEntry broadcast = 3;
+}
+
+message CSteamTV_HomePageTemplate_GameList {
+	repeated .GameListEntry entries = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_QuickExplore {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_ConveyorBelt {
+	repeated .GetBroadcastChannelEntry broadcasts = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_WatchParty {
+	optional .GetBroadcastChannelEntry broadcast = 1;
+	optional string title = 2;
+	optional uint64 chat_group_id = 3;
+}
+
+message CSteamTV_HomePageTemplate_Developer {
+	optional .GetBroadcastChannelEntry broadcast = 1;
+	optional string title = 2;
+}
+
+message CSteamTV_HomePageTemplate_Event {
+	optional string title = 1;
+}
+
+message CSteamTV_HomePageContentRow {
+	optional .ESteamTVContentTemplate template_type = 1 [default = k_ESteamTVContentTemplate_Invalid];
+	optional .CSteamTV_HomePageTemplate_Takeover takeover = 2;
+	optional .CSteamTV_HomePageTemplate_SingleGame single_game = 3;
+	optional .CSteamTV_HomePageTemplate_GameList game_list = 4;
+	optional .CSteamTV_HomePageTemplate_QuickExplore quick_explore = 5;
+	optional .CSteamTV_HomePageTemplate_ConveyorBelt conveyor_belt = 6;
+	optional .CSteamTV_HomePageTemplate_WatchParty watch_party = 7;
+	optional .CSteamTV_HomePageTemplate_Developer developer = 8;
+	optional .CSteamTV_HomePageTemplate_Event event = 9;
+}
+
+message CSteamTV_GetHomePageContents_Response {
+	repeated .CSteamTV_HomePageContentRow rows = 1;
+}
+
+message CSteamTV_AppCheer_SingleCheerType {
+	optional uint32 cheer_type = 1 [(description) = "The type of cheer. App dependent (different teams, heroes, players, etc)"];
+	optional uint32 cheer_amount = 2 [(description) = "The amount of cheers."];
+}
+
+message CSteamTV_AppCheer_Request {
+	optional uint32 app_id = 1 [(description) = "App ID this cheer is for."];
+	optional fixed64 cheer_target_id = 2 [(description) = "The thing being cheered on. ID is app dependent (could be steam id, match id, lobby id, server id, etc)."];
+	repeated .CSteamTV_AppCheer_SingleCheerType cheers = 3 [(description) = "The set of cheers this request represents (could be multiple of different types)."];
+}
+
+message CSteamTV_AppCheer_Response {
+	optional uint32 aggregation_delay_ms = 1 [(description) = "The amount of time in milliseconds that the client should aggregate cheers before sending them. The server can control this dynamically to ask clients to slow down sending."];
+}
+
+service SteamTV {
+	option (service_description) = "Methods for Steam TV operations";
+
+	rpc CreateBroadcastChannel (.CSteamTV_CreateBroadcastChannel_Request) returns (.CSteamTV_CreateBroadcastChannel_Response) {
+		option (method_description) = "Create a channel on SteamTV";
+	}
+
+	rpc GetBroadcastChannelID (.CSteamTV_GetBroadcastChannelID_Request) returns (.CSteamTV_GetBroadcastChannelID_Response) {
+		option (method_description) = "Get a broadcast channel ID for a channel by name or owner SteamID";
+	}
+
+	rpc SetBroadcastChannelProfile (.CSteamTV_SetBroadcastChannelProfile_Request) returns (.CSteamTV_SetBroadcastChannelProfile_Response) {
+		option (method_description) = "Set broadcast channel profile data";
+	}
+
+	rpc GetBroadcastChannelProfile (.CSteamTV_GetBroadcastChannelProfile_Request) returns (.CSteamTV_GetBroadcastChannelProfile_Response) {
+		option (method_description) = "Get broadcast channel profile data";
+	}
+
+	rpc SetBroadcastChannelImage (.CSteamTV_SetBroadcastChannelImage_Request) returns (.CSteamTV_SetBroadcastChannelImage_Response) {
+		option (method_description) = "Set broadcast channel image hash";
+	}
+
+	rpc GetBroadcastChannelImages (.CSteamTV_GetBroadcastChannelImages_Request) returns (.CSteamTV_GetBroadcastChannelImages_Response) {
+		option (method_description) = "Get broadcast channel images";
+	}
+
+	rpc SetBroadcastChannelLinkRegions (.CSteamTV_SetBroadcastChannelLinkRegions_Request) returns (.CSteamTV_SetBroadcastChannelLinkRegions_Response) {
+		option (method_description) = "Set broadcast channel link regions";
+	}
+
+	rpc GetBroadcastChannelLinks (.CSteamTV_GetBroadcastChannelLinks_Request) returns (.CSteamTV_GetBroadcastChannelLinks_Response) {
+		option (method_description) = "Get broadcast channel link regions";
+	}
+
+	rpc GetBroadcastChannelBroadcasters (.CSteamTV_GetBroadcastChannelBroadcasters_Request) returns (.CSteamTV_GetBroadcastChannelBroadcasters_Response) {
+		option (method_description) = "Get list of broadcaster info for this channel";
+	}
+
+	rpc GetFollowedChannels (.CSteamTV_GetFollowedChannels_Request) returns (.CSteamTV_GetFollowedChannels_Response) {
+		option (method_description) = "Get list of followed channels by a viewer";
+	}
+
+	rpc GetSubscribedChannels (.CSteamTV_GetSubscribedChannels_Request) returns (.CSteamTV_GetSubscribedChannels_Response) {
+		option (method_description) = "Get list of channels a user is subscribed to";
+	}
+
+	rpc GetBroadcastChannelStatus (.CSteamTV_GetBroadcastChannelStatus_Request) returns (.CSteamTV_GetBroadcastChannelStatus_Response) {
+		option (method_description) = "Get broadcast channel live status";
+	}
+
+	rpc FollowBroadcastChannel (.CSteamTV_FollowBroadcastChannel_Request) returns (.CSteamTV_FollowBroadcastChannel_Response) {
+		option (method_description) = "Follow a broadcast channel";
+	}
+
+	rpc SubscribeBroadcastChannel (.CSteamTV_SubscribeBroadcastChannel_Request) returns (.CSteamTV_SubscribeBroadcastChannel_Response) {
+		option (method_description) = "Subscribe to a broadcast channel";
+	}
+
+	rpc GetBroadcastChannelClips (.CSteamTV_GetBroadcastChannelClips_Request) returns (.CSteamTV_GetBroadcastChannelClips_Response) {
+		option (method_description) = "Get broadcast channel clips";
+	}
+
+	rpc ReportBroadcastChannel (.CSteamTV_ReportBroadcastChannel_Request) returns (.CSteamTV_ReportBroadcastChannel_Response) {
+		option (method_description) = "Report a broadcast channel";
+	}
+
+	rpc GetBroadcastChannelInteraction (.CSteamTV_GetBroadcastChannelInteraction_Request) returns (.CSteamTV_GetBroadcastChannelInteraction_Response) {
+		option (method_description) = "Get user's interaction status with a broadcast channel";
+	}
+
+	rpc GetGames (.CSteamTV_GetGames_Request) returns (.CSteamTV_GetGames_Response) {
+		option (method_description) = "Get list of games with active broadcasters";
+	}
+
+	rpc GetChannels (.CSteamTV_GetChannels_Request) returns (.CSteamTV_GetChannels_Response) {
+		option (method_description) = "Get the list of featured broadcast channels";
+	}
+
+	rpc AddChatBan (.CSteamTV_AddChatBan_Request) returns (.CSteamTV_AddChatBan_Response) {
+		option (method_description) = "Set the ban for a specific broadcaster. The issuer is the logged in steam account";
+	}
+
+	rpc GetChatBans (.CSteamTV_GetChatBans_Request) returns (.CSteamTV_GetChatBans_Response) {
+		option (method_description) = "Get list of bans for a specific broadcaster. ";
+	}
+
+	rpc AddChatModerator (.CSteamTV_AddChatModerator_Request) returns (.CSteamTV_AddChatModerator_Response) {
+		option (method_description) = "Add or remove a moderator for this broadcast channel";
+	}
+
+	rpc GetChatModerators (.CSteamTV_GetChatModerators_Request) returns (.CSteamTV_GetChatModerators_Response) {
+		option (method_description) = "Returns the list of moderators for this broadcast channel";
+	}
+
+	rpc AddWordBan (.CSteamTV_AddWordBan_Request) returns (.CSteamTV_AddWordBan_Response) {
+		option (method_description) = "Add or remove a banned keyword in this broadcast channel chat";
+	}
+
+	rpc GetWordBans (.CSteamTV_GetWordBans_Request) returns (.CSteamTV_GetWordBans_Response) {
+		option (method_description) = "Returns the list of banned keywords for this broadcast channel";
+	}
+
+	rpc JoinChat (.CSteamTV_JoinChat_Request) returns (.CSteamTV_JoinChat_Response) {
+		option (method_description) = "Joins the chat channel for a broadcast";
+	}
+
+	rpc Search (.CSteamTV_Search_Request) returns (.CSteamTV_Search_Response) {
+		option (method_description) = "Searches for broadcast channels based on input keywords";
+	}
+
+	rpc GetSteamTVUserSettings (.CSteamTV_GetSteamTVUserSettings_Request) returns (.CSteamTV_GetSteamTVUserSettings_Response) {
+		option (method_description) = "Returns a user's SteamTV settings";
+	}
+
+	rpc SetSteamTVUserSettings (.CSteamTV_SetSteamTVUserSettings_Request) returns (.CSteamTV_SetSteamTVUserSettings_Response) {
+		option (method_description) = "Sets a user's SteamTV settings";
+	}
+
+	rpc GetMyBroadcastChannels (.CSteamTV_GetMyBroadcastChannels_Request) returns (.CSteamTV_GetMyBroadcastChannels_Response) {
+		option (method_description) = "Gets the broadcast channels that the current user owns";
+	}
+
+	rpc GetHomePageContents (.CSteamTV_GetHomePageContents_Request) returns (.CSteamTV_GetHomePageContents_Response) {
+		option (method_description) = "Returns homepage contents for user";
+	}
+
+	rpc AppCheer (.CSteamTV_AppCheer_Request) returns (.CSteamTV_AppCheer_Response) {
+		option (method_description) = "The user is cheering for a specific broadcast for a specific app.";
+	}
+}

@@ -1,6 +1,6 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
-import "enums.proto";
 
 option py_generic_services = true;
 
@@ -20,6 +20,14 @@ enum EPublishedFileForSaleStatus {
 	k_PFFSS_RejectedForSale = 3;
 	k_PFFSS_NoLongerForSale = 4;
 	k_PFFSS_TentativeApproval = 5;
+}
+
+message CPublishedFile_Vote_Request {
+	optional uint64 publishedfileid = 1;
+	optional bool vote_up = 2;
+}
+
+message CPublishedFile_Vote_Response {
 }
 
 message CPublishedFile_Subscribe_Request {
@@ -48,6 +56,24 @@ message CPublishedFile_CanSubscribe_Request {
 
 message CPublishedFile_CanSubscribe_Response {
 	optional bool can_subscribe = 1;
+}
+
+message CPublishedFile_GetSubSectionData_Request {
+	optional uint64 publishedfileid = 1;
+	optional bool for_table_of_contents = 2;
+	optional uint64 specific_sectionid = 3;
+	optional .EPublishedFileRevision desired_revision = 4 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
+}
+
+message PublishedFileSubSection {
+	optional uint64 sectionid = 1;
+	optional string title = 2;
+	optional string description_text = 3;
+	optional uint32 sort_order = 4;
+}
+
+message CPublishedFile_GetSubSectionData_Response {
+	repeated .PublishedFileSubSection sub_sections = 1;
 }
 
 message CPublishedFile_Publish_Request {
@@ -287,6 +313,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_reactions = 35 [default = false, (description) = "If true, then reactions to items will be returned."];
 	optional uint32 startindex_override = 25 [(description) = "Backwards compatible for the client."];
 	optional .EPublishedFileRevision desired_revision = 33 [default = k_EPublishedFileRevision_Default, (description) = "Return the data for the specified revision."];
+	optional bool return_apps = 36 [(description) = "Return list of apps the items belong to"];
 }
 
 message CPublishedFile_GetUserFiles_Response {
@@ -322,18 +349,26 @@ message CPublishedFile_AreFilesInSubscriptionList_Response {
 
 message CPublishedFile_Update_Request {
 	optional uint32 appid = 1 [(description) = "App Id this published file belongs to."];
-	optional fixed64 publishedfileid = 2 [(description) = "Published file id of the file we'd like update."];
+	optional fixed64 publishedfileid = 2 [(description) = "Published file id of the file we'd like to update."];
 	optional string title = 3 [(description) = "(Optional) Title of the published file."];
 	optional string file_description = 4 [(description) = "(Optional) Description of the published file."];
 	optional uint32 visibility = 5 [(description) = "(Optional) Visibility of the published file."];
 	repeated string tags = 6 [(description) = "(Optional) Set of tags for the published file."];
 	optional string filename = 7 [(description) = "(Optional) Filename for the published file."];
 	optional string preview_filename = 8 [(description) = "(Optional) Preview filename for the published file."];
+	optional bool spoiler_tag = 10 [(description) = "(Optional) Whether this published file should have a spoiler tag attached to it."];
 	optional uint32 image_width = 15 [(description) = "(Optional) If this is an image file, you can specify the image width."];
 	optional uint32 image_height = 16 [(description) = "(Optional) If this is an image file, you can specify the image height."];
 }
 
 message CPublishedFile_Update_Response {
+}
+
+message CPublishedFile_Delete_Request {
+	optional fixed64 publishedfileid = 1 [(description) = "Published file id of the file we'd like to delete."];
+}
+
+message CPublishedFile_Delete_Response {
 }
 
 message CPublishedFile_GetChangeHistoryEntry_Request {
@@ -584,6 +619,10 @@ message CPublishedFile_FileDeleted_Client_Notification {
 service PublishedFile {
 	option (service_description) = "A service to access published file data";
 
+	rpc Vote (.CPublishedFile_Vote_Request) returns (.CPublishedFile_Vote_Response) {
+		option (method_description) = "User wants to vote on the item";
+	}
+
 	rpc Subscribe (.CPublishedFile_Subscribe_Request) returns (.CPublishedFile_Subscribe_Response) {
 		option (method_description) = "Subscribes the user to the published file";
 	}
@@ -594,6 +633,10 @@ service PublishedFile {
 
 	rpc CanSubscribe (.CPublishedFile_CanSubscribe_Request) returns (.CPublishedFile_CanSubscribe_Response) {
 		option (method_description) = "Check if the user can subscribe to the published file";
+	}
+
+	rpc GetSubSectionData (.CPublishedFile_GetSubSectionData_Request) returns (.CPublishedFile_GetSubSectionData_Response) {
+		option (method_description) = "Get sub section data (for table of contents, a specific section, or all)";
 	}
 
 	rpc Publish (.CPublishedFile_Publish_Request) returns (.CPublishedFile_Publish_Response) {
@@ -612,12 +655,20 @@ service PublishedFile {
 		option (method_description) = "Retrieves files published by a user.";
 	}
 
+	rpc GetUserFileCount (.CPublishedFile_GetUserFiles_Request) returns (.CPublishedFile_GetUserFiles_Response) {
+		option (method_description) = "Retrieves a count of files published by a user. Uses the same messages as GetUserFiles but totalonly must be true.";
+	}
+
 	rpc AreFilesInSubscriptionList (.CPublishedFile_AreFilesInSubscriptionList_Request) returns (.CPublishedFile_AreFilesInSubscriptionList_Response) {
 		option (method_description) = "Determines which files in the given list are in a user's subscription list";
 	}
 
 	rpc Update (.CPublishedFile_Update_Request) returns (.CPublishedFile_Update_Response) {
 		option (method_description) = "Updates information about a published file.";
+	}
+
+	rpc Delete (.CPublishedFile_Delete_Request) returns (.CPublishedFile_Delete_Response) {
+		option (method_description) = "Deletes a published file.";
 	}
 
 	rpc GetChangeHistoryEntry (.CPublishedFile_GetChangeHistoryEntry_Request) returns (.CPublishedFile_GetChangeHistoryEntry_Response) {

@@ -1,9 +1,19 @@
 syntax = "proto2";
+import "steammessages_base.proto";
 import "steammessages_unified_base.proto";
 import "enums.proto";
 import "steammessages_client_objects.proto";
 
 option py_generic_services = true;
+
+message CCloud_ClientLogUploadCheck_Notification {
+	optional uint64 client_id = 1;
+}
+
+message CCloud_ClientLogUploadComplete_Notification {
+	optional uint64 client_id = 1;
+	optional uint64 request_id = 2;
+}
 
 message CCloud_GetUploadServerInfo_Request {
 	optional uint32 appid = 1 [(description) = "App ID to which a file will be uploaded to."];
@@ -157,6 +167,10 @@ message CCloud_ExternalStorageTransferReport_Notification {
 	optional bool proxied = 10;
 	optional bool ipv6_local = 11;
 	optional bool ipv6_remote = 12;
+	optional uint32 time_to_connect_ms = 13;
+	optional uint32 time_to_send_req_ms = 14;
+	optional uint32 time_to_first_byte_ms = 15;
+	optional uint32 time_to_last_byte_ms = 16;
 }
 
 message CCloud_BeginAppUploadBatch_Request {
@@ -165,6 +179,7 @@ message CCloud_BeginAppUploadBatch_Request {
 	repeated string files_to_upload = 3 [(description) = "Filenames of files to upload in this batch"];
 	repeated string files_to_delete = 4 [(description) = "Filenames of files to delete in this batch"];
 	optional uint64 client_id = 5 [(description) = "Client ID number"];
+	optional uint64 app_build_id = 6 [(description) = "Current local build of the app which made these changes"];
 }
 
 message CCloud_BeginAppUploadBatch_Response {
@@ -310,6 +325,7 @@ message CCloud_GetAppFileChangelist_Response {
 	optional bool is_only_delta = 3 [(description) = "If true, 'files' omits any files that have not changed since client's change ID"];
 	repeated string path_prefixes = 4 [(description) = "string table of path prefixes"];
 	repeated string machine_names = 5 [(description) = "string table of machine names"];
+	optional uint64 app_buildid_hwm = 6 [(description) = "highest app build ID which has uploaded data"];
 }
 
 message CCloud_AppSessionSuspend_Request {
@@ -345,6 +361,18 @@ message CCloud_AppExitSyncDone_Notification {
 	optional uint32 appid = 1;
 	optional uint64 client_id = 2;
 	optional bool uploads_completed = 3;
+	optional bool uploads_required = 4;
+}
+
+message CCloud_ClientGetAppQuotaUsage_Request {
+	optional uint32 appid = 1;
+}
+
+message CCloud_ClientGetAppQuotaUsage_Response {
+	optional uint32 existing_files = 1;
+	optional uint64 existing_bytes = 2;
+	optional uint32 max_num_files = 3;
+	optional uint64 max_num_bytes = 4;
 }
 
 message CCloud_AppCloudStateChange_Notification {
@@ -352,8 +380,20 @@ message CCloud_AppCloudStateChange_Notification {
 	optional uint64 app_change_number = 2 [(description) = "New App Change Number"];
 }
 
+message CCloud_ClientLogUploadRequest_Notification {
+	optional uint64 request_id = 1;
+}
+
 service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
+
+	rpc ClientLogUploadCheck (.CCloud_ClientLogUploadCheck_Notification) returns (.NoResponse) {
+		option (method_description) = "Client checking for pending log upload requests.";
+	}
+
+	rpc ClientLogUploadComplete (.CCloud_ClientLogUploadComplete_Notification) returns (.NoResponse) {
+		option (method_description) = "Client is flagging a log upload request as completed.";
+	}
 
 	rpc GetUploadServerInfo (.CCloud_GetUploadServerInfo_Request) returns (.CCloud_GetUploadServerInfo_Response) {
 		option (method_description) = "Returns the URL of the proper cloud server for a user.";
@@ -454,6 +494,10 @@ service Cloud {
 	rpc SignalAppExitSyncDone (.CCloud_AppExitSyncDone_Notification) returns (.NoResponse) {
 		option (method_description) = "Client is done trying to sync after a game session";
 	}
+
+	rpc ClientGetAppQuotaUsage (.CCloud_ClientGetAppQuotaUsage_Request) returns (.CCloud_ClientGetAppQuotaUsage_Response) {
+		option (method_description) = "Client is requesting quota usage for an app";
+	}
 }
 
 service CloudClient {
@@ -462,5 +506,9 @@ service CloudClient {
 
 	rpc NotifyAppStateChange (.CCloud_AppCloudStateChange_Notification) returns (.NoResponse) {
 		option (method_description) = "Cloud state for the given app has changed.";
+	}
+
+	rpc ClientLogUploadRequest (.CCloud_ClientLogUploadRequest_Notification) returns (.NoResponse) {
+		option (method_description) = "Server is requesting log file uploads from the given client.";
 	}
 }
