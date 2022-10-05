@@ -383,7 +383,7 @@ class CMClient(EventEmitter):
 
             self._LOG.debug("Heartbeat started.")
 
-            interval = msg.body.out_of_game_heartbeat_seconds
+            interval = msg.body.heartbeat_seconds
             self._heartbeat_loop = gevent.spawn(self.__heartbeat, interval)
         else:
             self.emit(self.EVENT_ERROR, EResult(result))
