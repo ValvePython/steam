@@ -357,6 +357,7 @@ class CDNDepotFile(DepotFile):
                 chunk_end = chunk_start + chunk.cb_original
 
                 if (     chunk_start <= self.offset <  chunk_end
+                      or (chunk_end, chunk_start > self.offset and end_offset > chunk_end)
                       or chunk_start <  end_offset  <= chunk_end):
                     if start_offset is None:
                         start_offset = chunk.offset
