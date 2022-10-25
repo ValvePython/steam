@@ -74,6 +74,22 @@ class DepotFile(object):
         return os.path.join(*self.linktarget_raw.split('\\'))
 
     @property
+    def sha_content(self):
+        """File SHA1 
+
+        :type: bytes
+        """
+        return self.file_mapping.sha_content
+
+    @property
+    def sha_filename(self):
+        """File SHA1 
+
+        :type: bytes
+        """
+        return self.file_mapping.sha_content
+
+    @property
     def size(self):
         """File size in bytes
 
