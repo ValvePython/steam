@@ -75,7 +75,7 @@ class DepotFile(object):
 
     @property
     def sha_content(self):
-        """File SHA1 
+        """File content SHA1 
 
         :type: bytes
         """
@@ -83,11 +83,11 @@ class DepotFile(object):
 
     @property
     def sha_filename(self):
-        """File SHA1 
+        """Filename SHA1 
 
         :type: bytes
         """
-        return self.file_mapping.sha_content
+        return self.file_mapping.sha_filename
 
     @property
     def size(self):
