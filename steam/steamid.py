@@ -551,6 +551,7 @@ def steam64_from_url(url, http_timeout=30):
         https://steamcommunity.com/profiles/[U:1:12]
         https://steamcommunity.com/profiles/76561197960265740
         https://steamcommunity.com/id/johnc
+        https://steamcommunity.com/user/r
         https://steamcommunity.com/user/cv-dgb/
     """
 
