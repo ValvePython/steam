@@ -7,7 +7,7 @@ Appache file parsing examples:
 
     >>> header, apps = parse_appinfo(open('/d/Steam/appcache/appinfo.vdf', 'rb'))
     >>> header
-    {'magic': b"'DV\\x07", 'universe': 1}
+    {'magic': b"(DV\\x07", 'universe': 1}
     >>> next(apps)
     {'appid': 5,
      'size': 79,
@@ -16,6 +16,7 @@ Appache file parsing examples:
      'access_token': 0,
      'sha1': b'\\x87\\xfaCg\\x85\\x80\\r\\xb4\\x90Im\\xdc}\\xb4\\x81\\xeeQ\\x8b\\x825',
      'change_number': 4603827,
+     'data_sha1': b'\\x87\\xfaCg\\x85\\x80\\r\\xb4\\x90Im\\xdc}\\xb4\\x81\\xeeQ\\x8b\\x825',
      'data': {'appinfo': {'appid': 5, 'public_only': 1}}}
 
     >>> header, pkgs = parse_packageinfo(open('/d/Steam/appcache/packageinfo.vdf', 'rb'))
@@ -52,7 +53,7 @@ def parse_appinfo(fp):
     :return: (header, apps iterator)
     """
 # format:
-#   uint32   - MAGIC: "'DV\x07"
+#   uint32   - MAGIC: "'DV\x07" or "(DV\x07"
 #   uint32   - UNIVERSE: 1
 #   ---- repeated app sections ----
 #   uint32   - AppID
@@ -62,12 +63,13 @@ def parse_appinfo(fp):
 #   uint64   - accessToken
 #   20bytes  - SHA1
 #   uint32   - changeNumber
+#   20bytes  - binary_vdf SHA1 (added in "(DV\x07"
 #   variable - binary_vdf
 #   ---- end of section ---------
 #   uint32   - EOF: 0
 
     magic = fp.read(4)
-    if magic != b"'DV\x07":
+    if magic not in (b"'DV\x07", b"(DV\x07"):
         raise SyntaxError("Invalid magic, got %s" % repr(magic))
 
     universe = uint32.unpack(fp.read(4))[0]
@@ -87,8 +89,12 @@ def parse_appinfo(fp):
                 'access_token': uint64.unpack(fp.read(8))[0],
                 'sha1': fp.read(20),
                 'change_number': uint32.unpack(fp.read(4))[0],
-                'data': binary_load(fp),
             }
+
+            if magic == b"(DV\x07":
+                app['data_sha1'] = fp.read(20)
+
+            app['data'] =  binary_load(fp)
 
             yield app
 
