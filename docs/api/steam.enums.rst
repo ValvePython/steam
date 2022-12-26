@@ -22,4 +22,10 @@ enums.emsg
     :undoc-members:
     :inherited-members:
 
+enums.proto
+-----------
 
+.. automodule:: steam.enums.proto
+    :members:
+    :undoc-members:
+    :inherited-members:

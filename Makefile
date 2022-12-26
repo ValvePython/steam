@@ -94,4 +94,7 @@ pb_services:
 	grep -A 99999 MARK_SERVICE_END steam/core/msg/unified.py >> steam/core/msg/unified.py.tmp
 	mv steam/core/msg/unified.py.tmp steam/core/msg/unified.py
 
-pb_update: pb_fetch pb_compile pb_services
+pb_gen_enums:
+	python generate_enums_from_proto.py > steam/enums/proto.py
+
+pb_update: pb_fetch pb_compile pb_services pb_gen_enums
