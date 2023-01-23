@@ -190,7 +190,7 @@ class WebAuth(object):
         self._load_key()
         resp = self._send_login(password=password, captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
 
-        if resp['success'] and resp['login_complete']:
+        if resp.get('success') and resp.get('login_complete'):
             self.logged_on = True
             self.password = self.captcha_code = ''
             self.captcha_gid = -1
