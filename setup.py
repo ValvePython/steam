@@ -17,6 +17,7 @@ install_requires = [
     'six>=1.10',
     'pycryptodomex>=3.7.0',
     'requests>=2.9.1',
+    'urllib3<2',
     'vdf>=3.3',
     'cachetools>=3.0.0',
     "win-inet-pton; python_version == '2.7' and sys_platform == 'win32'",
