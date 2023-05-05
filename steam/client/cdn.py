@@ -836,6 +836,12 @@ class CDNClient(object):
             else:
                 manifest_gid = depot_info.get('manifests', {}).get(branch)
 
+            if isinstance(manifest_gid, dict):
+                # For some depots, Steam has started returning a dict
+                # {"public": {"gid": GID, "size": ..., "download": ...}, ...}
+                # instead of a simple map {"public": GID, ...}
+                manifest_gid = manifest_gid['gid']
+
             if manifest_gid is not None:
                 tasks.append(
                     self.gpool.spawn(
