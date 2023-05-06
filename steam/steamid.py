@@ -552,10 +552,11 @@ def steam64_from_url(url, http_timeout=30):
         https://steamcommunity.com/profiles/76561197960265740
         https://steamcommunity.com/id/johnc
         https://steamcommunity.com/user/cv-dgb/
+        https://steamcommunity.com/app/570
     """
 
     match = re.match(r'^(?P<clean_url>https?://steamcommunity.com/'
-                     r'(?P<type>profiles|id|gid|groups|user)/(?P<value>.*?))(?:/(?:.*)?)?$', url)
+                     r'(?P<type>profiles|id|gid|groups|user|app)/(?P<value>.*?))(?:/(?:.*)?)?$', url)
 
     if not match:
         return None
