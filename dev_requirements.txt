@@ -1,7 +1,8 @@
 
 -r requirements.txt
 
-vcrpy==2.0.1
+vcrpy==2.0.1; python_version <= '3.6'
+vcrpy==4.3.0; python_version > '3.6'
 PyYAML>=5.4
 mock==1.3.0
 
