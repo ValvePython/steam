@@ -33,3 +33,5 @@
 .coverage
 *.swp
 *.bin
+
+venv
