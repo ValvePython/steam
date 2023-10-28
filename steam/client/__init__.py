@@ -34,6 +34,8 @@ from steam.client.builtins import BuiltinBase
 from steam.utils import ip4_from_int, ip4_to_int
 from steam.utils.proto import proto_fill_from_dict
 
+
+# TODO: remove py2 support.
 if six.PY2:
     _cli_input = raw_input
 else:
@@ -42,14 +44,13 @@ else:
 
 class SteamClient(CMClient, BuiltinBase):
     EVENT_LOGGED_ON = 'logged_on'
-    """After successful login
-    """
+    """After successful login"""
+
     EVENT_AUTH_CODE_REQUIRED = 'auth_code_required'
-    """When either email or 2FA code is needed for login
-    """
+    """When either email or 2FA code is needed for login"""
+
     EVENT_NEW_LOGIN_KEY = 'new_login_key'
-    """After a new login key is accepted
-    """
+    """After a new login key is accepted"""
 
     _LOG = logging.getLogger("SteamClient")
     _reconnect_backoff_c = 0
