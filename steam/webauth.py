@@ -55,7 +55,7 @@ Example usage:
 
 """
 import json
-from time import time
+from time import time, sleep
 from base64 import b64encode
 from getpass import getpass
 import six
@@ -84,6 +84,8 @@ API_HEADERS = {
 }
 
 API_URL = 'https://api.steampowered.com/{}Service/{}/v{}'
+
+SUPPORTED_AUTH_TYPES = [EAuthSessionGuardType.EmailCode, EAuthSessionGuardType.DeviceCode, EAuthSessionGuardType.DeviceConfirmation]
 
 
 class WebAuth(object):
@@ -219,6 +221,7 @@ class WebAuth(object):
         self.client_id = resp['response']['client_id']
         self.request_id = resp['response']['request_id']
         self.steam_id = SteamID(resp['response']['steamid'])
+        self.allowed_confirmations = [EAuthSessionGuardType(confirm_type['confirmation_type']) for confirm_type in resp['response']['allowed_confirmations']]
 
     def _startLoginSession(self):
         """Starts login session via credentials."""
@@ -243,7 +246,7 @@ class WebAuth(object):
             self.refresh_token = resp['response']['refresh_token']
             self.access_token = resp['response']['access_token']
         except KeyError:
-            raise WebAuthException('Authentication requires 2fa token, which is not provided or invalid')
+            raise TwoFactorAuthNotProvided('Authentication requires 2fa token, which is not provided or invalid')
 
     def _finalizeLogin(self):
         self.sessionID = generate_session_id()
@@ -299,9 +302,11 @@ class WebAuth(object):
         if self.logged_on:
             return self.session
 
+        username = username or self.username
+        password = password or self.password
+
         if username == '' or password == '':
-            if self.username == '' and self.password == '':
-                raise ValueError("Username or password is provided empty!")
+            raise LoginIncorrect("Username or password is provided empty!")
         else:
             self.username = username
             self.password = password
@@ -370,22 +375,78 @@ class WebAuth(object):
         If you use email confirm, provide email_required = True,
         else just provide code.
         """
-        res = self.login(
-            username,
-            password,
-            code,
-            email_required
-        )
-        if hasattr(res, '__call__'):
-            while True:
-                try:
-                    twofactor_code = input('Enter your 2fa/email code: ')
-                    resp = res(twofactor_code)
-                    return resp
-                except WebAuthException:
-                    pass
-        else:
-            return self.session
+        while True:
+            try:
+                res = self.login(
+                    username,
+                    password,
+                    code,
+                    email_required
+                )
+            except LoginIncorrect:
+                prompt = ("Enter password for %s: " if not password else "Invalid password for %s. Enter password:")
+                password = getpass(prompt % repr(self.username))
+                continue
+            except TwoFactorAuthNotProvided:
+                # 2FA handling
+                allowed = set(self.allowed_confirmations)
+                if allowed.isdisjoint(SUPPORTED_AUTH_TYPES):
+                    raise AuthTypeNotSupported("Couldn't find a supported auth type for this account.")
+
+                can_confirm_with_app = EAuthSessionGuardType.DeviceConfirmation in allowed
+
+                twofactor_code = ''
+                while twofactor_code.strip() == '':
+                    prompt = ''
+                    if EAuthSessionGuardType.DeviceCode in allowed:
+                        prompt = 'Enter your Steam Guard code'
+                    elif EAuthSessionGuardType.EmailCode in allowed:
+                        prompt = 'Enter the Steam 2FA code emailed to you'
+                    if can_confirm_with_app:
+                        if prompt == '':
+                            # don't think this is possible, but let's handle it anyways
+                            input("Please confirm Steam Guard on your device and press ENTER to continue")
+                            sleep(10)
+                        else:
+                            prompt += ' (or simply press Enter if approved via app)'
+
+                    if prompt != '':
+                        prompt += ': '
+                        twofactor_code = input(prompt) 
+
+                    if can_confirm_with_app:
+                        try:
+                            self._pollLoginStatus() # test to see if they've authenticated via app
+                            break
+                        except TwoFactorAuthNotProvided:
+                            # they've not authenticated via the app, let's see if we can use their provided code
+                            pass
+
+                    if twofactor_code.strip():
+                        using_email_code = EAuthSessionGuardType.EmailCode in allowed
+                        self._update_login_token(twofactor_code, EAuthSessionGuardType.EmailCode if using_email_code else EAuthSessionGuardType.DeviceCode)
+                        try:
+                            self._pollLoginStatus()
+                            break
+                        except TwoFactorAuthNotProvided:
+                            print("Invalid auth code. Please try again")
+                            twofactor_code = ''
+                            continue
+                    else:
+                        print("Unauthenticated. Please try again")
+                self._finalizeLogin()
+                return self.session
+            if hasattr(res, '__call__'):
+                # this should not ever happen at this point as we don't use `email_required` on login()
+                while True:
+                    try:
+                        twofactor_code = input('Enter your 2fa/email code: ')
+                        resp = res(twofactor_code)
+                        return resp
+                    except WebAuthException:
+                        pass
+            else:
+                return self.session
 
 
 #TODO: DEPRECATED, must be rewritten, like WebAuth
@@ -503,6 +564,10 @@ class MobileWebAuth(WebAuth):
 
 
 class WebAuthException(Exception):
+    pass
+
+
+class AuthTypeNotSupported(WebAuthException):
     pass
 
 
