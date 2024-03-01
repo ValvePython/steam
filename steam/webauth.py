@@ -406,7 +406,6 @@ class WebAuth(object):
                         if prompt == '':
                             # don't think this is possible, but let's handle it anyways
                             input("Please confirm Steam Guard on your device and press ENTER to continue")
-                            sleep(10)
                         else:
                             prompt += ' (or simply press Enter if approved via app)'
 
