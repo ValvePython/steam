@@ -832,9 +832,9 @@ class CDNClient(object):
                     manifest_gid = decrypt_manifest_gid_2(unhexlify(egid),
                                                           self.beta_passwords[(app_id, branch)])
                 else:
-                    manifest_gid = depot_info.get('manifests', {}).get('public')
+                    manifest_gid = depot_info.get('manifests', {}).get('public').get('gid')
             else:
-                manifest_gid = depot_info.get('manifests', {}).get(branch)
+                manifest_gid = depot_info.get('manifests', {}).get(branch).get('gid')
 
             if manifest_gid is not None:
                 tasks.append(
