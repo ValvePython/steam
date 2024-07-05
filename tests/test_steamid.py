@@ -351,7 +351,7 @@ class steamid_functions(unittest.TestCase):
                               mode='once',
                               serializer='yaml',
                               filter_query_parameters=['nocache'],
-                              decode_compressed_response=False,
+                              decode_compressed_response=True,
                               before_record_request=scrub_req,
                               before_record_response=scrub_resp,
                               ):
