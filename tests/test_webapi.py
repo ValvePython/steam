@@ -30,7 +30,7 @@ test_vcr = vcr.VCR(
 )
 
 class TCwebapi(unittest.TestCase):
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def setUp(self):
         self.api = WebAPI(test_api_key)
         self.api.session.headers['Accept-Encoding'] = 'identity'
@@ -38,27 +38,27 @@ class TCwebapi(unittest.TestCase):
     def test_docs(self):
         self.assertTrue(len(self.api.doc()) > 0)
 
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def test_simple_api_call(self):
         resp = self.api.ISteamWebAPIUtil.GetServerInfo_v1()
         self.assertTrue('servertime' in resp)
 
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def test_simple_api_call_vdf(self):
         resp = self.api.ISteamWebAPIUtil.GetServerInfo(format='vdf')
         self.assertTrue('servertime' in resp['response'])
 
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def test_resolve_vanity(self):
         resp = self.api.ISteamUser.ResolveVanityURL(vanityurl='valve', url_type=2)
         self.assertEqual(resp['response']['steamid'], '103582791429521412')
 
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def test_post_publishedfile(self):
         resp = self.api.ISteamRemoteStorage.GetPublishedFileDetails(itemcount=5, publishedfileids=[1,1,1,1,1])
         self.assertEqual(resp['response']['resultcount'], 5)
 
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def test_get(self):
         resp = webapi.get('ISteamUser', 'ResolveVanityURL', 1,
                            session=self.api.session, params={
@@ -68,7 +68,7 @@ class TCwebapi(unittest.TestCase):
                                })
         self.assertEqual(resp['response']['steamid'], '103582791429521412')
 
-    @test_vcr.use_cassette('webapi.yaml')
+    @test_vcr.use_cassette('webapi.yaml', decode_compressed_response=True)
     def test_post(self):
         resp = webapi.post('ISteamRemoteStorage', 'GetPublishedFileDetails', 1,
                            session=self.api.session, params={

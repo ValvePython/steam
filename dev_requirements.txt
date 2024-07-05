@@ -1,7 +1,8 @@
 
 -r requirements.txt
 
-vcrpy==2.0.1
+# https://github.com/kevin1024/vcrpy/issues/719
+vcrpy>=4.4.0
 PyYAML>=5.4
 mock==1.3.0
 
