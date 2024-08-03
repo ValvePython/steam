@@ -7,7 +7,7 @@ Appache file parsing examples:
 
     >>> header, apps = parse_appinfo(open('/d/Steam/appcache/appinfo.vdf', 'rb'))
     >>> header
-    {'magic': b"(DV\\x07", 'universe': 1}
+    {'magic': b")DV\\x07", 'universe': 1}
     >>> next(apps)
     {'appid': 5,
      'size': 79,
@@ -43,6 +43,7 @@ from vdf import binary_load
 
 uint32 = struct.Struct('<I')
 uint64 = struct.Struct('<Q')
+int64 = struct.Struct('<q')
 
 def parse_appinfo(fp):
     """Parse appinfo.vdf from the Steam appcache folder
@@ -53,8 +54,9 @@ def parse_appinfo(fp):
     :return: (header, apps iterator)
     """
 # format:
-#   uint32   - MAGIC: "'DV\x07" or "(DV\x07"
+#   uint32   - MAGIC: "'DV\x07" or "(DV\x07" or b")DV\x07"
 #   uint32   - UNIVERSE: 1
+#   int64    - OFFSET TO KEY TABLE (added in ")DV\x07")
 #   ---- repeated app sections ----
 #   uint32   - AppID
 #   uint32   - size
@@ -63,16 +65,51 @@ def parse_appinfo(fp):
 #   uint64   - accessToken
 #   20bytes  - SHA1
 #   uint32   - changeNumber
-#   20bytes  - binary_vdf SHA1 (added in "(DV\x07"
+#   20bytes  - binary_vdf SHA1 (added in "(DV\x07")
 #   variable - binary_vdf
 #   ---- end of section ---------
 #   uint32   - EOF: 0
+#
+#   ---- key table ----
+#   uint32   - Count of keys
+#   char[]   - Null-terminated strings corresponding to field names
 
     magic = fp.read(4)
-    if magic not in (b"'DV\x07", b"(DV\x07"):
+    if magic not in (b"'DV\x07", b"(DV\x07", b")DV\x07"):
         raise SyntaxError("Invalid magic, got %s" % repr(magic))
 
     universe = uint32.unpack(fp.read(4))[0]
+
+    key_table = None
+
+    appinfo_version = magic[0]
+    if appinfo_version >= 41:  # b')'
+        # appinfo.vdf V29 and newer store list of keys in separate table at the
+        # end of the file to reduce size. Retrieve it and pass it to the VDF
+        # parser later.
+        key_table = []
+
+        key_table_offset = struct.unpack('q', fp.read(8))[0]
+        offset = fp.tell()
+        fp.seek(key_table_offset)
+        key_count = uint32.unpack(fp.read(4))[0]
+
+        # Read all null-terminated strings into a list
+        for _ in range(0, key_count):
+            field_name = bytearray()
+            while True:
+                field_name += fp.read(1)
+
+                if field_name[-1] == 0:
+                    field_name = field_name[0:-1]
+                    field_name = field_name.decode('utf-8', 'replace')
+
+                    key_table.append(field_name)
+                    break
+
+        # Rewind to the beginning of the file after the header:
+        # we can now parse the rest of the file.
+        fp.seek(offset)
 
     def apps_iter():
         while True:
@@ -91,10 +128,12 @@ def parse_appinfo(fp):
                 'change_number': uint32.unpack(fp.read(4))[0],
             }
 
-            if magic == b"(DV\x07":
+            if magic != b"'DV\x07":
                 app['data_sha1'] = fp.read(20)
 
-            app['data'] =  binary_load(fp)
+            # 'key_table' will be None for older 'appinfo.vdf' files which
+            # use self-contained binary VDFs.
+            app['data'] = binary_load(fp, key_table=key_table)
 
             yield app
 
