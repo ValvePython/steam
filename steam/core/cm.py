@@ -16,7 +16,7 @@ from steam.steamid import SteamID
 from steam.enums import EResult, EUniverse
 from steam.enums.emsg import EMsg
 from steam.core import crypto
-from steam.core.connection import TCPConnection
+from steam.core.connection import TCPConnection, WebsocketConnection
 from steam.core.msg import Msg, MsgProto
 from eventemitter import EventEmitter
 from steam.utils import ip4_from_int
@@ -59,6 +59,7 @@ class CMClient(EventEmitter):
 
     PROTOCOL_TCP = 0                        #: TCP protocol enum
     PROTOCOL_UDP = 1                        #: UDP protocol enum
+    PROTOCOL_WEBSOCKET = 2                        #: WEBSOCKET protocol enum
     verbose_debug = False                   #: print message connects in debug
 
     auto_discovery = True                   #: enables automatic CM discovery
@@ -83,10 +84,12 @@ class CMClient(EventEmitter):
     def __init__(self, protocol=PROTOCOL_TCP):
         self.cm_servers = CMServerList()
 
-        if protocol == CMClient.PROTOCOL_TCP:
+        if protocol == CMClient.PROTOCOL_WEBSOCKET:
+            self.connection = WebsocketConnection()
+        elif protocol == CMClient.PROTOCOL_TCP:
             self.connection = TCPConnection()
         else:
-            raise ValueError("Only TCP is supported")
+            raise ValueError("Only Websocket and TCP are supported")
 
         self.on(EMsg.ChannelEncryptRequest, self.__handle_encrypt_request),
         self.on(EMsg.Multi, self.__handle_multi),
@@ -132,8 +135,11 @@ class CMClient(EventEmitter):
                 self._connecting = False
                 return False
 
-            if not self.cm_servers.bootstrap_from_webapi():
-                self.cm_servers.bootstrap_from_dns()
+            if isinstance(self.connection, WebsocketConnection):
+                self.cm_servers.bootstrap_from_webapi_websocket()
+            elif isinstance(self.connection, TCPConnection):
+                if not self.cm_servers.bootstrap_from_webapi():
+                    self.cm_servers.bootstrap_from_dns()
 
         for i, server_addr in enumerate(cycle(self.cm_servers), start=next(i)-1):
             if retry and i >= retry:
@@ -154,6 +160,12 @@ class CMClient(EventEmitter):
         self.current_server_addr = server_addr
         self.connected = True
         self.emit(self.EVENT_CONNECTED)
+
+        # WebsocketConnection secures itself
+        if isinstance(self.connection, WebsocketConnection):
+            self.channel_secured = True
+            self.emit(self.EVENT_CHANNEL_SECURED)
+        
         self._recv_loop = gevent.spawn(self._recv_messages)
         self._connecting = False
         return True
@@ -509,7 +521,36 @@ class CMServerList(object):
         self.merge_list(map(str_to_tuple, serverlist))
 
         return True
+    
+    def bootstrap_from_webapi_websocket(self):
+        """
+        Fetches CM server list from WebAPI and replaces the current one
 
+        :return: booststrap success
+        :rtype: :class:`bool`
+        """
+        self._LOG.debug("Attempting bootstrap via WebAPI for websocket")
+
+        from steam import webapi
+        try:
+            resp = webapi.get('ISteamDirectory', 'GetCMListForConnect', 1, params={'cmtype': 'websockets',
+                                                                         'http_timeout': 3})
+        except Exception as exp:
+            self._LOG.error("WebAPI boostrap failed: %s" % str(exp))
+            return False
+
+        serverlist = resp['response']['serverlist']
+        self._LOG.debug("Received %d servers from WebAPI" % len(serverlist))
+
+        def str_to_tuple(serverinfo):
+            ip, port = serverinfo['endpoint'].split(':')
+            return str(ip), int(port)
+
+        self.clear()
+        self.merge_list(map(str_to_tuple, serverlist))
+
+        return True
+    
     def __iter__(self):
         def cm_server_iter():
             if not self.list:

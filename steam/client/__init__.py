@@ -59,8 +59,8 @@ class SteamClient(CMClient, BuiltinBase):
     login_key = None                   #: can be used for subsequent logins (no 2FA code will be required)
     chat_mode = 2                      #: chat mode (0=old chat, 2=new chat)
 
-    def __init__(self):
-        CMClient.__init__(self)
+    def __init__(self, protocol=CMClient.PROTOCOL_TCP):
+        CMClient.__init__(self, protocol=protocol)
 
         # register listners
         self.on(self.EVENT_DISCONNECTED, self._handle_disconnect)
