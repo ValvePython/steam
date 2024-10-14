@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=b'\220\001\001',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n!steammessages_contentsystem.proto\x1a\x18steammessages_base.proto\x1a steammessages_unified_base.proto\"\xb5\x02\n6CContentServerDirectory_GetServersForSteamPipe_Request\x12#\n\x07\x63\x65ll_id\x18\x01 \x01(\rB\x12\x82\xb5\x18\x0e\x63lient Cell ID\x12\x39\n\x0bmax_servers\x18\x02 \x01(\r:\x02\x32\x30\x42 \x82\xb5\x18\x1cmax servers in response list\x12*\n\x0bip_override\x18\x03 \x01(\tB\x15\x82\xb5\x18\x11\x63lient IP address\x12+\n\rlauncher_type\x18\x04 \x01(\x05:\x01\x30\x42\x11\x82\xb5\x18\rlauncher type\x12\x42\n\x0bipv6_public\x18\x05 \x01(\tB-\x82\xb5\x18)client public ipv6 address if it knows it\"\xdb\x02\n\"CContentServerDirectory_ServerInfo\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tsource_id\x18\x02 \x01(\x05\x12\x0f\n\x07\x63\x65ll_id\x18\x03 \x01(\x05\x12\x0c\n\x04load\x18\x04 \x01(\x05\x12\x15\n\rweighted_load\x18\x05 \x01(\x02\x12\"\n\x1anum_entries_in_client_list\x18\x06 \x01(\x05\x12\x18\n\x10steam_china_only\x18\x07 \x01(\x08\x12\x0c\n\x04host\x18\x08 \x01(\t\x12\r\n\x05vhost\x18\t \x01(\t\x12\x14\n\x0cuse_as_proxy\x18\n \x01(\x08\x12#\n\x1bproxy_request_path_template\x18\x0b \x01(\t\x12\x15\n\rhttps_support\x18\x0c \x01(\t\x12\x17\n\x0f\x61llowed_app_ids\x18\r \x03(\r\x12\x18\n\x10preferred_server\x18\x0e \x01(\x08\"o\n7CContentServerDirectory_GetServersForSteamPipe_Response\x12\x34\n\x07servers\x18\x01 \x03(\x0b\x32#.CContentServerDirectory_ServerInfo\"\x89\x01\n1CContentServerDirectory_GetDepotPatchInfo_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x64\x65potid\x18\x02 \x01(\r\x12\x19\n\x11source_manifestid\x18\x03 \x01(\x04\x12\x19\n\x11target_manifestid\x18\x04 \x01(\x04\"{\n2CContentServerDirectory_GetDepotPatchInfo_Response\x12\x14\n\x0cis_available\x18\x01 \x01(\x08\x12\x12\n\npatch_size\x18\x02 \x01(\x04\x12\x1b\n\x13patched_chunks_size\x18\x03 \x01(\x04\"P\n4CContentServerDirectory_GetClientUpdateHosts_Request\x12\x18\n\x10\x63\x61\x63hed_signature\x18\x01 \x01(\t\"w\n5CContentServerDirectory_GetClientUpdateHosts_Response\x12\x10\n\x08hosts_kv\x18\x01 \x01(\t\x12\x18\n\x10valid_until_time\x18\x02 \x01(\x04\x12\x12\n\nip_country\x18\x03 \x01(\t\"\xa1\x01\n6CContentServerDirectory_GetManifestRequestCode_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x10\n\x08\x64\x65pot_id\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x04\x12\x12\n\napp_branch\x18\x04 \x01(\t\x12\x1c\n\x14\x62ranch_password_hash\x18\x05 \x01(\t\"X\n7CContentServerDirectory_GetManifestRequestCode_Response\x12\x1d\n\x15manifest_request_code\x18\x01 \x01(\x04\x32\xe0\x04\n\x16\x43ontentServerDirectory\x12\x8b\x01\n\x16GetServersForSteamPipe\x12\x37.CContentServerDirectory_GetServersForSteamPipe_Request\x1a\x38.CContentServerDirectory_GetServersForSteamPipe_Response\x12|\n\x11GetDepotPatchInfo\x12\x32.CContentServerDirectory_GetDepotPatchInfo_Request\x1a\x33.CContentServerDirectory_GetDepotPatchInfo_Response\x12\x85\x01\n\x14GetClientUpdateHosts\x12\x35.CContentServerDirectory_GetClientUpdateHosts_Request\x1a\x36.CContentServerDirectory_GetClientUpdateHosts_Response\x12\x8b\x01\n\x16GetManifestRequestCode\x12\x37.CContentServerDirectory_GetManifestRequestCode_Request\x1a\x38.CContentServerDirectory_GetManifestRequestCode_Response\x1a$\x82\xb5\x18 Content Server and CDN directoryB\x03\x90\x01\x01'
+  serialized_pb=b'\n!steammessages_contentsystem.proto\x1a\x18steammessages_base.proto\x1a steammessages_unified_base.proto\"\xb5\x02\n6CContentServerDirectory_GetServersForSteamPipe_Request\x12#\n\x07\x63\x65ll_id\x18\x01 \x01(\rB\x12\x82\xb5\x18\x0e\x63lient Cell ID\x12\x39\n\x0bmax_servers\x18\x02 \x01(\r:\x02\x32\x30\x42 \x82\xb5\x18\x1cmax servers in response list\x12*\n\x0bip_override\x18\x03 \x01(\tB\x15\x82\xb5\x18\x11\x63lient IP address\x12+\n\rlauncher_type\x18\x04 \x01(\x05:\x01\x30\x42\x11\x82\xb5\x18\rlauncher type\x12\x42\n\x0bipv6_public\x18\x05 \x01(\tB-\x82\xb5\x18)client public ipv6 address if it knows it\"\xdb\x02\n\"CContentServerDirectory_ServerInfo\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x11\n\tsource_id\x18\x02 \x01(\x05\x12\x0f\n\x07\x63\x65ll_id\x18\x03 \x01(\x05\x12\x0c\n\x04load\x18\x04 \x01(\x05\x12\x15\n\rweighted_load\x18\x05 \x01(\x02\x12\"\n\x1anum_entries_in_client_list\x18\x06 \x01(\x05\x12\x18\n\x10steam_china_only\x18\x07 \x01(\x08\x12\x0c\n\x04host\x18\x08 \x01(\t\x12\r\n\x05vhost\x18\t \x01(\t\x12\x14\n\x0cuse_as_proxy\x18\n \x01(\x08\x12#\n\x1bproxy_request_path_template\x18\x0b \x01(\t\x12\x15\n\rhttps_support\x18\x0c \x01(\t\x12\x17\n\x0f\x61llowed_app_ids\x18\r \x03(\r\x12\x18\n\x10preferred_server\x18\x0e \x01(\x08\"o\n7CContentServerDirectory_GetServersForSteamPipe_Response\x12\x34\n\x07servers\x18\x01 \x03(\x0b\x32#.CContentServerDirectory_ServerInfo\"\x89\x01\n1CContentServerDirectory_GetDepotPatchInfo_Request\x12\r\n\x05\x61ppid\x18\x01 \x01(\r\x12\x0f\n\x07\x64\x65potid\x18\x02 \x01(\r\x12\x19\n\x11source_manifestid\x18\x03 \x01(\x04\x12\x19\n\x11target_manifestid\x18\x04 \x01(\x04\"{\n2CContentServerDirectory_GetDepotPatchInfo_Response\x12\x14\n\x0cis_available\x18\x01 \x01(\x08\x12\x12\n\npatch_size\x18\x02 \x01(\x04\x12\x1b\n\x13patched_chunks_size\x18\x03 \x01(\x04\"P\n4CContentServerDirectory_GetClientUpdateHosts_Request\x12\x18\n\x10\x63\x61\x63hed_signature\x18\x01 \x01(\t\"w\n5CContentServerDirectory_GetClientUpdateHosts_Response\x12\x10\n\x08hosts_kv\x18\x01 \x01(\t\x12\x18\n\x10valid_until_time\x18\x02 \x01(\x04\x12\x12\n\nip_country\x18\x03 \x01(\t\"\xa1\x01\n6CContentServerDirectory_GetManifestRequestCode_Request\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\r\x12\x10\n\x08\x64\x65pot_id\x18\x02 \x01(\r\x12\x13\n\x0bmanifest_id\x18\x03 \x01(\x04\x12\x12\n\napp_branch\x18\x04 \x01(\t\x12\x1c\n\x14\x62ranch_password_hash\x18\x05 \x01(\t\"X\n7CContentServerDirectory_GetManifestRequestCode_Response\x12\x1d\n\x15manifest_request_code\x18\x01 \x01(\x04\"f\n/CContentServerDirectory_GetCDNAuthToken_Request\x12\x10\n\x08\x64\x65pot_id\x18\x01 \x01(\r\x12\x11\n\thost_name\x18\x02 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\r\"Z\n0CContentServerDirectory_GetCDNAuthToken_Response\x12\r\n\x05token\x18\x01 \x01(\t\x12\x17\n\x0f\x65xpiration_time\x18\x02 \x01(\r2\xd8\x05\n\x16\x43ontentServerDirectory\x12\x8b\x01\n\x16GetServersForSteamPipe\x12\x37.CContentServerDirectory_GetServersForSteamPipe_Request\x1a\x38.CContentServerDirectory_GetServersForSteamPipe_Response\x12|\n\x11GetDepotPatchInfo\x12\x32.CContentServerDirectory_GetDepotPatchInfo_Request\x1a\x33.CContentServerDirectory_GetDepotPatchInfo_Response\x12\x85\x01\n\x14GetClientUpdateHosts\x12\x35.CContentServerDirectory_GetClientUpdateHosts_Request\x1a\x36.CContentServerDirectory_GetClientUpdateHosts_Response\x12\x8b\x01\n\x16GetManifestRequestCode\x12\x37.CContentServerDirectory_GetManifestRequestCode_Request\x1a\x38.CContentServerDirectory_GetManifestRequestCode_Response\x12v\n\x0fGetCDNAuthToken\x12\x30.CContentServerDirectory_GetCDNAuthToken_Request\x1a\x31.CContentServerDirectory_GetCDNAuthToken_Response\x1a$\x82\xb5\x18 Content Server and CDN directoryB\x03\x90\x01\x01'
   ,
   dependencies=[steammessages__base__pb2.DESCRIPTOR,steammessages__unified__base__pb2.DESCRIPTOR,])
 
@@ -513,6 +513,91 @@ _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE = _descriptor.Descripto
   serialized_end=1592,
 )
 
+
+_CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_REQUEST = _descriptor.Descriptor(
+  name='CContentServerDirectory_GetCDNAuthToken_Request',
+  full_name='CContentServerDirectory_GetCDNAuthToken_Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='depot_id', full_name='CContentServerDirectory_GetCDNAuthToken_Request.depot_id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='host_name', full_name='CContentServerDirectory_GetCDNAuthToken_Request.host_name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='CContentServerDirectory_GetCDNAuthToken_Request.app_id', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1594,
+  serialized_end=1696,
+)
+
+
+_CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_RESPONSE = _descriptor.Descriptor(
+  name='CContentServerDirectory_GetCDNAuthToken_Response',
+  full_name='CContentServerDirectory_GetCDNAuthToken_Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='token', full_name='CContentServerDirectory_GetCDNAuthToken_Response.token', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='expiration_time', full_name='CContentServerDirectory_GetCDNAuthToken_Response.expiration_time', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1698,
+  serialized_end=1788,
+)
+
 _CCONTENTSERVERDIRECTORY_GETSERVERSFORSTEAMPIPE_RESPONSE.fields_by_name['servers'].message_type = _CCONTENTSERVERDIRECTORY_SERVERINFO
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetServersForSteamPipe_Request'] = _CCONTENTSERVERDIRECTORY_GETSERVERSFORSTEAMPIPE_REQUEST
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_ServerInfo'] = _CCONTENTSERVERDIRECTORY_SERVERINFO
@@ -523,6 +608,8 @@ DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetClientUpdateHosts_R
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetClientUpdateHosts_Response'] = _CCONTENTSERVERDIRECTORY_GETCLIENTUPDATEHOSTS_RESPONSE
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetManifestRequestCode_Request'] = _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_REQUEST
 DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetManifestRequestCode_Response'] = _CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE
+DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetCDNAuthToken_Request'] = _CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_REQUEST
+DESCRIPTOR.message_types_by_name['CContentServerDirectory_GetCDNAuthToken_Response'] = _CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CContentServerDirectory_GetServersForSteamPipe_Request = _reflection.GeneratedProtocolMessageType('CContentServerDirectory_GetServersForSteamPipe_Request', (_message.Message,), {
@@ -588,6 +675,20 @@ CContentServerDirectory_GetManifestRequestCode_Response = _reflection.GeneratedP
   })
 _sym_db.RegisterMessage(CContentServerDirectory_GetManifestRequestCode_Response)
 
+CContentServerDirectory_GetCDNAuthToken_Request = _reflection.GeneratedProtocolMessageType('CContentServerDirectory_GetCDNAuthToken_Request', (_message.Message,), {
+  'DESCRIPTOR' : _CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_REQUEST,
+  '__module__' : 'steammessages_contentsystem_pb2'
+  # @@protoc_insertion_point(class_scope:CContentServerDirectory_GetCDNAuthToken_Request)
+  })
+_sym_db.RegisterMessage(CContentServerDirectory_GetCDNAuthToken_Request)
+
+CContentServerDirectory_GetCDNAuthToken_Response = _reflection.GeneratedProtocolMessageType('CContentServerDirectory_GetCDNAuthToken_Response', (_message.Message,), {
+  'DESCRIPTOR' : _CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_RESPONSE,
+  '__module__' : 'steammessages_contentsystem_pb2'
+  # @@protoc_insertion_point(class_scope:CContentServerDirectory_GetCDNAuthToken_Response)
+  })
+_sym_db.RegisterMessage(CContentServerDirectory_GetCDNAuthToken_Response)
+
 
 DESCRIPTOR._options = None
 _CCONTENTSERVERDIRECTORY_GETSERVERSFORSTEAMPIPE_REQUEST.fields_by_name['cell_id']._options = None
@@ -603,8 +704,8 @@ _CONTENTSERVERDIRECTORY = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=b'\202\265\030 Content Server and CDN directory',
   create_key=_descriptor._internal_create_key,
-  serialized_start=1595,
-  serialized_end=2203,
+  serialized_start=1791,
+  serialized_end=2519,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetServersForSteamPipe',
@@ -643,6 +744,16 @@ _CONTENTSERVERDIRECTORY = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_REQUEST,
     output_type=_CCONTENTSERVERDIRECTORY_GETMANIFESTREQUESTCODE_RESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetCDNAuthToken',
+    full_name='ContentServerDirectory.GetCDNAuthToken',
+    index=4,
+    containing_service=None,
+    input_type=_CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_REQUEST,
+    output_type=_CCONTENTSERVERDIRECTORY_GETCDNAUTHTOKEN_RESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

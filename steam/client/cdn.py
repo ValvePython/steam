@@ -466,6 +466,7 @@ class CDNClient(object):
             self.cell_id = self.steam.cell_id
 
         self.web = make_requests_session()
+        self.cdn_auth_tokens = {}        #: CDN authentication token
         self.depot_keys = {}             #: depot decryption keys
         self.manifests = {}              #: CDNDepotManifest instances
         self.app_depots = {}             #: app depot info
@@ -530,6 +531,51 @@ class CDNClient(object):
             self.servers.rotate(-1)
         return self.servers[0]
 
+    def get_cdn_auth_token(self, app_id, depot_id, hostname):
+        """Get CDN authentication token
+
+        :param app_id: app id
+        :type  app_id: :class:`int`
+        :param depot_id: depot id
+        :type  depot_id: :class:`int`
+        :param hostname: cdn hostname
+        :type  hostname: :class:`str`
+        :return: CDN authentication token
+        :rtype: str
+        """
+        def update_cdn_auth_tokens():
+            resp = self.steam.send_um_and_wait('ContentServerDirectory.GetCDNAuthToken#1', {
+                'app_id': app_id,
+                'depot_id': depot_id,
+                'host_name': hostname
+            }, timeout=10)
+
+            if resp is None or resp.header.eresult != EResult.OK:
+                if resp.header.eresult == EResult.Fail:
+                    # no need authtoken?
+                    pass
+                else:
+                    raise SteamError("Failed to get CDNAuthToken for %s, %s, %s" % (app_id, depot_id, hostname),
+                                     EResult.Timeout if resp is None else EResult(resp.header.eresult))
+
+            self.cdn_auth_tokens.update({app_id:{depot_id:{hostname: {
+                'eresult': resp.header.eresult,
+                'token': resp.body.token or '',
+                'expiration_time': resp.body.expiration_time or 0
+            }}}})
+
+        if app_id not in self.cdn_auth_tokens or \
+           depot_id not in self.cdn_auth_tokens[app_id] or \
+           hostname not in self.cdn_auth_tokens[app_id][depot_id]:
+            update_cdn_auth_tokens()
+        else:
+            if self.cdn_auth_tokens[app_id][depot_id][hostname]['eresult'] != EResult.OK:
+                pass
+            elif datetime.fromtimestamp(self.cdn_auth_tokens[app_id][depot_id][hostname]['expiration_time'] - 60) < datetime.now():
+                update_cdn_auth_tokens()
+
+        return self.cdn_auth_tokens[app_id][depot_id][hostname]['token']
+
     def get_depot_key(self, app_id, depot_id):
         """Get depot key, which is needed to decrypt files
 
@@ -552,13 +598,17 @@ class CDNClient(object):
 
         return self.depot_keys[depot_id]
 
-    def cdn_cmd(self, command, args):
+    def cdn_cmd(self, command, args, app_id=None, depot_id=None):
         """Run CDN command request
 
         :param command: command name
         :type  command: str
         :param args: args
         :type  args: str
+        :param args: app_id: (optional) required for CDN authentication token
+        :type  args: int
+        :param args: depot_id: (optional) required for CDN authentication token
+        :type  args: int
         :returns: requests response
         :rtype: :class:`requests.Response`
         :raises SteamError: on error
@@ -566,12 +616,13 @@ class CDNClient(object):
         server = self.get_content_server()
 
         while True:
-            url = "%s://%s:%s/%s/%s" % (
+            url = "%s://%s:%s/%s/%s%s" % (
                 'https' if server.https else 'http',
                 server.host,
                 server.port,
                 command,
                 args,
+                self.get_cdn_auth_token(app_id, depot_id, str(server.host))
                 )
 
             try:
@@ -602,7 +653,7 @@ class CDNClient(object):
         :raises SteamError: error message
         """
         if (depot_id, chunk_id) not in self._chunk_cache:
-            resp = self.cdn_cmd('depot', '%s/chunk/%s' % (depot_id, chunk_id))
+            resp = self.cdn_cmd('depot', '%s/chunk/%s' % (depot_id, chunk_id), app_id, depot_id)
 
             data = symmetric_decrypt(resp.content, self.get_depot_key(app_id, depot_id))
 
@@ -688,9 +739,9 @@ class CDNClient(object):
         """
         if (app_id, depot_id, manifest_gid) not in self.manifests:
             if manifest_request_code:
-                resp = self.cdn_cmd('depot', '%s/manifest/%s/5/%s' % (depot_id, manifest_gid, manifest_request_code))
+                resp = self.cdn_cmd('depot', '%s/manifest/%s/5/%s' % (depot_id, manifest_gid, manifest_request_code), app_id, depot_id)
             else:
-                resp = self.cdn_cmd('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid))
+                resp = self.cdn_cmd('depot', '%s/manifest/%s/5' % (depot_id, manifest_gid), app_id, depot_id)
 
             if resp.ok:
                 manifest = self.DepotManifestClass(self, app_id, resp.content)

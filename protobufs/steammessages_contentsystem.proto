@@ -68,6 +68,17 @@ message CContentServerDirectory_GetManifestRequestCode_Response {
 	optional uint64 manifest_request_code = 1;
 }
 
+message CContentServerDirectory_GetCDNAuthToken_Request {
+	optional uint32 depot_id = 1;
+	optional string host_name = 2;
+	optional uint32 app_id = 3;
+}
+
+message CContentServerDirectory_GetCDNAuthToken_Response {
+	optional string token = 1;
+	optional uint32 expiration_time = 2;
+}
+
 service ContentServerDirectory {
 	option (service_description) = "Content Server and CDN directory";
 
@@ -75,4 +86,5 @@ service ContentServerDirectory {
 	rpc GetDepotPatchInfo (.CContentServerDirectory_GetDepotPatchInfo_Request) returns (.CContentServerDirectory_GetDepotPatchInfo_Response);
 	rpc GetClientUpdateHosts (.CContentServerDirectory_GetClientUpdateHosts_Request) returns (.CContentServerDirectory_GetClientUpdateHosts_Response);
 	rpc GetManifestRequestCode (.CContentServerDirectory_GetManifestRequestCode_Request) returns (.CContentServerDirectory_GetManifestRequestCode_Response);
+	rpc GetCDNAuthToken (.CContentServerDirectory_GetCDNAuthToken_Request) returns (.CContentServerDirectory_GetCDNAuthToken_Response);
 }
