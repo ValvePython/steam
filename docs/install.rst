@@ -26,11 +26,11 @@ Cygwin
     - ``python3``
     - ``python3-setuptools``
 
-4. Install pip
+3. Install pip
     - Open cygwin terminal
     - Run ``easy_install-3.4 pip``
 
-3. Run ``pip install steam``
+4. Run ``pip install steam``
 
 .. note::
     Consider using `virtualenv <https://virtualenv.pypa.io>`_
