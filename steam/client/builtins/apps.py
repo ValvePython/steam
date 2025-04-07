@@ -173,7 +173,7 @@ class Apps(object):
 
         return data
 
-    def get_changes_since(self, change_number, app_changes=True, package_changes=False):
+    def get_changes_since(self, change_number, app_changes=True, package_changes=False, timeout=10):
         """Get changes since a change number
 
         :param change_number: change number to use as stating point
@@ -191,7 +191,7 @@ class Apps(object):
                                        'send_app_info_changes': app_changes,
                                        'send_package_info_changes': package_changes,
                                       },
-                                      timeout=10
+                                      timeout=timeout
                                       )
 
     def get_app_ticket(self, app_id):
