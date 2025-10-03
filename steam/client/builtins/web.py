@@ -19,6 +19,8 @@ class Web(object):
     def __handle_disconnect(self):
         self._web_session = None
 
+    # TODO: DEPRECATED. This function not work anymore.
+    #This function must be rewritten to use  WebAuth
     def get_web_session_cookies(self):
         """Get web authentication cookies via WebAPI's ``AuthenticateUser``
 
