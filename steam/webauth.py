@@ -150,7 +150,24 @@ class WebAuth(object):
             raise HTTPError(str(e))
 
     def _finalize_login(self, login_response):
-        self.steam_id = SteamID(login_response['transfer_parameters']['steamid'])
+        if "transfer_parameters" in login_response and ["steamid"] in login_response['transfer_parameters']:
+            self.steam_id = SteamID(login_response['transfer_parameters']['steamid'])
+            return
+        
+        elif "success" in login_response and login_response['success'] and self.session:
+                # If logging in with 2FA, steamid is not returned in transfer_parameters
+                # fetch the steamid from the cookies instead
+
+                # The first 17 chars of steamLoginSecure cookie is the steamid
+                steam_login_secure = self.session.cookies.get('steamLoginSecure', domain='steamcommunity.com')
+                id_from_cookie = steam_login_secure[:17] if steam_login_secure else None
+
+                if id_from_cookie and id_from_cookie.isdigit():
+                    self.steam_id = SteamID(id_from_cookie)
+                    return # Success
+        
+        raise LoginIncorrect("Could not finalize login, no steamid returned")
+
 
     def login(self, password='', captcha='', email_code='', twofactor_code='', language='english'):
         """Attempts web login and returns on a session with cookies set
@@ -190,7 +207,7 @@ class WebAuth(object):
         self._load_key()
         resp = self._send_login(password=password, captcha=captcha, email_code=email_code, twofactor_code=twofactor_code)
 
-        if resp['success'] and resp['login_complete']:
+        if resp and resp['success'] and resp['login_complete']:
             self.logged_on = True
             self.password = self.captcha_code = ''
             self.captcha_gid = -1
