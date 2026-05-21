@@ -337,6 +337,16 @@ class steamid_functions(unittest.TestCase):
         mm.get.side_effect = requests.exceptions.ReadTimeout('test')
         self.assertIsNone(steamid.steam64_from_url("https://steamcommunity.com/id/timeout_me"))
 
+    @mock.patch('steam.steamid.make_requests_session')
+    def test_steam64_from_url_group_chat_markup(self, mrs_mock):
+        mm = mrs_mock.return_value = mock.MagicMock()
+        mm.get.return_value.text = "OpenGroupChat( '103582791429521412'"
+
+        self.assertEqual(
+            steamid.steam64_from_url("https://steamcommunity.com/groups/Valve"),
+            103582791429521412
+        )
+
     def test_steam64_from_url(self):
         def scrub_req(r):
             r.headers.pop('Cookie', None)
