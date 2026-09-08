@@ -780,12 +780,17 @@ class CDNClient(object):
         def async_fetch_manifest(
             app_id, depot_id, manifest_gid, decrypt, depot_name, branch_name, branch_pass
         ):
+            
+            if isinstance(manifest_gid, dict):
+                manifest_gid = manifest_gid['gid']
             try:
                 manifest_code = self.get_manifest_request_code(
-                    app_id, depot_id, int(manifest_gid), branch_name, branch_pass
+                app_id, depot_id, int(manifest_gid), branch_name, branch_pass
                 )
             except SteamError as exc:
                 return ManifestError("Failed to acquire manifest code", app_id, depot_id, manifest_gid, exc)
+        
+                
 
             try:
                 manifest = self.get_manifest(
