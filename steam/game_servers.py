@@ -286,13 +286,14 @@ def _handle_a2s_multi_packet_response(sock, packet):
 
     # decompress response if needed
     if compressed:
-        size, checksum = _unpack_from('<ll', packet, 10)
+        size, checksum = _unpack_from('<lL', packet, 10)
         data = _bz2_decompress(data)
 
         if len(data) != size:
             raise RuntimeError("Response size mismatch - %d %d" % (len(data), size))
-        if checksum != crc32(data):
-            raise RuntimeError("Response checksum mismatch - %d %d" % (checksum, crc32(data)))
+        actual_checksum = crc32(data) & 0xffffffff
+        if checksum != actual_checksum:
+            raise RuntimeError("Response checksum mismatch - %d %d" % (checksum, actual_checksum))
 
     return data
 
